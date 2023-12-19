@@ -2,7 +2,6 @@
 
 import React from "react";
 
-import Button from "@atoms/button/Button";
 import SuggestedCarousel from "@molecules/slider/slider-page";
 import { MainLayout } from "@app/components/templates";
 

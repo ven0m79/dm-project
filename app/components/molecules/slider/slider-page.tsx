@@ -9,7 +9,6 @@ import { MoveLeft, MoveRight } from "lucide-react"
 
 import { cn } from "@app/components/molecules/lib/utils"
 
-
 const START_INDEX = 1
 const DRAG_THRESHOLD = 150
 const FALLBACK_WIDTH = 509

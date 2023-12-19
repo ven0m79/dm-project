@@ -48,7 +48,6 @@ const NavLinks: {
 
 const Nav = () => {
  const pathname = usePathname();
- //const isActive = true;
   return (
     <nav className={styles["navigation"]}>
       <ul className="flex ms-left ml-5 me-5">
