@@ -1,0 +1,19 @@
+.btn {
+  height: 32px;
+  color: white;
+  border-radius: 4px;
+}
+
+.primary {
+  background-color: rgb(8, 30, 128);
+}
+
+.secondary {
+  color: rgb(8, 30, 128);
+  background-color: rgb(255, 255, 255);
+}
+
+.tertiary {
+  color: rgb(255, 255, 255);
+  background-color: rgb(94, 94, 94);
+}

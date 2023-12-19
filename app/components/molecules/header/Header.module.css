@@ -1,0 +1,58 @@
+.header {
+    height: 140px;
+    width: 1400px;
+    background: rgb(255, 255, 255);
+    align-self: center;
+    color: #002766;
+}
+.containerWithLogo {
+    width: 1400px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.logo {
+    vertical-align: middle;
+    align-items: center;
+    align-self: center;
+    height: 74px;
+    width: 120px;
+    margin: 10px  100px 10px 50px;
+}
+.contactsGroupIcons {
+    align-self: center;
+    margin: 10px  5px 10px 50px; /*top right button left*/
+    vertical-align: middle;
+    font-size: larger;
+}
+.contactsGroup {
+    align-self: center;
+    margin: 10px  10px 10px 10px; /*top right button left*/
+    vertical-align: middle;
+    font-size: larger;
+}
+.search {
+    width: 370px;
+    height: 40px;
+    align-self: center;
+    background-color: rgb(255, 255, 255);
+    border: solid;
+    border-radius: 10px;
+    border-width: 0.5px;
+    border-color: #0061AA;
+    outline: none;
+    margin: 10px  10px 10px 50px;
+    vertical-align: middle;
+    font-size: larger;
+    padding: 0 20px;
+}
+.lang {
+    height: 20px;
+    width: 1400px;
+    vertical-align: middle;
+    text-align: right;
+    background-color: #0061AAa5;
+}
+.langText {
+    margin-right: 20px;
+}

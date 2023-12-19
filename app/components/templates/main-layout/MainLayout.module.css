@@ -1,0 +1,17 @@
+.main {
+  min-width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: rgb(255, 255, 255);
+  margin-top: 0;
+  font-family: Calibri, 'Trebuchet MS', sans-serif;
+}
+.wrapper {
+  width: 1400px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: rgb(203, 203, 203);
+  margin-top: 0;
+}

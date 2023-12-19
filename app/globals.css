@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-weight: 400; /* Соответствует значению normal */
+  font-family: e-Ukraine;
+  src: url("/fonts/e-UkraineHead-Regular.otf");
+}
+
+@font-face {
+  font-weight: 700; /* Соответствует значению bold */
+  font-family: e-Ukraine;
+  src: url("/fonts/e-UkraineHead-Bold.otf");
+}
+
+@font-face {
+  font-weight: 300;
+  font-family: e-Ukraine;
+  src: url("/fonts/e-UkraineHead-Light.otf");
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  margin: 0 !important;
+}
