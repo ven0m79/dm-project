@@ -2,16 +2,19 @@
 
 import React from "react";
 
-import SuggestedCarousel from "@molecules/slider/slider-page";
 import { MainLayout } from "@app/components/templates";
+import Example from "@molecules/slider/sliders";
+import Slider from "@app/components/molecules/slider/slider";
 
 const HomePage = () => {
   return (
     <MainLayout>
       <div>
         <div className="flex flex-1 flex-col justify-center items-center">
-          <SuggestedCarousel>
-          </SuggestedCarousel>
+          <div className="example-container">
+              <Slider />
+              <Example />            
+          </div>
           <div className="text-2xl text-blue-900 flex justify-center items-center valign-middle mb-10">ДМ-Проект є надійним партнером українських лікарів з 2009 року.</div> 
       
         <div className="flex flex-1 flex-row justify-end items-center self-center" style={{ width: "1400px"}}>

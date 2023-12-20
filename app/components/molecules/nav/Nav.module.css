@@ -44,10 +44,3 @@
   transition: all 0.2s;
   background-color: white;
 }
-
-.link:hover:before {
-  width: 130%;
-}
-.navigation:active {
-  background-color: rgb(3, 2, 2);
-}
