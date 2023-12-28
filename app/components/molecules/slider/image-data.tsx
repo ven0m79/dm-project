@@ -1,5 +1,5 @@
 const articles : {
-  [key: string]: {
+  [id: string]: {
     title: string;
     description: string;
     link: string;

@@ -33,3 +33,6 @@
   img {
     max-width: 1400px;
   }
+  li {
+    color: red;
+  }
