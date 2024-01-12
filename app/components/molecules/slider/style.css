@@ -1,6 +1,6 @@
 .example-container {
   width: 1400px;
-  height: 700px;
+  height: 500px;
   position: relative;
   display: flex;
   justify-content: center;
@@ -11,7 +11,7 @@
 .prev {
   top: calc(50% - 20px);
   position: absolute;
-  background: rgb(255, 0, 0);
+  background: #0060aa;
   border-radius: 30px;
   width: 40px;
   height: 40px;
@@ -35,5 +35,33 @@ img {
   max-width: 1400px;
 }
 li {
-  color: red;
+  color: black;
+  list-style-type: none;
+}
+.singleLink {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 46px;
+  background-color: #0060aa91;
+  border-radius: 10px;
+  color: white;
+  padding: 10px;
+  align-items: center;
+  align-self: center;
+  margin: 100px 0px 0px 130px;
+}
+.singleLink:hover {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 46px;
+  background-color: #0060aa91;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+  filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0.623));
+  padding: 10px;
+  align-items: center;
+  align-self: center;
+  margin: 100px 0px 0px 130px;
 }

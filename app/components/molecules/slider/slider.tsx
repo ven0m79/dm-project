@@ -49,7 +49,7 @@ export default function Slider() {
 
   return (
     <div className="example-container">
-      <AnimatePresence initial={false} custom={direction}>
+      <AnimatePresence initial={true} custom={direction}>
         <motion.div
           key={page}
           custom={direction}
@@ -80,10 +80,10 @@ export default function Slider() {
       </AnimatePresence>
 
       <div className="next" onClick={() => paginate(1)}>
-        {"‣"}
+        {">"}
       </div>
       <div className="prev" onClick={() => paginate(-1)}>
-        {"‣"}
+        {">"}
       </div>
     </div>
   );

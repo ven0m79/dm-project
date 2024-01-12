@@ -34,13 +34,3 @@
   background-color: #002766;
   border-bottom: 3px solid #007F3D;
 }
-.link:before {
-  bottom: -5px;
-  left: -15%;
-  content: "";
-  width: 0;
-  height: 1px;
-  position: absolute;
-  transition: all 0.2s;
-  background-color: white;
-}

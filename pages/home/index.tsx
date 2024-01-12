@@ -1,9 +1,10 @@
 "use client";
 
 import React from "react";
-
+import MapUkraine from "@app/components/molecules/mapUkraine/mapUkraine";
 import { MainLayout } from "@app/components/templates";
 import Slider from "@app/components/molecules/slider/slider";
+import Script from "next/script";
 
 const HomePage = () => {
   return (
@@ -39,7 +40,11 @@ const HomePage = () => {
               </p>
             </div>
             <div className="self-end items-end" style={{ width: "800px" }}>
-              <img src="/ukraine-map.svg" width={800} alt="Карта України"></img>
+              <MapUkraine />
+              <div>
+        </div>
+              
+              
             </div>
           </div>
 
