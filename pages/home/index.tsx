@@ -5,6 +5,8 @@ import MapUkraine from "@app/components/molecules/mapUkraine/mapUkraine";
 import { MainLayout } from "@app/components/templates";
 import Slider from "@app/components/molecules/slider/slider";
 import Script from "next/script";
+import { Map_Data } from "@app/components/molecules/mapUkraine/map-data";
+import MapOfUkraine from "@app/components/molecules/map/Map";
 
 const HomePage = () => {
   return (
@@ -39,15 +41,10 @@ const HomePage = () => {
                 <br />- гарантійного та післягарантійного обслуговування.
               </p>
             </div>
-            <div className="self-end items-end" style={{ width: "800px" }}>
-              <MapUkraine />
-              <div>
-        </div>
-              
-              
-            </div>
           </div>
 
+          <MapOfUkraine />
+          
           <div className="text-2xl text-blue-900 flex justify-center items-center valign-middle mt-10">
             Наші партнери:
           </div>
