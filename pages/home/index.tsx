@@ -1,11 +1,8 @@
 "use client";
 
 import React from "react";
-import MapUkraine from "@app/components/molecules/mapUkraine/mapUkraine";
 import { MainLayout } from "@app/components/templates";
 import Slider from "@app/components/molecules/slider/slider";
-import Script from "next/script";
-import { Map_Data } from "@app/components/molecules/mapUkraine/map-data";
 import MapOfUkraine from "@app/components/molecules/map/Map";
 
 const HomePage = () => {

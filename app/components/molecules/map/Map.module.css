@@ -1,0 +1,9 @@
+svg.path {
+    fill: coral;
+}
+
+svg.path:hover {
+    fill:blue;
+    transition: 1s;
+}
+
