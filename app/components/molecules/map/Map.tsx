@@ -8,7 +8,7 @@ const MapOfUkraine = () => {
     <svg width="700px" height="480px" viewBox="0.6875 0.6875 700 480">
       {Map_Data.map((el, i) => (
         <path
-          className='hover:fill-sky-900'
+          className='hover:fill-sky-900 hover:transition duration-1000 hover:ease-out active:transition-shadow'
           key={i}
           d={el.path}
           fill="#0060aa91"
