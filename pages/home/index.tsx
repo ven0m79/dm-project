@@ -41,9 +41,12 @@ const HomePage = () => {
                 <br />- гарантійного та післягарантійного обслуговування.
               </p>
             </div>
+            <div>
+            <MapOfUkraine />
+            </div>
           </div>
 
-          <MapOfUkraine />
+          
           
           <div className="text-2xl text-blue-900 flex justify-center items-center valign-middle mt-10">
             Наші партнери:
