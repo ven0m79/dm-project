@@ -1,9 +1,14 @@
-svg.path {
-    fill: coral;
+.custom-path {
+  fill: #8f13db;
 }
 
-svg.path:hover {
-    fill:blue;
-    transition: 1s;
+.custom-path:hover {
+  fill: blue;
+  transition: 1s;
 }
 
+.info-section {
+  width: 250px;
+  height: 100px;
+  background-color: orange;
+}

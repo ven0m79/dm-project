@@ -1,4 +1,4 @@
-type MapProps = {
+export type MapProps = {
   id: number;
   name: string;
   path: string;

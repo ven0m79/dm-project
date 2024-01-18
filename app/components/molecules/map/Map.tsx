@@ -1,43 +1,90 @@
-import React from "react";
+import classNames from "classnames";
+import { AnimatePresence, motion } from "framer-motion";
+import React, { useCallback, useEffect, useState } from "react";
 
-import { Map_Data } from "../mapUkraine/map-data";
-import "./Map.module.css";
+import SingleRegion from "@molecules/map/single-region";
+
+import { Map_Data, MapProps } from "../mapUkraine/map-data";
+import classes from "./Map.module.css";
 
 const MapOfUkraine = () => {
+  const [isHovering, setIsHovering] = useState<boolean>(false);
+  const [coords, setCoords] = useState<{ x: number; y: number } | undefined>();
+  const [hoveredItem, setHoveredItem] = useState<MapProps | null>(null);
+
+  const mouseMoveHandler = useCallback((e: any) => {
+    if (e.target.tagName !== "path") {
+      setIsHovering(false);
+
+      setCoords({
+        x: e.offsetX + 5,
+        y: e.offsetY - 475,
+      });
+
+      return;
+    }
+
+    if (e.target.tagName === "path") {
+      setIsHovering(true);
+
+      setCoords({
+        x: e.offsetX + 5,
+        y: e.offsetY - 475,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("mousemove", mouseMoveHandler as any);
+
+    return () => {
+      document.removeEventListener("mousemove", mouseMoveHandler as any);
+    };
+  }, [isHovering, mouseMoveHandler]);
+
   return (
-    <svg width="700px" height="480px" viewBox="0.6875 0.6875 700 480">
-      {Map_Data.map((el, i) => (
-        <path
-          className='hover:fill-sky-900 hover:transition duration-500 hover:ease-out active:transition-shadow before:transition before:ease-out'
-          key={i}
-          d={el.path}
-          fill="#0060aa91"
-          stroke="#ffffff"
-          stroke-width={1}
-          transform="matrix(0.6944,0,0,0.6944,0,0)"
-          
-          /* style={{
-            transform:
-              el.id === 13 || el.id === 15
-                ? "translate(-3.36%, 2.4%)"
-                : undefined,
-          }}*/
-          
-        />
-      ))}
-      {Map_Data.map((el, i) => (
-        <circle
-          key={i}
-          cx={el.city.xCoord}
-          cy={el.city.yCoord}
-          r={el.id === 0 ? 5.5 : 3.5}
-          fill="#ffff00"
-          stroke="#ffffff"
-          stroke-width={1}
-        />
-      ))}
-      
-    </svg>
+    <div className="relative">
+      <motion.svg
+        width="700px"
+        height="480px"
+        viewBox="0.6875 0.6875 700 480"
+        onHoverStart={() => {
+          setIsHovering(true);
+        }}
+        onHoverEnd={() => {
+          setIsHovering(false);
+        }}
+      >
+        {Map_Data.map((el) => (
+          <SingleRegion key={el.id} {...el} setHoveredItem={setHoveredItem} />
+        ))}
+      </motion.svg>
+
+      <AnimatePresence>
+        {isHovering && coords && coords?.x && coords?.y ? (
+          <>
+            <motion.foreignObject
+              className="absolute bg-amber-600 pointer-events-none"
+              animate={{
+                x: coords?.x,
+                y: coords?.y,
+              }}
+              initial={false}
+              transition={{ type: "spring", stiffness: 100 }}
+            >
+              <div
+                className={classNames(
+                  "flex items-center justify-center",
+                  classes["info-section"],
+                )}
+              >
+                <h1>{hoveredItem?.city?.town}</h1>
+              </div>
+            </motion.foreignObject>
+          </>
+        ) : null}
+      </AnimatePresence>
+    </div>
   );
 };
 
