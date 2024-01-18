@@ -79,8 +79,8 @@ const SingleSlide: FC<ArticleSingleType> = ({
         transition={{ duration: 2, ease: "easeOut" }}
       />
 
-      <li className="pointer-events-none">
-        <motion.p
+      <div className="pointer-events-none text-slate-950">
+        <motion.div
           className="pointer-events-none"
           initial={{ ...animatedStyles.initial }}
           animate={{ ...animatedStyles.animate }}
@@ -88,8 +88,8 @@ const SingleSlide: FC<ArticleSingleType> = ({
           style={{ fontSize: 50 }}
         >
           <div className="mt-10 mx-32 w-screen">{title}</div>
-        </motion.p>
-        <motion.p
+        </motion.div>
+        <motion.div
           className="pointer-events-none"
           initial={{ ...animatedStyles.initial }}
           animate={{ ...animatedStyles.animate }}
@@ -97,8 +97,8 @@ const SingleSlide: FC<ArticleSingleType> = ({
           style={{ fontSize: 20 }}
         >
           <div className="mt-8 mx-32 w-1/4">{description}</div>
-        </motion.p>
-      </li>
+        </motion.div>
+      </div>
         <motion.a
           href={link}
           className="singleLink"

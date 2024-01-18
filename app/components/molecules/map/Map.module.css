@@ -1,14 +1,16 @@
 .custom-path {
-  fill: #8f13db;
+  fill: #0061AA;
+  opacity: 0.5;
 }
 
 .custom-path:hover {
-  fill: blue;
-  transition: 1s;
+  fill: #0061AA;
+  opacity: 1;
 }
 
 .info-section {
   width: 250px;
-  height: 100px;
-  background-color: orange;
+  height: 50px;
+  background-color: #007F3D;
+  border-radius: 10px;
 }

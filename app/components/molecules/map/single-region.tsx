@@ -4,6 +4,8 @@ import React, { FC } from "react";
 import { MapProps } from "@molecules/mapUkraine/map-data";
 
 import classes from "./Map.module.css";
+import { easeOut } from "popmotion";
+import classNames from "classnames";
 
 {
   /*  "hover:fill-sky-900 hover:transition duration-500 hover:ease-out active:transition-shadow before:transition before:ease-out z-0"*/
@@ -15,7 +17,9 @@ const SingleRegion: FC<
   return (
     <>
       <motion.path
-        className={classes["custom-path"]}
+        className={classNames("duration-1000 hover:ease-out hover:before:ease-in",
+          classes["custom-path"],
+        )}
         d={props.path}
         fill="#0060aa91"
         stroke="#ffffff"

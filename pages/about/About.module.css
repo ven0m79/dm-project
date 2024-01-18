@@ -1,6 +1,5 @@
 .aboutText {
     margin: 20px;
-    
     display: flex;
     flex-direction: column;
     width: 1000px;
@@ -14,7 +13,6 @@
     background-size: contain;
     background-repeat: no-repeat;
 }
-
 .aboutContainer {
     align-self: center;
     width: 1400px;

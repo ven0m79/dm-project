@@ -64,13 +64,13 @@ const MapOfUkraine = () => {
         {isHovering && coords && coords?.x && coords?.y ? (
           <>
             <motion.foreignObject
-              className="absolute bg-amber-600 pointer-events-none"
+              className="absolute pointer-events-none opacity-70"
               animate={{
                 x: coords?.x,
                 y: coords?.y,
               }}
               initial={false}
-              transition={{ type: "spring", stiffness: 100 }}
+              transition={{ type: "spring", stiffness: 70 }}
             >
               <div
                 className={classNames(

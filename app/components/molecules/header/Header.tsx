@@ -4,6 +4,7 @@ import React from "react";
 import styles from "./Header.module.css";
 import { transform } from "typescript";
 import { Righteous } from "next/font/google";
+import Image from 'next/image';
 
 const Header = () => {
   return (
@@ -18,20 +19,34 @@ const Header = () => {
       </div>
       <div className={styles.containerWithLogo}>
         <div className={styles.logo}>
-            <img src="/logo-DM-project.png" width={120} alt="Logo DM Project"></img>
+            <Image
+             src="/logo-DM-project.png" 
+             width={120}
+             height={75} 
+             alt="Logo DM Project"
+            />
           </div>
           <div className={styles.contactsGroupIcons}>
-            <img src="/telephone.png" width="40" height="40" alt="Logo DM Project"></img>
+            <Image
+             src="/telephone.png" 
+             width={40}
+             height={40} alt="Logo DM Project"
+            />
           </div>
           <div className={styles.contactsGroup}>
-            <p>+380 95 XXX-XX-XX</p>
-            <p>+380 44 XXX-XX-XX</p>
+            <div>+380 95 XXX-XX-XX</div>
+            <div>+380 44 XXX-XX-XX</div>
           </div>          
           <div className={styles.contactsGroupIcons}>
-            <img src="/email.png" width="40" height="40"  alt="Logo DM Project"></img>
+            <Image
+             src="/email.png" 
+             width={40} 
+             height={40}
+             alt="Logo DM Project"
+             />
           </div>
           <div className={styles.contactsGroup}>
-            <p>service@dm-project.com.ua</p>
+            <div>service@dm-project.com.ua</div>
           </div>
             <input className={styles.search} placeholder="Пошук..."></input>      
         </div>
