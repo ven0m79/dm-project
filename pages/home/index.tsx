@@ -47,9 +47,58 @@ const HomePage = () => {
           </div>
         </div>
 
-          <div className="flex flex-1 flex-col text-slate-900 text-2xl w-auto"> {/*Сервіс та Проєктування*/}
-            <div className="flex">1 колонка</div>
-            <div className="flex">2 колонка</div>
+          <div 
+                className="flex flex-1 flex-col text-slate-900 justify-center items-center m-auto p-10"
+                style={{ width: "1400px" }}> {/*Сервіс та Проєктування*/}
+            <div className="flex flex-col self-start"
+                    style={{ width: "900px"}}>
+              <div className="flex flex-1 flex-col text-6xl font-bold indent-5"
+                    style={{color: "#0061AA"}}>
+                СЕРВіС
+              </div>
+              <div className="flex flex-1 flex-row text-slate-200 text-2xl">
+                <Link href={"/services"}>
+                  <div className="p-5 text-blue-800 indent-5 text-justify"
+                        style={{ width: "800px" }}>{'Offering solutions and products that are verifiably effective - that is our vision. She is our guiding principle on all levels - whether in strategic decision making within the management teams or in the daily operative work of each of our employees. Our vision always pushes us to develop and offer high quality solutions and products which can be proven to be effective and efficient in their application.'}</div>
+                </Link>
+                  <div>
+                        <Link href={"/services"}>
+                            <Image 
+                              src="/service.jpg" 
+                              alt={"Сервіс"}
+                              width={250}
+                              height={250}/>
+                        </Link>
+                  </div>
+                </div>
+                
+
+            </div>
+            <div className="flex flex-col self-end"
+                  style={{ width: "1034px" }}>
+            <div className="flex flex-1 flex-col text-slate-600 text-6xl font-bold self-end mt-10"
+                style={{color: "#0061AA"}}>
+                ПРОЄКТУВАННЯ
+              </div>
+              <div className="flex flex-1 flex-row text-slate-200 text-2xl">
+                <div>
+                <Link href={"/projects"}>
+                  <Image 
+                        src="/projection.jpg" 
+                        alt={"Проектування"}
+                        width={250}
+                        height={250}/>
+                </Link>
+                </div>
+                <Link href={"/projects"}>                
+                <div className="p-5 text-blue-800 indent-5 text-justify"
+                  style={{ width: "800px" }}>
+                    
+                      {'Offering solutions and products that are verifiably effective - that is our vision. She is our guiding principle on all levels - whether in strategic decision making within the management teams or in the daily operative work of each of our employees. Our vision always pushes us to develop and offer high quality solutions and products which can be proven to be effective and efficient in their application.'}
+                      </div>
+                      </Link>
+              </div>
+            </div>
           </div>
 
         <div className="flex flex-1 flex-col justify-center items-center">
