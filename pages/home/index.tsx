@@ -20,8 +20,7 @@ const HomePage = () => {
 
           <div
             className="flex flex-1 flex-row justify-end items-center self-center"
-            style={{ width: "1400px" }}
-          >
+            style={{ width: "1400px" }}>
             <div className="text-2xl text-blue-800">
               <div className={"font-bold"}> {'Поставлено:'}</div>
               <br />
@@ -46,9 +45,14 @@ const HomePage = () => {
             <MapOfUkraine />
             </div>
           </div>
+        </div>
 
-          
-          
+          <div className="flex flex-1 flex-col text-slate-900 text-2xl w-auto"> {/*Сервіс та Проєктування*/}
+            <div className="flex">1 колонка</div>
+            <div className="flex">2 колонка</div>
+          </div>
+
+        <div className="flex flex-1 flex-col justify-center items-center">
           <div className="text-2xl text-blue-900 flex justify-center items-center valign-middle mt-10">
             Наші партнери:
           </div>

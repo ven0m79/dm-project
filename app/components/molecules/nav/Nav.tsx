@@ -61,7 +61,7 @@ const Nav = () => {
         ))}
       </ul>
       <div className={classNames('flex justify-center items-center ml-14', styles["back"])}>
-        <Image src="/drager-side.svg" width="90" alt="Logo DM Project"/>
+        <Image src="/drager-side.svg" width={90} height={36} alt="Logo DM Project"/>
       </div>
       <div className={styles["back"]}>Уповноважений представник в Україні</div>
     </nav>
