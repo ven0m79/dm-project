@@ -5,6 +5,7 @@ import React from "react";
 
 import styles from "./Nav.module.css";
 import { link } from "fs";
+import Image from 'next/image';
 
 const NavLinks: {
   [key: string]: {
@@ -60,7 +61,7 @@ const Nav = () => {
         ))}
       </ul>
       <div className={classNames('flex justify-center items-center ml-14', styles["back"])}>
-        <img src="/drager-side.svg" width="90" alt="Logo DM Project"></img>
+        <Image src="/drager-side.svg" width="90" alt="Logo DM Project"/>
       </div>
       <div className={styles["back"]}>Уповноважений представник в Україні</div>
     </nav>
