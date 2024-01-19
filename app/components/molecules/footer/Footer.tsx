@@ -1,5 +1,8 @@
 import classNames from "classnames";
 import React from "react";
+import Link from 'next/link';
+import Image from 'next/image';
+
 
 import styles from "./Footer.module.css";
 
@@ -12,22 +15,22 @@ const Footer = () => {
     >
       <div className={styles.footerContainer}>
         <div className={classNames('flex flex-column justify-top items-center', styles["column"])}>
-          <img src="/DM-project-logo-transparent.png" width={186} height={117} alt="Logo DM Project"></img>
+          <Image src="/DM-project-logo-transparent.png" width={186} height={117} alt="Logo DM Project"/>
           <div className={styles.socialMedia}>
             <div className={classNames('flex flex-row justify-center items-center', styles["socialMedia"])}>
-              <a href="http://youtube.com"><img src="/youtube3.png" width={30} height={30} alt="Logo Youtube"></img></a></div>
+              <Link href="http://youtube.com"><Image src="/youtube3.png" width={30} height={30} alt="Logo Youtube"/></Link></div>
                 <div className={classNames('flex flex-column justify-center items-center', styles["socialMedia"])}>
-                <a href="http://facebook.com"><img src="/facebook3.png" width={30} height={30} alt="Logo Facebook"></img></a>
+                <Link href="http://facebook.com"><Image src="/facebook3.png" width={30} height={30} alt="Logo Facebook"/></Link>
                 </div>
             </div>
           </div>
         <div className={classNames('font-bold', styles["column"])}>
           <p className={classNames('font-bold mb-4 text-[20px] ml-16')}>ІНФОРМАЦІЯ</p>
-          <p className={classNames('font-normal mt-1 ml-16 hover:text-green-600')}><a href="/about">Про компанію</a></p>
-          <p className={classNames('font-normal mt-1 ml-16 hover:text-green-600')}><a href="/services">Сервіс</a></p>
-          <p className={classNames('font-normal mt-1 ml-16 hover:text-green-600')}><a href="/decisions">Рішення</a></p>
-          <p className={classNames('font-normal mt-1 ml-16 hover:text-green-600')}><a href="/projects">Проектування</a></p>
-          <p className={classNames('font-normal mt-1 ml-16 hover:text-green-600')}><a href="/shares">Акції</a></p>
+          <p className={classNames('font-normal mt-1 ml-16 hover:text-green-600')}><Link href="/about">Про компанію</Link></p>
+          <p className={classNames('font-normal mt-1 ml-16 hover:text-green-600')}><Link href="/services">Сервіс</Link></p>
+          <p className={classNames('font-normal mt-1 ml-16 hover:text-green-600')}><Link href="/decisions">Рішення</Link></p>
+          <p className={classNames('font-normal mt-1 ml-16 hover:text-green-600')}><Link href="/projects">Проектування</Link></p>
+          <p className={classNames('font-normal mt-1 ml-16 hover:text-green-600')}><Link href="/shares">Акції</Link></p>
         </div>
           
         <div className={classNames('font-bold', styles["column"])}>
@@ -45,9 +48,9 @@ const Footer = () => {
           <div>            <p className={classNames('font-bold mb-4 ml-1 text-[20px]')}>КОНТАКТИ</p></div>
         <div className={classNames('font-bold flex flex-row ml-0', styles["column"])}>
           <div className={classNames('font-normal mt-1 w-10')}>
-            <p className={classNames('font-normal mt-3')}><img src="/locationFooter.png" width={26} alt="Logo DM Project"></img></p>
-            <p className={classNames('font-normal mt-6')}><img src="/telephoneFooter.png" width={26} alt="Logo DM Project"></img></p>
-            <p className={classNames('font-normal mt-6')}><img src="/emailFooter.png" width={26} alt="Logo DM Project"></img></p>
+            <p className={classNames('font-normal mt-3')}><Image src="/locationFooter.png" width={26} height={26} alt="Logo DM Project"/></p>
+            <p className={classNames('font-normal mt-6')}><Image src="/telephoneFooter.png" width={26} height={26} alt="Logo DM Project"/></p>
+            <p className={classNames('font-normal mt-6')}><Image src="/emailFooter.png" width={26} height={26} alt="Logo DM Project"/></p>
           </div>
           <div>
             <p className={classNames('font-normal mt-1')}>ул. Кудряшова, 16, оф. 385, <br /> г. Киев, 03035, Украина <br />dm-project.com.ua</p>
