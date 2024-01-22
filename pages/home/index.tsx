@@ -19,18 +19,27 @@ const HomePage = () => {
           </div>
 
           <div
-            className="flex flex-1 flex-row justify-end items-center self-center"
+            className="flex flex-1 flex-row justify-end items-center self-center bg-slate-200"
             style={{ width: "1400px" }}>
-            <div className="text-2xl text-blue-800">
+            <div
+              className="self-start align-top bg-slate-800 mt-20"
+              style={{ width: "100px" }}>
+              <Image
+                alt="Галочка"
+                width={25}
+                height={25}
+                src={"/galka.png"} />
+            </div>
+            <div className="text-2xl text-blue-800 bg-red-200">
               <div className={"font-bold"}> {'Поставлено:'}</div>
               <br />
-              <div className={"py-2"}> {'4000 одиниць обладнання'}</div>
-              <div> {'400 міст України'}</div>
+              <div className={"font-bold py-2"}> {'4000 одиниць обладнання'}</div>
+              <div className={"font-bold"}> {'400 міст України'}</div>
               <br />
               <div className={"font-bold"}> {'Ми пропонуємо комплексні рішення:'}</div>
               <br />
               <div>
-                 {'- з проектування медичних закладів,'}
+                {'- з проектування медичних закладів,'}
                 <br />
                 {'- з підбору та постачання оптимальної конфігурації '}
                 <br />
@@ -42,64 +51,63 @@ const HomePage = () => {
               </div>
             </div>
             <div>
-            <MapOfUkraine />
+              <MapOfUkraine />
             </div>
           </div>
         </div>
 
-          <div 
-                className="flex flex-1 flex-col text-slate-900 justify-center items-center m-auto p-10"
-                style={{ width: "1400px" }}> {/*Сервіс та Проєктування*/}
-            <div className="flex flex-col self-start"
-                    style={{ width: "900px"}}>
-              <div className="flex flex-1 flex-col text-6xl font-bold indent-5"
-                    style={{color: "#0061AA"}}>
-                СЕРВіС
-              </div>
-              <div className="flex flex-1 flex-row text-slate-200 text-2xl">
-                <Link href={"/services"}>
-                  <div className="p-5 text-blue-800 indent-5 text-justify"
-                        style={{ width: "800px" }}>{'Offering solutions and products that are verifiably effective - that is our vision. She is our guiding principle on all levels - whether in strategic decision making within the management teams or in the daily operative work of each of our employees. Our vision always pushes us to develop and offer high quality solutions and products which can be proven to be effective and efficient in their application.'}</div>
-                </Link>
-                  <div>
-                        <Link href={"/services"}>
-                            <Image 
-                              src="/service.jpg" 
-                              alt={"Сервіс"}
-                              width={250}
-                              height={250}/>
-                        </Link>
-                  </div>
-                </div>
-                
-
+        <div
+          className="flex flex-1 flex-col text-slate-900 justify-center items-center m-auto p-10"
+          style={{ width: "1400px" }}> {/*Сервіс та Проєктування*/}
+          <div className="flex flex-col self-start"
+            style={{ width: "900px" }}>
+            <div className="flex flex-1 flex-col text-6xl font-bold indent-5"
+              style={{ color: "#0061AA" }}>
+              СЕРВіС
             </div>
-            <div className="flex flex-col self-end"
-                  style={{ width: "1034px" }}>
-            <div className="flex flex-1 flex-col text-slate-600 text-6xl font-bold self-end mt-10"
-                style={{color: "#0061AA"}}>
-                ПРОЄКТУВАННЯ
-              </div>
-              <div className="flex flex-1 flex-row text-slate-200 text-2xl">
-                <div>
-                <Link href={"/projects"}>
-                  <Image 
-                        src="/projection.jpg" 
-                        alt={"Проектування"}
-                        width={250}
-                        height={250}/>
+            <div className="flex flex-1 flex-row text-slate-200 text-2xl">
+              <Link href={"/services"}>
+                <div className="p-5 text-blue-800 indent-5 text-justify"
+                  style={{ width: "800px" }}>{'Offering solutions and products that are verifiably effective - that is our vision. She is our guiding principle on all levels - whether in strategic decision making within the management teams or in the daily operative work of each of our employees. Our vision always pushes us to develop and offer high quality solutions and products which can be proven to be effective and efficient in their application.'}</div>
+              </Link>
+              <div>
+                <Link href={"/services"}>
+                  <Image
+                    src="/service.jpg"
+                    alt={"Сервіс"}
+                    width={250}
+                    height={250} />
                 </Link>
-                </div>
-                <Link href={"/projects"}>                
+              </div>
+            </div>
+
+          </div>
+          <div className="flex flex-col self-end"
+            style={{ width: "1034px" }}>
+            <div className="flex flex-1 flex-col text-slate-600 text-6xl font-bold self-end mt-10"
+              style={{ color: "#0061AA" }}>
+              ПРОЄКТУВАННЯ
+            </div>
+            <div className="flex flex-1 flex-row text-slate-200 text-2xl">
+              <div>
+                <Link href={"/projects"}>
+                  <Image
+                    src="/projection.jpg"
+                    alt={"Проектування"}
+                    width={250}
+                    height={250} />
+                </Link>
+              </div>
+              <Link href={"/projects"}>
                 <div className="p-5 text-blue-800 indent-5 text-justify"
                   style={{ width: "800px" }}>
-                    
-                      {'Offering solutions and products that are verifiably effective - that is our vision. She is our guiding principle on all levels - whether in strategic decision making within the management teams or in the daily operative work of each of our employees. Our vision always pushes us to develop and offer high quality solutions and products which can be proven to be effective and efficient in their application.'}
-                      </div>
-                      </Link>
-              </div>
+
+                  {'Offering solutions and products that are verifiably effective - that is our vision. She is our guiding principle on all levels - whether in strategic decision making within the management teams or in the daily operative work of each of our employees. Our vision always pushes us to develop and offer high quality solutions and products which can be proven to be effective and efficient in their application.'}
+                </div>
+              </Link>
             </div>
           </div>
+        </div>
 
         <div className="flex flex-1 flex-col justify-center items-center">
           <div className="text-2xl text-blue-900 flex justify-center items-center valign-middle mt-10">

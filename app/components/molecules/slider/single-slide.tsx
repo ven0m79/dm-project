@@ -39,11 +39,11 @@ const animatedStylesForPhoto1 = {
 
 const animatedStylesForPhoto2 = {
   initial: {
-    x: "40%",
+    x: "70%",
     opacity: 0,
   },
   animate: {
-    x: 0,
+    x: "30%",
     opacity: 1,
   },
 };
@@ -71,7 +71,7 @@ const SingleSlide: FC<ArticleSingleType> = ({
       <motion.img
         src={img2}
         alt=""
-        width={245}
+        width={400}
         height={400}
         className="pointer-events-none absolute right-52 top-5"
         initial={{ ...animatedStylesForPhoto2.initial }}
