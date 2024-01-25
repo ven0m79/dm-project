@@ -19,22 +19,38 @@ const HomePage = () => {
           </div>
 
           <div
-            className="flex flex-1 flex-row justify-end items-center self-center bg-slate-200"
-            style={{ maxWidth: "1400px" }}>
-            <div
-              className="self-start align-top bg-slate-800 mt-20"
-              style={{ width: "50px" }}>
-              <Image
-                alt="Галочка"
-                width={25}
-                height={25}
-                src={"/galka.png"} />
-            </div>
-            <div className="text-2xl text-blue-800 bg-red-200">
+            className="flex flex-1 flex-row justify-end items-center self-center"
+            style={{ width: "85%", maxWidth: "1400px" }}>
+            
+            <div className="text-2xl text-blue-800">
               <div className={"font-bold"}> {'Поставлено:'}</div>
               <br />
-              <div className={"font-bold py-2"}> {'4000 одиниць обладнання'}</div>
-              <div className={"font-bold"}> {'400 міст України'}</div>
+                <div className="flex flex-1 flex-row items-center self-center">
+                  <div
+                    className="self-start"
+                    style={{ width: "50px" }}>
+                      <Image
+                          alt="Галочка"
+                          width={25}
+                          height={25}
+                          src={"/galka.png"} />
+                  </div>
+                    <div className={"font-bold"}> {'4200 одиниць обладнання'}</div>
+
+              </div>
+              <div className="flex flex-1 flex-row">
+                  <div
+                    className="self-start align-top"
+                    style={{ width: "50px" }}>
+                      <Image
+                          alt="Галочка"
+                          width={25}
+                          height={25}
+                          src={"/galka.png"} />
+                  </div>
+
+                    <div className={"font-bold"}> {'400 міст України'}</div>
+              </div>
               <br />
               <div className={"font-bold"}> {'Ми пропонуємо комплексні рішення:'}</div>
               <br />
