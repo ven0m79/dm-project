@@ -28,11 +28,11 @@ const animatedStylesForButton = {
 
 const animatedStylesForPhoto1 = {
   initial: {
-    x: "-15%",
+    x: "-55%",
     opacity: 0,
   },
   animate: {
-    x: 0,
+    x: "25%",
     opacity: 1,
   },
 };
@@ -60,9 +60,9 @@ const SingleSlide: FC<ArticleSingleType> = ({
       <motion.img
         src={img1}
         alt=""
-        width={524}
-        height={300}
-        className="pointer-events-none absolute left-96 top-14"
+        width={393}
+        height={225}
+        className="pointer-events-none absolute left-96 top-24"
         initial={{ ...animatedStylesForPhoto1.initial }}
         animate={{ ...animatedStylesForPhoto1.animate }}
         transition={{ duration: 1.5, ease: "easeOut" }}
@@ -85,7 +85,7 @@ const SingleSlide: FC<ArticleSingleType> = ({
           initial={{ ...animatedStyles.initial }}
           animate={{ ...animatedStyles.animate }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          style={{ fontSize: 50 }}
+          style={{ fontSize: 44 }}
         >
           <div className="mt-10 mx-32 w-screen">{title}</div>
         </motion.div>

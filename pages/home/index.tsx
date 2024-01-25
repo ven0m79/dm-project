@@ -20,10 +20,10 @@ const HomePage = () => {
 
           <div
             className="flex flex-1 flex-row justify-end items-center self-center bg-slate-200"
-            style={{ width: "1400px" }}>
+            style={{ maxWidth: "1400px" }}>
             <div
               className="self-start align-top bg-slate-800 mt-20"
-              style={{ width: "100px" }}>
+              style={{ width: "50px" }}>
               <Image
                 alt="Галочка"
                 width={25}
@@ -110,7 +110,7 @@ const HomePage = () => {
         </div>
 
         <div className="flex flex-1 flex-col justify-center items-center">
-          <div className="text-2xl text-blue-900 flex justify-center items-center valign-middle mt-10">
+          <div className="text-4xl text-blue-900 flex justify-center items-center valign-middle mt-10">
             Наші партнери:
           </div>
           <div className="flex flex-1 flex-row justify-center items-center valign-middle bg-white">
@@ -125,7 +125,7 @@ const HomePage = () => {
               </Link>
             </div>
             <div className="m-10">
-              <Link href="https://www.prohs.pt">
+              <Link href="https://www.prohs.pt/en/home/">
                 <Image
                   src="/logo-partners/prohs-log-partner.png"
                   width={150}

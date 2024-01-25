@@ -78,7 +78,7 @@ const MapOfUkraine = () => {
                   classes["info-section"],
                 )}
               >
-                <h1>{hoveredItem?.city?.town}</h1>
+                <h1>{hoveredItem?.name}</h1>
               </div>
             </motion.foreignObject>
           </>
