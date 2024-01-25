@@ -64,7 +64,7 @@ const MapOfUkraine = () => {
         {isHovering && coords && coords?.x && coords?.y ? (
           <>
             <motion.foreignObject
-              className="absolute pointer-events-none opacity-70"
+              className="absolute pointer-events-none opacity-80"
               animate={{
                 x: coords?.x,
                 y: coords?.y,
@@ -74,11 +74,16 @@ const MapOfUkraine = () => {
             >
               <div
                 className={classNames(
-                  "flex items-center justify-center",
+                  "flex flex-col items-center justify-center",
                   classes["info-section"],
                 )}
               >
-                <h1>{hoveredItem?.name}</h1>
+                {hoveredItem?.name}
+                <div
+                className={classNames(
+                  "items-center justify-center",
+                  classes["info-section-description"],
+                )}>{hoveredItem?.description}</div>
               </div>
             </motion.foreignObject>
           </>
