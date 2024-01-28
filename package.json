@@ -22,6 +22,7 @@
     "i18next": "^23.5.1",
     "lucide-react": "^0.297.0",
     "next": "^14.0.4",
+    "next-intl": "^3.5.2",
     "next-seo": "^6.1.0",
     "node": "^21.2.0",
     "popmotion": "^11.0.5",
