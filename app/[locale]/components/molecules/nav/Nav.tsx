@@ -7,7 +7,7 @@ import styles from "./Nav.module.css";
 import { link } from "fs";
 import Image from 'next/image';
 
-import {useTranslations} from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 const NavLinks: {
   [key: string]: {
@@ -47,21 +47,21 @@ const NavLinks: {
     title: "КОНТАКТИ",
     link: "/about-us",
   },
-};  
+};
 
 const Nav = () => {
- const pathname = usePathname();
- const t = useTranslations('Index');
+  const pathname = usePathname();
+  const t = useTranslations('Index');
   return (
     <nav className={styles["navigation"]}>
       <ul className="flex ms-left ml-5 me-5">
         {Object.keys(NavLinks).map((el) => (
           <li key={el} className={
-            classNames('mx-1', styles["link"], {[styles["active"]]: pathname === NavLinks[el].link})}>
+            classNames('mx-1', styles["link"], { [styles["active"]]: pathname === NavLinks[el].link })}>
             <Link href={NavLinks[el].link}>{NavLinks[el].title}
 
 
-            
+
 
 
             </Link>
@@ -69,9 +69,9 @@ const Nav = () => {
         ))}
       </ul>
       <div className={classNames('flex justify-center items-center ml-14', styles["back"])}>
-        <Image src="/drager-side.svg" width={90} height={36} alt="Logo DM Project"/>
+        <Image src="/drager-side.svg" width={90} height={36} alt="Logo DM Project" />
       </div>
-      <div className={styles["back"]}>Уповноважений представник в Україні</div>
+      <div className={styles["back"]}>{t('authorized-representative')}</div>
     </nav>
   );
 };

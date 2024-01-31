@@ -6,21 +6,21 @@ import Slider from "@app/[locale]/components/molecules/slider/slider";
 import MapOfUkraine from "@app/[locale]/components/molecules/map/Map";
 import Link from 'next/link';
 import Image from 'next/image';
-import {useTranslations} from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 
 const HomePage = () => {
   const t = useTranslations('Index');
   return (
     <MainLayout>
-              <div className="text-2xl text-blue-900 flex justify-center items-center valign-middle">{t('title')}</div>
+      <div className="text-2xl text-blue-900 flex justify-center items-center valign-middle">{t('title')}</div>
       <div>
         <div className="flex flex-1 flex-col justify-center items-center">
-        
+
           <Slider />
 
           <div className="text-2xl text-blue-900 flex justify-center items-center valign-middle mb-10">
-            {'ДМ-Проект є надійним партнером українських лікарів з 2009 року.'}
+            {t('in-Ukraine-2009')}
           </div>
 
           <div
