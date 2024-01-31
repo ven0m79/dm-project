@@ -1,3 +1,4 @@
+'use client'
 import { usePathname } from "next/navigation";
 import classNames from "classnames";
 import Link from "next/link";
@@ -16,62 +17,59 @@ const NavLinks: {
   };
 } = {
   home: {
-    title: "ГОЛОВНА",
+    title: "menu-main",
     link: "/",
   },
   about: {
-    title: "ПРО КОМПАНІЮ",
+    title: "menu-about-us",
     link: "/about",
   },
   catalog: {
-    title: "КАТАЛОГ",
+    title: "menu-catalog",
     link: "/catalog",
   },
   services: {
-    title: "СЕРВІС",
+    title: "menu-service",
     link: "/services",
   },
   decisions: {
-    title: "РІШЕННЯ",
+    title: "menu-decisions",
     link: "/decisions",
   },
   projects: {
-    title: "ПРОЕКТУВАННЯ",
+    title: "menu-projects",
     link: "/projects",
   },
   shares: {
-    title: "АКЦІЇ",
+    title: "menu-shares",
     link: "/shares",
   },
   about_us: {
-    title: "КОНТАКТИ",
+    title: "menu-contacts",
     link: "/about-us",
   },
 };
 
 const Nav = () => {
   const pathname = usePathname();
-  const t = useTranslations('Index');
+  const t = useTranslations('Menu');
+  const t2 = useTranslations('Index');
   return (
     <nav className={styles["navigation"]}>
       <ul className="flex ms-left ml-5 me-5">
         {Object.keys(NavLinks).map((el) => (
           <li key={el} className={
             classNames('mx-1', styles["link"], { [styles["active"]]: pathname === NavLinks[el].link })}>
-            <Link href={NavLinks[el].link}>{NavLinks[el].title}
-
-
-
-
+            <Link href={NavLinks[el].link}>{t(NavLinks[el].title)}
 
             </Link>
           </li>
         ))}
       </ul>
-      <div className={classNames('flex justify-center items-center ml-14', styles["back"])}>
+      <div className={classNames('flex justify-center items-center ml-16', styles["back"])}>
         <Image src="/drager-side.svg" width={90} height={36} alt="Logo DM Project" />
       </div>
-      <div className={styles["back"]}>{t('authorized-representative')}</div>
+      <div className={styles["back"]}>{t2('authorized-representative')}</div>
     </nav>
   );
 };

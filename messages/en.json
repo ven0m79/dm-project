@@ -2,9 +2,17 @@
   "Index": {
     "title": "Hello World!",
     "menu": "Menu!",
-    "menu-main": "Main",
-    "menu-about-us": "About us",
     "in-Ukraine-2009": "DM-Project has been a reliable partner of Ukrainian doctors since 2009",
     "authorized-representative": "Authorized representative in Ukraine"
+  },
+  "Menu": {
+    "menu-main": "MAIN",
+    "menu-about-us": "ABOUT US",
+    "menu-catalog": "CATALOG",
+    "menu-service": "SERVICE",
+    "menu-decisions": "DECISIONS",
+    "menu-projects": "PROJECTS",
+    "menu-shares": "SHARES",
+    "menu-contacts": "CONTACTS"
   }
 }

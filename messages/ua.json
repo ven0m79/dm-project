@@ -2,9 +2,17 @@
   "Index": {
     "title": "Доброго дня!",
     "menu": "Меню!",
-    "menu-main": "Головна",
-    "menu-about-us": "Про Компанію",
     "in-Ukraine-2009": "ДМ-Проект є надійним партнером українських лікарів з 2009 року",
     "authorized-representative": "Уповноважений представник в Україні"
+  },
+  "Menu": {
+    "menu-main": "ГОЛОВНА",
+    "menu-about-us": "ПРО КОМПАНІЮ",
+    "menu-catalog": "КАТАЛОГ",
+    "menu-service": "СЕРВІС",
+    "menu-decisions": "РІШЕННЯ",
+    "menu-projects": "ПРОЕКТУВАННЯ",
+    "menu-shares": "АКЦІЇ",
+    "menu-contacts": "КОНТАКТИ"
   }
 }
