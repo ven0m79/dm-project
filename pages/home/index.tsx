@@ -1,17 +1,22 @@
 "use client";
 
 import React from "react";
-import { MainLayout } from "@app/components/templates";
-import Slider from "@app/components/molecules/slider/slider";
-import MapOfUkraine from "@app/components/molecules/map/Map";
+import { MainLayout } from "@app/[locale]/components/templates";
+import Slider from "@app/[locale]/components/molecules/slider/slider";
+import MapOfUkraine from "@app/[locale]/components/molecules/map/Map";
 import Link from 'next/link';
 import Image from 'next/image';
+import {useTranslations} from 'next-intl';
+
 
 const HomePage = () => {
+  const t = useTranslations('Index');
   return (
     <MainLayout>
+              <div className="text-2xl text-blue-900 flex justify-center items-center valign-middle">{t('title')}</div>
       <div>
         <div className="flex flex-1 flex-col justify-center items-center">
+        
           <Slider />
 
           <div className="text-2xl text-blue-900 flex justify-center items-center valign-middle mb-10">
@@ -21,35 +26,35 @@ const HomePage = () => {
           <div
             className="flex flex-1 flex-row justify-end items-center self-center"
             style={{ width: "85%", maxWidth: "1400px" }}>
-            
+
             <div className="text-2xl text-blue-800">
               <div className={"font-bold"}> {'Поставлено:'}</div>
               <br />
-                <div className="flex flex-1 flex-row items-center self-center">
-                  <div
-                    className="self-start"
-                    style={{ width: "50px" }}>
-                      <Image
-                          alt="Галочка"
-                          width={25}
-                          height={25}
-                          src={"/galka.png"} />
-                  </div>
-                    <div className={"font-bold"}> {'4200 одиниць обладнання'}</div>
+              <div className="flex flex-1 flex-row items-center self-center">
+                <div
+                  className="self-start"
+                  style={{ width: "50px" }}>
+                  <Image
+                    alt="Галочка"
+                    width={25}
+                    height={25}
+                    src={"/galka.png"} />
+                </div>
+                <div className={"font-bold"}> {'4200 одиниць обладнання'}</div>
 
               </div>
               <div className="flex flex-1 flex-row">
-                  <div
-                    className="self-start align-top"
-                    style={{ width: "50px" }}>
-                      <Image
-                          alt="Галочка"
-                          width={25}
-                          height={25}
-                          src={"/galka.png"} />
-                  </div>
+                <div
+                  className="self-start align-top"
+                  style={{ width: "50px" }}>
+                  <Image
+                    alt="Галочка"
+                    width={25}
+                    height={25}
+                    src={"/galka.png"} />
+                </div>
 
-                    <div className={"font-bold"}> {'400 міст України'}</div>
+                <div className={"font-bold"}> {'400 міст України'}</div>
               </div>
               <br />
               <div className={"font-bold"}> {'Ми пропонуємо комплексні рішення:'}</div>
@@ -117,7 +122,6 @@ const HomePage = () => {
               <Link href={"/projects"}>
                 <div className="p-5 text-blue-800 indent-5 text-justify"
                   style={{ width: "800px" }}>
-
                   {'Offering solutions and products that are verifiably effective - that is our vision. She is our guiding principle on all levels - whether in strategic decision making within the management teams or in the daily operative work of each of our employees. Our vision always pushes us to develop and offer high quality solutions and products which can be proven to be effective and efficient in their application.'}
                 </div>
               </Link>

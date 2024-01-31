@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import React, { FC } from "react";
 
-import { MapProps } from "@molecules/mapUkraine/map-data";
+import { MapProps } from "@app/[locale]/components/molecules/mapUkraine/map-data";
 
 import classes from "./Map.module.css";
 import { easeOut } from "popmotion";

@@ -7,6 +7,8 @@ import styles from "./Nav.module.css";
 import { link } from "fs";
 import Image from 'next/image';
 
+import {useTranslations} from 'next-intl';
+
 const NavLinks: {
   [key: string]: {
     title: string;
@@ -49,6 +51,7 @@ const NavLinks: {
 
 const Nav = () => {
  const pathname = usePathname();
+ const t = useTranslations('Index');
   return (
     <nav className={styles["navigation"]}>
       <ul className="flex ms-left ml-5 me-5">
@@ -56,6 +59,11 @@ const Nav = () => {
           <li key={el} className={
             classNames('mx-1', styles["link"], {[styles["active"]]: pathname === NavLinks[el].link})}>
             <Link href={NavLinks[el].link}>{NavLinks[el].title}
+
+
+            
+
+
             </Link>
           </li>
         ))}

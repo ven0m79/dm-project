@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useCallback, useEffect, useState } from "react";
 
-import SingleRegion from "@molecules/map/single-region";
+import SingleRegion from "@app/[locale]/components/molecules/map/single-region";
 
 import { Map_Data, MapProps } from "../mapUkraine/map-data";
 import classes from "./Map.module.css";
