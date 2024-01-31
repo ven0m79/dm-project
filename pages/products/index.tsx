@@ -1,6 +1,6 @@
 import React from "react";
 
-import { MainLayout } from "@app/components/templates";
+import { MainLayout } from "@app/[locale]/components/templates";
 
 const ProductsPage = () => {
   return (

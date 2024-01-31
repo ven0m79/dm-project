@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { MainLayout } from "@app/components/templates";
+import { MainLayout } from "@app/[locale]/components/templates";
 import styles from "./About.module.css";
 
 const AboutPage = () => {

@@ -17,6 +17,15 @@ type MainLayoutProps = {
 
 const inter = Inter({ subsets: ["latin"] });
 
+interface LocaleLayoutProps {
+  children: ReactNode
+  params: { locale: string }
+}
+
+export function generateStaticParams() {
+  return [{ locale: 'ua' }, { locale: 'en' }]
+}
+
 const MainLayout: FC<MainLayoutProps> = ({
   children,
   noHeader = false,
@@ -27,7 +36,9 @@ const MainLayout: FC<MainLayoutProps> = ({
     <main className={classNames(inter.className, styles.main)}>
       {noHeader ? null : <Header />}
       {noNav ? null : <Nav />}
+
       {children}
+
       {noFooter ? null : <Footer />}
     </main>
   );

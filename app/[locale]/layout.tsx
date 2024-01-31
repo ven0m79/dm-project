@@ -23,9 +23,6 @@ export function generateStaticParams() {
   return [{ locale: 'ua' }, { locale: 'en' }]
 }
 
-
-
-
 export default async function RootLayout({ children, params: {locale} }: LocaleLayoutProps) {
   let messages
   try {

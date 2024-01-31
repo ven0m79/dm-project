@@ -1,7 +1,7 @@
 'use client'
 import { usePathname } from "next/navigation";
 import classNames from "classnames";
-import Link from "next/link";
+import { Link } from 'navigation';
 import React from "react";
 
 import styles from "./Nav.module.css";
@@ -66,10 +66,12 @@ const Nav = () => {
           </li>
         ))}
       </ul>
-      <div className={classNames('flex justify-center items-center ml-16', styles["back"])}>
-        <Image src="/drager-side.svg" width={90} height={36} alt="Logo DM Project" />
+      <div className="items-end right-0 flex flex-1 flex-row w-full justify-end">
+        <div className={classNames('flex justify-center items-center', styles["back"])}>
+          <Image src="/drager-side.svg" width={90} height={36} alt="Logo DM Project" />
+        </div>
+        <div className={styles["back"]}>{t2('authorized-representative')}</div>
       </div>
-      <div className={styles["back"]}>{t2('authorized-representative')}</div>
     </nav>
   );
 };
