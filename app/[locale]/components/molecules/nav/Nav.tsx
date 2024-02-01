@@ -1,14 +1,15 @@
 'use client'
 import { usePathname } from "next/navigation";
 import classNames from "classnames";
-import { Link } from 'navigation';
 import React from "react";
+import Link from "next/link";
 
 import styles from "./Nav.module.css";
 import { link } from "fs";
 import Image from 'next/image';
 
 import { useTranslations } from 'next-intl';
+
 
 const NavLinks: {
   [key: string]: {

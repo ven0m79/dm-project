@@ -1,5 +1,5 @@
 
-import HomePage from "@pages/home";
+import HomePage from "@app/[locale]/home";
 
 export default function Root() {
 
