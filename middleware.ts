@@ -5,6 +5,8 @@ export default createMiddleware({
 
   // Used when no locale matches
   defaultLocale: 'ua',
+  
+  localePrefix: 'as-needed',
 
   // A list of all locales that are supported
   locales: ["ua","en"]
