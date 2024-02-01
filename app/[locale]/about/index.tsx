@@ -2,11 +2,11 @@ import React from "react";
 import classNames from "classnames";
 import { MainLayout } from "@app/[locale]/components/templates";
 import styles from "./About.module.css";
-//import { useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 
 const AboutPage = () => {
-  //const t = useTranslations('Index');
+  const t = useTranslations('Index');
   return (
     <MainLayout>
       <div className={classNames('flex flex-1 justify-center items-start', styles["aboutContainer"])}>

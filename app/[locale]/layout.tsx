@@ -22,14 +22,9 @@ export function generateStaticParams() {
   return [{ locale: 'ua' }, { locale: 'en' }]
 }
 
-export default /*async*/ function RootLayout({ children, params: {locale} }: LocaleLayoutProps) {
+export default function RootLayout({ children, params: {locale} }: LocaleLayoutProps) {
   const messages = useMessages();
-  // try {
-  //   messages = (await import(`../../messages/${locale}.json`)).default
-  // } catch (error) {
-  //   console.error('Failed to load messages:', error);
-  //   notFound()
-  // }
+   
   return (
     <html lang={locale}>
       <body 
@@ -39,7 +34,7 @@ export default /*async*/ function RootLayout({ children, params: {locale} }: Loc
         )}
       >
         <main className="flex flex-1 flex-col items-center justify-center gap-12">
-        <NextIntlClientProvider locale={locale} messages={messages}>
+        <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>
       

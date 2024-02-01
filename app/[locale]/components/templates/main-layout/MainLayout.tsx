@@ -36,9 +36,7 @@ const MainLayout: FC<MainLayoutProps> = ({
     <main className={classNames(inter.className, styles.main)}>
       {noHeader ? null : <Header />}
       {noNav ? null : <Nav />}
-
       {children}
-
       {noFooter ? null : <Footer />}
     </main>
   );

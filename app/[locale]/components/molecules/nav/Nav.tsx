@@ -61,7 +61,7 @@ const Nav = () => {
         {Object.keys(NavLinks).map((el) => (
           <li key={el} className={
             classNames('mx-1', styles["link"], { [styles["active"]]: pathname === NavLinks[el].link })}>
-            <Link href={NavLinks[el].link}>{t(NavLinks[el].title)}
+            <Link locale="locale" href={NavLinks[el].link}>{t(NavLinks[el].title)}
 
             </Link>
           </li>
