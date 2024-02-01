@@ -1,9 +1,8 @@
 import { Inter } from "next/font/google";
 import { FC, ReactNode } from "react";
 
-import { NextIntlClientProvider } from 'next-intl';
+import { NextIntlClientProvider, useMessages } from 'next-intl';
 import { notFound } from 'next/navigation';
-
 
 import "./globals.css";
 import "./reset.css";
@@ -23,14 +22,14 @@ export function generateStaticParams() {
   return [{ locale: 'ua' }, { locale: 'en' }]
 }
 
-export default async function RootLayout({ children, params: {locale} }: LocaleLayoutProps) {
-  let messages
-  try {
-    messages = (await import(`../../messages/${locale}.json`)).default
-  } catch (error) {
-    console.error('Failed to load messages:', error);
-    notFound()
-  }
+export default /*async*/ function RootLayout({ children, params: {locale} }: LocaleLayoutProps) {
+  const messages = useMessages();
+  // try {
+  //   messages = (await import(`../../messages/${locale}.json`)).default
+  // } catch (error) {
+  //   console.error('Failed to load messages:', error);
+  //   notFound()
+  // }
   return (
     <html lang={locale}>
       <body 
