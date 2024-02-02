@@ -1,47 +1,44 @@
 import { Inter } from "next/font/google";
-import { FC, ReactNode } from "react";
+import { ReactNode } from "react";
 
-import { NextIntlClientProvider, useMessages } from 'next-intl';
-import { notFound } from 'next/navigation';
+import { NextIntlClientProvider, useMessages } from "next-intl";
 
 import "./globals.css";
 import "./reset.css";
 
-import type { Metadata } from "next"
-
-import { cn } from "@app/[locale]/components/molecules/lib/utils"
+import { cn } from "@app/[locale]/components/molecules/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
 interface LocaleLayoutProps {
-  children: ReactNode
-  params: { locale: string }
+  children: ReactNode;
+  params: { locale: string };
 }
 
 export function generateStaticParams() {
-  return [{ locale: 'ua' }, { locale: 'en' }]
+  return [{ locale: "ua" }, { locale: "en" }];
 }
 
-export default function RootLayout({ children, params: {locale} }: LocaleLayoutProps) {
+export default function RootLayout({
+  children,
+  params: { locale },
+}: LocaleLayoutProps) {
   const messages = useMessages();
-   
+
   return (
     <html lang={locale}>
-      <body 
-      className={cn(
+      <body
+        className={cn(
           "flex min-h-screen overflow-x-hidden bg-gray-950 text-gray-50",
           inter.className,
         )}
       >
         <main className="flex flex-1 flex-col items-center justify-center gap-12">
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
-        </NextIntlClientProvider>
-      
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            {children}
+          </NextIntlClientProvider>
         </main>
       </body>
     </html>
   );
-};
-
-
+}
