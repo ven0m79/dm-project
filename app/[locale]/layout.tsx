@@ -34,7 +34,7 @@ export default function RootLayout({ children, params: {locale} }: LocaleLayoutP
         )}
       >
         <main className="flex flex-1 flex-col items-center justify-center gap-12">
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
         </NextIntlClientProvider>
       

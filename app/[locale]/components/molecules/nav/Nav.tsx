@@ -9,6 +9,7 @@ import { link } from "fs";
 import Image from 'next/image';
 
 import { useTranslations } from 'next-intl';
+import {locales, localePrefix} from '../../../../../config';
 
 
 const NavLinks: {
@@ -61,9 +62,10 @@ const Nav = () => {
         {Object.keys(NavLinks).map((el) => (
           <li key={el} className={
             classNames('mx-1', styles["link"], { [styles["active"]]: pathname === NavLinks[el].link })}>
-            <Link locale="locale" href={NavLinks[el].link}>{t(NavLinks[el].title)}
+            <Link locale="" href={NavLinks[el].link}>{t(NavLinks[el].title)}{pathname}
 
             </Link>
+            
           </li>
         ))}
       </ul>
