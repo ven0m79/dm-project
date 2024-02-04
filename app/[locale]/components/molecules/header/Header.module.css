@@ -4,6 +4,8 @@
     background: rgb(255, 255, 255);
     align-self: center;
     color: #002766;
+    font-family: 'e-Ukraine', Calibri;
+    font-size: 16px;
 }
 .containerWithLogo {
     width: 1400px;

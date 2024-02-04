@@ -14,5 +14,15 @@
     "menu-projects": "ПРОЕКТУВАННЯ",
     "menu-shares": "АКЦІЇ",
     "menu-contacts": "КОНТАКТИ"
+  },
+  "Footer": {
+    "information": "ІНФОРМАЦІЯ",
+    "catalog": "КАТАЛОГ",
+    "contacts": "КОНТАКТИ",
+    "about-company": "Про компанію",
+    "service": "Сервіс",
+    "decisions": "Рішення",
+    "projects": "Проектування",
+    "shares": "Акції"
   }
 }

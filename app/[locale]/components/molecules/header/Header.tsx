@@ -1,3 +1,4 @@
+'use client'
 import classNames from "classnames";
 import React from "react";
 
@@ -5,10 +6,11 @@ import styles from "./Header.module.css";
 import { transform } from "typescript";
 import { Righteous } from "next/font/google";
 import Image from 'next/image';
-import Link from "next/link";
+import { Link, usePathname } from "../../../../../config";
 
 
 const Header = () => {
+  const pathname = usePathname();
   return (
     <header
       className={classNames(
@@ -18,8 +20,8 @@ const Header = () => {
     >
       <div className={styles.lang}>
         <div className={styles.langText}>
-          <Link href="/en" locale="en">EN</Link>{'   '}
-          <Link href="/ua" locale="ua">UA</Link></div>
+          <Link href={pathname} locale="en">EN</Link>{'   '}
+          <Link href={pathname} locale="ua">UA</Link></div>
       </div>
       <div className={styles.containerWithLogo}>
         <div className={styles.logo}>

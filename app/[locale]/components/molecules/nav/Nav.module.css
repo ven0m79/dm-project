@@ -15,16 +15,18 @@
   align-items: center;
   margin-left: 10px;
   height: 100%;
-  font-size: 18px;
+  font-size: 16px;
   color: #0061AA;
 }
 .link {
-  font-size: 15px;
+  font-size: 14px;
   height: 100%;
   padding: 15px 15px 15px 15px;
   color: white;
   transition: all 0.5s;
   position: relative;
+  font-family: 'e-Ukraine', Calibri;
+  font-size: 16px;
 }
 .active {
   height: 100%;

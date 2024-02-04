@@ -4,7 +4,6 @@ import { MainLayout } from "@app/[locale]/components/templates";
 import styles from "./About.module.css";
 
 const AboutPage = () => {
-  console.log("sds");
 
   return (
     <MainLayout>

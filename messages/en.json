@@ -14,5 +14,15 @@
     "menu-projects": "PROJECTS",
     "menu-shares": "SHARES",
     "menu-contacts": "CONTACTS"
-  }
+  },
+  "Footer": {
+    "information": "INFORMATION",
+    "catalog": "CATALOG",
+    "contacts": "CONTACTS",
+    "about-company": "About Company",
+    "service": "Service",
+    "decisions": "Decisions",
+    "projects": "Projects",
+    "shares": "Shares"
+  }  
 }
