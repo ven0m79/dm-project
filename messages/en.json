@@ -24,5 +24,10 @@
     "decisions": "Decisions",
     "projects": "Projects",
     "shares": "Shares"
+  },
+  "AboutPage": {
+    "information1": "LLC 'DM-PROJECT' was founded in 2009. We are the official representative in Ukraine of the international company Dräger, a world leader in the production of life support systems. Our medical equipment is successfully used in many medical institutions of the country. Thus, we supplied more than 1,000 artificial lung ventilation devices that work reliably in all regions of Ukraine.",
+    "information2": "Anesthesia - breathing machines, ventilators, patient condition monitors, intensive care units, incubators for newborns, medical architectural systems (medical consoles, bedside panels), operating lamps and lighting systems for operating rooms, as well as consumables for medical equipment - this is incomplete a list of our products.",
+    "information3": "Following the modern principles of comprehensive and high-quality service to our customers, we provide a wide range of services: calculation of the optimal configuration of medical equipment, its commissioning, personnel training, warranty and post-warranty repairs, supply of consumables. Our clients can always be sure of the help of professionals. Another very promising field of activity of our company is related to such a high-tech product as 'clean rooms'."    
   }  
 }

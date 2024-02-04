@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 
+
 import styles from "./Footer.module.css";
 
 const Footer = () => {
@@ -50,8 +51,8 @@ const Footer = () => {
         <div className={classNames('font-bold flex flex-row ml-0', styles["row"])}>
           <div className={classNames('font-normal mt-1 w-10')}>
             <p className={classNames('font-normal mt-3')}><Image src="/locationFooter.png" width={26} height={26} alt="Logo DM Project"/></p>
-            <p className={classNames('font-normal mt-8')}><Image src="/telephoneFooter.png" width={26} height={26} alt="Logo DM Project"/></p>
-            <p className={classNames('font-normal mt-9')}><Image src="/emailFooter.png" width={26} height={26} alt="Logo DM Project"/></p>
+            <p className={classNames('font-normal mt-6')}><Image src="/telephoneFooter.png" width={26} height={26} alt="Logo DM Project"/></p>
+            <p className={classNames('font-normal mt-7')}><Image src="/emailFooter.png" width={26} height={26} alt="Logo DM Project"/></p>
           </div>
           <div>
             <p className={classNames('font-normal mt-1')}>вул. Мокра, 16, оф. 385, <br /> м. Київ, 03035, Україна <br />dm-project.com.ua</p>

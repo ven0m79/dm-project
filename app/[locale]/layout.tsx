@@ -7,6 +7,7 @@ import "./globals.css";
 import "./reset.css";
 
 import { cn } from "@app/[locale]/components/molecules/lib/utils";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
   children,
   params: { locale },
 }: LocaleLayoutProps) {
+  unstable_setRequestLocale(locale);
   const messages = useMessages();
 
   return (

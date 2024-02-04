@@ -1,17 +1,16 @@
 .footer {
-  margin-bottom: 0px;
+  margin-top: 0;
   height: 320px;
   width: 1400px;
   align-self: center;
   border-radius: 10px 10px 0px 0px;
   background-color: #0061AA;
   font-family: 'e-Ukraine', Calibri;
-  font-size: 18px;
 }
 .footerContainer {
   display: flex;
   align-self: center;
-/*   border: solid 1px rgb(203, 0, 0); */
+/*  border: solid 1px rgb(203, 0, 0); */
 }
 .column {
   display: flex;
@@ -20,15 +19,8 @@
   width: 300px;
   margin-left: 10px;
   margin-right: 10px;
-/*  border: solid 1px black; */
-}
-.row {
-  display: flex;
-  flex-direction: row;
-  color: white;
-  width: 300px;
-  margin-left: 10px;
-  margin-right: 10px;
+  font-size: 16px;
+  font-weight: normal;
 /*  border: solid 1px black; */
 }
 .socialMedia {
