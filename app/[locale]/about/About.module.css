@@ -7,6 +7,7 @@
     color: black;
     font-family: 'e-Ukraine', sans-serif;
 }
+
 .aboutMainPhoto {
     margin: 20px;
     width: 300px;
@@ -15,11 +16,63 @@
     background-size: contain;
     background-repeat: no-repeat;
 }
+
 .aboutContainer {
     align-self: center;
     width: 1400px;
+    /* border: 1px solid #ff0000; */
 }
+
+.aboutDecisions {
+    align-self: center;
+    width: 100%;
+    /* border: 1px solid #2f00ff; */
+}
+
 .image-radius {
     border-radius: 10px;
     border: 1px solid #ff0000;
+}
+
+.block-decisions {
+    /* margin: 0px 40px 10px 40px ; */
+    padding: 10px;
+    width: 400px;
+    height: 200px;
+    border-radius: 10px;
+    border: 1px solid #0061AA;
+    color: #003257;
+}
+
+.block-decisions:hover {
+    /* margin: 0px 40px 10px 40px ; */
+    padding: 10px;
+    width: 400px;
+    height: 200px;
+    border-radius: 10px;
+    border: 1px solid #ff0000;
+    color: #ff0000;
+    animation: bounce 0.5s;
+    cursor: pointer;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    60%,
+    100% {
+        transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-20px);
+        transform: translateY(-20px);
+    }
+
+    80% {
+        transform: translateY(-10px);
+        transform: translateY(-10px);
+    }
 }
