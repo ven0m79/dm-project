@@ -26,13 +26,13 @@ const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
         >
           <div
             className={classNames(
-              "flex justify-center items-start rounded-xl w-30",
+              "flex justify-center items-start rounded-xl w-30 m-5",
               styles["aboutMainPhoto"],
             )}
           />
           <div
             className={classNames(
-              "flex flex-column justify-center items-start",
+              "flex flex-column justify-center items-start my-3",
               styles["aboutText"],
             )}
           >

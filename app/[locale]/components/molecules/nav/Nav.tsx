@@ -67,7 +67,7 @@ const Nav = () => {
           </li>
         ))}
       </ul>
-      <div className="items-end right-0 flex flex-1 flex-row w-full justify-end">
+      <div className="items-end right-0 flex flex-1 flex-row w-full justify-end mx-2">
         <div
           className={classNames(
             "flex justify-center items-center",
