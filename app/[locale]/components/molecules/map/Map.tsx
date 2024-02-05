@@ -6,10 +6,11 @@ import SingleRegion from "@app/[locale]/components/molecules/map/single-region";
 
 import { Map_Data, MapProps } from "../mapUkraine/map-data";
 import classes from "./Map.module.css";
-import { unstable_setRequestLocale } from "next-intl/server";
 
-const MapOfUkraine = ({params: {locale}}:any) => {
-  unstable_setRequestLocale(locale);
+
+
+
+const MapOfUkraine = () => {
   const [isHovering, setIsHovering] = useState<boolean>(false);
   const [coords, setCoords] = useState<{ x: number; y: number } | undefined>();
   const [hoveredItem, setHoveredItem] = useState<MapProps | null>(null);

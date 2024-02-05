@@ -49,8 +49,7 @@ const NavLinks: {
   },
 };
 
-const Nav = ({params: {locale}}:any) => {
-  unstable_setRequestLocale(locale);
+const Nav = () => {
   const pathname = usePathname();
   const t = useTranslations("Menu");
   const t2 = useTranslations("Index");

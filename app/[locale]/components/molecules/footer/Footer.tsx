@@ -4,13 +4,11 @@ import { Link, usePathname } from "../../../../../config";
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-
-
 import styles from "./Footer.module.css";
 import { unstable_setRequestLocale } from "next-intl/server";
 
-const Footer = ({params: {locale}}:any) => {
-  unstable_setRequestLocale(locale);
+const Footer = () => {
+
   const t = useTranslations('Footer');
   return (
     <footer

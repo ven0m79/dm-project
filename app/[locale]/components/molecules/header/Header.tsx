@@ -10,8 +10,7 @@ import { Link, usePathname } from "../../../../../config";
 import { unstable_setRequestLocale } from "next-intl/server";
 
 
-const Header = ({params: {locale}}:any) => {
-  unstable_setRequestLocale(locale);
+const Header = () => {
   const pathname = usePathname();
   return (
     <header
