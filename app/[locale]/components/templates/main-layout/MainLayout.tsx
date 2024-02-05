@@ -15,6 +15,10 @@ type MainLayoutProps = {
   noFooter?: boolean;
 };
 
+type Props = {
+  locale: string;
+}
+
 const inter = Inter({ subsets: ["latin"] });
 
 const MainLayout: FC<MainLayoutProps> = ({

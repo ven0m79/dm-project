@@ -4,7 +4,7 @@ import {unstable_setRequestLocale} from 'next-intl/server';
 
 import { MainLayout } from "@app/[locale]/components/templates";
 
-const AboutUsPage = ({params: {locale}}:any) => {
+const AboutUsPage = ({params: {locale}}: {params: {locale: string}}) => {
   unstable_setRequestLocale(locale);
   return (
     <MainLayout>

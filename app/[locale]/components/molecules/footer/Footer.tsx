@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 import styles from "./Footer.module.css";
-import { unstable_setRequestLocale } from "next-intl/server";
 
 const Footer = () => {
 

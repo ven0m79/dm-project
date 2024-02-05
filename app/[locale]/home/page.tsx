@@ -7,9 +7,11 @@ import MapOfUkraine from "@app/[locale]/components/molecules/map/Map";
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { unstable_setRequestLocale } from "next-intl/server";
 
 
-const HomePage = () => {
+const HomePage = ({params: {locale}}: {params: {locale: string}}) => {
+  unstable_setRequestLocale(locale);
   const t = useTranslations('Index');
   return (
     <MainLayout>

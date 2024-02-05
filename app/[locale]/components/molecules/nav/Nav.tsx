@@ -7,7 +7,6 @@ import React from "react";
 import styles from "./Nav.module.css";
 
 import { Link, usePathname } from "../../../../../config";
-import { unstable_setRequestLocale } from "next-intl/server";
 
 const NavLinks: {
   [key: string]: {

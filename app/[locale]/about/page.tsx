@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 
 
 
-const AboutPage = ({params: {locale}}:any) => {
+const AboutPage = ({params: {locale}}: {params: {locale: string}}) => {
   unstable_setRequestLocale(locale);
   const t = useTranslations('AboutPage');
   return (

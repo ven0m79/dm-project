@@ -7,9 +7,6 @@ import SingleRegion from "@app/[locale]/components/molecules/map/single-region";
 import { Map_Data, MapProps } from "../mapUkraine/map-data";
 import classes from "./Map.module.css";
 
-
-
-
 const MapOfUkraine = () => {
   const [isHovering, setIsHovering] = useState<boolean>(false);
   const [coords, setCoords] = useState<{ x: number; y: number } | undefined>();
