@@ -7,9 +7,11 @@ import { transform } from "typescript";
 import { Righteous } from "next/font/google";
 import Image from 'next/image';
 import { Link, usePathname } from "../../../../../config";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 
-const Header = () => {
+const Header = ({params: {locale}}:any) => {
+  unstable_setRequestLocale(locale);
   const pathname = usePathname();
   return (
     <header

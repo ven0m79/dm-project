@@ -7,8 +7,10 @@ import { useTranslations } from 'next-intl';
 
 
 import styles from "./Footer.module.css";
+import { unstable_setRequestLocale } from "next-intl/server";
 
-const Footer = () => {
+const Footer = ({params: {locale}}:any) => {
+  unstable_setRequestLocale(locale);
   const t = useTranslations('Footer');
   return (
     <footer

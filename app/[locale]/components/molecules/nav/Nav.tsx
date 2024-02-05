@@ -7,6 +7,7 @@ import React from "react";
 import styles from "./Nav.module.css";
 
 import { Link, usePathname } from "../../../../../config";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 const NavLinks: {
   [key: string]: {
@@ -48,7 +49,8 @@ const NavLinks: {
   },
 };
 
-const Nav = () => {
+const Nav = ({params: {locale}}:any) => {
+  unstable_setRequestLocale(locale);
   const pathname = usePathname();
   const t = useTranslations("Menu");
   const t2 = useTranslations("Index");
