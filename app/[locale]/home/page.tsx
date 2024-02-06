@@ -61,7 +61,7 @@ const HomePage = () => {
               <br />
               <div className={classNames("font-bold", styles["textHeader"])}> {'Ми пропонуємо комплексні рішення:'}</div>
               <br />
-              <div>
+              <div className={classNames("", styles["putText"])}>
                 {'- з проектування медичних закладів,'}
                 <br />
                 {'- з підбору та постачання оптимальної конфігурації '}
