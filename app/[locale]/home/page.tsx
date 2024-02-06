@@ -29,8 +29,8 @@ const HomePage = () => {
             className="flex flex-1 flex-row justify-end items-center self-center"
             style={{ width: "85%", maxWidth: "1400px" }}>
 
-            <div className={classNames("text-2xl text-blue-800", styles["ass"])}>
-              <div className={classNames("font-bold",  styles["textHeader"])}> {'Поставлено:'}</div>
+            <div className={"text-2xl text-blue-800"}>
+              <div className={classNames("font-bold", styles["textHeader"])}> {'Поставлено:'}</div>
               <br />
               <div className="flex flex-1 flex-row items-center self-center">
                 <div
@@ -42,7 +42,7 @@ const HomePage = () => {
                     height={25}
                     src={"/galka.png"} />
                 </div>
-                <div className={"font-bold"}> {'4200 одиниць обладнання'}</div>
+                <div className={classNames("font-bold", styles["putText"])}> {'4200 одиниць обладнання'}</div>
 
               </div>
               <div className="flex flex-1 flex-row">
@@ -56,10 +56,10 @@ const HomePage = () => {
                     src={"/galka.png"} />
                 </div>
 
-                <div className={"font-bold"}> {'400 міст України'}</div>
+                <div className={classNames("font-bold", styles["putText"])}> {'400 міст України'}</div>
               </div>
               <br />
-              <div className={classNames("font-bold",  styles["textHeader"])}> {'Ми пропонуємо комплексні рішення:'}</div>
+              <div className={classNames("font-bold", styles["textHeader"])}> {'Ми пропонуємо комплексні рішення:'}</div>
               <br />
               <div>
                 {'- з проектування медичних закладів,'}
@@ -80,11 +80,11 @@ const HomePage = () => {
         </div>
 
         <div
-          className={classNames("font-bold flex flex-1 flex-col text-slate-900 justify-center items-center m-auto p-10",  styles["serviceTextHeader"])}
+          className={classNames("font-bold flex flex-1 flex-col text-slate-900 justify-center items-center m-auto p-10", styles["serviceTextHeader"])}
           style={{ width: "1400px" }}> {/*Сервіс та Проєктування*/}
           <div className="flex flex-col self-start"
             style={{ width: "900px" }}>
-            <div className={classNames("flex flex-1 flex-col font-bold indent-5",  styles["textHeader"])}>
+            <div className={classNames("flex flex-1 flex-col font-bold indent-5", styles["textHeader"])}>
               СЕРВіС
             </div>
             <div className="flex flex-1 flex-row text-slate-200">
@@ -105,7 +105,7 @@ const HomePage = () => {
           </div>
           <div className="flex flex-col self-end"
             style={{ width: "1034px" }}>
-            <div  className={classNames("font-bold self-end mt-10",  styles["textHeader"])}>
+            <div className={classNames("font-bold self-end mt-10", styles["textHeader"])}>
               ПРОЄКТУВАННЯ
             </div>
             <div className="flex flex-1 flex-row text-slate-200">
