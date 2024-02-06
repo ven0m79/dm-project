@@ -57,7 +57,7 @@ const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
             Реалізовані проєкти
           </div>
           <div className="text-2xl flex flex-row justify-between mb-5 w-full px-5">
-            <Link href="/"><div
+            <Link href="/about/ohmatdet"><div
               className={classNames(
                 "flex flex-col justify-center items-center rounded-xl",
                 styles["block-decisions"],
@@ -70,7 +70,7 @@ const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
                   alt="НДСЛ “Охматдит"
                 /></div>
             </Link>
-            <Link href="/"><div
+            <Link href="/about/feofania"><div
               className={classNames(
                 "flex flex-col justify-center items-center rounded-xl",
                 styles["block-decisions"],
@@ -83,7 +83,7 @@ const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
                   alt="Лікарня “Феофанія"
                 /></div>
             </Link>
-            <Link href="/"><div
+            <Link href="/about/kardiovinnitsa"><div
               className={classNames(
                 "flex flex-col justify-center items-center rounded-xl",
                 styles["block-decisions"],
