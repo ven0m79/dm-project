@@ -1,3 +1,25 @@
-.ass {
-    max-width: 1400px;
+.put {
+    font-family: 'Calibri';
+    font-size: 28px;
+    color: #0061AA;
+}
+.textHeader {
+    font-family: 'Calibri';
+    font-size: 32px;
+    color: #002766;
+}
+.serviceTextHeader {
+    font-family: 'Calibri';
+    font-size: 28px;
+    font-weight: bold;
+    color: #002766;
+}
+
+.serviceText {
+    width: 800px;
+    font-family: 'Calibri';
+    line-height: 33px;
+    font-size: 24px;
+    font-weight: normal;
+    color: #0061AA;    
 }

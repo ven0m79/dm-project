@@ -8,17 +8,20 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
+import styles from "./Home.module.css";
+import classNames from "classnames";
+
 const HomePage = () => {
   const t = useTranslations('Index');
   return (
     <MainLayout>
-      <div className="text-2xl text-blue-900 flex justify-center items-center valign-middle">{t('title')}</div>
+      {/* <div className="text-2xl text-blue-900 flex justify-center items-center valign-middle">{t('title')}</div> */}
       <div>
         <div className="flex flex-1 flex-col justify-center items-center">
 
           <Slider />
 
-          <div className="text-2xl text-blue-900 flex justify-center items-center valign-middle mb-10">
+          <div className={classNames("justify-center items-center valign-middle mb-10", styles['serviceTextHeader'])}>
             {t('in-Ukraine-2009')}
           </div>
 
@@ -26,8 +29,8 @@ const HomePage = () => {
             className="flex flex-1 flex-row justify-end items-center self-center"
             style={{ width: "85%", maxWidth: "1400px" }}>
 
-            <div className="text-2xl text-blue-800">
-              <div className={"font-bold"}> {'Поставлено:'}</div>
+            <div className={classNames("text-2xl text-blue-800", styles["ass"])}>
+              <div className={classNames("font-bold",  styles["textHeader"])}> {'Поставлено:'}</div>
               <br />
               <div className="flex flex-1 flex-row items-center self-center">
                 <div
@@ -56,7 +59,7 @@ const HomePage = () => {
                 <div className={"font-bold"}> {'400 міст України'}</div>
               </div>
               <br />
-              <div className={"font-bold"}> {'Ми пропонуємо комплексні рішення:'}</div>
+              <div className={classNames("font-bold",  styles["textHeader"])}> {'Ми пропонуємо комплексні рішення:'}</div>
               <br />
               <div>
                 {'- з проектування медичних закладів,'}
@@ -77,18 +80,17 @@ const HomePage = () => {
         </div>
 
         <div
-          className="flex flex-1 flex-col text-slate-900 justify-center items-center m-auto p-10"
+          className={classNames("font-bold flex flex-1 flex-col text-slate-900 justify-center items-center m-auto p-10",  styles["serviceTextHeader"])}
           style={{ width: "1400px" }}> {/*Сервіс та Проєктування*/}
           <div className="flex flex-col self-start"
             style={{ width: "900px" }}>
-            <div className="flex flex-1 flex-col text-6xl font-bold indent-5"
-              style={{ color: "#0061AA" }}>
+            <div className={classNames("flex flex-1 flex-col font-bold indent-5",  styles["textHeader"])}>
               СЕРВіС
             </div>
-            <div className="flex flex-1 flex-row text-slate-200 text-2xl">
+            <div className="flex flex-1 flex-row text-slate-200">
               <Link href={"/services"}>
-                <div className="p-5 text-blue-800 indent-5 text-justify"
-                  style={{ width: "800px" }}>{'Offering solutions and products that are verifiably effective - that is our vision. She is our guiding principle on all levels - whether in strategic decision making within the management teams or in the daily operative work of each of our employees. Our vision always pushes us to develop and offer high quality solutions and products which can be proven to be effective and efficient in their application.'}</div>
+                <div className={classNames("p-5 indent-5 text-justify",
+                  styles["serviceText"])}>{'Offering solutions and products that are verifiably effective - that is our vision. She is our guiding principle on all levels - whether in strategic decision making within the management teams or in the daily operative work of each of our employees. Our vision always pushes us to develop and offer high quality solutions and products which can be proven to be effective and efficient in their application.'}</div>
               </Link>
               <div>
                 <Link href={"/services"}>
@@ -100,15 +102,13 @@ const HomePage = () => {
                 </Link>
               </div>
             </div>
-
           </div>
           <div className="flex flex-col self-end"
             style={{ width: "1034px" }}>
-            <div className="flex flex-1 flex-col text-slate-600 text-6xl font-bold self-end mt-10"
-              style={{ color: "#0061AA" }}>
+            <div  className={classNames("font-bold self-end mt-10",  styles["textHeader"])}>
               ПРОЄКТУВАННЯ
             </div>
-            <div className="flex flex-1 flex-row text-slate-200 text-2xl">
+            <div className="flex flex-1 flex-row text-slate-200">
               <div>
                 <Link href={"/projects"}>
                   <Image
@@ -119,8 +119,8 @@ const HomePage = () => {
                 </Link>
               </div>
               <Link href={"/projects"}>
-                <div className="p-5 text-blue-800 indent-5 text-justify"
-                  style={{ width: "800px" }}>
+                <div className={classNames("p-5 indent-5 text-justify",
+                  styles["serviceText"])}>
                   {'Offering solutions and products that are verifiably effective - that is our vision. She is our guiding principle on all levels - whether in strategic decision making within the management teams or in the daily operative work of each of our employees. Our vision always pushes us to develop and offer high quality solutions and products which can be proven to be effective and efficient in their application.'}
                 </div>
               </Link>
@@ -129,7 +129,7 @@ const HomePage = () => {
         </div>
 
         <div className="flex flex-1 flex-col justify-center items-center">
-          <div className="text-4xl text-blue-900 flex justify-center items-center valign-middle mt-10">
+          <div className={classNames("font-bold justify-center items-center valign-middle mt-10", styles['textHeader'])}>
             Наші партнери:
           </div>
           <div className="flex flex-1 flex-row justify-center items-center valign-middle bg-white">
@@ -184,7 +184,7 @@ const HomePage = () => {
               </Link>
             </div>
           </div>
-          <div className="text-2xl text-blue-900 flex justify-center items-center valign-middle mb-10">
+          <div className={classNames("justify-center items-center valign-middle mb-10", styles['serviceTextHeader'])}>
             ДМ-Проект допомагає зберігати життя українців!
           </div>
         </div>
