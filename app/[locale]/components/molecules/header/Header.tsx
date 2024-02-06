@@ -7,8 +7,10 @@ import { transform } from "typescript";
 import { Righteous } from "next/font/google";
 import Image from 'next/image';
 import { Link, usePathname } from "../../../../../config";
+import { useTranslations } from 'next-intl';
 
 const Header = () => {
+  const t = useTranslations('Header');
   const pathname = usePathname();
   return (
     <header
@@ -53,7 +55,7 @@ const Header = () => {
         <div className={styles.contactsGroup}>
           <div>service@dm-project.com.ua</div>
         </div>
-        <input className={styles.search} placeholder="Пошук..."></input>
+        <input className={styles.search} placeholder={t('placeholder')}></input>
       </div>
     </header>
 
