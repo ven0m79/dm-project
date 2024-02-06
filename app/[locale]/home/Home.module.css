@@ -14,14 +14,23 @@
     font-weight: bold;
     color: #002766;
 }
-
 .serviceText {
     width: 800px;
     font-family: 'Calibri';
-    line-height: 33px;
+    line-height: 35px;
     font-size: 24px;
     font-weight: normal;
     color: #0061AA;    
+}
+
+.serviceText:hover {
+    width: 800px;
+    font-family: 'Calibri';
+    line-height: 35px;
+    font-size: 24px;
+    font-weight: normal;
+    color: #0061AA;    
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
 }
 .putText {
     font-family: 'Calibri';
