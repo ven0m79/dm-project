@@ -1,0 +1,68 @@
+.main {
+    width: 1400px;
+}
+.leftContainer {
+    margin: 10px auto 10px auto;
+    width: 100%;
+    color: black;
+    border-radius: 10px;
+}
+.container {
+    width: 460px;
+    height: 666px;
+    background-color: #ECF3FE;
+    margin: 10px auto 10px auto;
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Calibri';
+    font-size: 18px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.form {
+    margin-top: 10px;
+    width: 400px;
+    border: 1px solid #0061AA;
+    font-size: 18px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    padding-left: 10px;
+    resize: none;
+    font-family: 'Calibri';
+    outline: none;
+}
+
+.form::placeholder {
+    font-family: 'Calibri';
+    font-size: 18px;
+}
+
+.sendUsMessage {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    text-align: center;
+    font-size: 24px;
+    font-family: 'Calibri';
+}
+
+.yerSubmit {
+    width: 400px;
+    padding: 13px 30px;
+    margin: 5px 0 20px 0;
+    font-size: 18px;
+    color: #000;
+    background-color: #ECF3FE;
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Calibri';
+    font-size: 18px;
+}
+
+.yerSubmit:hover {
+    transition: all 0.5s;
+    background: #002766;
+    color: #ffffff;
+    font-family: 'Calibri';
+    font-size: 18px;
+}
