@@ -28,7 +28,7 @@ const ServicesPage = ({ params: { locale } }: { params: { locale: string } }) =>
     <MainLayout>
       <div className={classNames("flex flex-1 flex-row self-center", styles.main)}>
         <div className={classNames("text-gray-900 flex flex-1 flex-col justify-normal items-start w-full mt-8", styles.leftContainer)}>
-        <div className=" text-black self-center h-96 text-5xl">СЕРВІСНЕ ОБСЛУГОВУВАННЯ</div>
+        <div className=" text-black self-center h-96 text-5xl">Сервісне обслуговування</div>
         </div>
         <div className="text-gray-900 justify-center items-start pr-5">
           <form onSubmit={handleSubmit} className={styles.container}>

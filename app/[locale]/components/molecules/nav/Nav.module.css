@@ -8,6 +8,7 @@
   background: linear-gradient(to right, #0061AA 35%, #0061AA 63%, white 69%, white 100%);
   border-radius: 10px;
 }
+
 .back {
   margin-top: 0vh;
   display: flex;
@@ -19,6 +20,7 @@
   font-size: 18px;
   color: #0061AA;
 }
+
 .link {
   font-size: 14px;
   height: 100%;
@@ -29,10 +31,18 @@
   font-family: 'Calibri';
   font-size: 16px;
 }
+
 .active {
   height: 100%;
   padding: 15px 15px 15px 15px;
   color: rgb(255, 255, 255);
   background-color: #002766;
+  border-bottom: 3px solid #007F3D;
+}
+
+.link:hover {
+  transition: all 0.5s;
+  background: #002766;
+  color: #ffffff;
   border-bottom: 3px solid #007F3D;
 }
