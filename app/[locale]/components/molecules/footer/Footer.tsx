@@ -36,34 +36,34 @@ const Footer = () => {
         </div>
           
         <div className={classNames('font-bold', styles["column"])}>
-          <p className={classNames('font-bold mb-4 text-[20px] ml-5')}>КАТАЛОГ</p>
-          <p className={classNames('font-normal mt-1 ml-5')}>Обладнання для операційних</p>
-          <p className={classNames('font-normal mt-1 ml-5')}>Обладнання для відділень інтенсівної терації</p>
-          <p className={classNames('font-normal mt-1 ml-5')}>Неонатальне обладнання</p>
-          <p className={classNames('font-normal mt-1 ml-5')}>Стерилізаційне та дезінфекційне обладнання</p>
-          <p className={classNames('font-normal mt-1 ml-5')}>Медичне газопостачання</p>
-          <p className={classNames('font-normal mt-1 ml-5')}>Медичні меблі</p>
-          <p className={classNames('font-normal mt-1 ml-5')}>Витратні матеріали та аксесуари</p>
+          <p className={classNames('font-bold mb-4 text-[20px] ml-5')}>{t('catalog')}</p>
+          <p className={classNames('font-normal mt-1 ml-5')}>{t('or-equipment')}</p>
+          <p className={classNames('font-normal mt-1 ml-5')}>{t('icu-equipment')}</p>
+          <p className={classNames('font-normal mt-1 ml-5')}>{t('neonatal-equipment')}</p>
+          <p className={classNames('font-normal mt-1 ml-5')}>{t('candd-equipment')}</p>
+          <p className={classNames('font-normal mt-1 ml-5')}>{t('gas-systems')}</p>
+          <p className={classNames('font-normal mt-1 ml-5')}>{t('other-equipment')}</p>
+          <p className={classNames('font-normal mt-1 ml-5')}>{t('accessories')}</p>
         </div>
         <div className={classNames('font-bold flex flex-column', styles["column"])}>
-          <div>            <p className={classNames('font-bold mb-4 ml-1 text-[20px]')}>КОНТАКТИ</p></div>
+          <div>            <p className={classNames('font-bold mb-4 ml-1 text-[20px]')}>{t('contacts')}</p></div>
         <div className={classNames('font-bold flex flex-row ml-0', styles["row"])}>
           <div className={classNames('font-normal mt-1 w-10')}>
-            <p className={classNames('font-normal mt-3')}><Image src="/locationFooter.png" width={26} height={26} alt="Logo DM Project"/></p>
-            <p className={classNames('font-normal mt-6')}><Image src="/telephoneFooter.png" width={26} height={26} alt="Logo DM Project"/></p>
-            <p className={classNames('font-normal mt-7')}><Image src="/emailFooter.png" width={26} height={26} alt="Logo DM Project"/></p>
+            <p className={classNames('font-normal mt-1')}><Image src="/locationFooter.png" width={26} height={26} alt="Logo DM Project"/></p>
+            <p className={classNames('font-normal mt-7')}><Image src="/telephoneFooter.png" width={26} height={26} alt="Logo DM Project"/></p>
+            <p className={classNames('font-normal mt-8')}><Image src="/emailFooter.png" width={26} height={26} alt="Logo DM Project"/></p>
           </div>
           <div>
-            <p className={classNames('font-normal mt-1')}>вул. Мокра, 16, оф. 385, <br /> м. Київ, 03035, Україна <br />dm-project.com.ua</p>
-            <p className={classNames('font-normal mt-1')}>+380 44 520-12-24, <br />+380 44 520-12-25, <br />+380 44 520-12-45 (факс)</p>
-            <p className={classNames('font-normal mt-1')}>allinfo@dm-project.com.ua <br />sales@dm-project.com.ua <br />service@dm-project.com.ua</p>
+            <p className={classNames('font-normal mt-1 ml-1')}>{t('adress')}</p><br />
+            <p className={classNames('font-normal mt-1 ml-1')}>{t('fax')}</p><br />
+            <p className={classNames('font-normal mt-1 ml-1')}>allinfo@dm-project.com.ua <br />sales@dm-project.com.ua <br />service@dm-project.com.ua</p>
           </div>
         </div>
         </div>
       </div>
       <div className={styles.stroke}></div>
       <div className={classNames("mt-3 text-white justify-center items-center", styles["footerContainer"])}>
-        © 2023 ДМ-Проект. Всі права захищені</div>
+      {t('all-right')}</div>
     </footer>
   );
 };

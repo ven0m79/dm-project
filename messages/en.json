@@ -23,7 +23,17 @@
     "service": "Service",
     "decisions": "Decisions",
     "projects": "Projects",
-    "shares": "Shares"
+    "shares": "Shares",
+    "or-equipment": "OR equipment",
+    "icu-equipment": "ICU equipment",
+    "neonatal-equipment": "Neonatal equipment",
+    "candd-equipment": "Cleaning and desinfecting equipment ",
+    "gas-systems": "Gas Management Systems",
+    "other-equipment": "Other hospital equipment",
+    "accessories": "Accessories",
+    "adress": "03035, Kyiv, Ukraine, Mokra srt., 16, office 385",
+    "fax": "+380 44 520-12-24, +380 44 520-12-25, +380 44 520-12-45 (fax)",
+    "all-right": "© 2024 ДМ-Project. All rights reserved"
   },
   "Header": {
     "placeholder": "Search..."
