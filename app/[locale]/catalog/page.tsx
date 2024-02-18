@@ -34,7 +34,7 @@ const CatalogPage = ({params: {locale}}: {params: {locale: string}}) => {
             </Link>
             <Link href="#"><div
               className={classNames(
-                "flex flex-row justify-center items-center rounded-xl",
+                "flex flex-row items-center rounded-xl",
                 styles["block-decisions"],
               )}
             >Обладнання для відділень інтенсивної терапії
@@ -47,7 +47,7 @@ const CatalogPage = ({params: {locale}}: {params: {locale: string}}) => {
             </Link>
             <Link href="#"><div
               className={classNames(
-                "flex flex-row justify-center items-center rounded-xl",
+                "flex flex-row items-center rounded-xl",
                 styles["block-decisions"],
               )}
             >Неонатальне обладнання
@@ -60,7 +60,7 @@ const CatalogPage = ({params: {locale}}: {params: {locale: string}}) => {
             </Link>
             <Link href="#"><div
               className={classNames(
-                "flex flex-row justify-center items-center rounded-xl",
+                "flex flex-row items-center rounded-xl",
                 styles["block-decisions"],
               )}
             >Стерилізаційне та дезінфекційне обладнання
@@ -73,7 +73,7 @@ const CatalogPage = ({params: {locale}}: {params: {locale: string}}) => {
             </Link>
             <Link href="#"><div
               className={classNames(
-                "flex flex-row justify-center items-center rounded-xl",
+                "flex flex-row items-center rounded-xl",
                 styles["block-decisions"],
               )}
             >Медичне газопостачання
@@ -86,7 +86,7 @@ const CatalogPage = ({params: {locale}}: {params: {locale: string}}) => {
             </Link>
             <Link href="#"><div
               className={classNames(
-                "flex flex-row justify-center items-center rounded-xl",
+                "flex flex-row items-center rounded-xl",
                 styles["block-decisions"],
               )}
             >Медичні меблі
@@ -99,7 +99,7 @@ const CatalogPage = ({params: {locale}}: {params: {locale: string}}) => {
             </Link>
             <Link href="#"><div
               className={classNames(
-                "flex flex-row justify-center items-center rounded-xl",
+                "flex flex-row items-center rounded-xl",
                 styles["block-decisions"],
               )}
             >Витратні матеріали та аксесуари

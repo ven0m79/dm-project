@@ -38,6 +38,7 @@ const ServicesPage = ({ params: { locale } }: { params: { locale: string } }) =>
         <div className={styles.sendUsMessage}>
           {t('title')}
         </div>
+        <div className={styles.stroke}></div>
         <div className={classNames("text-gray-900 flex flex-1 flex-row justify-normal items-start w-full")}>
           <div className={classNames("text-gray-900 flex flex-1 flex-col justify-normal items-start w-full")}>
             <div className={classNames("text-gray-900 justify-normal items-start indent-4 w-full mt-8", styles.leftContainer)}>
