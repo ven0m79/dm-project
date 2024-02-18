@@ -19,7 +19,7 @@
 .catalogContainer {
     align-self: center;
     width: 1400px;
-    /* border: 1px solid #ff0000; */
+    border: 1px solid  transparent;
 }
 
 .aboutDecisions {
@@ -34,9 +34,6 @@
 }
 
 .block-decisions {
-    /* margin: 0px 40px 10px 40px ; */
-    padding: 10px;
-    margin: 20px;
     width: 600px;
     height: 150px;
     border-radius: 10px;
@@ -45,41 +42,23 @@
     justify-content: space-between;
     padding-left: 50px;
     padding-right: 50px;
+    transition: all 0.2s;
 }
 
-.block-decisions:hover {
-    /* margin: 0px 40px 10px 40px ; */
-    padding: 10px;
-    margin: 20px;
-    width: 600px;
-    height: 150px;
-    border-radius: 10px;
-    border: 1px solid #ff0000;
-    color: #ff0000;
-    animation: bounce 0.5s;
-    cursor: pointer;
-    justify-content: space-between;
-    padding-left: 50px;
-    padding-right: 50px;
+.block-decisions:hover .img {
+
+    transform: scale(1.1);
+    transform-origin: left;
+}
+.img {
+    transition: all 0.5s;
+}
+.span {
+    transition: all 0.5s;
+    transform-origin: right;
 }
 
-@keyframes bounce {
+.block-decisions:hover .span {
 
-    0%,
-    20%,
-    60%,
-    100% {
-        transform: translateY(0);
-        transform: translateY(0);
-    }
-
-    40% {
-        transform: translateY(-20px);
-        transform: translateY(-20px);
-    }
-
-    80% {
-        transform: translateY(-10px);
-        transform: translateY(-10px);
-    }
+    transform: scale(1.1);
 }
