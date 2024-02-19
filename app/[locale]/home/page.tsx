@@ -131,9 +131,10 @@ const HomePage = () => {
             Наші партнери:
           </div>
           <div className="flex flex-1 flex-row justify-center items-center valign-middle bg-white">
-            <div className="m-10">
+            <div className={classNames("m-10", styles['block-partners'])}>
               <Link href="https://www.draeger.com">
                 <Image
+                  className={styles.img}
                   src="/logo-partners/dreger-log-partner.jpg"
                   width={150}
                   height={150}
@@ -141,9 +142,10 @@ const HomePage = () => {
                 />
               </Link>
             </div>
-            <div className="m-10">
+            <div className={classNames("m-10", styles['block-partners'])}>
               <Link href="https://www.prohs.pt/en/home/">
                 <Image
+                  className={styles.img}
                   src="/logo-partners/prohs-log-partner.png"
                   width={150}
                   height={150}
@@ -151,9 +153,10 @@ const HomePage = () => {
                 />
               </Link>
             </div>
-            <div className="m-10">
+            <div className={classNames("m-10", styles['block-partners'])}>
               <Link href="https://www.at-os.com">
                 <Image
+                  className={styles.img}
                   src="/logo-partners/atos-log-partner.jpg"
                   width={150}
                   height={150}
@@ -161,9 +164,10 @@ const HomePage = () => {
                 />
               </Link>
             </div>
-            <div className="m-10">
+            <div className={classNames("m-10", styles['block-partners'])}>
               <Link href="https://www.lojer.com">
                 <Image
+                  className={styles.img}
                   src="/logo-partners/lojer-log-partner.jpg"
                   width={150}
                   height={150}
@@ -171,9 +175,10 @@ const HomePage = () => {
                 />
               </Link>
             </div>
-            <div className="m-10">
+            <div className={classNames("m-10", styles['block-partners'])}>
               <Link href="http://renosem.com">
                 <Image
+                  className={styles.img}
                   src="/logo-partners/renosem-log-partner.jpg"
                   width={150}
                   height={150}
