@@ -7,7 +7,7 @@ const api = new WooCommerceRestApi({
     version: "wc/v3"
 });
 
-export default async function handler(req, res) {
+export default async function handler(req: any, res: any) {
     const responseData = {
         success: false,
         products: [],
