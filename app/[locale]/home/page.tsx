@@ -83,7 +83,7 @@ const HomePage = () => {
           <div className="flex flex-col self-start"
             style={{ width: "900px" }}>
             <div className={classNames("flex flex-1 flex-col font-bold indent-5", styles["textHeader"])}>
-              СЕРВіС
+              СЕРВІС
             </div>
             <div className="flex flex-1 flex-row text-slate-200">
               <Link href={"/services"}>
