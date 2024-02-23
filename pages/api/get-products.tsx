@@ -29,7 +29,7 @@ export default async function handler(req: any, res: any) {
 
         res.json (responseData)
     } catch (error) {
-        responseData.error = error.message;
+        responseData.error;
         res.status(500).json(responseData);
     }
 
