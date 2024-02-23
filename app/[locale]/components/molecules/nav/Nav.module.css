@@ -16,7 +16,7 @@
   align-items: center;
   margin-left: 10px;
   height: 100%;
-  font-family: 'Calibri';
+  font-family: Roboto;
   font-size: 18px;
   color: #0061AA;
 }
@@ -28,8 +28,8 @@
   color: white;
   
   position: relative;
-  font-family: 'Calibri';
-  font-size: 16px;
+  font-family: Roboto;
+  font-size: 14px;
 }
 
 .active {

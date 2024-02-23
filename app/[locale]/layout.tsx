@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
 import { ReactNode } from "react";
 
 import { NextIntlClientProvider, useMessages } from "next-intl";
@@ -9,7 +9,12 @@ import "./reset.css";
 import { cn } from "@app/[locale]/components/molecules/lib/utils";
 import { unstable_setRequestLocale } from "next-intl/server";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Roboto({
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 interface LocaleLayoutProps {
   children: ReactNode;

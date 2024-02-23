@@ -85,7 +85,7 @@ const SingleSlide: FC<ArticleSingleType> = ({
           initial={{ ...animatedStyles.initial }}
           animate={{ ...animatedStyles.animate }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          style={{ fontSize: 44 }}
+          style={{ fontSize: 40 }}
         >
           <div className="mt-10 mx-32 w-screen">{title}</div>
         </motion.div>

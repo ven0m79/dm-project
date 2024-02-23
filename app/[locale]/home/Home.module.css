@@ -1,17 +1,17 @@
 .put {
-    font-family: 'Calibri';
+    font-family: Roboto;
     font-size: 28px;
     color: #0061AA;
 }
 
 .textHeader {
-    font-family: 'Calibri';
+    font-family: Roboto;
     font-size: 32px;
     color: #002766;
 }
 
 .serviceTextHeader {
-    font-family: 'Calibri';
+    font-family: Roboto;
     font-size: 28px;
     font-weight: bold;
     color: #002766;
@@ -19,7 +19,7 @@
 
 .serviceText {
     width: 800px;
-    font-family: 'Calibri';
+    font-family: Roboto;
     line-height: 35px;
     font-size: 24px;
     font-weight: normal;
@@ -28,7 +28,7 @@
 
 .serviceText:hover {
     width: 800px;
-    font-family: 'Calibri';
+    font-family: Roboto;
     line-height: 35px;
     font-size: 24px;
     font-weight: normal;
@@ -37,7 +37,7 @@
 }
 
 .putText {
-    font-family: 'Calibri';
+    font-family: Roboto;
     line-height: 33px;
     font-size: 24px;
     font-weight: normal;

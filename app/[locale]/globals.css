@@ -2,24 +2,6 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@font-face {
-  font-weight: 400; /* Соответствует значению normal */
-  font-family: e-Ukraine;
-  src: url("/fonts/e-UkraineHead-Regular.otf");
-}
-
-@font-face {
-  font-weight: 700; /* Соответствует значению bold */
-  font-family: e-UkraineB;
-  src: url("/fonts/e-UkraineHead-Bold.otf");
-}
-
-@font-face {
-  font-weight: 300;
-  font-family: e-UkraineL;
-  src: url("/fonts/e-UkraineHead-Light.otf");
-}
-
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
