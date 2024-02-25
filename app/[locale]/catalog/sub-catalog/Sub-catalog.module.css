@@ -6,15 +6,17 @@
 
 .subMenu {
     border-radius: 10px;
-    border: 1px solid blue;
-    width: 400px;
+    /* border: 1px solid blue; */
+    width: 1400px;
+    height: fit-content;
     font-family: 'Roboto';
     font-size: 16px;
     background-color: #0061AA;
-    color: #0091CC;
 }
 .subItem {
-    width: 400px;
+    width: 300px;
     background-color: #0091CC;
     color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }

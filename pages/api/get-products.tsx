@@ -16,13 +16,7 @@ export default async function handler(req: any, res: any) {
     }
 
     try {
-        const { data } = await api.get(
-            'products',
-            {
-                per_page: 10
-            },
-
-        );
+        const { data } = await api.get('products');
 
         responseData.success = true;
         responseData.products = data;
