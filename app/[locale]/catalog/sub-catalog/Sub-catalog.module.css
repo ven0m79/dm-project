@@ -1,0 +1,20 @@
+.subCatalog {
+    width: 1400px;
+    padding: 10px;
+    /* border: 1px solid red; */
+}
+
+.subMenu {
+    border-radius: 10px;
+    border: 1px solid blue;
+    width: 400px;
+    font-family: 'Roboto';
+    font-size: 16px;
+    background-color: #0061AA;
+    color: #0091CC;
+}
+.subItem {
+    width: 400px;
+    background-color: #0091CC;
+    color: white;
+}

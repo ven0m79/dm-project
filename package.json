@@ -21,6 +21,7 @@
     "clsx": "^2.0.0",
     "eslint": "8.50.0",
     "eslint-config-next": "13.5.2",
+    "flowbite-react": "^0.7.2",
     "follow-redirects": "^1.15.5",
     "framer-motion": "^10.16.16",
     "i18n": "^0.15.1",
