@@ -19,3 +19,12 @@
 body {
   margin: 0 !important;
 }
+
+ul {
+  overflow-y: hidden;
+}
+button {
+  text-align: start;
+  padding-left: 10px;
+  padding-right: 10px;
+}

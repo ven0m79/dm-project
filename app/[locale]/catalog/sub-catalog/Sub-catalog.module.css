@@ -1,6 +1,5 @@
 .subCatalog {
     width: 1400px;
-    padding: 10px;
     /* border: 1px solid red; */
 }
 
@@ -12,11 +11,31 @@
     font-family: 'Roboto';
     font-size: 16px;
     background-color: #0061AA;
+
 }
-.subItem {
+.subCollapse {
     width: 300px;
     background-color: #0091CC;
     color: white;
     padding-top: 5px;
     padding-bottom: 5px;
+}
+.subItem {
+    width: 300px;
+    background-color: #0061AA;
+    color: white;
+    padding-left: 15px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.subItem:active {
+
+    background-color: #0b0bc7;
+
+}
+.subMenuDash {
+    width: 300px;
+    height: 20px;
+    background-color: #0061AA;
+    border-radius: 0 0 10px 10px;
 }
