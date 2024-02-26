@@ -1,6 +1,7 @@
 .footer {
-  margin-bottom: 0px;
-  height: 320px;
+  padding-bottom: 0px;
+  padding-top: 20px;
+  height: auto;
   width: 1400px;
   align-self: center;
   border-radius: 10px 10px 0px 0px;
