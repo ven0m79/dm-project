@@ -6,7 +6,7 @@
   align-self: center;
   border-radius: 10px 10px 0px 0px;
   background-color: #0061AA;
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
 }
 
 .footerContainer {

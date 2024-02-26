@@ -62,7 +62,7 @@ const Footer = () => {
         </div>
       </div>
       <div className={styles.stroke}></div>
-      <div className={classNames("mt-3 text-white justify-center items-center", styles["footerContainer"])}>
+      <div className={classNames("mt-3 mb-3 text-white justify-center items-center", styles["footerContainer"])}>
         {t('all-right')}</div>
     </footer>
   );
