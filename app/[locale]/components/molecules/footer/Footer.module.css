@@ -7,11 +7,13 @@
   background-color: #0061AA;
   font-family: 'Roboto';
 }
+
 .footerContainer {
   display: flex;
   align-self: center;
-/*  border: solid 1px rgb(203, 0, 0); */
+  /*  border: solid 1px rgb(203, 0, 0); */
 }
+
 .column {
   display: flex;
   flex-direction: column;
@@ -21,8 +23,10 @@
   margin-right: 10px;
   font-size: 16px;
   font-weight: normal;
-/*  border: solid 1px black; */
+  /*  border: solid 1px black; */
+  font-family: 'Roboto';
 }
+
 .socialMedia {
   display: flex;
   flex-direction: row;
@@ -31,11 +35,12 @@
   margin-left: 5px;
   margin-right: 5px;
 }
+
 .stroke {
   align-self: center;
   width: 1240px;
   height: 1px;
   margin-top: 30px;
   background: linear-gradient(to right, #ffffff00 0%, #ffffff 45%, white 55%, #ffffff00 100%);
-  
+
 }

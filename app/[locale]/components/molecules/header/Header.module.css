@@ -25,13 +25,13 @@
     align-self: center;
     margin: 10px  5px 10px 50px; /*top right button left*/
     vertical-align: middle;
-    font-size: larger;
+    font-family: 'Roboto';
 }
 .contactsGroup {
     align-self: center;
     margin: 10px  10px 10px 10px; /*top right button left*/
     vertical-align: middle;
-    font-size: larger;
+    font-family: 'Roboto';
 }
 .search {
     width: 370px;
@@ -45,7 +45,7 @@
     outline: none;
     margin: 10px  10px 10px 50px;
     vertical-align: middle;
-    font-size: larger;
+    font-family: 'Roboto';
     padding: 0 20px;
 }
 .lang {
@@ -54,7 +54,9 @@
     vertical-align: middle;
     text-align: right;
     background-color: #0061AAa5;
+    font-family: 'Roboto';
 }
 .langText {
     margin-right: 20px;
+    font-family: 'Roboto';
 }
