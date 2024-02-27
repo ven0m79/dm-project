@@ -18,6 +18,7 @@ type Props = {
   locale: string;
 }
 
+
 const MainLayout: FC<MainLayoutProps> = ({
   children,
   noHeader = false,

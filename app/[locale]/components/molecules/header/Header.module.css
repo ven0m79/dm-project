@@ -4,7 +4,7 @@
     background: rgb(255, 255, 255);
     align-self: center;
     color: #002766;
-    font-family: 'Roboto';
+    font-family: "Roboto", sans-serif;
     font-size: 16px;
 }
 .containerWithLogo {
@@ -25,13 +25,13 @@
     align-self: center;
     margin: 10px  5px 10px 50px; /*top right button left*/
     vertical-align: middle;
-    font-family: 'Roboto';
+    font-family: "Roboto", sans-serif;
 }
 .contactsGroup {
     align-self: center;
     margin: 10px  10px 10px 10px; /*top right button left*/
     vertical-align: middle;
-    font-family: 'Roboto';
+    font-family: "Roboto", sans-serif;
 }
 .search {
     width: 370px;
@@ -45,7 +45,7 @@
     outline: none;
     margin: 10px  10px 10px 50px;
     vertical-align: middle;
-    font-family: 'Roboto';
+    font-family: "Roboto", sans-serif;
     padding: 0 20px;
 }
 .lang {
@@ -54,9 +54,9 @@
     vertical-align: middle;
     text-align: right;
     background-color: #0061AAa5;
-    font-family: 'Roboto';
+    font-family: "Roboto", sans-serif;
 }
 .langText {
     margin-right: 20px;
-    font-family: 'Roboto';
+    font-family: "Roboto", sans-serif;
 }
