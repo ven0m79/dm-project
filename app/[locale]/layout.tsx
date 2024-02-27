@@ -13,6 +13,7 @@ const inter = Roboto({
   weight: ['400', '700'],
   style: ['normal', 'italic'],
   subsets: ['cyrillic'],
+  variable: '--defaultFont',
   display: 'swap',
 })
 
