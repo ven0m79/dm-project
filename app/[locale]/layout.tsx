@@ -12,7 +12,7 @@ import { unstable_setRequestLocale } from "next-intl/server";
 const inter = Roboto({
   weight: ['400', '700'],
   style: ['normal', 'italic'],
-  subsets: ['latin'],
+  subsets: ['cyrillic'],
   display: 'swap',
 })
 
