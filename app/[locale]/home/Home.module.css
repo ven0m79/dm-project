@@ -1,45 +1,39 @@
 .put {
-    font-family: Roboto;
-    font-size: 28px;
+    font-size: 24px;
     color: #0061AA;
 }
 
 .textHeader {
-    font-family: Roboto;
-    font-size: 32px;
+    font-size: 25px;
     color: #002766;
 }
 
 .serviceTextHeader {
-    font-family: Roboto;
-    font-size: 28px;
+    font-size: 23px;
     font-weight: bold;
     color: #002766;
 }
 
 .serviceText {
     width: 800px;
-    font-family: Roboto;
     line-height: 35px;
-    font-size: 24px;
+    font-size: 23px;
     font-weight: normal;
     color: #0061AA;
 }
 
 .serviceText:hover {
     width: 800px;
-    font-family: Roboto;
     line-height: 35px;
-    font-size: 24px;
+    font-size: 23px;
     font-weight: normal;
     color: #0061AA;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
 }
 
 .putText {
-    font-family: Roboto;
     line-height: 33px;
-    font-size: 24px;
+    font-size: 23px;
     font-weight: normal;
     color: #0061AA;
 }

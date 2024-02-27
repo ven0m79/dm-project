@@ -49,7 +49,7 @@
 
 .block-decisions:hover .img {
 
-    transform: scale(1.1);
+    transform: scale(1.05);
     transform-origin: left;
 }
 .img {
@@ -62,5 +62,5 @@
 
 .block-decisions:hover .span {
 
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
