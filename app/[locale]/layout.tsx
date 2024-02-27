@@ -15,6 +15,7 @@ const inter = Roboto({
   subsets: ['cyrillic'],
   variable: '--defaultFont',
   display: 'swap',
+  adjustFontFallback: false,
 })
 
 interface LocaleLayoutProps {
