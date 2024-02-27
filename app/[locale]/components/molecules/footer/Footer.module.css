@@ -6,13 +6,14 @@
   align-self: center;
   border-radius: 10px 10px 0px 0px;
   background-color: #0061AA;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .footerContainer {
   display: flex;
   align-self: center;
   /*  border: solid 1px rgb(203, 0, 0); */
+  font-family: "Roboto", sans-serif;
 }
 
 .column {
@@ -25,7 +26,7 @@
   font-size: 16px;
   font-weight: normal;
   /*  border: solid 1px black; */
-  font-family: 'Roboto';
+  font-family: "Roboto", sans-serif;
 }
 
 .socialMedia {
@@ -35,6 +36,7 @@
   margin-top: 10px;
   margin-left: 5px;
   margin-right: 5px;
+  font-family: "Roboto", sans-serif;
 }
 
 .stroke {
