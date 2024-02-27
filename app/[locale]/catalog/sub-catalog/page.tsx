@@ -1,20 +1,11 @@
-
 'use client'
 
 import { Sidebar } from 'flowbite-react';
-import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, HiViewBoards } from 'react-icons/hi';
 import styles from "./Sub-catalog.module.css";
-
 import React from "react";
-
-
-
 import { MainLayout } from "@app/[locale]/components/templates";
 //import { unstable_setRequestLocale } from "next-intl/server";
-
 // import { useRouter } from 'next/router'
-
-
 import { useTranslations } from 'next-intl';
 import classNames from 'classnames';
 

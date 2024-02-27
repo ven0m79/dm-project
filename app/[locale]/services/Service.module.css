@@ -8,7 +8,6 @@
     color: black;
     border-radius: 10px;
     font-size: 18px;
-    font-family: 'Calibri';
     line-height: 27px;
     padding-left: 20px;
     padding-right: 20px;
@@ -23,7 +22,6 @@
     margin: 10px auto 10px auto;
     border-radius: 10px;
     text-align: center;
-    font-family: 'Calibri';
     font-size: 18px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
@@ -37,12 +35,10 @@
     border-radius: 10px;
     padding-left: 10px;
     resize: none;
-    font-family: 'Calibri';
     outline: none;
 }
 
 .form::placeholder {
-    font-family: 'Calibri';
     font-size: 18px;
 }
 
@@ -52,10 +48,10 @@
     padding-bottom: 20px;
     text-align: center;
     font-size: 24px;
-    font-family: 'Calibri';
 }
 
 .yerSubmit {
+    text-align: center;
     width: 400px;
     padding: 13px 30px;
     margin: 5px 0 20px 0;
@@ -65,7 +61,6 @@
     border: 1px solid black;
     border-radius: 10px;
     cursor: pointer;
-    font-family: 'Calibri';
     font-size: 18px;
 }
 
@@ -73,7 +68,6 @@
     transition: all 0.5s;
     background: #002766;
     color: #ffffff;
-    font-family: 'Calibri';
     font-size: 18px;
 }
 

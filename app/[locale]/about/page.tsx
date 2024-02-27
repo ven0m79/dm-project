@@ -62,39 +62,42 @@ const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
                 "flex flex-col justify-center items-center rounded-xl",
                 styles["block-decisions"],
               )}
-            >НДСЛ “Охматдит”
-            <Image
-                  src="/decisions/ohmatdet.jpg"
-                  width={220}
-                  height={130}
-                  alt="НДСЛ “Охматдит"
-                /></div>
+            ><span className={styles.span}>НДСЛ “Охматдит”</span>
+              <Image
+                className={styles.img}
+                src="/decisions/ohmatdet.jpg"
+                width={220}
+                height={130}
+                alt="НДСЛ “Охматдит"
+              /></div>
             </Link>
             <Link href="/about/feofania"><div
               className={classNames(
                 "flex flex-col justify-center items-center rounded-xl",
                 styles["block-decisions"],
               )}
-            >Лікарня “Феофанія”
-            <Image
-                  src="/decisions/feofania.jpg"
-                  width={220}
-                  height={130}
-                  alt="Лікарня “Феофанія"
-                /></div>
+            ><span className={styles.span}>Лікарня “Феофанія”</span>
+              <Image
+                className={styles.img}
+                src="/decisions/feofania.jpg"
+                width={220}
+                height={130}
+                alt="Лікарня “Феофанія"
+              /></div>
             </Link>
             <Link href="/about/kardiovinnitsa"><div
               className={classNames(
                 "flex flex-col justify-center items-center rounded-xl",
                 styles["block-decisions"],
               )}
-            >Вінницький Кардіоцентр
-            <Image
-                  src="/decisions/kardioVinnitsa.jpg"
-                  width={220}
-                  height={130}
-                  alt="Вінницький Кардіоцентр"
-                /></div>
+            ><span className={styles.span}>Вінницький Кардіоцентр</span>
+              <Image
+                className={styles.img}
+                src="/decisions/kardioVinnitsa.jpg"
+                width={220}
+                height={130}
+                alt="Вінницький Кардіоцентр"
+              /></div>
             </Link>
           </div>
         </div>

@@ -4,7 +4,6 @@
     width: 1050px;
     font-size: 18px;
     color: black;
-    font-family: 'Calibri';
     line-height: 27px;
 }
 
@@ -43,7 +42,6 @@
     padding-left: 50px;
     padding-right: 50px;
     transition: all 0.2s;
-    font-family: "Roboto", sans-serif;
     font-size: 27px;
 }
 
