@@ -1,4 +1,5 @@
 import WooCommerceRestApi from "@woocommerce/woocommerce-rest-api";
+import {SingleProductDetails, WoocomerceCategoryType} from "./woocomerce.types";
 
 export const api = new WooCommerceRestApi({
   url: "https://dm-project.com.ua",
@@ -8,11 +9,50 @@ export const api = new WooCommerceRestApi({
   queryStringAuth: true,
 });
 
-export async function fetchWooCommerceProducts() {
+export async function fetchWooCommerceProducts(id: number) {
   try {
-    const response = await api.get("products/categories/18");
-    console.log({ response });
+    const response = await api.get(`products/categories/${id}`);
+
+    if (response.status === 200) {
+      return response.data;
+    }
     return response;
+  } catch (error) {
+    throw new Error(error as string);
+  }
+}
+
+export async function fetchWooCommerceCategories() {
+  try {
+    const response = await api.get("products/categories");
+
+    if (response.status === 200) {
+      return (await response.data) as WoocomerceCategoryType[];
+    }
+  } catch (error) {
+    throw new Error(error as string);
+  }
+}
+
+export async function fetchWooCommerceProductsBasedOnCategory(id: number) {
+  try {
+    const response = await api.get(`products?category=${id}`);
+
+    if (response.status === 200) {
+      return (await response.data) as SingleProductDetails[];
+    }
+  } catch (error) {
+    throw new Error(error as string);
+  }
+}
+
+export async function fetchWooCommerceProductDetails(id: number) {
+  try {
+    const response = await api.get(`products/${id}`);
+
+    if (response.status === 200) {
+      return (await response.data) as SingleProductDetails;
+    }
   } catch (error) {
     throw new Error(error as string);
   }

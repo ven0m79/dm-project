@@ -42,3 +42,7 @@ button {
   padding-left: 10px;
   padding-right: 10px;
 }
+
+.text-data {
+  color: red;
+}
