@@ -6,11 +6,12 @@
 .subMenu {
     border-radius: 10px;
     /* border: 1px solid blue; */
-    width: 1400px;
+    width: 300px;
     height: fit-content;
     font-size: 16px;
     background-color: #0061AA;
 }
+
 .subCollapse {
     width: 300px;
     background-color: #0091CC;
@@ -18,9 +19,7 @@
     padding-top: 5px;
     padding-bottom: 5px;
 }
-.subCollapse:hover {
-background-color: #0b0bc7;
-}
+
 .subItem {
     width: 300px;
     background-color: #0061AA;
@@ -29,9 +28,11 @@ background-color: #0b0bc7;
     padding-top: 3px;
     padding-bottom: 3px;
 }
+
 .subItem:hover {
     background-color: #0b0bc7;
 }
+
 .subMenuDash {
     width: 300px;
     height: 20px;

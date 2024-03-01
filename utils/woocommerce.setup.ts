@@ -10,7 +10,7 @@ export const api = new WooCommerceRestApi({
 
 export async function fetchWooCommerceProducts() {
   try {
-    const response = await api.get("products");
+    const response = await api.get("products/categories/18");
     console.log({ response });
     return response;
   } catch (error) {
