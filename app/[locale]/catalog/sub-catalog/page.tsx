@@ -114,7 +114,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
           <div className={classNames("", styles.subMenuDash)}></div>
         </div>
 
-        <div className="flex flex-wrap justify-around self-center mt-4 mb-4 mx-1 w-full">
+        <div key={0} className="flex flex-wrap justify-around self-center mt-4 mb-4 mx-1 w-full">
           {selectedProducts.length
             ? selectedProducts.map((el) => {
               return (
