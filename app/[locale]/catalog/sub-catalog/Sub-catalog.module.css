@@ -48,3 +48,26 @@
     padding-top: 5px;
     font-size: 18px;
 }
+
+.headSubCatalog {
+    color: black;
+    width: 320px;
+    height: 60px;
+    padding: 5px;
+    text-align: center;
+    border-top: 1px solid #007F3D;
+}
+
+.headSubCatalogBlock {
+    display: flex;
+    justify-content: center;
+    width: 350px;
+    border: 1px solid #4285F4;
+    border-radius: 10px;
+}
+
+.headSubCatalogPhoto {
+    padding: 5px;
+    /* border: 1px solid #c70b0b; */
+
+}

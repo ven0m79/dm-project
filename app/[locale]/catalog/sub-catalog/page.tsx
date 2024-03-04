@@ -114,24 +114,34 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
           <div className={classNames("", styles.subMenuDash)}></div>
         </div>
 
-        <div className="text-gray-400 mx-4">
+        <div className="flex flex-wrap justify-around self-center mt-4 mb-4 mx-1 w-full">
           {selectedProducts.length
             ? selectedProducts.map((el) => {
-                return (
-                  <Link key={el.id} href={`/product/${el.id}`}>
-                    <div className="cursor-pointer">
-                      <img
-                        src={el.images[0].src}
-                        alt={el.images[0].alt}
-                        width={250}
-                        height={300}
-                      />
+              return (
+                <div className={classNames("mx-5", styles.headSubCatalogBlock)}>
 
-                      <h3>{el.name}</h3>
+                  <div className="">
+
+                    <Link key={el.id} href={`/catalog/sub-catalog/product/${el.id}`}>
+                      <div className={classNames("cursor-pointer", styles.headSubCatalogPhoto)}>
+                        <img
+                          src={el.images[0].src}
+                          alt={el.images[0].alt}
+                          width={310}
+                          height={360}
+                        />
+                      </div>
+                    
+
+                    <div className="flex justify-center">
+                      <h3 className={classNames("", styles.headSubCatalog)}>{el.name}</h3>
                     </div>
-                  </Link>
-                );
-              })
+                    </Link>
+                  </div>
+                </div>
+
+              );
+            })
             : null}
         </div>
 
