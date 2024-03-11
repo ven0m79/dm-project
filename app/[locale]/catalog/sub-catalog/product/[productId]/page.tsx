@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { fetchWooCommerceProductDetails } from "../../../../../../utils/woocommerce.setup";
 import { SingleProductDetails } from "../../../../../../utils/woocomerce.types";
 import { MainLayout } from "@app/[locale]/components/templates";
+import Leftsidebar from "@app/[locale]/components/molecules/leftSidebar/leftSidebar";
 
 type Params = {
   productId: string;
@@ -32,6 +33,9 @@ const Page = () => {
 
   return (
     <MainLayout>
+      <Leftsidebar params={{
+        locale: ""
+      }} />
     <div>
       <h1 className="text-4xl text-stone-800">{details?.name}</h1>
       <div>
@@ -48,7 +52,9 @@ const Page = () => {
         
       />
     </div>
-
+    <Leftsidebar params={{
+        locale: ""
+      }} />
     </MainLayout>
   );
 };

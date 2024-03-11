@@ -11,8 +11,6 @@ export default async function handler(req: any, res: any) {
     const responseData = {
         success: false,
         products: [],
-        error: "Не підсосало"
-
     }
 
     try {
@@ -23,7 +21,6 @@ export default async function handler(req: any, res: any) {
 
         res.json (responseData)
     } catch (error) {
-        responseData.error;
         res.status(500).json(responseData);
     }
 

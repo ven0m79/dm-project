@@ -1,13 +1,13 @@
 export type WoocomerceCategoryType = {
-  count: number;
+  id: number;
+  name: string;
+  slug: string;
+  parent: number;
   description: string;
   display: string;
-  id: number;
   image: null | string;
   menu_order: number;
-  name: string;
-  parent: number;
-  slug: string;
+  count: number;
   _links: any;
 };
 
