@@ -95,7 +95,7 @@ const Leftsidebar = ({ params: { locale } }: { params: { locale: string } }) => 
                             >
                                 {el.childrenData?.map((item) => (
                                     <Sidebar.Item
-                                        as="div"
+                                        as="div"                                        
                                         key={item.id}
                                         className={classNames("cursor-pointer", styles.subItem)}
                                         onClick={() => {
