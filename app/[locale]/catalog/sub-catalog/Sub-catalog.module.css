@@ -14,13 +14,15 @@
 
 .subCollapse {
     width: 300px;
+    height: 40px;
     background-color: #0091CC;
-    color: white;
+    color: white !important;
     padding-top: 5px;
     padding-bottom: 5px;
 }
 
 .subItem {
+    height: 40px;
     width: 300px;
     background-color: #0061AA;
     color: white;
