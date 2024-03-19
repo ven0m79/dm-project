@@ -1,5 +1,8 @@
 import WooCommerceRestApi from "@woocommerce/woocommerce-rest-api";
-import {SingleProductDetails, WoocomerceCategoryType} from "./woocomerce.types";
+import {
+  SingleProductDetails,
+  WoocomerceCategoryType,
+} from "./woocomerce.types";
 
 export const api = new WooCommerceRestApi({
   url: "https://dm-project.com.ua",
@@ -22,9 +25,9 @@ export async function fetchWooCommerceProducts(id: number) {
   }
 }
 
-export async function fetchWooCommerceCategories() {
+export async function fetchWooCommerceCategories(locale: string) {
   try {
-    const response = await api.get("products/categories");
+    const response = await api.get(`products/categories?per_page=100&lang=${locale}`);
 
     if (response.status === 200) {
       return (await response.data) as WoocomerceCategoryType[];

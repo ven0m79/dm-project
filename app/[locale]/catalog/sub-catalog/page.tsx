@@ -1,73 +1,45 @@
 "use client";
-
-import { Sidebar } from "flowbite-react";
-import styles from "./Sub-catalog.module.css";
-import React, { useCallback, useEffect, useState } from "react";
-import { MainLayout } from "@app/[locale]/components/templates";
-import { useTranslations } from "next-intl";
 import classNames from "classnames";
-
-import {
-  fetchWooCommerceCategories,
-  fetchWooCommerceProductsBasedOnCategory,
-} from "../../../../utils/woocommerce.setup";
-
 import Link from "next/link";
-import {
-  SingleProductDetails,
-  WoocomerceCategoryType,
-} from "../../../../utils/woocomerce.types";
+import { useSearchParams } from "next/navigation";
+import React, { useCallback, useEffect, useState } from "react";
 
-const PARENT_ID = 19;
+import { MainLayout } from "@app/[locale]/components/templates";
+import Sidebar from "@app/[locale]/components/molecules/leftSidebar/leftSidebar";
 
-type InternalDataTypes = WoocomerceCategoryType & {
-  childrenData?: WoocomerceCategoryType[];
-};
+import { fetchWooCommerceCategories } from "../../../../utils/woocommerce.setup";
+import { SingleProductDetails } from "../../../../utils/woocomerce.types";
+import styles from "./Sub-catalog.module.css";
+import { categoriesCreation, TransformedCategoriesType } from "./helpers";
 
 const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
-  const t = useTranslations("Footer");
+  // цей прийом дозволить визначати яку категорію ти видрав, дивись на сторінці категорій
+  // треба буде формувати структуру, у якій значення із попередньої сторінки буде відповідати вибранному sidebar елементу
+  const searchParams = useSearchParams();
+  const selectedCategory = searchParams?.get("category");
+  console.log({ selectedCategory });
 
-  const [categories, setCategories] = useState<InternalDataTypes[] | null>(
-    null,
-  );
+  const [categories, setCategories] = useState<TransformedCategoriesType[]>([]);
   const [selectedProducts, setSelectedProducts] = useState<
     SingleProductDetails[]
   >([]);
 
   const getData = useCallback(async () => {
     try {
-      const data = await fetchWooCommerceCategories();
+      const data = await fetchWooCommerceCategories(locale);
 
       if (data) {
-        const parentElement = data.find(
-          (el) => el.id === PARENT_ID,
-        ) as WoocomerceCategoryType;
-        const subParentElements = data.filter((el) => el.parent === PARENT_ID);
+        // отут тобі треба розділити результат масиву data на 2 елементи які в ньому є
+        // один для лівого бару, другий - правий
 
-        const finalData: InternalDataTypes = {
-          ...parentElement,
-          childrenData: subParentElements,
-        };
-
-        const responseData = [finalData];
-        setCategories(responseData);
+        setCategories(
+          categoriesCreation(data as unknown as TransformedCategoriesType[]),
+        );
       }
     } catch (e) {
       console.warn({ e });
     }
-  }, []);
-
-  const getCategoryDetails = useCallback(async (id: number) => {
-    try {
-      const data = await fetchWooCommerceProductsBasedOnCategory(id);
-
-      if (data) {
-        setSelectedProducts(data);
-      }
-    } catch (e) {
-      console.warn({ e });
-    }
-  }, []);
+  }, [locale]);
 
   useEffect(() => {
     getData();
@@ -82,48 +54,33 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
         )}
       >
         <div className={classNames("mt-4", styles.subMenu)}>
-          <div className={classNames("mt-3", styles.subMenuDashHead)}>
-            Каталог по типу призначення
-          </div>
-
-          <Sidebar aria-label="Catalog" className="">
-            <Sidebar.ItemGroup>
-              {categories?.map((el) => (
-                <Sidebar.Collapse
-                  key={el.id}
-                  className={classNames("", styles.subCollapse)}
-                  label={t("or-equipment")}
-                  open
-                >
-                  {el.childrenData?.map((item) => (
-                    <Sidebar.Item
-                      as="div"
-                      key={item.id}
-                      className={classNames("cursor-pointer", styles.subItem)}
-                      onClick={() => {
-                        getCategoryDetails(item.id);
-                      }}
-                    >
-                      {item.name}
-                    </Sidebar.Item>
-                  ))}
-                </Sidebar.Collapse>
-              ))}
-            </Sidebar.ItemGroup>
-          </Sidebar>
+          <Sidebar
+            items={categories}
+            setSelectedProducts={setSelectedProducts}
+          />
           <div className={classNames("", styles.subMenuDash)}></div>
         </div>
 
         <div className="flex flex-wrap justify-around self-center mt-4 mb-4 mx-1 w-full">
-          {selectedProducts.length
-            ? selectedProducts.map((el) => {
+          {selectedProducts && selectedProducts.length ? (
+            selectedProducts.map((el) => {
               return (
-                <div key={el.id} className={classNames("mx-5", styles.headSubCatalogBlock)}>
-
+                <div
+                  key={el.id}
+                  className={classNames("mx-5", styles.headSubCatalogBlock)}
+                >
                   <div className="">
-
-                    <Link locale={locale} key={el.id} href={`/catalog/sub-catalog/product/${el.id}`}>
-                      <div className={classNames("cursor-pointer", styles.headSubCatalogPhoto)}>
+                    <Link
+                      locale={locale}
+                      key={el.id}
+                      href={`/catalog/sub-catalog/product/${el.id}`}
+                    >
+                      <div
+                        className={classNames(
+                          "cursor-pointer",
+                          styles.headSubCatalogPhoto,
+                        )}
+                      >
                         <img
                           src={el.images[0].src}
                           alt={el.images[0].alt}
@@ -131,27 +88,27 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
                           height={360}
                         />
                       </div>
-                    
 
-                    <div className="flex justify-center">
-                      <h3 className={classNames("", styles.headSubCatalog)}>{el.name}</h3>
-                    </div>
+                      <div className="flex justify-center">
+                        <h3 className={classNames("", styles.headSubCatalog)}>
+                          {el.name}
+                        </h3>
+                      </div>
                     </Link>
                   </div>
                 </div>
-
               );
             })
-            : null}
+          ) : (
+            <h2 className="text-amber-700">Немає результатів пошуку</h2>
+          )}
         </div>
 
         <div className={classNames("mt-4", styles.subMenu)}>
-          <div className={classNames("mt-3", styles.subMenuDashHead)}>
-            Каталог по типу обладнання
-          </div>
-          <Sidebar aria-label="Catalog">
-            <Sidebar.ItemGroup></Sidebar.ItemGroup>
-          </Sidebar>
+          <Sidebar
+            items={categories}
+            setSelectedProducts={setSelectedProducts}
+          />
           <div className={classNames("", styles.subMenuDash)}></div>
         </div>
       </div>

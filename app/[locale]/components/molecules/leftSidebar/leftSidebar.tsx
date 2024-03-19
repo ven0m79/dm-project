@@ -1,150 +1,79 @@
-"use client"
+"use client";
 
-import { Sidebar } from "flowbite-react";
+import { Sidebar as FBSidebar } from "flowbite-react";
 import styles from "../../../catalog/sub-catalog/Sub-catalog.module.css";
-import React, { useCallback, useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import React, { FC, useCallback, useState } from "react";
 import classNames from "classnames";
 
-import {
-    fetchWooCommerceCategories,
-    fetchWooCommerceProductsBasedOnCategory,
-} from "../../../../../utils/woocommerce.setup";
+import { fetchWooCommerceProductsBasedOnCategory } from "../../../../../utils/woocommerce.setup";
+import { TransformedCategoriesType } from "@app/[locale]/catalog/sub-catalog/helpers";
 
-import Link from "next/link";
-import {
-    SingleProductDetails,
-    WoocomerceCategoryType,
-} from "../../../../../utils/woocomerce.types";
-
-const PARENT_ID = 19;
-
-type InternalDataTypes = WoocomerceCategoryType & {
-    childrenData?: WoocomerceCategoryType[];
+type LeftSidebarProps = {
+  items: TransformedCategoriesType[];
+  setSelectedProducts?: (v: any[]) => void;
 };
 
-const Leftsidebar = ({ params: { locale } }: { params: { locale: string } }) => {
-    const t = useTranslations("Footer");
+const Sidebar: FC<LeftSidebarProps> = ({ items, setSelectedProducts }) => {
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
-    const [categories, setCategories] = useState<InternalDataTypes[] | null>(
-        null,
-    );
-    const [selectedProducts, setSelectedProducts] = useState<
-        SingleProductDetails[]
-    >([]);
+  const getCategoryDetails = useCallback(
+    async (id: number) => {
+      try {
+        const data = await fetchWooCommerceProductsBasedOnCategory(id);
 
-    const getData = useCallback(async () => {
-        try {
-            const data = await fetchWooCommerceCategories();
+        console.log({ data });
 
-            if (data) {
-                const parentElement = data.find(
-                    (el) => el.id === PARENT_ID,
-                ) as WoocomerceCategoryType;
-                const subParentElements = data.filter((el) => el.parent === PARENT_ID);
-
-                const finalData: InternalDataTypes = {
-                    ...parentElement,
-                    childrenData: subParentElements,
-                };
-
-                const responseData = [finalData];
-                setCategories(responseData);
-            }
-        } catch (e) {
-            console.warn({ e });
+        if (data) {
+          setSelectedProducts?.(data);
         }
-    }, []);
+      } catch (e) {
+        console.warn({ e });
+      }
+    },
+    [setSelectedProducts],
+  );
 
-    const getCategoryDetails = useCallback(async (id: number) => {
-        try {
-            const data = await fetchWooCommerceProductsBasedOnCategory(id);
-
-            if (data) {
-                setSelectedProducts(data);
-            }
-        } catch (e) {
-            console.warn({ e });
-        }
-    }, []);
-
-    useEffect(() => {
-        getData();
-    }, [getData]);
-
-    return (
-        <div
-            className={classNames(
-                "flex flex-1 flex-row justify-between self-center",
-                styles.subCatalog,
-            )}
-        >
-            <div className={classNames("mt-4", styles.subMenu)}>
-                <div className={classNames("mt-3", styles.subMenuDashHead)}>
-                    Каталог по типу призначення
-                </div>
-
-                <Sidebar aria-label="Catalog" className="">
-                    <Sidebar.ItemGroup>
-                        {categories?.map((el) => (
-                            <Sidebar.Collapse
-                                key={el.id}
-                                className={classNames("", styles.subCollapse)}
-                                label={t("or-equipment")}
-                                open
-                            >
-                                {el.childrenData?.map((item) => (
-                                    <Sidebar.Item
-                                        as="div"                                        
-                                        key={item.id}
-                                        className={classNames("cursor-pointer", styles.subItem)}
-                                        onClick={() => {
-                                            getCategoryDetails(item.id);
-                                        }}
-                                    >
-                                        {item.name}
-                                    </Sidebar.Item>
-                                ))}
-                            </Sidebar.Collapse>
-                        ))}
-                    </Sidebar.ItemGroup>
-                </Sidebar>
-                <div className={classNames("", styles.subMenuDash)}></div>
-            </div>
-
-            <div className="flex flex-wrap justify-around self-center mt-4 mb-4 mx-1 w-full">
-                {selectedProducts.length
-                    ? selectedProducts.map((el) => {
-                        return (
-                            <div key={el.id} className={classNames("mx-5", styles.headSubCatalogBlock)}>
-
-                                <div className="">
-
-                                    <Link key={el.id} href={`/catalog/sub-catalog/product/${el.id}`}>
-                                        <div className={classNames("cursor-pointer", styles.headSubCatalogPhoto)}>
-                                            <img
-                                                src={el.images[0].src}
-                                                alt={el.images[0].alt}
-                                                width={310}
-                                                height={360}
-                                            />
-                                        </div>
-
-
-                                        <div className="flex justify-center">
-                                            <h3 className={classNames("", styles.headSubCatalog)}>{el.name}</h3>
-                                        </div>
-                                    </Link>
-                                </div>
-                            </div>
-
-                        );
-                    })
-                    : null}
-            </div>
-
-        </div>
+  // оця хуйня робить всю магію з створенням вкладених dropdown options
+  const renderNestedCategories = (category: TransformedCategoriesType) => {
+    return category.childrens.length === 0 ? (
+      <FBSidebar.Item
+        as="div"
+        key={category.id}
+        className={classNames("cursor-pointer", styles.subItem)}
+        onClick={() => getCategoryDetails(category.id)}
+      >
+        {category.name}
+      </FBSidebar.Item>
+    ) : (
+      <FBSidebar.Collapse
+        label={category.name}
+        key={category.id}
+        className={classNames("", styles.subCollapse)}
+      >
+        {category.childrens.length
+          ? category.childrens.map((child) => renderNestedCategories(child))
+          : null}
+      </FBSidebar.Collapse>
     );
+  };
+
+  return (
+    <div
+      className={classNames(
+        "flex flex-1 flex-row justify-between self-center",
+        styles.subCatalog,
+      )}
+    >
+      <div className={classNames("mt-4", styles.subMenu)}>
+        <FBSidebar aria-label="Catalog" className="">
+          <FBSidebar.ItemGroup>
+            {items?.map((el) => renderNestedCategories(el))}
+          </FBSidebar.ItemGroup>
+        </FBSidebar>
+        <div className={classNames("", styles.subMenuDash)}></div>
+      </div>
+    </div>
+  );
 };
 
-export default Leftsidebar
+export default Sidebar;

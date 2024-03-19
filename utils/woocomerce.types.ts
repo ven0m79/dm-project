@@ -1,5 +1,3 @@
-import { Attributes } from "react";
-
 export type WoocomerceCategoryType = {
   id: number;
   name: string;
@@ -10,7 +8,11 @@ export type WoocomerceCategoryType = {
   image: null | string;
   menu_order: number;
   count: number;
-  _links: any;
+  _links?: {
+    up?: { href: string }[];
+    self?: { href: string }[];
+    collection?: { href: string }[];
+  };
 };
 
 export type ImageType = {
@@ -29,13 +31,13 @@ export type TagType = {
 export type SingleProductDetails = {
   id: number;
   name: string;
-  slug:	string;
-  permalink:	string;
-  type:	string;
-  status:	string;
+  slug: string;
+  permalink: string;
+  type: string;
+  status: string;
   average_rating: string;
   images: ImageType[];
-  featured:	boolean;
+  featured: boolean;
   catalog_visibility: string;
   description: string;
   short_description: string;
@@ -44,11 +46,11 @@ export type SingleProductDetails = {
   price: string;
   downloadable: boolean;
   downloads: DownloadsType[];
-  dimensions:	DimentionType[];
+  dimensions: DimentionType[];
   parent_id: number;
-  categories:	CategoriesType[];
+  categories: CategoriesType[];
   attributes: AttributesType[];
-  lang: string; 
+  lang: string;
 };
 export type DownloadsType = {
   id: string;
