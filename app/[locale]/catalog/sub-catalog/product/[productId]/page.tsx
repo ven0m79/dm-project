@@ -33,9 +33,7 @@ const Page = () => {
 
   return (
     <MainLayout>
-      <Leftsidebar params={{
-        locale: ""
-      }} />
+      <Leftsidebar items={[]} />
     <div>
       <h1 className="text-4xl text-stone-800">{details?.name}</h1>
       <div>
@@ -52,9 +50,7 @@ const Page = () => {
         
       />
     </div>
-    <Leftsidebar params={{
-        locale: ""
-      }} />
+    <Leftsidebar items={[]} />
     </MainLayout>
   );
 };
