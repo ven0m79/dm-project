@@ -46,7 +46,6 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
   }, [getData]);
 
   return (
-    <Suspense>
     <MainLayout>
       <div
         className={classNames(
@@ -55,10 +54,12 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
         )}
       >
         <div className={classNames("mt-4", styles.subMenu)}>
+          <Suspense>
           <Sidebar
             items={categories}
             setSelectedProducts={setSelectedProducts}
           />
+          </Suspense>
           <div className={classNames("", styles.subMenuDash)}></div>
         </div>
 
@@ -106,15 +107,16 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
         </div>
 
         <div className={classNames("mt-4", styles.subMenu)}>
+        <Suspense>
           <Sidebar
             items={categories}
             setSelectedProducts={setSelectedProducts}
           />
+          </Suspense>
           <div className={classNames("", styles.subMenuDash)}></div>
         </div>
       </div>
     </MainLayout>
-    </Suspense>
   );
 };
 
