@@ -2,7 +2,7 @@
 import classNames from "classnames";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useState } from "react";
 
 import { MainLayout } from "@app/[locale]/components/templates";
 import Sidebar from "@app/[locale]/components/molecules/leftSidebar/leftSidebar";
@@ -46,6 +46,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
   }, [getData]);
 
   return (
+    <Suspense>
     <MainLayout>
       <div
         className={classNames(
@@ -113,6 +114,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
         </div>
       </div>
     </MainLayout>
+    </Suspense>
   );
 };
 
