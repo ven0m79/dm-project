@@ -23,6 +23,8 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
   const [selectedProducts, setSelectedProducts] = useState<
     SingleProductDetails[]
   >([]);
+  console.log({ categories });
+
 
   const getData = useCallback(async () => {
     try {
@@ -55,10 +57,10 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
       >
         <div className={classNames("mt-4", styles.subMenu)}>
           <Suspense>
-          <Sidebar
-            items={categories}
-            setSelectedProducts={setSelectedProducts}
-          />
+            <Sidebar
+              items={[categories?.[1] || []]}
+              setSelectedProducts={setSelectedProducts}
+            />
           </Suspense>
           <div className={classNames("", styles.subMenuDash)}></div>
         </div>
@@ -107,11 +109,11 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
         </div>
 
         <div className={classNames("mt-4", styles.subMenu)}>
-        <Suspense>
-          <Sidebar
-            items={categories}
-            setSelectedProducts={setSelectedProducts}
-          />
+          <Suspense>
+            <Sidebar
+               items={[categories?.[0] || []]}
+              setSelectedProducts={setSelectedProducts}
+            />
           </Suspense>
           <div className={classNames("", styles.subMenuDash)}></div>
         </div>

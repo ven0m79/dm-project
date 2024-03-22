@@ -35,7 +35,7 @@ const Sidebar: FC<LeftSidebarProps> = ({ items, setSelectedProducts }) => {
 
   // оця хуйня робить всю магію з створенням вкладених dropdown options
   const renderNestedCategories = (category: TransformedCategoriesType) => {
-    return category.childrens.length === 0 ? (
+    return category?.childrens?.length === 0 ? (
       <FBSidebar.Item
         as="div"
         key={category.id}
@@ -46,11 +46,12 @@ const Sidebar: FC<LeftSidebarProps> = ({ items, setSelectedProducts }) => {
       </FBSidebar.Item>
     ) : (
       <FBSidebar.Collapse
+      open
         label={category.name}
         key={category.id}
         className={classNames("", styles.subCollapse)}
       >
-        {category.childrens.length
+        {category?.childrens?.length
           ? category.childrens.map((child) => renderNestedCategories(child))
           : null}
       </FBSidebar.Collapse>

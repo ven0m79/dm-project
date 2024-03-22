@@ -14,7 +14,7 @@ export default async function handler(req: any, res: any) {
   };
 
   try {
-    const { data } = await api.get("products/categories/19");
+    const { data } = await api.get("products");
 
     responseData.success = true;
     responseData.products = data;
