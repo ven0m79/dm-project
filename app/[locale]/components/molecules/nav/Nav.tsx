@@ -60,7 +60,7 @@ const Nav = () => {
           <li
             key={el}
             className={classNames("mx-1", styles["link"], {
-              [styles["active"]]: pathname === NavLinks[el].link,
+              [styles["active"]]: pathname === '/'? pathname === NavLinks[el].link : pathname.includes(NavLinks[el].link),
             })}
           >
             <Link href={NavLinks[el].link}>{t(NavLinks[el].title)}</Link>

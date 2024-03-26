@@ -8,6 +8,7 @@ import styles from "../../../catalog/sub-catalog/Sub-catalog.module.css";
 
 import { fetchWooCommerceProductsBasedOnCategory } from "../../../../../utils/woocommerce.setup";
 import { TransformedCategoriesType } from "@app/[locale]/catalog/sub-catalog/helpers";
+import { Locale } from "node_modules/next/dist/compiled/@vercel/og/satori";
 
 const LEFT_BAR_PARENT_ID = 50;
 const RIGHT_BAR_PARENT_ID = 55;
@@ -23,6 +24,7 @@ const categoriesIdData = {
 };
 
 type LeftSidebarProps = {
+  locale: string;
   items: TransformedCategoriesType[];
   categoryTag?: string | null | keyof typeof categoriesIdData;
   setSelectedProducts?: (v: any[]) => void;
@@ -105,13 +107,13 @@ const Sidebar: FC<LeftSidebarProps> = ({
   return (
     <div
       className={classNames(
-        "flex flex-1 flex-row justify-between self-center",
+        "flex flex-1 flex-row justify-between",
         styles.subCatalog,
       )}
     >
       <div className={classNames("mt-4", styles.subMenu)}>
         {/*Оцю стилізувати*/}
-        <h3 className="text-amber-700">{items?.[0]?.name}</h3>
+        <h3 className="text-gray-50 ml-5">{items?.[0]?.name}</h3>
 
         <FBSidebar aria-label="Catalog" className="">
           <FBSidebar.ItemGroup>

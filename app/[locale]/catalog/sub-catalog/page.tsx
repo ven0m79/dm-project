@@ -57,8 +57,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
             <Sidebar
               items={[categories?.[1] || []]}
               categoryTag={selectedCategory}
-              setSelectedProducts={setSelectedProducts}
-            />
+              setSelectedProducts={setSelectedProducts} locale={locale} />
             <div className={classNames("", styles.subMenuDash)}></div>
           </div>
 
@@ -108,8 +107,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
           <div className={classNames("mt-4", styles.subMenu)}>
             <Sidebar
               items={[categories?.[0] || []]}
-              setSelectedProducts={setSelectedProducts}
-            />
+              setSelectedProducts={setSelectedProducts} locale={locale}            />
             <div className={classNames("", styles.subMenuDash)}></div>
           </div>
         </div>
