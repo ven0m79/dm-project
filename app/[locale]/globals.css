@@ -34,6 +34,7 @@ body {
 }
 
 ul {
+  
   overflow-y: hidden;
 }
 
@@ -43,20 +44,42 @@ button {
   padding-right: 10px;
 }
 
-.text-data {
-  color: red;
-}
-.header {
+h2 {
   font-size: 22px;
   font-weight: bold;
   color: #002766;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+h3 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #002766;
+  text-align: justify;
+  text-indent: 20px;
+}
+h4 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #002766;
+  text-align: justify;
+  text-indent: 20px;
+}
+
+.ul1 {
+  font-size: 14px;
+  font-weight: normal;
+  color: #0061AA;
+  text-align: justify;
+  text-indent: 20px;
+  line-height: 27px;
+  list-style-type: disc;
 }
 
 .productText {
-  line-height: 33px;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: normal;
   color: #0061AA;
   text-align: justify;
@@ -64,7 +87,4 @@ button {
   line-height: 27px;
   margin-top: 5px;
   margin-bottom: 5px;
-}
-h2 {
-  background-color: transparent;
 }
