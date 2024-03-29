@@ -66,7 +66,7 @@ const Page = () => {
               <Link
                 target="blank"
                 href={details?.images[0].src || ""}>
-                <img
+                <Image
                   src={details?.images[0].src}
                   alt={details?.images[0].alt}
                   width={300}
@@ -79,7 +79,7 @@ const Page = () => {
               <br />
               <h2 className={classNames("", styles.brand)}>Бренд: {details?.brands[0]?.name}</h2>
               <br />
-              <h2 className={classNames("", styles.available)}>В наявності: "Під заказ"</h2>
+              <h2 className={classNames("", styles.available)}>{'В наявності: "Під заказ"'}</h2>
               <br />
               <div className="flex flex-row justify-between mt-10">
                 <div className={classNames("", styles.downloadable)}>
