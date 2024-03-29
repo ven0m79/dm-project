@@ -82,7 +82,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
                             styles.headSubCatalogPhoto,
                           )}
                         >
-                          <Image
+                          <img
                             src={el.images[0].src}
                             alt={el.images[0].alt}
                             width={310}

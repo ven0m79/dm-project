@@ -66,9 +66,9 @@ const Page = () => {
               <Link
                 target="blank"
                 href={details?.images[0].src || ""}>
-                <Image
-                  src={details?.images[0].src || ""}
-                  alt={details?.images[0].alt || ""}
+                <img
+                  src={details?.images[0].src}
+                  alt={details?.images[0].alt}
                   width={300}
                   height={311}
                 /></Link>
