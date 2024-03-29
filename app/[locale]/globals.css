@@ -46,7 +46,25 @@ button {
 .text-data {
   color: red;
 }
+.header {
+  font-size: 22px;
+  font-weight: bold;
+  color: #002766;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
+.productText {
+  line-height: 33px;
+  font-size: 18px;
+  font-weight: normal;
+  color: #0061AA;
+  text-align: justify;
+  text-indent: 20px;
+  line-height: 27px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 h2 {
   background-color: transparent;
 }

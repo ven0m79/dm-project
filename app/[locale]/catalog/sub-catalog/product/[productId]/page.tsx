@@ -11,6 +11,7 @@ import { Anybody } from "next/font/google";
 import Link from "next/link";
 import styles from "./Product.module.css";
 import classNames from "classnames";
+import Image from 'next/image';
 
 
 type Params = {
@@ -62,12 +63,16 @@ const Page = () => {
 
           <div className="flex flex-row">
             <div className={classNames("m-4", styles.imageRadius)}>
-              <img
-                src={details?.images[0].src}
-                alt={details?.images[0].alt}
-                width={300}
-                height={311}
-              />
+              <Link
+                target="blank"
+                href={details?.images[0].src || ""}>
+                <img
+                  src={details?.images[0].src}
+                  alt={details?.images[0].alt}
+                  width={300}
+                  height={311}
+                /></Link>
+
             </div>
             <div className="p-4 w-auto">
               <h1 className={classNames("", styles.title)}>{details?.name}</h1>
@@ -80,11 +85,12 @@ const Page = () => {
                 <div className={classNames("", styles.downloadable)}>
                   <Link
                     href={details?.downloads[0]?.file || ""}
-                  ><img
-                    src="/download-pdf.png"
-                    width={36}
-                    className="float-left" >
-                    </img>Завантажити документацію</Link>
+                  ><Image
+                      src="/download-pdf.png"
+                      width={36}
+                      className="float-left"
+                      alt={"Завантажити"} />
+                    Завантажити документацію</Link>
                 </div>
                 <div
                   className={styles.yerSubmit}

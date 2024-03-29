@@ -11,6 +11,7 @@ import { fetchWooCommerceCategories } from "../../../../utils/woocommerce.setup"
 import { SingleProductDetails } from "../../../../utils/woocomerce.types";
 import styles from "./Sub-catalog.module.css";
 import { categoriesCreation, TransformedCategoriesType } from "./helpers";
+import Image from 'next/image';
 
 const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
   // цей прийом дозволить визначати яку категорію ти видрав, дивись на сторінці категорій
@@ -81,7 +82,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
                             styles.headSubCatalogPhoto,
                           )}
                         >
-                          <img
+                          <Image
                             src={el.images[0].src}
                             alt={el.images[0].alt}
                             width={310}
@@ -107,7 +108,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
           <div className={classNames("mt-4", styles.subMenu)}>
             <Sidebar
               items={[categories?.[0] || []]}
-              setSelectedProducts={setSelectedProducts} locale={locale}            />
+              setSelectedProducts={setSelectedProducts} locale={locale} />
             <div className={classNames("", styles.subMenuDash)}></div>
           </div>
         </div>
