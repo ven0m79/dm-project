@@ -90,7 +90,7 @@ const Page = () => {
                       width={36}
                       className="float-left"
                       alt={"Завантажити"} />
-                    Завантажити документацію</Link>
+                    {'Завантажити документацію'}</Link>
                 </div>
                 <div
                   className={styles.yerSubmit}
