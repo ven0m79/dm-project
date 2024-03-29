@@ -1,13 +1,16 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useState } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import { fetchWooCommerceProductDetails } from "../../../../../../utils/woocommerce.setup";
 import { SingleProductDetails } from "../../../../../../utils/woocomerce.types";
 import { MainLayout } from "@app/[locale]/components/templates";
 import Sidebar from "@app/[locale]/components/molecules/leftSidebar/leftSidebar";
 import { TransformedCategoriesType } from "../../helpers";
-
+import { Anybody } from "next/font/google";
+import Link from "next/link";
+import styles from "./Product.module.css";
+import classNames from "classnames";
 
 
 type Params = {
@@ -48,30 +51,64 @@ const Page = () => {
 
   return (
     <MainLayout>
-      <div className="flex self-center flex-row bg-slate-400 w-[1400px]">
-        <Sidebar
-          items={[categories?.[1] || []]}
-          setSelectedProducts={setSelectedProducts} locale={""} />
-        <div>
-          <h1 className="text-4xl text-stone-800 text-bold">{details?.name}</h1>
-          <div>
-            <img
-              src={details?.images[0].src}
-              alt={details?.images[0].alt}
-              width={250}
-              height={300}
-            />
+      <div className="flex self-center flex-row w-[1400px]">
+        <div className="w-[300px]">
+          <Sidebar
+            items={[categories?.[1] || []]}
+            setSelectedProducts={setSelectedProducts} locale={""} />
+        </div>
+        <div className="flex flex-col bg-slate-000 p-1 w-full">
+
+
+          <div className="flex flex-row">
+            <div className={classNames("m-4", styles.imageRadius)}>
+              <img
+                src={details?.images[0].src}
+                alt={details?.images[0].alt}
+                width={300}
+                height={311}
+              />
+            </div>
+            <div className="p-4 w-auto">
+              <h1 className={classNames("", styles.title)}>{details?.name}</h1>
+              <br />
+              <h2 className={classNames("", styles.brand)}>Бренд: {details?.brands[0]?.name}</h2>
+              <br />
+              <h2 className={classNames("", styles.available)}>В наявності: "Під заказ"</h2>
+              <br />
+              <div className="flex flex-row justify-between mt-10">
+                <div className={classNames("", styles.downloadable)}>
+                  <Link
+                    href={details?.downloads[0]?.file || ""}
+                  ><img
+                    src="/download-pdf.png"
+                    width={36}
+                    className="float-left" >
+                    </img>Завантажити документацію</Link>
+                </div>
+                <div
+                  className={styles.yerSubmit}
+                ><Link
+                  href={"../../../../services"}>
+                    Замовити зараз</Link></div>
+              </div>
+            </div>
           </div>
+          <div className={styles.stroke}></div>
           <div
             className="content"
             dangerouslySetInnerHTML={{ __html: details?.description || "" }}
           />
+
         </div>
-        <Sidebar
-          items={[categories?.[0] || []]}
-          setSelectedProducts={setSelectedProducts} locale={""} />
+        <div className="w-[300px]">
+          <Sidebar
+            items={[categories?.[0] || []]}
+            setSelectedProducts={setSelectedProducts} locale={""} />
+        </div>
       </div>
     </MainLayout>
+
   );
 };
 

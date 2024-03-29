@@ -46,3 +46,7 @@ button {
 .text-data {
   color: red;
 }
+
+h2 {
+  background-color: transparent;
+}

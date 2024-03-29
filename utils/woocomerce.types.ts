@@ -51,9 +51,16 @@ export type SingleProductDetails = {
   categories: CategoriesType[];
   attributes: AttributesType[];
   lang: string;
+  stock_status: string;
+  brands: BrandsType[];
+};
+export type BrandsType = {
+  id: number;
+  name: string;
+  slug: string;
 };
 export type DownloadsType = {
-  id: string;
+  id: number;
   name: string;
   file: string;
 };
