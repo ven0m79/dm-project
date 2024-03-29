@@ -85,7 +85,7 @@ const Page = () => {
                 <div className={classNames("", styles.downloadable)}>
                   <Link
                     href={details?.downloads[0]?.file || ""}
-                  ><Image
+                  ><img
                       src="/download-pdf.png"
                       width={36}
                       className="float-left"
