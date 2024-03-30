@@ -58,7 +58,7 @@ const Page = () => {
             items={[categories?.[1] || []]}
             setSelectedProducts={setSelectedProducts} locale={""} />
         </div>
-        <div className="flex flex-col bg-slate-000 p-1 w-full">
+        <div className="flex flex-col bg-slate-000 p-1">
 
 
           <div className="flex flex-row">
@@ -74,10 +74,10 @@ const Page = () => {
                 /></Link>
 
             </div>
-            <div className="p-4 w-auto">
+            <div className="p-4 w-[500px]">
               <h1 className={classNames("", styles.title)}>{details?.name}</h1>
               <br />
-              <h2 className={classNames("", styles.brand)}>Бренд: {details?.brands[0]?.name}</h2>
+              <div className={classNames("text-normal", styles.brand)}>Бренд: {details?.brands[0]?.name}</div>
               <br />
               <h2 className={classNames("", styles.available)}>{'В наявності: "Під заказ"'}</h2>
               <br />

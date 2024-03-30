@@ -44,37 +44,39 @@ button {
   padding-right: 10px;
 }
 
-h2 {
+.h2 {
   font-size: 22px;
   font-weight: bold;
   color: #002766;
   margin-top: 20px;
-  margin-bottom: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
 }
-h3 {
+.h3 {
   font-size: 18px;
   font-weight: bold;
   color: #002766;
   text-align: justify;
   text-indent: 20px;
+  margin-top: 20px;
 }
-h4 {
+.h4 {
   font-size: 16px;
   font-weight: bold;
   color: #002766;
   text-align: justify;
   text-indent: 20px;
+  margin-top: 20px;
 }
 
 .ul1 {
   font-size: 14px;
-  font-weight: normal;
   color: #0061AA;
   text-align: justify;
   text-indent: 20px;
   line-height: 27px;
+  list-style-type: disc;
+}
+
+.ul1.a {
   list-style-type: disc;
 }
 
