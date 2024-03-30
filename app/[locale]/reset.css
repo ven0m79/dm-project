@@ -104,7 +104,7 @@ body {
 }
 ol,
 ul {
-  list-style-type: disc;
+  list-style-type: none;
 }
 blockquote,
 q {
