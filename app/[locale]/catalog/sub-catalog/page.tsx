@@ -11,7 +11,6 @@ import { fetchWooCommerceCategories } from "../../../../utils/woocommerce.setup"
 import { SingleProductDetails } from "../../../../utils/woocomerce.types";
 import styles from "./Sub-catalog.module.css";
 import { categoriesCreation, TransformedCategoriesType } from "./helpers";
-import Image from 'next/image';
 
 const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
   // цей прийом дозволить визначати яку категорію ти видрав, дивись на сторінці категорій
@@ -28,6 +27,8 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
     try {
       const data = await fetchWooCommerceCategories(locale);
 
+      console.log({ data });
+
       if (data) {
         // отут тобі треба розділити результат масиву data на 2 елементи які в ньому є
         // один для лівого бару, другий - правий
@@ -43,7 +44,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
 
   useEffect(() => {
     getData();
-  }, [getData]);
+  }, [getData, locale]);
 
   return (
     <Suspense fallback="Loading">
@@ -58,7 +59,9 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
             <Sidebar
               items={[categories?.[1] || []]}
               categoryTag={selectedCategory}
-              setSelectedProducts={setSelectedProducts} locale={locale} />
+              setSelectedProducts={setSelectedProducts}
+              locale={locale}
+            />
             <div className={classNames("", styles.subMenuDash)}></div>
           </div>
 
@@ -74,7 +77,10 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
                       <Link
                         locale={locale}
                         key={el.id}
-                        href={`/catalog/sub-catalog/product/${el.id}`}
+                        href={{
+                          pathname: `/catalog/sub-catalog/product/${el.translations[locale as any]}`,
+                          query: `category=${selectedCategory}`
+                        }}
                       >
                         <div
                           className={classNames(
@@ -108,7 +114,9 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
           <div className={classNames("mt-4", styles.subMenu)}>
             <Sidebar
               items={[categories?.[0] || []]}
-              setSelectedProducts={setSelectedProducts} locale={locale} />
+              setSelectedProducts={setSelectedProducts}
+              locale={locale}
+            />
             <div className={classNames("", styles.subMenuDash)}></div>
           </div>
         </div>

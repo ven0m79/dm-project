@@ -53,6 +53,7 @@ export type SingleProductDetails = {
   lang: string;
   stock_status: string;
   brands: BrandsType[];
+  translations: Record<string, number>[];
 };
 export type BrandsType = {
   id: number;

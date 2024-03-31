@@ -33,12 +33,13 @@ type LeftSidebarProps = {
 const Sidebar: FC<LeftSidebarProps> = ({
   items,
   categoryTag,
+  locale,
   setSelectedProducts,
 }) => {
   const getCategoryDetails = useCallback(
     async (id: number) => {
       try {
-        const data = await fetchWooCommerceProductsBasedOnCategory(id);
+        const data = await fetchWooCommerceProductsBasedOnCategory(id, locale);
 
         if (data) {
           setSelectedProducts?.(data);
@@ -47,7 +48,7 @@ const Sidebar: FC<LeftSidebarProps> = ({
         console.warn({ e });
       }
     },
-    [setSelectedProducts],
+    [locale, setSelectedProducts],
   );
 
   const renderNestedCategories = (
