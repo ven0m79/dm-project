@@ -15,6 +15,8 @@ import Link from "next/link";
 import styles from "./Product.module.css";
 import classNames from "classnames";
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
+import Loader from "@app/[locale]/components/atoms/loader/Loader";
 
 type Params = {
   productId: string;
@@ -99,60 +101,82 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
             locale={locale}
           />
         </div>
-        <div className="flex flex-col p-1">
+        <div className="flex flex-col p-1 min-h-[600px]">
           {loading ? (
-            <div className="flex flex-1 w-[800px] flex-row bg-amber-600">
-              <h1>Loading</h1>
+            <div className="flex flex-1 w-[800px] h-[600px] justify-center items-center">
+              <Loader />
             </div>
           ) : (
             <>
-              <div className="flex flex-row">
-                <div className={classNames("m-4", styles.imageRadius)}>
-                  <Link target="blank" href={details?.images[0].src || ""}>
-                    <img
-                      src={details?.images[0].src}
-                      alt={details?.images[0].alt}
-                      width={300}
-                      height={311}
+              <AnimatePresence>
+                {!loading && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      delay: 0.4,
+                    }}
+                  >
+                    <div className="flex flex-row ">
+                      <div className={classNames("m-4", styles.imageRadius)}>
+                        <Link
+                          target="blank"
+                          href={details?.images[0].src || ""}
+                        >
+                          <img
+                            src={details?.images[0].src}
+                            alt={details?.images[0].alt}
+                            width={300}
+                            height={311}
+                          />
+                        </Link>
+                      </div>
+                      <div className="p-4 w-[500px]">
+                        <h1 className={classNames("", styles.title)}>
+                          {details?.name}
+                        </h1>
+                        <br />
+                        <div
+                          className={classNames("text-normal", styles.brand)}
+                        >
+                          Бренд: {details?.brands[0]?.name}
+                        </div>
+                        <br />
+                        <h2 className={classNames("", styles.available)}>
+                          {'В наявності: "Під заказ"'}
+                        </h2>
+                        <br />
+                        <div className="flex flex-row justify-between mt-10">
+                          <div className={classNames("", styles.downloadable)}>
+                            <Link href={details?.downloads[0]?.file || ""}>
+                              <img
+                                src="/download-pdf.png"
+                                width={36}
+                                className="float-left"
+                                alt={"Завантажити"}
+                              />
+                              {"Завантажити документацію"}
+                            </Link>
+                          </div>
+                          <div className={styles.yerSubmit}>
+                            <Link href={"../../../../services"}>
+                              Замовити зараз
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className={styles.stroke}></div>
+                    <div
+                      className="content"
+                      dangerouslySetInnerHTML={{
+                        __html: details?.description || "",
+                      }}
                     />
-                  </Link>
-                </div>
-                <div className="p-4 w-[500px]">
-                  <h1 className={classNames("", styles.title)}>
-                    {details?.name}
-                  </h1>
-                  <br />
-                  <div className={classNames("text-normal", styles.brand)}>
-                    Бренд: {details?.brands[0]?.name}
-                  </div>
-                  <br />
-                  <h2 className={classNames("", styles.available)}>
-                    {'В наявності: "Під заказ"'}
-                  </h2>
-                  <br />
-                  <div className="flex flex-row justify-between mt-10">
-                    <div className={classNames("", styles.downloadable)}>
-                      <Link href={details?.downloads[0]?.file || ""}>
-                        <img
-                          src="/download-pdf.png"
-                          width={36}
-                          className="float-left"
-                          alt={"Завантажити"}
-                        />
-                        {"Завантажити документацію"}
-                      </Link>
-                    </div>
-                    <div className={styles.yerSubmit}>
-                      <Link href={"../../../../services"}>Замовити зараз</Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.stroke}></div>
-              <div
-                className="content"
-                dangerouslySetInnerHTML={{ __html: details?.description || "" }}
-              />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </>
           )}
         </div>
