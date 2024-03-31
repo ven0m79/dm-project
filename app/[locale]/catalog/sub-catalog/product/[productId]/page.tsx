@@ -18,13 +18,13 @@ type Params = {
   productId: string;
 };
 
-const Page = () => {
+const Page = ({ params: { locale } }: { params: { locale: string } }) => {
   const { productId }: Params = useParams<any>();
   const [details, setDetails] = useState<SingleProductDetails | null>(null);
 
   const getCategoryDetails = useCallback(async () => {
     try {
-      const data = await fetchWooCommerceProductDetails(Number(productId));
+      const data = await fetchWooCommerceProductDetails(Number(productId), locale);
 
       if (data) {
         setDetails(data);
@@ -32,7 +32,7 @@ const Page = () => {
     } catch (e) {
       console.warn({ e });
     }
-  }, [productId]);
+  }, [productId, locale]);
 
   useEffect(() => {
     getCategoryDetails();
@@ -56,7 +56,7 @@ const Page = () => {
         <div className="w-[300px]">
           <Sidebar
             items={[categories?.[1] || []]}
-            setSelectedProducts={setSelectedProducts} locale={""} />
+            setSelectedProducts={setSelectedProducts} locale={locale} />
         </div>
         <div className="flex flex-col bg-slate-000 p-1">
 
@@ -110,7 +110,7 @@ const Page = () => {
         <div className="w-[300px]">
           <Sidebar
             items={[categories?.[0] || []]}
-            setSelectedProducts={setSelectedProducts} locale={""} />
+            setSelectedProducts={setSelectedProducts} locale={locale} />
         </div>
       </div>
     </MainLayout>

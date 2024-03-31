@@ -12,9 +12,9 @@ export const api = new WooCommerceRestApi({
   queryStringAuth: true,
 });
 
-export async function fetchWooCommerceProducts(id: number) {
+export async function fetchWooCommerceProducts(id: number, locale: string) {
   try {
-    const response = await api.get(`products/categories/${id}`);
+    const response = await api.get(`products/categories/${id}?lang=${locale}`);
 
     if (response.status === 200) {
       return response.data;
@@ -37,9 +37,9 @@ export async function fetchWooCommerceCategories(locale: string) {
   }
 }
 
-export async function fetchWooCommerceProductsBasedOnCategory(id: number) {
+export async function fetchWooCommerceProductsBasedOnCategory(id: number, locale: string) {
   try {
-    const response = await api.get(`products?category=${id}`);
+    const response = await api.get(`products?category=${id}?lang=${locale}`);
 
     if (response.status === 200) {
       return (await response.data) as SingleProductDetails[];
@@ -49,9 +49,9 @@ export async function fetchWooCommerceProductsBasedOnCategory(id: number) {
   }
 }
 
-export async function fetchWooCommerceProductDetails(id: number) {
+export async function fetchWooCommerceProductDetails(id: number, locale: string) {
   try {
-    const response = await api.get(`products/${id}`);
+    const response = await api.get(`products/${id}?lang=${locale}`);
 
     if (response.status === 200) {
       return (await response.data) as SingleProductDetails;
