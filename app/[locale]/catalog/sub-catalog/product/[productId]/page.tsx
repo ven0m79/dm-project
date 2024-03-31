@@ -149,7 +149,9 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                         <br />
                         <div className="flex flex-row justify-between mt-10">
                           <div className={classNames("", styles.downloadable)}>
-                            <Link href={details?.downloads[0]?.file || ""}>
+                            <Link
+                              target="blank"
+                              href={details?.downloads[0]?.file || ""}>
                               <img
                                 src="/download-pdf.png"
                                 width={36}
@@ -169,7 +171,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                     </div>
                     <div className={styles.stroke}></div>
                     <div
-                      className="content"
+                      className="content px-5"
                       dangerouslySetInnerHTML={{
                         __html: details?.description || "",
                       }}
