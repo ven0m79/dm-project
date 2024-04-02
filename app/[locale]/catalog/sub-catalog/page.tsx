@@ -51,7 +51,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
       <MainLayout>
         <div
           className={classNames(
-            "flex flex-1 flex-row justify-between self-center",
+            "flex flex-1 flex-row justify-between self-center mb-5",
             styles.subCatalog,
           )}
         >
@@ -65,13 +65,13 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
             <div className={classNames("", styles.subMenuDash)}></div>
           </div>
 
-          <div className="flex flex-wrap justify-around self-center mt-4 mb-4 mx-1 w-full">
+          <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-4 w-full items-start">
             {selectedProducts && selectedProducts.length ? (
               selectedProducts.map((el) => {
                 return (
                   <div
                     key={el.id}
-                    className={classNames("mx-5", styles.headSubCatalogBlock)}
+                    className={classNames("mx-5 mb-5", styles.headSubCatalogBlock)}
                   >
                     <div className="">
                       <Link

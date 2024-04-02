@@ -102,6 +102,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
         <div className="w-[300px]">
           <Sidebar
             items={[categories?.[1] || []]}
+            categoryTag={selectedCategory}
             setSelectedProducts={setSelectedProducts}
             locale={locale}
           />
@@ -226,6 +227,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
         <div className="w-[300px]">
           <Sidebar
             items={[categories?.[0] || []]}
+            categoryTag={selectedCategory}
             setSelectedProducts={setSelectedProducts}
             locale={locale}
           />
