@@ -30,12 +30,15 @@
     margin-top: 15px;
     margin-bottom: 20px;
 }
+.downloadabled {
+    color: #000;
+}
 .downloadable {
     margin-top: 20px;
     text-align: center;
-    width: 250px;
+    width: 400px;
     padding: 13px 30px;
-    margin: 5px 0 20px 0;
+    margin: 5px 0 10px 0;
     font-size: 18px;
     color: #000;
     background-color: #ECF3FE;

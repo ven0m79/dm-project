@@ -5,6 +5,7 @@ import { useParams, useSearchParams } from "next/navigation";
 import {
   fetchWooCommerceCategories,
   fetchWooCommerceProductDetails,
+  fetchWooCommerceCrossProductsDetails
 } from "../../../../../../utils/woocommerce.setup";
 import { SingleProductDetails } from "../../../../../../utils/woocomerce.types";
 import { MainLayout } from "@app/[locale]/components/templates";
@@ -17,6 +18,10 @@ import classNames from "classnames";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import Loader from "@app/[locale]/components/atoms/loader/Loader";
+
+import { Tabs } from "flowbite-react";
+import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
+import { MdDashboard } from "react-icons/md";
 
 type Params = {
   productId: string;
@@ -93,7 +98,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
 
   return (
     <MainLayout>
-      <div className="flex self-center flex-row w-[1400px]">
+      <div className="flex self-center flex-row w-[1400px] mb-8">
         <div className="w-[300px]">
           <Sidebar
             items={[categories?.[1] || []]}
@@ -147,35 +152,70 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                           {'В наявності: "Під заказ"'}
                         </h2>
                         <br />
-                        <div className="flex flex-row justify-between mt-10">
+                        <div className="flex flex-col justify-between mt-10">
                           <div className={classNames("", styles.downloadable)}>
-                            <Link
-                              target="blank"
-                              href={details?.downloads[0]?.file || ""}>
-                              <img
-                                src="/download-pdf.png"
-                                width={36}
-                                className="float-left"
-                                alt={"Завантажити"}
-                              />
-                              {"Завантажити документацію"}
+
+                            <Link href={"../../../../services"}>
+                            Сервісне обслуговування
                             </Link>
                           </div>
-                          <div className={styles.yerSubmit}>
+                          <div className={styles.downloadable}>
                             <Link href={"../../../../services"}>
-                              Замовити зараз
+                            Запит комерційної пропозиції
                             </Link>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div className={styles.stroke}></div>
-                    <div
+
+                    <div className="flex flex-1 flex-row w-[400px]">
+                     
+
+
+
+                    </div>
+                    <div className="text-black">
+      <Tabs aria-label="Default tabs" style="underline">
+      <Tabs.Item active title="Опис" icon={HiUserCircle}>
+                        <div
                       className="content px-5"
                       dangerouslySetInnerHTML={{
                         __html: details?.description || "",
                       }}
                     />
+      </Tabs.Item>
+      <Tabs.Item title="Аксесуари та комплектуючі" icon={MdDashboard}>
+                      <div className={classNames("ml-10", styles.downloadabled)}>
+                        {details?.cross_sell_ids?.map((el) => (
+                          <li
+                            className={classNames("mx-1")}
+                          >
+                            {el}
+                          </li>
+                        ))}
+
+                      </div>
+      </Tabs.Item>
+      <Tabs.Item title="Загрузки" icon={HiAdjustments}>
+ <div className={classNames("", styles.downloadabled)}>
+                        {details?.downloads?.map((el) => (
+                          <li
+                            key={el.id}
+                            className={classNames("mx-1")}
+                          >
+                            <Link href={el.file}>{el.name}</Link>
+                          </li>
+                        ))}
+
+                      </div>
+      </Tabs.Item>
+      <Tabs.Item title="Відео" icon={HiClipboardList}>
+                          Тут будуть лінки на ютуб...
+      </Tabs.Item>
+    </Tabs>
+</div>
+
                   </motion.div>
                 )}
               </AnimatePresence>

@@ -60,3 +60,15 @@ export async function fetchWooCommerceProductDetails(id: number, locale: string)
     throw new Error(error as string);
   }
 }
+
+export async function fetchWooCommerceCrossProductsDetails(id: number, locale: string) {
+  try {
+    const response = await api.get(`products/cross_sell_ids/${id}?lang=${locale}`);
+
+    if (response.status === 200) {
+      return (await response.data) as SingleProductDetails;
+    }
+  } catch (error) {
+    throw new Error(error as string);
+  }
+}
