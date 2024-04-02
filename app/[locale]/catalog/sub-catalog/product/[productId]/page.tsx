@@ -189,6 +189,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                       <div className={classNames("ml-10", styles.downloadabled)}>
                         {details?.cross_sell_ids?.map((el) => (
                           <li
+                          key={0}
                             className={classNames("mx-1")}
                           >
                             {el}
