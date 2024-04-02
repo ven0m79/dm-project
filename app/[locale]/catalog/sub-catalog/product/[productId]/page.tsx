@@ -160,7 +160,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                             </Link>
                           </div>
                           <div className={styles.downloadable}>
-                            <Link href={"../../../../services"}>
+                            <Link href={"../../../../about-us"}>
                             Запит комерційної пропозиції
                             </Link>
                           </div>
