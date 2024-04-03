@@ -19,9 +19,68 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import Loader from "@app/[locale]/components/atoms/loader/Loader";
 
-import { Tabs } from "flowbite-react";
+import { Tabs, CustomFlowbiteTheme } from "flowbite-react";
 import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
+
+// const customTabTheme: CustomFlowbiteTheme = {
+//     "base": "flex flex-col gap-2",
+//     "tablist": {
+//       "base": "flex text-center",
+//       "styles": {
+//         "default": "flex-wrap border-b border-gray-200 dark:border-gray-700",
+//         "underline": "-mb-px flex-wrap border-b border-gray-200 dark:border-gray-700",
+//         "pills": "flex-wrap space-x-2 text-sm font-medium text-gray-500 dark:text-gray-400",
+//         "fullWidth": "grid w-full grid-flow-col divide-x divide-gray-200 rounded-none text-sm font-medium shadow dark:divide-gray-700 dark:text-gray-400"
+//       },
+//       "tabitem": {
+//         "base": "flex items-center justify-center rounded-t-lg p-4 text-sm font-medium first:ml-0 focus:outline-none focus:ring-4 focus:ring-cyan-300 disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500",
+//         "styles": {
+//           "default": {
+//             "base": "rounded-t-lg",
+//             "active": {
+//               "on": "bg-gray-300 text-cyan-600 dark:bg-gray-800 dark:text-cyan-500",
+//               "off": "text-gray-500 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800  dark:hover:text-gray-300"
+//             }
+//           },
+//           "underline": {
+//             "base": "rounded-t-lg",
+//             "active": {
+//               "on": "active rounded-t-lg text-cyan-600 dark:text-cyan-900",
+//               "off": "text-gray-500 hover:border-gray-300 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300"
+//             }
+//           },
+//           "pills": {
+//             "base": "",
+//             "active": {
+//               "on": "rounded-lg bg-cyan-600 text-white",
+//               "off": "rounded-lg hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white"
+//             }
+//           },
+//           "fullWidth": {
+//             "base": "ml-0 flex w-full rounded-none first:ml-0",
+//             "active": {
+//               "on": "active rounded-none bg-gray-100 p-4 text-gray-900 dark:bg-gray-700 dark:text-white",
+//               "off": "rounded-none bg-white hover:bg-gray-50 hover:text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
+//             }
+//           }
+//         },
+//         "icon": "mr-2 h-5 w-5"
+//       }
+//     },
+//     "tabitemcontainer": {
+//       "base": "",
+//       "styles": {
+//         "default": "",
+//         "underline": "",
+//         "pills": "",
+//         "fullWidth": ""
+//       }
+//     },
+//     "tabpanel": "py-3"
+//   }
+
+
 
 type Params = {
   productId: string;
@@ -157,12 +216,12 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                           <div className={classNames("", styles.downloadable)}>
 
                             <Link href={"../../../../services"}>
-                            Сервісне обслуговування
+                              Сервісне обслуговування
                             </Link>
                           </div>
                           <div className={styles.downloadable}>
                             <Link href={"../../../../about-us"}>
-                            Запит комерційної пропозиції
+                              Запит комерційної пропозиції
                             </Link>
                           </div>
                         </div>
@@ -171,52 +230,49 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                     <div className={styles.stroke}></div>
 
                     <div className="flex flex-1 flex-row w-[400px]">
-                     
-
-
 
                     </div>
                     <div className="text-black">
-      <Tabs aria-label="Default tabs" style="underline">
-      <Tabs.Item active title="Опис" icon={HiUserCircle}>
-                        <div
-                      className="content px-5"
-                      dangerouslySetInnerHTML={{
-                        __html: details?.description || "",
-                      }}
-                    />
-      </Tabs.Item>
-      <Tabs.Item title="Аксесуари та комплектуючі" icon={MdDashboard}>
-                      <div className={classNames("ml-10", styles.downloadabled)}>
-                        {details?.cross_sell_ids?.map((el) => (
-                          <li
-                          key={0}
-                            className={classNames("mx-1")}
-                          >
-                            {el}
-                          </li>
-                        ))}
+                      <Tabs aria-label="Default tabs" style="underline">
+                        <Tabs.Item active title="Опис" icon={HiUserCircle}>
+                          <div
+                            className="content px-5"
+                            dangerouslySetInnerHTML={{
+                              __html: details?.description || "",
+                            }}
+                          />
+                        </Tabs.Item>
+                        <Tabs.Item title="Аксесуари та комплектуючі" icon={MdDashboard}>
+                          <div className={classNames("ml-10", styles.downloadabled)}>
+                            {details?.cross_sell_ids?.map((el) => (
+                              <li
+                                key={0}
+                                className={classNames("mx-1")}
+                              >
+                                {el}
+                              </li>
+                            ))}
 
-                      </div>
-      </Tabs.Item>
-      <Tabs.Item title="Загрузки" icon={HiAdjustments}>
- <div className={classNames("", styles.downloadabled)}>
-                        {details?.downloads?.map((el) => (
-                          <li
-                            key={el.id}
-                            className={classNames("mx-1")}
-                          >
-                            <Link href={el.file}>{el.name}</Link>
-                          </li>
-                        ))}
+                          </div>
+                        </Tabs.Item>
+                        <Tabs.Item title="Загрузки" icon={HiAdjustments}>
+                          <div className={classNames("", styles.downloadabled)}>
+                            {details?.downloads?.map((el) => (
+                              <li
+                                key={el.id}
+                                className={classNames("mx-1")}
+                              >
+                                <Link href={el.file}>{el.name}</Link>
+                              </li>
+                            ))}
 
-                      </div>
-      </Tabs.Item>
-      <Tabs.Item title="Відео" icon={HiClipboardList}>
+                          </div>
+                        </Tabs.Item>
+                        <Tabs.Item title="Відео" icon={HiClipboardList}>
                           Тут будуть лінки на ютуб...
-      </Tabs.Item>
-    </Tabs>
-</div>
+                        </Tabs.Item>
+                      </Tabs>
+                    </div>
 
                   </motion.div>
                 )}

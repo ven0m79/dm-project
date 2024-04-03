@@ -84,3 +84,6 @@
     background: linear-gradient(to right, #ffffff00 0%, #0061AA 45%, #0061AA 55%, #ffffff00 100%);
 
 }
+.tabs {
+    background-color: #0061AA;
+}
