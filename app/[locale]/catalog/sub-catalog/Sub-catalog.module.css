@@ -54,7 +54,8 @@
 
 .headSubCatalog {
     color: black;
-    width: 310px;
+    width: 180px;
+    font-size: 14px;
     height: 60px;
     padding: 5px;
     text-align: center;
@@ -64,7 +65,7 @@
 .headSubCatalogBlock {
     display: flex;
     justify-content: center;
-    width: 340px;
+    width: 210px;
     border: 1px solid #4285F4;
     border-radius: 10px;
 }

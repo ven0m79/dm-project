@@ -65,7 +65,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
             <div className={classNames("", styles.subMenuDash)}></div>
           </div>
 
-          <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-4 w-full items-start">
+          <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-6 w-full items-start">
             {selectedProducts && selectedProducts.length ? (
               selectedProducts.map((el) => {
                 return (
@@ -91,8 +91,8 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
                           <img
                             src={el.images[0].src}
                             alt={el.images[0].alt}
-                            width={310}
-                            height={360}
+                            width={210}
+                            height={260}
                           />
                         </div>
 

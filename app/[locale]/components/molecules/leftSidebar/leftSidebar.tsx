@@ -8,7 +8,6 @@ import styles from "../../../catalog/sub-catalog/Sub-catalog.module.css";
 
 import { fetchWooCommerceProductsBasedOnCategory } from "../../../../../utils/woocommerce.setup";
 import { TransformedCategoriesType } from "@app/[locale]/catalog/sub-catalog/helpers";
-import { Locale } from "node_modules/next/dist/compiled/@vercel/og/satori";
 
 const LEFT_BAR_PARENT_ID = 50;
 const RIGHT_BAR_PARENT_ID = 55;
@@ -55,7 +54,7 @@ const Sidebar: FC<LeftSidebarProps> = ({
     category: TransformedCategoriesType,
     level = 0,
   ) => {
-    const marginLeft = level === 0 || level === 1 ? 0 : level * 10;
+    const marginLeft = level === 0 || level === 1 ? 0 : level * 5;
 
     return category?.childrens?.length === 0 ? (
       <FBSidebar.Item

@@ -25,12 +25,12 @@ import { MdDashboard } from "react-icons/md";
 
 const customTheme: CustomFlowbiteTheme = {
   tabs: {
-    base: "bg-green-500 hover:bg-green-700",
+    base: "flex flex-col gap-2 ml-4",
     tablist: {
-      base: "bg-green-500 hover:bg-green-700",
+      base: "flex text-center",
       styles: {
-        default: "bg-blue-400 hover:bg-blue-600",
-        underline: "bg-red-400 hover:bg-red-600",
+        default: "flex-wrap border-b border-gray-200 dark:border-gray-700",
+        underline: "-mb-px flex-wrap border-b border-gray-200 dark:border-gray-700",
       },
       tabitem: {
         base: "flex items-center justify-center rounded-t-lg p-4 text-sm font-medium first:ml-0 focus:outline-none focus:ring-4 focus:ring-cyan-300 disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500",
@@ -85,6 +85,9 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
         : Number(details.translations?.[locale as any])) || 0
     );
   }, [details, locale, productId]);
+  console.log(details);
+
+  const isAccesories = details?.tags?.map(el => el.name)?.includes("accessories");
 
   const getData = useCallback(async () => {
     try {
@@ -188,20 +191,31 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                         <div
                           className={classNames("text-normal", styles.brand)}
                         >
-                          Бренд: {details?.brands[0]?.name}
+                          {'Бренд: '} {details?.brands[0]?.name}
                         </div>
                         <br />
-                        <h2 className={classNames("", styles.available)}>
+                        {isAccesories ? 
+                        
+                            <div className={classNames("text-normal", styles.brand)}>
+                              {'Артикул: '}{details?.sku}
 
-                        </h2>
+                            </div>
+                         : null
+                          }
                         <br />
                         <div className="flex flex-col justify-between mt-10">
-                          <div className={classNames("", styles.downloadable)}>
+                          
+                          {isAccesories ?
+                            <div className="">
 
-                            <Link href={"../../../../services"}>
-                              Сервісне обслуговування
-                            </Link>
-                          </div>
+                            </div>
+                            :
+                            <div className={classNames("", styles.downloadable)}>
+                              <Link href={"../../../../services"}>
+                                Сервісне обслуговування
+                              </Link>
+                            </div>
+                          }
                           <div className={styles.downloadable}>
                             <Link href={"../../../../about-us"}>
                               Запит комерційної пропозиції
@@ -217,29 +231,30 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                     </div>
                     <div className="text-black">
 
-                      
-                      <Tabs aria-label="Default tabs" theme={customTheme}>
+
+                      <Tabs aria-label="Default tabs" theme={customTheme.tabs}>
                         <Tabs.Item active title="Опис" icon={HiUserCircle} className="bg-red">
                           <div
-                            className="content px-5"
+                            className="content"
                             dangerouslySetInnerHTML={{
                               __html: details?.description || "",
                             }}
                           />
                         </Tabs.Item>
-                        <Tabs.Item title="Аксесуари та комплектуючі" icon={MdDashboard}>
-                          <div className={classNames("ml-10", styles.downloadabled)}>
-                            {details?.cross_sell_ids?.map((el) => (
-                              <li
-                                key={0}
-                                className={classNames("mx-1")}
-                              >
-                                {el}
-                              </li>
-                            ))}
+                        {isAccesories ? null :
+                          <Tabs.Item title="Аксесуари та комплектуючі" icon={MdDashboard}>
+                            <div className={classNames("ml-10", styles.downloadabled)}>
+                              {details?.cross_sell_ids?.map((el) => (
+                                <li
+                                  key={0}
+                                  className={classNames("mx-1")}
+                                >
+                                  {el}
+                                </li>
+                              ))}
 
-                          </div>
-                        </Tabs.Item>
+                            </div>
+                          </Tabs.Item>}
                         <Tabs.Item title="Загрузки" icon={HiAdjustments}>
                           <div className={classNames("", styles.downloadabled)}>
                             {details?.downloads?.map((el) => (
