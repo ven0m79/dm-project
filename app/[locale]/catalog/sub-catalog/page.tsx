@@ -46,6 +46,13 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
     getData();
   }, [getData, locale]);
 
+  const isAccessories = selectedProducts?.map(el => el.tags.map(el => el.name).includes("accessories"));
+  
+  console.log('selectedProducts -', selectedProducts);
+  console.log('isAccessories -', isAccessories);
+   
+  
+
   return (
     <Suspense fallback="Loading">
       <MainLayout>
@@ -66,13 +73,15 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
           </div>
 
           <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-6 w-full items-start">
+
             {selectedProducts && selectedProducts.length ? (
               selectedProducts.map((el) => {
                 return (
+                  isAccessories ? 
                   <div
                     key={el.id}
-                    className={classNames("mx-5 mb-5", styles.headSubCatalogBlock)}
-                  >
+                    className={classNames("mx-5 mb-5", styles.headSubCatalogBlockMini)}
+                    >
                     <div className="">
                       <Link
                         locale={locale}
@@ -91,8 +100,44 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
                           <img
                             src={el.images[0].src}
                             alt={el.images[0].alt}
-                            width={210}
-                            height={260}
+                            width={100}
+                            height={150}
+                          />
+                        </div>
+
+                        <div className="flex justify-center">
+                          <h3 className={classNames("", styles.headSubCatalog)}>
+                            {el.name}
+                          </h3>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                  :
+                  <div
+                    key={el.id}
+                    className={classNames("mx-5 mb-5", styles.headSubCatalogBlock)}
+                   >
+                    <div className="">
+                      <Link
+                        locale={locale}
+                        key={el.id}
+                        href={{
+                          pathname: `/catalog/sub-catalog/product/${el.translations[locale as any]}`,
+                          query: `category=${selectedCategory}`
+                        }}
+                      >
+                        <div
+                          className={classNames(
+                            "cursor-pointer",
+                            styles.headSubCatalogPhoto,
+                          )}
+                        >
+                          <img
+                            src={el.images[0].src}
+                            alt={el.images[0].alt}
+                            width={200}
+                            height={250}
                           />
                         </div>
 
@@ -114,6 +159,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
           <div className={classNames("mt-4", styles.subMenu)}>
             <Sidebar
               items={[categories?.[0] || []]}
+              categoryTag={selectedCategory}
               setSelectedProducts={setSelectedProducts}
               locale={locale}
             />

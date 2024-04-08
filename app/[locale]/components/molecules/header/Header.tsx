@@ -15,11 +15,15 @@ const Header = () => {
   return (
     <header
       className={classNames(
-        "mt-top flex flex-col",
+        "mt-top flex flex-col w-full",
         styles["header"]
       )}
     >
-      <div className={styles.lang}>
+      <div className=
+      {classNames(
+        "w-full",
+        styles["lang"]
+      )}>
         <div className={styles.langText}>
           <Link href={pathname} locale="en">EN</Link>{'   '}
           <Link href={pathname} locale="ua">UA</Link></div>

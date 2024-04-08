@@ -71,7 +71,7 @@ const Sidebar: FC<LeftSidebarProps> = ({
           category.id === LEFT_BAR_PARENT_ID ||
           category.id === RIGHT_BAR_PARENT_ID ||
           category.id ===
-            categoriesIdData[categoryTag as keyof typeof categoriesIdData]
+          categoriesIdData[categoryTag as keyof typeof categoriesIdData]
         }
         label={category.name}
         key={category.id}
@@ -83,8 +83,8 @@ const Sidebar: FC<LeftSidebarProps> = ({
       >
         {category?.childrens?.length
           ? category.childrens.map((child) =>
-              renderNestedCategories(child, level + 1),
-            )
+            renderNestedCategories(child, level + 1),
+          )
           : null}
       </FBSidebar.Collapse>
     );
@@ -93,12 +93,12 @@ const Sidebar: FC<LeftSidebarProps> = ({
   useEffect(() => {
     if (
       categoriesIdData?.[
-        categoryTag as unknown as keyof typeof categoriesIdData
+      categoryTag as unknown as keyof typeof categoriesIdData
       ]
     ) {
       getCategoryDetails(
         categoriesIdData?.[
-          categoryTag as unknown as keyof typeof categoriesIdData
+        categoryTag as unknown as keyof typeof categoriesIdData
         ],
       );
     }

@@ -6,9 +6,10 @@
   width: 1400px;
   align-items: center;
   background: linear-gradient(to right, #0061AA 35%, #0061AA 63%, white 69%, white 100%);
-  border-radius: 10px;
 }
-
+.colorBlue {
+  background-color: #0061AA;
+}
 .back {
   margin-top: 0vh;
   display: flex;

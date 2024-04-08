@@ -87,7 +87,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
   }, [details, locale, productId]);
   console.log(details);
 
-  const isAccesories = details?.tags?.map(el => el.name)?.includes("accessories");
+  const isAccessories = details?.tags?.map(el => el.name)?.includes("accessories");
 
   const getData = useCallback(async () => {
     try {
@@ -194,7 +194,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                           {'Бренд: '} {details?.brands[0]?.name}
                         </div>
                         <br />
-                        {isAccesories ? 
+                        {isAccessories ? 
                         
                             <div className={classNames("text-normal", styles.brand)}>
                               {'Артикул: '}{details?.sku}
@@ -205,7 +205,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                         <br />
                         <div className="flex flex-col justify-between mt-10">
                           
-                          {isAccesories ?
+                          {isAccessories ?
                             <div className="">
 
                             </div>
@@ -241,7 +241,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                             }}
                           />
                         </Tabs.Item>
-                        {isAccesories ? null :
+                        {isAccessories ? null :
                           <Tabs.Item title="Аксесуари та комплектуючі" icon={MdDashboard}>
                             <div className={classNames("ml-10", styles.downloadabled)}>
                               {details?.cross_sell_ids?.map((el) => (

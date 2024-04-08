@@ -1,6 +1,5 @@
 .header {
     height: 140px;
-    width: 1400px;
     background: rgb(255, 255, 255);
     align-self: center;
     color: #002766;
@@ -8,7 +7,7 @@
     font-size: 16px;
 }
 .containerWithLogo {
-    width: 1400px;
+    align-self: center;
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -50,7 +49,6 @@
 }
 .lang {
     height: 20px;
-    width: 1400px;
     vertical-align: middle;
     text-align: right;
     background-color: #0061AAa5;

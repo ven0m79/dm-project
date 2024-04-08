@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     <footer
       className={classNames(
-        "mt-auto flex flex-col justify-center items-center", styles["footer"]
+        "mt-auto flex flex-col justify-center items-center w-full", styles["footer"]
       )}
     >
       <div className={styles.footerContainer}>

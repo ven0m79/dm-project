@@ -54,6 +54,9 @@ const Nav = () => {
   const t2 = useTranslations("Index");
 
   return (
+    <div className={classNames(
+      "flex flex-1 w-full justify-center h-[50px]",
+      styles["colorBlue"])}>
     <nav className={styles["navigation"]}>
       <ul className="flex ms-left ml-5 me-5">
         {Object.keys(NavLinks).map((el) => (
@@ -84,6 +87,7 @@ const Nav = () => {
         <div className={styles["back"]}>{t2("authorized-representative")}</div>
       </div>
     </nav>
+    </div>
   );
 };
 
