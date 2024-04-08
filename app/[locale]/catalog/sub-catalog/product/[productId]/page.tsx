@@ -141,7 +141,11 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
     getData();
   }, [getData, locale]);
 
+console.log(isAccessories);
+
+
   return (
+  
     <MainLayout>
       <div className="flex self-center flex-row w-[1400px] mb-8">
         <div className="w-[300px]">

@@ -51,9 +51,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
   console.log('selectedProducts -', selectedProducts);
   console.log('isAccessories -', isAccessories);
    
-  
-
-  return (
+    return (
     <Suspense fallback="Loading">
       <MainLayout>
         <div
@@ -76,8 +74,11 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
 
             {selectedProducts && selectedProducts.length ? (
               selectedProducts.map((el) => {
+                console.log('В Ретурні ', isAccessories);
+                
                 return (
-                  isAccessories ? 
+                                   
+                  isAccessories[0]  ? 
                   <div
                     key={el.id}
                     className={classNames("mx-5 mb-5", styles.headSubCatalogBlockMini)}
