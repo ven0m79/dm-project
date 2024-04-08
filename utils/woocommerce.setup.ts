@@ -14,7 +14,7 @@ export const api = new WooCommerceRestApi({
 
 export async function fetchWooCommerceProducts(id: number, locale: string) {
   try {
-    const response = await api.get(`products/categories/${id}?per_page=100&lang=${locale}`);
+    const response = await api.get(`products/categories/${id}&per_page=100&lang=${locale}`);
 
     if (response.status === 200) {
       return response.data;
@@ -27,7 +27,7 @@ export async function fetchWooCommerceProducts(id: number, locale: string) {
 
 export async function fetchWooCommerceCategories(locale: string) {
   try {
-    const response = await api.get(`products/categories?per_page=100&lang=${locale}`);
+    const response = await api.get(`products/categories&per_page=100&lang=${locale}`);
 
     if (response.status === 200) {
       return (await response.data) as WoocomerceCategoryType[];
@@ -39,7 +39,7 @@ export async function fetchWooCommerceCategories(locale: string) {
 
 export async function fetchWooCommerceProductsBasedOnCategory(id: number, locale: string) {
   try {
-    const response = await api.get(`products?category=${id}?per_page=100&lang=${locale}`);
+    const response = await api.get(`products?category=${id}&per_page=100&lang=${locale}`);
 
     if (response.status === 200) {
       return (await response.data) as SingleProductDetails[];
@@ -51,7 +51,7 @@ export async function fetchWooCommerceProductsBasedOnCategory(id: number, locale
 
 export async function fetchWooCommerceProductDetails(id: number, locale: string) {
   try {
-    const response = await api.get(`products/${id}?per_page=100&lang=${locale}`);
+    const response = await api.get(`products/${id}&per_page=100&lang=${locale}`);
 
     if (response.status === 200) {
       return (await response.data) as SingleProductDetails;
@@ -63,7 +63,7 @@ export async function fetchWooCommerceProductDetails(id: number, locale: string)
 
 export async function fetchWooCommerceCrossProductsDetails(id: number, locale: string) {
   try {
-    const response = await api.get(`products/cross_sell_ids?per_page=100&lang=${locale}`);
+    const response = await api.get(`products/cross_sell_ids&per_page=100&lang=${locale}`);
 
     if (response.status === 200) {
       return (await response.data) as SingleProductDetails;
