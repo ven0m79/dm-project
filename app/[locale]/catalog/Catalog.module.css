@@ -33,12 +33,12 @@
 }
 
 .block-decisions {
-    width: 600px;
+    justify-content: space-between;
+    width: 688px;
     height: 150px;
     border-radius: 10px;
     /* border: 1px solid #0061AA; */
     color: #003257;
-    justify-content: space-between;
     padding-left: 50px;
     padding-right: 50px;
     transition: all 0.2s;
@@ -58,6 +58,7 @@
     transition: all 0.5s;
 }
 .img {
+    align-items: end;
     transition: all 0.5s;
 }
 .span {

@@ -25,7 +25,7 @@ const CatalogPage = ({
     <MainLayout>
       <div
         className={classNames(
-          "text-2xl flex flex-wrap justify-center mb-5 px-5 gap-5 mt-5",
+          "text-2xl flex flex-wrap justify-start mb-5 gap-5 mt-5",
           [styles.catalogContainer],
         )}
       >

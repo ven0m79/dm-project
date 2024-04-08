@@ -58,7 +58,7 @@ const Nav = () => {
       "flex flex-1 w-full justify-center h-[50px]",
       styles["colorBlue"])}>
     <nav className={styles["navigation"]}>
-      <ul className="flex ms-left ml-5 me-5">
+      <ul className="flex ms-left me-5">
         {Object.keys(NavLinks).map((el) => (
           <li
             key={el}
