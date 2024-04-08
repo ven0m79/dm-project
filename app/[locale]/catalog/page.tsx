@@ -170,7 +170,7 @@ const CatalogPage = ({
         <Link
           href={{
             pathname: "/catalog/sub-catalog",
-            query: "category=accessories&per_page=100",
+            query: "category=accessories",
           }}
         >
           <div
