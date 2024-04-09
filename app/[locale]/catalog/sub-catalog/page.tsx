@@ -81,7 +81,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
                     <div
                       key={el.id}
                       className={classNames("mx-1 mb-5 flex flex-col justify-center items-center", styles.headSubCatalogBlockMini)}
-                    >
+                     >
                       <div className="">
                         <Link
                           locale={locale}
@@ -102,7 +102,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
                             />
                           </div>
                           <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center"></div>
-                          <div className="flex justify-center">
+                          <div className="flex justify-center h-16">
                             <h3 className="">
                               {el.name}
                             </h3>
