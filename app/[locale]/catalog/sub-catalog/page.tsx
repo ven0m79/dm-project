@@ -136,7 +136,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
                           </div>
                           <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center"></div>
                           <div className="flex justify-center">
-                            <h3 className={classNames("", styles.headSubCatalog)}>
+                            <h3 className="flex justify-center h-16">
                               {el.name}
                             </h3>
                           </div>
