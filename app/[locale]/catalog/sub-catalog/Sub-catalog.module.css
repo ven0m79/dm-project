@@ -51,34 +51,22 @@
     padding-top: 5px;
     font-size: 18px;
 }
-
-.headSubCatalog {
-    color: black;
-    width: 180px;
-    font-size: 14px;
-    height: 60px;
-    padding: 5px;
-    text-align: center;
-    border-top: 1px solid #007F3D;
-}
-
 .headSubCatalogBlock {
+    color: black;
     display: flex;
-    justify-content: center;
+    text-align: center;
+    padding: 5px;
     width: 210px;
-    border: 1px solid #4285F4;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     border-radius: 10px;
 }
 .headSubCatalogBlockMini {
+    font-size: 12px;
+    color: black;
     display: flex;
-    justify-content: center;
-    width: 110px;
-    border: 1px solid #4285F4;
-    border-radius: 10px;
-}
-
-.headSubCatalogPhoto {
+    text-align: center;
     padding: 5px;
-    /* border: 1px solid #c70b0b; */
-
+    width: 142px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    border-radius: 10px;
 }

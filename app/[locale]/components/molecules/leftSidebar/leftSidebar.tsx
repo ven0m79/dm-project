@@ -2,6 +2,7 @@
 
 import classNames from "classnames";
 import { Sidebar as FBSidebar } from "flowbite-react";
+import { HiArrowSmRight, HiArrowDown, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, HiViewBoards } from "react-icons/hi";
 import React, { FC, useCallback, useEffect } from "react";
 
 import styles from "../../../catalog/sub-catalog/Sub-catalog.module.css";

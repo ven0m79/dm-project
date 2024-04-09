@@ -47,11 +47,11 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
   }, [getData, locale]);
 
   const isAccessories = selectedProducts?.map(el => el.tags.map(el => el.name).includes("accessories"));
-  
+
   console.log('selectedProducts -', selectedProducts);
   console.log('isAccessories -', isAccessories);
-   
-    return (
+
+  return (
     <Suspense fallback="Loading">
       <MainLayout>
         <div
@@ -62,7 +62,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
         >
           <div className={classNames("mt-4", styles.subMenu)}>
             <Sidebar
-              items={[categories?.[1] || []]}  
+              items={[categories?.[1] || []]}
               categoryTag={selectedCategory}
               setSelectedProducts={setSelectedProducts}
               locale={locale}
@@ -74,81 +74,75 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
             {selectedProducts && selectedProducts.length ? (
               selectedProducts.map((el) => {
                 console.log('В Ретурні ', isAccessories);
-                
+
                 return (
-                                   
-                  isAccessories[0]  ? 
-                  <div
-                    key={el.id}
-                    className={classNames("mx-5 mb-5", styles.headSubCatalogBlockMini)}
+
+                  isAccessories[0] ?
+                    <div
+                      key={el.id}
+                      className={classNames("mx-1 mb-5 flex flex-col justify-center items-center", styles.headSubCatalogBlockMini)}
                     >
-                    <div className="">
-                      <Link
-                        locale={locale}
-                        key={el.id}
-                        href={{
-                          pathname: `/catalog/sub-catalog/product/${el.translations[locale as any]}`,
-                          query: `category=${selectedCategory}`
-                        }}
-                      >
-                        <div
-                          className={classNames(
-                            "cursor-pointer",
-                            styles.headSubCatalogPhoto,
-                          )}
+                      <div className="">
+                        <Link
+                          locale={locale}
+                          key={el.id}
+                          href={{
+                            pathname: `/catalog/sub-catalog/product/${el.translations[locale as any]}`,
+                            query: `category=${selectedCategory}`
+                          }}
                         >
-                          <img
-                            src={el.images[0].src}
-                            alt={el.images[0].alt}
-                            width={100}
-                            height={150}
-                          />
-                        </div>
-
-                        <div className="flex justify-center">
-                          <h3 className={classNames("", styles.headSubCatalog)}>
-                            {el.name}
-                          </h3>
-                        </div>
-                      </Link>
+                          <div
+                            className={"cursor-pointer flex flex-1 justify-center"}
+                          >
+                            <img
+                              src={el.images[0].src}
+                              alt={el.images[0].alt}
+                              width={150}
+                              height={210}
+                            />
+                          </div>
+                          <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center"></div>
+                          <div className="flex justify-center">
+                            <h3 className="">
+                              {el.name}
+                            </h3>
+                          </div>
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                  :
-                  <div
-                    key={el.id}
-                    className={classNames("mx-5 mb-5", styles.headSubCatalogBlock)}
-                   >
-                    <div className="">
-                      <Link
-                        locale={locale}
-                        key={el.id}
-                        href={{
-                          pathname: `/catalog/sub-catalog/product/${el.translations[locale as any]}`,
-                          query: `category=${selectedCategory}`
-                        }}
-                      >
-                        <div
-                          className={classNames(
-                            "cursor-pointer",
-                            styles.headSubCatalogPhoto,
-                          )}
+                    :
+                    <div
+                      key={el.id}
+                      className={classNames("mx-5 mb-5 flex flex-col justify-center items-center", styles.headSubCatalogBlock)}
+                    >
+                      <div className="">
+                        <Link
+                          locale={locale}
+                          key={el.id}
+                          href={{
+                            pathname: `/catalog/sub-catalog/product/${el.translations[locale as any]}`,
+                            query: `category=${selectedCategory}`
+                          }}
                         >
-                          <img
-                            src={el.images[0].src}
-                            alt={el.images[0].alt}
-                            width={200}
-                            height={250}
-                          />
-                        </div>
-
-                        <div className="flex justify-center">
-                          <h3 className={classNames("", styles.headSubCatalog)}>
-                            {el.name}
-                          </h3>
-                        </div>
-                      </Link>
+                          <div
+                            className="cursor-pointer flex justify-center"
+                          >
+                            <img
+                              src={el.images[0].src}
+                              alt={el.images[0].alt}
+                              width={200}
+                              height={250}
+                            />
+                          </div>
+                          <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center"></div>
+                          <div className="flex justify-center">
+                            <h3 className={classNames("", styles.headSubCatalog)}>
+                              {el.name}
+                            </h3>
+                          </div>
+                        </Link>
+                      </div>
                     </div>
-                  </div>
                 );
               })
             ) : (

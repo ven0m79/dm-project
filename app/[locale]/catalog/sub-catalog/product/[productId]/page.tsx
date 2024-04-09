@@ -278,7 +278,7 @@ console.log(isAccessories);
                       </Tabs>
                     </div>
 
-                  </motion.div>
+                  </motion.div> 
                 )}
               </AnimatePresence>
             </>
