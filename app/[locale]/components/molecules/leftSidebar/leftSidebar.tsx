@@ -111,9 +111,9 @@ const Sidebar: FC<LeftSidebarProps> = ({
         styles.subCatalog,
       )}
     >
-      <div className={classNames("mt-4", styles.subMenu)}>
+      <div>
         {/*Оцю стилізувати*/}
-        <h3 className="text-gray-50 ml-5">{items?.[0]?.name}</h3>
+        <h3 className="text-blue-950 ml-5 font-bold mt-5">{items?.[0]?.name}</h3>
 
         <FBSidebar aria-label="Catalog" className="">
           <FBSidebar.ItemGroup>

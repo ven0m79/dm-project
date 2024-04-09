@@ -62,12 +62,11 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
         >
           <div className={classNames("mt-4", styles.subMenu)}>
             <Sidebar
-              items={[categories?.[1] || []]}
+              items={[categories?.[1] || []]}  
               categoryTag={selectedCategory}
               setSelectedProducts={setSelectedProducts}
               locale={locale}
             />
-            <div className={classNames("", styles.subMenuDash)}></div>
           </div>
 
           <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-6 w-full items-start">
@@ -164,7 +163,6 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
               setSelectedProducts={setSelectedProducts}
               locale={locale}
             />
-            <div className={classNames("", styles.subMenuDash)}></div>
           </div>
         </div>
       </MainLayout>

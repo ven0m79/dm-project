@@ -148,7 +148,7 @@ console.log(isAccessories);
   
     <MainLayout>
       <div className="flex self-center flex-row w-[1400px] mb-8">
-        <div className="w-[300px]">
+      <div className={classNames("mt-4", styles.subMenu)}>
           <Sidebar
             items={[categories?.[1] || []]}
             categoryTag={selectedCategory}
@@ -284,7 +284,7 @@ console.log(isAccessories);
             </>
           )}
         </div>
-        <div className="w-[300px]">
+        <div className={classNames("mt-4", styles.subMenu)}>
           <Sidebar
             items={[categories?.[0] || []]}
             categoryTag={selectedCategory}

@@ -50,8 +50,8 @@ const Footer = () => {
           <div className={classNames('font-bold flex flex-row ml-0', styles["row"])}>
             <div className={classNames('font-normal mt-1 w-10')}>
               <p className={classNames('font-normal mt-1')}><Image src="/locationFooter.png" width={26} height={26} alt="Logo DM Project" /></p>
-              <p className={classNames('font-normal mt-7')}><Image src="/telephoneFooter.png" width={26} height={26} alt="Logo DM Project" /></p>
-              <p className={classNames('font-normal mt-8')}><Image src="/emailFooter.png" width={26} height={26} alt="Logo DM Project" /></p>
+              <p className={classNames('font-normal mt-5')}><Image src="/telephoneFooter.png" width={26} height={26} alt="Logo DM Project" /></p>
+              <p className={classNames('font-normal mt-6')}><Image src="/emailFooter.png" width={26} height={26} alt="Logo DM Project" /></p>
             </div>
             <div>
               <div className={classNames('font-normal mt-1 ml-1')}>{t('adress')}</div><br />

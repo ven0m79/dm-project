@@ -45,6 +45,12 @@ const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
             <div className={classNames("my-2 m indent-5 text-justify")}>
               {t('information3')}
             </div>
+            <div className={classNames("my-2 m indent-5 text-justify")}>
+              {t('information4')}
+            </div>
+            <div className={classNames("my-2 m indent-5 text-justify")}>
+              {t('information5')}
+            </div>
           </div>
         </div>
         <div
