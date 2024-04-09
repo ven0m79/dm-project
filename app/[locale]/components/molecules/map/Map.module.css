@@ -10,9 +10,10 @@
 
 .info-section {
   font-size: large;
+  color: #0061AA;
   width: 350px;
   height: 80px;
-  background-color: #007F3D;
+  background-color: #f5f697;
   border-radius: 10px;
 }
 .info-section-description {
