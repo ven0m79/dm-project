@@ -5,30 +5,45 @@
   align-self: center;
   width: 1400px;
   align-items: center;
-  background: linear-gradient(to right, #0061AA 35%, #0061AA 63%, white 69%, white 100%);
+  background-color: #0061AA;
 }
+
 .colorBlue {
   background-color: #0061AA;
   height: 50px;
 }
+
 .back {
+  width: 240px;
   margin-top: 0vh;
   display: flex;
+  align-self: center;
+  align-items: center;
+  height: 50px;
+  /* border: dashed 1px red; */
+  background: linear-gradient(to right, #0061AA 0%, white 20%, white 80%, #0061AA 100%);
+}
+
+.backText {
+  margin-top: 0vh;
   align-self: center;
   align-items: center;
   margin-left: 10px;
   height: 100%;
   font-family: Roboto;
   font-size: 18px;
-  color: #0061AA;
+  color: white;
+  /* border: solid 1px blue; */
+  background-color: #0061AA;
 }
+
 
 .link {
   font-size: 14px;
   height: 100%;
   padding: 15px 15px 15px 15px;
   color: white;
-  
+
   position: relative;
   font-family: "Roboto", sans-serif;
   font-size: 14px;

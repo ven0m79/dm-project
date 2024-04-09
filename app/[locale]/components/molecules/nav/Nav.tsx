@@ -58,11 +58,11 @@ const Nav = () => {
       "flex flex-1 w-full justify-center max-h-[50px]",
       styles["colorBlue"])}>
     <nav className={styles["navigation"]}>
-      <ul className="flex ms-center me-5">
+      <ul className="flex ms-center">
         {Object.keys(NavLinks).map((el) => (
           <li
             key={el}
-            className={classNames("mx-1", styles["link"], {
+            className={classNames("", styles["link"], {
               [styles["active"]]: pathname === '/'? pathname === NavLinks[el].link : pathname.includes(NavLinks[el].link),
             })}
           >
@@ -84,7 +84,7 @@ const Nav = () => {
             alt="Logo DM Project"
           />
         </div>
-        <div className={styles["back"]}>{t2("authorized-representative")}</div>
+        <div className={styles["backText"]}>{t2("authorized-representative")}</div>
       </div>
     </nav>
     </div>
