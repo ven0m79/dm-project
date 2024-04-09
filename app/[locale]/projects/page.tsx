@@ -7,7 +7,7 @@ const Projects = ({params: {locale}}: {params: {locale: string}}) => {
   unstable_setRequestLocale(locale);
   return (
     <MainLayout>
-      <div className="flex flex-1 justify-center items-center">
+      <div className="flex flex-1 flex-col justify-center items-center">
         <h1 className="text-6xl text-gray-900">Ви на сторінці Проектування</h1>
       </div>
     </MainLayout>

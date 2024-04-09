@@ -120,7 +120,6 @@ const Sidebar: FC<LeftSidebarProps> = ({
             {items?.map((el) => renderNestedCategories(el))}
           </FBSidebar.ItemGroup>
         </FBSidebar>
-        <div className={classNames("", styles.subMenuDash)}></div>
       </div>
     </div>
   );

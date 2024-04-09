@@ -20,10 +20,10 @@ const Header = () => {
       )}
     >
       <div className=
-      {classNames(
-        "w-full",
-        styles["lang"]
-      )}>
+        {classNames(
+          "w-full",
+          styles["lang"]
+        )}>
         <div className={styles.langText}>
           <Link href={pathname} locale="en">EN</Link>{'   '}
           <Link href={pathname} locale="ua">UA</Link></div>
@@ -45,8 +45,7 @@ const Header = () => {
           />
         </div>
         <div className={styles.contactsGroup}>
-          <div>+380 95 XXX-XX-XX</div>
-          <div>+380 44 XXX-XX-XX</div>
+          <div>+380 44 520-12-24</div>
         </div>
         <div className={styles.contactsGroupIcons}>
           <Image
@@ -57,6 +56,8 @@ const Header = () => {
           />
         </div>
         <div className={styles.contactsGroup}>
+          <div>allinfo@dm-project.com.ua</div>
+          <div>sales@dm-project.com.ua</div>
           <div>service@dm-project.com.ua</div>
         </div>
         <input className={styles.search} placeholder={t('placeholder')}></input>

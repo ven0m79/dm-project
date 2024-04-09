@@ -50,7 +50,7 @@ const HomePage = () => {
                 </div>
                 <div className={classNames("font-bold", styles["putText"])}>
                   {" "}
-                  {"4200 одиниць обладнання"}
+                  {"Більше 4200 одиниць обладнання"}
                 </div>
               </div>
               <div className="flex flex-1 flex-row">
@@ -65,7 +65,7 @@ const HomePage = () => {
 
                 <div className={classNames("font-bold", styles["putText"])}>
                   {" "}
-                  {"400 міст України"}
+                  {"Більше 400 міст України"}
                 </div>
               </div>
               <br />
@@ -75,15 +75,15 @@ const HomePage = () => {
               </div>
               <br />
               <div className={classNames("", styles["putText"])}>
-                {"- з проектування медичних закладів,"}
+                {"- Проектування медичних закладів, з виготовленням проектної документації «під ключ»"}
                 <br />
                 {
-                  "- з підбору та постачання оптимальної конфігурації якісного медичного обладнання згідно потреб клієнта,"
+                  "- Високотехнологічне медичне обладнання для оснащення відділень інтенсивної терапії, операційних, стерилізаційних відділень, медичні меблі та витратні матеріали"
                 }
                 <br />
-                {"- навчання персоналу,"}
+                {"- Навчання персоналу, надання консультаційної підтримки"}
                 <br />
-                {"- гарантійного та післягарантійного обслуговування."}
+                {"- Гарантійне та післягарантійне сервісне обслуговування обладнання."}
               </div>
             </div>
             <div>
@@ -119,7 +119,7 @@ const HomePage = () => {
                   )}
                 >
                   {
-                    "Offering solutions and products that are verifiably effective - that is our vision. She is our guiding principle on all levels - whether in strategic decision making within the management teams or in the daily operative work of each of our employees. Our vision always pushes us to develop and offer high quality solutions and products which can be proven to be effective and efficient in their application."
+                    "Наша сервісна служба проводить планомірну роботу з підтримки в робочому стані медичної апаратури виробництва Drager, AT-OS, Renosem, PROSH, Lojer. Для кожного типу обладнання існує план обслуговування, розроблений інженерами «ДМ-ПРОЕКТ»"
                   }
                 </div>
               </Link>
@@ -158,13 +158,17 @@ const HomePage = () => {
               <Link href={"/projects"}>
                 <div
                   className={classNames(
-                    "p-5 indent-5 text-justify",
+                    "p-5 text-left text-blue-200",
                     styles["serviceText"],
                   )}
                 >
-                  {
-                    "Offering solutions and products that are verifiably effective - that is our vision. She is our guiding principle on all levels - whether in strategic decision making within the management teams or in the daily operative work of each of our employees. Our vision always pushes us to develop and offer high quality solutions and products which can be proven to be effective and efficient in their application."
-                  }
+                  {"- Поетапне проектування майбутньої клініки з максимальною деталізацією та врахуванням специфіки кожного підрозділу"}
+                  <br />
+                  {"- Розрахунок необхідної потужності та проектування  інженерних комунікацій та систем"}
+                  <br />
+                  {"- Проектування системи постачання медичних газів"}
+                  <br />
+                  {"- Проектування та монтаж архітектурних систем -консолей, панелей"}
                 </div>
               </Link>
             </div>
@@ -237,14 +241,14 @@ const HomePage = () => {
               </Link>
             </div>
           </div>
-          <div
+          {/* <div
             className={classNames(
               "justify-center items-center valign-middle mb-10",
               styles["serviceTextHeader"],
             )}
           >
             ДМ-Проект допомагає зберігати життя українців!
-          </div>
+          </div> */}
         </div>
       </div>
     </MainLayout>

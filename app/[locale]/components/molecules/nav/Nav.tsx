@@ -44,7 +44,7 @@ const NavLinks: {
   },
   about_us: {
     title: "menu-contacts",
-    link: "/about-us",
+    link: "/contacts",
   },
 };
 
@@ -55,10 +55,10 @@ const Nav = () => {
 
   return (
     <div className={classNames(
-      "flex flex-1 w-full justify-center h-[50px]",
+      "flex flex-1 w-full justify-center max-h-[50px]",
       styles["colorBlue"])}>
     <nav className={styles["navigation"]}>
-      <ul className="flex ms-left me-5">
+      <ul className="flex ms-center me-5">
         {Object.keys(NavLinks).map((el) => (
           <li
             key={el}

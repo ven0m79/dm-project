@@ -88,6 +88,27 @@ button {
   margin-right: 20px;
 }
 
+.ul2 {
+  font-size: 24px;
+  color: #0061aa !important;
+  text-align: justify;
+  text-indent: 20px;
+  line-height: 27px;
+  list-style-type: disc;
+}
+
+.ul2 > li {
+  color: #002766;
+  margin-right: 20px;
+  padding-right: 20px;
+}
+
+.ul2 > li > span {
+  color: #002766;
+  margin-right: 20px;
+  padding-right: 20px;
+}
+
 .productText {
   font-size: 14px;
   font-weight: normal;
