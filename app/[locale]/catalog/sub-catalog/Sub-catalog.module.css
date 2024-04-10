@@ -15,11 +15,14 @@
 .subCollapse {
     width: 300px;
     height: 40px;
-    
     color: #0061AA !important;
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: 15px;
+}
+.subCollapse:hover {
+    background-color: #0060aa10;
+    border-radius: 10px;
 }
 
 .subItem {
@@ -32,7 +35,8 @@
 }
 
 .subItem:hover {
-    background-color: #0060aa50;
+    background-color: #0060aa10;
+    border-radius: 10px;
 }
 
 .subMenuDash {

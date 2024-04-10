@@ -37,16 +37,18 @@ const Footer = () => {
 
         <div className={classNames('font-bold', styles["column"])}>
           <div className={classNames('font-bold mb-4 text-[20px] ml-5')}>{t('catalog')}</div>
-          <Link href="/catalog/sub-catalog"><div className={classNames('font-normal mt-1 ml-5 hover:text-green-600')}>{t('or-equipment')}</div></Link>
-          <Link href="/catalog/sub-catalog"><div className={classNames('font-normal mt-1 ml-5 hover:text-green-600')}>{t('icu-equipment')}</div></Link>
-          <Link href="/catalog/sub-catalog?neonat"><div className={classNames('font-normal mt-1 ml-5 hover:text-green-600')}>{t('neonatal-equipment')}</div></Link>
-          <Link href="/catalog/sub-catalog"><div className={classNames('font-normal mt-1 ml-5 hover:text-green-600')}>{t('candd-equipment')}</div></Link>
-          <Link href="/catalog/sub-catalog"><div className={classNames('font-normal mt-1 ml-5 hover:text-green-600')}>{t('gas-systems')}</div></Link>
-          <Link href="/catalog/sub-catalog"><div className={classNames('font-normal mt-1 ml-5 hover:text-green-600')}>{t('other-equipment')}</div></Link>
-          <Link href="/catalog/sub-catalog"><div className={classNames('font-normal mt-1 ml-5 hover:text-green-600')}>{t('accessories')}</div></Link>
+          <Link href="/catalog/sub-catalog?category=operations"><div className={classNames('font-normal mt-1 ml-5 hover:text-green-600')}>{t('or-equipment')}</div></Link>
+          <Link href="/catalog/sub-catalog?category=intensive-therapy"><div className={classNames('font-normal mt-1 ml-5 hover:text-green-600')}>{t('icu-equipment')}</div></Link>
+          <Link href="/catalog/sub-catalog?category=neonathal"><div className={classNames('font-normal mt-1 ml-5 hover:text-green-600')}>{t('neonatal-equipment')}</div></Link>
+          <Link href="/catalog/sub-catalog?category=sterilization"><div className={classNames('font-normal mt-1 ml-5 hover:text-green-600')}>{t('candd-equipment')}</div></Link>
+          <Link href="/catalog/sub-catalog?category=gaz"><div className={classNames('font-normal mt-1 ml-5 hover:text-green-600')}>{t('gas-systems')}</div></Link>
+          <Link href="/catalog/sub-catalog?category=furniture"><div className={classNames('font-normal mt-1 ml-5 hover:text-green-600')}>{t('other-equipment')}</div></Link>
+          <Link href="/catalog/sub-catalog?category=accessories"><div className={classNames('font-normal mt-1 ml-5 hover:text-green-600')}>{t('accessories')}</div></Link>
         </div>
         <div className={classNames('font-bold flex flex-column', styles["column"])}>
-          <div>            <p className={classNames('font-bold mb-4 ml-1 text-[20px]')}>{t('contacts')}</p></div>
+          <div>
+            <p className={classNames('font-bold mb-4 ml-1 text-[20px]')}>{t('contacts')}</p>
+          </div>
           <div className={classNames('font-bold flex flex-row ml-0', styles["row"])}>
             <div className={classNames('font-normal mt-1 w-10')}>
               <p className={classNames('font-normal mt-1')}><Image src="/locationFooter.png" width={26} height={26} alt="Logo DM Project" /></p>
