@@ -196,15 +196,22 @@ console.log(isAccessories);
                         
                         {isAccessories ? 
                         
-                            <><div className={classNames("text-normal", styles.brand)}>
+                            <div className={classNames("text-normal", styles.brand)}>
                               {'Артикул: '}{details?.sku}
 
-                            </div><div className="h-[100px]"></div></>
+                            </div>
                          : null
                           }
+                          <div className="h-[100px]"></div>
                         <br />
                         <div className="flex flex-row justify-between">
                           
+                         
+                          <div className={styles.downloadable}>
+                            <Link href={"../../../../contacts"}>
+                              Запит комерційної пропозиції
+                            </Link>
+                          </div>
                           {isAccessories ?
                             <div className="">
 
@@ -215,12 +222,8 @@ console.log(isAccessories);
                                 Сервісне обслуговування
                               </Link>
                             </div>
+                            
                           }
-                          <div className={styles.downloadable}>
-                            <Link href={"../../../../contacts"}>
-                              Запит комерційної пропозиції
-                            </Link>
-                          </div>
                         </div>
                       </div>
                     </div>
