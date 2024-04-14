@@ -7,7 +7,7 @@
 }
 
 .imageRadius {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 13px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     padding: 10px;
     border-radius: 10px;
 }
@@ -34,24 +34,24 @@
     color: #000;
 }
 .downloadable {
-    margin-top: 20px;
+
     text-align: center;
-    width: 400px;
-    padding: 13px 30px;
+    width: 154px;
+    padding: 5px;
     margin: 5px 0 10px 0;
-    font-size: 18px;
-    color: #000;
-    background-color: #ECF3FE;
-    border: 1px solid black;
-    border-radius: 10px;
+    font-size: 16px;
+    color: #0061AA ;
+    background-color: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     cursor: pointer;
-    font-size: 18px;
+    border-radius: 10px;
 }
 .downloadable:hover {
     transition: all 0.5s;
-    background: #002766;
-    color: #ffffff;
-    font-size: 18px;
+    background-color: #0060aa10;
+    color: #0061AA ;
+    font-size: 16px;
+    border-radius: 10px;
 }
 .yerSubmit {
     margin-top: 20px;
@@ -78,7 +78,7 @@
 .stroke {
     align-self: center;
     width: 800px;
-    height: 1px;
+    height: 1px; 
     margin-top: 5px;
     margin-bottom: 10px;
     background: linear-gradient(to right, #ffffff00 0%, #0061AA 45%, #0061AA 55%, #ffffff00 100%);

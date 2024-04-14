@@ -29,17 +29,17 @@ const customTheme: CustomFlowbiteTheme = {
     tablist: {
       base: "flex text-center",
       styles: {
-        default: "flex-wrap border-b border-gray-200 dark:border-gray-700",
+        default: "flex-wrap border-b border-gray-200 dark:border-gray-300",
         underline: "-mb-px flex-wrap border-b border-gray-200 dark:border-gray-700",
       },
       tabitem: {
-        base: "flex items-center justify-center rounded-t-lg p-4 text-sm font-medium first:ml-0 focus:outline-none focus:ring-4 focus:ring-cyan-300 disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500",
+        base: "flex items-center justify-center rounded-t-lg p-4 text-sm font-medium first:ml-0 focus:outline-none focus:ring-0 focus:ring-cyan-900 disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500",
         styles: {
           default: {
             base: "rounded-t-lg",
             active: {
-              on: "bg-gray-100 text-cyan-600 dark:bg-gray-800 dark:text-cyan-500",
-              off: "text-gray-500 hover:bg-gray-50 hover:text-gray-600 dark:text-gray-400 dark:hover:bg-gray-800  dark:hover:text-gray-300"
+              on: "bg-[#0060aa10] text-[#0061AA] dark:bg-[#0060aa10] dark:text-[#0061AA]",
+              off: "text-[#0061AA] hover:bg-gray-50 hover:text-text-[#0061AA] dark:text-[#0060aa10] dark:hover:bg-[#0060aa10]  dark:hover:text-text-[#0061AA]"
             }
           },
           underline: {
@@ -175,19 +175,14 @@ console.log(isAccessories);
                   >
                     <div className="flex flex-row ">
                       <div className={classNames("m-4", styles.imageRadius)}>
-                        <Link
-                          target="blank"
-                          href={details?.images[0].src || ""}
-                        >
                           <img
                             src={details?.images[0].src}
                             alt={details?.images[0].alt}
-                            width={300}
-                            height={311}
+                            width={450}
+                            height={475}
                           />
-                        </Link>
                       </div>
-                      <div className="p-4 w-[500px]">
+                      <div className="px-1 pt-28 w-[350px]">
                         <h1 className={classNames("", styles.title)}>
                           {details?.name}
                         </h1>
@@ -198,6 +193,7 @@ console.log(isAccessories);
                           {'Бренд: '} {details?.brands[0]?.name}
                         </div>
                         <br />
+                        <div className="h-[100px]"></div>
                         {isAccessories ? 
                         
                             <div className={classNames("text-normal", styles.brand)}>
@@ -207,21 +203,21 @@ console.log(isAccessories);
                          : null
                           }
                         <br />
-                        <div className="flex flex-col justify-between mt-10">
+                        <div className="flex flex-row justify-between">
                           
                           {isAccessories ?
                             <div className="">
 
                             </div>
                             :
-                            <div className={classNames("", styles.downloadable)}>
+                            <div className={classNames("self-center", styles.downloadable)}>
                               <Link href={"../../../../services"}>
                                 Сервісне обслуговування
                               </Link>
                             </div>
                           }
                           <div className={styles.downloadable}>
-                            <Link href={"../../../../about-us"}>
+                            <Link href={"../../../../contacts"}>
                               Запит комерційної пропозиції
                             </Link>
                           </div>

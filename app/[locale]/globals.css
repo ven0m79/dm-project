@@ -74,9 +74,20 @@ button {
   margin-top: 20px;
   margin-bottom: 5px;
 }
-
+.img1 {
+  padding: 10px;
+  display: flex;
+  float: left;
+  align-items: flex-end;
+}
+.img2 {
+  padding: 10px;
+  display: flex;
+  float: right;
+  align-items: flex-end;
+}
 .ul1 {
-  font-size: 14px;
+  font-size: 16px;
   color: #0061aa;
   text-align: justify;
   text-indent: 20px;
@@ -110,12 +121,21 @@ button {
 }
 
 .productText {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: normal;
   color: #0061aa;
   text-align: justify;
   text-indent: 20px;
   line-height: 27px;
+}
+.stroke {
+  align-self: center;
+  width: 800px;
+  height: 1px; 
+  margin-top: 15px;
+  margin-bottom: 10px;
+  background: linear-gradient(to right, #ffffff00 0%, #0061AA 45%, #0061AA 55%, #ffffff00 100%);
+
 }
 .table1 {
   margin-top: 20px;
