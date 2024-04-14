@@ -173,7 +173,7 @@ console.log(isAccessories);
                       delay: 0.4,
                     }}
                   >
-                    <div className="flex flex-row ">
+                    <div className="flex flex-row w-[800px]">
                       <div className={classNames("m-4", styles.imageRadius)}>
                           <img
                             src={details?.images[0].src}
@@ -193,13 +193,13 @@ console.log(isAccessories);
                           {'Бренд: '} {details?.brands[0]?.name}
                         </div>
                         <br />
-                        <div className="h-[100px]"></div>
+                        
                         {isAccessories ? 
                         
-                            <div className={classNames("text-normal", styles.brand)}>
+                            <><div className={classNames("text-normal", styles.brand)}>
                               {'Артикул: '}{details?.sku}
 
-                            </div>
+                            </div><div className="h-[100px]"></div></>
                          : null
                           }
                         <br />
