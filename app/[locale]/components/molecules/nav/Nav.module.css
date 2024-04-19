@@ -20,10 +20,7 @@
   align-self: center;
   align-items: center;
   height: 50px;
-  /* background: rgb(255,255,255);
-  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 55%, rgba(0,97,170,1) 98%, rgba(0,97,170,1) 100%, rgba(255,255,255,0.4962359943977591) 4250%);
-   */
-   background: radial-gradient(circle farthest-side, #ffffff, #0061AA);
+  background: radial-gradient(circle farthest-side, #ffffff 40%, #0061AA);
 }
 
 .backText {
