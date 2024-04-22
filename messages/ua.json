@@ -24,7 +24,7 @@
   "Menu": {
     "menu-main": "ГОЛОВНА",
     "menu-about-us": "ПРО КОМПАНІЮ",
-    "menu-catalog": "КАТАЛОГ",
+    "menu-catalog": "ПРОДУКТИ",
     "menu-service": "СЕРВІС",
     "menu-decisions": "РІШЕННЯ",
     "menu-projects": "ПРОЕКТУВАННЯ",
@@ -33,7 +33,7 @@
   },
   "Footer": {
     "information": "ІНФОРМАЦІЯ",
-    "catalog": "КАТАЛОГ",
+    "catalog": "ПРОДУКТИ",
     "contacts": "КОНТАКТИ",
     "about-company": "Про компанію",
     "service": "Сервіс",

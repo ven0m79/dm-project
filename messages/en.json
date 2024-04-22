@@ -24,16 +24,16 @@
   "Menu": {
     "menu-main": "MAIN",
     "menu-about-us": "ABOUT US",
-    "menu-catalog": "CATALOG",
+    "menu-catalog": "PRODUCTS",
     "menu-service": "SERVICE",
-    "menu-decisions": "DECISIONS",
+    "menu-decisions": "SOLUTIONS",
     "menu-projects": "PROJECTS",
-    "menu-shares": "SHARES",
+    "menu-shares": "OFFERS",
     "menu-contacts": "CONTACTS"
   },
   "Footer": {
     "information": "INFORMATION",
-    "catalog": "CATALOG",
+    "catalog": "PRODUCTS",
     "contacts": "CONTACTS",
     "about-company": "About Company",
     "service": "Service",
