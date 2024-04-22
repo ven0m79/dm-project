@@ -61,7 +61,15 @@ const Header = () => {
           <div>service@dm-project.com.ua</div>
         </div>
         <input className={styles.search} placeholder={t('placeholder')}></input>
+        <div className={classNames('flex flex-row justify-center items-center', styles["socialMedia"])}>
+              <Link href="http://youtube.com"><Image src="/youtube-ico.jpg" width={30} height={30} alt="Logo Youtube" /></Link></div>
+            <div className={classNames('flex flex-column justify-center items-center', styles["socialMedia"])}>
+              <Link href="http://facebook.com"><Image src="/facebook-ico.jpg" width={30} height={30} alt="Logo Facebook" /></Link>
+            </div>
       </div>
+      
+
+      
     </header>
 
   );

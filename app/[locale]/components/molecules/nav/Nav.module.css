@@ -20,7 +20,7 @@
   align-self: center;
   align-items: center;
   height: 50px;
-  background: radial-gradient(circle farthest-side, #ffffff 40%, #0061AA);
+  background: radial-gradient(circle farthest-side, #ffffff 10%, #0061AA);
 }
 
 .backText {

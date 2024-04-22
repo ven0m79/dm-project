@@ -2,8 +2,24 @@
   "Index": {
     "title": "Hello World!",
     "menu": "Menu!",
-    "in-Ukraine-2009": "DM-Project has been a reliable partner of Ukrainian doctors since 2009",
-    "authorized-representative": "Authorized representative in Ukraine"
+    "in-Ukraine-2009": "DM-Project has been a reliable partner of Ukrainian doctors since 2009 ",
+    "authorized-representative": "Authorized representative in Ukraine",
+    "delivered": "Delivered:",
+    "more-then": "More than 4200 units of equipment",
+    "more-then2": "More than 400 cities of Ukraine",
+    "integrated": "We offer integrated solutions",
+    "integrated1": "- Designing of medical institutions, with the production of turnkey project documentation",
+    "integrated2": "- High-tech medical equipment for equipping intensive care units, operating rooms, sterilization units, medical furniture and consumables",
+    "integrated3": "- Staff training, support and consulting",
+    "integrated4": "- Warranty and post-warranty equipment maintenance ",
+    "service": "Service",
+    "service-text": "Our service department carries out systematic work to maintain/keep medical equipment manufactured by Dräger, AT-OS, Renosem, PROSH, Lojer in working order. There is a maintenance plan developed by DM-PROJECT engineers for each type of equipment.",
+    "projectings": "Designing",
+    "projectings1": "- The phased design of the future clinic with maximum detail and taking into account the specifics of each department",
+    "projectings2": "- Calculation of the required capacity and design of utilities and systems",
+    "projectings3": "- Design of medical gases supply systems",
+    "projectings4": "- Design and installation of architectural systems - consoles, panels",
+    "partners" : "Our partners"
   },
   "Menu": {
     "menu-main": "MAIN",
@@ -39,11 +55,12 @@
     "placeholder": "Search..."
   },
   "AboutPage": {
-    "information1": "LLC 'DM-PROJECT' was founded in 2009. We are the official representative in Ukraine of the international company Dräger, a world leader in the production of life support systems. Our medical equipment is successfully used in many medical institutions of the country. Thus, we supplied more than 1,000 artificial lung ventilation devices that work reliably in all regions of Ukraine.",
-    "information2": "Anesthesia - breathing machines, ventilators, patient condition monitors, intensive care units, incubators for newborns, medical architectural systems (medical consoles, bedside panels), operating lamps and lighting systems for operating rooms, as well as consumables for medical equipment - this is incomplete a list of our products.",
-    "information3": "Following the modern principles of comprehensive and high-quality service to our customers, we provide a wide range of services: calculation of the optimal configuration of medical equipment, its commissioning, personnel training, warranty and post-warranty repairs, supply of consumables. Our clients can always be sure of the help of professionals. Another very promising field of activity of our company is related to such a high-tech product as 'clean rooms'.",    
-    "information4": "Following the modern principles of comprehensive and high-quality service to our customers, we provide a wide range of services: calculation of the optimal configuration of medical equipment, its commissioning, personnel training, warranty and post-warranty repairs, supply of consumables. Our clients can always be sure of the help of professionals. Another very promising field of activity of our company is related to such a high-tech product as 'clean rooms'.",   
-    "information5": "Following the modern principles of comprehensive and high-quality service to our customers, we provide a wide range of services: calculation of the optimal configuration of medical equipment, its commissioning, personnel training, warranty and post-warranty repairs, supply of consumables. Our clients can always be sure of the help of professionals. Another very promising field of activity of our company is related to such a high-tech product as 'clean rooms'."    
+    "information1": "DM-PROJECT was founded in 2009 as an authorized representative of the German company Dräger in Ukraine, the world leader in the production of human life support systems.",
+    "information2": "Today, the company's main activities include not only the sale of high-quality medical equipment, but also the development and implementation of integrated solutions for medical institutions, from design to service and staff training.",
+    "information3": "The service department of DM-PROJECT performs maintenance of more than 4000 devices manufactured by Dräger, which are installed in public and private medical institutions in all regions of Ukraine.",    
+    "information4": "In response to market challenges, our technologies are constantly being improved; our managers and engineers regularly attend advanced training.",   
+    "information5": "We take care of our clients, advise them and offer unique solutions that meet any requirements and specifics of medical institutions.",
+    "implemented": "Implemented projects"
   },
   "ServicePage": {
     "title": "Service",
@@ -54,4 +71,4 @@
     "contact-form-submit": "SEND MESSAGE"
   }
 
-}
+} 

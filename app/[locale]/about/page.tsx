@@ -60,7 +60,7 @@ const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
           )}
         >
           <div className="text-2xl text-blue-900 flex justify-between mb-5">
-            Реалізовані проєкти
+          {t('implemented')}
           </div>
           <div className="text-2xl flex flex-row justify-between mb-5 w-full px-5">
             <Link href="/about/ohmatdet"><div

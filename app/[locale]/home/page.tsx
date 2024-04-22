@@ -36,7 +36,7 @@ const HomePage = () => {
             <div className={"text-2xl text-blue-800"}>
               <div className={classNames("font-bold", styles["textHeader"])}>
                 {" "}
-                {"Поставлено:"}
+                {t("delivered")}
               </div>
               <br />
               <div className="flex flex-1 flex-row items-center self-center">
@@ -50,7 +50,7 @@ const HomePage = () => {
                 </div>
                 <div className={classNames("font-bold", styles["putText"])}>
                   {" "}
-                  {"Більше 4200 одиниць обладнання"}
+                  {t("more-then")}
                 </div>
               </div>
               <div className="flex flex-1 flex-row">
@@ -65,25 +65,23 @@ const HomePage = () => {
 
                 <div className={classNames("font-bold", styles["putText"])}>
                   {" "}
-                  {"Більше 400 міст України"}
+                  {t("more-then2")}
                 </div>
               </div>
               <br />
               <div className={classNames("font-bold", styles["textHeader"])}>
                 {" "}
-                {"Ми пропонуємо комплексні рішення:"}
+                {t("integrated")}
               </div>
               <br />
               <div className={classNames("", styles["putText"])}>
-                {"- Проектування медичних закладів, з виготовленням проектної документації «під ключ»"}
+              {t("integrated1")}
                 <br />
-                {
-                  "- Високотехнологічне медичне обладнання для оснащення відділень інтенсивної терапії, операційних, стерилізаційних відділень, медичні меблі та витратні матеріали"
-                }
+                {t("integrated2")}
                 <br />
-                {"- Навчання персоналу, надання консультаційної підтримки"}
+                {t("integrated3")}
                 <br />
-                {"- Гарантійне та післягарантійне сервісне обслуговування обладнання."}
+                {t("integrated4")}
               </div>
             </div>
             <div>
@@ -108,7 +106,7 @@ const HomePage = () => {
                 styles["textHeader"],
               )}
             >
-              СЕРВІС
+              {t("service")}
             </div>
             <div className="flex flex-1 flex-row text-slate-200">
               <Link href={"/services"}>
@@ -118,9 +116,7 @@ const HomePage = () => {
                     styles["serviceText"],
                   )}
                 >
-                  {
-                    "Наша сервісна служба проводить планомірну роботу з підтримки в робочому стані медичної апаратури виробництва Dräger, AT-OS, Renosem, PROHS, Lojer. Для кожного типу обладнання існує план обслуговування, розроблений інженерами «ДМ-ПРОЕКТ»"
-                  }
+                  {t("service-text")}
                 </div>
               </Link>
               <div>
@@ -142,7 +138,7 @@ const HomePage = () => {
                 styles["textHeader"],
               )}
             >
-              ПРОЄКТУВАННЯ
+              {t("projectings")}
             </div>
             <div className="flex flex-1 flex-row text-slate-200">
               <div>
@@ -162,13 +158,13 @@ const HomePage = () => {
                     styles["serviceText"],
                   )}
                 >
-                  {"- Поетапне проектування майбутньої клініки з максимальною деталізацією та врахуванням специфіки кожного підрозділу"}
+                  {t("projectings1")}
                   <br />
-                  {"- Розрахунок необхідної потужності та проектування  інженерних комунікацій та систем"}
+                  {t("projectings2")}
                   <br />
-                  {"- Проектування системи постачання медичних газів"}
+                  {t("projectings3")}
                   <br />
-                  {"- Проектування та монтаж архітектурних систем -консолей, панелей"}
+                  {t("projectings4")}
                 </div>
               </Link>
             </div>
@@ -182,7 +178,7 @@ const HomePage = () => {
               styles["textHeader"],
             )}
           >
-            Наші партнери:
+            {t("partners")}
           </div>
           <div className="flex flex-1 flex-row justify-center items-center valign-middle bg-white">
             <div className={classNames("m-10", styles["block-partners"])}>

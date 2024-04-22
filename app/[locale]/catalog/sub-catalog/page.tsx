@@ -91,6 +91,9 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
                             query: `category=${selectedCategory}`
                           }}
                         >
+                          <div>
+                          {el.sku}
+                          </div>
                           <div
                             className={"cursor-pointer flex flex-1 justify-center"}
                           >
