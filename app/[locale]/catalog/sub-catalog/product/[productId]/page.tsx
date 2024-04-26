@@ -157,6 +157,7 @@ console.log(isAccessories);
           />
         </div>
         <div className="flex flex-col p-1 min-h-[600px]">
+          
           {loading ? (
             <div className="flex flex-1 w-[800px] h-[600px] justify-center items-center">
               <Loader />
