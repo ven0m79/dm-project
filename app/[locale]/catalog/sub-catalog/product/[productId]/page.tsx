@@ -39,7 +39,7 @@ const customTheme: CustomFlowbiteTheme = {
             base: "rounded-t-lg",
             active: {
               on: "bg-[#0060aa10] text-[#0061AA] dark:bg-[#0060aa10] dark:text-[#0061AA]",
-              off: "text-[#0061AA] hover:bg-gray-50 hover:text-text-[#0061AA] dark:text-[#0060aa10] dark:hover:bg-[#0060aa10]  dark:hover:text-text-[#0061AA]"
+              off: "text-[#0061AA] hover:bg-gray-50 hover:text-[#0061AA] dark:text-[#0060aa10] dark:hover:bg-[#0060aa10]  dark:hover:text-text-[#0061AA]"
             }
           },
           underline: {
