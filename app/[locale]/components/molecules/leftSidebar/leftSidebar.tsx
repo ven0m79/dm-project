@@ -15,7 +15,7 @@ const customTheme: CustomFlowbiteTheme = {
     root: {
       base: "h-full",
       inner:
-        "h-full w-[300px] overflow-y-auto overflow-x-hidden py-2 rounded bg-transparent dark:bg-gray-800",
+        "h-full w-[300px] overflow-y-auto overflow-x-hidden py-3 rounded bg-white dark:bg-gray-800",
     },
     collapse: {
       button: "group flex w-full items-center rounded-lg p-1 text-base font-normal text-[#0061AA] transition duration-75 hover:bg-[#0061aa10] dark:text-white dark:hover:bg-gray-700",
