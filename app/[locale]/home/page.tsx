@@ -20,14 +20,14 @@ const HomePage = () => {
         <div className="flex flex-1 flex-col justify-center items-center">
           <Slider />
 
-          <div
+          <h2
             className={classNames(
               "justify-center items-center valign-middle mb-10",
               styles["serviceTextHeader"],
             )}
           >
-            {t("in-Ukraine-2009")}
-          </div>
+            {t("in-Ukraine-2009").toUpperCase()}
+          </h2>
 
           <div
             className="flex flex-1 flex-row justify-end items-center self-center"
@@ -36,7 +36,7 @@ const HomePage = () => {
             <div className={"text-2xl text-blue-800"}>
               <div className={classNames("font-bold", styles["textHeader"])}>
                 {" "}
-                {t("delivered")}
+                {t("delivered").toUpperCase()}
               </div>
               <br />
               <div className="flex flex-1 flex-row items-center self-center">
@@ -71,7 +71,7 @@ const HomePage = () => {
               <br />
               <div className={classNames("font-bold", styles["textHeader"])}>
                 {" "}
-                {t("integrated")}
+                {t("integrated").toUpperCase()}
               </div>
               <br />
               <div className={classNames("", styles["putText"])}>
@@ -178,7 +178,7 @@ const HomePage = () => {
               styles["textHeader"],
             )}
           >
-            {t("partners")}
+            {t("partners").toUpperCase()}
           </div>
           <div className="flex flex-1 flex-row justify-center items-center valign-middle bg-white">
             <div className={classNames("m-10", styles["block-partners"])}>
