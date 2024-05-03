@@ -58,7 +58,7 @@ const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
             "flex flex-1 flex-col justify-between items-center",
             styles["aboutDecisions"],
           )}
-        >
+        >        <div className={styles.stroke}></div>
           <div className="text-2xl text-blue-900 flex justify-between mb-5">
           {t('implemented')}
           </div>

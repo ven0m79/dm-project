@@ -68,7 +68,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
               locale={locale}
             />
           </div>
-
+ 
           <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-6 w-full items-start">
 
             {selectedProducts && selectedProducts.length ? (

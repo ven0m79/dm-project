@@ -5,7 +5,7 @@
     font-size: 18px;
     color: #0061AA;
     
-    line-height: 27px;
+    line-height: 22px;
 }
 
 .aboutMainPhoto {
@@ -62,7 +62,15 @@
     transform: scale(1.15);
 }
 
+.stroke {
+    align-self: center;
+    width: 1240px;
+    height: 1px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, #ffffff00 0%, #0061AA 45%, #0061AA 55%, #ffffff00 100%);
 
+}
 
 /* @keyframes bounce {
 
