@@ -10,7 +10,8 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import styles from "./Home.module.css";
-const HomePage = () => {
+
+const HomePage = ({ params: { locale } }: { params: { locale: string } }) => {
   const t = useTranslations("Index");
 
   return (
@@ -85,7 +86,7 @@ const HomePage = () => {
               </div>
             </div>
             <div>
-              <MapOfUkraine />
+              <MapOfUkraine locale={locale} />
             </div>
           </div>
         </div>
@@ -161,13 +162,17 @@ const HomePage = () => {
                     styles["serviceText"],
                   )}
                 >
-                  <span className="text-[#0061AA] mr-[10px]">•</span>{t("projectings1")}
+                  <span className="text-[#0061AA] mr-[10px]">•</span>
+                  {t("projectings1")}
                   <br />
-                  <span className="text-[#0061AA] mr-[10px]">•</span>{t("projectings2")}
+                  <span className="text-[#0061AA] mr-[10px]">•</span>
+                  {t("projectings2")}
                   <br />
-                  <span className="text-[#0061AA] mr-[10px]">•</span>{t("projectings3")}
+                  <span className="text-[#0061AA] mr-[10px]">•</span>
+                  {t("projectings3")}
                   <br />
-                  <span className="text-[#0061AA] mr-[10px]">•</span>{t("projectings4")}
+                  <span className="text-[#0061AA] mr-[10px]">•</span>
+                  {t("projectings4")}
                 </div>
               </Link>
             </div>
@@ -185,8 +190,7 @@ const HomePage = () => {
           </div>
           <div className="flex flex-1 flex-row justify-center items-center valign-middle bg-white">
             <div className={classNames("m-10", styles["block-partners"])}>
-              <Link href="https://www.draeger.com"
-                target="_blank">
+              <Link href="https://www.draeger.com" target="_blank">
                 <Image
                   className={styles.img}
                   src="/logo-partners/dreger-log-partner.jpg"
@@ -197,8 +201,7 @@ const HomePage = () => {
               </Link>
             </div>
             <div className={classNames("m-10", styles["block-partners"])}>
-              <Link href="https://www.prohs.pt/en/home/"
-                target="_blank">
+              <Link href="https://www.prohs.pt/en/home/" target="_blank">
                 <Image
                   className={styles.img}
                   src="/logo-partners/prohs-log-partner.png"
@@ -209,8 +212,7 @@ const HomePage = () => {
               </Link>
             </div>
             <div className={classNames("m-10", styles["block-partners"])}>
-              <Link href="https://www.at-os.com"
-                target="_blank">
+              <Link href="https://www.at-os.com" target="_blank">
                 <Image
                   className={styles.img}
                   src="/logo-partners/atos-log-partner.jpg"
@@ -221,8 +223,7 @@ const HomePage = () => {
               </Link>
             </div>
             <div className={classNames("m-10", styles["block-partners"])}>
-              <Link href="https://www.lojer.com"
-                target="_blank">
+              <Link href="https://www.lojer.com" target="_blank">
                 <Image
                   className={styles.img}
                   src="/logo-partners/lojer-log-partner.jpg"
@@ -233,8 +234,7 @@ const HomePage = () => {
               </Link>
             </div>
             <div className={classNames("m-10", styles["block-partners"])}>
-              <Link href="http://renosem.com"
-                target="_blank">
+              <Link href="http://renosem.com" target="_blank">
                 <Image
                   className={styles.img}
                   src="/logo-partners/renosem-log-partner.jpg"
