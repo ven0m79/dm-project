@@ -98,6 +98,9 @@ const HomePage = () => {
           style={{ width: "1400px" }}
         >
           {" "}
+          <div className={styles.stroke}></div>
+          <br />
+          <br />
           {/*Сервіс та Проєктування*/}
           <div className="flex flex-col self-start" style={{ width: "900px" }}>
             <div
@@ -154,17 +157,17 @@ const HomePage = () => {
               <Link href={"/projects"}>
                 <div
                   className={classNames(
-                    "p-5 text-left text-blue-200",
+                    "p-5 text-blue-200 text-justify",
                     styles["serviceText"],
                   )}
                 >
-                  {t("projectings1")}
+                  <span className="text-[#0061AA] mr-[10px]">•</span>{t("projectings1")}
                   <br />
-                  {t("projectings2")}
+                  <span className="text-[#0061AA] mr-[10px]">•</span>{t("projectings2")}
                   <br />
-                  {t("projectings3")}
+                  <span className="text-[#0061AA] mr-[10px]">•</span>{t("projectings3")}
                   <br />
-                  {t("projectings4")}
+                  <span className="text-[#0061AA] mr-[10px]">•</span>{t("projectings4")}
                 </div>
               </Link>
             </div>
