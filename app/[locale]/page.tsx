@@ -1,7 +1,15 @@
+"use client";
 
-import HomePage from "@app/[locale]/home/page";
+import { useEffect } from "react";
+
+import { useRouter } from "../../config";
 
 export default function Root() {
+  const router = useRouter();
 
-  return <HomePage />;
+  useEffect(() => {
+    router.push("/home");
+  }, [router]);
+
+  return null;
 }

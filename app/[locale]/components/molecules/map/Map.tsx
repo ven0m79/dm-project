@@ -4,10 +4,12 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import SingleRegion from "@app/[locale]/components/molecules/map/single-region";
 
-import { Map_Data, MapProps } from "../mapUkraine/map-data";
+import { Map_Data_Eng, Map_Data_Ukr, MapProps } from "./map-data";
 import classes from "./Map.module.css";
 
-const MapOfUkraine = () => {
+const MapOfUkraine = ({ locale }: { locale: string }) => {
+  const [selectedMapData, setSelectedMapData] = useState<MapProps[]>([]);
+
   const [isHovering, setIsHovering] = useState<boolean>(false);
   const [coords, setCoords] = useState<{ x: number; y: number } | undefined>();
   const [hoveredItem, setHoveredItem] = useState<MapProps | null>(null);
@@ -42,6 +44,15 @@ const MapOfUkraine = () => {
     };
   }, [isHovering, mouseMoveHandler]);
 
+  useEffect(() => {
+    if (locale === "ua") {
+      setSelectedMapData(Map_Data_Ukr);
+    }
+    if (locale === "en") {
+      setSelectedMapData(Map_Data_Eng);
+    }
+  }, [locale]);
+
   return (
     <div className="relative">
       <motion.svg
@@ -55,9 +66,11 @@ const MapOfUkraine = () => {
           setIsHovering(false);
         }}
       >
-        {Map_Data.map((el) => (
-          <SingleRegion key={el.id} {...el} setHoveredItem={setHoveredItem} />
-        ))}
+        {selectedMapData.map((el: any) => {
+          return (
+            <SingleRegion key={el.id} {...el} setHoveredItem={setHoveredItem} />
+          );
+        })}
       </motion.svg>
 
       <AnimatePresence>
@@ -80,10 +93,13 @@ const MapOfUkraine = () => {
               >
                 {hoveredItem?.name}
                 <div
-                className={classNames(
-                  "items-center justify-center",
-                  classes["info-section-description"],
-                )}>{hoveredItem?.description}</div>
+                  className={classNames(
+                    "items-center justify-center",
+                    classes["info-section-description"],
+                  )}
+                >
+                  {hoveredItem?.description}
+                </div>
               </div>
             </motion.foreignObject>
           </>

@@ -2,8 +2,8 @@
 
 import classNames from "classnames";
 import { CustomFlowbiteTheme, Sidebar as FBSidebar } from "flowbite-react";
-import { HiArrowSmRight, HiArrowDown, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, HiViewBoards } from "react-icons/hi";
-import React, { FC, useCallback, useEffect } from "react";
+
+import React, { FC, memo, useCallback, useEffect } from "react";
 
 import styles from "../../../catalog/sub-catalog/Sub-catalog.module.css";
 
@@ -18,7 +18,8 @@ const customTheme: CustomFlowbiteTheme = {
         "h-full w-[300px] overflow-y-auto overflow-x-hidden py-3 rounded bg-white dark:bg-gray-800",
     },
     collapse: {
-      button: "group flex w-full items-center rounded-lg p-1 text-base font-normal text-[#0061AA] transition duration-75 hover:bg-[#0061aa10] dark:text-white dark:hover:bg-gray-700",
+      button:
+        "group flex w-full items-center rounded-lg p-1 text-base font-normal text-[#0061AA] transition duration-75 hover:bg-[#0061aa10] dark:text-white dark:hover:bg-gray-700",
       icon: {
         base: "h-6 w-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white",
         open: {
@@ -101,19 +102,22 @@ const categoriesIdData = {
   accessories: 95,
 };
 
-type LeftSidebarProps = {
+type SidebarProps = {
   locale: string;
   items: TransformedCategoriesType[];
   categoryTag?: string | null | keyof typeof categoriesIdData;
+  setSelectedCategoryItem?: (v: string) => void;
   setSelectedProducts?: (v: any[]) => void;
 };
 
-const Sidebar: FC<LeftSidebarProps> = ({
+const Sidebar: FC<SidebarProps> = ({
   items,
   categoryTag,
   locale,
   setSelectedProducts,
+  setSelectedCategoryItem,
 }) => {
+  console.log({ categoryTag, categoriesIdData });
   const getCategoryDetails = useCallback(
     async (id: number) => {
       try {
@@ -140,20 +144,34 @@ const Sidebar: FC<LeftSidebarProps> = ({
         as="div"
         key={category.id}
         className={classNames("cursor-pointer")}
-        onClick={() => getCategoryDetails(category.id)
-          
-        }
         style={{ paddingLeft: marginLeft }}
       >
-        <div style={{ marginLeft: marginLeft }}>{category.name}</div>
+        <div
+          style={{ marginLeft: marginLeft }}
+          onClick={() => {
+            const selectedParent = items[0]?.childrens?.find(
+              (item) => item.id === category.parent,
+            );
+
+            setSelectedCategoryItem?.(selectedParent?.slug || "");
+            getCategoryDetails(category.id);
+          }}
+        >
+          {category.name}
+        </div>
       </FBSidebar.Item>
     ) : (
       <FBSidebar.Collapse
         open={
           category.id === LEFT_BAR_PARENT_ID ||
           category.id === RIGHT_BAR_PARENT_ID ||
-          category.id ===
-          categoriesIdData[categoryTag as keyof typeof categoriesIdData]
+          (categoryTag &&
+            category.id ===
+              categoriesIdData[categoryTag as keyof typeof categoriesIdData]) ||
+          (categoryTag !== "" &&
+            category.slug
+              ?.toLowerCase()
+              ?.includes((categoryTag as string)?.toLowerCase()))
         }
         label={category.name}
         key={category.id}
@@ -161,13 +179,21 @@ const Sidebar: FC<LeftSidebarProps> = ({
           "opacity-0 pointer-events-none mt-[-40px]":
             category.id === LEFT_BAR_PARENT_ID ||
             category.id === RIGHT_BAR_PARENT_ID,
+          "bg-blue-950":
+            (categoryTag !== "" &&
+              category.slug
+                ?.toLowerCase()
+                ?.includes((categoryTag as string)?.toLowerCase())) ||
+            (categoryTag &&
+              category.id ===
+                categoriesIdData[categoryTag as keyof typeof categoriesIdData]),
         })}
         style={{ paddingLeft: marginLeft }}
       >
         {category?.childrens?.length
           ? category.childrens.map((child) =>
-            renderNestedCategories(child, level + 1),
-          )
+              renderNestedCategories(child, level + 1),
+            )
           : null}
       </FBSidebar.Collapse>
     );
@@ -176,12 +202,12 @@ const Sidebar: FC<LeftSidebarProps> = ({
   useEffect(() => {
     if (
       categoriesIdData?.[
-      categoryTag as unknown as keyof typeof categoriesIdData
+        categoryTag as unknown as keyof typeof categoriesIdData
       ]
     ) {
       getCategoryDetails(
         categoriesIdData?.[
-        categoryTag as unknown as keyof typeof categoriesIdData
+          categoryTag as unknown as keyof typeof categoriesIdData
         ],
       );
     }
@@ -196,9 +222,15 @@ const Sidebar: FC<LeftSidebarProps> = ({
     >
       <div>
         {/*Оцю стилізувати*/}
-        <h3 className="text-blue-950 ml-5 font-bold mt-5">{items?.[0]?.name}</h3>
+        <h3 className="text-blue-950 ml-5 font-bold mt-5">
+          {items?.[0]?.name}
+        </h3>
 
-        <FBSidebar aria-label="Catalog" className="" theme={customTheme.sidebar}>
+        <FBSidebar
+          aria-label="Catalog"
+          className=""
+          theme={customTheme.sidebar}
+        >
           <FBSidebar.ItemGroup>
             {items?.map((el) => renderNestedCategories(el))}
           </FBSidebar.ItemGroup>
@@ -208,4 +240,4 @@ const Sidebar: FC<LeftSidebarProps> = ({
   );
 };
 
-export default Sidebar;
+export default memo(Sidebar);
