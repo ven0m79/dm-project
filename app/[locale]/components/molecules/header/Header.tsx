@@ -6,7 +6,7 @@ import styles from "./Header.module.css";
 import { transform } from "typescript";
 import { Righteous } from "next/font/google";
 import Image from 'next/image';
-import { Link, usePathname } from "../../../../../config";
+import { Link, locales, usePathname } from "../../../../../config";
 import { useTranslations } from 'next-intl';
 
 const Header = () => {
@@ -30,12 +30,15 @@ const Header = () => {
       </div>
       <div className={styles.containerWithLogo}>
         <div className={styles.logo}>
+          <Link
+          href={"/"}>
           <Image
             src="/logo-DM-project.png"
             width={120}
             height={75}
             alt="Logo DM Project"
           />
+          </Link>
         </div>
         <div className={styles.contactsGroupIcons}>
           <Image

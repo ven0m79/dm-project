@@ -75,7 +75,7 @@ const HomePage = () => {
               </div>
               <br />
               <div className={classNames("", styles["putText"])}>
-              {t("integrated1")}
+                {t("integrated1")}
                 <br />
                 {t("integrated2")}
                 <br />
@@ -185,7 +185,8 @@ const HomePage = () => {
           </div>
           <div className="flex flex-1 flex-row justify-center items-center valign-middle bg-white">
             <div className={classNames("m-10", styles["block-partners"])}>
-              <Link href="https://www.draeger.com">
+              <Link href="https://www.draeger.com"
+                target="_blank">
                 <Image
                   className={styles.img}
                   src="/logo-partners/dreger-log-partner.jpg"
@@ -196,7 +197,8 @@ const HomePage = () => {
               </Link>
             </div>
             <div className={classNames("m-10", styles["block-partners"])}>
-              <Link href="https://www.prohs.pt/en/home/">
+              <Link href="https://www.prohs.pt/en/home/"
+                target="_blank">
                 <Image
                   className={styles.img}
                   src="/logo-partners/prohs-log-partner.png"
@@ -207,7 +209,8 @@ const HomePage = () => {
               </Link>
             </div>
             <div className={classNames("m-10", styles["block-partners"])}>
-              <Link href="https://www.at-os.com">
+              <Link href="https://www.at-os.com"
+                target="_blank">
                 <Image
                   className={styles.img}
                   src="/logo-partners/atos-log-partner.jpg"
@@ -218,7 +221,8 @@ const HomePage = () => {
               </Link>
             </div>
             <div className={classNames("m-10", styles["block-partners"])}>
-              <Link href="https://www.lojer.com">
+              <Link href="https://www.lojer.com"
+                target="_blank">
                 <Image
                   className={styles.img}
                   src="/logo-partners/lojer-log-partner.jpg"
@@ -229,7 +233,8 @@ const HomePage = () => {
               </Link>
             </div>
             <div className={classNames("m-10", styles["block-partners"])}>
-              <Link href="http://renosem.com">
+              <Link href="http://renosem.com"
+                target="_blank">
                 <Image
                   className={styles.img}
                   src="/logo-partners/renosem-log-partner.jpg"
