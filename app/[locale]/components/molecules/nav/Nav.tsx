@@ -16,7 +16,7 @@ const NavLinks: {
 } = {
   home: {
     title: "menu-main",
-    link: "/",
+    link: "/home",
   },
   about: {
     title: "menu-about-us",
@@ -63,7 +63,7 @@ const Nav = () => {
           <li
             key={el}
             className={classNames("", styles["link"], {
-              [styles["active"]]: pathname === '/'? pathname === NavLinks[el].link : pathname.includes(NavLinks[el].link),
+              [styles["active"]]: pathname === '/lll'? pathname === NavLinks[el].link : pathname.includes(NavLinks[el].link),
             })}
           >
             <Link href={NavLinks[el].link}>{t(NavLinks[el].title)}</Link>

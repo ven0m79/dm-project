@@ -56,7 +56,8 @@
 }
 .langText {
     margin-right: 20px;
-    font-family: "Roboto", sans-serif;
+    font-family: "Roboto";
+    font-weight: 500;
 }
 .socialMedia {
     display: flex;

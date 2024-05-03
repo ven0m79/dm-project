@@ -31,7 +31,7 @@ const Header = () => {
       <div className={styles.containerWithLogo}>
         <div className={styles.logo}>
           <Link
-          href={"/"}>
+          href={"/home"}>
           <Image
             src="/logo-DM-project.png"
             width={120}

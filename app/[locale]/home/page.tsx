@@ -49,7 +49,7 @@ const HomePage = ({ params: { locale } }: { params: { locale: string } }) => {
                     src={"/galka.png"}
                   />
                 </div>
-                <div className={classNames("font-bold", styles["putText"])}>
+                <div className={classNames("", styles["putText"])}>
                   {" "}
                   {t("more-then")}
                 </div>
@@ -64,7 +64,7 @@ const HomePage = ({ params: { locale } }: { params: { locale: string } }) => {
                   />
                 </div>
 
-                <div className={classNames("font-bold", styles["putText"])}>
+                <div className={classNames("", styles["putText"])}>
                   {" "}
                   {t("more-then2")}
                 </div>
@@ -93,7 +93,7 @@ const HomePage = ({ params: { locale } }: { params: { locale: string } }) => {
 
         <div
           className={classNames(
-            "font-bold flex flex-1 flex-col text-slate-900 justify-center items-center m-auto p-10",
+            "font-bold flex flex-1 flex-col text-slate-900 justify-center items-center m-auto py-7",
             styles["serviceTextHeader"],
           )}
           style={{ width: "1400px" }}
@@ -103,16 +103,16 @@ const HomePage = ({ params: { locale } }: { params: { locale: string } }) => {
           <br />
           <br />
           {/*Сервіс та Проєктування*/}
-          <div className="flex flex-col self-start" style={{ width: "900px" }}>
+          <div className="flex flex-col" style={{ width: "1400px" }}>
             <div
               className={classNames(
-                "flex flex-1 flex-col font-bold indent-5",
+                "flex flex-1 flex-col font-bold",
                 styles["textHeader"],
               )}
             >
               {t("service")}
             </div>
-            <div className="flex flex-1 flex-row text-slate-200">
+            <div className="flex flex-1 flex-row ">
               <Link href={"/services"}>
                 <div
                   className={classNames(
@@ -123,7 +123,7 @@ const HomePage = ({ params: { locale } }: { params: { locale: string } }) => {
                   {t("service-text")}
                 </div>
               </Link>
-              <div>
+              <div className="">
                 <Link href={"/services"}>
                   <Image
                     src="/service.jpg"
@@ -135,17 +135,17 @@ const HomePage = ({ params: { locale } }: { params: { locale: string } }) => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col self-end" style={{ width: "1034px" }}>
+          <div className="flex flex-col self-end" style={{ width: "1050px" }}>
             <div
               className={classNames(
-                "font-bold self-end mt-10",
-                styles["textHeader"],
+                "self-end mt-10",
+                styles["serviceTextHeader"],
               )}
             >
               {t("projectings")}
             </div>
-            <div className="flex flex-1 flex-row text-slate-200">
-              <div>
+            <div className="flex flex-1 flex-row">
+              <div className="">
                 <Link href={"/projects"}>
                   <Image
                     src="/projection.jpg"
@@ -155,30 +155,29 @@ const HomePage = ({ params: { locale } }: { params: { locale: string } }) => {
                   />
                 </Link>
               </div>
-              <Link href={"/projects"}>
-                <div
-                  className={classNames(
-                    "p-5 text-blue-200 text-justify",
-                    styles["serviceText"],
-                  )}
-                >
-                  <span className="text-[#0061AA] mr-[10px]">•</span>
-                  {t("projectings1")}
-                  <br />
-                  <span className="text-[#0061AA] mr-[10px]">•</span>
-                  {t("projectings2")}
-                  <br />
-                  <span className="text-[#0061AA] mr-[10px]">•</span>
-                  {t("projectings3")}
-                  <br />
-                  <span className="text-[#0061AA] mr-[10px]">•</span>
-                  {t("projectings4")}
-                </div>
-              </Link>
+              <div className="">
+                <Link href={"/projects"}>
+                  <div
+                    className={classNames(
+                      "p-4 text-justify",
+                      styles["serviceText"],
+                    )}
+                  >
+                    <span className="text-[#0061AA] mr-[10px]">•</span>{t("projectings1")}
+                    <br />
+                    <span className="text-[#0061AA] mr-[10px]">•</span>{t("projectings2")}
+                    <br />
+                    <span className="text-[#0061AA] mr-[10px]">•</span>{t("projectings3")}
+                    <br />
+                    <span className="text-[#0061AA] mr-[10px]">•</span>{t("projectings4")}
+                  </div>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
-
+        <br />
+        
         <div className="flex flex-1 flex-col justify-center items-center">
           <div
             className={classNames(
@@ -190,7 +189,8 @@ const HomePage = ({ params: { locale } }: { params: { locale: string } }) => {
           </div>
           <div className="flex flex-1 flex-row justify-center items-center valign-middle bg-white">
             <div className={classNames("m-10", styles["block-partners"])}>
-              <Link href="https://www.draeger.com" target="_blank">
+              <Link href="https://www.draeger.com"
+                target="_blank">
                 <Image
                   className={styles.img}
                   src="/logo-partners/dreger-log-partner.jpg"
@@ -201,7 +201,8 @@ const HomePage = ({ params: { locale } }: { params: { locale: string } }) => {
               </Link>
             </div>
             <div className={classNames("m-10", styles["block-partners"])}>
-              <Link href="https://www.prohs.pt/en/home/" target="_blank">
+              <Link href="https://www.prohs.pt/en/home/"
+                target="_blank">
                 <Image
                   className={styles.img}
                   src="/logo-partners/prohs-log-partner.png"
@@ -212,7 +213,8 @@ const HomePage = ({ params: { locale } }: { params: { locale: string } }) => {
               </Link>
             </div>
             <div className={classNames("m-10", styles["block-partners"])}>
-              <Link href="https://www.at-os.com" target="_blank">
+              <Link href="https://www.at-os.com"
+                target="_blank">
                 <Image
                   className={styles.img}
                   src="/logo-partners/atos-log-partner.jpg"
@@ -223,7 +225,8 @@ const HomePage = ({ params: { locale } }: { params: { locale: string } }) => {
               </Link>
             </div>
             <div className={classNames("m-10", styles["block-partners"])}>
-              <Link href="https://www.lojer.com" target="_blank">
+              <Link href="https://www.lojer.com"
+                target="_blank">
                 <Image
                   className={styles.img}
                   src="/logo-partners/lojer-log-partner.jpg"
@@ -234,7 +237,8 @@ const HomePage = ({ params: { locale } }: { params: { locale: string } }) => {
               </Link>
             </div>
             <div className={classNames("m-10", styles["block-partners"])}>
-              <Link href="http://renosem.com" target="_blank">
+              <Link href="http://renosem.com"
+                target="_blank">
                 <Image
                   className={styles.img}
                   src="/logo-partners/renosem-log-partner.jpg"
@@ -245,14 +249,6 @@ const HomePage = ({ params: { locale } }: { params: { locale: string } }) => {
               </Link>
             </div>
           </div>
-          {/* <div
-            className={classNames(
-              "justify-center items-center valign-middle mb-10",
-              styles["serviceTextHeader"],
-            )}
-          >
-            ДМ-Проект допомагає зберігати життя українців!
-          </div> */}
         </div>
       </div>
     </MainLayout>

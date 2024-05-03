@@ -69,6 +69,10 @@
     "contact-form-email": "E-mail",
     "contact-form-message": "Write Your Message Here...",
     "contact-form-submit": "SEND MESSAGE"
+  },
+  "Map": {
+    "kyiv": "Kyiv reg."
+    
   }
 
 } 

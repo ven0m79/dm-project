@@ -23,11 +23,7 @@
 }
 
 .serviceText:hover {
-    width: 800px;
-    line-height: 35px;
-    font-size: 23px;
-    font-weight: normal;
-    color: #0061AA;
+
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
 }
 
