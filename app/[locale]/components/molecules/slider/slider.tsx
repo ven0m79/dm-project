@@ -1,10 +1,10 @@
 import * as React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { wrap } from "popmotion";
 
 import "./style.css";
-import articles from "./image-data";
+import {articles, articlesEng} from "./image-data";
 import SingleSlide from "./single-slide";
 
 const variants = {
@@ -28,11 +28,13 @@ const variants = {
   },
 };
 
-const articlesData = Object.keys(articles);
 
-export default function Slider() {
+
+export default function Slider({ locale }: { locale: string }) {
+
+  const [articles, setArticles] = useState([])
   const [[page, direction], setPage] = useState([0, 0]);
-  const index = wrap(0, articlesData.length, page);
+  const index = wrap(0, articles .length, page);
 
   const paginate = (newDirection: number) => {
     setPage([page + newDirection, newDirection]);
@@ -44,8 +46,18 @@ export default function Slider() {
   };
 
   const currentArticle = React.useMemo(() => {
-    return articles[articlesData[index]];
+    return articles[articles[index]];
   }, [index]);
+
+  useEffect(() => {
+    if (locale === "ua") {
+      setArticles(articles);
+    }
+    if (locale === "en") {
+      setArticles(articlesEng);
+    }
+  }, [locale]);
+
 
   return (
     <div className="example-container">
