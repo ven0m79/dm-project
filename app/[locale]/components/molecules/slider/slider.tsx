@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { wrap } from "popmotion";
 
 import "./style.css";
-import {articles, articlesEng} from "./image-data";
+import {ArticleSingleType, articlesUa, articlesEng} from "./image-data";
 import SingleSlide from "./single-slide";
 
 const variants = {
@@ -32,7 +32,7 @@ const variants = {
 
 export default function Slider({ locale }: { locale: string }) {
 
-  const [articles, setArticles] = useState([])
+  const [articles, setArticles] = useState<ArticleSingleType[]>([])
   const [[page, direction], setPage] = useState([0, 0]);
   const index = wrap(0, articles .length, page);
 
@@ -46,15 +46,15 @@ export default function Slider({ locale }: { locale: string }) {
   };
 
   const currentArticle = React.useMemo(() => {
-    return articles[articles[index]];
-  }, [index]);
+    return articles[index];
+  }, [articles, index]);
 
   useEffect(() => {
     if (locale === "ua") {
-      setArticles(articles);
+      setArticles(Object.values(articlesUa));
     }
     if (locale === "en") {
-      setArticles(articlesEng);
+      setArticles(Object.values(articlesEng));
     }
   }, [locale]);
 

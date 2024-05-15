@@ -6,7 +6,7 @@ export type ArticleSingleType = {
   img2: string;
 };
 
-export const articles: {
+export const articlesUa: {
   [id: string]: ArticleSingleType;
 } = {
   slide1: {
