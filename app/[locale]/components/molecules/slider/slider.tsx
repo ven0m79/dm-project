@@ -29,7 +29,6 @@ const variants = {
 };
 
 
-
 export default function Slider({ locale }: { locale: string }) {
 
   const [articles, setArticles] = useState<ArticleSingleType[]>([])
