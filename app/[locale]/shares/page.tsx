@@ -12,7 +12,7 @@ import linea from "./linea/linea-trans.webp";
 import polaris from "./polaris200/polaris200-trans.webp";
 import polaris2 from "./polaris200-2/polaris200-2-trans.webp";
 import fabiusplusxl from "./fabiusplusxl/Fabius_plus_XL-trans.webp";
-import atlan300 from "./Atlan300/Atlan300.webp"
+import atlan300 from "./atlan300/Atlan300.webp"
 
 const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
   unstable_setRequestLocale(locale);
@@ -65,7 +65,7 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
       
       <Link
         href={{
-          pathname: "/shares/linea",
+          pathname: "/shares/polaris200",
         }}
       >
         <div
@@ -104,7 +104,7 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
 
       <Link
         href={{
-          pathname: "/shares/linea",
+          pathname: "/shares/polaris200-2",
         }}
       >
         <div
@@ -143,7 +143,7 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
 
       <Link
         href={{
-          pathname: "/shares/linea",
+          pathname: "/shares/fabiusplusxl",
         }}
       >
         <div
@@ -182,7 +182,7 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
 
       <Link
         href={{
-          pathname: "/shares/linea",
+          pathname: "/shares/atlan300",
         }}
       >
         <div

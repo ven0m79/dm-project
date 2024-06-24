@@ -3,14 +3,24 @@
     flex-direction: column;
     width: 1050px;
     font-size: 18px;
-    color: black;
+    color: #0061AA;
     line-height: 27px;
 }
+.sharesText {
+    display: flex;
+    flex-direction: column;
+    font-size: 22px;
+    color: #0061AA;
+    line-height: 28px;
+}
+
 
 .catalogContainer {
     align-self: center;
     width: 1400px;
     border: 1px solid  transparent;
+    color: #0061AA;
+    font-size: 22px;
 }
 
 .image-radius {
