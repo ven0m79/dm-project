@@ -20,7 +20,7 @@ const SharesLinea = ({ params: { locale } }: { params: { locale: string } }) => 
                     [styles.catalogContainer],
                 )}
             >
-                <p className="font font-bold indent-5">Панель Linea</p>
+                <p className="font font-bold indent-5">Панель <span className="underline">Linea</span></p>
                 <p className="indent-5 text-justify">ТОВ «ДМ-ПРОЕКТ», уповноважений представник Drägerwerk AG & Co. KGaA (Німеччина) в Україні, пропонує до поставки наступне медичне обладнання для стоматології:</p>
 
                 <div>
