@@ -12,7 +12,7 @@ import linea from "./linea/linea-trans.webp";
 import polaris from "./polaris200/polaris200-trans.webp";
 import polaris2 from "./polaris200-2/polaris200-2-trans.webp";
 import fabiusplusxl from "./fabiusplusxl/Fabius_plus_XL-trans.webp";
-import atlan300 from "./atlan300/Atlan300.webp"
+import atlan300 from "./atlan300/Atlan3001.png"
 
 
 
