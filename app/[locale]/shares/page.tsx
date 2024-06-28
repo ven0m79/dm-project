@@ -12,7 +12,7 @@ import linea from "./linea/linea-trans.webp";
 import polaris from "./polaris200/polaris200-trans.webp";
 import polaris2 from "./polaris200-2/polaris200-2-trans.webp";
 import fabiusplusxl from "./fabiusplusxl/Fabius_plus_XL-trans.webp";
-import atlan300 from "./atlan300/Atlan300.webp";
+import atlan from "./testoviy.png";
 
 
 
@@ -212,7 +212,7 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
           <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
             <Image
               className={styles.img}
-              src={atlan300}
+              src={atlan}
               width={109}
               height={150}
               alt="logo"
