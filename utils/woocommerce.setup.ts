@@ -1,5 +1,6 @@
 import WooCommerceRestApi from "@woocommerce/woocommerce-rest-api";
 import {
+  SingleProductTitles,
   SingleProductDetails,
   WoocomerceCategoryType,
 } from "./woocomerce.types";

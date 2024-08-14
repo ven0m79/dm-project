@@ -36,16 +36,8 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
             "flex flex-row items-center rounded-xl justify-between",
             styles["block-decisions"],
           )}
-        ><div className="flex w-[200px] h-[150px] bg-[#0d3d61] items-center justify-center rounded-l-lg rounded-r-none">
-            <Image
-              className={styles.img}
-              src={logo}
-              width={100}
-              height={100}
-              alt="logo"
-            />
-          </div>
-          <div className="flex flex-col w-[350px] h-[150px] pl-5 mt-5">
+        >
+          <div className="flex flex-col w-[350px] h-[150px] pl-10 mt-5">
             <div className="mb-3">
               <span className={classNames("text-black", styles.span)}>Акційна комерційна пропозиція</span>
             </div>
@@ -75,16 +67,8 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
             "flex flex-row items-center rounded-xl justify-between",
             styles["block-decisions"],
           )}
-        ><div className="flex w-[200px] h-[150px] bg-[#0d3d61] items-center justify-center rounded-l-lg rounded-r-none">
-            <Image
-              className={styles.img}
-              src={logo}
-              width={100}
-              height={100}
-              alt="logo"
-            />
-          </div>
-          <div className="flex flex-col w-[350px] h-[150px] pl-5 mt-5">
+        >
+          <div className="flex flex-col w-[450px] h-[150px] pl-10 mt-5">
             <div className="mb-3">
               <span className={classNames("text-black", styles.span)}>Акційна комерційна пропозиція</span>
             </div>
@@ -114,16 +98,8 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
             "flex flex-row items-center rounded-xl justify-between",
             styles["block-decisions"],
           )}
-        ><div className="flex w-[200px] h-[150px] bg-[#0d3d61] items-center justify-center rounded-l-lg rounded-r-none">
-            <Image
-              className={styles.img}
-              src={logo}
-              width={100}
-              height={100}
-              alt="logo"
-            />
-          </div>
-          <div className="flex flex-col w-[350px] h-[150px] pl-5 mt-5">
+        >
+          <div className="flex flex-col w-[450px] h-[150px] pl-10 mt-5">
             <div className="mb-3">
               <span className={classNames("text-black", styles.span)}>Акційна комерційна пропозиція</span>
             </div>
@@ -153,16 +129,8 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
             "flex flex-row items-center rounded-xl justify-between",
             styles["block-decisions"],
           )}
-        ><div className="flex w-[200px] h-[150px] bg-[#0d3d61] items-center justify-center rounded-l-lg rounded-r-none">
-            <Image
-              className={styles.img}
-              src={logo}
-              width={100}
-              height={100}
-              alt="logo"
-            />
-          </div>
-          <div className="flex flex-col w-[350px] h-[150px] pl-5 mt-5">
+        >
+          <div className="flex flex-col w-[550px] h-[150px] pl-10 mt-5">
             <div className="mb-3">
               <span className={classNames("text-black", styles.span)}>Акційна комерційна пропозиція</span>
             </div>
@@ -192,16 +160,8 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
             "flex flex-row items-center rounded-xl justify-between",
             styles["block-decisions"],
           )}
-        ><div className="flex w-[200px] h-[150px] bg-[#0d3d61] items-center justify-center rounded-l-lg rounded-r-none">
-            <Image
-              className={styles.img}
-              src={logo}
-              width={100}
-              height={100}
-              alt="logo"
-            />
-          </div>
-          <div className="flex flex-col w-[350px] h-[150px] pl-5 mt-5">
+        >
+          <div className="flex flex-col w-[500px] h-[150px] pl-10 mt-5">
             <div className="mb-3">
               <span className={classNames("text-black", styles.span)}>Акційна комерційна пропозиція</span>
             </div>

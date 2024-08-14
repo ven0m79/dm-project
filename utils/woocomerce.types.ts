@@ -85,3 +85,6 @@ export type AttributesType = {
   visible: boolean;
   variation: boolean;
 };
+export type SingleProductTitles = {
+  name: string;
+};
