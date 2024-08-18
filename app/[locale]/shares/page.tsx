@@ -23,7 +23,7 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
       <div
       className={classNames(
         "flex flex-wrap mb-5 gap-5 mt-5",
-        [styles.catalogContainer],
+        [styles.productText],
       )}
     >
       <Link

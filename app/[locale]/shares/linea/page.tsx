@@ -8,6 +8,7 @@ import Image from "next/image";
 import classNames from "classnames";
 import linea1 from "./linea1.webp";
 import linea2 from "./linea2.webp";
+import linea3 from "./linea3.webp";
 
 
 const SharesLinea = ({ params: { locale } }: { params: { locale: string } }) => {
@@ -16,38 +17,33 @@ const SharesLinea = ({ params: { locale } }: { params: { locale: string } }) => 
         <MainLayout>
             <div
                 className={classNames(
-                    "text-2xl flex flex-wrap justify-start mb-5 gap-5 mt-5 text-slate-950",
-                    [styles.catalogContainer],
+                    "w-full flex flex-wrap justify-center mb-5 gap-5 mt-5",
+
                 )}
             >
-                <p className="font font-bold indent-5">Панель <span className="underline">Linea</span></p><br/>
-                <p className="indent-5 text-justify">Ми пропонуємо до поставки наступне медичне обладнання для стоматології:</p>
-
-                <div>
-                    <div className="flex flex-row gap-[1px] w-[1400px] bg-black justify-center">
-                        <div className="w-[80px] my-[1px] bg-slate-200 self-center items-center justify-center flex">№ з/п</div>
-                        <div className="w-[700px] my-[1px] bg-slate-200 justify-center flex">Найменування обладнання:</div>
-                        <div className="w-[200px] my-[1px] bg-slate-200 justify-center flex">Ціна за од., євро</div>
-                        <div className="w-[114px] my-[1px] bg-slate-200 justify-center flex">Кількість</div>
-                        <div className="w-[300px] my-[1px] bg-slate-200 justify-center flex">Загальна вартість, євро</div>
-                    </div>
-                    <div className="flex flex-row gap-1 w-[1400px] m-1">
-                        <div className="w-[80px] justify-center flex">1</div>
-                        <div className="w-[700px]">Консоль медична з настінним кріпленням Лінеа IM2, у комплекті:<br />
+                <div className={classNames(
+                    "flex flex-col justify-center mb-5 gap-5 w-[900px]",
+                    [styles.catalogContainer])}>
+                    <p className=" text-justify text-[20px]">Ми пропонуємо до поставки наступне медичне обладнання для стоматології: <span className="font-bold">Панель <span className="underline">Linea</span></span></p>
+                    <div className="flex flex-wrap">
+                        <p className="indent-5 text-justify">Консоль медична з настінним кріпленням Лінеа IM2, у комплекті: 2 996,00 у.о.</p>
+                        <div className="w-full flex flax-wrap justify-center my-2">
                             <Image
                                 className={styles.img}
                                 src={linea1}
-                                width={700}
+                                width={400}
                                 height={100}
                                 alt="linea"
                             />
                             <Image
                                 className={styles.img}
                                 src={linea2}
-                                width={700}
+                                width={400}
                                 height={100}
                                 alt="linea"
                             />
+                        </div>
+                        <div className="w-[]">
                             -	панель з настінним кріпленням L=1200мм, розміщення роз’ємів у 2 ряди;<br />
                             -	розетка газова О2 – 2шт;<br />
                             -	розетка газова Air – 2шт;<br />
@@ -59,19 +55,25 @@ const SharesLinea = ({ params: { locale } }: { params: { locale: string } }) => 
                             -	додаткова вбудована медична рейка у нижній частині – 1шт;<br />
                             -	інфузійна стійка з кріпленням у двох точках на медичну рейку – 1шт.
                         </div>
-                        <div className="w-[200px] justify-center flex">2 996,00</div>
-                        <div className="w-[116px] justify-center flex">1</div>
-                        <div className="w-[300px] justify-center flex">2 996,00</div>
+
+                        <div className={classNames("self-center my-2 indent-5 text-justify", styles["catalogContainer"])}>
+                            <p className="my-2">Поєднайте ергономіку та економічність з використанням настінних консолей (панелей), які нададуть вам електричні, газові та ІТ-рішення.</p>
+                            <Image
+                                className={"float-left mt-1 mb-5 mr-5"}
+                                src={linea3}
+                                width={500}
+                                height={100}
+                                alt="linea"
+                            />
+                            <p className="my-2">Лінійка продуктів Linea розроблена для використання практично у всіх сферах. У звичайних палатах, відділеннях інтенсивної терапії, наркозних/операційних, реабілітації – завдяки своїй модульній конструкції сімейство Linea є індивідуальним рішенням для подачі медіа для багатьох застосувань у лікарні.</p>
+                            <p className="my-2">Продукти Linea виготовлені зі стійких екструдованих алюмінієвих профілів із закругленими краями та ідеально інтегрованими з’єднаннями для максимальної безпеки, простоти чищення та гігієни. Як частина єдиної концепції підготовки, існує стандартизований список із понад 20 дезінфікуючих засобів, доступних для сімейства Linea, як і для інших пристроїв та аксесуарів Dräger. Відсутність рухомих частин також зводить до мінімуму необхідні роботи з обслуговування.</p>
+                            <p className="my-2">Як і всі рішення Dräger, сімейство продуктів Linea також допомагає зробити повсякденні робочі процеси ефективнішими. Dräger робить гнучкість і сумісність основними акцентами своєї продукції. Linea дає змогу ефективно використовувати особливості приміщення. Інтеграція стандартних рейок дозволяють використовувати ряд аксесуарів від Dräger та інших виробників, тому ви можете комбінувати аксесуари повністю відповідно до ваших вимог.</p>
+                        </div>
                     </div>
                 </div>
 
             </div>
-            <div className={classNames("w-[1400px] self-center my-2 indent-5 text-justify", styles["sharesText"])}>
-                <p className="my-2">Поєднайте ергономіку та економічність з використанням настінних консолей (панелей), які нададуть вам електричні, газові та ІТ-рішення.</p>
-                <p className="my-2">Лінійка продуктів Linea розроблена для використання практично у всіх сферах. У звичайних палатах, відділеннях інтенсивної терапії, наркозних/операційних, реабілітації – завдяки своїй модульній конструкції сімейство Linea є індивідуальним рішенням для подачі медіа для багатьох застосувань у лікарні.</p>
-                <p className="my-2">Продукти Linea виготовлені зі стійких екструдованих алюмінієвих профілів із закругленими краями та ідеально інтегрованими з’єднаннями для максимальної безпеки, простоти чищення та гігієни. Як частина єдиної концепції підготовки, існує стандартизований список із понад 20 дезінфікуючих засобів, доступних для сімейства Linea, як і для інших пристроїв та аксесуарів Dräger. Відсутність рухомих частин також зводить до мінімуму необхідні роботи з обслуговування.</p>
-                <p className="my-2">Як і всі рішення Dräger, сімейство продуктів Linea також допомагає зробити повсякденні робочі процеси ефективнішими. Dräger робить гнучкість і сумісність основними акцентами своєї продукції. Linea дає змогу ефективно використовувати особливості приміщення. Інтеграція стандартних рейок дозволяють використовувати ряд аксесуарів від Dräger та інших виробників, тому ви можете комбінувати аксесуари повністю відповідно до ваших вимог.</p>
-            </div>
+
         </MainLayout>
     );
 };
