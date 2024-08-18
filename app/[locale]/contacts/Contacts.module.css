@@ -1,19 +1,12 @@
 .main {
     width: 1400px;
 }
-
-.leftContainer {
-    text-indent: 15px;
+.catalogText {
     display: flex;
     width: 1400px;
     font-size: 18px;
     color: #0061AA;
     line-height: 27px;
-    margin: 10px auto 10px auto;
-    padding-left: 20px;
-    padding-right: 20px;
-    text-align: justify;
-
 }
 
 .container {
@@ -79,5 +72,16 @@
     margin-top: 5px;
     margin-bottom: 10px;
     background: linear-gradient(to right, #ffffff00 0%, #0061AA 45%, #0061AA 55%, #ffffff00 100%);
+
+}
+
+.stroke1 {
+    align-self: self-start;
+    text-indent: 55px;
+    width: 500px;
+    height: 1px;
+    margin-top: 24px;
+    margin-bottom: 2px;
+    background: #0061AA;
 
 }

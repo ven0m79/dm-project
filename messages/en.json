@@ -68,11 +68,27 @@
     "contact-form-name": "Name",
     "contact-form-email": "E-mail",
     "contact-form-message": "Write Your Message Here...",
-    "contact-form-submit": "SEND MESSAGE"
+    "contact-form-submit": "SEND MESSAGE",
+    "contact-prehead1": "Warranty and post-guarantee service",
+    "contact-prehead2": "Training of medical personnel",
+    "contact-paragraph1": "According to the company's policy, technical support and service is an important part of our activity.",
+    "contact-paragraph2": "The DM-PROEKT company carries out planned work to maintain Dräger equipment in working condition. There are more than 3,000 units of Dräger medical equipment in Ukraine, and for each of them there is an individual service plan developed by the DM-PROJECT service department.",
+    "contact-paragraph3": "This allows you to ensure the reliable functioning of Dräger medical equipment, protect clinics from emergency situations due to breakdowns. For medical institutions, this way is the most economical, as their own experience has shown.",
+    "contact-paragraph4": "In Ukraine, the Dräger company entrusts the installation and maintenance of its equipment exclusively to service engineers of the DM-PROEKT company, who have undergone special training in Germany. Due to strict adherence to these rules, Dräger equipment can work without failure for more than 20 years, and for it there is practically no such thing as a service life.",
+    "contact-paragraph5": "Timely and high-quality training of personnel in the rules of working with the equipment allows you to effectively use its wide possibilities to save the lives of patients from the very first day of its operation. That is why the DM-PROJECT company pays great attention to the process of training medical personnel to work with Dräger equipment, is always open to issues of support and development of educational programs for medical workers of Ukraine with the aim of conveying to them information about the latest developments in the field of medicine and involves them in mastering new knowledge and skills."
+
   },
   "Map": {
     "kyiv": "Kyiv reg."
     
   }
-
+  ,
+  "ContactsPage": {
+    "title": "Contact Us",
+    "contact-form-title": "Send Us Message",
+    "contact-form-name": "Name",
+    "contact-form-email": "E-mail",
+    "contact-form-message": "Write Your Message Here...",
+    "contact-form-submit": "SEND MESSAGE"
+    }
 } 

@@ -23,7 +23,7 @@ const SharesLinea = ({ params: { locale } }: { params: { locale: string } }) => 
             >
                 <div className={classNames(
                     "flex flex-col justify-center mb-5 gap-5 w-[900px]",
-                    [styles.catalogContainer])}>
+                    [styles.catalogContainerDeeper])}>
                     <p className=" text-justify text-[20px]">Ми пропонуємо до поставки наступне медичне обладнання для стоматології: <span className="font-bold">Панель <span className="underline">Linea</span></span></p>
                     <div className="flex flex-wrap">
                         <p className="indent-5 text-justify">Консоль медична з настінним кріпленням Лінеа IM2, у комплекті: 2 996,00 у.о.</p>
