@@ -8,14 +8,14 @@ import { GoogleMap } from  "@react-google-maps/api" ;
 export  const defaultMapContainerStyle = { 
     width : '500px' , 
     height : '300px' , 
-    borderRadius : '15px 15px 15px 15px' , 
+    borderRadius : '0px 0px 0px 0px' , 
 }; 
 const defaultMapCenter = {
-    lat: 50.431284760007486,
-    lng: 30.485278846030162
+    lat: 50.43066125519892,
+    lng: 30.485148390790926
 }
 
-const defaultMapZoom = 17;
+const defaultMapZoom = 19;
 
 const defaultMapOptions = {
     zoomControl: true,
