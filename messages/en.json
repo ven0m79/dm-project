@@ -63,7 +63,7 @@
     "implemented": "Implemented projects"
   },
   "ServicePage": {
-    "title": "Service",
+    "title": "Service (Переклад Гугл)",
     "contact-form-title": "Contact with Service Center",
     "contact-form-name": "Name",
     "contact-form-email": "E-mail",
@@ -78,17 +78,51 @@
     "contact-paragraph5": "Timely and high-quality training of personnel in the rules of working with the equipment allows you to effectively use its wide possibilities to save the lives of patients from the very first day of its operation. That is why the DM-PROJECT company pays great attention to the process of training medical personnel to work with Dräger equipment, is always open to issues of support and development of educational programs for medical workers of Ukraine with the aim of conveying to them information about the latest developments in the field of medicine and involves them in mastering new knowledge and skills."
 
   },
-  "Map": {
-    "kyiv": "Kyiv reg."
-    
-  }
-  ,
+  "ProjectPage": {
+    "title": "Projects (Переклад Гугл)",
+    "project-head1": "",
+    "project-head2": "",
+    "project-prehead1": "",
+    "project-prehead2": "",
+    "project-prehead3": "",
+    "project-prehead4": "",
+    "project-prehead5": "",
+    "project-paragraph1": "",
+    "project-paragraph2": "",
+    "project-paragraph3": "",
+    "project-paragraph4": "",
+    "project-paragraph5": "",
+    "project-paragraph6": "",
+    "project-paragraph7": "",
+    "project-paragraph8": "",
+    "project-paragraph9": "",
+    "project-paragraph10": "",
+    "project-paragraph11": "",
+    "project-paragraph12": "",
+    "project-paragraph13": "",
+    "project-paragraph14": "",
+    "project-paragraph15": "",
+    "project-paragraph16": "",
+    "project-paragraph17": "",
+    "project-paragraph18": "",
+    "project-paragraph19": "",
+    "project-paragraph20": "",
+    "project-paragraph21": "",
+    "project-paragraph22": "",
+    "project-paragraph23": "",
+    "project-paragraph24": ""
+
+  },
   "ContactsPage": {
     "title": "Contact Us",
     "contact-form-title": "Send Us Message",
     "contact-form-name": "Name",
     "contact-form-email": "E-mail",
     "contact-form-message": "Write Your Message Here...",
-    "contact-form-submit": "SEND MESSAGE"
+    "contact-form-submit": "SEND MESSAGE",
+    "contact-adress": "Adress",
+    "contact-adress1": "03035, Kyiv, Ukraine, Mokra 16, office 385",
+    "contact-phone": "Phone",
+    "contact-mail": "E-mail"
     }
 } 

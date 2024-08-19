@@ -43,7 +43,7 @@ const ContactsPage = ({ params: { locale } }: { params: { locale: string } }) =>
         <div className={classNames("flex flex-wrap justify-around items-start", styles.catalogText)}>
           <div className={classNames("flex flex-col justify-normal items-start")}>
             <p className="text-2xl justify-normal items-start indent-4 w-full mt-7">
-              Адреса
+            {t('contact-adress')}
             </p>
             <p className={styles.stroke1}></p>
             <p className="flex flex-wrap justify-normal items-start indent-4 mt-8 mb-10">
@@ -54,10 +54,10 @@ const ContactsPage = ({ params: { locale } }: { params: { locale: string } }) =>
               height={30}
               alt="logo"
             />
-              03035, Київ, Україна, вул. Мокра 16, офіс 385
+              {t('contact-adress1')}
             </p>
             <p className="text-2xl justify-normal items-start indent-4 w-full mt-7">
-              Телефон
+            {t('contact-phone')}
             </p>
             <p className={styles.stroke1}></p>
             <p className="flex flex-wrap justify-normal items-start indent-4 mt-8 mb-10">
@@ -71,7 +71,7 @@ const ContactsPage = ({ params: { locale } }: { params: { locale: string } }) =>
             +380 44 520-12-24
             </p>
             <p className="text-2xl justify-normal items-start indent-4 w-full mt-7">
-              E-mail
+            {t('contact-mail')}
             </p>
             <p className={styles.stroke1}></p>
             <p className="flex flex-wrap justify-normal items-start indent-4 mt-8 mb-10">

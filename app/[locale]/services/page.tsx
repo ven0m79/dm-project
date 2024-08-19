@@ -50,7 +50,8 @@ const ServicesPage = ({ params: { locale } }: { params: { locale: string } }) =>
                 alt={"photo"}>
 
               </Image> */}
-              <p className="text-2xl pb-4">{t('contact-prehead1')}</p></div>
+              <p className="text-2xl pb-4">{t('contact-prehead1')}</p>
+            </div>
             <div className={classNames("")}>
               {t('contact-paragraph1')}
             </div>
@@ -64,7 +65,8 @@ const ServicesPage = ({ params: { locale } }: { params: { locale: string } }) =>
               {t('contact-paragraph4')}
             </div>
             <div className={classNames("justify-normal items-start indent-4 w-full mt-8")}>
-              <p className="text-2xl pb-4">{t('contact-prehead2')}</p></div>
+              <p className="text-2xl pb-4">{t('contact-prehead2')}</p>
+            </div>
             <div className={classNames("")}>
               {t('contact-paragraph5')}
             </div>
