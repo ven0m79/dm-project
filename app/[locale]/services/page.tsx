@@ -16,7 +16,8 @@ import { Link } from "config";
 import Image from 'next/image';
 import { title } from "process";
 
-import { MapProvider } from  "@app/[locale]/components/providers/map-provider" ; 
+import { MapProvider } from "@app/[locale]/components/atoms/providers/map-provider";
+import { MapComponent } from "../components/molecules/googleMaps/map";
 
 const ServicesPage = ({ params: { locale } }: { params: { locale: string } }) => {
   //unstable_setRequestLocale(locale);
@@ -104,14 +105,12 @@ const ServicesPage = ({ params: { locale } }: { params: { locale: string } }) =>
 
           </div>
         </div>
-<div className="w-[500px] h-[300px]">
-        < MapProvider > 
-      < main >
-         Карта будет здесь 
-      </ main > 
-    </ MapProvider >
-    </div>
-
+        <div className="w-[500px] h-[300px]">
+          < MapProvider >
+            <MapComponent/>
+          </ MapProvider >
+        </div>
+<br/>
 
       </div>
     </MainLayout>
