@@ -15,7 +15,7 @@ const defaultMapCenter = {
     lng: 30.485278846030162
 }
 
-const defaultMapZoom = 18;
+const defaultMapZoom = 17;
 
 const defaultMapOptions = {
     zoomControl: true,
