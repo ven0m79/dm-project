@@ -105,7 +105,7 @@ const ServicesPage = ({ params: { locale } }: { params: { locale: string } }) =>
 
           </div>
         </div>
-        <div className="w-[500px] h-[300px]">
+        <div className="w-[500px] h-[300px] pl-10">
           < MapProvider >
             <MapComponent/>
           </ MapProvider >

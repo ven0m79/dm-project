@@ -1,7 +1,5 @@
-//Поскольку карта будет загружена и отображена на стороне клиента 
  'use client' ; 
 
-// Импортируем необходимые модули и функции из внешних библиотек и нашего собственного проекта 
 import { Libraries , useJsApiLoader } from  '@react-google-maps/api' ; 
 import { ReactNode } from  'react' ; 
 
