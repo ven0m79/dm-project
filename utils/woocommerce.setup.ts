@@ -4,6 +4,7 @@ import {
   SingleProductDetails,
   WoocomerceCategoryType,
 } from "./woocomerce.types";
+import { title } from "process";
 
 export const api = new WooCommerceRestApi({
   url: "https://dm-project.com.ua",
@@ -68,6 +69,18 @@ export async function fetchWooCommerceCrossProductsDetails(id: number, locale: s
 
     if (response.status === 200) {
       return (await response.data) as SingleProductDetails;
+    }
+  } catch (error) {
+    throw new Error(error as string);
+  }
+}
+
+export async function fetchWooCommerceProductsTitles(searchTerm: string, locale: string) {
+  try {
+    const response = await api.get(`products?search=${searchTerm}&locale=${locale}`);
+
+    if (response.status === 200) {
+      return (await response.data) as SingleProductTitles;
     }
   } catch (error) {
     throw new Error(error as string);

@@ -86,5 +86,7 @@ export type AttributesType = {
   variation: boolean;
 };
 export type SingleProductTitles = {
+  id: number;
   name: string;
+  search: string;
 };

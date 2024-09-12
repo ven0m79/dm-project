@@ -1,21 +1,58 @@
-'use client'
+"use client"
 import classNames from "classnames";
-import React from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import styles from "./Header.module.css";
-import { transform } from "typescript";
-import { Righteous } from "next/font/google";
 import Image from 'next/image';
 import { Link, locales, usePathname } from "../../../../../config";
 import { useTranslations } from 'next-intl';
 
-//import debouce from "lodash.debounce";
+import debouce from "lodash.debounce";
+import { fetchWooCommerceProductsTitles } from "../../../../../utils/woocommerce.setup";
+import { SingleProductTitles } from "utils/woocomerce.types";
 
-
-const Header = () => {
+const Header = (locale: any) => {
   const t = useTranslations('Header');
   const pathname = usePathname();
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [titles, setTitles] = useState("");
+
+  const set = useCallback(async () => {
+    try {
+      const data = await fetchWooCommerceProductsTitles(searchTerm, locale);
+  
+      if (data) {
+        console.log("SearchTerm: " + searchTerm);
+        
+        console.log("Data: " + data);
+        
+        //setSearchTerm(data as unknown as  SingleProductTitles[])
+        ;
+      }
+    } catch (e) {
+      console.warn({ e });
+    }
+  }, [searchTerm, locale]);
+
+  const handleChange = (e:any) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const debouncedResults = useMemo(() => {
+    return debouce(handleChange, 500);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      debouncedResults.cancel();
+      set();
+    };
+  });
+
+
   return (
+    
     <header
       className={classNames(
         "mt-top flex flex-col w-full",
@@ -66,7 +103,8 @@ const Header = () => {
           <div>sales@dm-project.com.ua</div>
           <div>service@dm-project.com.ua</div>
         </div>
-        <input className={styles.search} placeholder={t('placeholder')}></input>
+        <input className={styles.search} onChange={debouncedResults} placeholder={t('placeholder')} />
+        {titles}
         <div className={classNames('flex flex-row justify-center items-center', styles["socialMedia"])}>
               <Link href="http://youtube.com"><Image src="/youtube-ico.jpg" width={30} height={30} alt="Logo Youtube" /></Link></div>
             <div className={classNames('flex flex-column justify-center items-center', styles["socialMedia"])}>
