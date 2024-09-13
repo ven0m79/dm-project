@@ -54,6 +54,7 @@ const SingleSlide: FC<ArticleSingleType> = ({
   description,
   link,
   title,
+  more,
 }) => {
   return (
     <div>
@@ -106,9 +107,7 @@ const SingleSlide: FC<ArticleSingleType> = ({
           animate={{ ...animatedStylesForButton.animate }}
           transition={{ duration: 1, ease: "easeOut" }}
           style={{ fontSize: 20 }}
-        > Перейти в розділ
-            
-          
+        > {more}
         </motion.a>
       
     </div>

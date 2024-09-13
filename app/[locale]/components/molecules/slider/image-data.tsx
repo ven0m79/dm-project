@@ -4,6 +4,7 @@ export type ArticleSingleType = {
   link: string;
   img1: string;
   img2: string;
+  more: string;
 };
 
 export const articlesUa: {
@@ -15,6 +16,7 @@ export const articlesUa: {
     link: "/catalog/sub-catalog?category=operations",
     img1: "/slider-photo/oper1(back).png",
     img2: "/slider-photo/oper1.png",
+    more: "Перейти в розділ",
   },
   slide2: {
     title: "Обладнання для відділень інтенсивної терапії",
@@ -23,7 +25,9 @@ export const articlesUa: {
     link: "/catalog/sub-catalog?category=intensive-therapy",
     img1: "/slider-photo/intencive-terapy(back).png",
     img2: "/slider-photo/intencive-terapy.png",
+    more: "Перейти в розділ",
   },
+  
   slide3: {
     title: "Неонатальне обладнання",
     description:
@@ -31,6 +35,7 @@ export const articlesUa: {
     link: "/catalog/sub-catalog?category=neonathal",
     img1: "/slider-photo/neonat1(back).png",
     img2: "/slider-photo/neonat1.png",
+    more: "Перейти в розділ",
   },
   slide4: {
     title: "Стерилізаційне та дезінфекційне обладнання",
@@ -38,6 +43,7 @@ export const articlesUa: {
     link: "/catalog/sub-catalog?category=sterilization",
     img1: "/slider-photo/sterilization(back).png",
     img2: "/slider-photo/sterilization.png",
+    more: "Перейти в розділ",
   },
   slide5: {
     title: "Медичне газопостачання",
@@ -45,6 +51,7 @@ export const articlesUa: {
     link: "/catalog/sub-catalog?category=gaz",
     img1: "/slider-photo/med-gaz(back).png",
     img2: "/slider-photo/med-gaz.png",
+    more: "Перейти в розділ",
   },
   slide6: {
     title: "Медичні меблі",
@@ -52,6 +59,7 @@ export const articlesUa: {
     link: "/catalog/sub-catalog?category=furniture",
     img1: "/slider-photo/furniture-med(back).png",
     img2: "/slider-photo/furniture-med.png",
+    more: "Перейти в розділ",
   },
   slide7: {
     title: "Витратні матеріали та аксесуари",
@@ -59,6 +67,7 @@ export const articlesUa: {
     link: "/catalog/sub-catalog?category=accessories",
     img1: "/slider-photo/consumables(back).png",
     img2: "/slider-photo/consumables.png",
+    more: "Перейти в розділ",
   },
 };
 
@@ -71,6 +80,7 @@ export const articlesEng: {
     link: "/catalog/sub-catalog?category=operations",
     img1: "/slider-photo/oper1(back).png",
     img2: "/slider-photo/oper1.png",
+    more: "Read more",
   },
   slide2: {
     title: "Equipment for ICU",
@@ -78,6 +88,7 @@ export const articlesEng: {
     link: "/catalog/sub-catalog?category=intensive-therapy",
     img1: "/slider-photo/intencive-terapy(back).png",
     img2: "/slider-photo/intencive-terapy.png",
+    more: "Read more",
   },
   slide3: {
     title: "Neonatal equipment",
@@ -85,6 +96,7 @@ export const articlesEng: {
     link: "/catalog/sub-catalog?category=neonathal",
     img1: "/slider-photo/neonat1(back).png",
     img2: "/slider-photo/neonat1.png",
+    more: "Read more",
   },
   slide4: {
     title: "Sterilization and disinfection equipment",
@@ -92,6 +104,7 @@ export const articlesEng: {
     link: "/catalog/sub-catalog?category=sterilization",
     img1: "/slider-photo/sterilization(back).png",
     img2: "/slider-photo/sterilization.png",
+    more: "Read more",
   },
   slide5: {
     title: "Medical gas supply",
@@ -99,6 +112,7 @@ export const articlesEng: {
     link: "/catalog/sub-catalog?category=gaz",
     img1: "/slider-photo/med-gaz(back).png",
     img2: "/slider-photo/med-gaz.png",
+    more: "Read more",
   },
   slide6: {
     title: "Medical furniture",
@@ -106,6 +120,7 @@ export const articlesEng: {
     link: "/catalog/sub-catalog?category=furniture",
     img1: "/slider-photo/furniture-med(back).png",
     img2: "/slider-photo/furniture-med.png",
+    more: "Read more",
   },
   slide7: {
     title: "Consumables and accessories",
@@ -113,6 +128,7 @@ export const articlesEng: {
     link: "/catalog/sub-catalog?category=accessories",
     img1: "/slider-photo/consumables(back).png",
     img2: "/slider-photo/consumables.png",
+    more: "Read more",
   },
 };
 
