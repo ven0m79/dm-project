@@ -5,13 +5,20 @@ import axios from 'axios';
 
 // Create an Axios instance
 const api = axios.create({
-  baseURL: 'https://dm-project.com.ua/', 
+  baseURL: 'https://dm-project.com.ua/wp-json/wc/v3/',
   headers: {
     'Authorization': `Basic ${Buffer.from('ck_8dee30956004b4c7f467a46247004a2f4cd650e5:cs_1cf0a573275e5cafe5af6bddbb01f29b9592be20').toString('base64')}`
   }
 });
 
+type TagType = {
+  id: number;
+  name: string;
+  slug: string;
+};
+
 type Product = {
+  tags: TagType[];
   id: number;
   name: string;
   price: string;
@@ -44,7 +51,10 @@ const SearchWithDropdown = () => {
       console.log('API Response:', response.data); // Log the response data
 
       if (response.status === 200) {
-        setProducts(response.data);
+        const filteredProducts = response.data.filter((product: Product) =>
+          product.name.toLowerCase().includes(term.toLowerCase())
+        );
+        setProducts(filteredProducts);
         setShowDropdown(true);
       }
     } catch (error) {
@@ -67,7 +77,7 @@ const SearchWithDropdown = () => {
   return (
     <div className="search-container">
       <input
-      className="text-black"
+        className="text-black"
         type="text"
         placeholder="Search products..."
         value={searchTerm}
@@ -82,8 +92,9 @@ const SearchWithDropdown = () => {
         <ul className="dropdown-menu">
           {products.map((product) => (
             <li key={product.id}>
-              <a href={product.permalink}>
-                {product.name} - ${product.price}
+              <a href={"/catalog/sub-catalog/product/" + product.id + "?category=" + product.tags[0].name}>
+                {product.name}
+                {}
               </a>
             </li>
           ))}

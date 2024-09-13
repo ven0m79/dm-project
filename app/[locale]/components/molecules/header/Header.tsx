@@ -9,7 +9,7 @@ import { useTranslations } from 'next-intl';
 
 import debouce from "lodash.debounce";
 import { fetchWooCommerceProductsTitles } from "../../../../../utils/woocommerce.setup";
-import { SingleProductTitles } from "utils/woocomerce.types";
+import { SingleProductTitles } from "../../../../../utils/woocomerce.types";
 
 const Header = (locale: any) => {
   const t = useTranslations('Header');

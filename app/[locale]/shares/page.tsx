@@ -37,12 +37,12 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
             styles["block-decisions"],
           )}
         >
-          <div className="flex flex-col w-[350px] h-[150px] pl-10 mt-5">
+          <div className="flex flex-col w-[400px] h-[150px] pl-10 mt-5">
             <div className="mb-3">
               <span className={classNames("text-black", styles.span)}>Акційна комерційна пропозиція</span>
             </div>
             <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>Панель <span className="underline">Linea</span></span>
+              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}> Консоль медична з настінним кріпленням Лінеа IM2</span>
             </div>
           </div>
           <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
@@ -73,7 +73,7 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
               <span className={classNames("text-black", styles.span)}>Акційна комерційна пропозиція</span>
             </div>
             <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>Світильник операційний <span className="underline">Polaris 200</span> однокупольний</span>
+              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>Світильник операційний Polaris 200 однокупольний</span>
             </div>
           </div>
           <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
@@ -104,7 +104,7 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
               <span className={classNames("text-black", styles.span)}>Акційна комерційна пропозиція</span>
             </div>
             <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>Світильник операційний <span className="underline">Polaris 200</span> двокупольний</span>
+              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>Світильник операційний Polaris 200 двокупольний</span>
             </div>
           </div>
           <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
@@ -135,7 +135,7 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
               <span className={classNames("text-black", styles.span)}>Акційна комерційна пропозиція</span>
             </div>
             <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>Наркозно-дихальний апарат <span className="underline">Fabius plus XL</span> + Монітор пацієнта <span className="underline">Vista 120S</span></span>
+              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>Наркозно-дихальний апарат Fabius plus XL + Монітор пацієнта Vista 120S</span>
             </div>
           </div>
           <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
@@ -166,7 +166,7 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
               <span className={classNames("text-black", styles.span)}>Акційна комерційна пропозиція</span>
             </div>
             <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>Наркозно-дихальний апарат <span className="underline">Atlan A300</span> + Монітор пацієнта <span className="underline">Vista 120S</span></span>
+              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>Наркозно-дихальний апарат Atlan A300 + Монітор пацієнта Vista 120S</span>
             </div>
           </div>
           <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
