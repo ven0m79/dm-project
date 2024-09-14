@@ -1,9 +1,13 @@
 "use client"
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
 import axios from 'axios';
+import { useTranslations, useLocale } from "next-intl";
+import { Combobox, ComboboxInput, ComboboxOption, ComboboxOptions } from '@headlessui/react';
+import clsx from 'clsx';
+import Loader from "@app/[locale]/components/atoms/loader/loaderSearch";
+import debounce from "lodash.debounce";
 
-// Create an Axios instance
 const api = axios.create({
   baseURL: 'https://dm-project.com.ua/wp-json/wc/v3/',
   headers: {
@@ -26,36 +30,37 @@ type Product = {
 };
 
 const SearchWithDropdown = () => {
+  const t = useTranslations();
+  const locale = useLocale();
   const [searchTerm, setSearchTerm] = useState('');
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false);
-
+  
   const handleSearch = async (term: string) => {
-    if (term.length < 3) { // Adjust length as needed
+    if (term.length < 3) {
       setProducts([]);
-      setShowDropdown(false);
       return;
     }
 
     setLoading(true);
 
     try {
-      const response = await api.get('products', {
+      const response = await api.get('products?per_page=100', {
         params: {
-          search: term
-
+          search: term,
+          per_page: 20,
+          lang: locale,
         }
       });
 
-      console.log('API Response:', response.data); // Log the response data
+      console.log('API Response:', response.data);
+      console.log("Total products fetched:", response.data.length);
 
       if (response.status === 200) {
         const filteredProducts = response.data.filter((product: Product) =>
           product.name.toLowerCase().includes(term.toLowerCase())
         );
         setProducts(filteredProducts);
-        setShowDropdown(true);
       }
     } catch (error) {
       console.error('Failed to fetch products:');
@@ -64,44 +69,92 @@ const SearchWithDropdown = () => {
     }
   };
 
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      if (searchTerm.length > 0) {
-        handleSearch(searchTerm);
-      }
-    }, 300);
+  const debouncedHandleSearch = useMemo(
+    () => debounce(handleSearch, 500),
+    []
+  );
 
-    return () => clearTimeout(timeoutId);
-  }, [searchTerm]);
+  useEffect(() => {
+    if (searchTerm.length > 0) {
+      debouncedHandleSearch(searchTerm);
+    } else {
+      setProducts([]);
+    }
+    return () => {
+      debouncedHandleSearch.cancel();
+    };
+  }, [searchTerm, debouncedHandleSearch]);
+
+
+
+
+  const highlightText = (text: string, highlight: string) => {
+    const parts = text.split(new RegExp(`(${highlight})`, "gi"));
+    return (
+      <>
+        {parts.map((part, i) => (
+          <span
+            key={i}
+            style={{
+              color: part.toLowerCase() === highlight.toLowerCase() ? "blue" : "",
+            }}
+          >
+            {part}
+          </span>
+        ))}
+      </>
+    );
+  };
 
   return (
-    <div className="search-container">
-      <input
-        className="text-black"
-        type="text"
-        placeholder="Search products..."
+    <div className="mx-auto h-screen w-72 pt-20 z-50">
+      <Combobox
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        onFocus={() => setShowDropdown(true)}
-        onBlur={() => setTimeout(() => setShowDropdown(false), 500)}  // Delay hiding to allow click
-      />
+      >
+        <div className="relative flex">
+          <ComboboxInput
+            className={clsx(
+              'w-full rounded-lg border-none bg-white/5 py-1.5 pr-8 pl-3 text-sm/6 text-white',
+              'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25'
+            )}
+            placeholder="Search products..."
+            onChange={(event) => setSearchTerm(event.target.value)}
+          />
 
-      {loading && <div>Loading...</div>}
+          {loading && <div className="absolute right-5 mt-4">
+              <Loader />
+            </div>}
 
-      {showDropdown && products.length > 0 && (
-        <ul className="dropdown-menu">
-          {products.map((product) => (
-            <li key={product.id}>
-              <a href={"/catalog/sub-catalog/product/" + product.id + "?category=" + product.tags[0].name}>
-                {product.name}
-                {}
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
+          {products.length > 0 && (
+            <ComboboxOptions
+              anchor="bottom"
+              transition
+              className={clsx(
+                'w-[var(--input-width)] rounded-xl border border-white/5 bg-white/5 p-1 [--anchor-gap:var(--spacing-1)] empty:invisible',
+                'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0'
+              )}>
+              {products.map((product) => (
+                <ComboboxOption
+                  key={product.id}
+                  value={product.name}
+                  className="group flex cursor-default items-center gap-2 rounded-lg py-1.5 px-3 select-none data-[focus]:bg-white/10">
+                  <a
+                    className={clsx('block, text-black')}
+                    href={"/catalog/sub-catalog/product/" + product.id + "?category=" + product.tags[0].name}>
+                    <div className="text-sm/6 text-white">
+                    {highlightText(product.name, searchTerm)}
+                    </div>
+                  </a>
+                </ComboboxOption>
+              ))}
+            </ComboboxOptions>
+          )}
+
+
+
+        </div>
+      </Combobox>
     </div>
   );
 };
-
 export default SearchWithDropdown;
