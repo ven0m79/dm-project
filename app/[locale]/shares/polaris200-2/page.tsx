@@ -26,7 +26,7 @@ const SharesPolaris200 = ({ params: { locale } }: { params: { locale: string } }
                     [styles.catalogContainerDeeper])}>
                     <p className=" text-justify text-[24px]">Пропонуємо для стоматологічних клінік, малих операційних та процедурних</p>
                     <div className="flex flex-wrap">
-                        <p className="indent-5 text-justify">Апарат наркозно-дихальний Fabius plus XL: <span className="font-bold">45 450,00 у.о.</span></p>
+                        <p className="indent-5 text-justify">Світильник операційний Polaris 200 двокупольний: <span className="font-bold">21 079,00 у.о.</span></p>
                         <div className="w-full flex flax-wrap justify-center my-2">
                             <Image
                                 className={styles.img}
