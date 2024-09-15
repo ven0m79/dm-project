@@ -11,7 +11,6 @@ import { SingleProductDetails } from "../../../../../../utils/woocomerce.types";
 import { MainLayout } from "@app/[locale]/components/templates";
 import Sidebar from "@app/[locale]/components/molecules/leftSidebar/leftSidebar";
 import { categoriesCreation, TransformedCategoriesType } from "../../helpers";
-import { Anybody } from "next/font/google";
 import Link from "next/link";
 import styles from "./Product.module.css";
 import classNames from "classnames";

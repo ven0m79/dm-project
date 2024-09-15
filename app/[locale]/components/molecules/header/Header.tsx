@@ -192,7 +192,7 @@ const Header = () => {
                       className="group flex cursor-default items-center gap-2 rounded-lg py-1.5 px-3 select-none data-[focus]:bg-sky-100">
                       <a
                         className={clsx('block, text-black')}
-                        href={"/catalog/sub-catalog/product/" + product.id + "?category=" + product.tags[0].name}>
+                        href={`/catalog/sub-catalog/product/${product.id}?category=${product.tags[0].name}`}>
                         <div className="text-sm/6 text-black">
                           {highlightText(product.name, searchTerm)}
                         </div>
@@ -207,11 +207,12 @@ const Header = () => {
             </div>
           </Combobox>
         </div>
-
-        <div className={classNames('flex flex-row justify-center items-center', styles["socialMedia"])}>
-          <Link href="http://youtube.com"><Image src="/youtube-ico.jpg" width={30} height={30} alt="Logo Youtube" /></Link></div>
-        <div className={classNames('flex flex-column justify-center items-center', styles["socialMedia"])}>
-          <Link href="http://facebook.com"><Image src="/facebook-ico.jpg" width={30} height={30} alt="Logo Facebook" /></Link>
+        <div className="flex flex-row pl-10">
+          <div className={classNames('flex flex-row justify-center items-center', styles["socialMedia"])}>
+            <Link href="http://youtube.com"><Image src="/youtube-ico.jpg" width={30} height={30} alt="Logo Youtube" /></Link></div>
+          <div className={classNames('flex flex-column justify-center items-center', styles["socialMedia"])}>
+            <Link href="http://facebook.com"><Image src="/facebook-ico.jpg" width={30} height={30} alt="Logo Facebook" /></Link>
+          </div>
         </div>
       </div>
 
