@@ -32,7 +32,7 @@ const SharesFabiusXL = ({ params: { locale } }: { params: { locale: string } }) 
                             <div className="flex flex-col justify-center items-center w-[525px]">
                                 <p className="text-justify py-4 font-bold">Апарат наркозно-дихальний Fabius plus XL</p>
                                 <Image
-                                    className={classNames(" justify-center indent-4", [styles.img])}
+                                    className={styles.img}
                                     src={fabius1}
                                     width={200}
                                     height={300}
