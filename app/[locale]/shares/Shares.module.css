@@ -16,12 +16,13 @@
 
 
 .catalogContainer {
-    width: 1400px;
+    width: 1050px;
     align-self: center;
     border: 1px solid  transparent;
     color: #0061AA;
     font-size: 18px;
     line-height: 22px;
+
 }
 .catalogContainerDeeper {
     width: 1050px;
@@ -84,4 +85,4 @@
 .block-decisions:hover .span {
 
     transform: scale(1.01);
-}
+} 
