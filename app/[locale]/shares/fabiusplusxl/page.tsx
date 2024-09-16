@@ -8,7 +8,7 @@ import Image from "next/image";
 import classNames from "classnames";
 import fabius1 from "./fabius1.webp";
 import fabius2 from "./fabius2.webp";
-import vista120s from "./vista120s.webp";
+import fabius3 from "./fabius3.webp";
 
 
 
@@ -29,17 +29,24 @@ const SharesFabiusXL = ({ params: { locale } }: { params: { locale: string } }) 
                     <p className="text-justify">Апарат наркозно-дихальний Fabius plus XL та Монітор пацієнта Vista 120S: <span className="font-bold">45 450,00 у.о.</span></p>
                     <div className="flex flex-row">
                         <div className="flex flex-col justify-center items-center">
-                            <div className="flex flex-col justify-center items-center w-[525px]">
-                                <p className="text-justify py-4 font-bold">Апарат наркозно-дихальний Fabius plus XL</p>
+                            <div className="flex flex-row justify-center items-center w-[525px]">
                                 <Image
                                     className={styles.img}
                                     src={fabius1}
-                                    width={200}
-                                    height={300}
+                                    width={400}
+                                    height={100}
                                     alt="FabiusXL"
                                 />
+                                <Image
+                                    className={styles.img}
+                                    src={fabius2}
+                                    width={400}
+                                    height={100}
+                                    alt="Vista120s"
+                                />
                             </div>
-                            <div className="ml-5">
+                            <div className="flex flex-row">
+                            <div className="pl-20 w-[525px]">
                                 -	Базовий блок Fabius Plus XL на візку<br />
                                 -	Механічний змішувач газів, на 3 гази<br />
                                 -	Модуль газоналізу Scio Four Oxi<br />
@@ -55,21 +62,9 @@ const SharesFabiusXL = ({ params: { locale } }: { params: { locale: string } }) 
                                 -	Шланг N2O, 3 м – 1 шт.<br />
                                 -	Шланг AIR, 3 м – 1 шт.<br />
                                 -	Випарник севофлюрану Vapor 2000<br />
-                                -	Кріплення для монітора</div>
-
-                        </div>
-                        <div>
-                            <div className="flex flex-col justify-center items-center w-[525px]">
-                                <p className="py-4 font-bold">Монітор пацієнта Vista 120S</p>
-                                <Image
-                                    className={styles.img}
-                                    src={vista120s}
-                                    width={200}
-                                    height={300}
-                                    alt="Vista120s"
-                                />
+                                -	Кріплення для монітора
                             </div>
-                            <div className="ml-5">
+                            <div className="ml-5 w-[525px]">
                                 -	Основний блок монітора<br />
                                 -	Папір для принтера - 4 рул.<br />
                                 -	Батарея літій-іонна<br />
@@ -82,13 +77,17 @@ const SharesFabiusXL = ({ params: { locale } }: { params: { locale: string } }) 
                                 -	Манжета для виміру НІАТ, 5 розмірів<br />
                                 -	Температурний датчик нашкірний<br />
                             </div>
+                            </div>
                         </div>
+
+
+
 
                     </div>
                     <div className={classNames("self-center my-2 indent-5 text-justify", styles["catalogContainer"])}>
                         <Image
                             className={"float-left mt-1 mb-5 mr-5"}
-                            src={fabius2}
+                            src={fabius3}
                             width={500}
                             height={100}
                             alt="FabiusXL"
