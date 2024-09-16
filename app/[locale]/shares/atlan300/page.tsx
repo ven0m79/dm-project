@@ -26,7 +26,7 @@ const SharesAtlan = ({ params: { locale } }: { params: { locale: string } }) => 
                     "flex flex-col justify-center items-center mb-5 gap-5",
                     [styles.catalogContainerDeeper])}>
                     <p className=" text-justify text-[24px]">Пропонуємо для стоматологічних клінік, малих операційних та процедурних</p>
-                    <p className="text-justify">Апарат наркозно-дихальний Atlan A300: <span className="font-bold">51 700,00 у.о.</span></p>
+                    <p className="text-justify">Апарат наркозно-дихальний Atlan A300 та Монітор пацієнта Vista 120S: <span className="font-bold">51 700,00 у.о.</span></p>
                     <div className="flex flex-row">
                         <div className="flex flex-col justify-center items-center">
                             <div className="flex flex-col justify-center items-center w-[525px]">
@@ -56,7 +56,8 @@ const SharesAtlan = ({ params: { locale } }: { params: { locale: string } }) => 
                                 -	Шланг O2, 3 м – 1 шт.<br />
                                 -	Шланг N2O, 3 м – 1 шт.<br />
                                 -	Шланг AIR, 3 м – 1 шт.<br />
-                                -	Маска силіконова багаторазова  - 3 шт різних розмірів</div>
+                                -	Маска силіконова багаторазова<br />
+                                - 3 шт різних розмірів</div>
                             </div>
                             <div>
                                 <div className="flex flex-col justify-center items-center w-[525px]">
