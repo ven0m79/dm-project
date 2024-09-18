@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import classNames from "classnames";
 import { MainLayout } from "@app/[locale]/components/templates";
@@ -6,10 +7,11 @@ import { unstable_setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
 import { Link } from "config";
 import Image from 'next/image';
+import SliderAbout from "../components/molecules/sliderAbout/slider";
 
 
 const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
-  unstable_setRequestLocale(locale);
+  //unstable_setRequestLocale(locale);
   const t = useTranslations('AboutPage');
   return (
     <MainLayout>
@@ -60,9 +62,10 @@ const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
           )}
         >        <div className={styles.stroke}></div>
           <div className="text-2xl text-blue-900 flex justify-between mb-5">
-          {t('implemented')}
+            {t('implemented')}
           </div>
-          <div className="text-2xl flex flex-row justify-between mb-5 w-full px-5">
+          <SliderAbout locale={locale} />
+          {/* <div className="text-2xl flex flex-row justify-between mb-5 w-full px-5">
             <Link href="/about/ohmatdet"><div
               className={classNames(
                 "flex flex-col justify-center items-center rounded-xl",
@@ -105,7 +108,7 @@ const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
                 alt="Вінницький Кардіоцентр"
               /></div>
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </MainLayout>
