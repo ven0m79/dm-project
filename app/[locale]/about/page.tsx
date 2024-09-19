@@ -8,6 +8,8 @@ import { useTranslations } from 'next-intl';
 import { Link } from "config";
 import Image from 'next/image';
 import SliderAbout from "../components/molecules/sliderAbout/slider";
+import roman from "../../../public/roman.webp";
+import vystavka from "../../../public/vystavka.webp";
 
 
 const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
@@ -23,15 +25,17 @@ const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
       >
         <div
           className={classNames(
-            "flex flex-1 flex-row justify-center items-start",
+            "flex flex-1 flex-row justify-center items-start w-[1400px]",
           )}
         >
-          <div
-            className={classNames(
-              "flex justify-center items-start rounded-xl w-30 m-5",
-              styles["aboutMainPhoto"],
-            )}
-          />
+          <Image
+            src={vystavka}
+            className="p-5 float-left"
+            width={550}
+            height={750}
+            alt={""}>
+          </Image>
+
           <div
             className={classNames(
               "flex flex-column justify-center items-start my-3",
@@ -50,11 +54,21 @@ const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
             <div className={classNames("my-2 m indent-5 text-justify")}>
               {t('information4')}
             </div>
-            <div className={classNames("my-2 m indent-5 text-justify")}>
-              {t('information5')}
-            </div>
+
+
           </div>
+          <Image
+            className="p-5 float-right"
+            src={roman}
+            width={330}
+            height={480}
+            alt={""}>
+          </Image>
         </div>
+        <div className={classNames("my-2 m indent-5 text-justify", styles["aboutText"])}>
+          {t('information5')}
+        </div>
+
         <div
           className={classNames(
             "flex flex-1 flex-col justify-between items-center",
@@ -64,7 +78,22 @@ const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
           <div className="text-2xl text-blue-900 flex justify-between mb-5">
             {t('implemented')}
           </div>
-          <SliderAbout locale={locale} />
+          <div className="flex flex-row justify-start items-start self-start h-[650px]">
+            <div>
+              <SliderAbout locale={locale} />
+            </div>
+            <div>
+            <div className={classNames("px-5 indent-5 text-justify w-[500px] text-red-900", styles["aboutText1"]) }>
+              <p>{t('information1')}</p><br/>
+              <p>{t('information1')}</p><br/>
+              <p>{t('information1')}</p><br/>
+              <p>{t('information1')}</p><br/>
+              <p>{t('information1')}</p><br/>
+            </div>
+            </div>
+          </div>
+
+
           {/* <div className="text-2xl flex flex-row justify-between mb-5 w-full px-5">
             <Link href="/about/ohmatdet"><div
               className={classNames(
