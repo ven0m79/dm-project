@@ -6,8 +6,8 @@ import { GoogleMap } from  "@react-google-maps/api" ;
 
 //Стиль карты 
 export  const defaultMapContainerStyle = { 
-    width : '500px' , 
-    height : '300px' , 
+    width : '460px' , 
+    height : '280px' , 
     borderRadius : '0px 0px 0px 0px' , 
 }; 
 const defaultMapCenter = {
