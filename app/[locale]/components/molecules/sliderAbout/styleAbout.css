@@ -1,5 +1,5 @@
-.example-container {
-  width: 900px;
+.container {
+  width: 864px;
   height: 600px;
   position: relative;
   display: flex;
@@ -8,8 +8,8 @@
   margin-bottom: 20px;
 }
 
-.next,
-.prev {
+.next1,
+.prev1 {
   top: calc(50% - 20px);
   position: absolute;
   /* background: #0060aa; */
@@ -22,13 +22,13 @@
   user-select: none;
   cursor: pointer;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 22px;
   z-index: 2;
 }
-.next {
+.next1 {
   right: 10px;
 }
-.prev {
+.prev1 {
   left: 10px;
   transform: scale(-1);
 }

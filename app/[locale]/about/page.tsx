@@ -71,25 +71,26 @@ const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
 
         <div
           className={classNames(
-            "flex flex-1 flex-col justify-between items-center",
+            "flex flex-1 flex-col items-start",
             styles["aboutDecisions"],
           )}
-        >        <div className={styles.stroke}></div>
-          <div className="text-2xl text-blue-900 flex justify-between mb-5">
+        >
+          <div className={styles.stroke}></div>
+          <div className="text-2xl text-blue-900 flex justify-center self-center mb-5">
             {t('implemented')}
           </div>
-          <div className="flex flex-row justify-start items-start self-start h-[650px]">
+          <div className="flex flex-row justify-between items-start self-start h-[650px] w-[850px]">
             <div>
               <SliderAbout locale={locale} />
             </div>
             <div>
-            <div className={classNames("px-5 indent-5 text-justify w-[500px] text-red-900", styles["aboutText1"]) }>
-              <p>{t('information1')}</p><br/>
-              <p>{t('information1')}</p><br/>
-              <p>{t('information1')}</p><br/>
-              <p>{t('information1')}</p><br/>
-              <p>{t('information1')}</p><br/>
-            </div>
+              <div className={classNames("px-5 indent-5 text-justify w-[548x]", styles["aboutText1"])}>
+                <p>{t('information1')}</p><br />
+                <p>{t('information1')}</p><br />
+                <p>{t('information1')}</p><br />
+                <p>{t('information1')}</p><br />
+                <p>{t('information1')}</p><br />
+              </div>
             </div>
           </div>
 

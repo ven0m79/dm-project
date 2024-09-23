@@ -73,10 +73,6 @@ const SharesFabiusXL = ({ params: { locale } }: { params: { locale: string } }) 
                             </div>
                             </div>
                         </div>
-
-
-
-
                     </div>
                     <div className={classNames("self-center my-2 indent-5 text-justify", styles["catalogContainer"])}>
                         <Image

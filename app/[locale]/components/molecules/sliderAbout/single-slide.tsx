@@ -1,6 +1,6 @@
 import { ArticleSingleTypeAbout } from "./image-data";
 import { FC } from "react";
-import "./style.css";
+import "./styleAbout.css";
 
 import { motion } from "framer-motion";
 

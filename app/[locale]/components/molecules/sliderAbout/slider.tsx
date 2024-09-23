@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { wrap } from "popmotion";
 
-import "./style.css";
+import "./styleAbout.css";
 import {ArticleSingleTypeAbout, articlesUa, articlesEng} from "./image-data";
 import SingleSlideAbout from "./single-slide";
 
@@ -68,7 +68,7 @@ export default function SliderAbout({ locale }: { locale: string }) {
   }, [page]);
 
   return (
-    <div className="example-container">
+    <div className="container">
       <AnimatePresence initial={true} custom={direction}>
         <motion.div
           key={page}
@@ -77,7 +77,7 @@ export default function SliderAbout({ locale }: { locale: string }) {
           initial="enter"
           animate="center"
           exit="exit"
-          className="absolute flex h-[460px] w-full"
+          className="absolute flex h-[460px] w-[800px]"
           transition={{
             x: { type: "spring", stiffness: 300, damping: 30 },
             opacity: { duration: 0.2 },
@@ -99,10 +99,10 @@ export default function SliderAbout({ locale }: { locale: string }) {
         </motion.div>
       </AnimatePresence>
 
-      <div className="next" onClick={() => paginate(1)}>
+      <div className="next1" onClick={() => paginate(1)}>
         {">"}
       </div>
-      <div className="prev" onClick={() => paginate(-1)}>
+      <div className="prev1" onClick={() => paginate(-1)}>
         {">"}
       </div>
       
