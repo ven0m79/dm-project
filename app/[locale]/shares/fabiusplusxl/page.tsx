@@ -25,25 +25,19 @@ const SharesFabiusXL = ({ params: { locale } }: { params: { locale: string } }) 
                 <div className={classNames(
                     "flex flex-col justify-center items-center mb-5 gap-5",
                     [styles.catalogContainerDeeper])}>
-                    <p className=" text-centered text-[24px]">Пропонуємо для стоматологічних клінік, малих операційних та процедурних</p>
+                    <p className=" text-centered text-[24px]">Пропонуємо готове рішення для вашої операційної </p>
                     <p className="text-justify">Апарат наркозно-дихальний Fabius plus XL та Монітор пацієнта Vista 120S: <span className="font-bold">45 450,00 у.о.</span></p>
                     <div className="flex flex-row">
                         <div className="flex flex-col justify-center items-center">
-                            <div className="flex flex-row justify-center items-center w-[525px]">
+                            <div className="flex flex-row justify-center items-center w-[800px]">
                                 <Image
                                     className={styles.img}
                                     src={fabius1}
-                                    width={400}
-                                    height={100}
+                                    width={1200}
+                                    height={800}
                                     alt="FabiusXL"
                                 />
-                                <Image
-                                    className={styles.img}
-                                    src={fabius2}
-                                    width={400}
-                                    height={100}
-                                    alt="Vista120s"
-                                />
+
                             </div>
                             <div className="flex flex-row">
                             <div className="pl-20 w-[525px]">
@@ -86,13 +80,21 @@ const SharesFabiusXL = ({ params: { locale } }: { params: { locale: string } }) 
                     </div>
                     <div className={classNames("self-center my-2 indent-5 text-justify", styles["catalogContainer"])}>
                         <Image
-                            className={"float-left mt-1 mb-5 mr-5"}
+                            className={"float-left mt-2 mb-2 mr-5"}
                             src={fabius3}
                             width={500}
                             height={100}
                             alt="FabiusXL"
                         />
-                        <p className="my-2">ОПИС!!!!!</p>
+                        <p className="my-2">Поєднання наркозного апарата Fabius plus XL та мультипараметричного монітора Vista 120S  забезпечує справжню інтегровану функціональність робочої станції. </p>
+                        <p className="my-2">Наркозно-дихальний апарат Fabius plus XL призначений для інгаляційної анестезії з низьким потоком у дорослих та дітей. </p>
+                        <p className="my-2">Fabius plus XL забезпечує ефективну вентиляцію на рівні вимог для інтенсивної терапії в режимах: Ручна/Спонтанна (MAN/SPON), Контрольована за тиском (PC-CMV), Контрольована за об'ємом (VC-CMV), має інтегрований поршневий вентилятор з електронним керуванням та електричним приводом (не потрібен рушійний газ), дихальну систему із вбудованим нагрівачем для підігріву дихального газу та зменшення конденсації, механічний змішувач газів на 3 гази, резервне живлення від батареї до 120 хвилин (час роботи мінімум 45 хвилин), висококонтрастний монітор 10,5’’, великі ящики для зберігання.</p>
+                        <p className="my-2">Модуль газоналізу Scio Four Oxi вимірює значення O2 на вдиху та видиху, CO2, N2O та анестетиків.</p>
+                        <p className="my-2">Показники відображаються на моніторі пацієнта Vista 120S.</p>
+                        <p className="my-2">Монітор пацієнта Vista 120S забезпечує спостереження фізіологічних показників у пацієнтів різних вікових груп: ЕКГ на 3 відведення, SpO2, температура, дихання, неінвазивне вимірювання артеріального тиску.	</p>
+                        <p className="my-2">Vista 120S  має 12" кольоровий сенсорний TFT екран, 8 каналів (відображення до 11 кривих), інтерфейс моніторингу газів, зберігає до 120 годин трендів основних параметрів, до 1200 вимірювань НІАТ і 200 тривожних подій, працює 350 хвилин від батареї.</p>
+                        <p className="my-2">Анестезіологічна станція Fabius plus XL / Vista 120S допоможе максимально збільшити ваш терапевтичний потенціал і підвищити безпеку пацієнтів.</p>
+
                     </div>
                 </div>
 
