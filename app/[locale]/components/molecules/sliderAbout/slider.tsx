@@ -77,7 +77,7 @@ export default function SliderAbout({ locale }: { locale: string }) {
           initial="enter"
           animate="center"
           exit="exit"
-          className="absolute flex h-[460px] w-[800px]"
+          className="absolute flex h-[460px] w-[864px]"
           transition={{
             x: { type: "spring", stiffness: 300, damping: 30 },
             opacity: { duration: 0.2 },
