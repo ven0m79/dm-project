@@ -65,7 +65,7 @@
   "ServicePage": {
     "title": "Сервісне обслуговування",
     "contact-form-title": "Звернення до сервісного центру",
-    "contact-form-name": "Им'я",
+    "contact-form-name": "Ім'я та прізвище",
     "contact-form-mobile":"Телефон",
     "contact-form-medicalFacility": "Назва закладу",
     "contact-form-city": "Місто",

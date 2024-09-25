@@ -65,7 +65,7 @@
   "ServicePage": {
     "title": "Service",
     "contact-form-title": "Contact with Service Center",
-    "contact-form-name": "Name",
+    "contact-form-name": "Name and Surname",
     "contact-form-mobile":"Phone number",
     "contact-form-medicalFacility": "The Name of the Medical Facility",
     "contact-form-city": "City",
