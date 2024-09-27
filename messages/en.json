@@ -1,6 +1,5 @@
 {
   "Index": {
-    "title": "Hello World!",
     "menu": "Menu!",
     "in-Ukraine-2009": "DM-Project has been a reliable partner of Ukrainian doctors since 2009 ",
     "authorized-representative": "Authorized representative in Ukraine",
@@ -19,7 +18,7 @@
     "projectings2": " Calculation of the required capacity and design of utilities and systems",
     "projectings3": " Design of medical gases supply systems",
     "projectings4": " Design and installation of architectural systems - consoles, panels",
-    "partners" : "Our partners"
+    "partners": "Our partners"
   },
   "Menu": {
     "menu-main": "MAIN",
@@ -57,8 +56,8 @@
   "AboutPage": {
     "information1": "DM-PROJECT was founded in 2009 as an authorized representative of the German company Dräger in Ukraine, the world leader in the production of human life support systems.",
     "information2": "Today, the company's main activities include not only the sale of high-quality medical equipment, but also the development and implementation of integrated solutions for medical institutions, from design to service and staff training.",
-    "information3": "The service department of DM-PROJECT performs maintenance of more than 4000 devices manufactured by Dräger, which are installed in public and private medical institutions in all regions of Ukraine.",    
-    "information4": "In response to market challenges, our technologies are constantly being improved; our managers and engineers regularly attend advanced training.",   
+    "information3": "The service department of DM-PROJECT performs maintenance of more than 4000 devices manufactured by Dräger, which are installed in public and private medical institutions in all regions of Ukraine.",
+    "information4": "In response to market challenges, our technologies are constantly being improved; our managers and engineers regularly attend advanced training.",
     "information5": "We take care of our clients, advise them and offer unique solutions that meet any requirements and specifics of medical institutions.",
     "implemented": "Implemented projects"
   },
@@ -66,7 +65,7 @@
     "title": "Service",
     "contact-form-title": "Contact with Service Center",
     "contact-form-name": "Name and Surname",
-    "contact-form-mobile":"Phone number",
+    "contact-form-mobile": "Phone number",
     "contact-form-medicalFacility": "The Name of the Medical Facility",
     "contact-form-city": "City",
     "contact-form-email": "E-mail",
@@ -80,7 +79,6 @@
     "contact-paragraph3": "This ensures the reliable functioning of medical equipment, protect clinics from abnormal emergency situations because of breakdowns. For medical institutions, this way is the most economical, as their own experience has shown.",
     "contact-paragraph4": "In Ukraine, the Dräger company entrusts the installation and maintenance of their equipment exclusively to service engineers of the DM-PROJECT, who have undergone special training in Germany. Due to strict adherence to these rules, Dräger equipment can work without failure for more than 20 years, and for it there is practically no such concept as the term of operation.",
     "contact-paragraph5": "Timely and high-quality training of personnel in the rules of working with the equipment allows you to effectively use its wide possibilities to save the lives of patients from the very first day of its operation. That is why the DM-PROJECT pays great attention to the process of training medical personnel to work with equipment, is always open to issues of support and development of educational programs for medical professionals of Ukraine with the aim of conveying to them information about the latest developments in the field of medicine and involves them in mastering new knowledge and skills."
-
   },
   "ProjectPage": {
     "title": "Projects (Переклад Гугл)",
@@ -115,7 +113,6 @@
     "project-paragraph22": "data on types, quantitative and qualitative characteristics of engineering resources consumed by a unit of technological installed equipment;",
     "project-paragraph23": "volumes and characteristics of effluents, emissions and other emissions from operating equipment.",
     "project-paragraph24": "Specialists of \"DM-PROEKT\" LLC carry out author's supervision during the construction, reconstruction and major repair and re-equipment of medical facilities."
-
   },
   "ContactsPage": {
     "title": "Contact Us",
@@ -128,5 +125,49 @@
     "contact-adress1": "03035, Kyiv, Ukraine, Mokra 16, office 385",
     "contact-phone": "Phone",
     "contact-mail": "E-mail"
-    }
-} 
+  },
+  "Shares": {
+    "shares-fabius-title": "We offer a ready-made solution for your operating room",
+    "shares-fabius-pehead": "Anesthesia workstation Fabius plus XL and Patient monitor Vista 120S",
+    "shares-fabius-specific1": "Fabius Plus XL Trolley version",
+    "shares-fabius-specific2": "3 gas, 5 connections",
+    "shares-fabius-specific3": "SW option Pressure Control ",
+    "shares-fabius-specific4": "Scio Four Oxi  ",
+    "shares-fabius-specific5": "External O2 flow tube, ISO",
+    "shares-fabius-specific6": "Dräger Auto Exclusion, 2 vap.",
+    "shares-fabius-specific7": "Gas cylinder holder",
+    "shares-fabius-specific8": "Integrated Socket DIN",
+    "shares-fabius-specific9": "Sample Line Set (10pcs)",
+    "shares-fabius-specific10": "WaterLock2 -12 pcs.",
+    "shares-fabius-specific11": "Spirolog – 5 pcs.",
+    "shares-fabius-specific12": "O2 CS hose, 3 m, NIST, DIN",
+    "shares-fabius-specific13": "N2O CS hose, 3 m, NIST, EN DIN",
+    "shares-fabius-specific14": "AIR CS hose, 3 m, NIST, DIN",
+    "shares-fabius-specific15": "Vapor 2000 Sevoflurane",
+    "shares-fabius-specific16": "Mounting Plate Vista 120  ",
+    "shares-vista120-specific1": "Vista 120S basic",
+    "shares-vista120-specific2": "Printing Paper 4 pcs",
+    "shares-vista120-specific3": "Rechargeable Li-Ion Battery",
+    "shares-vista120-specific4": "ECG Defib TRUNK 3/5-LEADS",
+    "shares-vista120-specific5": "ECG 3-Lead single pin",
+    "shares-vista120-specific6": "SPO2 Nellcor cable, 3 m",
+    "shares-vista120-specific7": "SPO2 Nellcor sensor DS100A, adult",
+    "shares-vista120-specific8": "OXIBANDSENSOR A/N",
+    "shares-vista120-specific9": "NIBP Tube 3m",
+    "shares-vista120-specific10": "NIBP Cuff Small Child",
+    "shares-vista120-specific11": "NIBP Cuff Child",
+    "shares-vista120-specific12": "NIBP Cuff Small Adult",
+    "shares-vista120-specific13": "NIBP Cuff Adult",
+    "shares-vista120-specific14": "NIBP Cuff Larger Adult",
+    "shares-vista120-specific15": "Temperature Probe Skin, 3m",
+    "shares-fabius-text1": "We offer a complete solution for your operating room - the Fabius plus XL / Vista 120S Аnesthesia Station.",
+    "shares-fabius-text2": "The combination of the Fabius plus XL anesthesia machine and the Vista 120S multiparameter monitor provides true integrated workstation functionality.",
+    "shares-fabius-text3": "The Fabius plus XL anesthesia machine is suitable for low-flow anesthesia in adults and pediatric patients.",
+    "shares-fabius-text4": "The Fabius plus XL provides effective ventilation at the level required for intensive care in the following modes: Manual/Spontaneous (MAN/SPON), Pressure Controlled (PC-CMV), Volume Controlled (VC-CMV), and has an integrated electronically controlled and electrically driven piston ventilator (no driving gas required), Breathing system with integrated heater to heat breathing gas and reduce condensation, mechanical gas mixer for 3 gases, battery backup for up to 120 minutes (minimum 45 minutes runtime), 10.5’ high contrast monitor, large storage drawers.",
+    "shares-fabius-text5": "The Scio Four Oxi gas analysis module measures inspiratory and expiratory O2, CO2, N2O and anaesthetics.",
+    "shares-fabius-text6": "The values are displayed on the Vista 120S patient monitor.",
+    "shares-fabius-text7": "The Vista 120S patient monitor provides physiological monitoring for patients of all ages: 3-lead ECG, SpO2, temperature, respiration, and non-invasive blood pressure.",
+    "shares-fabius-text8": "The Vista 120S has a 12’ colour TFT touchscreen, 8 channels (displaying up to 11 waveforms), a gas monitoring interface, stores up to 120 hours of key parameter trends, up to 1200 NIBP measurements and 200 alarm events, and lasts 350 minutes on battery power.",
+    "shares-fabius-text9": "The Fabius plus XL / Vista 120S Anaesthesia Station will help you maximise your therapeutic potential and improve patient safety."
+  }
+}
