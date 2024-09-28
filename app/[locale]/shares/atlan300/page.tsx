@@ -75,10 +75,6 @@ const SharesAtlan = ({ params: { locale } }: { params: { locale: string } }) => 
                                 -	{t('shares-vista120-specific9')}<br />
                                 -	{t('shares-vista120-specific10')}<br />
                                 -	{t('shares-vista120-specific11')}<br />
-                                -	{t('shares-vista120-specific12')}<br />
-                                -	{t('shares-vista120-specific13')}<br />
-                                -	{t('shares-vista120-specific14')}<br />
-                                -	{t('shares-vista120-specific15')}<br />
                             </div>
                         </div>
                     </div>
