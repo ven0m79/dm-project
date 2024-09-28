@@ -11,8 +11,8 @@ export  const defaultMapContainerStyle = {
     borderRadius : '0px 0px 0px 0px' , 
 }; 
 const defaultMapCenter = {
-    lat: 50.43066125519892,
-    lng: 30.485148390790926
+    lat: 50.43093725153015,
+    lng: 30.487117122686342
 }
 
 const defaultMapZoom = 19;
