@@ -19,7 +19,7 @@ const SharesPolaris200 = ({ params: { locale } }: { params: { locale: string } }
         <MainLayout>
             <div
                 className={classNames(
-                    "w-full flex flex-wrap justify-center mb-5 gap-5 mt-5",
+                    "w-full flex flex-wrap justify-center mb-5 gap-5 mt-5", 
 
                 )}
             >
