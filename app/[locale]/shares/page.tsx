@@ -13,11 +13,13 @@ import polaris from "./polaris200/polaris200-trans.webp";
 import polaris2 from "./polaris200-2/polaris200-2-trans.webp";
 import fabiusplusxl from "./fabiusplusxl/Fabius_plus_XL-trans.webp";
 import atlan from "./testoviy.png";
+import { useTranslations } from "next-intl";
 
 
 
 const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
   unstable_setRequestLocale(locale);
+  const t = useTranslations('Shares');
   return (
     <MainLayout>
       <div
@@ -39,10 +41,10 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
         >
           <div className="flex flex-col w-[400px] h-[150px] pl-10 mt-5">
             <div className="mb-3">
-              <span className={classNames("text-black", styles.span)}>Акційна комерційна пропозиція</span>
+              <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
             </div>
             <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}> Консоль медична з настінним кріпленням Лінеа IM2</span>
+              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>{t("shares-title1")}</span>
             </div>
           </div>
           <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
@@ -70,10 +72,10 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
         >
           <div className="flex flex-col w-[450px] h-[150px] pl-10 mt-5">
             <div className="mb-3">
-              <span className={classNames("text-black", styles.span)}>Акційна комерційна пропозиція</span>
+              <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
             </div>
             <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>Світильник операційний Polaris 200 однокупольний</span>
+              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>{t("shares-title2")}</span>
             </div>
           </div>
           <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
@@ -101,10 +103,10 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
         >
           <div className="flex flex-col w-[450px] h-[150px] pl-10 mt-5">
             <div className="mb-3">
-              <span className={classNames("text-black", styles.span)}>Акційна комерційна пропозиція</span>
+              <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
             </div>
             <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>Світильник операційний Polaris 200 двокупольний</span>
+              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>{t("shares-title3")}</span>
             </div>
           </div>
           <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
@@ -132,10 +134,10 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
         >
           <div className="flex flex-col w-[550px] h-[150px] pl-10 mt-5">
             <div className="mb-3">
-              <span className={classNames("text-black", styles.span)}>Акційна комерційна пропозиція</span>
+              <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
             </div>
             <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>Наркозно-дихальний апарат Fabius plus XL + Монітор пацієнта Vista 120S</span>
+              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>{t("shares-title4")}</span>
             </div>
           </div>
           <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
@@ -163,10 +165,40 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
         >
           <div className="flex flex-col w-[500px] h-[150px] pl-10 mt-5">
             <div className="mb-3">
-              <span className={classNames("text-black", styles.span)}>Акційна комерційна пропозиція</span>
+              <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
             </div>
             <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>Наркозно-дихальний апарат Atlan A300 + Монітор пацієнта Vista 120S</span>
+              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>{t("shares-title5")}</span>
+            </div>
+          </div>
+          <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
+            <Image
+              className={styles.img}
+              src={atlan}
+              width={109}
+              height={150}
+              alt="logo"
+            />
+          </div>
+        </div>
+      </Link>
+      <Link
+        href={{
+          pathname: "/shares/AWD655-2H",
+        }}
+      >
+        <div
+          className={classNames(
+            "flex flex-row items-center rounded-xl justify-between",
+            styles["block-decisions"],
+          )}
+        >
+          <div className="flex flex-col w-[450px] h-[150px] pl-10 mt-5">
+            <div className="mb-3">
+              <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
+            </div>
+            <div>
+              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>{t("shares-title6")}</span>
             </div>
           </div>
           <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
