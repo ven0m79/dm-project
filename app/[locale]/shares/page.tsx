@@ -13,6 +13,8 @@ import polaris from "./polaris200/polaris200-trans.webp";
 import polaris2 from "./polaris200-2/polaris200-2-trans.webp";
 import fabiusplusxl from "./fabiusplusxl/Fabius_plus_XL-trans.webp";
 import atlan from "./testoviy.png";
+import awd655_h2_v1 from "./AWD655-2H-V1/awd655-2h-v1-trans.webp";
+import awd655_h2_v2 from "./AWD655-2H-V2/awd655-2h-v2-trans.webp";
 import { useTranslations } from "next-intl";
 
 
@@ -184,7 +186,7 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
       </Link>
       <Link
         href={{
-          pathname: "/shares/AWD655-2H",
+          pathname: "/shares/AWD655-2H-V1",
         }}
       >
         <div
@@ -204,7 +206,37 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
           <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
             <Image
               className={styles.img}
-              src={atlan}
+              src={awd655_h2_v1}
+              width={109}
+              height={150}
+              alt="logo"
+            />
+          </div>
+        </div>
+      </Link>
+      <Link
+        href={{
+          pathname: "/shares/AWD655-2H-V2",
+        }}
+      >
+        <div
+          className={classNames(
+            "flex flex-row items-center rounded-xl justify-between",
+            styles["block-decisions"],
+          )}
+        >
+          <div className="flex flex-col w-[450px] h-[150px] pl-10 mt-5">
+            <div className="mb-3">
+              <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
+            </div>
+            <div>
+              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>{t("shares-title7")}</span>
+            </div>
+          </div>
+          <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
+            <Image
+              className={styles.img}
+              src={awd655_h2_v2}
               width={109}
               height={150}
               alt="logo"
