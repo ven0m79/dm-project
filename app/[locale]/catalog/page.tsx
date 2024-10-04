@@ -46,8 +46,6 @@ const CatalogPage = ({
             )}
           >
 
-
-
             <span className={styles.span}>{t("or-equipment")}</span>
             <Image
               className={styles.img}

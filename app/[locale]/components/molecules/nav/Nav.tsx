@@ -30,10 +30,10 @@ const NavLinks: {
     title: "menu-service",
     link: "/services",
   },
-  decisions: {
-    title: "menu-decisions",
-    link: "/decisions",
-  },
+  // decisions: {
+  //   title: "menu-decisions",
+  //   link: "/decisions",
+  // },
   projects: {
     title: "menu-projects",
     link: "/projects",
