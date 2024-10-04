@@ -154,7 +154,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
                 );
               })
             ) : (
-              <h2 className="text-amber-700">Немає результатів пошуку</h2>
+              <h2 className="text-amber-700"></h2>
             )}
           </div>
 

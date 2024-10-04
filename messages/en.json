@@ -114,6 +114,16 @@
     "project-paragraph23": "volumes and characteristics of effluents, emissions and other emissions from operating equipment.",
     "project-paragraph24": "Specialists of \"DM-PROEKT\" LLC carry out author's supervision during the construction, reconstruction and major repair and re-equipment of medical facilities."
   },
+  "Catalog1": {
+    "or-equipment": "OR equipment",
+    "icu-equipment": "ICU equipment",
+    "neonatal-equipment": "Neonatal equipment",
+    "candd-equipment": "Cleaning and desinfecting equipment",
+    "gas-systems": "Gas Management Systems",
+    "other-equipment": "Other hospital equipment",
+    "accessories": "Accessories"
+  },
+  
   "ContactsPage": {
     "title": "Contact Us",
     "contact-form-title": "Send Us Message",

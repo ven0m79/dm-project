@@ -13,6 +13,7 @@ import imgMedgaz from "./icons-photo/med-gaz.webp";
 import imgNeonat from "./icons-photo/neonat.webp";
 import imgOper from "./icons-photo/oper.webp";
 import imgSteriliz from "./icons-photo/sterilization.webp";
+import { useTranslations } from "next-intl";
 
 const CatalogPage = ({
   params: { locale },
@@ -20,6 +21,7 @@ const CatalogPage = ({
   params: { locale: string };
 }) => {
   unstable_setRequestLocale(locale);
+  const t = useTranslations('Catalog1');
 
   return (
     <MainLayout>
@@ -43,13 +45,16 @@ const CatalogPage = ({
               styles["block-decisions"],
             )}
           >
-            <span className={styles.span}>Обладнання для операційних</span>
+
+
+
+            <span className={styles.span}>{t("or-equipment")}</span>
             <Image
               className={styles.img}
               src={imgOper}
               width={130}
               height={130}
-              alt="Обладнання для операційних"
+              alt={t("or-equipment")}
             />
           </div>
         </Link>
@@ -66,14 +71,14 @@ const CatalogPage = ({
             )}
           >
             <span className={styles.span}>
-              Обладнання для відділень інтенсивної терапії
+            {t("icu-equipment")}
             </span>
             <Image
               className={styles.img}
               src={imgIntensive}
               width={130}
               height={130}
-              alt="Обладнання для відділень інтенсивної терапії"
+              alt={t("icu-equipment")}
             />
           </div>
         </Link>
@@ -89,13 +94,13 @@ const CatalogPage = ({
               styles["block-decisions"],
             )}
           >
-            <span className={styles.span}>Неонатальне обладнання</span>
+            <span className={styles.span}>{t("neonatal-equipment")}</span>
             <Image
               className={styles.img}
               src={imgNeonat}
               width={130}
               height={130}
-              alt="Неонатальне обладнання"
+              alt={t("neonatal-equipment")}
             />
           </div>
         </Link>
@@ -112,14 +117,14 @@ const CatalogPage = ({
             )}
           >
             <span className={styles.span}>
-              Стерилізаційне та дезінфекційне обладнання
+            {t("candd-equipment")}
             </span>
             <Image
               className={styles.img}
               src={imgSteriliz}
               width={130}
               height={130}
-              alt="Стерилізаційне та дезінфекційне обладнання"
+              alt={t("candd-equipment")}
             />
           </div>
         </Link>
@@ -135,13 +140,13 @@ const CatalogPage = ({
               styles["block-decisions"],
             )}
           >
-            <span className={styles.span}>Медичне газопостачання</span>
+            <span className={styles.span}>{t("gas-systems")}</span>
             <Image
               className={styles.img}
               src={imgMedgaz}
               width={130}
               height={130}
-              alt="Медичне газопостачання"
+              alt={t("gas-systems")}
             />
           </div>
         </Link>
@@ -157,13 +162,13 @@ const CatalogPage = ({
               styles["block-decisions"],
             )}
           >
-            <span className={styles.span}>Медичні меблі</span>
+            <span className={styles.span}>{t("other-equipment")}</span>
             <Image
               className={styles.img}
               src={imgFurniture}
               width={130}
               height={130}
-              alt="Медичні меблі"
+              alt={t("other-equipment")}
             />
           </div>
         </Link>
@@ -179,13 +184,13 @@ const CatalogPage = ({
               styles["block-decisions"],
             )}
           >
-            <span className={styles.span}>Витратні матеріали та аксесуари</span>
+            <span className={styles.span}>{t("accessories")}</span>
             <Image
               className={styles.img}
               src={imgCons}
               width={130}
               height={130}
-              alt="Витратні матеріали та аксесуари"
+              alt={t("accessories")}
             />
           </div>
         </Link>
