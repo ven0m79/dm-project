@@ -3,7 +3,7 @@
 import classNames from "classnames";
 import { CustomFlowbiteTheme, Sidebar as FBSidebar } from "flowbite-react";
 
-import React, { FC, memo, useCallback, useEffect } from "react";
+import React, { FC, memo, useCallback, useEffect, useState } from "react";
 
 import styles from "../../../catalog/sub-catalog/Sub-catalog.module.css";
 
@@ -119,6 +119,10 @@ const Sidebar: FC<SidebarProps> = ({
   setSelectedProducts,
   setSelectedCategoryItem,
 }) => {
+
+  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
+  const [openedCategoryId, setOpenedCategoryId] = useState<number | null>(null);
+
   console.log({ categoryTag, categoriesIdData });
   const getCategoryDetails = useCallback(
     async (id: number) => {
@@ -135,6 +139,12 @@ const Sidebar: FC<SidebarProps> = ({
     [locale, setSelectedProducts],
   );
 
+  const handleCategoryClick = (categoryId: number) => {
+    setSelectedCategoryId(categoryId);
+    setOpenedCategoryId(categoryId);
+    getCategoryDetails(categoryId);
+  };
+
   const renderNestedCategories = (
     category: TransformedCategoriesType,
     level = 0,
@@ -145,7 +155,9 @@ const Sidebar: FC<SidebarProps> = ({
       <FBSidebar.Item
         as="div"
         key={category.id}
-        className={classNames("cursor-pointer")}
+        className={classNames("cursor-pointer", {
+          "bg-sky-200": selectedCategoryId === category.id, // Highlight selected item
+        })}
         style={{ paddingLeft: marginLeft }}
       >
         <div
@@ -156,7 +168,7 @@ const Sidebar: FC<SidebarProps> = ({
             );
 
             setSelectedCategoryItem?.(selectedParent?.slug || "");
-            getCategoryDetails(category.id);
+            handleCategoryClick(category.id);
           }}
         >
           {category.name}
@@ -169,13 +181,7 @@ const Sidebar: FC<SidebarProps> = ({
           category.id === RIGHT_BAR_PARENT_ID ||
           category.id === LEFT_BAR_PARENT_ID_EN ||
           category.id === RIGHT_BAR_PARENT_ID_EN ||
-          (categoryTag &&
-            category.id ===
-              categoriesIdData[categoryTag as keyof typeof categoriesIdData]) ||
-          (categoryTag !== "" &&
-            category.slug
-              ?.toLowerCase()
-              ?.includes((categoryTag as string)?.toLowerCase()))
+          openedCategoryId === category.id
         }
         label={category.name}
         key={category.id}
@@ -185,37 +191,27 @@ const Sidebar: FC<SidebarProps> = ({
             category.id === RIGHT_BAR_PARENT_ID ||
             category.id === LEFT_BAR_PARENT_ID_EN ||
             category.id === RIGHT_BAR_PARENT_ID_EN,
-          "bg-blue-950":
-            (categoryTag !== "" &&
-              category.slug
-                ?.toLowerCase()
-                ?.includes((categoryTag as string)?.toLowerCase())) ||
-            (categoryTag &&
-              category.id ===
-                categoriesIdData[categoryTag as keyof typeof categoriesIdData]),
+          "bg-sky-500": selectedCategoryId === category.id
         })}
         style={{ paddingLeft: marginLeft }}
       >
         {category?.childrens?.length
           ? category.childrens.map((child) =>
-              renderNestedCategories(child, level + 1),
-            )
+            renderNestedCategories(child, level + 1),
+          )
           : null}
       </FBSidebar.Collapse>
     );
   };
 
   useEffect(() => {
-    if (
-      categoriesIdData?.[
-        categoryTag as unknown as keyof typeof categoriesIdData
-      ]
-    ) {
-      getCategoryDetails(
-        categoriesIdData?.[
-          categoryTag as unknown as keyof typeof categoriesIdData
-        ],
-      );
+    if (categoryTag) {
+      const categoryId = categoriesIdData[categoryTag as keyof typeof categoriesIdData];
+      if (categoryId) {
+        getCategoryDetails(categoryId);
+        setSelectedCategoryId(categoryId); // Ensure initial category is selected
+        setOpenedCategoryId(categoryId);
+      }
     }
   }, [categoryTag, getCategoryDetails]);
 
