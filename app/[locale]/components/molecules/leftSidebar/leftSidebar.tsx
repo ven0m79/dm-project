@@ -140,8 +140,12 @@ const Sidebar: FC<SidebarProps> = ({
   );
 
   const handleCategoryClick = (categoryId: number) => {
+    if (openedCategoryId === categoryId) {
+      // Do nothing if the clicked category is already open
+      return;
+    }
     setSelectedCategoryId(categoryId);
-    setOpenedCategoryId(categoryId);
+    setOpenedCategoryId(categoryId); // Set the clicked category as open
     getCategoryDetails(categoryId);
   };
 
