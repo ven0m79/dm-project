@@ -72,8 +72,12 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
   const { productId }: Params = useParams<any>();
   const searchParams = useSearchParams();
   const selectedCategory = searchParams?.get("category");
+  const [selectedCategoryItem, setSelectedCategoryItem] =
+  useState(selectedCategory);
   const [categories, setCategories] = useState<TransformedCategoriesType[]>([]);
-
+  const [selectedProducts, setSelectedProducts] = useState<
+  SingleProductDetails[]
+>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [details, setDetails] = useState<SingleProductDetails | null>(null);
 
@@ -128,10 +132,6 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
     }
   }, [locale, selectedProductId]);
 
-  function setSelectedProducts(v: any[]): void {
-    throw new Error("Function not implemented.");
-  }
-
   useEffect(() => {
     getCategoryDetails();
   }, [getCategoryDetails]);
@@ -148,13 +148,20 @@ console.log(isAccessories);
     <MainLayout>
       <div className="flex self-center flex-row w-[1400px] mb-8">
       <div className={classNames("mt-4", styles.subMenu)}>
-          <Sidebar
-            items={[categories?.[1] || []]}
-            categoryTag={selectedCategory}
-            setSelectedProducts={setSelectedProducts}
-            locale={locale}
-          />
-        </div>
+            {(locale === "ua") ?
+              <Sidebar
+                items={[categories?.[1] || []]}
+                categoryTag={selectedCategoryItem}
+                setSelectedProducts={setSelectedProducts}
+                locale={locale}
+              /> :
+              <Sidebar
+                items={[categories?.[0] || []]}
+                categoryTag={selectedCategoryItem}
+                setSelectedProducts={setSelectedProducts}
+                locale={locale}
+              />}
+          </div>
         <div className="flex flex-col p-1 min-h-[600px]">
           
           {loading ? (
@@ -284,13 +291,20 @@ console.log(isAccessories);
           )}
         </div>
         <div className={classNames("mt-4", styles.subMenu)}>
-          <Sidebar
-            items={[categories?.[0] || []]}
-            categoryTag={selectedCategory}
-            setSelectedProducts={setSelectedProducts}
-            locale={locale}
-          />
-        </div>
+            {(locale === "ua") ?
+              <Sidebar
+                items={[categories?.[0] || []]}
+                categoryTag={selectedCategoryItem}
+                setSelectedProducts={setSelectedProducts}
+                locale={locale}
+              /> :
+              <Sidebar
+                items={[categories?.[1] || []]}
+                categoryTag={selectedCategoryItem}
+                setSelectedProducts={setSelectedProducts}
+                locale={locale}
+              />}
+          </div>
       </div>
     </MainLayout>
   );

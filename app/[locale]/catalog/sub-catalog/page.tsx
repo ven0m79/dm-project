@@ -66,14 +66,21 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
           )}
         >
           <div className={classNames("mt-4", styles.subMenu)}>
-            <Sidebar
-              items={[categories?.[1] || []]}
-              categoryTag={selectedCategoryItem}
-              setSelectedProducts={setSelectedProducts}
-              setSelectedCategoryItem={setSelectedCategoryItem}
-              locale={locale}
-            />
+            {(locale === "ua") ?
+              <Sidebar
+                items={[categories?.[1] || []]}
+                categoryTag={selectedCategoryItem}
+                setSelectedProducts={setSelectedProducts}
+                locale={locale}
+              /> :
+              <Sidebar
+                items={[categories?.[0] || []]}
+                categoryTag={selectedCategoryItem}
+                setSelectedProducts={setSelectedProducts}
+                locale={locale}
+              />}
           </div>
+
 
           <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-6 w-full items-start">
             {selectedProducts && selectedProducts.length ? (
@@ -159,12 +166,19 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
           </div>
 
           <div className={classNames("mt-4", styles.subMenu)}>
-            <Sidebar
-              items={[categories?.[0] || []]}
-              categoryTag={selectedCategoryItem}
-              setSelectedProducts={setSelectedProducts}
-              locale={locale}
-            />
+            {(locale === "ua") ?
+              <Sidebar
+                items={[categories?.[0] || []]}
+                categoryTag={selectedCategoryItem}
+                setSelectedProducts={setSelectedProducts}
+                locale={locale}
+              /> :
+              <Sidebar
+                items={[categories?.[1] || []]}
+                categoryTag={selectedCategoryItem}
+                setSelectedProducts={setSelectedProducts}
+                locale={locale}
+              />}
           </div>
         </div>
       </MainLayout>

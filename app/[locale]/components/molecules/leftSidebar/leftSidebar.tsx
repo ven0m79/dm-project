@@ -91,6 +91,8 @@ const customTheme: CustomFlowbiteTheme = {
 
 const LEFT_BAR_PARENT_ID = 50;
 const RIGHT_BAR_PARENT_ID = 55;
+const LEFT_BAR_PARENT_ID_EN = 52;
+const RIGHT_BAR_PARENT_ID_EN = 57;
 
 const categoriesIdData = {
   operations: 19,
@@ -165,6 +167,8 @@ const Sidebar: FC<SidebarProps> = ({
         open={
           category.id === LEFT_BAR_PARENT_ID ||
           category.id === RIGHT_BAR_PARENT_ID ||
+          category.id === LEFT_BAR_PARENT_ID_EN ||
+          category.id === RIGHT_BAR_PARENT_ID_EN ||
           (categoryTag &&
             category.id ===
               categoriesIdData[categoryTag as keyof typeof categoriesIdData]) ||
@@ -178,7 +182,9 @@ const Sidebar: FC<SidebarProps> = ({
         className={classNames("", {
           "opacity-0 pointer-events-none mt-[-40px]":
             category.id === LEFT_BAR_PARENT_ID ||
-            category.id === RIGHT_BAR_PARENT_ID,
+            category.id === RIGHT_BAR_PARENT_ID ||
+            category.id === LEFT_BAR_PARENT_ID_EN ||
+            category.id === RIGHT_BAR_PARENT_ID_EN,
           "bg-blue-950":
             (categoryTag !== "" &&
               category.slug
@@ -220,7 +226,7 @@ const Sidebar: FC<SidebarProps> = ({
         styles.subCatalog,
       )}
     >
-      <div>
+      <div className="">
         {/*Оцю стилізувати*/}
         <h3 className="text-blue-950 ml-5 font-bold mt-5">
           {items?.[0]?.name}
