@@ -12,11 +12,11 @@ import vista120 from "./vista120.webp";
 import { useTranslations } from "next-intl";
 
 
-const SharesAtlan = () => {
+const SharesAtlan = ({ params: { locale } }: { params: { locale: string } }) => {
     const t = useTranslations('Shares');
     return (
         <MainLayout>
-            <Suspense fallback={<div>Loading...</div>}>
+            
                 <div
                     className={classNames(
                         "w-full flex flex-wrap justify-center mb-5 gap-5 mt-5",
@@ -104,7 +104,6 @@ const SharesAtlan = () => {
                         <p className="my-2">{t('shares-atlan300-text15')}</p>
                     </div>
                 </div>
-            </Suspense>
         </MainLayout >
     );
 };
