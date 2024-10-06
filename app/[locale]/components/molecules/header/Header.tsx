@@ -1,6 +1,6 @@
 "use client";
 import classNames from "classnames";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import styles from "./Header.module.css";
 import Image from "next/image";
