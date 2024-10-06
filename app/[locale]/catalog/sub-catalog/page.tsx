@@ -54,8 +54,9 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
   );
 
   return (
-    <Suspense fallback="Loading">
-      <MainLayout>
+
+    <MainLayout>
+      <Suspense fallback="Loading">
         <div
           className={classNames(
             "flex flex-1 flex-row justify-between self-center mb-5",
@@ -181,8 +182,9 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
             )}
           </div>
         </div>
-      </MainLayout>
-    </Suspense>
+      </Suspense>
+    </MainLayout>
+
   );
 };
 
