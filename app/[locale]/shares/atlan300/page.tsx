@@ -12,7 +12,7 @@ import vista120 from "./vista120.webp";
 import { useTranslations } from "next-intl";
 
 
-const SharesAtlan = ({ params: { locale } }: { params: { locale: string } }) => {
+const SharesAtlan = () => {
     const t = useTranslations('Shares');
     return (
         <MainLayout>
