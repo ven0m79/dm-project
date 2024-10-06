@@ -3,7 +3,6 @@ import React from "react";
 import classNames from "classnames";
 import { MainLayout } from "@app/[locale]/components/templates";
 import styles from "./About.module.css";
-import { unstable_setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
 import { Link } from "config";
 import Image from 'next/image';

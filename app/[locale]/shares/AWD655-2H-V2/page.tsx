@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./../Shares.module.css";
 
 import { MainLayout } from "@app/[locale]/components/templates";
-import { unstable_setRequestLocale } from "next-intl/server";
+
 import { Link } from "config";
 import Image from "next/image";
 import classNames from "classnames";
@@ -13,7 +13,6 @@ import { useTranslations } from "next-intl";
 
 
 const AWD655_2h_v2 = ({ params: { locale } }: { params: { locale: string } }) => {
-    unstable_setRequestLocale(locale);
     const t = useTranslations('Shares');
     return (
         <MainLayout>

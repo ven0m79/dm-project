@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./Catalog.module.css";
 
 import { MainLayout } from "@app/[locale]/components/templates";
-import { unstable_setRequestLocale } from "next-intl/server";
+
 import { Link } from "config";
 import Image from "next/image";
 import classNames from "classnames";
@@ -21,7 +21,7 @@ const CatalogPage = ({
 }: {
   params: { locale: string };
 }) => {
-  unstable_setRequestLocale(locale);
+
   const t = useTranslations('Catalog1');
 
   return (
