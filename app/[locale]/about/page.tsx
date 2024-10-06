@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { Suspense } from "react";
 import classNames from "classnames";
 import { MainLayout } from "@app/[locale]/components/templates";
@@ -16,7 +16,7 @@ const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
   const t = useTranslations('AboutPage');
   return (
     <MainLayout>
-      <Suspense fallback="Loading">
+      <Suspense fallback={"Loading"}>
         <div
           className={classNames(
             "flex flex-1 flex-col justify-center items-start",
