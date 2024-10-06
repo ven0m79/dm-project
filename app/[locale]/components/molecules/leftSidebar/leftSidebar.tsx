@@ -15,7 +15,7 @@ const customTheme: CustomFlowbiteTheme = {
     root: {
       base: "h-full",
       inner:
-        "h-fit w-[300px] overflow-y-auto overflow-x-hidden py-3 rounded bg-white dark:bg-gray-800",
+        "h-fit w-[300px] overflow-y-auto overflow-x-hidden py-3 rounded-xl bg-white dark:bg-gray-800",
     },
     collapse: {
       button:
@@ -63,7 +63,7 @@ const customTheme: CustomFlowbiteTheme = {
         noIcon: "font-bold",
       },
       content: {
-        base: "flex-1 whitespace-normal px-3", // Change this line
+        base: "flex-1 whitespace-normal px-3",
       },
       icon: {
         base: "h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white",
@@ -140,12 +140,8 @@ const Sidebar: FC<SidebarProps> = ({
   );
 
   const handleCategoryClick = (categoryId: number) => {
-    if (openedCategoryId === categoryId) {
-      // Do nothing if the clicked category is already open
-      return;
-    }
     setSelectedCategoryId(categoryId);
-    setOpenedCategoryId(categoryId); // Set the clicked category as open
+    setOpenedCategoryId(categoryId);
     getCategoryDetails(categoryId);
   };
 
@@ -160,7 +156,7 @@ const Sidebar: FC<SidebarProps> = ({
         as="div"
         key={category.id}
         className={classNames("cursor-pointer", {
-          "bg-sky-200": selectedCategoryId === category.id, // Highlight selected item
+          "bg-sky-200": selectedCategoryId === category.id,
         })}
         style={{ paddingLeft: marginLeft }}
       >
