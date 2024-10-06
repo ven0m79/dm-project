@@ -7,7 +7,10 @@ import styles from "./About.module.css";
 import { useTranslations } from 'next-intl';
 import { Link } from "config";
 import Image from 'next/image';
-import SliderAbout from "../components/molecules/sliderAbout/slider";
+import dynamic from "next/dynamic";  // Import dynamic for client-side rendering
+
+const SliderAbout = dynamic(() => import("../components/molecules/sliderAbout/slider"), { ssr: false });
+
 import roman from "../../../public/roman.webp";
 import vystavka from "../../../public/vystavka.webp";
 
