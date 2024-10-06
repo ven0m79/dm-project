@@ -36,7 +36,7 @@ const CatalogPage = ({
             pathname: "/catalog/sub-catalog",
             // ось тут треба конфігурувати параметр, який буде значенням для відкриття порібного бару
             // він бає бути унікальним для всіх категорій
-            query: "category=operations",
+            query: "category=or-equipment",
           }}
         >
           <div
@@ -59,7 +59,7 @@ const CatalogPage = ({
         <Link
           href={{
             pathname: "/catalog/sub-catalog",
-            query: "category=intensive-therapy",
+            query: "category=icu-equipment",
           }}
         >
           <div
@@ -83,7 +83,7 @@ const CatalogPage = ({
         <Link
           href={{
             pathname: "/catalog/sub-catalog",
-            query: "category=neonathal",
+            query: "category=neonatal-equipment",
           }}
         >
           <div
@@ -105,7 +105,7 @@ const CatalogPage = ({
         <Link
           href={{
             pathname: "/catalog/sub-catalog",
-            query: "category=sterilization",
+            query: "category=cleaning-and-desinfecting-equipment",
           }}
         >
           <div
@@ -129,7 +129,7 @@ const CatalogPage = ({
         <Link
           href={{
             pathname: "/catalog/sub-catalog",
-            query: "category=gaz",
+            query: "category=gas-management-systems",
           }}
         >
           <div
