@@ -3,12 +3,20 @@
 import classNames from "classnames";
 import { CustomFlowbiteTheme, Sidebar as FBSidebar } from "flowbite-react";
 
-import React, { FC, memo, useCallback, useEffect, useState } from "react";
+import React, {
+  FC,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 import styles from "../../../catalog/sub-catalog/Sub-catalog.module.css";
 
 import { fetchWooCommerceProductsBasedOnCategory } from "../../../../../utils/woocommerce.setup";
 import { TransformedCategoriesType } from "@app/[locale]/catalog/sub-catalog/helpers";
+import { usePathname, useRouter } from "../../../../../config";
 
 const customTheme: CustomFlowbiteTheme = {
   sidebar: {
@@ -94,22 +102,34 @@ const RIGHT_BAR_PARENT_ID = 55;
 const LEFT_BAR_PARENT_ID_EN = 52;
 const RIGHT_BAR_PARENT_ID_EN = 57;
 
-const categoriesIdData = {
-  operations: 19,
-  "intensive-therapy": 75,
-  neonathal: 79,
-  sterilization: 83,
-  gaz: 87,
+const categoriesUAIdData = {
+  "or-equipment": 19,
+  "icu-equipment": 75,
+  "neonatal-equipment": 79,
+  "cleaning-and-desinfecting-equipment": 83,
+  "gas-management-systems": 87,
   furniture: 91,
   accessories: 95,
+};
+
+const categoriesENIdData = {
+  "or-equipment": 61,
+  "icu-equipment": 77,
+  "neonatal-equipment": 81,
+  "cleaning-and-desinfecting-equipment": 85,
+  "gas-management-systems": 89,
+  furniture: 93,
+  accessories: 97,
 };
 
 type SidebarProps = {
   locale: string;
   items: TransformedCategoriesType[];
-  categoryTag?: string | null | keyof typeof categoriesIdData;
+  categoryTag?: string | null | keyof typeof categoriesUAIdData;
   setSelectedCategoryItem?: (v: string) => void;
   setSelectedProducts?: (v: any[]) => void;
+  changeURLParams?: boolean;
+  fromProductPage?: boolean;
 };
 
 const Sidebar: FC<SidebarProps> = ({
@@ -118,12 +138,22 @@ const Sidebar: FC<SidebarProps> = ({
   locale,
   setSelectedProducts,
   setSelectedCategoryItem,
+  changeURLParams,
+  fromProductPage,
 }) => {
+  const router = useRouter();
+  const pathname = usePathname();
 
-  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
+  const currentIdsData = useMemo(
+    () => (locale === "ua" ? categoriesUAIdData : categoriesENIdData),
+    [locale],
+  );
+
+  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
+    null,
+  );
   const [openedCategoryId, setOpenedCategoryId] = useState<number | null>(null);
 
-  console.log({ categoryTag, categoriesIdData });
   const getCategoryDetails = useCallback(
     async (id: number) => {
       try {
@@ -149,6 +179,50 @@ const Sidebar: FC<SidebarProps> = ({
     getCategoryDetails(categoryId);
   };
 
+  const findParentCategories = useCallback(
+    (
+      categories: TransformedCategoriesType[],
+      targetCategoryId: number,
+      parents: TransformedCategoriesType[] = [],
+    ): TransformedCategoriesType[] | null => {
+      for (const category of categories) {
+        // If the target category is found, return the parents list
+        if (category.id === targetCategoryId) {
+          return parents; // Return the accumulated parents when the target is found
+        }
+
+        // If the category has children, search recursively
+        if (category.childrens && category.childrens.length > 0) {
+          const foundParents = findParentCategories(
+            category.childrens,
+            targetCategoryId,
+            [...parents, category], // Add the current category to the parents list
+          );
+
+          if (foundParents) {
+            return foundParents.filter(
+              (el) =>
+                // @ts-ignore
+                el.id !== LEFT_BAR_PARENT_ID &&
+                el.id !== LEFT_BAR_PARENT_ID_EN &&
+                el.id !== RIGHT_BAR_PARENT_ID &&
+                el.id !== RIGHT_BAR_PARENT_ID_EN,
+            ); // Return the full parent path if found
+          }
+        }
+      }
+
+      return null; // Return null if the target category is not found
+    },
+    [],
+  );
+
+  const selectedItemsNestedData = useMemo(() => {
+    return findParentCategories(items, Number(selectedCategoryId))?.map(
+      (el) => el.id,
+    );
+  }, [findParentCategories, items, selectedCategoryId]);
+
   const renderNestedCategories = (
     category: TransformedCategoriesType,
     level = 0,
@@ -170,9 +244,18 @@ const Sidebar: FC<SidebarProps> = ({
             const selectedParent = items[0]?.childrens?.find(
               (item) => item.id === category.parent,
             );
+            const listCat = findParentCategories(items, category.id);
 
             setSelectedCategoryItem?.(selectedParent?.slug || "");
             handleCategoryClick(category.id);
+
+            if (changeURLParams) {
+              router.push(`${pathname}?category=${listCat?.[0].slug}`);
+            }
+
+            if (fromProductPage) {
+              router.push(`/catalog/sub-catalog?category=${listCat?.[0].slug}`);
+            }
           }}
         >
           {category.name}
@@ -185,7 +268,8 @@ const Sidebar: FC<SidebarProps> = ({
           category.id === RIGHT_BAR_PARENT_ID ||
           category.id === LEFT_BAR_PARENT_ID_EN ||
           category.id === RIGHT_BAR_PARENT_ID_EN ||
-          openedCategoryId === category.id
+          openedCategoryId === category.id ||
+          selectedItemsNestedData?.includes(Number(category.id))
         }
         label={category.name}
         key={category.id}
@@ -195,14 +279,14 @@ const Sidebar: FC<SidebarProps> = ({
             category.id === RIGHT_BAR_PARENT_ID ||
             category.id === LEFT_BAR_PARENT_ID_EN ||
             category.id === RIGHT_BAR_PARENT_ID_EN,
-          "bg-sky-500": selectedCategoryId === category.id
+          "bg-sky-500": selectedCategoryId === category.id,
         })}
         style={{ paddingLeft: marginLeft }}
       >
         {category?.childrens?.length
           ? category.childrens.map((child) =>
-            renderNestedCategories(child, level + 1),
-          )
+              renderNestedCategories(child, level + 1),
+            )
           : null}
       </FBSidebar.Collapse>
     );
@@ -210,14 +294,23 @@ const Sidebar: FC<SidebarProps> = ({
 
   useEffect(() => {
     if (categoryTag) {
-      const categoryId = categoriesIdData[categoryTag as keyof typeof categoriesIdData];
+      const updatedTag =
+        locale !== "ua"
+          ? categoryTag.includes("en")
+            ? categoryTag.slice(0, -3)
+            : categoryTag
+          : categoryTag;
+
+      const categoryId =
+        currentIdsData[updatedTag as keyof typeof currentIdsData];
+
       if (categoryId) {
         getCategoryDetails(categoryId);
         setSelectedCategoryId(categoryId); // Ensure initial category is selected
         setOpenedCategoryId(categoryId);
       }
     }
-  }, [categoryTag, getCategoryDetails]);
+  }, [categoryTag, currentIdsData, getCategoryDetails, locale]);
 
   return (
     <div
