@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { FC, ReactNode } from "react";
+import React, { FC, ReactNode, Suspense } from "react";
 
 import { Nav, Footer, Header } from "@app/[locale]/components/molecules";
 import "@app/[locale]/globals.css";
@@ -27,7 +27,9 @@ const MainLayout: FC<MainLayoutProps> = ({
 }) => {
   return (
     <main className={(styles.main)}>
-      {noHeader ? null : <Header />}
+      <Suspense fallback="Loading...">
+        {noHeader ? null : <Header />}
+      </Suspense>
       {noNav ? null : <Nav />}
       {children}
       {noFooter ? null : <Footer />}
