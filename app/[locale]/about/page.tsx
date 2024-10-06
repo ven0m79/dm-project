@@ -15,8 +15,8 @@ const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
   //unstable_setRequestLocale(locale);
   const t = useTranslations('AboutPage');
   return (
-    <Suspense fallback="Loading">
-      <MainLayout>
+    <MainLayout>
+      <Suspense fallback="Loading">
         <div
           className={classNames(
             "flex flex-1 flex-col justify-center items-start",
@@ -141,8 +141,9 @@ const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
           </div> */}
           </div>
         </div>
-      </MainLayout>
-    </Suspense>
+      </Suspense>
+    </MainLayout>
+
   );
 };
 
