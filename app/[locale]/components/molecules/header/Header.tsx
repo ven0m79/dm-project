@@ -119,7 +119,6 @@ const Header = () => {
   }, [searchParams]);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
     <header
       className={classNames("mt-top flex flex-col w-full", styles["header"])}
     >
@@ -251,7 +250,6 @@ const Header = () => {
         </div>
       </div>
     </header>
-    </Suspense>
   );
 };
 
