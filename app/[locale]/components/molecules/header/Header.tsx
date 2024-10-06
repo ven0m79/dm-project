@@ -1,3 +1,4 @@
+"use client";
 import classNames from "classnames";
 import React, { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import axios from "axios";
