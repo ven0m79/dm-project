@@ -53,9 +53,6 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
     el.tags.map((el) => el.name).includes("accessories"),
   );
 
-  console.log("selectedProducts -", selectedProducts);
-  // console.log("isAccessories -", isAccessories);
-
   return (
     <Suspense fallback="Loading">
       <MainLayout>
@@ -66,27 +63,28 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
           )}
         >
           <div className={classNames("mt-4", styles.subMenu)}>
-            {(locale === "ua") ?
+            {locale === "ua" ? (
               <Sidebar
                 items={[categories?.[1] || []]}
                 categoryTag={selectedCategoryItem}
                 setSelectedProducts={setSelectedProducts}
                 locale={locale}
-              /> :
+                changeURLParams
+              />
+            ) : (
               <Sidebar
                 items={[categories?.[0] || []]}
                 categoryTag={selectedCategoryItem}
                 setSelectedProducts={setSelectedProducts}
                 locale={locale}
-              />}
+                changeURLParams
+              />
+            )}
           </div>
-
 
           <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-6 w-full items-start">
             {selectedProducts && selectedProducts.length ? (
               selectedProducts.map((el) => {
-                console.log("В Ретурні ", isAccessories);
-
                 return isAccessories[0] ? (
                   <div
                     key={el.id}
@@ -166,19 +164,21 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
           </div>
 
           <div className={classNames("mt-4", styles.subMenu)}>
-            {(locale === "ua") ?
+            {locale === "ua" ? (
               <Sidebar
                 items={[categories?.[0] || []]}
                 categoryTag={selectedCategoryItem}
                 setSelectedProducts={setSelectedProducts}
                 locale={locale}
-              /> :
+              />
+            ) : (
               <Sidebar
                 items={[categories?.[1] || []]}
                 categoryTag={selectedCategoryItem}
                 setSelectedProducts={setSelectedProducts}
                 locale={locale}
-              />}
+              />
+            )}
           </div>
         </div>
       </MainLayout>
