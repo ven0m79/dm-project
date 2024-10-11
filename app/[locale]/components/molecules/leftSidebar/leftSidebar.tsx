@@ -36,7 +36,7 @@ const customTheme: CustomFlowbiteTheme = {
         },
       },
       label: {
-        base: "ml-3 flex-1 whitespace-normal text-left", // Change this line
+        base: "ml-3 flex-1 whitespace-normal text-left",
         icon: {
           base: "h-6 w-6 transition delay-0 ease-in-out",
           open: {

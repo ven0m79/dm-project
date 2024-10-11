@@ -88,36 +88,58 @@ button {
 }
 .ul1 {
   font-size: 16px;
-  color: #0061aa;
+  color: #0061aa !important;
   text-align: justify;
-  text-indent: 20px;
+  
   line-height: 27px;
   list-style-type: disc;
 }
 
 .ul1 > li > span {
   margin-right: 20px;
+  text-indent: 20px;
 }
 
 .ul2 {
   font-size: 24px;
   color: #0061aa !important;
   text-align: justify;
-  text-indent: 20px;
+  
   line-height: 27px;
   list-style-type: disc;
 }
 
 .ul2 > li {
-  color: #002766;
+  color: #002766 !important;
   margin-right: 20px;
   padding-right: 20px;
 }
 
 .ul2 > li > span {
-  color: #002766;
+  color: #002766 !important;
   margin-right: 20px;
   padding-right: 20px;
+}
+.ul3 {
+  font-size: 16px;
+  color: #0061aa !important;
+  text-align: justify;
+  
+  line-height: 27px;
+  list-style-type: disc;
+}
+.ul3 > li {
+  display: block;
+  color: #0061aa !important;
+  margin-right: 20px;
+  padding-right: 20px;
+  margin-left: 20px;
+  padding-left: 20px;
+}
+
+
+.ul3 > li > span {
+  margin-right: 20px;
 }
 
 .productText {

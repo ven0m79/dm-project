@@ -27,7 +27,7 @@ const MainLayout: FC<MainLayoutProps> = ({
 }) => {
   return (
     <main className={(styles.main)}>
-      <Suspense fallback="Loading...">
+      <Suspense fallback="Loading">
         {noHeader ? null : <Header />}
       </Suspense>
       {noNav ? null : <Nav />}
