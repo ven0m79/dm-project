@@ -275,7 +275,7 @@ const Sidebar: FC<SidebarProps> = ({
             category.id === RIGHT_BAR_PARENT_ID ||
             category.id === LEFT_BAR_PARENT_ID_EN ||
             category.id === RIGHT_BAR_PARENT_ID_EN,
-          "bg-sky-500": selectedCategoryId === category.id,
+          "bg-sky-200": selectedCategoryId === category.id,
         })}
         style={{ paddingLeft: marginLeft }}
       >
