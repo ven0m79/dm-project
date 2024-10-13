@@ -221,34 +221,36 @@ const Sidebar: FC<SidebarProps> = ({
 
   const renderNestedCategories = (
     category: TransformedCategoriesType,
-    level = 0,
+    level = 0,  // Level starts at 0 for root
   ) => {
-    const marginLeft = level === 0 || level === 1 ? 0 : level * 5;
-
+    // Apply padding starting from level 2
+    const paddingLeft = level > 1 ? level * 7 : 0; // No padding for level 0 and level 1
+  
     return category?.childrens?.length === 0 ? (
+      // Render regular item (no children)
       <FBSidebar.Item
         as="div"
         key={category.id}
         className={classNames("cursor-pointer", {
           "bg-sky-200": selectedCategoryId === category.id,
         })}
-        style={{ paddingLeft: marginLeft }}
+        // Apply padding only for levels >= 2
+        style={{ paddingLeft: `${paddingLeft}px` }}
       >
         <div
-          style={{ marginLeft: marginLeft }}
           onClick={() => {
             const selectedParent = items[0]?.childrens?.find(
               (item) => item.id === category.parent,
             );
             const listCat = findParentCategories(items, category.id);
-
+  
             setSelectedCategoryItem?.(selectedParent?.slug || "");
             handleCategoryClick(category.id);
-
+  
             if (changeURLParams) {
               router.push(`${pathname}?category=${listCat?.[0].slug}`);
             }
-
+  
             if (fromProductPage) {
               router.push(`/catalog/sub-catalog?category=${listCat?.[0].slug}`);
             }
@@ -258,6 +260,7 @@ const Sidebar: FC<SidebarProps> = ({
         </div>
       </FBSidebar.Item>
     ) : (
+      // Render collapse for items with children
       <FBSidebar.Collapse
         open={
           category.id === LEFT_BAR_PARENT_ID ||
@@ -269,7 +272,7 @@ const Sidebar: FC<SidebarProps> = ({
         }
         label={category.name}
         key={category.id}
-        className={classNames("", {
+        className={classNames({
           "opacity-0 pointer-events-none mt-[-40px]":
             category.id === LEFT_BAR_PARENT_ID ||
             category.id === RIGHT_BAR_PARENT_ID ||
@@ -277,16 +280,20 @@ const Sidebar: FC<SidebarProps> = ({
             category.id === RIGHT_BAR_PARENT_ID_EN,
           "bg-sky-200": selectedCategoryId === category.id,
         })}
-        style={{ paddingLeft: marginLeft }}
+        // Apply padding only for levels >= 2
+        style={{ paddingLeft: `${paddingLeft}px` }}
       >
+        {/* Recursively render children */}
         {category?.childrens?.length
           ? category.childrens.map((child) =>
-              renderNestedCategories(child, level + 1),
+              renderNestedCategories(child, level + 1), // Increase level for deeper nesting
             )
           : null}
       </FBSidebar.Collapse>
     );
   };
+  
+  
 
   useEffect(() => {
     if (categoryTag) {
