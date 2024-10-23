@@ -202,12 +202,16 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                         <br />
 
                         {isAccessories ? (
-                          <div
-                            className={classNames("text-normal", styles.brand)}
-                          >
-                            {"Артикул: "}
-                            {details?.sku}
-                          </div>
+                          <><div
+                              className={classNames("text-normal", styles.brand)}
+                            >
+                              {"Артикул: "}
+                              {details?.sku}
+                            </div><div
+                                className="content mt-5 -ml-5 text-black"
+                                dangerouslySetInnerHTML={{
+                                  __html: details?.short_description || "",
+                                }} /></>
                         ) : null}
                         <div className="h-[100px]"></div>
                         <br />
