@@ -273,7 +273,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                                 crossSellProducts.map((el) => (
                                   <li key={el.id} className="mx-1">
                                     <a
-                                      className={"text text-green-900"}
+                                      className={"text text-blue-900"}
                                       href={`/catalog/sub-catalog/product/${el.id}?category=${el.tags[0].name}`}
                                     >
                                       {el.name}</a>
