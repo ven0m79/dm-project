@@ -56,7 +56,9 @@ export type SingleProductDetails = {
   translations: Record<string, number>[];
   cross_sell_ids: CrossSellIds[];
 };
-export type CrossSellIds = number[]
+export type CrossSellIds = {
+  id: number;
+};
 
 export type BrandsType = {
   id: number;

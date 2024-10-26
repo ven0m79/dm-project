@@ -63,26 +63,31 @@ export async function fetchWooCommerceProductDetails(id: number, locale: string)
   }
 }
 
-export async function fetchWooCommerceCrossProductsDetails(id: number, locale: string) {
+export async function fetchWooCommerceCrossProductsDetails(ids: any, locale: string) {
+  // Fetch product details for each ID in the array
   try {
-    const response = await api.get(`products/cross_sell_ids?per_page=100&lang=${locale}`);
+    // Fetch product details for each ID in the array
+    const productPromises = ids.map(async (id: number) => {
+      // Use the `api.get` method to fetch product details by ID
+      const response = await api.get(`products/${id}`, { lang: locale });
+      return response.data;
+    });
 
-    if (response.status === 200) {
-      return (await response.data) as SingleProductDetails;
-    }
+    // Resolve all promises and return product data
+    return await Promise.all(productPromises);
   } catch (error) {
     throw new Error(error as string);
   }
 }
 
-export async function fetchWooCommerceProductsTitles(searchTerm: string, locale: string) {
-  try {
-    const response = await api.get(`products?search=${searchTerm}&locale=${locale}`);
+  export async function fetchWooCommerceProductsTitles(searchTerm: string, locale: string) {
+    try {
+      const response = await api.get(`products?search=${searchTerm}&locale=${locale}`);
 
-    if (response.status === 200) {
-      return (await response.data) as SingleProductTitles;
+      if (response.status === 200) {
+        return (await response.data) as SingleProductTitles;
+      }
+    } catch (error) {
+      throw new Error(error as string);
     }
-  } catch (error) {
-    throw new Error(error as string);
   }
-}

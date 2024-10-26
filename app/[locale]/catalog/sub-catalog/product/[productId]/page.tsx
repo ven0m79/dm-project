@@ -80,6 +80,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
   >([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [details, setDetails] = useState<SingleProductDetails | null>(null);
+  const [crossSellProducts, setCrossSellProducts] = useState<SingleProductDetails[]>([]);
 
   const selectedProductId = useMemo(() => {
     return (
@@ -97,7 +98,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
     try {
       const data = await fetchWooCommerceCategories(locale);
 
-      console.log({ data });
+      //console.log({ data });
 
       if (data) {
         // отут тобі треба розділити результат масиву data на 2 елементи які в ньому є
@@ -116,20 +117,21 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
     setLoading(true);
 
     try {
-      const data = await fetchWooCommerceProductDetails(
-        selectedProductId,
-        locale,
-      );
+      const data = await fetchWooCommerceProductDetails(selectedProductId, locale);
 
       if (data) {
         setDetails(data);
+
+        if (data.cross_sell_ids?.length) {
+          const crossSellData = await fetchWooCommerceCrossProductsDetails(data.cross_sell_ids, locale);
+          setCrossSellProducts(crossSellData);
+          console.log("Cross-sell products:", crossSellData);
+        }
       }
     } catch (e) {
-      console.warn({ e });
+      console.warn("Error fetching product details or cross-sell products:", e);
     } finally {
-      setTimeout(() => {
-        setLoading(false);
-      }, 500);
+      setLoading(false);
     }
   }, [locale, selectedProductId]);
 
@@ -203,15 +205,15 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
 
                         {isAccessories ? (
                           <><div
-                              className={classNames("text-normal", styles.brand)}
-                            >
-                              {"Артикул: "}
-                              {details?.sku}
-                            </div><div
-                                className="content mt-5 -ml-5 text-black"
-                                dangerouslySetInnerHTML={{
-                                  __html: details?.short_description || "",
-                                }} /></>
+                            className={classNames("text-normal", styles.brand)}
+                          >
+                            {"Артикул: "}
+                            {details?.sku}
+                          </div><div
+                              className="content mt-5 -ml-5"
+                              dangerouslySetInnerHTML={{
+                                __html: details?.short_description || "",
+                              }} /></>
                         ) : null}
                         <div className="h-[100px]"></div>
                         <br />
@@ -267,11 +269,19 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                                 styles.downloadabled,
                               )}
                             >
-                              {details?.cross_sell_ids?.map((el) => (
-                                <li key={0} className={classNames("mx-1")}>
-                                  {el}
-                                </li>
-                              ))}
+                              {crossSellProducts.length > 0 ? (
+                                crossSellProducts.map((el) => (
+                                  <li key={el.id} className="mx-1">
+                                    <a
+                                      className={"text text-green-900"}
+                                      href={`/catalog/sub-catalog/product/${el.id}?category=${el.tags[0].name}`}
+                                    >
+                                      {el.name}</a>
+                                  </li>
+                                ))
+                              ) : (
+                                <p>No cross-sell products available.</p>
+                              )}
                             </div>
                           </Tabs.Item>
                         )}
