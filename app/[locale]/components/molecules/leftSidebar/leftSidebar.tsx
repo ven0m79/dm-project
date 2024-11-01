@@ -169,20 +169,15 @@ const Sidebar: FC<SidebarProps> = ({
     [locale, setSelectedProducts],
   );
 
-  const handleCollapseToggle = (categoryId: number) => {
-    setSelectedCategoryId(categoryId);
-    getCategoryDetails(categoryId);
-    setOpenedCategoryIds((prevOpenedIds) => {
-      const isOpened = prevOpenedIds.includes(categoryId);
-
-      if (!isOpened) {
-        getCategoryDetails(categoryId); // Fetch products when opening a new category
-        return [...prevOpenedIds, categoryId]; // Add to open list
-      } else {
-        return prevOpenedIds.filter((id) => id !== categoryId); // Remove from open list
-      }
-    });
-  };
+      const handleCollapseToggle = async (categoryId: number) => {
+      setSelectedCategoryId(categoryId); // Highlight the selected category
+      
+      // Fetch products for the selected category
+      await getCategoryDetails(categoryId);
+      
+      // After fetching, set the clicked category as the only open one
+      setOpenedCategoryIds([categoryId]);
+    };
 
   const findParentCategories = useCallback(
     (
@@ -351,4 +346,3 @@ const Sidebar: FC<SidebarProps> = ({
 };
 
 export default memo(Sidebar);
- 
