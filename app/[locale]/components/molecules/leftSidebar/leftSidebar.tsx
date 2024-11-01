@@ -152,7 +152,7 @@ const Sidebar: FC<SidebarProps> = ({
   const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
     null,
   );
-  const [openedCategoryId, setOpenedCategoryId] = useState<number | null>(null);
+  const [openedCategoryIds, setOpenedCategoryIds] = useState<number[]>([]);
 
   const getCategoryDetails = useCallback(
     async (id: number) => {
@@ -169,10 +169,19 @@ const Sidebar: FC<SidebarProps> = ({
     [locale, setSelectedProducts],
   );
 
-  const handleCategoryClick = (categoryId: number) => {
+  const handleCollapseToggle = (categoryId: number) => {
     setSelectedCategoryId(categoryId);
-    setOpenedCategoryId(categoryId);
     getCategoryDetails(categoryId);
+    setOpenedCategoryIds((prevOpenedIds) => {
+      const isOpened = prevOpenedIds.includes(categoryId);
+
+      if (!isOpened) {
+        getCategoryDetails(categoryId); // Fetch products when opening a new category
+        return [...prevOpenedIds, categoryId]; // Add to open list
+      } else {
+        return prevOpenedIds.filter((id) => id !== categoryId); // Remove from open list
+      }
+    });
   };
 
   const findParentCategories = useCallback(
@@ -225,9 +234,7 @@ const Sidebar: FC<SidebarProps> = ({
   ) => {
     // Apply padding starting from level 2
     const paddingLeft = level > 1 ? level * 7 : 0; // No padding for level 0 and level 1
-  
     return category?.childrens?.length === 0 ? (
-      // Render regular item (no children)
       <FBSidebar.Item
         as="div"
         key={category.id}
@@ -245,7 +252,7 @@ const Sidebar: FC<SidebarProps> = ({
             const listCat = findParentCategories(items, category.id);
   
             setSelectedCategoryItem?.(selectedParent?.slug || "");
-            handleCategoryClick(category.id);
+            handleCollapseToggle(category.id);
   
             if (changeURLParams) {
               router.push(`${pathname}?category=${listCat?.[0].slug}`);
@@ -267,7 +274,7 @@ const Sidebar: FC<SidebarProps> = ({
           category.id === RIGHT_BAR_PARENT_ID ||
           category.id === LEFT_BAR_PARENT_ID_EN ||
           category.id === RIGHT_BAR_PARENT_ID_EN ||
-          openedCategoryId === category.id ||
+          openedCategoryIds.includes(category.id)  ||
           selectedItemsNestedData?.includes(Number(category.id))
         }
         label={category.name}
@@ -282,6 +289,7 @@ const Sidebar: FC<SidebarProps> = ({
         })}
         // Apply padding only for levels >= 2
         style={{ paddingLeft: `${paddingLeft}px` }}
+        onClick={() => handleCollapseToggle(category.id)} // Fetch products on collapse open
       >
         {/* Recursively render children */}
         {category?.childrens?.length
@@ -310,7 +318,7 @@ const Sidebar: FC<SidebarProps> = ({
       if (categoryId) {
         getCategoryDetails(categoryId);
         setSelectedCategoryId(categoryId); // Ensure initial category is selected
-        setOpenedCategoryId(categoryId);
+        setOpenedCategoryIds([categoryId]);
       }
     }
   }, [categoryTag, currentIdsData, getCategoryDetails, locale]);
