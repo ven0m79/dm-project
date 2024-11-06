@@ -178,6 +178,23 @@ const Sidebar: FC<SidebarProps> = ({
       // After fetching, set the clicked category as the only open one
       setOpenedCategoryIds([categoryId]);
     };
+    
+    // const handleCollapseToggle = (categoryId: number) => {
+    //   setSelectedCategoryId(categoryId);
+    //   getCategoryDetails(categoryId);
+    //   setOpenedCategoryIds((prevOpenedIds) => {
+    //     const isOpened = prevOpenedIds.includes(categoryId);
+  
+    //     if (!isOpened) {
+    //       getCategoryDetails(categoryId); // Fetch products when opening a new category
+    //       return [...prevOpenedIds, categoryId]; // Add to open list
+    //     } else {
+    //       return prevOpenedIds.filter((id) => id !== categoryId); // Remove from open list
+    //     }
+    //   });
+    // };
+
+
 
   const findParentCategories = useCallback(
     (

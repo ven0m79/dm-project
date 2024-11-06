@@ -44,6 +44,7 @@ export type SingleProductDetails = {
   tags: TagType[];
   sku: string;
   price: string;
+  regular_price: string;
   downloadable: boolean;
   downloads: DownloadsType[];
   dimensions: DimentionType[];

@@ -68,11 +68,11 @@ const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
 
               <div>
                 <div className={classNames("px-5 indent-5 text-justify w-[548x]", styles["aboutText1"])}>
+                  {/* <p>{t('information1')}</p><br />
                   <p>{t('information1')}</p><br />
                   <p>{t('information1')}</p><br />
                   <p>{t('information1')}</p><br />
-                  <p>{t('information1')}</p><br />
-                  <p>{t('information1')}</p><br />
+                  <p>{t('information1')}</p><br /> */}
                 </div>
               </div>
             </div>

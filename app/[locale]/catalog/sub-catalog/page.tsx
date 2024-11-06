@@ -115,6 +115,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
                             width={150}
                             height={210}
                           />
+                          {/* <div className="h-px mt-24 ml-20 text-[16px] flex self-center absolute text-red-500 font-bold">{el.price} $</div> */}
                         </div>
                         <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center"></div>
                         <div className="flex justify-center h-16">
@@ -147,7 +148,9 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
                             width={200}
                             height={250}
                           />
+                          
                         </div>
+                        
                         <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center"></div>
                         <div className="flex justify-center">
                           <h3 className="flex justify-center h-16">
