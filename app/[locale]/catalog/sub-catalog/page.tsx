@@ -112,8 +112,8 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
                           <img
                             src={el.images[0].src}
                             alt={el.images[0].alt}
-                            width={150}
-                            height={210}
+                            width={190}
+                            height={200}
                           />
                           {/* <div className="h-px mt-24 ml-20 text-[16px] flex self-center absolute text-red-500 font-bold">{el.price} $</div> */}
                         </div>
