@@ -17,6 +17,7 @@ import styles from "../../../catalog/sub-catalog/Sub-catalog.module.css";
 import { fetchWooCommerceProductsBasedOnCategory } from "../../../../../utils/woocommerce.setup";
 import { TransformedCategoriesType } from "@app/[locale]/catalog/sub-catalog/helpers";
 import { usePathname, useRouter } from "../../../../../config";
+import ErrorBoundary from "../../error";
 
 const customTheme: CustomFlowbiteTheme = {
   sidebar: {
@@ -132,7 +133,7 @@ type SidebarProps = {
   fromProductPage?: boolean;
 };
 
-const Sidebar: FC<SidebarProps> = ({
+const Content: FC<SidebarProps> = ({
   items,
   categoryTag,
   locale,
@@ -169,30 +170,30 @@ const Sidebar: FC<SidebarProps> = ({
     [locale, setSelectedProducts],
   );
 
-      const handleCollapseToggle = async (categoryId: number) => {
-      setSelectedCategoryId(categoryId); // Highlight the selected category
-      
-      // Fetch products for the selected category
-      await getCategoryDetails(categoryId);
-      
-      // After fetching, set the clicked category as the only open one
-      setOpenedCategoryIds([categoryId]);
-    };
-    
-    // const handleCollapseToggle = (categoryId: number) => {
-    //   setSelectedCategoryId(categoryId);
-    //   getCategoryDetails(categoryId);
-    //   setOpenedCategoryIds((prevOpenedIds) => {
-    //     const isOpened = prevOpenedIds.includes(categoryId);
-  
-    //     if (!isOpened) {
-    //       getCategoryDetails(categoryId); // Fetch products when opening a new category
-    //       return [...prevOpenedIds, categoryId]; // Add to open list
-    //     } else {
-    //       return prevOpenedIds.filter((id) => id !== categoryId); // Remove from open list
-    //     }
-    //   });
-    // };
+  const handleCollapseToggle = async (categoryId: number) => {
+    setSelectedCategoryId(categoryId); // Highlight the selected category
+
+    // Fetch products for the selected category
+    await getCategoryDetails(categoryId);
+
+    // After fetching, set the clicked category as the only open one
+    setOpenedCategoryIds([categoryId]);
+  };
+
+  // const handleCollapseToggle = (categoryId: number) => {
+  //   setSelectedCategoryId(categoryId);
+  //   getCategoryDetails(categoryId);
+  //   setOpenedCategoryIds((prevOpenedIds) => {
+  //     const isOpened = prevOpenedIds.includes(categoryId);
+
+  //     if (!isOpened) {
+  //       getCategoryDetails(categoryId); // Fetch products when opening a new category
+  //       return [...prevOpenedIds, categoryId]; // Add to open list
+  //     } else {
+  //       return prevOpenedIds.filter((id) => id !== categoryId); // Remove from open list
+  //     }
+  //   });
+  // };
 
 
 
@@ -262,14 +263,14 @@ const Sidebar: FC<SidebarProps> = ({
               (item) => item.id === category.parent,
             );
             const listCat = findParentCategories(items, category.id);
-  
+
             setSelectedCategoryItem?.(selectedParent?.slug || "");
             handleCollapseToggle(category.id);
-  
+
             if (changeURLParams) {
               router.push(`${pathname}?category=${listCat?.[0].slug}`);
             }
-  
+
             if (fromProductPage) {
               router.push(`/catalog/sub-catalog?category=${listCat?.[0].slug}`);
             }
@@ -286,7 +287,7 @@ const Sidebar: FC<SidebarProps> = ({
           category.id === RIGHT_BAR_PARENT_ID ||
           category.id === LEFT_BAR_PARENT_ID_EN ||
           category.id === RIGHT_BAR_PARENT_ID_EN ||
-          openedCategoryIds.includes(category.id)  ||
+          openedCategoryIds.includes(category.id) ||
           selectedItemsNestedData?.includes(Number(category.id))
         }
         label={category.name}
@@ -306,14 +307,14 @@ const Sidebar: FC<SidebarProps> = ({
         {/* Recursively render children */}
         {category?.childrens?.length
           ? category.childrens.map((child) =>
-              renderNestedCategories(child, level + 1), // Increase level for deeper nesting
-            )
+            renderNestedCategories(child, level + 1), // Increase level for deeper nesting
+          )
           : null}
       </FBSidebar.Collapse>
     );
   };
-  
-  
+
+
 
   useEffect(() => {
     if (categoryTag) {
@@ -361,5 +362,13 @@ const Sidebar: FC<SidebarProps> = ({
     </div>
   );
 };
+
+const Sidebar: FC<SidebarProps> = (props) => {
+  return <ErrorBoundary>
+    <Content {...props}/>
+
+
+  </ErrorBoundary>
+}
 
 export default memo(Sidebar);
