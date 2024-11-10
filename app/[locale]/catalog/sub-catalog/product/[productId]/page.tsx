@@ -191,7 +191,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                           height={475}
                         />
                       </div>
-                      <div className="px-1 pt-28 w-[350px]">
+                      <div className="px-1 pt-28 w-[300px]">
                         <h1 className={classNames("", styles.title)}>
                           {details?.name}
                         </h1>
@@ -217,18 +217,18 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                         ) : null}
                         <div className="h-[100px]"></div>
                         <br />
-                        <div className="flex flex-row justify-between">
+                        <div className="flex flex-col justify-between">
                           <div className={styles.downloadable}>
                             <Link href={"../../../../contacts"}>
                               Запит комерційної пропозиції
                             </Link>
-                          </div>
+                          </div><br />
                           {isAccessories ? (
                             <div className=""></div>
                           ) : (
                             <div
                               className={classNames(
-                                "self-center",
+                                "",
                                 styles.downloadable,
                               )}
                             >
