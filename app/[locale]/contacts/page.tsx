@@ -32,12 +32,15 @@ const ContactsPage = ({ params: { locale } }: { params: { locale: string } }) =>
     const data = { name, mobile, medicalFacility, city, email, message };
     //console.log(data);
     fetch('/api/contact', {
-      method: 'post',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
-    });
+    })
+    .then(response => response.json())
+    .then(result => console.log('Success:', result))
+    .catch(error => console.error('Error:', error));;
   };
   return (
     <MainLayout>
