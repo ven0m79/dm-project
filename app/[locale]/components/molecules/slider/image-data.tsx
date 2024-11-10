@@ -13,7 +13,7 @@ export const articlesUa: {
   slide1: {
     title: "Обладнання для операційних",
     description: "Наркозно-дихальні апарати, монітори пацієнта, операційні столи, операційні світильники, консолі та інше",
-    link: "/catalog/sub-catalog?category=operations",
+    link: "/catalog/sub-catalog?category=or-equipment",
     img1: "/slider-photo/oper1(back).png",
     img2: "/slider-photo/oper1.png",
     more: "Перейти в розділ",
@@ -22,7 +22,7 @@ export const articlesUa: {
     title: "Обладнання для відділень інтенсивної терапії",
     description:
       "Апарати ШВЛ, монітори пацієнта, консолі, панелі, аспіратори, ліжка, візки та інше",
-    link: "/catalog/sub-catalog?category=intensive-therapy",
+    link: "/catalog/sub-catalog?category=icu-equipment",
     img1: "/slider-photo/intencive-terapy(back).png",
     img2: "/slider-photo/intencive-terapy.png",
     more: "Перейти в розділ",
@@ -32,7 +32,7 @@ export const articlesUa: {
     title: "Неонатальне обладнання",
     description:
       "Інкубатори, відкриті реанімаційні місця, лампи фототерапії, білірубінометри та інше",
-    link: "/catalog/sub-catalog?category=neonathal",
+    link: "/catalog/sub-catalog?category=neonatal-equipment",
     img1: "/slider-photo/neonat1(back).png",
     img2: "/slider-photo/neonat1.png",
     more: "Перейти в розділ",
@@ -40,7 +40,7 @@ export const articlesUa: {
   slide4: {
     title: "Стерилізаційне та дезінфекційне обладнання",
     description: "Стерилізатори, мийні машини та інше",
-    link: "/catalog/sub-catalog?category=sterilization",
+    link: "/catalog/sub-catalog?category=cleaning-and-desinfecting-equipment",
     img1: "/slider-photo/sterilization(back).png",
     img2: "/slider-photo/sterilization.png",
     more: "Перейти в розділ",
@@ -48,7 +48,7 @@ export const articlesUa: {
   slide5: {
     title: "Медичне газопостачання",
     description: "Компресорні станції, вакуумні станції, кисневі станції, блоки контролю, газові розетки та інше",
-    link: "/catalog/sub-catalog?category=gaz",
+    link: "/catalog/sub-catalog?category=gas-management-systems",
     img1: "/slider-photo/med-gaz(back).png",
     img2: "/slider-photo/med-gaz.png",
     more: "Перейти в розділ",
@@ -77,7 +77,7 @@ export const articlesEng: {
   slide1: {
     title: "Equipment for OR",
     description: "Anesthesia machines, patient monitors, operating tables, operating lights, ceiling supply units and more",
-    link: "/catalog/sub-catalog?category=operations",
+    link: "/catalog/sub-catalog?category=or-equipment",
     img1: "/slider-photo/oper1(back).png",
     img2: "/slider-photo/oper1.png",
     more: "Read more",
@@ -85,7 +85,7 @@ export const articlesEng: {
   slide2: {
     title: "Equipment for ICU",
     description: "Ventilators, patient monitors, ceiling supply units, wall supply units, aspirators, beds, trolleys and more",
-    link: "/catalog/sub-catalog?category=intensive-therapy",
+    link: "/catalog/sub-catalog?category=icu-equipment",
     img1: "/slider-photo/intencive-terapy(back).png",
     img2: "/slider-photo/intencive-terapy.png",
     more: "Read more",
@@ -93,7 +93,7 @@ export const articlesEng: {
   slide3: {
     title: "Neonatal equipment",
     description: "Incubators, open care warmers, phototherapy lamps, bilirubinometers and more",
-    link: "/catalog/sub-catalog?category=neonathal",
+    link: "/catalog/sub-catalog?category=neonatal-equipment",
     img1: "/slider-photo/neonat1(back).png",
     img2: "/slider-photo/neonat1.png",
     more: "Read more",
@@ -101,7 +101,7 @@ export const articlesEng: {
   slide4: {
     title: "Sterilization and disinfection equipment",
     description: "Sterilizers, washing machines and more",
-    link: "/catalog/sub-catalog?category=sterilization",
+    link: "/catalog/sub-catalog?category=cleaning-and-desinfecting-equipment",
     img1: "/slider-photo/sterilization(back).png",
     img2: "/slider-photo/sterilization.png",
     more: "Read more",
@@ -109,7 +109,7 @@ export const articlesEng: {
   slide5: {
     title: "Medical gas supply",
     description: "Compressor stations, vacuum stations, oxygen stations, gas control units, terminal units and more",
-    link: "/catalog/sub-catalog?category=gaz",
+    link: "/catalog/sub-catalog?category=gas-management-systems",
     img1: "/slider-photo/med-gaz(back).png",
     img2: "/slider-photo/med-gaz.png",
     more: "Read more",
