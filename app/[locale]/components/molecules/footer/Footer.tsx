@@ -37,7 +37,7 @@ const Footer = () => {
 
         <div className={classNames('font-bold', styles["column"])}>
           <div className={classNames('font-bold mb-4 text-[20px] ml-5')}>{t('catalog')}</div>
-          <Link href="/catalog/sub-catalog?category=operations"><div className={classNames('font-normal mt-1 ml-5 hover:text-green-600')}>{t('or-equipment')}</div></Link>
+          <Link href="/catalog/sub-catalog?category=or-equipment"><div className={classNames('font-normal mt-1 ml-5 hover:text-green-600')}>{t('or-equipment')}</div></Link>
           <Link href="/catalog/sub-catalog?category=intensive-therapy"><div className={classNames('font-normal mt-1 ml-5 hover:text-green-600')}>{t('icu-equipment')}</div></Link>
           <Link href="/catalog/sub-catalog?category=neonathal"><div className={classNames('font-normal mt-1 ml-5 hover:text-green-600')}>{t('neonatal-equipment')}</div></Link>
           <Link href="/catalog/sub-catalog?category=sterilization"><div className={classNames('font-normal mt-1 ml-5 hover:text-green-600')}>{t('candd-equipment')}</div></Link>

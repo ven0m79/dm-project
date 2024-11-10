@@ -165,9 +165,9 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
             />
           )}
         </div>
-        <div className="flex flex-col p-1 min-h-[600px]">
+        <div className="flex flex-col p-1 min-h-[600px] flex-1">
           {loading ? (
-            <div className="flex flex-1 w-[800px] h-[600px] justify-center items-center">
+            <div className="flex w-[800px] h-[600px] justify-center items-center">
               <Loader />
             </div>
           ) : (
@@ -210,7 +210,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                             {"Артикул: "}
                             {details?.sku}
                           </div><div
-                              className="content mt-5 -ml-5"
+                              className="content mt-5 -ml-5 bg-black"
                               dangerouslySetInnerHTML={{
                                 __html: details?.short_description || "",
                               }} /></>
