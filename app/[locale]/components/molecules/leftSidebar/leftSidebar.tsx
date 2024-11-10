@@ -2,6 +2,7 @@
 
 import classNames from "classnames";
 import { CustomFlowbiteTheme, Sidebar as FBSidebar } from "flowbite-react";
+import { useSearchParams } from "next/navigation";
 
 import React, {
   FC,
@@ -144,15 +145,14 @@ const Content: FC<SidebarProps> = ({
 }) => {
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const currentIdsData = useMemo(
     () => (locale === "ua" ? categoriesUAIdData : categoriesENIdData),
     [locale],
   );
 
-  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
-    null,
-  );
+  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>();
   const [openedCategoryIds, setOpenedCategoryIds] = useState<number[]>([]);
 
   const getCategoryDetails = useCallback(
@@ -171,6 +171,7 @@ const Content: FC<SidebarProps> = ({
   );
 
   const handleCollapseToggle = async (categoryId: number) => {
+    console.log("clicking");
     setSelectedCategoryId(categoryId); // Highlight the selected category
 
     // Fetch products for the selected category
@@ -179,6 +180,8 @@ const Content: FC<SidebarProps> = ({
     // After fetching, set the clicked category as the only open one
     setOpenedCategoryIds([categoryId]);
   };
+
+  console.log(selectedCategoryId, openedCategoryIds);
 
   // const handleCollapseToggle = (categoryId: number) => {
   //   setSelectedCategoryId(categoryId);
@@ -194,8 +197,6 @@ const Content: FC<SidebarProps> = ({
   //     }
   //   });
   // };
-
-
 
   const findParentCategories = useCallback(
     (
@@ -243,7 +244,7 @@ const Content: FC<SidebarProps> = ({
 
   const renderNestedCategories = (
     category: TransformedCategoriesType,
-    level = 0,  // Level starts at 0 for root
+    level = 0, // Level starts at 0 for root
   ) => {
     // Apply padding starting from level 2
     const paddingLeft = level > 1 ? level * 7 : 0; // No padding for level 0 and level 1
@@ -306,15 +307,13 @@ const Content: FC<SidebarProps> = ({
       >
         {/* Recursively render children */}
         {category?.childrens?.length
-          ? category.childrens.map((child) =>
-            renderNestedCategories(child, level + 1), // Increase level for deeper nesting
-          )
+          ? category.childrens.map(
+              (child) => renderNestedCategories(child, level + 1), // Increase level for deeper nesting
+            )
           : null}
       </FBSidebar.Collapse>
     );
   };
-
-
 
   useEffect(() => {
     if (categoryTag) {
@@ -335,6 +334,21 @@ const Content: FC<SidebarProps> = ({
       }
     }
   }, [categoryTag, currentIdsData, getCategoryDetails, locale]);
+
+  useEffect(() => {
+    const category = searchParams?.get("category");
+
+    if (category) {
+      // @ts-ignore
+      const categoryId = currentIdsData[category];
+
+      if (categoryId) {
+        getCategoryDetails(categoryId);
+        setSelectedCategoryId(categoryId);
+        setOpenedCategoryIds([categoryId]);
+      }
+    }
+  }, [currentIdsData, getCategoryDetails, searchParams]);
 
   return (
     <div
@@ -364,11 +378,11 @@ const Content: FC<SidebarProps> = ({
 };
 
 const Sidebar: FC<SidebarProps> = (props) => {
-  return <ErrorBoundary>
-    <Content {...props}/>
-
-
-  </ErrorBoundary>
-}
+  return (
+    <ErrorBoundary>
+      <Content {...props} />
+    </ErrorBoundary>
+  );
+};
 
 export default memo(Sidebar);
