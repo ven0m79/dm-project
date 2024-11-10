@@ -16,6 +16,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
   // цей прийом дозволить визначати яку категорію ти видрав, дивись на сторінці категорій
   // треба буде формувати структуру, у якій значення із попередньої сторінки буде відповідати вибранному sidebar елементу
   const searchParams = useSearchParams();
+
   const selectedCategory = searchParams?.get("category");
 
   const [selectedCategoryItem, setSelectedCategoryItem] =
@@ -29,8 +30,6 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
   const getData = useCallback(async () => {
     try {
       const data = await fetchWooCommerceCategories(locale);
-
-      // console.log({ data });
 
       if (data) {
         // отут тобі треба розділити результат масиву data на 2 елементи які в ньому є
@@ -54,7 +53,6 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
   );
 
   return (
-
     <MainLayout>
       <Suspense fallback="Loading">
         <div
@@ -148,9 +146,8 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
                             width={200}
                             height={250}
                           />
-                          
                         </div>
-                        
+
                         <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center"></div>
                         <div className="flex justify-center">
                           <h3 className="flex justify-center h-16">
@@ -187,7 +184,6 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
         </div>
       </Suspense>
     </MainLayout>
-
   );
 };
 

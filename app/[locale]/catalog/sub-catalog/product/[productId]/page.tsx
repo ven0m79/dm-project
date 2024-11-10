@@ -80,7 +80,9 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
   >([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [details, setDetails] = useState<SingleProductDetails | null>(null);
-  const [crossSellProducts, setCrossSellProducts] = useState<SingleProductDetails[]>([]);
+  const [crossSellProducts, setCrossSellProducts] = useState<
+    SingleProductDetails[]
+  >([]);
 
   const selectedProductId = useMemo(() => {
     return (
@@ -117,13 +119,19 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
     setLoading(true);
 
     try {
-      const data = await fetchWooCommerceProductDetails(selectedProductId, locale);
+      const data = await fetchWooCommerceProductDetails(
+        selectedProductId,
+        locale,
+      );
 
       if (data) {
         setDetails(data);
 
         if (data.cross_sell_ids?.length) {
-          const crossSellData = await fetchWooCommerceCrossProductsDetails(data.cross_sell_ids, locale);
+          const crossSellData = await fetchWooCommerceCrossProductsDetails(
+            data.cross_sell_ids,
+            locale,
+          );
           setCrossSellProducts(crossSellData);
           console.log("Cross-sell products:", crossSellData);
         }
@@ -204,16 +212,23 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                         <br />
 
                         {isAccessories ? (
-                          <><div
-                            className={classNames("text-normal", styles.brand)}
-                          >
-                            {"Артикул: "}
-                            {details?.sku}
-                          </div><div
+                          <>
+                            <div
+                              className={classNames(
+                                "text-normal",
+                                styles.brand,
+                              )}
+                            >
+                              {"Артикул: "}
+                              {details?.sku}
+                            </div>
+                            <div
                               className="content mt-5 bg-black"
                               dangerouslySetInnerHTML={{
                                 __html: details?.short_description || "",
-                              }} /></>
+                              }}
+                            />
+                          </>
                         ) : null}
                         <div className="h-[100px]"></div>
                         <br />
@@ -222,15 +237,13 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                             <Link href={"../../../../contacts"}>
                               Запит комерційної пропозиції
                             </Link>
-                          </div><br />
+                          </div>
+                          <br />
                           {isAccessories ? (
                             <div className=""></div>
                           ) : (
                             <div
-                              className={classNames(
-                                "",
-                                styles.downloadable,
-                              )}
+                              className={classNames("", styles.downloadable)}
                             >
                               <Link href={"../../../../services"}>
                                 Сервісне обслуговування
@@ -241,7 +254,6 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                       </div>
                     </div>
                     <div className={styles.stroke}></div>
-
 
                     <div className="text-black">
                       <Tabs aria-label="Default tabs" theme={customTheme.tabs}>
@@ -276,7 +288,8 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                                       className={"text text-blue-900"}
                                       href={`/catalog/sub-catalog/product/${el.id}?category=${el.tags[0].name}`}
                                     >
-                                      {el.name}</a>
+                                      {el.name}
+                                    </a>
                                   </li>
                                 ))
                               ) : (
