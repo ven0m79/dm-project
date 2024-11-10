@@ -126,8 +126,11 @@
   
   "ContactsPage": {
     "title": "Contact Us",
+    "contact-form-name": "Name and Surname",
+    "contact-form-mobile": "Phone number",
+    "contact-form-medicalFacility": "The Name of the Medical Facility",
+    "contact-form-city": "City",
     "contact-form-title": "Send Us Message",
-    "contact-form-name": "Name",
     "contact-form-email": "E-mail",
     "contact-form-message": "Write Your Message Here...",
     "contact-form-submit": "SEND MESSAGE",

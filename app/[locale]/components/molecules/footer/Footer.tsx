@@ -157,7 +157,12 @@ const Footer = () => {
             </div>
           </Link>
           {/* додати функцію */}
-          <Link href="/catalog/sub-catalog?category=cleaning-and-desinfecting-equipment">
+          <Link
+            href="/catalog/sub-catalog?category=cleaning-and-desinfecting-equipment"
+            onClick={() => {
+              navigateWithDelay("cleaning-and-desinfecting-equipment");
+            }}
+          >
             <div
               className={classNames(
                 "font-normal mt-1 ml-5 hover:text-green-600",
@@ -167,9 +172,9 @@ const Footer = () => {
             </div>
           </Link>
           <Link
-            href={{
-              pathname: "/catalog/sub-catalog",
-              query: "category=gas-management-systems",
+            href="/catalog/sub-catalog?category=category=gas-management-systems"
+            onClick={() => {
+              navigateWithDelay("gas-management-systems");
             }}
           >
             <div
@@ -181,9 +186,9 @@ const Footer = () => {
             </div>
           </Link>
           <Link
-            href={{
-              pathname: "/catalog/sub-catalog",
-              query: "category=furniture",
+            href="/catalog/sub-catalog?category=furniture"
+            onClick={() => {
+              navigateWithDelay("furniture");
             }}
           >
             <div
@@ -194,7 +199,12 @@ const Footer = () => {
               {t("other-equipment")}
             </div>
           </Link>
-          <Link href="/catalog/sub-catalog?category=accessories">
+          <Link
+            href="/catalog/sub-catalog?category=accessories"
+            onClick={() => {
+              navigateWithDelay("accessories");
+            }}
+          >
             <div
               className={classNames(
                 "font-normal mt-1 ml-5 hover:text-green-600",

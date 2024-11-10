@@ -223,7 +223,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                               {details?.sku}
                             </div>
                             <div
-                              className="content mt-5 bg-black"
+                              className="content mt-5"
                               dangerouslySetInnerHTML={{
                                 __html: details?.short_description || "",
                               }}

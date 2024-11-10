@@ -21,11 +21,12 @@
 }
 
 .form {
-    margin-top: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     width: 400px;
     border: 1px solid #0061AA;
+    color: #002766;
     font-size: 18px;
-    margin-bottom: 25px;
     border-radius: 10px;
     padding-left: 10px;
     resize: none;

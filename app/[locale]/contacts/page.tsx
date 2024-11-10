@@ -21,17 +21,23 @@ const ContactsPage = ({ params: { locale } }: { params: { locale: string } }) =>
   //unstable_setRequestLocale(locale);
   const t = useTranslations('ContactsPage');
   const [name, setName] = useState('');
+  const [mobile, setMobile] = useState('');
+  const [medicalFacility, setMedicalFacility] = useState('');
+  const [city, setCity] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
   const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    const data = {
-      name,
-      email,
-      message,
-    };
-    console.log(data);
+    const data = { name, mobile, medicalFacility, city, email, message };
+    //console.log(data);
+    fetch('/api/contact', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
   };
   return (
     <MainLayout>
@@ -86,32 +92,50 @@ const ContactsPage = ({ params: { locale } }: { params: { locale: string } }) =>
             </p>
           </div>
           <div>
-            <form onSubmit={handleSubmit} className={styles.container}>
+          <form onSubmit={handleSubmit} className={styles.container}>
               <div className={styles.sendUsMessage}>{t('contact-form-title')}</div>
               <input
-                className={classNames("h-12", styles.form)}
+                className={classNames("h-10", styles.form)}
                 placeholder={t('contact-form-name')}
                 id="name"
                 type="text"
                 onChange={e => setName(e.target.value)}
               /><br />
               <input
-                className={classNames("h-12", styles.form)}
+                className={classNames("h-10", styles.form)}
+                placeholder={t('contact-form-mobile')}
+                id="mobile"
+                type="mobile"
+                onChange={e => setMobile(e.target.value)}
+              /><br />
+              <input
+                className={classNames("h-10", styles.form)}
+                placeholder={t('contact-form-medicalFacility')}
+                id="medicalFacility"
+                type="medicalFacility"
+                onChange={e => setMedicalFacility(e.target.value)}
+              /><br />
+              <input
+                className={classNames("h-10", styles.form)}
+                placeholder={t('contact-form-city')}
+                id="city"
+                type="city"
+                onChange={e => setCity(e.target.value)}
+              /><br />
+              <input
+                className={classNames("h-10", styles.form)}
                 placeholder={t('contact-form-email')}
                 id="email"
                 type="email"
                 onChange={e => setEmail(e.target.value)}
               /><br />
               <textarea
-                className={classNames("h-40", styles.form)}
+                className={classNames("h-24 pt-2", styles.form)}
                 placeholder={t('contact-form-message')}
                 id="message"
-                itemType="text"
                 onChange={e => setMessage(e.target.value)}
               /><br />
-              <button
-                className={styles.yerSubmit}
-                type="submit">{t('contact-form-submit')}</button>
+              <button className={styles.yerSubmit} type="submit">{t('contact-form-submit')}</button>
             </form>
 
           </div>
