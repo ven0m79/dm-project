@@ -252,7 +252,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                           className="bg-red"
                         >
                           <div
-                            className="content w-[784px]"
+                            className="content w-fit"
                             dangerouslySetInnerHTML={{
                               __html: details?.description || "",
                             }}
