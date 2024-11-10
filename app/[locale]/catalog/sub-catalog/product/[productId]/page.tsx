@@ -167,7 +167,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
         </div>
         <div className="flex flex-col p-1 min-h-[600px] flex-1">
           {loading ? (
-            <div className="flex w-fit h-[600px] justify-center items-center">
+            <div className="flex w-[800px] h-[600px] justify-center items-center">
               <Loader />
             </div>
           ) : (
@@ -210,7 +210,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                             {"Артикул: "}
                             {details?.sku}
                           </div><div
-                              className="content mt-5 -ml-5 bg-black"
+                              className="content mt-5 bg-black"
                               dangerouslySetInnerHTML={{
                                 __html: details?.short_description || "",
                               }} /></>
@@ -242,7 +242,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                     </div>
                     <div className={styles.stroke}></div>
 
-                    <div className="flex flex-1 flex-row w-[400px]"></div>
+
                     <div className="text-black">
                       <Tabs aria-label="Default tabs" theme={customTheme.tabs}>
                         <Tabs.Item
@@ -252,7 +252,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                           className="bg-red"
                         >
                           <div
-                            className="content"
+                            className="content w-[784px]"
                             dangerouslySetInnerHTML={{
                               __html: details?.description || "",
                             }}
