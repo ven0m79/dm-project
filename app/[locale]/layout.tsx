@@ -35,6 +35,10 @@ export default function RootLayout({
 
   return (
     <html lang={locale}>
+      <head>
+        <title>ДМ-ПРОЕКТ</title>
+        <meta name="description" content="Компанія ДМ-ПРОЕКТ заснована у 2009 році як уповноважений представник німецької компанії Dräger в Україні, світового лідера з виробництва систем життєзабезпечення людини." />
+      </head>
       <body
         className={cn(
           "flex min-h-screen overflow-x-hidden bg-gray-950 text-gray-50",
