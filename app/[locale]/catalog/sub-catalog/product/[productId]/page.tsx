@@ -14,13 +14,14 @@ import { categoriesCreation, TransformedCategoriesType } from "../../helpers";
 import Link from "next/link";
 import styles from "./Product.module.css";
 import classNames from "classnames";
-import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import Loader from "@app/[locale]/components/atoms/loader/Loader";
 
 import { Tabs, CustomFlowbiteTheme } from "flowbite-react";
 import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
+import { Button } from "@app/[locale]/components/atoms";
+import { useRouter } from "../../../../../../config";
 
 const customTheme: CustomFlowbiteTheme = {
   tabs: {
@@ -69,6 +70,8 @@ type Params = {
 };
 
 const Page = ({ params: { locale } }: { params: { locale: string } }) => {
+  const router = useRouter();
+
   const { productId }: Params = useParams<any>();
   const searchParams = useSearchParams();
   const selectedCategory = searchParams?.get("category");
@@ -155,23 +158,11 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
     <MainLayout>
       <div className="flex self-center flex-row w-[1400px] mb-8">
         <div className={classNames("mt-4", styles.subMenu)}>
-          {locale === "ua" ? (
-            <Sidebar
-              items={[categories?.[1] || []]}
-              categoryTag={selectedCategoryItem}
-              setSelectedProducts={setSelectedProducts}
-              locale={locale}
-              fromProductPage
-            />
-          ) : (
-            <Sidebar
-              items={[categories?.[0] || []]}
-              categoryTag={selectedCategoryItem}
-              setSelectedProducts={setSelectedProducts}
-              locale={locale}
-              fromProductPage
-            />
-          )}
+          <Button
+            onClick={router.back}
+          >
+            Go back
+          </Button>
         </div>
         <div className="flex flex-col p-1 min-h-[600px] flex-1">
           {loading ? (

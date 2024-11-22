@@ -10,12 +10,14 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import styles from "./Home.module.css";
+import Seo from "@app/[locale]/components/atoms/seo/Seo";
 
 const HomePage = ({ params: { locale } }: { params: { locale: string } }) => {
   const t = useTranslations("Index");
 
   return (
     <MainLayout>
+      <Seo title="ДМ-ПРОЕКТ: Головна" description="ДМ-Проект є надійним партнером українських лікарів з 2009 року" />
       {/* <div className="text-2xl text-blue-900 flex justify-center items-center valign-middle">{t('title')}</div> */}
       <div>
         <div className="flex flex-1 flex-col justify-center items-center">

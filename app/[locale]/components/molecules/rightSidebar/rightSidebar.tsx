@@ -98,33 +98,12 @@ const customTheme: CustomFlowbiteTheme = {
   },
 };
 
-const LEFT_BAR_PARENT_ID = 50;
-const LEFT_BAR_PARENT_ID_EN = 52;
-
-const categoriesUAIdData = {
-  "or-equipment": 19,
-  "icu-equipment": 75,
-  "neonatal-equipment": 79,
-  "cleaning-and-desinfecting-equipment": 83,
-  "gas-management-systems": 87,
-  furniture: 91,
-  accessories: 95,
-};
-
-const categoriesENIdData = {
-  "or-equipment": 61,
-  "icu-equipment": 77,
-  "neonatal-equipment": 81,
-  "cleaning-and-desinfecting-equipment": 85,
-  "gas-management-systems": 89,
-  furniture: 93,
-  accessories: 97,
-};
+const RIGHT_BAR_PARENT_ID = 55;
+const RIGHT_BAR_PARENT_ID_EN = 57;
 
 type SidebarProps = {
   locale: string;
   items: TransformedCategoriesType[];
-  categoryTag?: string | null | keyof typeof categoriesUAIdData;
   setSelectedCategoryItem?: (v: string) => void;
   setSelectedProducts?: (v: any[]) => void;
   changeURLParams?: boolean;
@@ -133,7 +112,6 @@ type SidebarProps = {
 
 const Content: FC<SidebarProps> = ({
   items,
-  categoryTag,
   locale,
   setSelectedProducts,
   setSelectedCategoryItem,
@@ -143,11 +121,6 @@ const Content: FC<SidebarProps> = ({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-
-  const currentIdsData = useMemo(
-    () => (locale === "ua" ? categoriesUAIdData : categoriesENIdData),
-    [locale],
-  );
 
   const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>();
   const [openedCategoryIds, setOpenedCategoryIds] = useState<number[]>([]);
@@ -168,28 +141,14 @@ const Content: FC<SidebarProps> = ({
   );
 
   const handleCollapseToggle = async (categoryId: number) => {
+    console.log("clicking");
     setSelectedCategoryId(categoryId); // Highlight the selected category
 
     // Fetch products for the selected category
     await getCategoryDetails(categoryId);
 
     // After fetching, set the clicked category as the only open one
-    // Toggle open state
-    setOpenedCategoryIds((prevOpenedIds) => {
-      const isOpened = prevOpenedIds.includes(categoryId);
-      const updatedIds = isOpened
-        ? prevOpenedIds.filter((id) => id !== categoryId)
-        : [...prevOpenedIds, categoryId];
-
-      // Save to localStorage
-      localStorage.setItem("openedCategories", JSON.stringify(updatedIds));
-
-      return updatedIds;
-    });
-
-    const listCat = findParentCategories(items, categoryId);
-
-    router.push(`/catalog/sub-catalog?category=${listCat?.[0]?.slug}`);
+    setOpenedCategoryIds([categoryId]);
   };
 
   // const handleCollapseToggle = (categoryId: number) => {
@@ -230,7 +189,10 @@ const Content: FC<SidebarProps> = ({
           if (foundParents) {
             return foundParents.filter(
               (el) =>
-                el.id !== LEFT_BAR_PARENT_ID && el.id !== LEFT_BAR_PARENT_ID_EN,
+                // @ts-ignore
+
+                el.id !== RIGHT_BAR_PARENT_ID &&
+                el.id !== RIGHT_BAR_PARENT_ID_EN,
             ); // Return the full parent path if found
           }
         }
@@ -289,8 +251,8 @@ const Content: FC<SidebarProps> = ({
       // Render collapse for items with children
       <FBSidebar.Collapse
         open={
-          category.id === LEFT_BAR_PARENT_ID ||
-          category.id === LEFT_BAR_PARENT_ID_EN ||
+          category.id === RIGHT_BAR_PARENT_ID ||
+          category.id === RIGHT_BAR_PARENT_ID_EN ||
           openedCategoryIds.includes(category.id) ||
           selectedItemsNestedData?.includes(Number(category.id))
         }
@@ -298,8 +260,8 @@ const Content: FC<SidebarProps> = ({
         key={category.id}
         className={classNames({
           "opacity-0 pointer-events-none mt-[-40px]":
-            category.id === LEFT_BAR_PARENT_ID ||
-            category.id === LEFT_BAR_PARENT_ID_EN,
+            category.id === RIGHT_BAR_PARENT_ID ||
+            category.id === RIGHT_BAR_PARENT_ID_EN,
           "bg-sky-200": selectedCategoryId === category.id,
         })}
         // Apply padding only for levels >= 2
@@ -317,26 +279,6 @@ const Content: FC<SidebarProps> = ({
   };
 
   useEffect(() => {
-    if (categoryTag) {
-      const updatedTag =
-        locale !== "ua"
-          ? categoryTag.includes("en")
-            ? categoryTag.slice(0, -3)
-            : categoryTag
-          : categoryTag;
-
-      const categoryId =
-        currentIdsData[updatedTag as keyof typeof currentIdsData];
-
-      if (categoryId) {
-        getCategoryDetails(categoryId);
-        setSelectedCategoryId(categoryId); // Ensure initial category is selected
-        setOpenedCategoryIds([categoryId]);
-      }
-    }
-  }, [categoryTag, currentIdsData, getCategoryDetails, locale]);
-
-  useEffect(() => {
     const category = searchParams?.get("category");
 
     if (category) {
@@ -347,10 +289,9 @@ const Content: FC<SidebarProps> = ({
         getCategoryDetails(categoryId);
         setSelectedCategoryId(categoryId);
         setOpenedCategoryIds([categoryId]);
-        localStorage.setItem("openedCategories", JSON.stringify([categoryId]));
       }
     }
-  }, [currentIdsData, getCategoryDetails, searchParams]);
+  }, [getCategoryDetails, searchParams]);
 
   return (
     <div

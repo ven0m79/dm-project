@@ -10,6 +10,7 @@ import Image from 'next/image';
 import SliderAbout from "../components/molecules/sliderAbout/slider";
 import roman from "../../../public/roman.webp";
 import vystavka from "../../../public/vystavka.webp";
+import Seo from "@app/[locale]/components/atoms/seo/Seo";
 
 const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
   const t = useTranslations('AboutPage');
@@ -17,6 +18,7 @@ const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
   return (
     <MainLayout>
       <Suspense fallback="Loading..."> {/* Wrapping in Suspense */}
+        <Seo title="ДМ-ПРОЕКТ: Про компанію" description="Компанія ДМ-ПРОЕКТ заснована у 2009 році як уповноважений представник німецької компанії Dräger в Україні, світового лідера з виробництва систем життєзабезпечення людини." />
         <div className={classNames("flex flex-1 flex-col justify-center items-start", styles["aboutContainer"])}>
           <div className={classNames("flex flex-1 flex-row justify-center items-start w-[1400px]")}>
             <Image

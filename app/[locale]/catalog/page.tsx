@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { Suspense } from "react";
 import styles from "./Catalog.module.css";
 
@@ -15,14 +15,27 @@ import imgNeonat from "./icons-photo/neonat.webp";
 import imgOper from "./icons-photo/oper.webp";
 import imgSteriliz from "./icons-photo/sterilization.webp";
 import { useTranslations } from "next-intl";
+import Seo from "@app/[locale]/components/atoms/seo/Seo";
+import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 
-const CatalogPage = ({  params: { locale },}: {  params: { locale: string };}) => {
+const CatalogPage = ({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) => {
+  const t = useTranslations("Catalog1");
 
-  const t = useTranslations('Catalog1');
+  const isMobile = useIsMobile();
+
+  console.log({isMobile })
 
   return (
     <MainLayout>
       <Suspense fallback="Loading">
+        <Seo
+          title="ДМ-ПРОЕКТ: Продукти"
+          description="Сьогодні основними видами діяльності компанії є не тільки продаж медичного обладнання високого класу, а й розробка та впровадження комплексних рішень для медичних закладів, починаючи з проектування і закінчуючи сервісом та навчанням персоналу."
+        />
         <div
           className={classNames(
             "text-2xl flex flex-wrap justify-start mb-5 gap-5 mt-5",
@@ -37,11 +50,10 @@ const CatalogPage = ({  params: { locale },}: {  params: { locale: string };}) =
           >
             <div
               className={classNames(
-                "flex flex-row items-center rounded-xl",
+                "flex flex-row items-center rounded-xl sm:bg-amber-800",
                 styles["block-decisions"],
               )}
             >
-
               <span className={styles.span}>{t("or-equipment")}</span>
               <Image
                 className={styles.img}
@@ -64,9 +76,7 @@ const CatalogPage = ({  params: { locale },}: {  params: { locale: string };}) =
                 styles["block-decisions"],
               )}
             >
-              <span className={styles.span}>
-                {t("icu-equipment")}
-              </span>
+              <span className={styles.span}>{t("icu-equipment")}</span>
               <Image
                 className={styles.img}
                 src={imgIntensive}
@@ -110,9 +120,7 @@ const CatalogPage = ({  params: { locale },}: {  params: { locale: string };}) =
                 styles["block-decisions"],
               )}
             >
-              <span className={styles.span}>
-                {t("candd-equipment")}
-              </span>
+              <span className={styles.span}>{t("candd-equipment")}</span>
               <Image
                 className={styles.img}
                 src={imgSteriliz}
