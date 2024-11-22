@@ -190,7 +190,6 @@ const Content: FC<SidebarProps> = ({
             return foundParents.filter(
               (el) =>
                 // @ts-ignore
-
                 el.id !== RIGHT_BAR_PARENT_ID &&
                 el.id !== RIGHT_BAR_PARENT_ID_EN,
             ); // Return the full parent path if found

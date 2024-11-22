@@ -1,5 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+const mail = require('@sendgrid/mail');
+mail.setApiKey(process.env.SENDGRID_API_KEY);
+
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     const data = req.body; // Данные из запроса

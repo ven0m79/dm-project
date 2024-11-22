@@ -5,7 +5,8 @@ import { useSearchParams } from "next/navigation";
 import React, { Suspense, useCallback, useEffect, useState } from "react";
 
 import { MainLayout } from "@app/[locale]/components/templates";
-import Sidebar from "@app/[locale]/components/molecules/leftSidebar/leftSidebar";
+import LSidebar from "@app/[locale]/components/molecules/leftSidebar/leftSidebar";
+import RSidebar from "@app/[locale]/components/molecules/rightSidebar/rightSidebar";
 
 import { fetchWooCommerceCategories } from "../../../../utils/woocommerce.setup";
 import { SingleProductDetails } from "../../../../utils/woocomerce.types";
@@ -65,7 +66,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
         >
           <div className={classNames("mt-4", styles.subMenu)}>
             {locale === "ua" ? (
-              <Sidebar
+              <LSidebar
                 items={[categories?.[1] || []]}
                 categoryTag={selectedCategoryItem}
                 setSelectedProducts={setSelectedProducts}
@@ -73,7 +74,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
                 changeURLParams
               />
             ) : (
-              <Sidebar
+              <LSidebar
                 items={[categories?.[0] || []]}
                 categoryTag={selectedCategoryItem}
                 setSelectedProducts={setSelectedProducts}
@@ -168,16 +169,14 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
 
           <div className={classNames("mt-4", styles.subMenu)}>
             {locale === "ua" ? (
-              <Sidebar
+              <RSidebar
                 items={[categories?.[0] || []]}
-                categoryTag={selectedCategoryItem}
                 setSelectedProducts={setSelectedProducts}
                 locale={locale}
               />
             ) : (
-              <Sidebar
+              <RSidebar
                 items={[categories?.[1] || []]}
-                categoryTag={selectedCategoryItem}
                 setSelectedProducts={setSelectedProducts}
                 locale={locale}
               />
