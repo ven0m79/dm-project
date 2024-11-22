@@ -11,6 +11,7 @@ import { fetchWooCommerceCategories } from "../../../../utils/woocommerce.setup"
 import { SingleProductDetails } from "../../../../utils/woocomerce.types";
 import styles from "./Sub-catalog.module.css";
 import { categoriesCreation, TransformedCategoriesType } from "./helpers";
+import Seo from "@app/[locale]/components/atoms/seo/Seo";
 
 const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
   // цей прийом дозволить визначати яку категорію ти видрав, дивись на сторінці категорій
@@ -55,6 +56,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
   return (
     <MainLayout>
       <Suspense fallback="Loading">
+        <Seo title={`ДМ-ПРОЕКТ: ${selectedCategory}`} description="Сьогодні основними видами діяльності компанії є не тільки продаж медичного обладнання високого класу, а й розробка та впровадження комплексних рішень для медичних закладів, починаючи з проектування і закінчуючи сервісом та навчанням персоналу."/>
         <div
           className={classNames(
             "flex flex-1 flex-row justify-between self-center mb-5",

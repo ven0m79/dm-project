@@ -18,7 +18,6 @@ import styles from "../../../catalog/sub-catalog/Sub-catalog.module.css";
 import { fetchWooCommerceProductsBasedOnCategory } from "../../../../../utils/woocommerce.setup";
 import { TransformedCategoriesType } from "@app/[locale]/catalog/sub-catalog/helpers";
 import { usePathname, useRouter } from "../../../../../config";
-import ErrorBoundary from "../../error";
 
 const customTheme: CustomFlowbiteTheme = {
   sidebar: {
@@ -100,9 +99,7 @@ const customTheme: CustomFlowbiteTheme = {
 };
 
 const LEFT_BAR_PARENT_ID = 50;
-const RIGHT_BAR_PARENT_ID = 55;
 const LEFT_BAR_PARENT_ID_EN = 52;
-const RIGHT_BAR_PARENT_ID_EN = 57;
 
 const categoriesUAIdData = {
   "or-equipment": 19,
@@ -171,17 +168,29 @@ const Content: FC<SidebarProps> = ({
   );
 
   const handleCollapseToggle = async (categoryId: number) => {
-    console.log("clicking");
     setSelectedCategoryId(categoryId); // Highlight the selected category
 
     // Fetch products for the selected category
     await getCategoryDetails(categoryId);
 
     // After fetching, set the clicked category as the only open one
-    setOpenedCategoryIds([categoryId]);
-  };
+    // Toggle open state
+    setOpenedCategoryIds((prevOpenedIds) => {
+      const isOpened = prevOpenedIds.includes(categoryId);
+      const updatedIds = isOpened
+        ? prevOpenedIds.filter((id) => id !== categoryId)
+        : [...prevOpenedIds, categoryId];
 
-  console.log(selectedCategoryId, openedCategoryIds);
+      // Save to localStorage
+      localStorage.setItem("openedCategories", JSON.stringify(updatedIds));
+
+      return updatedIds;
+    });
+
+    const listCat = findParentCategories(items, categoryId);
+
+    router.push(`/catalog/sub-catalog?category=${listCat?.[0]?.slug}`);
+  };
 
   // const handleCollapseToggle = (categoryId: number) => {
   //   setSelectedCategoryId(categoryId);
@@ -221,11 +230,7 @@ const Content: FC<SidebarProps> = ({
           if (foundParents) {
             return foundParents.filter(
               (el) =>
-                // @ts-ignore
-                el.id !== LEFT_BAR_PARENT_ID &&
-                el.id !== LEFT_BAR_PARENT_ID_EN &&
-                el.id !== RIGHT_BAR_PARENT_ID &&
-                el.id !== RIGHT_BAR_PARENT_ID_EN,
+                el.id !== LEFT_BAR_PARENT_ID && el.id !== LEFT_BAR_PARENT_ID_EN,
             ); // Return the full parent path if found
           }
         }
@@ -285,9 +290,7 @@ const Content: FC<SidebarProps> = ({
       <FBSidebar.Collapse
         open={
           category.id === LEFT_BAR_PARENT_ID ||
-          category.id === RIGHT_BAR_PARENT_ID ||
           category.id === LEFT_BAR_PARENT_ID_EN ||
-          category.id === RIGHT_BAR_PARENT_ID_EN ||
           openedCategoryIds.includes(category.id) ||
           selectedItemsNestedData?.includes(Number(category.id))
         }
@@ -296,9 +299,7 @@ const Content: FC<SidebarProps> = ({
         className={classNames({
           "opacity-0 pointer-events-none mt-[-40px]":
             category.id === LEFT_BAR_PARENT_ID ||
-            category.id === RIGHT_BAR_PARENT_ID ||
-            category.id === LEFT_BAR_PARENT_ID_EN ||
-            category.id === RIGHT_BAR_PARENT_ID_EN,
+            category.id === LEFT_BAR_PARENT_ID_EN,
           "bg-sky-200": selectedCategoryId === category.id,
         })}
         // Apply padding only for levels >= 2
@@ -346,6 +347,7 @@ const Content: FC<SidebarProps> = ({
         getCategoryDetails(categoryId);
         setSelectedCategoryId(categoryId);
         setOpenedCategoryIds([categoryId]);
+        localStorage.setItem("openedCategories", JSON.stringify([categoryId]));
       }
     }
   }, [currentIdsData, getCategoryDetails, searchParams]);
@@ -378,11 +380,7 @@ const Content: FC<SidebarProps> = ({
 };
 
 const Sidebar: FC<SidebarProps> = (props) => {
-  return (
-    <ErrorBoundary>
-      <Content {...props} />
-    </ErrorBoundary>
-  );
+  return <Content {...props} />;
 };
 
 export default memo(Sidebar);
