@@ -329,8 +329,8 @@ return {
             </>
           )}
         </div>
-        <div className={classNames("mt-4", styles.subMenu)}>
-          {locale === "ua" ? (
+         <div className={classNames("mt-4", styles.subMenu)}>
+          {/*{locale === "ua" ? (
             <Sidebar
               items={[categories?.[0] || []]}
               categoryTag={selectedCategoryItem}
@@ -346,7 +346,7 @@ return {
               locale={locale}
               changeURLParams
             />
-          )}
+          )} */}
         </div>
       </div>
     </MainLayout>
