@@ -22,6 +22,7 @@ import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import { Button } from "@app/[locale]/components/atoms";
 import { useRouter } from "../../../../../../config";
+import Seo from "@app/[locale]/components/atoms/seo/Seo";
 
 const customTheme: CustomFlowbiteTheme = {
   tabs: {
@@ -99,6 +100,23 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
     ?.map((el) => el.name)
     ?.includes("accessories");
 
+    const SEOData = useMemo(() => {
+if (isAccessories) {
+  return {
+    title: `My accesories is:${details?.name}`,
+    description: "SDsdsds"
+  }
+
+}
+
+
+return {
+  title: `My accesories is:${details?.name}`,
+ description: "SDsdsds"
+}
+
+    }, [details?.name])
+
   const getData = useCallback(async () => {
     try {
       const data = await fetchWooCommerceCategories(locale);
@@ -155,6 +173,8 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
   }, [getData, locale]);
 
   return (
+    <>
+    <Seo title={SEOData.title} description={SEOData.description} />
     <MainLayout>
       <div className="flex self-center flex-row w-[1400px] mb-8">
         <div className={classNames("mt-4", styles.subMenu)}>
@@ -330,6 +350,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
         </div>
       </div>
     </MainLayout>
+    </>
   );
 };
 

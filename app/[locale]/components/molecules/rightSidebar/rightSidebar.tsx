@@ -277,20 +277,19 @@ const Content: FC<SidebarProps> = ({
     );
   };
 
-  useEffect(() => {
-    const category = searchParams?.get("category");
+  // useEffect(() => {
+  //   const category = searchParams?.get("category");
 
-    if (category) {
-      // @ts-ignore
-      const categoryId = currentIdsData?.[category];
+  //   if (category) {
+  //     const categoryId = currentIdsData?.[category];
 
-      if (categoryId) {
-        getCategoryDetails(categoryId);
-        setSelectedCategoryId(categoryId);
-        setOpenedCategoryIds([categoryId]);
-      }
-    }
-  }, [getCategoryDetails, searchParams]);
+  //     if (categoryId) {
+  //       getCategoryDetails(categoryId);
+  //       setSelectedCategoryId(categoryId);
+  //       setOpenedCategoryIds([categoryId]);
+  //     }
+  //   }
+  // }, [getCategoryDetails, searchParams]);
 
   return (
     <div
