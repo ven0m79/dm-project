@@ -326,7 +326,7 @@ const Content: FC<SidebarProps> = ({
           : categoryTag;
 
       const categoryId =
-        currentIdsData[updatedTag as keyof typeof currentIdsData];
+        currentIdsData?.[updatedTag as keyof typeof currentIdsData];
 
       if (categoryId) {
         getCategoryDetails(categoryId);
@@ -341,7 +341,7 @@ const Content: FC<SidebarProps> = ({
 
     if (category) {
       // @ts-ignore
-      const categoryId = currentIdsData[category];
+      const categoryId = currentIdsData?.[category];
 
       if (categoryId) {
         getCategoryDetails(categoryId);
