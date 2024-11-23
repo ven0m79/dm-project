@@ -282,7 +282,7 @@ const Content: FC<SidebarProps> = ({
 
     if (category) {
       // @ts-ignore
-      const categoryId = currentIdsData[category];
+      const categoryId = currentIdsData?.[category];
 
       if (categoryId) {
         getCategoryDetails(categoryId);
