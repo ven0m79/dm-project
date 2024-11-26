@@ -9,7 +9,7 @@ import Loader from "@app/[locale]/components/atoms/loader/loaderSearch";
 import debounce from "lodash.debounce";
 
 const api = axios.create({
-  baseURL: 'https://dm-project.com.ua/wp-json/wc/v3/',
+  baseURL: 'https://api.dm-project.com.ua/wp-json/wc/v3/',
   headers: {
     'Authorization': `Basic ${Buffer.from('ck_8dee30956004b4c7f467a46247004a2f4cd650e5:cs_1cf0a573275e5cafe5af6bddbb01f29b9592be20').toString('base64')}`
   }

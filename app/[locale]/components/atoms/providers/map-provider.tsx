@@ -11,7 +11,7 @@ export  function  MapProvider ( { children }: { children: ReactNode } ) {
 
   // Асинхронная загрузка JavaScript API Google Карт 
   const { isLoaded : scriptLoaded, loadError } = useJsApiLoader ( { 
-    googleMapsApiKey : process.env . NEXT_PUBLIC_GOOGLE_MAP_API as  string  , libraries 
+    googleMapsApiKey :  "AIzaSyCHJrBrnIEF5ccIaQU3jqP6tgju8uG3ytQ"  , libraries 
     : libraries as  Libraries , 
   }); 
 
