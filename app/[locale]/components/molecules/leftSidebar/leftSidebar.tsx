@@ -187,25 +187,25 @@ const Content: FC<SidebarProps> = ({
       return updatedIds;
     });
 
-    const listCat = findParentCategories(items, categoryId);
-
-    router.push(`/catalog/sub-catalog?category=${listCat?.[0]?.slug}`);
+     const listCat = findParentCategories(items, categoryId);
+     console.log(listCat);
+     
+     if (!listCat || listCat.length === 0) {
+      // Если listCat пустой, используем кликнутую категорию
+      const clickedCategory = items
+        .flatMap((item) => [item, ...(item.childrens || [])]) // Учитываем вложенные категории
+        .find((item) => item.id === categoryId);
+  
+      if (clickedCategory?.slug) {
+        router.push(`/catalog/sub-catalog?category=${clickedCategory.slug}`);
+      } else {
+        console.warn("Clicked category not found or has no slug");
+      }
+    } else {
+      // Если listCat содержит элементы, используем первый
+      router.push(`/catalog/sub-catalog?category=${listCat[0].slug}`);
+    }
   };
-
-  // const handleCollapseToggle = (categoryId: number) => {
-  //   setSelectedCategoryId(categoryId);
-  //   getCategoryDetails(categoryId);
-  //   setOpenedCategoryIds((prevOpenedIds) => {
-  //     const isOpened = prevOpenedIds.includes(categoryId);
-
-  //     if (!isOpened) {
-  //       getCategoryDetails(categoryId); // Fetch products when opening a new category
-  //       return [...prevOpenedIds, categoryId]; // Add to open list
-  //     } else {
-  //       return prevOpenedIds.filter((id) => id !== categoryId); // Remove from open list
-  //     }
-  //   });
-  // };
 
   const findParentCategories = useCallback(
     (
@@ -306,6 +306,8 @@ const Content: FC<SidebarProps> = ({
         style={{ paddingLeft: `${paddingLeft}px` }}
         onClick={() => handleCollapseToggle(category.id)} // Fetch products on collapse open
       >
+        
+        
         {/* Recursively render children */}
         {category?.childrens?.length
           ? category.childrens.map(
