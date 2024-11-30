@@ -100,22 +100,22 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
     ?.map((el) => el.name)
     ?.includes("accessories");
 
-    const SEOData = useMemo(() => {
-if (isAccessories) {
-  return {
-    title: `My accesories is:${details?.name}`,
-    description: "SDsdsds"
-  }
+  const SEOData = useMemo(() => {
+    if (isAccessories) {
+      return {
+        title: `My accesories is:${details?.name}`,
+        description: "SDsdsds"
+      }
 
-}
+    }
 
 
-return {
-  title: `My accesories is:${details?.name}`,
- description: "SDsdsds"
-}
+    return {
+      title: `My accesories is:${details?.name}`,
+      description: "SDsdsds"
+    }
 
-    }, [details?.name])
+  }, [details?.name])
 
   const getData = useCallback(async () => {
     try {
@@ -174,163 +174,164 @@ return {
 
   return (
     <>
-    <Seo title={SEOData.title} description={SEOData.description} />
-    <MainLayout>
-      <div className="flex self-center flex-row w-[1400px] mb-8">
-        <div className={classNames("mt-4", styles.subMenu)}>
-          <Button
-            onClick={router.back}
-          >
-            Go back
-          </Button>
-        </div>
-        <div className="flex flex-col p-1 min-h-[600px] flex-1">
-          {loading ? (
-            <div className="flex w-[800px] h-[600px] justify-center items-center">
-              <Loader />
-            </div>
-          ) : (
-            <>
-              <AnimatePresence>
-                {!loading && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{
-                      delay: 0.4,
-                    }}
-                  >
-                    <div className="flex flex-row w-[800px]">
-                      <div className={classNames("m-4", styles.imageRadius)}>
-                        <img
-                          src={details?.images[0].src}
-                          alt={details?.images[0].alt}
-                          width={450}
-                          height={475}
-                        />
-                      </div>
-                      <div className="px-1 pt-28 w-[300px]">
-                        <h1 className={classNames("", styles.title)}>
-                          {details?.name}
-                        </h1>
-                        <br />
-                        <div
-                          className={classNames("text-normal", styles.brand)}
-                        >
-                          {"Бренд: "} {details?.brands[0]?.name}
+      <Seo title={SEOData.title} description={SEOData.description} />
+      <MainLayout>
+        <div className="flex self-center flex-row w-[1400px] mb-8">
+          <div className={classNames("mt-4 items-center", styles.subMenu)}>
+            <Button
+              className="w-full text-center"
+              onClick={router.back}
+            >
+              Повернутись до продуктів
+            </Button>
+          </div>
+          <div className="flex flex-col p-1 min-h-[600px] flex-1">
+            {loading ? (
+              <div className="flex w-[800px] h-[600px] justify-center items-center">
+                <Loader />
+              </div>
+            ) : (
+              <>
+                <AnimatePresence>
+                  {!loading && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{
+                        delay: 0.4,
+                      }}
+                    >
+                      <div className="flex flex-row w-[800px]">
+                        <div className={classNames("m-4", styles.imageRadius)}>
+                          <img
+                            src={details?.images[0].src}
+                            alt={details?.images[0].alt}
+                            width={450}
+                            height={475}
+                          />
                         </div>
-                        <br />
-
-                        {isAccessories ? (
-                          <>
-                            <div
-                              className={classNames(
-                                "text-normal",
-                                styles.brand,
-                              )}
-                            >
-                              {"Артикул: "}
-                              {details?.sku}
-                            </div>
-                            <div
-                              className="content mt-5"
-                              dangerouslySetInnerHTML={{
-                                __html: details?.short_description || "",
-                              }}
-                            />
-                          </>
-                        ) : null}
-                        <div className="h-[100px]"></div>
-                        <br />
-                        <div className="flex flex-col justify-between">
-                          <div className={styles.downloadable}>
-                            <Link href={"../../../../contacts"}>
-                              Запит комерційної пропозиції
-                            </Link>
+                        <div className="px-1 pt-28 w-[300px]">
+                          <h1 className={classNames("", styles.title)}>
+                            {details?.name}
+                          </h1>
+                          <br />
+                          <div
+                            className={classNames("text-normal", styles.brand)}
+                          >
+                            {"Бренд: "} {details?.brands[0]?.name}
                           </div>
                           <br />
+
                           {isAccessories ? (
-                            <div className=""></div>
-                          ) : (
-                            <div
-                              className={classNames("", styles.downloadable)}
-                            >
-                              <Link href={"../../../../services"}>
-                                Сервісне обслуговування
+                            <>
+                              <div
+                                className={classNames(
+                                  "text-normal",
+                                  styles.brand,
+                                )}
+                              >
+                                {"Артикул: "}
+                                {details?.sku}
+                              </div>
+                              <div
+                                className="content mt-5"
+                                dangerouslySetInnerHTML={{
+                                  __html: details?.short_description || "",
+                                }}
+                              />
+                            </>
+                          ) : null}
+                          <div className="h-[100px]"></div>
+                          <br />
+                          <div className="flex flex-col justify-between">
+                            <div className={styles.downloadable}>
+                              <Link href={"../../../../contacts"}>
+                                Запит комерційної пропозиції
                               </Link>
                             </div>
-                          )}
+                            <br />
+                            {isAccessories ? (
+                              <div className=""></div>
+                            ) : (
+                              <div
+                                className={classNames("", styles.downloadable)}
+                              >
+                                <Link href={"../../../../services"}>
+                                  Сервісне обслуговування
+                                </Link>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className={styles.stroke}></div>
+                      <div className={styles.stroke}></div>
 
-                    <div className="text-black">
-                      <Tabs aria-label="Default tabs" theme={customTheme.tabs}>
-                        <Tabs.Item
-                          active
-                          title="Опис"
-                          icon={HiUserCircle}
-                          className="bg-red"
-                        >
-                          <div
-                            className="content w-fit"
-                            dangerouslySetInnerHTML={{
-                              __html: details?.description || "",
-                            }}
-                          />
-                        </Tabs.Item>
-                        {isAccessories ? null : (
+                      <div className="text-black">
+                        <Tabs aria-label="Default tabs" theme={customTheme.tabs}>
                           <Tabs.Item
-                            title="Аксесуари та комплектуючі"
-                            icon={MdDashboard}
+                            active
+                            title="Опис"
+                            icon={HiUserCircle}
+                            className="bg-red"
                           >
                             <div
-                              className={classNames(
-                                "ml-10",
-                                styles.downloadabled,
-                              )}
+                              className="content w-fit"
+                              dangerouslySetInnerHTML={{
+                                __html: details?.description || "",
+                              }}
+                            />
+                          </Tabs.Item>
+                          {isAccessories ? null : (
+                            <Tabs.Item
+                              title="Аксесуари та комплектуючі"
+                              icon={MdDashboard}
                             >
-                              {crossSellProducts.length > 0 ? (
-                                crossSellProducts.map((el) => (
-                                  <li key={el.id} className="mx-1">
-                                    <a
-                                      className={"text text-blue-900"}
-                                      href={`/catalog/sub-catalog/product/${el.id}?category=${el.tags[0].name}`}
-                                    >
-                                      {el.name}
-                                    </a>
-                                  </li>
-                                ))
-                              ) : (
-                                <p>No cross-sell products available.</p>
-                              )}
+                              <div
+                                className={classNames(
+                                  "ml-10",
+                                  styles.downloadabled,
+                                )}
+                              >
+                                {crossSellProducts.length > 0 ? (
+                                  crossSellProducts.map((el) => (
+                                    <li key={el.id} className="mx-1">
+                                      <a
+                                        className={"text text-blue-900"}
+                                        href={`/catalog/sub-catalog/product/${el.id}?category=${el.tags[0].name}`}
+                                      >
+                                        {el.name}
+                                      </a>
+                                    </li>
+                                  ))
+                                ) : (
+                                  <p>No cross-sell products available.</p>
+                                )}
+                              </div>
+                            </Tabs.Item>
+                          )}
+                          <Tabs.Item title="Загрузки" icon={HiAdjustments}>
+                            <div className={classNames("", styles.downloadabled)}>
+                              {details?.downloads?.map((el) => (
+                                <li key={el.id} className={classNames("mx-1")}>
+                                  <Link href={el.file}>{el.name}</Link>
+                                </li>
+                              ))}
                             </div>
                           </Tabs.Item>
-                        )}
-                        <Tabs.Item title="Загрузки" icon={HiAdjustments}>
-                          <div className={classNames("", styles.downloadabled)}>
-                            {details?.downloads?.map((el) => (
-                              <li key={el.id} className={classNames("mx-1")}>
-                                <Link href={el.file}>{el.name}</Link>
-                              </li>
-                            ))}
-                          </div>
-                        </Tabs.Item>
-                        <Tabs.Item title="Відео" icon={HiClipboardList}>
-                          Тут будуть лінки на ютуб...
-                        </Tabs.Item>
-                      </Tabs>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </>
-          )}
-        </div>
-         <div className={classNames("mt-4", styles.subMenu)}>
-          {/*{locale === "ua" ? (
+                          <Tabs.Item title="Відео" icon={HiClipboardList}>
+                            Тут будуть лінки на ютуб...
+                          </Tabs.Item>
+                        </Tabs>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </>
+            )}
+          </div>
+          <div className={classNames("mt-4", styles.subMenu)}>
+            {/*{locale === "ua" ? (
             <Sidebar
               items={[categories?.[0] || []]}
               categoryTag={selectedCategoryItem}
@@ -347,9 +348,9 @@ return {
               changeURLParams
             />
           )} */}
+          </div>
         </div>
-      </div>
-    </MainLayout>
+      </MainLayout>
     </>
   );
 };
