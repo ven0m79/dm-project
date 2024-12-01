@@ -154,6 +154,8 @@ const Header = () => {
         </div>
         <div className={styles.contactsGroup}>
           <div>+380 44 520-12-24</div>
+          <div className="pt-1">+380 66 358-98-10</div>
+          <div className="pl-10">(cервіс)</div>
         </div>
         <div className={styles.contactsGroupIcons}>
           <Image
