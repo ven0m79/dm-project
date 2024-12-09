@@ -97,6 +97,7 @@ button {
 }
 
 .ul1 > li > span {
+  color: #0061aa !important;
   margin-right: 20px;
   text-indent: 20px;
 }
