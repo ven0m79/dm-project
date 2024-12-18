@@ -55,7 +55,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
   return (
     <MainLayout>
       <Suspense fallback="Loading">
-        <Seo title={`ДМ-ПРОЕКТ: ${selectedCategory}`} description={`Пропонуємо Вам сучасне обладнання рызних типів та призначень`}/>
+        <Seo title={`ДМ-ПРОЕКТ: ${selectedCategory}`} description={`Пропонуємо Вам сучасне обладнання різних типів та призначень`}/>
         <div
           className={classNames(
             "flex flex-1 flex-row justify-between self-center mb-5",
