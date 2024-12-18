@@ -34,8 +34,6 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
       const data = await fetchWooCommerceCategories(locale);
 
       if (data) {
-        // отут тобі треба розділити результат масиву data на 2 елементи які в ньому є
-        // один для лівого бару, другий - правий
 
         setCategories(
           categoriesCreation(data as unknown as TransformedCategoriesType[]),
@@ -57,7 +55,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
   return (
     <MainLayout>
       <Suspense fallback="Loading">
-        <Seo title={`ДМ-ПРОЕКТ: ${selectedCategory}`} description="Сьогодні основними видами діяльності компанії є не тільки продаж медичного обладнання високого класу, а й розробка та впровадження комплексних рішень для медичних закладів, починаючи з проектування і закінчуючи сервісом та навчанням персоналу."/>
+        <Seo title={`ДМ-ПРОЕКТ: ${selectedCategory}`} description={`Пропонуємо Вам сучасне обладнання рызних типів та призначень`}/>
         <div
           className={classNames(
             "flex flex-1 flex-row justify-between self-center mb-5",
@@ -120,7 +118,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
                         </div>
                         <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center"></div>
                         <div className="flex justify-center h-16">
-                          <h3 className="">{el.name}</h3>
+                          <h3 className="">{el.name} </h3>
                         </div>
                       </Link>
                     </div>

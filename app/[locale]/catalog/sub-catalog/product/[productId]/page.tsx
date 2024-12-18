@@ -23,6 +23,7 @@ import { MdDashboard } from "react-icons/md";
 import { Button } from "@app/[locale]/components/atoms";
 import { useRouter } from "../../../../../../config";
 import Seo from "@app/[locale]/components/atoms/seo/Seo";
+import DOMPurify from 'dompurify'
 
 const customTheme: CustomFlowbiteTheme = {
   tabs: {
@@ -100,22 +101,25 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
     ?.map((el) => el.name)
     ?.includes("accessories");
 
-  const SEOData = useMemo(() => {
-    if (isAccessories) {
-      return {
-        title: `My accesories is:${details?.name}`,
-        description: "SDsdsds"
+    const SEOData = useMemo(() => {
+      // Очистка описания
+      const cleanDescription = details?.short_description
+        ? DOMPurify.sanitize(details.short_description)
+        : '';
+    
+      if (isAccessories) {
+        return {
+          title: details?.name || '',
+          description: cleanDescription,
+        };
       }
-
-    }
-
-
-    return {
-      title: `My accesories is:${details?.name}`,
-      description: "SDsdsds"
-    }
-
-  }, [details?.name])
+    
+      return {
+        title: details?.name || '',
+        description: cleanDescription, // Всегда используем очищенное описание
+      };
+    }, [details?.name, details?.short_description]);
+    
 
   const getData = useCallback(async () => {
     try {
@@ -124,9 +128,6 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
       //console.log({ data });
 
       if (data) {
-        // отут тобі треба розділити результат масиву data на 2 елементи які в ньому є
-        // один для лівого бару, другий - правий
-
         setCategories(
           categoriesCreation(data as unknown as TransformedCategoriesType[]),
         );
@@ -234,12 +235,12 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                                 {"Артикул: "}
                                 {details?.sku}
                               </div>
-                              <div
+                              {/* <div
                                 className="content mt-5"
                                 dangerouslySetInnerHTML={{
                                   __html: details?.short_description || "",
                                 }}
-                              />
+                              /> */}
                             </>
                           ) : null}
                           <div className="h-[100px]"></div>
