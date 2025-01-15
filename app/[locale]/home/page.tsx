@@ -21,8 +21,9 @@ const HomePage = ({ params: { locale } }: { params: { locale: string } }) => {
       {/* <div className="text-2xl text-blue-900 flex justify-center items-center valign-middle">{t('title')}</div> */}
       <div>
         <div className="flex flex-1 flex-col justify-center items-center">
+        <button className="flex mt-2 bg-red-600 font-bold text-2xl opacity-50 w-96 h-16 justify-center items-center">Test SERVER!</button>
           <Slider locale={locale} />
-<button>Test for test!</button>
+
           <h2
             className={classNames(
               "justify-center items-center valign-middle mb-10",
@@ -179,7 +180,7 @@ const HomePage = ({ params: { locale } }: { params: { locale: string } }) => {
           </div>
         </div>
         <br />
-        
+
         <div className="flex flex-1 flex-col justify-center items-center">
           <div
             className={classNames(
