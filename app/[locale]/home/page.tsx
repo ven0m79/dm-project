@@ -22,7 +22,7 @@ const HomePage = ({ params: { locale } }: { params: { locale: string } }) => {
       <div>
         <div className="flex flex-1 flex-col justify-center items-center">
           <Slider locale={locale} />
-
+<button>Test for test!</button>
           <h2
             className={classNames(
               "justify-center items-center valign-middle mb-10",
