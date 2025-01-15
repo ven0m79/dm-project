@@ -22,7 +22,7 @@ export function middleware(req: {
     return NextResponse.redirect(url);
   }
 
-  if (hostname === 'test.dm-project.com.ua') {
+  if (hostname.startsWith('test')) {
     const response = NextResponse.next();
     response.headers.set('X-Robots-Tag', 'noindex, nofollow');
     return response;
@@ -32,5 +32,5 @@ export function middleware(req: {
 }
 
 export const config = {
-  matcher: ["/((?!api|_next|.*\\..*).*)", "/:path*"],
+  matcher: ["/((?!api|_next|.*\\..*).*)"],
 };
