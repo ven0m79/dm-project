@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { Suspense, useCallback, useEffect, useState } from 'react';
 import LSidebar from "@app/[locale]/components/molecules/leftSidebar/leftSidebar";
 import RSidebar from "@app/[locale]/components/molecules/rightSidebar/rightSidebar";
 import { fetchWooCommerceCategories } from 'utils/woocommerce.setup';
@@ -56,6 +56,7 @@ export default function Layout({
         getData();
     }, [getData, locale]);
     return (
+        <Suspense fallback="Loading">
         <MainLayout>
             <div
                 className={classNames(
@@ -106,5 +107,6 @@ export default function Layout({
                 </div>
             </div>
         </MainLayout>
+        </Suspense>
     );
 }
