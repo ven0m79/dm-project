@@ -53,8 +53,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
   );
 
   return (
-    <>
-      <Suspense fallback="Loading">
+       <Suspense fallback="Loading">
         <Seo title={`ДМ-ПРОЕКТ: ${selectedCategory}`} description={`Пропонуємо Вам сучасне обладнання різних типів та призначень`}/>
         <div
           className={classNames(
@@ -182,7 +181,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
           </div> */}
         </div>
       </Suspense>
-    </>
+
   );
 };
 
