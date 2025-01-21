@@ -2,17 +2,13 @@
 import classNames from "classnames";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import React, { Suspense, useCallback, useEffect, useState } from "react";
-
-import { MainLayout } from "@app/[locale]/components/templates";
-import LSidebar from "@app/[locale]/components/molecules/leftSidebar/leftSidebar";
-import RSidebar from "@app/[locale]/components/molecules/rightSidebar/rightSidebar";
+import React, { Suspense, useEffect, useState } from "react";
 
 import { fetchWooCommerceCategories } from "../../../../utils/woocommerce.setup";
 import { SingleProductDetails } from "../../../../utils/woocomerce.types";
-import styles from "./Sub-catalog.module.css";
 import { categoriesCreation, TransformedCategoriesType } from "./helpers";
 import Seo from "@app/[locale]/components/atoms/seo/Seo";
+import styles from "./Sub-catalog.module.css";
 
 const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
   const searchParams = useSearchParams();
@@ -20,29 +16,34 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
 
   const [selectedCategoryItem, setSelectedCategoryItem] =
     useState(selectedCategory);
-
   const [categories, setCategories] = useState<TransformedCategoriesType[]>([]);
   const [selectedProducts, setSelectedProducts] = useState<SingleProductDetails[]>(
     []
   );
 
-  const getData = useCallback(async () => {
+  // Данные о категориях и продуктах
+  const getData = async () => {
     try {
       const data = await fetchWooCommerceCategories(locale);
 
       if (data) {
-        setCategories(
-          categoriesCreation(data as unknown as TransformedCategoriesType[])
-        );
+        setCategories(categoriesCreation(data as unknown as TransformedCategoriesType[]));
       }
     } catch (e) {
       console.warn({ e });
     }
-  }, [locale]);
+  };
 
   useEffect(() => {
     getData();
-  }, [getData, locale]);
+  }, [locale]);
+
+  useEffect(() => {
+    // При изменении категории обновляем состояние
+    if (selectedCategory) {
+      setSelectedCategoryItem(selectedCategory);
+    }
+  }, [selectedCategory]);
 
   const isAccessories = selectedProducts?.map((el) =>
     el.tags.map((el) => el.name).includes("accessories")
@@ -145,7 +146,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
 // Обернуть компонент в Suspense для корректной работы с асинхронными данными
 export default function SubCatalogPage({ params }: { params: { locale: string } }) {
   return (
-    <Suspense fallback="Loading">
+    <Suspense fallback={<div>Loading...</div>}>
       <SubCatalog params={params} />
     </Suspense>
   );
