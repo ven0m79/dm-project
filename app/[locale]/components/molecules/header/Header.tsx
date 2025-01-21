@@ -143,7 +143,7 @@ const Header = () => {
               alt="Logo DM Project"
             />
           </Link>
-        </div>
+        </div> 
         <div className={styles.contactsGroupIcons}>
           <Image
             src="/telephone.png"
@@ -152,7 +152,7 @@ const Header = () => {
             alt="Logo DM Project"
           />
         </div>
-        <div className={styles.contactsGroup}>
+        <div className={classNames("text-[8px] sm:text-[10px] xl:text-[16px]", styles["contactsGroup"])}>
           <div>+380 44 520-12-24</div>
           <div className="pt-1">+380 66 358-98-10</div>
           <div className="pl-10">(cервіс)</div>
@@ -165,12 +165,12 @@ const Header = () => {
             alt="Logo DM Project"
           />
         </div>
-        <div className={styles.contactsGroup}>
+        <div className={classNames("text-[8px] sm:text-[10px] xl:text-[16px]", styles["contactsGroup"])}>
           <div>allinfo@dm-project.com.ua</div>
           <div>sales@dm-project.com.ua</div>
           <div>service@dm-project.com.ua</div>
         </div>
-        <div className={classNames("mx-auto w-72", styles["search"])}>
+        <div className={classNames("mx-auto max-w-76", styles["search"])}>
           <Combobox value={searchTerm}>
             <div className="relative flex z-50">
               <ComboboxInput

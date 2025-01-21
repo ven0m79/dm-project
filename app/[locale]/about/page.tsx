@@ -27,7 +27,7 @@ const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
               width={550}
               height={750}
               alt={""}
-            />
+            /> 
 
             <div className={classNames("flex flex-column justify-center items-start my-3", styles["aboutText"])}>
               <div className={classNames("my-2 indent-5 text-justify")}>

@@ -1,11 +1,14 @@
 .navigation {
   margin-top: 0vh;
-  height: 50px;
+  max-height: 100%;
   display: flex;
   align-self: center;
-  width: 1400px;
+  max-width: 1400px;
+  width: 100%;
   align-items: center;
   background-color: #0061AA;
+  text-wrap: nowrap;
+  /* border: 1px solid green; */
 }
 
 .colorBlue {
@@ -15,11 +18,12 @@
 
 .back {
   width: 240px;
+  border: 1px solid red;
   margin-top: 0vh;
   display: flex;
   align-self: center;
   align-items: center;
-  height: 50px;
+  height: 100%;
   background: radial-gradient(circle farthest-side, #ffffff 10%, #0061AA);
 }
 
@@ -30,25 +34,22 @@
   margin-left: 10px;
   height: 100%;
   font-family: Roboto;
-  font-size: 16px;
   color: white;
-  /* border: solid 1px blue; */
+  border: solid 1px blue;
   background-color: #0061AA;
 }
 
 
 .link {
-  font-size: 16px;
-  height: 100%;
+  height: 50px;
   padding: 15px 11px 15px 11px;
   color: white;
-
   position: relative;
   font-family: "Roboto", sans-serif;
 }
 
 .active {
-  height: 100%;
+  height: 50px;
   padding: 15px 15px 15px 15px;
   color: rgb(255, 255, 255);
   background-color: #002766;

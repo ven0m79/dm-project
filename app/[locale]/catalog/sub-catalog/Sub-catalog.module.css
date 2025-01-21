@@ -1,7 +1,10 @@
 .subCatalog {
-    width: 1400px;
+    width: 100%;
+    max-width: 1400px;
+    min-width: none;
+    align-content: center;
     
-    /* border: 1px solid red; */
+    border: 1px solid red;
 }
 
 .subMenu {

@@ -18,7 +18,6 @@
     align-self: center;
     height: 74px;
     width: 120px;
-    margin: 10px  100px 10px 50px;
 }
 .contactsGroupIcons {
     align-self: center;
@@ -38,7 +37,7 @@
 
     border-color: #0061AA;
     outline: none;
-    margin: 10px  10px 10px 50px;
+
     vertical-align: middle;
     font-family: "Roboto", sans-serif;
     padding: 0 20px;

@@ -31,8 +31,8 @@ const MainLayout: FC<MainLayoutProps> = ({
         {noHeader ? null : <Header />}
       </Suspense>
       {noNav ? null : <Nav />}
-      {children}
-      {noFooter ? null : <Footer />}
+      {/* {children} */}
+      {/* {noFooter ? null : <Footer />} */}
     </main>
   );
 };

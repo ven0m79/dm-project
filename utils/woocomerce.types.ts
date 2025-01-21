@@ -56,6 +56,7 @@ export type SingleProductDetails = {
   brands: BrandsType[];
   translations: Record<string, number>[];
   cross_sell_ids: CrossSellIds[];
+  parentCategory: string;
 };
 export type CrossSellIds = {
   id: number;

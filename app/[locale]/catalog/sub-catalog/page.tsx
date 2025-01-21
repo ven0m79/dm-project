@@ -53,7 +53,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
   );
 
   return (
-    <MainLayout>
+    <>
       <Suspense fallback="Loading">
         <Seo title={`ДМ-ПРОЕКТ: ${selectedCategory}`} description={`Пропонуємо Вам сучасне обладнання різних типів та призначень`}/>
         <div
@@ -62,7 +62,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
             styles.subCatalog,
           )}
         >
-          <div className={classNames("mt-4", styles.subMenu)}>
+          {/* <div className={classNames("mt-4", styles.subMenu)}>
             {locale === "ua" ? (
               <LSidebar
                 items={[categories?.[1] || []]}
@@ -80,7 +80,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
                 changeURLParams
               />
             )}
-          </div>
+          </div> */}
 
           <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-6 w-full items-start">
             {selectedProducts && selectedProducts.length ? (
@@ -164,7 +164,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
               <h2 className="text-amber-700"></h2>
             )}
           </div>
-
+{/* 
           <div className={classNames("mt-4", styles.subMenu)}>
             {locale === "ua" ? (
               <RSidebar
@@ -179,10 +179,10 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
                 locale={locale}
               />
             )}
-          </div>
+          </div> */}
         </div>
       </Suspense>
-    </MainLayout>
+    </>
   );
 };
 

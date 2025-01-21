@@ -62,7 +62,7 @@ const Nav = () => {
         {Object.keys(NavLinks).map((el) => (
           <li
             key={el}
-            className={classNames("", styles["link"], {
+            className={classNames("text-[10px] sm:text-[12px] xl:text-[16px]", styles["link"], {
               [styles["active"]]: pathname === '/lll'? pathname === NavLinks[el].link : pathname.includes(NavLinks[el].link),
             })}
           >
@@ -70,7 +70,7 @@ const Nav = () => {
           </li>
         ))}
       </ul>
-      <div className="items-end right-0 flex flex-1 flex-row w-full justify-end mx-2">
+      <div className="items-end right-0 flex flex-1 flex-row justify-end mx-2">
         <div
           className={classNames(
             "flex justify-center items-center",
@@ -84,7 +84,8 @@ const Nav = () => {
             alt="Logo DM Project"
           />
         </div>
-        <div className={styles["backText"]}>{t2("authorized-representative")}</div>
+        <div className={classNames(
+            "text-[10px] sm:text-[12px] xl:text-[16px] text-wrap" ,styles["backText"])}>{t2("authorized-representative")}</div>
       </div>
     </nav>
     </div>
