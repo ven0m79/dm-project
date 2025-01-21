@@ -56,8 +56,9 @@ export default function Layout({
         getData();
     }, [getData, locale]);
     return (
-        <Suspense fallback="Loading">
+
         <MainLayout>
+                    <Suspense fallback="Loading">
             <div
                 className={classNames(
                     "flex flex-1 flex-row justify-between self-center mb-5 mt-5",
@@ -106,7 +107,8 @@ export default function Layout({
                     )}
                 </div>
             </div>
+            </Suspense>    
         </MainLayout>
-        </Suspense>
+        
     );
 }
