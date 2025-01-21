@@ -58,7 +58,7 @@ export default function Layout({
     return (
 
         <MainLayout>
-                    <Suspense fallback="Loading">
+                    <Suspense fallback={<div>Loading layout...</div>}>
             <div
                 className={classNames(
                     "flex flex-1 flex-row justify-between self-center mb-5 mt-5",
