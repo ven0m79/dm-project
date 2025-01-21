@@ -181,7 +181,6 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
           </div> */}
         </div>
       </Suspense>
-
   );
 };
 
