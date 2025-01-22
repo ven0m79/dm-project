@@ -57,13 +57,14 @@ export default function Layout({
     }, [getData, locale]);
     return (
         <MainLayout>
-                    <Suspense fallback="Loading">
+                    
             <div
                 className={classNames(
                     "flex flex-1 flex-row justify-between self-center mb-5 mt-5",
                     styles.subCatalog,
                 )}
             >
+                <Suspense fallback="Loading">
                 <div className='w-[302px]'>
                     {/* Компонента1 */}
                     {locale === "ua" ? (
@@ -84,10 +85,12 @@ export default function Layout({
                         />
                     )}
                 </div>
+                </Suspense>
                 {/* Основное содержимое */}
                 <div className='min-w-min'>
                 {children}
                 </div>
+                <Suspense fallback="Loading">
                 <div className='w-[302px]'>
                     {locale === "ua" ? (
                         <RSidebar
@@ -105,8 +108,9 @@ export default function Layout({
                         />
                     )}
                 </div>
+                </Suspense>
             </div>
-            </Suspense>    
+               
         </MainLayout>
         
     );
