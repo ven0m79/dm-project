@@ -1,4 +1,5 @@
 import WooCommerceRestApi from "@woocommerce/woocommerce-rest-api";
+import { SingleProductDetails } from "utils/woocomerce.types";
 
 const api = new WooCommerceRestApi({
   url: process.env.NEXT_PUBLIC_WORDPRESS_RITE_URL || "",
@@ -10,29 +11,33 @@ const api = new WooCommerceRestApi({
 export default async function getDynamicRoutes(req: any, res: any) {
   const responseData = {
     success: false,
-    products: [] as string[],
+    products: [] as SingleProductDetails[],
     error: null as string | null,
   };
 
   try {
-    const productsWithDetails: string[] = [];
+    const productsWithDetails: SingleProductDetails[] = [];
+    let page = 1;
 
-    // Запрос для получения товаров
-    const { data: products } = await api.get("products", {
-      params: {
-        per_page: 100, 
-      },
-    });
+    let totalPages = 1;
 
-    // Обрабатываем товары и формируем ссылки
-    const productsLinks = products.map((product: any) => {
-      const tagSlug = product.tags?.[0]?.slug; 
-      const lang = product.lang; 
+    do {
+      const response = await api.get("products?per_page=100");
 
-      return `/${lang}/catalog/sub-catalog/product/${product.id}?category=${tagSlug}`;
-    });
+      const products = response.data;
+      totalPages = parseInt(response.headers['x-wp-totalpages'], 10);
 
-    productsWithDetails.push(...productsLinks);
+      const productsLinks = products.map((product: any) => {
+        const tagSlug = product.tags?.[0]?.slug || "no-tag";
+        const lang = product.lang || "en";
+
+        return `/${lang}/catalog/sub-catalog/product/${product.id}?category=${tagSlug}`
+          ;
+      });
+
+      productsWithDetails.push(...productsLinks);
+      page++;
+    } while (page <= totalPages);
 
     responseData.success = true;
     responseData.products = productsWithDetails; 

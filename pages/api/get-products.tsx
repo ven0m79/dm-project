@@ -16,30 +16,33 @@ export default async function handler(req: any, res: any) {
   };
 
   try {
-    const productsWithDetails = [];
+    const productsWithDetails: SingleProductDetails[] = [];
+    let page = 1;
+    let totalPages = 1;
 
-    // Запрос для получения товаров
-    const { data: products } = await api.get("products", {
-      params: {
-        per_page: 100, // Максимальное количество товаров за запрос
-      },
-    });
+    do {
+      const response = await api.get("products?per_page=100");
 
-    // Обрабатываем товары и формируем ссылки
-    const productsLinks = products.map((product: any) => {
-      const tagSlug = product.tags?.[0]?.slug || "no-tag"; // Получаем slug первого тега или "no-tag"
-      const lang = product.lang || "en"; // Получаем язык или используем "en" по умолчанию
+      const products = response.data;
+      totalPages = parseInt(response.headers['x-wp-totalpages'], 10);
+      // Подсчитываем количество полученных товаров
 
-      return {
-        id: product.id,
-        name: product.name,
-        lang, // Язык товара
-        tags: tagSlug, // Тег
-        route: `https://www.dm-project.com.ua/${lang}/catalog/sub-catalog/product/${product.id}?category=${tagSlug}`,
-      };
-    });
+      const productsLinks = products.map((product: any) => {
+        const tagSlug = product.tags?.[0]?.slug || "no-tag";
+        const lang = product.lang || "en";
 
-    productsWithDetails.push(...productsLinks);
+        return {
+          id: product.id,
+          name: product.name,
+          lang,
+          tags: tagSlug,
+          route: `/${lang}/catalog/sub-catalog/product/${product.id}?category=${tagSlug}`,
+        };
+      });
+
+      productsWithDetails.push(...productsLinks);
+      page++;
+    } while (page <= totalPages);
 
     responseData.success = true;
     responseData.products = productsWithDetails;
