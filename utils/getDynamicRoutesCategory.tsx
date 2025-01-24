@@ -1,5 +1,4 @@
 import WooCommerceRestApi from "@woocommerce/woocommerce-rest-api";
-import { SingleProductDetails } from "utils/woocomerce.types";
 
 const api = new WooCommerceRestApi({
   url: process.env.NEXT_PUBLIC_WORDPRESS_RITE_URL || "",
@@ -8,39 +7,43 @@ const api = new WooCommerceRestApi({
   version: "wc/v3",
 });
 
-export default async function getDynamicRoutes(req: any, res: any) {
+export default async function getDynamicRoutesCategory(req: any, res: any) {
   const responseData = {
     success: false,
-    products: [] as string[],
+    categories: [] as string[],
     error: null as string | null,
   };
 
   try {
-    const productsWithDetails: string[] = [];
+    const categoriesWithDetails: string[] = [];
     let page = 1;
 
     let totalPages = 1;
 
     do {
-      const response = await api.get("products?per_page=100");
+      const response = await api.get("products/categories?per_page=100", {
+        params: {
+          page: page,
+        },
+      });
 
-      const products = response.data;
+      const categories = response.data;
       totalPages = parseInt(response.headers['x-wp-totalpages'], 10);
 
-      const productsLinks = products.map((product: any) => {
-        const tagSlug = product.tags?.[0]?.slug || "no-tag";
-        const lang = product.lang || "en";
+      const categoriesLinks = categories.map((categories: any) => {
+        const tagSlug = categories.slug || "no-tag";
+        const lang = categories.lang || "en";
 
-        return `/${lang}/catalog/sub-catalog/product/${product.id}?category=${tagSlug}`
+        return `/${lang}/catalog/sub-catalog?category=${tagSlug}`
           ;
       });
 
-      productsWithDetails.push(...productsLinks);
+      categoriesWithDetails.push(...categoriesLinks);
       page++;
     } while (page <= totalPages);
 
     responseData.success = true;
-    responseData.products = productsWithDetails; 
+    responseData.categories = categoriesWithDetails; 
 
     return responseData;
   } catch (error: any) {

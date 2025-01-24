@@ -46,7 +46,9 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
   );
 
   useEffect(() => {
+   
     if (selectedCategory && openedCategoryIds.length === 0) {
+      console.log(selectedCategory)
       // @ts-ignore
       const categoryId = currentIdsData?.[selectedCategory];
 
