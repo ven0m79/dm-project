@@ -1,6 +1,11 @@
 import { Roboto } from "next/font/google";
 import { ReactNode } from "react";
 
+import { DefaultSeo } from "next-seo";
+import defaultSEOConfig from "../../next-seo.config";
+import { usePathname } from "next/navigation";
+
+
 import { NextIntlClientProvider, useMessages } from "next-intl";
 
 import "./globals.css";
@@ -32,14 +37,21 @@ export default function RootLayout({
 }: LocaleLayoutProps) {
   unstable_setRequestLocale(locale);
   const messages = useMessages();
+  const pathname = usePathname();
+  const seoConfig = {
+    ...defaultSEOConfig,
+    openGraph: {
+      ...defaultSEOConfig.openGraph,
+      locale: locale === "en" ? "en_US" : "uk_UA", // Установка языка.
+      url: `https://dm-project.com.ua${pathname}`, // Динамическое URL.
+    },
+  };
+
+
 
   return (
     <html lang={locale}>
       <head>
-        <title>ДМ-проект</title>
-        <meta
-          name="description"
-          content="Компанія ДМ-ПРОЕКТ заснована у 2009 році як уповноважений представник німецької компанії Dräger в Україні, світового лідера з виробництва систем життєзабезпечення людини."></meta>
       </head>
       <body
         className={cn(
@@ -49,6 +61,7 @@ export default function RootLayout({
       >
         <main className="flex flex-1 flex-col items-center justify-center gap-12 w-100% bg-white">
           <NextIntlClientProvider locale={locale} messages={messages}>
+          <DefaultSeo {...seoConfig} />
             {children}
           </NextIntlClientProvider>
         </main>

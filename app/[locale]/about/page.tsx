@@ -10,16 +10,30 @@ import Image from "next/image";
 import SliderAbout from "../components/molecules/sliderAbout/slider";
 import roman from "../../../public/roman.webp";
 import vystavka from "../../../public/vystavka.webp";
-import Seo from "@app/[locale]/components/atoms/seo/Seo";
+//import Seo from "@app/[locale]/components/atoms/seo/Seo";
+import { NextSeo } from 'next-seo';
 
 const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
   const t = useTranslations("AboutPage");
 
   return (
     <MainLayout>
-      <Seo
+      <NextSeo
         title="ДМ-ПРОЕКТ: Про компанію"
-        description="Компанія ДМ-ПРОЕКТ заснована у 2009 році як уповноважений представник німецької компанії Dräger в Україні, світового лідера з виробництва систем життєзабезпечення людини."
+        description="Видами діяльності компанії є не тільки продаж медичного обладнання високого класу, а й розробка та впровадження комплексних рішень для медичних закладів, починаючи з проектування і закінчуючи сервісом та навчанням персоналу."
+        openGraph={{
+          url: '<.dm-project.com.ua/about>',
+          title: 'ДМ-ПРОЕКТ: Про компанію',
+          description: 'Видами діяльності компанії є не тільки продаж медичного обладнання високого класу, а й розробка та впровадження комплексних рішень для медичних закладів, починаючи з проектування і закінчуючи сервісом та навчанням персоналу.',
+          images: [
+            {
+              url: '<https://www.mywebsite.com/about-og-image.jpg>',
+              width: 1200,
+              height: 630,
+              alt: 'ДМ-проект: Про компанію - зображення для соцмереж',
+            },
+          ],
+        }}
       />
       <div
         className={classNames(

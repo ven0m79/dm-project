@@ -18,11 +18,10 @@ export default async function getDynamicRoutes(req: any, res: any) {
   try {
     const productsWithDetails: string[] = [];
     let page = 1;
-
     let totalPages = 1;
 
     do {
-      const response = await api.get("products?per_page=100");
+      const response = await api.get(`products?per_page=100&page=${page}`);
 
       const products = response.data;
       totalPages = parseInt(response.headers['x-wp-totalpages'], 10);
