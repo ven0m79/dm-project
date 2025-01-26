@@ -10,7 +10,6 @@ import Image from "next/image";
 import SliderAbout from "../components/molecules/sliderAbout/slider";
 import roman from "../../../public/roman.webp";
 import vystavka from "../../../public/vystavka.webp";
-import Seo from "@app/[locale]/components/atoms/seo/Seo";
 import { NextSeo } from 'next-seo';
 
 const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
@@ -18,10 +17,9 @@ const AboutPage = ({ params: { locale } }: { params: { locale: string } }) => {
 
   return (
     <MainLayout>
-      <Seo
+      <NextSeo
         title="ДМ-ПРОЕКТ: Про компанію"
         description="Видами діяльності компанії є не тільки продаж медичного обладнання високого класу, а й розробка та впровадження комплексних рішень для медичних закладів, починаючи з проектування і закінчуючи сервісом та навчанням персоналу."
-       
       />
       <div
         className={classNames(
