@@ -1,9 +1,8 @@
 import { Roboto } from "next/font/google";
 import { ReactNode } from "react";
 
-import { NextSeo } from "next-seo";
-
-
+import { DefaultSeo } from "next-seo";
+import defaultSEOConfig from "../../next-seo.config";
 
 import { NextIntlClientProvider, useMessages } from "next-intl";
 
@@ -37,10 +36,17 @@ export default function RootLayout({
   unstable_setRequestLocale(locale);
   const messages = useMessages();
 
+  const seoConfig = {
+    ...defaultSEOConfig,
+    openGraph: {
+      ...defaultSEOConfig.openGraph,
+      locale: locale === "en" ? "en_US" : "ua_UA", // Установка языка.
+      url: `https://dm-project.com.ua`, // Динамическое URL.
+    },
+  };
+
   return (
     <html lang={locale}>
-       <head>
-      </head>
       <body
         className={cn(
           "flex min-h-screen overflow-x-hidden bg-gray-950 text-gray-50",
@@ -49,6 +55,7 @@ export default function RootLayout({
       >
         <main className="flex flex-1 flex-col items-center justify-center gap-12 w-100% bg-white">
           <NextIntlClientProvider locale={locale} messages={messages}>
+          {/* <DefaultSeo {...seoConfig} /> */}
             {children}
           </NextIntlClientProvider>
         </main>
