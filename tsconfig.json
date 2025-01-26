@@ -26,6 +26,6 @@
       "@pages/*": ["./pages/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "i18.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "i18.js", "next-seo.config.js"],
   "exclude": ["node_modules"]
 }
