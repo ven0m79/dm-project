@@ -50,7 +50,7 @@ const CatalogPage = ({
           {/* sm:bg-amber-800 in classnames */}
           <div
             className={classNames(
-              "flex flex-row items-center rounded-xl ",
+              "flex flex-row items-center rounded-xl",
               styles["block-decisions"],
             )}
           >

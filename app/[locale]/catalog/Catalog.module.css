@@ -1,24 +1,16 @@
-.catalogText {
-    display: flex;
-    flex-direction: column;
-    width: 1050px;
-    font-size: 18px;
-    color: black;
-    line-height: 27px;
-}
-
-.catalogMainPhoto {
-    width: 300px;
-    height: 300px;
-    background-image: url("../../../public/aboutDM.jpg");
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
 .catalogContainer {
     align-self: center;
-    width: 1400px;
-    border: 1px solid  transparent;
+    max-width: 1400px;
+    padding-left: 5px;
+    padding-right: 5px;
+
+    
+    @media (max-width: 640px) {
+        width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+
+    }
 }
 
 .aboutDecisions {
@@ -27,14 +19,10 @@
     /* border: 1px solid #2f00ff; */
 }
 
-.image-radius {
-    border-radius: 10px;
-    border: 1px solid #ff0000;
-}
-
 .block-decisions {
     justify-content: space-between;
-    width: 688px;
+    width: 100vh;
+    max-width: 678px;
     height: 150px;
     border-radius: 10px;
     /* border: 1px solid #0061AA; */
@@ -46,7 +34,10 @@
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 
     @media (max-width: 640px) {
-        width: 120px;
+        min-width: 100%;
+        font-size: 18px;
+        height: 100px;
+
     }
 }
 
@@ -64,6 +55,12 @@
 .img {
     align-items: end;
     transition: all 0.5s;
+
+    @media (max-width: 640px) {
+        width: 80px;
+        height: 80px;
+
+    }
 }
 .span {
     transition: all 0.5s;
