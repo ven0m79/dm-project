@@ -2,22 +2,19 @@
 
 import classNames from "classnames";
 import { CustomFlowbiteTheme, Sidebar as FBSidebar } from "flowbite-react";
-import { useSearchParams } from "next/navigation";
+//import { useSearchParams } from "next/navigation";
 
-import React, {
-  FC,
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { FC, memo, useCallback, useMemo } from "react";
 
 import styles from "../../../catalog/sub-catalog/Sub-catalog.module.css";
 
-import { fetchWooCommerceProductsBasedOnCategory } from "../../../../../utils/woocommerce.setup";
 import { TransformedCategoriesType } from "@app/[locale]/catalog/sub-catalog/helpers";
 import { usePathname, useRouter } from "../../../../../config";
+import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
+import {
+  RIGHT_BAR_PARENT_ID,
+  RIGHT_BAR_PARENT_ID_EN,
+} from "@app/[locale]/components/constants";
 
 const customTheme: CustomFlowbiteTheme = {
   sidebar: {
@@ -98,70 +95,53 @@ const customTheme: CustomFlowbiteTheme = {
   },
 };
 
-const RIGHT_BAR_PARENT_ID = 55;
-const RIGHT_BAR_PARENT_ID_EN = 57;
-
 type SidebarProps = {
   locale: string;
-  items: TransformedCategoriesType[];
-  setSelectedCategoryItem?: (v: string) => void;
-  setSelectedProducts?: (v: any[]) => void;
+
   changeURLParams?: boolean;
   fromProductPage?: boolean;
 };
 
 const Content: FC<SidebarProps> = ({
-  items,
   locale,
-  setSelectedProducts,
-  setSelectedCategoryItem,
   changeURLParams,
   fromProductPage,
 }) => {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>();
-  const [openedCategoryIds, setOpenedCategoryIds] = useState<number[]>([]);
-
-  const getCategoryDetails = useCallback(
-    async (id: number) => {
-      try {
-        const data = await fetchWooCommerceProductsBasedOnCategory(id, locale);
-
-        if (data) {
-          setSelectedProducts?.(data);
-        }
-      } catch (e) {
-        console.warn({ e });
-      }
-    },
-    [locale, setSelectedProducts],
-  );
+  
+  const {
+      categories,
+      openedCategoryIds,
+      selectedCategoryId,
+      setSelectedCategoryId,
+      setSelectedCategory,
+      setOpenedCategoryIds,
+      getCategoryDetails,
+    } = useSidebar();
+  
+    const items = useMemo(
+      () => (locale === "ua" ? [categories?.[0] || []] : [categories?.[1] || []]),
+      [categories, locale],
+    );
 
   const handleCollapseToggle = async (categoryId: number) => {
     setSelectedCategoryId(categoryId); // Highlight the selected category
 
     // Fetch products for the selected category
-    await getCategoryDetails(categoryId);
+    await getCategoryDetails(categoryId, locale);
 
     // After fetching, set the clicked category as the only open one
     // Toggle open state
     setOpenedCategoryIds((prevOpenedIds) => {
       const isOpened = prevOpenedIds.includes(categoryId);
-      const updatedIds = isOpened
+
+      return isOpened
         ? prevOpenedIds.filter((id) => id !== categoryId)
         : [...prevOpenedIds, categoryId];
-
-      // Save to localStorage
-      localStorage.setItem("openedCategories", JSON.stringify(updatedIds));
-
-      return updatedIds;
     });
 
-     const listCat = findParentCategories(items, categoryId);
-     console.log(listCat);
+    const listCat = findParentCategories(items, categoryId);
      
      if (!listCat || listCat.length === 0) {
       // Если listCat пустой, используем кликнутую категорию
@@ -204,8 +184,7 @@ const Content: FC<SidebarProps> = ({
             return foundParents.filter(
               (el) =>
                 // @ts-ignore
-                el.id !== RIGHT_BAR_PARENT_ID &&
-                el.id !== RIGHT_BAR_PARENT_ID_EN,
+                el.id !== RIGHT_BAR_PARENT_ID && el.id !== RIGHT_BAR_PARENT_ID_EN,
             ); // Return the full parent path if found
           }
         }
@@ -245,7 +224,7 @@ const Content: FC<SidebarProps> = ({
             );
             const listCat = findParentCategories(items, category.id);
 
-            setSelectedCategoryItem?.(selectedParent?.slug || "");
+            setSelectedCategory(selectedParent?.slug || "");
             handleCollapseToggle(category.id);
 
             if (changeURLParams) {

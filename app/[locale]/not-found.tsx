@@ -1,8 +1,10 @@
 import Link from 'next/link'
 import { Button } from 'app/[locale]/components/atoms'
 import { AlertTriangle } from 'lucide-react'
+import { useTranslations } from "next-intl";
 
 export default function NotFound() {
+  const t = useTranslations(""); // Загружаем переводы из JSON-файла
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4">
       <div className="text-center max-w-md w-full">

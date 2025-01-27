@@ -40,10 +40,11 @@ export default function RootLayout({
     ...defaultSEOConfig,
     openGraph: {
       ...defaultSEOConfig.openGraph,
-      locale: locale === "en" ? "en_US" : "ua_UA", // Установка языка.
+      locale: locale === "ua" ? "ua_UA" : "en_US", // Установка языка.
       url: `https://dm-project.com.ua`, // Динамическое URL.
     },
   };
+
 
   return (
     <html lang={locale}>
@@ -55,7 +56,7 @@ export default function RootLayout({
       >
         <main className="flex flex-1 flex-col items-center justify-center gap-12 w-100% bg-white">
           <NextIntlClientProvider locale={locale} messages={messages}>
-          {/* <DefaultSeo {...seoConfig} /> */}
+            {/* <DefaultSeo {...seoConfig} /> */}
             {children}
           </NextIntlClientProvider>
         </main>

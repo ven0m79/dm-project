@@ -29,29 +29,16 @@ const Content: FC<{
         styles.subCatalog,
       )}
     >
-      <div className="w-[302px]">
+      <div className="w-[300px]">
         {/* Компонента1 */}
         <LSidebar locale={locale} changeURLParams />
       </div>
       {/* Основное содержимое */}
-      <div className="min-w-min">{children}</div>
+      <div className="w-full">{children}</div>
 
-      <div className="w-[302px]">
-        {/*{locale === "ua" ? (*/}
-        {/*  <RSidebar*/}
-        {/*    items={[categories?.[1] || []]}*/}
-        {/*    setSelectedProducts={setSelectedProducts}*/}
-        {/*    locale={locale}*/}
-        {/*    changeURLParams*/}
-        {/*  />*/}
-        {/*) : (*/}
-        {/*  <RSidebar*/}
-        {/*    items={[categories?.[0] || []]}*/}
-        {/*    setSelectedProducts={setSelectedProducts}*/}
-        {/*    locale={locale}*/}
-        {/*    changeURLParams*/}
-        {/*  />*/}
-        {/*)}*/}
+      <div className="w-[300px]">
+                {/* Компонента1 */}
+                <RSidebar locale={locale} changeURLParams />
       </div>
     </div>
   );
