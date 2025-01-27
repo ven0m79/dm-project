@@ -18,12 +18,12 @@
 
 .back {
   width: 240px;
-  border: 1px solid red;
+  height: 50px;
+  /* border: 1px solid red; */
   margin-top: 0vh;
   display: flex;
   align-self: center;
   align-items: center;
-  height: 100%;
   background: radial-gradient(circle farthest-side, #ffffff 10%, #0061AA);
 }
 
@@ -35,7 +35,7 @@
   height: 100%;
   font-family: Roboto;
   color: white;
-  border: solid 1px blue;
+  /* border: solid 1px blue; */
   background-color: #0061AA;
 }
 
