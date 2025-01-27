@@ -16,7 +16,7 @@ import imgOper from "./icons-photo/oper.webp";
 import imgSteriliz from "./icons-photo/sterilization.webp";
 import { useTranslations } from "next-intl";
 import Seo from "@app/[locale]/components/atoms/seo/Seo";
-import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
+import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile"; 
 
 const CatalogPage = ({
   params: { locale },
