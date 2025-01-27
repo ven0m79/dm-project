@@ -1,6 +1,9 @@
 export const LEFT_BAR_PARENT_ID = 50;
 export const LEFT_BAR_PARENT_ID_EN = 52;
 
+export const RIGHT_BAR_PARENT_ID = 55;
+export const RIGHT_BAR_PARENT_ID_EN = 57;
+
 export const categoriesUAIdData = {
   "or-equipment": 19,
   "icu-equipment": 75,

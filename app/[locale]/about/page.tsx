@@ -1,4 +1,4 @@
-"use client"; // Ensure this component is client-side rendered
+"use client"; 
 
 import React from "react";
 import classNames from "classnames";

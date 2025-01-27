@@ -80,7 +80,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
           styles.subCatalog,
         )}
       >
-        <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-6 w-full items-start">
+        <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-5 w-full items-start">
           {selectedProducts && selectedProducts.length ? (
             selectedProducts.map((el) => {
               return isAccessories[0] ? (
