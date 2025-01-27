@@ -66,14 +66,14 @@ const Footer = () => {
           </div>
         </div>
         <div className={classNames("font-bold", styles["column"])}>
-          <div className={classNames("font-bold mb-4 text-[20px] ml-16")}>
+          <div className={classNames("font-bold mb-4 text-[20px] ml-10")}>
             {" "}
             {t("information")}
           </div>
           <Link href="/about">
             <div
               className={classNames(
-                "font-normal mt-1 ml-16 hover:text-green-600",
+                "font-normal mt-1 ml-10 hover:text-green-600",
               )}
             >
               {t("about-company")}
@@ -82,7 +82,7 @@ const Footer = () => {
           <Link href="/services">
             <div
               className={classNames(
-                "font-normal mt-1 ml-16 hover:text-green-600",
+                "font-normal mt-1 ml-10 hover:text-green-600",
               )}
             >
               {t("service")}
@@ -92,7 +92,7 @@ const Footer = () => {
           <Link href="/projects">
             <div
               className={classNames(
-                "font-normal mt-1 ml-16 hover:text-green-600",
+                "font-normal mt-1 ml-10 hover:text-green-600",
               )}
             >
               {t("projects")}
@@ -101,7 +101,7 @@ const Footer = () => {
           <Link href="/shares">
             <div
               className={classNames(
-                "font-normal mt-1 ml-16 hover:text-green-600",
+                "font-normal mt-1 ml-10 hover:text-green-600",
               )}
             >
               {t("shares")}
