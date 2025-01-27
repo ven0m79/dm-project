@@ -29,14 +29,14 @@ const Content: FC<{
         styles.subCatalog,
       )}
     >
-      <div className="w-[300px]">
+      <div className="w-[302px]">
         {/* Компонента1 */}
         <LSidebar locale={locale} changeURLParams />
       </div>
       {/* Основное содержимое */}
       <div className="w-full">{children}</div>
 
-      <div className="w-[300px]">
+      <div className="w-[302px]">
                 {/* Компонента1 */}
                 <RSidebar locale={locale} changeURLParams />
       </div>

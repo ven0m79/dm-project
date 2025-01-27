@@ -4,7 +4,7 @@
     min-width: none;
     align-content: center;
     
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 .subMenu {
@@ -23,6 +23,7 @@
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: 15px;
+       /* border: 1px solid blue; */
 }
 .subCollapse:hover {
     background-color: #0060aa10;

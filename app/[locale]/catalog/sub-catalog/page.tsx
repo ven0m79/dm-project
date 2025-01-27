@@ -76,7 +76,7 @@ const SubCatalog = ({ params: { locale } }: { params: { locale: string } }) => {
       />
       <div
         className={classNames(
-          "flex flex-1 flex-row justify-between self-center mb-5",
+          "flex flex-1 flex-row justify-between self-center mb-5", 
           styles.subCatalog,
         )}
       >

@@ -161,7 +161,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                       delay: 0.4,
                     }}
                   >
-                    <div className="flex flex-row w-full bg-black">
+                    <div className="flex flex-row w-full bg-slate-600">
                       <div className={classNames("m-4", styles.imageRadius)}>
                         <img
                           src={details?.images[0].src}
