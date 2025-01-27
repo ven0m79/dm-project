@@ -270,25 +270,11 @@ const Content: FC<SidebarProps> = ({
     );
   };
 
-  // useEffect(() => {
-  //   const category = searchParams?.get("category");
-
-  //   if (category) {
-  //     const categoryId = currentIdsData?.[category];
-
-  //     if (categoryId) {
-  //       getCategoryDetails(categoryId);
-  //       setSelectedCategoryId(categoryId);
-  //       setOpenedCategoryIds([categoryId]);
-  //     }
-  //   }
-  // }, [getCategoryDetails, searchParams]);
-
   return (
     <div
       className={classNames(
         "flex flex-1 flex-row justify-between",
-        styles.subCatalog,
+        styles.subMenu, 
       )}
     >
       <div className="">

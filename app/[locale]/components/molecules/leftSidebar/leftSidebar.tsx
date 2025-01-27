@@ -268,39 +268,11 @@ const Content: FC<SidebarProps> = ({
     );
   };
 
-  // useEffect(() => {
-  //   if (categoryTag) {
-  //     const updatedTag =
-  //       locale !== "ua"
-  //         ? categoryTag.includes("en")
-  //           ? categoryTag.slice(0, -3)
-  //           : categoryTag
-  //         : categoryTag;
-  //
-  //     const categoryId =
-  //       currentIdsData?.[updatedTag as keyof typeof currentIdsData];
-  //
-  //     if (categoryId) {
-  //       getCategoryDetails(categoryId);
-  //       setSelectedCategoryId(categoryId); // Ensure initial category is selected
-  //       setOpenedCategoryIds([categoryId]);
-  //     }
-  //   }
-  // }, [
-  //   categoryTag,
-  //   currentIdsData,
-  //   getCategoryDetails,
-  //   locale,
-  //   setOpenedCategoryIds,
-  //   setSelectedCategoryId,
-  // ]);
-  //
-
   return (
     <div
       className={classNames(
         "flex flex-1 flex-row justify-between",
-        styles.subCatalog,
+        styles.subMenu,
       )}
     >
       <div className="">
