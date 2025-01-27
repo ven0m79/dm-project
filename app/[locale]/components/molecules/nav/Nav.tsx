@@ -63,7 +63,7 @@ const Nav = () => {
       "flex flex-1 w-full justify-center max-h-[50px]",
       styles["colorBlue"])}>
       {isMobile ? (<div>
-        <nav className={styles["navigation"]}>Test</nav>
+        <nav className={""}>Test</nav>
           </div>) :
         <nav className={styles["navigation"]}>
           <ul className="flex ms-center">
