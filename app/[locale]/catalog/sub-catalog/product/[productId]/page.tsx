@@ -143,7 +143,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
   return (
     <>
       <Seo title={SEOData.title} description={SEOData.description} />
-      <div className="flex self-center flex-row max-w-[800px] mb-8 bg-red-600">
+      <div className="flex self-center flex-row max-w-[800px] mb-8">
         <div className="flex flex-col p-1 min-h-[600px] flex-1">
           {loading ? (
             <div className="flex w-[800px] h-[600px] justify-center items-center">
@@ -161,7 +161,7 @@ const Page = ({ params: { locale } }: { params: { locale: string } }) => {
                       delay: 0.4,
                     }}
                   >
-                    <div className="flex flex-row w-full bg-black">
+                    <div className="flex flex-row w-full">
                       <div className={classNames("m-4", styles.imageRadius)}>
                         <img
                           src={details?.images[0].src}
