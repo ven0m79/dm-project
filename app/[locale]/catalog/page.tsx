@@ -26,7 +26,6 @@ const CatalogPage = ({
   const t = useTranslations("Catalog1");
 
   const isMobile = useIsMobile();
-
   console.log({ isMobile });
 
   return (
