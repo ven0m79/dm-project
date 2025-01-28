@@ -36,7 +36,6 @@
 .backText {
     @media (max-width: 640px) {
         height: 30px;
-        background-color: #0061AA;
         color: white;
         /* border: 1px solid black; */
         font-size: 16px;
