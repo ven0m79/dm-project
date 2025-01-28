@@ -158,8 +158,8 @@ const Header = () => {
               <Link href={"/catalog"}>
                 <Image
                   src="/go-menu.webp"
-                  width={25}
-                  height={25}
+                  width={35}
+                  height={35}
                   alt="Відкити меню"
                 />
               </Link>
