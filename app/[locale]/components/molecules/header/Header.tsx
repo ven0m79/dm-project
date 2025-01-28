@@ -165,7 +165,7 @@ const Header = () => {
               </Link>
             </div>
           </div>
-          <div className={classNames("flex justify-center items-center text-nowrap bg-[#0061AA]", styles["backText"])}>
+          <div className={classNames("flex justify-center items-center h-[30px] text-nowrap bg-[#0061AA]", styles["backText"])}>
             {t2("authorized-representativeDreger1")}<span className="font-bold mx-1">{t2("authorized-representativeDreger2")}</span> {t2("authorized-representativeDreger3")}
           </div>
           <div className={classNames("flex justify-center items-center pb-2 h-[50px] bg-[#0061AA]", styles["searchMob"])}>
