@@ -35,8 +35,6 @@
 
 .backText {
     @media (max-width: 640px) {
-
-        color: white;
         /* border: 1px solid black; */
         font-size: 16px;
         padding-left: 5px;
@@ -47,10 +45,6 @@
 
 .searchMob {
     @media (max-width: 640px) {
-
-
-
-
         /* border: 1px solid black; */
 
     }
