@@ -43,6 +43,7 @@ type Product = {
 
 const Header = () => {
   const t = useTranslations("Header");
+  const t2 = useTranslations("Index");
   const locale = useLocale();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -125,26 +126,99 @@ const Header = () => {
   }, [searchParams]);
 
   return (
-
-
     <header
       className={classNames("mt-top flex flex-col w-full", styles["header"])}
     >
-      {isMobile ? (
-        <div className="bg-blue-300 h-svh">
-          <div></div>
-          <div className={classNames("flex justify-center", [styles.logo])}>
-            <Link href={"/home"}>
-              <Image
-                src="/logo-DM-project.png"
-                width={120}
-                height={75}
-                alt="Logo DM Project"
-              />
-            </Link>
+      {typeof window !== "undefined" && isMobile ? (
+        <div className="flex flex-col self-start  h-svh ">
+          <div className={classNames("flex flex-row justify-center", [styles.logo])}>
+            <div className="w-[200px] ml-4">
+              <Link
+                href={"/catalog"}
+                className="flex items-center">
+                <Image
+                  src="/go-products.webp"
+                  width={25}
+                  height={25}
+                  alt="Перейти до каталогу продуктів"
+                /> <span className="ml-2 font-bold">Продукти</span>
+              </Link>
+            </div>
+            <div className={classNames("flex justify-center", [styles.logo])}>
+              <Link href={"/home"}>
+                <Image
+                  src="/logo-DM-project.png"
+                  width={120}
+                  height={75}
+                  alt="Logo DM Project"
+                />
+              </Link>
+            </div>
+            <div className="flex justify-center w-[214px]">
+              <Link href={"/catalog"}>
+                <Image
+                  src="/go-menu.webp"
+                  width={50}
+                  height={50}
+                  alt="Відкити меню"
+                />
+              </Link>
+            </div>
           </div>
-          <div></div>
-        </div>
+            <div className={classNames("flex justify-center items-center text-nowrap pt-1", styles["backText"])}>
+              {t2("authorized-representativeDreger1")}<span className="font-bold mx-1">{t2("authorized-representativeDreger2")}</span> {t2("authorized-representativeDreger3")}
+            </div>
+            <div className={classNames("flex justify-center items-center pb-2 h-[50px] bg-[#0061AA]", styles["searchMob"])}>
+            <Combobox value={searchTerm}>
+                <div className="relative flex z-50">
+                  <ComboboxInput
+                    className={clsx(
+                      "w-[400px] rounded-lg border-[#0061AA] border bg-white py-1 pr-8 pl-3 text-sm/6 text-black",
+                      "focus: outline-none data-[focus]:outline-none data-[focus]:-outline-offset-2 data-[focus]:bg-sky-50",
+                    )}
+                    placeholder={t("placeholder")}
+                    onChange={(event) => setSearchTerm(event.target.value)}
+                  />
+
+                  {loading && (
+                    <div className="absolute right-5 mt-4">
+                      <Loader />
+                    </div>
+                  )}
+
+                  {products.length > 0 && (
+                    <ComboboxOptions
+                      anchor="bottom"
+                      transition
+                      className={clsx(
+                        "w-[var(--input-width)] rounded-xl border-2 border-[#0061AA] bg-white p-1 [--anchor-gap:var(--spacing-1)] empty:invisible z-50",
+                        "transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0",
+                      )}
+                    >
+                      {products.map((product) => (
+                        <ComboboxOption
+                          key={product.id}
+                          value={product.name}
+                          className="group flex cursor-default items-center gap-2 rounded-lg py-1.5 px-3 select-none data-[focus]:bg-sky-100"
+                        >
+                          <a
+                            className={clsx("block, text-black")}
+                            href={`/catalog/sub-catalog/product/${product.id}?category=${product.tags[0].name}`}
+                          >
+                            <div className="text-sm/6 text-black">
+                              {highlightText(product.name, searchTerm)}
+                            </div>
+                          </a>
+                        </ComboboxOption>
+                      ))}
+                    </ComboboxOptions>
+                  )}
+                </div>
+              </Combobox>
+            
+            </div>
+          </div>
+
       ) :
         <>
           <div className={classNames("w-full", styles["lang"])}>
