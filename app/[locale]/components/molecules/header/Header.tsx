@@ -165,15 +165,15 @@ const Header = () => {
               </Link>
             </div>
           </div>
-            <div className={classNames("flex justify-center items-center text-nowrap pt-1", styles["backText"])}>
+            <div className={classNames("flex justify-center items-center text-nowrap", styles["backText"])}>
               {t2("authorized-representativeDreger1")}<span className="font-bold mx-1">{t2("authorized-representativeDreger2")}</span> {t2("authorized-representativeDreger3")}
             </div>
             <div className={classNames("flex justify-center items-center pb-2 h-[50px] bg-[#0061AA]", styles["searchMob"])}>
             <Combobox value={searchTerm}>
-                <div className="relative flex z-50">
+                <div className="relative flex z-50 w-[90%]">
                   <ComboboxInput
                     className={clsx(
-                      "w-[400px] rounded-lg border-[#0061AA] border bg-white py-1 pr-8 pl-3 text-sm/6 text-black",
+                      "w-full rounded-lg border-[#0061AA] border bg-white py-1 pr-8 pl-3 text-sm/6 text-black",
                       "focus: outline-none data-[focus]:outline-none data-[focus]:-outline-offset-2 data-[focus]:bg-sky-50",
                     )}
                     placeholder={t("placeholder")}

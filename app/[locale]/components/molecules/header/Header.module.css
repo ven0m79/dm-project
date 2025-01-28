@@ -91,7 +91,6 @@
 
 .backText {
     @media (max-width: 640px) {
-        width: 100vw;
         height: 30px;
         background-color: #0061AA;
         color: white;
