@@ -1,6 +1,6 @@
 "use client";
 import classNames from "classnames";
-import React, { Dispatch, FC, SetStateAction, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import styles from "./Header.module.css";
 import Image from "next/image";
@@ -33,7 +33,6 @@ type Product = {
   price: string;
   permalink: string;
 }
-
 
 const Header = () => {
   const locale = useLocale();

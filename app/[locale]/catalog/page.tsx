@@ -49,7 +49,7 @@ const CatalogPage = ({
           {/* sm:bg-amber-800 in classnames */}
           <div
             className={classNames(
-              "flex flex-row items-center rounded-xl",
+              "flex flex-row items-center rounded-xl mx-1",
               styles["block-decisions"],
             )}
           >
@@ -71,7 +71,7 @@ const CatalogPage = ({
         >
           <div
             className={classNames(
-              "flex flex-row items-center rounded-xl",
+              "flex flex-row items-center rounded-xl mx-1",
               styles["block-decisions"],
             )}
           >
@@ -93,7 +93,7 @@ const CatalogPage = ({
         >
           <div
             className={classNames(
-              "flex flex-row items-center rounded-xl",
+              "flex flex-row items-center rounded-xl mx-1",
               styles["block-decisions"],
             )}
           >
@@ -115,7 +115,7 @@ const CatalogPage = ({
         >
           <div
             className={classNames(
-              "flex flex-row items-center rounded-xl",
+              "flex flex-row items-center rounded-xl mx-1",
               styles["block-decisions"],
             )}
           >
@@ -137,7 +137,7 @@ const CatalogPage = ({
         >
           <div
             className={classNames(
-              "flex flex-row items-center rounded-xl",
+              "flex flex-row items-center rounded-xl mx-1",
               styles["block-decisions"],
             )}
           >
@@ -159,7 +159,7 @@ const CatalogPage = ({
         >
           <div
             className={classNames(
-              "flex flex-row items-center rounded-xl",
+              "flex flex-row items-center rounded-xl mx-1",
               styles["block-decisions"],
             )}
           >
@@ -181,7 +181,7 @@ const CatalogPage = ({
         >
           <div
             className={classNames(
-              "flex flex-row items-center rounded-xl",
+              "flex flex-row items-center rounded-xl mx-1",
               styles["block-decisions"],
             )}
           >
