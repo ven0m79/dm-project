@@ -111,7 +111,7 @@ const AnimatedHamburgerButton = () => {
 
             <motion.div
                 initial={{ x: "100%", opacity: 0 }} // Начальное состояние (спрятано)
-                animate={isOpen ? { x: "30%", opacity: 1 } : { x: "100%", opacity: 0 }} // Анимация появления и скрытия
+                animate={isOpen ? { x: "20%", opacity: 1 } : { x: "100%", opacity: 0 }} // Анимация появления и скрытия
                 transition={{ type: "tween", duration: 0.5 }} // Плавная анимация
                 className="fixed top-0 right-0 h-full w-1/2 bg-[#4E5A63E5]/90 shadow-lg backdrop-blur-lg p-5 z-50"
             >
