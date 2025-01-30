@@ -16,20 +16,28 @@
 
 
 .catalogContainer {
-    width: 1050px;
+    max-width: 1400px;
     align-self: center;
     border: 1px solid  transparent;
     color: #0061AA;
     font-size: 18px;
     line-height: 22px;
+    @media (max-width: 640px) {
+        width: 100%;
+        /* border: 1px solid red; */
+    }
 }
 .catalogContainerMain {
-    width: 1400px;
+    max-width: 1400px;
     align-self: center;
     border: 1px solid  transparent;
     color: #0061AA;
     font-size: 18px;
     line-height: 22px;
+    @media (max-width: 640px) {
+        width: 100%;
+        /* border: 1px solid red; */
+    }
 
 }
 .catalogContainerDeeper {
@@ -46,7 +54,8 @@
 }
 
 .block-decisions {
-    width: 688px;
+    max-width: 678px;
+    width: 100vh;
     height: 150px;
     border-radius: 10px;
     /* border: 1px solid #0061AA; */
@@ -56,6 +65,14 @@
     transition: all 0.2s;
     font-size: 20px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    @media (max-width: 640px) {
+        width: 97vw;
+        font-size: 12px;
+        height: 100px;
+        z-index: 49;
+        /* border: 1px solid blue; */
+
+    }
 }
 
 .productText {
@@ -88,6 +105,10 @@
 .span {
     transition: all 0.5s;
     transform-origin: right;
+    position: relative;
+    @media (max-width: 640px) {
+        line-height: 25px;
+        }
 }
 
 .block-decisions:hover .span {

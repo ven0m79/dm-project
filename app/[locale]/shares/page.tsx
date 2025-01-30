@@ -41,12 +41,12 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
             styles["block-decisions"],
           )}
         >
-          <div className="flex flex-col w-[400px] h-[150px] pl-10 mt-5">
+          <div className="flex flex-col w-screen h-[150px] pl-10 mt-10">
             <div className="mb-3">
               <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
             </div>
             <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>{t("shares-title1")}</span>
+              <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title1")}</span>
             </div>
           </div>
           <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
@@ -77,7 +77,7 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
               <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
             </div>
             <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>{t("shares-title2")}</span>
+              <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title2")}</span>
             </div>
           </div>
           <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
@@ -108,7 +108,7 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
               <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
             </div>
             <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>{t("shares-title3")}</span>
+              <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title3")}</span>
             </div>
           </div>
           <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
@@ -139,7 +139,7 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
               <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
             </div>
             <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>{t("shares-title4")}</span>
+              <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title4")}</span>
             </div>
           </div>
           <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
@@ -170,7 +170,7 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
               <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
             </div>
             <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>{t("shares-title5")}</span>
+              <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title5")}</span>
             </div>
           </div>
           <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
@@ -200,7 +200,7 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
               <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
             </div>
             <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>{t("shares-title6")}</span>
+              <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title6")}</span>
             </div>
           </div>
           <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
@@ -230,7 +230,7 @@ const Shares = ({ params: { locale } }: { params: { locale: string } }) => {
               <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
             </div>
             <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-2xl", styles.span)}>{t("shares-title7")}</span>
+              <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title7")}</span>
             </div>
           </div>
           <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
