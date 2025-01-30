@@ -129,10 +129,12 @@ const MobileNav: FC<{}> = ({ }) => {
                             <Link href={NavLinks[el].link}>{t(NavLinks[el].title)}</Link>
                         </li>
                     ))}
-                          
-                    <Link href={""}
+
+                    <Link
+                        className="absolute top-5 right-4"
+                        href={""}
                         onClick={() => setIsOpen(false)}>
-                        <li className="p-2 text-white cursor-pointer mt-7">✖</li>
+                        <li className="text-white cursor-pointer text-2xl">✖</li>
                     </Link>
                 </ul>
             </motion.div>

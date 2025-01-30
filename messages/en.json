@@ -54,7 +54,8 @@
     "all-right": "DM-Project. All rights reserved"
   },
   "Header": {
-    "placeholder": "Search..."
+    "placeholder": "Search...",
+    "products": "Products"
   },
   "AboutPage": {
     "information1": "DM-PROJECT was founded in 2009 as an authorized representative of the German company Dräger in Ukraine, the world leader in the production of human life support systems.",

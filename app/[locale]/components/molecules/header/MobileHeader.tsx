@@ -66,7 +66,7 @@ type Product = {
               width={25}
               height={25}
               alt="Перейти до каталогу продуктів"
-            /> <span className="ml-2 text-sm">Продукти</span>
+            /> <span className="ml-2 text-sm">{t("products")}</span>
           </Link>
         </div>
         <div className="flex justify-center w-1/2">

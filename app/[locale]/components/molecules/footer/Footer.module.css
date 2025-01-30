@@ -18,7 +18,6 @@
   display: flex;
   flex-direction: column;
   color: white;
-  width: 20%px;
   max-width: 300px;
   margin-left: 10px;
   margin-right: 10px;
@@ -41,7 +40,7 @@
 .stroke {
   align-self: center;
   max-width: 1240px;
-  width: 100%;
+  width: 100vw;
   height: 1px;
   margin-top: 30px;
   background: linear-gradient(to right, #ffffff00 0%, #ffffff 45%, white 55%, #ffffff00 100%);
