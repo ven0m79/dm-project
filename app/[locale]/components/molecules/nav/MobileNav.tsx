@@ -113,21 +113,21 @@ const AnimatedHamburgerButton = () => {
                 initial={{ x: "100%", opacity: 0 }} // Начальное состояние (спрятано)
                 animate={isOpen ? { x: "30%", opacity: 1 } : { x: "100%", opacity: 0 }} // Анимация появления и скрытия
                 transition={{ type: "tween", duration: 0.5 }} // Плавная анимация
-                className="fixed top-0 right-0 h-full w-1/2 bg-white/80 shadow-lg backdrop-blur-lg p-5 z-50"
+                className="fixed top-0 right-0 h-full w-1/2 bg-[#4E5A63E5]/90 shadow-lg backdrop-blur-lg p-5 z-50"
             >
-
-                <h2 className="text-2xl font-bold text-black">Меню</h2>
-                <div className="p-2 hover:text-blue-600 cursor-pointer text-black">
-                    <Link href={`${pathname}${selectedCategory}`} locale="en">
-                        EN
-                    </Link>
+                <div className="flex flex-row">
+                    <div className="p-2 hover:text-blue-600 cursor-pointer text-white">
+                        <Link href={`${pathname}${selectedCategory}`} locale="en">
+                            EN
+                        </Link>
+                    </div>
+                    <div className="p-2 hover:text-blue-600 cursor-pointer text-white">
+                        <Link href={`${pathname}${selectedCategory}`} locale="ua">
+                            UA
+                        </Link>
+                    </div>
                 </div>
-                <div className="p-2 hover:text-blue-600 cursor-pointer text-black">
-                    <Link href={`${pathname}${selectedCategory}`} locale="ua">
-                        UA
-                    </Link>
-                </div>
-                <ul className="mt-4 text-black">
+                <ul className="mt-4 text-white">
                     {Object.keys(NavLinks).map((el) => (
                         <li
                             key={el}
