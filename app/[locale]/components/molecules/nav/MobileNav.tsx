@@ -111,17 +111,17 @@ const AnimatedHamburgerButton = () => {
 
             <motion.div
                 initial={{ x: "100%", opacity: 0 }} // Начальное состояние (спрятано)
-                animate={isOpen ? { x: "20%", opacity: 1 } : { x: "100%", opacity: 0 }} // Анимация появления и скрытия
+                animate={isOpen ? { x: "0%", opacity: 1 } : { x: "100%", opacity: 0 }} // Анимация появления и скрытия
                 transition={{ type: "tween", duration: 0.5 }} // Плавная анимация
                 className="fixed top-0 right-0 h-full w-1/2 bg-[#4E5A63E5]/90 shadow-lg backdrop-blur-lg p-5 z-50"
             >
                 <div className="flex flex-row">
-                    <div className="p-2 hover:text-blue-600 cursor-pointer text-white">
+                    <div className="p-2 hover:text-white cursor-pointer text-[#D3DDE4]">
                         <Link href={`${pathname}${selectedCategory}`} locale="en">
                             EN
                         </Link>
                     </div>
-                    <div className="p-2 hover:text-blue-600 cursor-pointer text-white">
+                    <div className="p-2 hover:text-white cursor-pointer text-[#D3DDE4]">
                         <Link href={`${pathname}${selectedCategory}`} locale="ua">
                             UA
                         </Link>
@@ -131,14 +131,17 @@ const AnimatedHamburgerButton = () => {
                     {Object.keys(NavLinks).map((el) => (
                         <li
                             key={el}
-                            className="p-2 hover:text-blue-600 cursor-pointer"
+                            className={classNames("p-2 cursor-pointer", styles["link"], {
+                                [styles["active"]]: pathname === '/lll' ? pathname === NavLinks[el].link : pathname.includes(NavLinks[el].link),
+                            })}
                         >
                             <Link href={NavLinks[el].link}>{t(NavLinks[el].title)}</Link>
                         </li>
                     ))}
+                          
                     <Link href={""}
                         onClick={() => setIsOpen(false)}>
-                        <li className="p-2 hover:text-blue-600 cursor-pointer mt-10">Закрити</li>
+                        <li className="p-2 text-white cursor-pointer mt-10">✖</li>
                     </Link>
                 </ul>
             </motion.div>
