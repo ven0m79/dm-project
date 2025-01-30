@@ -57,6 +57,7 @@
   border-bottom: 3px solid #007F3D;
 
   @media (max-width: 640px) {
+    padding: 15px 11px 15px 11px;
     color: white;
     background-color: transparent;
     border-bottom: 0px solid #007F3D;
