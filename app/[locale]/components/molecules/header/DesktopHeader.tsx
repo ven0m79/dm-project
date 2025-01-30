@@ -35,7 +35,7 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
     const t = useTranslations("Header");
     const t2 = useTranslations("Index");
     const pathname = usePathname();
-      const searchParams = useSearchParams();
+    const searchParams = useSearchParams();
 
 
     const highlightText = (text: string, highlight: string) => {
@@ -59,9 +59,9 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
 
     const selectedCategory = useMemo(() => {
         return searchParams?.get("category")
-          ? `?category=${searchParams?.get("category")}`
-          : "";
-      }, [searchParams]);
+            ? `?category=${searchParams?.get("category")}`
+            : "";
+    }, [searchParams]);
 
     return <><div className={classNames("w-screen", styles["lang"])}>
         <div className={styles.langText}>

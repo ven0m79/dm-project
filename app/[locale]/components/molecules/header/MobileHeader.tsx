@@ -82,6 +82,7 @@ type Product = {
         <div className="flex justify-center w-1/4">
           <Link href={"/catalog"}>
             <Image
+            className="opacity-0"
               src="/go-menu.webp"
               width={35}
               height={35}
@@ -95,7 +96,7 @@ type Product = {
       </div>
       <div className={classNames("flex justify-center items-center pb-2 h-[50px] bg-[#0061AA]", styles["searchMob"])}>
         <Combobox value={searchTerm}>
-          <div className="relative flex z-50 w-[90%]">
+          <div className="relative flex z-49 w-[90%]">
             <ComboboxInput
               className={clsx(
                 "w-full rounded-lg border-[#0061AA] border bg-white py-1 pr-8 pl-3 text-sm/6 text-black",

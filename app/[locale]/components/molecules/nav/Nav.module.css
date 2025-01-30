@@ -1,19 +1,14 @@
 .navigation {
   margin-top: 0vh;
   max-height: 100%;
-  display: flex;
   align-self: center;
-  max-width: 1400px;
-  width: 100%;
+
+  width: 100vw;
   align-items: center;
   background-color: #0061AA;
   text-wrap: nowrap;
+  vertical-align: middle;
   /* border: 1px solid green; */
-}
-
-.colorBlue {
-  background-color: #0061AA;
-  height: 50px;
 }
 
 .back {

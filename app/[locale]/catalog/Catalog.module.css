@@ -26,6 +26,7 @@
         width: 97vw;
         font-size: 18px;
         height: 100px;
+        z-index: 49;
         /* border: 1px solid blue; */
 
     }
@@ -35,6 +36,12 @@
 
     transform: scale(1.03);
     transform-origin: left;
+    @media (max-width: 640px) {
+
+        z-index: 25;
+        /* border: 1px solid blue; */
+
+    }
 }
 
 .block-decisions:hover {

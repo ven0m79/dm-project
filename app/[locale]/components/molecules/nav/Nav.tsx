@@ -9,6 +9,8 @@ import styles from "./Nav.module.css";
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 
 import { Link, usePathname } from "../../../../../config";
+import DesktopNav from "./DesktopNav";
+import MobileNav from "./MobileNav";
 
 const NavLinks: {
   [key: string]: {
@@ -59,47 +61,13 @@ const Nav = () => {
   console.log({ isMobile });
 
   return (
-    <div className={classNames(
-      "flex flex-1 w-full justify-center max-h-[50px]",
-      styles["colorBlue"])}>
-      {isMobile ? (<div>
-        <nav className={""}></nav>
-          </div>) :
-        <nav className={styles["navigation"]}>
-          <ul className="flex ms-center">
-            {Object.keys(NavLinks).map((el) => (
-              <li
-                key={el}
-                className={classNames("text-[10px] sm:text-[12px] xl:text-[16px]", styles["link"], {
-                  [styles["active"]]: pathname === '/lll' ? pathname === NavLinks[el].link : pathname.includes(NavLinks[el].link),
-                })}
-              >
-                <Link href={NavLinks[el].link}>{t(NavLinks[el].title)}</Link>
-              </li>
-            ))}
-          </ul>
-          <div className="items-end right-0 flex flex-1 flex-row justify-end mx-2">
-            <div
-              className={classNames(
-                "flex justify-center items-center",
-                styles["back"],
-              )}
-            >
-              <Image
-                src="/drager-side.svg"
-                width={90}
-                height={36}
-                alt="Logo DM Project"
-              />
-            </div>
-            <div className={classNames(
-              "text-[10px] sm:text-[12px] xl:text-[16px] text-wrap", styles["backText"])}>{t2("authorized-representative")}</div>
-          </div>
-
-
-        </nav>
+    <nav className={classNames("flex flex-1 w-screen justify-center max-h-[50px]", styles["navigation"])}>
+      {typeof window !== "undefined" && isMobile ? 
+        <MobileNav />
+        :
+        <DesktopNav />
       }
-    </div >
+    </nav >
   );
 };
 
