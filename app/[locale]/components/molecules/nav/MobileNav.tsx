@@ -50,15 +50,6 @@ const NavLinks: {
 };
 
 const MobileNav: FC<{}> = ({ }) => {
-
-    return (
-        <div>
-            <AnimatedHamburgerButton />
-        </div>
-    )
-}
-
-const AnimatedHamburgerButton = () => {
     const [isOpen, setIsOpen] = useState(false);
     const t = useTranslations("Menu");
     const searchParams = useSearchParams();
@@ -115,7 +106,7 @@ const AnimatedHamburgerButton = () => {
                 transition={{ type: "tween", duration: 0.5 }} // Плавная анимация
                 className="fixed top-0 right-0 h-full w-1/2 bg-[#4E5A63E5]/90 shadow-lg backdrop-blur-lg p-5 z-50"
             >
-                <div className="flex flex-row">
+                <div className="flex flex-row ml-3 mb-7">
                     <div className="p-2 hover:text-white cursor-pointer text-[#D3DDE4]">
                         <Link href={`${pathname}${selectedCategory}`} locale="en">
                             EN
@@ -141,7 +132,7 @@ const AnimatedHamburgerButton = () => {
                           
                     <Link href={""}
                         onClick={() => setIsOpen(false)}>
-                        <li className="p-2 text-white cursor-pointer mt-10">✖</li>
+                        <li className="p-2 text-white cursor-pointer mt-7">✖</li>
                     </Link>
                 </ul>
             </motion.div>
