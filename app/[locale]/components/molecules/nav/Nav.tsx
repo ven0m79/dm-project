@@ -53,16 +53,11 @@ const NavLinks: {
 };
 
 const Nav = () => {
-  const pathname = usePathname();
-  const t = useTranslations("Menu");
-  const t2 = useTranslations("Index");
-
   const isMobile = useIsMobile();
-  console.log({ isMobile });
-
+  
   return (
     <nav className={classNames("flex flex-1 w-screen justify-center max-h-[50px]", styles["navigation"])}>
-      {typeof window !== "undefined" && isMobile ? 
+      {typeof window !== "undefined" && isMobile ?
         <MobileNav />
         :
         <DesktopNav />

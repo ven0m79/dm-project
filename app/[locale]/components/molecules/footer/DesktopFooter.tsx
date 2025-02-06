@@ -10,9 +10,9 @@ import styles from "./Footer.module.css";
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 
 const DesktopFooter: FC<{}> = ({ }) => {
-const { navigateWithDelay } = useNavigateTo();
-const t = useTranslations("Footer");
-const isMobile = useIsMobile();
+    const { navigateWithDelay } = useNavigateTo();
+    const t = useTranslations("Footer");
+    const isMobile = useIsMobile();
 
     return (
         <><div className={styles.footerContainer}>
@@ -110,7 +110,7 @@ const isMobile = useIsMobile();
                     href="/catalog/sub-catalog?category=or-equipment"
                     onClick={() => {
                         navigateWithDelay("or-equipment");
-                    } }
+                    }}
                 >
                     <div
                         className={classNames(
@@ -125,7 +125,7 @@ const isMobile = useIsMobile();
                     href="/catalog/sub-catalog?category=icu-equipment"
                     onClick={() => {
                         navigateWithDelay("icu-equipment");
-                    } }
+                    }}
                 >
                     <div
                         className={classNames(
@@ -139,7 +139,7 @@ const isMobile = useIsMobile();
                     href="/catalog/sub-catalog?category=neonatal-equipment"
                     onClick={() => {
                         navigateWithDelay("neonatal-equipment");
-                    } }
+                    }}
                 >
                     <div
                         className={classNames(
@@ -154,7 +154,7 @@ const isMobile = useIsMobile();
                     href="/catalog/sub-catalog?category=cleaning-and-desinfecting-equipment"
                     onClick={() => {
                         navigateWithDelay("cleaning-and-desinfecting-equipment");
-                    } }
+                    }}
                 >
                     <div
                         className={classNames(
@@ -168,7 +168,7 @@ const isMobile = useIsMobile();
                     href="/catalog/sub-catalog?category=category=gas-management-systems"
                     onClick={() => {
                         navigateWithDelay("gas-management-systems");
-                    } }
+                    }}
                 >
                     <div
                         className={classNames(
@@ -182,7 +182,7 @@ const isMobile = useIsMobile();
                     href="/catalog/sub-catalog?category=furniture"
                     onClick={() => {
                         navigateWithDelay("furniture");
-                    } }
+                    }}
                 >
                     <div
                         className={classNames(
@@ -196,7 +196,7 @@ const isMobile = useIsMobile();
                     href="/catalog/sub-catalog?category=accessories"
                     onClick={() => {
                         navigateWithDelay("accessories");
-                    } }
+                    }}
                 >
                     <div
                         className={classNames(
@@ -261,12 +261,14 @@ const isMobile = useIsMobile();
                     </div>
                 </div>
             </div>
-        </div><div className={styles.stroke}></div><div
-            className={classNames(
-                "mt-3 mb-3 text-white justify-center items-center",
-                styles["footerContainer"]
-            )}
-        >
+        </div>
+            <div className={styles.stroke}></div>
+            <div
+                className={classNames(
+                    "mt-3 mb-3 text-white justify-center items-center",
+                    styles["footerContainer"]
+                )}
+            >
                 © {new Date().getFullYear()} {t("all-right")}
             </div></>
     )
