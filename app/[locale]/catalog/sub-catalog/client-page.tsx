@@ -10,7 +10,7 @@ import { categoriesCreation, TransformedCategoriesType } from "./helpers";
 import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
 import { getCategoriesIds } from "@app/[locale]/components/constants";
 
-export const ClientPage: FC<{locale: string, selectedCategory: string}> = ({locale, selectedCategory}) => {
+export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   const {
     selectedProducts,
     setCategories,
@@ -46,9 +46,8 @@ export const ClientPage: FC<{locale: string, selectedCategory: string}> = ({loca
   );
 
   useEffect(() => {
-   
     if (selectedCategory && openedCategoryIds.length === 0) {
-      console.log(selectedCategory)
+      console.log(selectedCategory);
       // @ts-ignore
       const categoryId = currentIdsData?.[selectedCategory];
 
@@ -174,4 +173,3 @@ export const ClientPage: FC<{locale: string, selectedCategory: string}> = ({loca
     </>
   );
 };
-

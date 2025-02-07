@@ -3,7 +3,6 @@ import React from "react";
 import styles from "./Catalog.module.css";
 
 import { MainLayout } from "@app/[locale]/components/templates";
-
 import { Link } from "config";
 import Image from "next/image";
 import classNames from "classnames";
@@ -17,11 +16,7 @@ import imgSteriliz from "./icons-photo/sterilization.webp";
 import { useTranslations } from "next-intl";
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile"; 
 
-export const ClientPage = ({
-  params: { locale },
-}: {
-  params: { locale: string };
-}) => {
+export const ClientPage = () => {
   const t = useTranslations("Catalog1");
 
   const isMobile = useIsMobile();
