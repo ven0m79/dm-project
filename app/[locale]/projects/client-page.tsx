@@ -11,9 +11,6 @@ import { MainLayout } from "@app/[locale]/components/templates";
 import { unstable_setRequestLocale } from "next-intl/server";
 
 import { useTranslations } from 'next-intl';
-import { Link } from "config";
-import Image from 'next/image';
-import { title } from "process";
 import { useIsMobile } from "../components/hooks/useIsMobile";
 
 export const ClientPage = () => {
@@ -28,18 +25,18 @@ export const ClientPage = () => {
           {t('title')}
         </div>
         <div className={styles.stroke}></div>
-        <div className={classNames("flex flex-1 flex-row justify-normal items-start w-full")}>
-          <div className={classNames("flex flex-col justify-normal items-start w-full", styles.leftContainer)}>
+        <div className={classNames("flex flex-1 flex-row justify-normal items-start")}>
+          <div className={classNames("flex flex-col justify-center items-start", styles.leftContainer)}>
 
-            <div className={classNames("justify-normal items-start indent-4 w-full mt-8")}>
+            <div className={classNames("justify-normal items-start indent-4 mt-8")}>
               <p className=" pb-4">{t('project-head1')}</p>
             </div>
 
-            <div className={classNames("justify-normal items-start indent-4 w-full mt-8")}>
+            <div className={classNames("justify-normal items-start indent-4 mt-8")}>
               <p className="text-bold pb-4">{t('project-head2')}</p>
             </div>
 
-            <div className={classNames("justify-normal items-start indent-4 w-full mt-8")}>
+            <div className={classNames("justify-normal items-start indent-4 mt-8")}>
               <p className="text-2xl pb-4">{t('project-prehead1')}</p>
             </div>
 
@@ -56,7 +53,7 @@ export const ClientPage = () => {
               {t('project-paragraph4')}
             </div>
 
-            <div className={classNames("justify-normal items-start indent-4 w-full mt-8")}>
+            <div className={classNames("justify-normal items-start indent-4 mt-8")}>
               <p className="text-2xl pb-4">{t('project-prehead2')}</p>
             </div>
             <div className={classNames("")}>
@@ -66,7 +63,7 @@ export const ClientPage = () => {
               {t('project-paragraph6')}
             </div>
 
-            <div className={classNames("justify-normal items-start indent-4 w-full mt-8")}>
+            <div className={classNames("justify-normal items-start indent-4 mt-8")}>
               <p className="text-2xl pb-4">{t('project-prehead3')}</p>
             </div>
             <div className={classNames("")}>
@@ -93,7 +90,7 @@ export const ClientPage = () => {
               {t('project-paragraph16')}
             </div>
 
-            <div className={classNames("justify-normal items-start indent-4 w-full mt-8")}>
+            <div className={classNames("justify-normal items-start indent-4 mt-8")}>
               <p className="text-2xl pb-4">{t('project-prehead4')}</p>
             </div>
             <div className={classNames("")}>
@@ -118,7 +115,7 @@ export const ClientPage = () => {
               {t('project-paragraph23')}
             </div>
 
-            <div className={classNames("justify-normal items-start indent-4 w-full mt-8")}>
+            <div className={classNames("justify-normal items-start indent-4 mt-8")}>
               <p className="text-2xl pb-4">{t('project-prehead5')}</p>
             </div>
             <div className={classNames("")}>
