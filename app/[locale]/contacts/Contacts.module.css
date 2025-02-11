@@ -9,11 +9,18 @@
 .catalogText {
     display: flex;
     max-width: 1400px;
-    width: 100vw;
+    width: 97vw;
     font-size: 18px;
     color: #0061AA;
     line-height: 27px;
 }
+.catalogAdress {
+    max-width: 1400px;
+    min-width: 400px;
+    width: 50%;
+    margin: 10px auto 10px auto;
+            /* border: 1px solid red;  */
+} 
 
 .container {
     max-width: 460px;
@@ -88,8 +95,7 @@
 .stroke1 {
     align-self: center;
     text-indent: 55px;
-    max-width: 500px;
-    width: 100vw;
+    width: 90%;
     height: 1px;
     margin-top: 24px;
     margin-bottom: 2px;

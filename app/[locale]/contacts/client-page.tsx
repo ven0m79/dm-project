@@ -24,9 +24,9 @@ export const ClientPage = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
-  
-    const isMobile = useIsMobile();
-    console.log({ isMobile });
+
+  const isMobile = useIsMobile();
+  console.log({ isMobile });
 
   const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
@@ -39,9 +39,9 @@ export const ClientPage = () => {
       },
       body: JSON.stringify(data),
     })
-    .then(response => response.json())
-    .then(result => console.log('Success:', result))
-    .catch(error => console.error('Error:', error));;
+      .then(response => response.json())
+      .then(result => console.log('Success:', result))
+      .catch(error => console.error('Error:', error));;
   };
   return (
     <MainLayout>
@@ -50,53 +50,57 @@ export const ClientPage = () => {
           {t('title')}
         </div>
         <div className={styles.stroke}></div>
-        <div className={classNames("flex flex-wrap justify-around items-start", styles.catalogText)}>
-          <div className={classNames("flex flex-col justify-normal items-start")}>
-            <p className="text-2xl justify-normal items-start indent-4 w-full mt-7">
-            {t('contact-adress')}
+        <div className={classNames("flex flex-wrap justify-between items-start ", styles.catalogText)}>
+          <div className={classNames("flex flex-col justify-normal items-start ", styles.catalogAdress)}>
+            <p className="text-2xl justify-normal items-start indent-4 mt-2 sm:indent-10">
+              {t('contact-adress')}
             </p>
             <p className={styles.stroke1}></p>
-            <p className="flex flex-wrap justify-normal items-start indent-4 mt-8 mb-10">
-            <Image
-              className={""}
-              src={adress}
-              width={30}
-              height={30}
-              alt="logo"
-            />
+            <p className="flex items-center gap-3 mt-2 mb-10 text-wrap ml-10">
+              <Image
+                className={""}
+                src={adress}
+                width={30}
+                height={30}
+                alt="logo"
+              />
               {t('contact-adress1')}
             </p>
-            <p className="text-2xl justify-normal items-start indent-4 w-full mt-7">
-            {t('contact-phone')}
+            <p className="text-2xl justify-normal items-start indent-4 mt-2 sm:indent-10">
+              {t('contact-phone')}
             </p>
             <p className={styles.stroke1}></p>
-            <p className="flex flex-wrap justify-normal items-start indent-4 mt-8 mb-10">
-            <Image
-              className={""}
-              src={phone}
-              width={30}
-              height={30}
-              alt="logo"
-            />
-            +380 44 520-12-24
+            <p className="flex items-center gap-3 mt-2 mb-10 text-wrap ml-10">
+              <Image
+                className={""}
+                src={phone}
+                width={30}
+                height={30}
+                alt="logo"
+              />
+              <span>+380 44 520-12-24 <br />
+                +380 66 358-98-10 (cервіс)</span>
             </p>
-            <p className="text-2xl justify-normal items-start indent-4 w-full mt-7">
-            {t('contact-mail')}
+            <p className="text-2xl justify-normal items-start indent-4 w-full mt-2 sm:indent-10">
+              {t('contact-mail')}
             </p>
             <p className={styles.stroke1}></p>
-            <p className="flex flex-wrap justify-normal items-start indent-4 mt-8 mb-10">
-            <Image
-              className={""}
-              src={mail}
-              width={30}
-              height={30}
-              alt="logo"
-            />
-            allinfo@dm-project.com.ua
+            <p className="flex items-center gap-3 mt-2 mb-10 text-wrap ml-10">
+              <Image
+                className={""}
+                src={mail}
+                width={30}
+                height={30}
+                alt="logo"
+              />
+              <span>allinfo@dm-project.com.ua<br />
+                sales@dm-project.com.ua<br />
+                service@dm-project.com.ua
+              </span>
             </p>
           </div>
-          <div>
-          <form onSubmit={handleSubmit} className={styles.container}>
+          <div className="flex flex-1 w-1/2">
+            <form onSubmit={handleSubmit} className={styles.container}>
               <div className={styles.sendUsMessage}>{t('contact-form-title')}</div>
               <input
                 className={classNames("h-10", styles.form)}
