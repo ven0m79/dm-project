@@ -50,7 +50,7 @@ const DesktopNav: FC<{}> = ({ }) => {
     const t = useTranslations("Menu");
     const t2 = useTranslations("Index");
     return <div className="items-center right-0 flex flex-1 flex-row justify-center mx-2">
-        <div>
+        <div className="">
             <ul className="flex ms-center">
                 {Object.keys(NavLinks).map((el) => (
                     <li
@@ -66,7 +66,7 @@ const DesktopNav: FC<{}> = ({ }) => {
         </div>
         <div
             className={classNames(
-                "flex justify-center items-center",
+                "hidden lg:flex justify-center items-center",
                 styles["back"]
             )}
         >
@@ -77,7 +77,7 @@ const DesktopNav: FC<{}> = ({ }) => {
                 alt="Logo DM Project" />
         </div>
         <div className={classNames(
-            "text-[10px] sm:text-[12px] xl:text-[16px] text-wrap", styles["backText"])}>{t2("authorized-representative")}</div>
+            "hidden lg:flex text-[10px] sm:text-[12px] xl:text-[16px] text-wrap", styles["backText"])}>{t2("authorized-representative")}</div>
     </div>
 }
 
