@@ -8,14 +8,11 @@ import classNames from "classnames";
 
 import { MainLayout } from "@app/[locale]/components/templates";
 //import { unstable_setRequestLocale } from "next-intl/server";
-
 import { useTranslations } from 'next-intl';
-import { Link } from "config";
 import Image from 'next/image';
 import mail from "./contacts-photo/emailContacts.png";
 import phone from "./contacts-photo/telephoneContacts.png";
 import adress from "./contacts-photo/locationContacts.png";
-import { title } from "process";
 import { useIsMobile } from "../components/hooks/useIsMobile";
 
 export const ClientPage = () => {

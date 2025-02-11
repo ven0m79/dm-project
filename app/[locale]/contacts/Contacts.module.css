@@ -1,16 +1,22 @@
 .main {
-    width: 1400px;
+    align-self: center;
+    max-width: 1400px;
+    @media (max-width: 640px) {
+        width: 100%;
+        /* border: 1px solid red; */
+    }
 }
 .catalogText {
     display: flex;
-    width: 1400px;
+    max-width: 1400px;
     font-size: 18px;
     color: #0061AA;
     line-height: 27px;
 }
 
 .container {
-    width: 460px;
+    max-width: 460px;
+    width: 100vw;
     height: 520px;
     background-color: #ECF3FE;
     margin: 10px auto 10px auto;
@@ -23,7 +29,8 @@
 .form {
     margin-top: 5px;
     margin-bottom: 5px;
-    width: 400px;
+    max-width: 400px;
+    width: 100vw;
     border: 1px solid #0061AA;
     color: #002766;
     font-size: 18px;
@@ -47,7 +54,7 @@
 
 .yerSubmit {
     text-align: center;
-    width: 400px;
+    max-width: 400px;
     padding: 13px 30px;
     margin: 5px 0 20px 0;
     font-size: 18px;
@@ -68,7 +75,8 @@
 
 .stroke {
     align-self: center;
-    width: 1240px;
+    max-width: 1240px;
+    width: 100vw;
     height: 1px;
     margin-top: 5px;
     margin-bottom: 10px;
@@ -77,9 +85,10 @@
 }
 
 .stroke1 {
-    align-self: self-start;
+    align-self: center;
     text-indent: 55px;
-    width: 500px;
+    max-width: 500px;
+    width: 100vw;
     height: 1px;
     margin-top: 24px;
     margin-bottom: 2px;

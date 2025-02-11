@@ -13,8 +13,6 @@
     color: #0061AA;
     line-height: 28px;
 }
-
-
 .catalogContainer {
     max-width: 1400px;
     align-self: center;
@@ -52,7 +50,6 @@
     border-radius: 10px;
     border: 1px solid #ff0000;
 }
-
 .block-decisions {
     max-width: 678px;
     width: 100vh;
@@ -71,10 +68,8 @@
         height: 100px;
         z-index: 49;
         /* border: 1px solid blue; */
-
     }
 }
-
 .productText {
     font-size: 18px;
     font-weight: normal;
@@ -84,9 +79,7 @@
     line-height: 27px;
     width: 800px;
   }
-
 .block-decisions:hover .img {
-
     transform: scale(1.03);
     transform-origin: left;
 }
@@ -110,7 +103,6 @@
         line-height: 25px;
         }
 }
-
 .block-decisions:hover .span {
 
     transform: scale(1.01);
