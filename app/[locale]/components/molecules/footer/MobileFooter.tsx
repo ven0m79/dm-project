@@ -20,10 +20,10 @@ const MobileFooter: FC<{}> = ({ }) => {
                     className="flex flex-col items-center">
                     <Image
                         src="/go-products-footer.webp"
-                        width={40}
-                        height={40}
+                        width={35}
+                        height={35}
                         alt="Каталогу продуктів"
-                    /> <span className="mt-2 text-md">{t("productsMob")}</span>
+                    /> <span className="mt-2 text-sm">{t("productsMob")}</span>
                 </Link>
                 <Link
                     href={"/"}
@@ -34,20 +34,20 @@ const MobileFooter: FC<{}> = ({ }) => {
                     }}>
                     <Image
                         src="/search-footer.webp"
-                        width={40}
-                        height={40}
+                        width={35}
+                        height={35}
                         alt="Пошук"
-                    /> <span className="mt-2 text-md">{t("searchMob")}</span>
+                    /> <span className="mt-2 text-sm">{t("searchMob")}</span>
                 </Link>
                 <Link
                     href={"/contacts"}
                     className="flex flex-col items-center">
                     <Image
                         src="/contacts-footer.webp"
-                        width={45}
-                        height={45}
+                        width={35}
+                        height={35}
                         alt="Контакти"
-                    /> <span className="mt-2 text-md">{t("contactsMob")}</span>
+                    /> <span className="mt-2 text-sm">{t("contactsMob")}</span>
                 </Link>
             </div>
             <div className={styles.stroke}></div>
