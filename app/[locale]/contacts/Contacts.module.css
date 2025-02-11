@@ -9,6 +9,7 @@
 .catalogText {
     display: flex;
     max-width: 1400px;
+    width: 100vw;
     font-size: 18px;
     color: #0061AA;
     line-height: 27px;
