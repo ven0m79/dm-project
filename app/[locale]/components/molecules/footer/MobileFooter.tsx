@@ -14,7 +14,42 @@ const MobileFooter: FC<{}> = ({ }) => {
 
     return (
         <>
-            <div className="items-center right-0 flex flex-1 flex-row justify-center mx-2"></div>
+            <div className="items-center right-0 flex flex-1 flex-row justify-around mx-2  w-screen">
+                <Link
+                    href={"/catalog"}
+                    className="flex flex-col items-center">
+                    <Image
+                        src="/go-products-footer.webp"
+                        width={40}
+                        height={40}
+                        alt="Каталогу продуктів"
+                    /> <span className="mt-2 text-md">{t("productsMob")}</span>
+                </Link>
+                <Link
+                    href={"/"}
+                    className="flex flex-col items-center"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        window.dispatchEvent(new Event("focusSearch"));
+                    }}>
+                    <Image
+                        src="/search-footer.webp"
+                        width={40}
+                        height={40}
+                        alt="Пошук"
+                    /> <span className="mt-2 text-md">{t("searchMob")}</span>
+                </Link>
+                <Link
+                    href={"/contacts"}
+                    className="flex flex-col items-center">
+                    <Image
+                        src="/contacts-footer.webp"
+                        width={45}
+                        height={45}
+                        alt="Контакти"
+                    /> <span className="mt-2 text-md">{t("contactsMob")}</span>
+                </Link>
+            </div>
             <div className={styles.stroke}></div>
             <div
                 className={classNames(
