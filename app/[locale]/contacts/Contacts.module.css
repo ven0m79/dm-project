@@ -37,8 +37,11 @@
 .form {
     margin-top: 5px;
     margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
     max-width: 400px;
-    width: 100vw;
+    min-width: 200px;
+    width: 100%;
     border: 1px solid #0061AA;
     color: #002766;
     font-size: 18px;
