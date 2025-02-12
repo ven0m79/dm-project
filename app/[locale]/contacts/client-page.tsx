@@ -1,13 +1,9 @@
 'use client'
 import React from "react";
-
 import { useState } from 'react';
-import Head from 'next/head';
 import styles from './Contacts.module.css';
 import classNames from "classnames";
-
 import { MainLayout } from "@app/[locale]/components/templates";
-//import { unstable_setRequestLocale } from "next-intl/server";
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import mail from "./contacts-photo/emailContacts.png";

@@ -23,8 +23,8 @@
 } 
 
 .container {
-    max-width: 460px;
-    width: 100vw;
+    max-width: 390px;
+    width: 100%;
     height: 520px;
     background-color: #ECF3FE;
     margin: 10px auto 10px auto;
@@ -41,7 +41,7 @@
     margin-right: 5px;
     max-width: 400px;
     min-width: 200px;
-    width: 100%;
+    width: 90%;
     border: 1px solid #0061AA;
     color: #002766;
     font-size: 18px;
@@ -65,7 +65,9 @@
 
 .yerSubmit {
     text-align: center;
+    min-width: 200px;
     max-width: 400px;
+    width: 90%;
     padding: 13px 30px;
     margin: 5px 0 20px 0;
     font-size: 18px;
