@@ -38,7 +38,7 @@ export const ClientPage = () => {
         </div>
         <div className={styles.stroke}></div>
 
-        <div className={classNames("flex flex-col lg:flex-row flex-1 justify-normal items-start w-full")}>
+        <div className={classNames("flex flex-col :flex-row flex-1 justify-normal items-start w-full")}>
           {/* Left Section */}
           <div className={classNames("flex flex-col justify-normal items-start w-full", styles.leftContainer)}>
 
@@ -46,7 +46,7 @@ export const ClientPage = () => {
 
             <div className="text-justify">
 
-              <p className="text-justify text-[20px] md:text-[22px] pb-4">{t('contact-prehead1')}</p>
+              <p className="text-justify text-[20px] sm:text-[22px] pb-4">{t('contact-prehead1')}</p>
               <Image
                 className="float-left mr-5 mt-2 w-1/2"
                 src={imgSrc}
@@ -62,7 +62,7 @@ export const ClientPage = () => {
 
             {/* Second Image and Text */}
             <div className="clear-both">
-              <p className="text-justify text-[20px] md:text-[22px] pb-4 mt-8">{t('contact-prehead2')}</p>
+              <p className="text-justify text-[20px] sm:text-[22px] pb-4 mt-8">{t('contact-prehead2')}</p>
               <Image
                 className="float-left mr-5 mt-2 w-1/2"
                 src={imgSrc1}
