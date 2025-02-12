@@ -9,7 +9,6 @@ import polaris2 from "./polaris200-2.webp";
 import polaris3 from "./polaris200-3.webp";
 import { useTranslations } from "next-intl";
 
-
 const SharesPolaris200 = () => {
 
     const t = useTranslations('Shares');
@@ -18,7 +17,6 @@ const SharesPolaris200 = () => {
             <div
                 className={classNames(
                     "w-full flex flex-wrap justify-center mb-3 mt-3", 
-
                 )}
             >
                 <div className={classNames(
