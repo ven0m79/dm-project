@@ -123,9 +123,9 @@ export const ClientPage = () => {
             </form>
             <div className={classNames("w-full h-full flex flex-col items-center justify-center", styles.howUsFind)}>
               {/* <p className="mt-2 mb-3">{t('contact-prehead3')}</p> */}
-              {/* <MapProvider>
+               <MapProvider>
                 <MapComponent />
-              </MapProvider> */}
+              </MapProvider>
             </div>
           </div>
         </div>
