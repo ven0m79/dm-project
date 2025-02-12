@@ -122,10 +122,10 @@ export const ClientPage = () => {
               <button className={styles.yerSubmit} type="submit">{t('contact-form-submit')}</button>
             </form>
             <div className={classNames("w-full h-full flex flex-col items-center justify-center", styles.howUsFind)}>
-              <p className="mt-2 mb-3">{t('contact-prehead3')}</p>
-              <MapProvider>
+              {/* <p className="mt-2 mb-3">{t('contact-prehead3')}</p> */}
+              {/* <MapProvider>
                 <MapComponent />
-              </MapProvider>
+              </MapProvider> */}
             </div>
           </div>
         </div>

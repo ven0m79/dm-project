@@ -30,7 +30,9 @@
     margin-bottom: 5px;
     margin-left: 5px;
     margin-right: 5px;
-    width: 400px;
+    min-width: 300px;
+    max-width: 400px;
+    width: 80%;
     border: 1px solid #0061AA;
     color: #002766;
     font-size: 18px;
@@ -61,7 +63,9 @@
 
 .yerSubmit {
     text-align: center;
-    width: 400px;
+    min-width: 300px;
+    max-width: 400px;
+    width: 80%;
     padding: 13px 30px;
     margin: 5px 0 20px 0;
     font-size: 18px;
