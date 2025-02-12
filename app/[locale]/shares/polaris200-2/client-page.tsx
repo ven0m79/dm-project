@@ -9,7 +9,7 @@ import polaris2_2 from "./polaris200-2-2.webp";
 import polaris2_3 from "./polaris200-2-3.webp";
 import { useTranslations } from "next-intl";
 
-const SharesPolaris200 = () => {
+const SharesPolaris2002 = () => {
     const t = useTranslations('Shares');
     return (
         <MainLayout>
@@ -69,4 +69,4 @@ const SharesPolaris200 = () => {
     );
 };
 
-export default SharesPolaris200;
+export default SharesPolaris2002;
