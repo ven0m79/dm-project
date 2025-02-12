@@ -38,7 +38,7 @@ export const ClientPage = () => {
         </div>
         <div className={styles.stroke}></div>
 
-        <div className={classNames("flex flex-1 flex-row justify-normal items-start w-full")}>
+        <div className={classNames("flex flex-col md:flex-row flex-1 justify-normal items-start w-full")}>
           {/* Left Section */}
           <div className={classNames("flex flex-col justify-normal items-start w-full", styles.leftContainer)}>
 
@@ -46,9 +46,9 @@ export const ClientPage = () => {
 
             <div className="text-justify">
 
-              <p className="text-justify text-2xl pb-4">{t('contact-prehead1')}</p>
+              <p className="text-justify text-[20px] md:text-[22px] pb-4">{t('contact-prehead1')}</p>
               <Image
-                className="float-left mr-5 mt-2"
+                className="float-left mr-5 mt-2 w-1/2"
                 src={imgSrc}
                 width={400}
                 height={300}
@@ -64,7 +64,7 @@ export const ClientPage = () => {
             <div className="clear-both">
               <p className="text-2xl pb-4 mt-8">{t('contact-prehead2')}</p>
               <Image
-                className="float-left mr-5 mt-2"
+                className="float-left mr-5 mt-2 w-1/2"
                 src={imgSrc1}
                 width={400}
                 height={300}
@@ -75,7 +75,7 @@ export const ClientPage = () => {
           </div>
 
           {/* Form Section */}
-          <div>
+          <div className="w-screen h-full flex flex-col items-center justify-center">
             <form onSubmit={handleSubmit} className={styles.container}>
               <div className={styles.sendUsMessage}>{t('contact-form-title')}</div>
               <input
@@ -121,16 +121,14 @@ export const ClientPage = () => {
               /><br />
               <button className={styles.yerSubmit} type="submit">{t('contact-form-submit')}</button>
             </form>
-            <div className={styles.howUsFind}>
+            <div className={classNames("w-screen h-full flex flex-col items-center justify-center", styles.howUsFind)}>
               <p className="mt-2 mb-3">{t('contact-prehead3')}</p>
               <MapProvider>
                 <MapComponent />
               </MapProvider>
             </div>
           </div>
-
         </div>
-
       </div>
     </MainLayout>
   );

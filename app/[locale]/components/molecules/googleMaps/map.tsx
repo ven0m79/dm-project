@@ -26,7 +26,7 @@ const defaultMapOptions = {
 
 const  MapComponent = ( ) => { 
     return ( 
-        < div  className = "w-full" > 
+        < div  className = "flex items-center justify-center w-full" > 
             < GoogleMap  
                 mapContainerStyle={defaultMapContainerStyle}
                 center={defaultMapCenter}
