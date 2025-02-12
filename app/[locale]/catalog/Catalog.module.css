@@ -36,6 +36,7 @@
 
     transform: scale(1.03);
     transform-origin: left;
+
     @media (max-width: 640px) {
 
         z-index: 25;
@@ -67,7 +68,7 @@
     transform-origin: right;
 
     @media (max-width: 640px) {
-    line-height: 25px;
+        line-height: 25px;
     }
 }
 

@@ -8,12 +8,11 @@ import { Link } from "config";
 import Image from "next/image";
 import classNames from "classnames";
 
-import logo from "./shares-photo/DM-project-logo-transparent.png";
 import linea from "./linea/linea-trans.webp";
 import polaris from "./polaris200/polaris200-trans.webp";
 import polaris2 from "./polaris200-2/polaris200-2-trans.webp";
 import fabiusplusxl from "./fabiusplusxl/Fabius_plus_XL-trans.webp";
-import atlan from "./testoviy.png";
+import atlan from "./atlan300/atlan300-trans.webp";
 import awd655_h2_v1 from "./AWD655-2H-V1/awd655-2h-v1-trans.webp";
 import awd655_h2_v2 from "./AWD655-2H-V2/awd655-2h-v2-trans.webp";
 import { useTranslations } from "next-intl";
@@ -30,227 +29,227 @@ export const ClientPage = () => {
   return (
     <MainLayout>
       <div
-      className={classNames(
-        "flex flex-wrap mb-5 gap-5 mt-5",
-        [styles.catalogContainerMain],
-      )}
-    >
-      <Link
-        href={{
-          pathname: "/shares/linea",
-        }}
+        className={classNames(
+          "flex flex-wrap mb-5 gap-5 mt-5",
+          [styles.catalogContainerMain],
+        )}
       >
-        <div
-          className={classNames(
-            "flex flex-row items-center rounded-xl justify-between",
-            styles["block-decisions"],
-          )}
+        <Link
+          href={{
+            pathname: "/shares/linea",
+          }}
         >
-          <div className="flex flex-col w-screen h-[150px] pl-10 mt-10">
-            <div className="mb-3">
-              <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
+          <div
+            className={classNames(
+              "flex flex-row items-center rounded-xl justify-between bg-slate-500",
+              styles["block-decisions"],
+            )}
+          >
+            <div className="flex flex-col w-4/5 h-[150px] pl-10 mt-10">
+              <div className="mb-3">
+                <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
+              </div>
+              <div>
+                <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title1")}</span>
+              </div>
             </div>
-            <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title1")}</span>
-            </div>
-          </div>
-          <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
-            <Image
-              className={styles.img}
-              src={linea}
-              width={215}
-              height={150}
-              alt="logo"
-            />
-          </div>
-        </div>
-      </Link>
-      
-      <Link
-        href={{
-          pathname: "/shares/polaris200",
-        }}
-      >
-        <div
-          className={classNames(
-            "flex flex-row items-center rounded-xl justify-between",
-            styles["block-decisions"],
-          )}
-        >
-          <div className="flex flex-col w-[450px] h-[150px] pl-10 mt-5">
-            <div className="mb-3">
-              <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
-            </div>
-            <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title2")}</span>
+            <div className="flex w-1/5 h-full items-center justify-end mr-1">
+              <Image
+                className={classNames("h-full w-auto object-contain", styles.img)}
+                src={linea}
+                width={140}
+                height={140}
+                alt="logo"
+              />
             </div>
           </div>
-          <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
-            <Image
-              className={styles.img}
-              src={polaris}
-              width={165}
-              height={150}
-              alt="logo"
-            />
-          </div>
-        </div>
-      </Link>
+        </Link>
 
-      <Link
-        href={{
-          pathname: "/shares/polaris200-2",
-        }}
-      >
-        <div
-          className={classNames(
-            "flex flex-row items-center rounded-xl justify-between",
-            styles["block-decisions"],
-          )}
+        <Link
+          href={{
+            pathname: "/shares/polaris200",
+          }}
         >
-          <div className="flex flex-col w-[450px] h-[150px] pl-10 mt-5">
-            <div className="mb-3">
-              <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
+          <div
+            className={classNames(
+              "flex flex-row items-center rounded-xl justify-between",
+              styles["block-decisions"],
+            )}
+          >
+            <div className="flex flex-col w-4/5 h-[150px] pl-10 mt-5">
+              <div className="mb-3">
+                <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
+              </div>
+              <div>
+                <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title2")}</span>
+              </div>
             </div>
-            <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title3")}</span>
+            <div className="flex w-1/5 h-full items-center justify-end mr-1">
+              <Image
+                className={classNames("h-full w-auto object-contain", styles.img)}
+                src={polaris}
+                width={140}
+                height={140}
+                alt="logo"
+              />
             </div>
           </div>
-          <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
-            <Image
-              className={styles.img}
-              src={polaris2}
-              width={159}
-              height={150}
-              alt="logo"
-            />
-          </div>
-        </div>
-      </Link>
+        </Link>
 
-      <Link
-        href={{
-          pathname: "/shares/fabiusplusxl",
-        }}
-      >
-        <div
-          className={classNames(
-            "flex flex-row items-center rounded-xl justify-between",
-            styles["block-decisions"],
-          )}
+        <Link
+          href={{
+            pathname: "/shares/polaris200-2",
+          }}
         >
-          <div className="flex flex-col w-[550px] h-[150px] pl-10 mt-5">
-            <div className="mb-3">
-              <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
+          <div
+            className={classNames(
+              "flex flex-row items-center rounded-xl justify-between",
+              styles["block-decisions"],
+            )}
+          >
+            <div className="flex flex-col w-4/5 h-[150px] pl-10 mt-5">
+              <div className="mb-3">
+                <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
+              </div>
+              <div>
+                <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title3")}</span>
+              </div>
             </div>
-            <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title4")}</span>
+            <div className="flex w-1/5 h-full items-center justify-end mr-1">
+              <Image
+                className={classNames("h-full w-auto object-contain", styles.img)}
+                src={polaris2}
+                width={140}
+                height={140}
+                alt="logo"
+              />
             </div>
           </div>
-          <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
-            <Image
-              className={styles.img}
-              src={fabiusplusxl}
-              width={109}
-              height={150}
-              alt="logo"
-            />
-          </div>
-        </div>
-      </Link>
+        </Link>
 
-      <Link
-        href={{
-          pathname: "/shares/atlan300",
-        }}
-      >
-        <div
-          className={classNames(
-            "flex flex-row items-center rounded-xl justify-between",
-            styles["block-decisions"],
-          )}
+        <Link
+          href={{
+            pathname: "/shares/fabiusplusxl",
+          }}
         >
-          <div className="flex flex-col w-[500px] h-[150px] pl-10 mt-5">
-            <div className="mb-3">
-              <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
+          <div
+            className={classNames(
+              "flex flex-row items-center rounded-xl justify-between",
+              styles["block-decisions"],
+            )}
+          >
+            <div className="flex flex-col w-4/5 h-[150px] pl-10 mt-5">
+              <div className="mb-3">
+                <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
+              </div>
+              <div>
+                <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title4")}</span>
+              </div>
             </div>
-            <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title5")}</span>
-            </div>
-          </div>
-          <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
-            <Image
-              className={styles.img}
-              src={atlan}
-              width={109}
-              height={150}
-              alt="logo"
-            />
-          </div>
-        </div>
-      </Link>
-      <Link
-        href={{
-          pathname: "/shares/AWD655-2H-V1",
-        }}
-      >
-        <div
-          className={classNames(
-            "flex flex-row items-center rounded-xl justify-between",
-            styles["block-decisions"],
-          )}
-        >
-          <div className="flex flex-col w-[450px] h-[150px] pl-10 mt-5">
-            <div className="mb-3">
-              <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
-            </div>
-            <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title6")}</span>
+            <div className="flex w-1/5 h-full items-center justify-end mr-1">
+              <Image
+                className={classNames("h-full w-auto object-contain", styles.img)}
+                src={fabiusplusxl}
+                width={140}
+                height={140}
+                alt="logo"
+              />
             </div>
           </div>
-          <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
-            <Image
-              className={styles.img}
-              src={awd655_h2_v1}
-              width={109}
-              height={150}
-              alt="logo"
-            />
-          </div>
-        </div>
-      </Link>
-      <Link
-        href={{
-          pathname: "/shares/AWD655-2H-V2",
-        }}
-      >
-        <div
-          className={classNames(
-            "flex flex-row items-center rounded-xl justify-between",
-            styles["block-decisions"],
-          )}
-        >
-          <div className="flex flex-col w-[450px] h-[150px] pl-10 mt-5">
-            <div className="mb-3">
-              <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
-            </div>
-            <div>
-              <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title7")}</span>
-            </div>
-          </div>
-          <div className="flex w-[150px] h-[150px] items-center justify-end mr-1">
-            <Image
-              className={styles.img}
-              src={awd655_h2_v2}
-              width={109}
-              height={150}
-              alt="logo"
-            />
-          </div>
-        </div>
-      </Link>
+        </Link>
 
-    </div>
+        <Link
+          href={{
+            pathname: "/shares/atlan300",
+          }}
+        >
+          <div
+            className={classNames(
+              "flex flex-row items-center rounded-xl justify-between",
+              styles["block-decisions"],
+            )}
+          >
+            <div className="flex flex-col w-4/5 h-[150px] pl-10 mt-5">
+              <div className="mb-3">
+                <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
+              </div>
+              <div>
+                <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title5")}</span>
+              </div>
+            </div>
+            <div className="flex w-1/5 h-full items-center justify-end mr-1">
+              <Image
+                className={classNames("h-full w-auto object-contain", styles.img)}
+                src={atlan}
+                width={140}
+                height={140}
+                alt="logo"
+              />
+            </div>
+          </div>
+        </Link>
+        <Link
+          href={{
+            pathname: "/shares/AWD655-2H-V1",
+          }}
+        >
+          <div
+            className={classNames(
+              "flex flex-row items-center rounded-xl justify-between",
+              styles["block-decisions"],
+            )}
+          >
+            <div className="flex flex-col w-4/5 h-[150px] pl-10 mt-5">
+              <div className="mb-3">
+                <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
+              </div>
+              <div>
+                <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title6")}</span>
+              </div>
+            </div>
+            <div className="flex w-1/5 h-full items-center justify-end mr-1">
+              <Image
+                className={classNames("h-full w-auto object-contain", styles.img)}
+                src={awd655_h2_v1}
+                width={140}
+                height={140}
+                alt="logo"
+              />
+            </div>
+          </div>
+        </Link>
+        <Link
+          href={{
+            pathname: "/shares/AWD655-2H-V2",
+          }}
+        >
+          <div
+            className={classNames(
+              "flex flex-row items-center rounded-xl justify-between",
+              styles["block-decisions"],
+            )}
+          >
+            <div className="flex flex-col w-4/5 h-[150px] pl-10 mt-5">
+              <div className="mb-3">
+                <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
+              </div>
+              <div>
+                <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title7")}</span>
+              </div>
+            </div>
+            <div className="flex h-full w-1/5 items-center justify-end mr-1">
+              <Image
+                className={classNames("h-full w-auto object-contain", styles.img)}
+                src={awd655_h2_v2}
+                width={140}
+                height={140}
+                alt="logo"
+              />
+            </div>
+          </div>
+        </Link>
+
+      </div>
     </MainLayout>
   );
 };
