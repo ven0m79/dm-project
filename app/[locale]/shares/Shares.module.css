@@ -39,7 +39,8 @@
 
 }
 .catalogContainerDeeper {
-    width: 1050px;
+    max-width: 1050px;
+    width: 90vw;
     align-self: center;
     color: #0061AA;
     font-size: 18px;
