@@ -26,14 +26,14 @@ const defaultMapOptions = {
 
 const  MapComponent = ( ) => { 
     return ( 
-        < div  className = "flex items-center justify-center w-full" > 
+        <div  className = "flex items-center justify-center mx-6 w-full max-[400px] min-[200px]:"> 
             < GoogleMap  
                 mapContainerStyle={defaultMapContainerStyle}
                 center={defaultMapCenter}
                 zoom={defaultMapZoom}
                 options={defaultMapOptions}> 
             </ GoogleMap > 
-        </ div >
+        </div>
      ) 
 }; 
 
