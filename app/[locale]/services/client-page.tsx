@@ -38,7 +38,7 @@ export const ClientPage = () => {
         </div>
         <div className={styles.stroke}></div>
 
-        <div className={classNames("flex flex-col :flex-row flex-1 justify-normal items-start w-full")}>
+        <div className={classNames("flex flex-col lg:flex-row flex-1 justify-normal items-start w-full")}>
           {/* Left Section */}
           <div className={classNames("flex flex-col justify-normal items-start w-full", styles.leftContainer)}>
 
@@ -122,7 +122,7 @@ export const ClientPage = () => {
               <button className={styles.yerSubmit} type="submit">{t('contact-form-submit')}</button>
             </form>
             <div className={classNames("w-full h-full flex flex-col items-center justify-center", styles.howUsFind)}>
-              {/* <p className="mt-2 mb-3">{t('contact-prehead3')}</p> */}
+              <p className="mt-2 mb-3">{t('contact-prehead3')}</p>
                <MapProvider>
                 <MapComponent />
               </MapProvider>

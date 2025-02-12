@@ -14,7 +14,7 @@
     text-align: justify;
 }
 .container {
-    max-width: 460px;
+    max-width: 390px;
     width: 100%;
     height: 520px;
     background-color: #ECF3FE;
@@ -55,7 +55,7 @@
     font-size: 24px;
 }
 .howUsFind {
-    width: 80%;
+    width: 100%;
     color: #002766;
     padding-top: 10px;
     text-align: center;
