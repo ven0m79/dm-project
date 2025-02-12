@@ -38,7 +38,7 @@ export const ClientPage = () => {
         </div>
         <div className={styles.stroke}></div>
 
-        <div className={classNames("flex flex-col md:flex-row flex-1 justify-normal items-start w-full")}>
+        <div className={classNames("flex flex-col lg:flex-row flex-1 justify-normal items-start w-full")}>
           {/* Left Section */}
           <div className={classNames("flex flex-col justify-normal items-start w-full", styles.leftContainer)}>
 
@@ -75,7 +75,7 @@ export const ClientPage = () => {
           </div>
 
           {/* Form Section */}
-          <div className="w-screen h-full flex flex-col items-center justify-center">
+          <div className="w-full lg:w-auto flex flex-col items-center justify-center">
             <form onSubmit={handleSubmit} className={styles.container}>
               <div className={styles.sendUsMessage}>{t('contact-form-title')}</div>
               <input
@@ -121,7 +121,7 @@ export const ClientPage = () => {
               /><br />
               <button className={styles.yerSubmit} type="submit">{t('contact-form-submit')}</button>
             </form>
-            <div className={classNames("w-screen h-full flex flex-col items-center justify-center", styles.howUsFind)}>
+            <div className={classNames("w-full h-full flex flex-col items-center justify-center", styles.howUsFind)}>
               <p className="mt-2 mb-3">{t('contact-prehead3')}</p>
               <MapProvider>
                 <MapComponent />
