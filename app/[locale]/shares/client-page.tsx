@@ -41,19 +41,19 @@ export const ClientPage = () => {
         >
           <div
             className={classNames(
-              "flex flex-row items-center rounded-xl justify-between bg-slate-500",
+              "flex flex-row items-center rounded-xl justify-between h-full",
               styles["block-decisions"],
             )}
           >
-            <div className="flex flex-col w-4/5 h-[150px] pl-10 mt-10">
-              <div className="mb-3">
+            <div className="flex flex-col w-4/5 h-full pl-10 justify-center">
+              <div className="">
                 <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
               </div>
               <div>
                 <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title1")}</span>
               </div>
             </div>
-            <div className="flex w-1/5 h-full items-center justify-end mr-1">
+            <div className="flex w-1/5 h-full items-center justify-center mr-1">
               <Image
                 className={classNames("h-full w-auto object-contain", styles.img)}
                 src={linea}
@@ -76,15 +76,15 @@ export const ClientPage = () => {
               styles["block-decisions"],
             )}
           >
-            <div className="flex flex-col w-4/5 h-[150px] pl-10 mt-5">
-              <div className="mb-3">
+            <div className="flex flex-col w-4/5 h-full pl-10 justify-center">
+            <div className="">
                 <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
               </div>
               <div>
                 <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title2")}</span>
               </div>
             </div>
-            <div className="flex w-1/5 h-full items-center justify-end mr-1">
+            <div className="flex w-1/5 h-full items-center justify-center mr-1">
               <Image
                 className={classNames("h-full w-auto object-contain", styles.img)}
                 src={polaris}
@@ -107,15 +107,15 @@ export const ClientPage = () => {
               styles["block-decisions"],
             )}
           >
-            <div className="flex flex-col w-4/5 h-[150px] pl-10 mt-5">
-              <div className="mb-3">
+            <div className="flex flex-col w-4/5 h-full pl-10 justify-center">
+            <div className="">
                 <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
               </div>
               <div>
                 <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title3")}</span>
               </div>
             </div>
-            <div className="flex w-1/5 h-full items-center justify-end mr-1">
+            <div className="flex w-1/5 h-full items-center justify-center mr-1">
               <Image
                 className={classNames("h-full w-auto object-contain", styles.img)}
                 src={polaris2}
@@ -138,15 +138,15 @@ export const ClientPage = () => {
               styles["block-decisions"],
             )}
           >
-            <div className="flex flex-col w-4/5 h-[150px] pl-10 mt-5">
-              <div className="mb-3">
+            <div className="flex flex-col w-4/5 h-full pl-10 justify-center">
+            <div className="">
                 <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
               </div>
               <div>
                 <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title4")}</span>
               </div>
             </div>
-            <div className="flex w-1/5 h-full items-center justify-end mr-1">
+            <div className="flex w-1/5 h-full items-center justify-center mr-1">
               <Image
                 className={classNames("h-full w-auto object-contain", styles.img)}
                 src={fabiusplusxl}
@@ -169,15 +169,15 @@ export const ClientPage = () => {
               styles["block-decisions"],
             )}
           >
-            <div className="flex flex-col w-4/5 h-[150px] pl-10 mt-5">
-              <div className="mb-3">
+            <div className="flex flex-col w-4/5 h-full pl-10 justify-center">
+            <div className="">
                 <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
               </div>
               <div>
                 <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title5")}</span>
               </div>
             </div>
-            <div className="flex w-1/5 h-full items-center justify-end mr-1">
+            <div className="flex w-1/5 h-full items-center justify-center mr-1">
               <Image
                 className={classNames("h-full w-auto object-contain", styles.img)}
                 src={atlan}
@@ -199,15 +199,15 @@ export const ClientPage = () => {
               styles["block-decisions"],
             )}
           >
-            <div className="flex flex-col w-4/5 h-[150px] pl-10 mt-5">
-              <div className="mb-3">
+            <div className="flex flex-col w-4/5 h-full pl-10 justify-center">
+            <div className="">
                 <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
               </div>
               <div>
                 <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title6")}</span>
               </div>
             </div>
-            <div className="flex w-1/5 h-full items-center justify-end mr-1">
+            <div className="flex w-1/5 h-full items-center justify-center mr-1">
               <Image
                 className={classNames("h-full w-auto object-contain", styles.img)}
                 src={awd655_h2_v1}
@@ -229,15 +229,15 @@ export const ClientPage = () => {
               styles["block-decisions"],
             )}
           >
-            <div className="flex flex-col w-4/5 h-[150px] pl-10 mt-5">
-              <div className="mb-3">
+            <div className="flex flex-col w-4/5 h-full pl-10 justify-center">
+            <div className="">
                 <span className={classNames("text-black", styles.span)}>{t("shares-title-main")}</span>
               </div>
               <div>
                 <span className={classNames("text-[#0d3d61] font-bold text-base sm:text-2xl", styles.span)}>{t("shares-title7")}</span>
               </div>
             </div>
-            <div className="flex h-full w-1/5 items-center justify-end mr-1">
+            <div className="flex w-1/5 h-full items-center justify-center mr-1">
               <Image
                 className={classNames("h-full w-auto object-contain", styles.img)}
                 src={awd655_h2_v2}
