@@ -62,7 +62,7 @@ export const ClientPage = () => {
 
             {/* Second Image and Text */}
             <div className="clear-both">
-              <p className="text-2xl pb-4 mt-8">{t('contact-prehead2')}</p>
+              <p className="text-justify text-[20px] md:text-[22px] pb-4 mt-8">{t('contact-prehead2')}</p>
               <Image
                 className="float-left mr-5 mt-2 w-1/2"
                 src={imgSrc1}
