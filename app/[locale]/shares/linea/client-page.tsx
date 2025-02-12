@@ -54,7 +54,7 @@ const SharesLinea = () => {
                         </div>
                         <div className={classNames("self-center my-2 indent-5 text-justify", styles["catalogContainer"])}>
                             <Image
-                                className={"w-1/2 float-left mt-1 mb-5 mr-5"}
+                                className={"w-1/2 float-left mt-1 mb-3 mr-3"}
                                 src={linea3}
                                 width={500}
                                 height={100}
