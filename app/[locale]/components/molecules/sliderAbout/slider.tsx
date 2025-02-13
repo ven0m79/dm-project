@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { wrap } from "popmotion";
 
 import "./styleAbout.css";
-import {ArticleSingleTypeAbout, articlesUa, articlesEng} from "./image-data";
+import { ArticleSingleTypeAbout, articlesUa, articlesEng } from "./image-data";
 import SingleSlideAbout from "./single-slide";
 
 const variants = {
@@ -15,7 +15,7 @@ const variants = {
     zIndex: 1,
     opacity: 1,
     transition: {
-      duration: 0.8, 
+      duration: 0.8,
     },
   },
   exit: {
@@ -26,12 +26,12 @@ const variants = {
   },
 };
 
-
 export default function SliderAbout({ locale }: { locale: string }) {
+  const [containerHeight, setContainerHeight] = useState<number>(800);
 
-  const [articles, setArticles] = useState<ArticleSingleTypeAbout[]>([])
+  const [articles, setArticles] = useState<ArticleSingleTypeAbout[]>([]);
   const [[page, direction], setPage] = useState([0, 0]);
-  const index = wrap(0, articles .length, page);
+  const index = wrap(0, articles.length, page);
 
   const paginate = (newDirection: number) => {
     setPage([page + newDirection, newDirection]);
@@ -61,14 +61,14 @@ export default function SliderAbout({ locale }: { locale: string }) {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      paginate(1); 
-    }, 3500); 
+      paginate(1);
+    }, 3500);
 
-    return () => clearInterval(intervalId); 
+    return () => clearInterval(intervalId);
   }, [page]);
 
   return (
-    <div className="container p-5 h-auto z-48">
+    <div className="container p-5 z-48" style={{ height: containerHeight }}>
       <AnimatePresence initial={true} custom={direction}>
         <motion.div
           key={page}
@@ -95,28 +95,30 @@ export default function SliderAbout({ locale }: { locale: string }) {
             }
           }}
         >
-          <SingleSlideAbout {...currentArticle} />
+          <SingleSlideAbout
+            {...currentArticle}
+            setContainerHeight={setContainerHeight}
+          />
         </motion.div>
         <div className="next1" onClick={() => paginate(1)}>
-        {">"}
-      </div>
-      <div className="prev1" onClick={() => paginate(-1)}>
-        {">"}
-      </div>
-      
-
-
+          {">"}
+        </div>
+        <div className="prev1" onClick={() => paginate(-1)}>
+          {">"}
+        </div>
       </AnimatePresence>
-      <div className="flex absolule justify-center bottom-0">
-        {articles.map((_, i) => (
-          <div
-            key={i}
-            className={`z-10 h-2 w-2 rounded-full mx-2 cursor-pointer ${i === index ? 'bg-blue-500' : 'bg-gray-300'}`}
-            onClick={() => goToSlide(i)}
-          ></div>
-        ))}
+
+      <div className="absolute bottom-1">
+        <div className="flex justify-center">
+          {articles.map((_, i) => (
+            <div
+              key={i}
+              className={`z-10 h-2 w-2 rounded-full mx-2 cursor-pointer ${i === index ? "bg-blue-500" : "bg-gray-300"}`}
+              onClick={() => goToSlide(i)}
+            ></div>
+          ))}
+        </div>
       </div>
-      
     </div>
   );
 }
