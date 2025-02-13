@@ -68,16 +68,16 @@ export default function SliderAbout({ locale }: { locale: string }) {
   }, [page]);
 
   return (
-    <div className="container">
+    <div className="container p-5 h-auto z-48">
       <AnimatePresence initial={true} custom={direction}>
         <motion.div
           key={page}
           custom={direction}
           variants={variants}
-          initial="enter"
+          initial="center"
           animate="center"
           exit="exit"
-          className="absolute flex h-[460px] w-[864px]"
+          className="h-auto w-auto z-49"
           transition={{
             x: { type: "spring", stiffness: 300, damping: 30 },
             opacity: { duration: 0.2 },
@@ -97,24 +97,26 @@ export default function SliderAbout({ locale }: { locale: string }) {
         >
           <SingleSlideAbout {...currentArticle} />
         </motion.div>
-      </AnimatePresence>
-
-      <div className="next1" onClick={() => paginate(1)}>
+        <div className="next1" onClick={() => paginate(1)}>
         {">"}
       </div>
       <div className="prev1" onClick={() => paginate(-1)}>
         {">"}
       </div>
       
-      <div className="flex justify-center mt-4">
+
+
+      </AnimatePresence>
+      <div className="flex absolule justify-center bottom-0">
         {articles.map((_, i) => (
           <div
             key={i}
-            className={`z-10 mt-[520px] h-2 w-2 rounded-full mx-2 cursor-pointer ${i === index ? 'bg-blue-500' : 'bg-gray-300'}`}
+            className={`z-10 h-2 w-2 rounded-full mx-2 cursor-pointer ${i === index ? 'bg-blue-500' : 'bg-gray-300'}`}
             onClick={() => goToSlide(i)}
           ></div>
         ))}
       </div>
+      
     </div>
   );
 }
