@@ -33,6 +33,13 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
           <div className={classNames("ml-2 my-0 indent-5 text-justify")}>
             {t("information2")}
           </div>
+          <Image
+              className="w-full mt-2"
+              src={roman}
+              width={384}
+              height={518}
+              alt={""} />
+          </div>
           <div className={classNames("mx-2 my-0 lg:my-2 md:my-1 indent-5 text-justify")}>
             {t("information3")}
           </div>
@@ -40,13 +47,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
             {t("information4")}
           </div>
           <div>
-            <Image
-              className="w-full mt-2"
-              src={roman}
-              width={384}
-              height={518}
-              alt={""} />
-          </div>
+
           <div className={styles.stroke}></div>
           <div className="text-2xl text-blue-900 flex justify-center self-center mb-5">
             {t("implemented")}
