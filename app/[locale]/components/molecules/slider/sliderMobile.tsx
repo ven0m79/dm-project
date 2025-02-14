@@ -5,7 +5,7 @@ import { wrap } from "popmotion";
 
 import "./style.css";
 import {ArticleSingleType, articlesUa, articlesEng} from "./image-data";
-import SingleSlide from "./single-slide";
+import SingleSlideMobile from "./single-slideMobile";
 
 
 const variants = {
@@ -29,7 +29,7 @@ const variants = {
   },
 };
 
-export default function Slider({ locale }: { locale: string }) {
+export default function SliderMobile({ locale }: { locale: string }) {
 
   const [articles, setArticles] = useState<ArticleSingleType[]>([])
   const [[page, direction], setPage] = useState([0, 0]);
@@ -86,7 +86,7 @@ export default function Slider({ locale }: { locale: string }) {
             }
           }}
         >
-          <SingleSlide {...currentArticle} />
+          <SingleSlideMobile {...currentArticle} />
         </motion.div>
       </AnimatePresence>
 
