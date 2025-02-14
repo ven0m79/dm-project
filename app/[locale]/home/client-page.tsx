@@ -30,7 +30,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
           }
           <h2
             className={classNames(
-              "justify-center items-center valign-middle mb-10",
+              "w-full text-center mb-10",
               styles["serviceTextHeader"],
             )}
           >

@@ -6,12 +6,15 @@
 .textHeader {
     font-size: 25px;
     color: #002766;
-}
 
+}
 .serviceTextHeader {
     font-size: 23px;
     font-weight: bold;
     color: #002766;
+    @media (max-width: 640px) {
+        font-size: 16px;
+    }
 }
 
 .serviceText {
