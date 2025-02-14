@@ -1,9 +1,13 @@
 .aboutText {
-    display: flex;
-    flex-direction: column;
 
+    height: auto;
     color: #0061AA;
     line-height: 22px;
+    @media (max-width: 640px) {
+        width: 100%;
+        /* border: 1px solid red; */
+        line-height: 11px;
+    }
 }
 .aboutContainer {
     align-self: center;

@@ -68,55 +68,57 @@ export default function SliderAbout({ locale }: { locale: string }) {
   }, [page]);
 
   return (
-    <div className="container p-5 z-48" style={{ height: containerHeight }}>
-      <AnimatePresence initial={true} custom={direction}>
-        <motion.div
-          key={page}
-          custom={direction}
-          variants={variants}
-          initial="center"
-          animate="center"
-          exit="exit"
-          className="h-auto w-auto z-49"
-          transition={{
-            x: { type: "spring", stiffness: 300, damping: 30 },
-            opacity: { duration: 0.2 },
-          }}
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={1}
-          onDragEnd={(e, { offset, velocity }) => {
-            const swipe = swipePower(offset.x, velocity.x);
+    <div className="w-screen flex justify-center px-5">
+      <div className="container z-10" style={{ height: containerHeight }}>
+        <AnimatePresence initial={true} custom={direction}>
+          <motion.div
+            key={page}
+            custom={direction}
+            variants={variants}
+            initial="center"
+            animate="center"
+            exit="exit"
+            className="h-auto w-auto z-49"
+            transition={{
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 },
+            }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={1}
+            onDragEnd={(e, { offset, velocity }) => {
+              const swipe = swipePower(offset.x, velocity.x);
 
-            if (swipe < -swipeConfidenceThreshold) {
-              paginate(1);
-            } else if (swipe > swipeConfidenceThreshold) {
-              paginate(-1);
-            }
-          }}
-        >
-          <SingleSlideAbout
-            {...currentArticle}
-            setContainerHeight={setContainerHeight}
-          />
-        </motion.div>
-        <div className="next1" onClick={() => paginate(1)}>
-          {">"}
-        </div>
-        <div className="prev1" onClick={() => paginate(-1)}>
-          {">"}
-        </div>
-      </AnimatePresence>
+              if (swipe < -swipeConfidenceThreshold) {
+                paginate(1);
+              } else if (swipe > swipeConfidenceThreshold) {
+                paginate(-1);
+              }
+            }}
+          >
+            <SingleSlideAbout
+              {...currentArticle}
+              setContainerHeight={setContainerHeight}
+            />
+          </motion.div>
+          <div className="next1" onClick={() => paginate(1)}>
+            {">"}
+          </div>
+          <div className="prev1" onClick={() => paginate(-1)}>
+            {">"}
+          </div>
+        </AnimatePresence>
 
-      <div className="absolute bottom-1">
-        <div className="flex justify-center">
-          {articles.map((_, i) => (
-            <div
-              key={i}
-              className={`z-10 h-2 w-2 rounded-full mx-2 cursor-pointer ${i === index ? "bg-blue-500" : "bg-gray-300"}`}
-              onClick={() => goToSlide(i)}
-            ></div>
-          ))}
+        <div className="absolute bottom-10 w-screen px-6">
+          <div className="flex justify-center">
+            {articles.map((_, i) => (
+              <div
+                key={i}
+                className={`z-40 h-2 w-2 rounded-full mx-1 cursor-pointer ${i === index ? "bg-blue-500" : "bg-gray-300"}`}
+                onClick={() => goToSlide(i)}
+              ></div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
