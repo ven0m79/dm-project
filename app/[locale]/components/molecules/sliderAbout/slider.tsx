@@ -6,6 +6,7 @@ import { wrap } from "popmotion";
 import "./styleAbout.css";
 import { ArticleSingleTypeAbout, articlesUa, articlesEng } from "./image-data";
 import SingleSlideAbout from "./single-slide";
+import { useIsMobile } from "../../hooks/useIsMobile";
 
 const variants = {
   enter: {
@@ -27,9 +28,8 @@ const variants = {
 };
   
 export default function SliderAbout({ locale }: { locale: string }) {
-  
-  const [containerHeight, setContainerHeight] = useState<number>(250);
-
+    const isMobile = useIsMobile();
+  const [containerHeight, setContainerHeight] = useState<number>(800);
   const [articles, setArticles] = useState<ArticleSingleTypeAbout[]>([]);
   const [[page, direction], setPage] = useState([0, 0]);
   const index = wrap(0, articles.length, page);
@@ -70,7 +70,7 @@ export default function SliderAbout({ locale }: { locale: string }) {
 
   return (
     <div className="w-screen flex justify-center px-1">
-      <div className="container z-10" style={{ height: containerHeight }}>
+      <div className="container z-10" style={{ height: isMobile ? 250 :  containerHeight}}>
         <AnimatePresence initial={true} custom={direction}>
           <motion.div
             key={page}
@@ -100,6 +100,7 @@ export default function SliderAbout({ locale }: { locale: string }) {
             <SingleSlideAbout
               {...currentArticle}
               setContainerHeight={setContainerHeight}
+
             />
           </motion.div>
           <div className="next1" onClick={() => paginate(1)}>
@@ -110,7 +111,7 @@ export default function SliderAbout({ locale }: { locale: string }) {
           </div>
         </AnimatePresence>
 
-        <div className="absolute bottom-10 w-screen px-6">
+        <div className="absolute bottom-5 w-screen px-6">
           <div className="flex justify-center">
             {articles.map((_, i) => (
               <div

@@ -25,6 +25,7 @@ const SingleSlideAbout: FC<
     }
   }, [setContainerHeight]);
 
+  
   useEffect(() => {
     window.addEventListener("resize", heightChangeHandler);
 
