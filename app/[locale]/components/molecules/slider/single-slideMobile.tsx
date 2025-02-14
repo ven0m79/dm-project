@@ -88,7 +88,7 @@ const SingleSlideMobile: FC<ArticleSingleType> = ({
           transition={{ duration: 1.5, ease: "easeOut" }}
           style={{ fontSize: 40 }}
         >
-          <div className="mt-5 ml-2 w-2/3 flex-wrap text-xl">{title}</div>
+          <div className="mt-5 ml-2 w-2/3 flex-wrap text-xl leading-5">{title}</div>
         </motion.div>
         <motion.div
           className="pointer-events-none"
