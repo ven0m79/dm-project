@@ -18,14 +18,14 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
     <MainLayout>
       {typeof window !== "undefined" && isMobile ?
         <>
-          <div className={classNames("flex flex-1 flex-col w-full px-1 sm:px-5", styles.aboutText)}>
+          <div className={classNames("flex flex-1 flex-col w-full sm:px-5", styles.aboutText)}>
             <div className={classNames("ml-2 my-0 mt-2 indent-5 text-justify")}>
               {t("information1")}
             </div>
             <div>
               <Image
                 src={vystavka}
-                className="w-full mt-2"
+                className="w-full mt-2 px-1"
                 width={640}
                 height={480}
                 alt={""} />
@@ -36,7 +36,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
             </div>
             <div>
               <Image
-                className="w-full mt-2"
+                className="w-full mt-2 px-1"
                 src={roman}
                 width={384}
                 height={518}
