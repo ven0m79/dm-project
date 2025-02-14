@@ -29,7 +29,8 @@ const variants = {
   const isMobile = useIsMobile();
   
 export default function SliderAbout({ locale }: { locale: string }) {
-  const [containerHeight, setContainerHeight] = useState<number>(isMobile ? 400 : 800);
+  
+  const [containerHeight, setContainerHeight] = useState<number>(300);
 
   const [articles, setArticles] = useState<ArticleSingleTypeAbout[]>([]);
   const [[page, direction], setPage] = useState([0, 0]);
