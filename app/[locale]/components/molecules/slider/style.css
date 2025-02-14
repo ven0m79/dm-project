@@ -76,7 +76,7 @@ li {
     position: absolute;
     font-size: 14px;
     top: 80%;
-    left: 37%;
+    left: 33%;
 
     /* border: 1px solid red; */
     width: 150px;
@@ -98,13 +98,15 @@ li {
   align-self: center;
   margin: 100px 0px 0px 130px;
   @media (max-width: 640px) {
+    margin: 0px 0px 0px 0px;
     position: absolute;
     font-size: 14px;
-    top: calc(65% - 20px);
+    top: 80%;
+    left: 33%;
+
     /* border: 1px solid red; */
     width: 150px;
     height: 25px;
-    margin: 50px 0px 0px calc(45% - 50px);
     padding: 5px;
 }
 }

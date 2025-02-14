@@ -39,7 +39,7 @@ const animatedStylesForPhoto1 = {
 
 const animatedStylesForPhoto2 = {
   initial: {
-    x: "30%",
+    x: "140%",
     opacity: 0,
   },
   animate: {
@@ -63,7 +63,7 @@ const SingleSlideMobile: FC<ArticleSingleType> = ({
         alt=""
         width={210}
         height={120}
-        className="pointer-events-none absolute left-1/2 top-10 transform -translate-x-1/2"
+        className="pointer-events-none absolute left-1/2 top-12 transform -translate-x-1/2"
         initial={{ ...animatedStylesForPhoto1.initial }}
         animate={{ ...animatedStylesForPhoto1.animate }}
         transition={{ duration: 1.5, ease: "easeOut" }}
@@ -88,7 +88,7 @@ const SingleSlideMobile: FC<ArticleSingleType> = ({
           transition={{ duration: 1.5, ease: "easeOut" }}
           style={{ fontSize: 40 }}
         >
-          <div className="mt-5 ml-2 w-1/2 flex-wrap text-xl">{title}</div>
+          <div className="mt-5 ml-2 w-2/3 flex-wrap text-xl">{title}</div>
         </motion.div>
         <motion.div
           className="pointer-events-none"
