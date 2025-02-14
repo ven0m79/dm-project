@@ -6,7 +6,6 @@ import { wrap } from "popmotion";
 import "./styleAbout.css";
 import { ArticleSingleTypeAbout, articlesUa, articlesEng } from "./image-data";
 import SingleSlideAbout from "./single-slide";
-import { useIsMobile } from "../../hooks/useIsMobile";
 
 const variants = {
   enter: {
@@ -26,11 +25,10 @@ const variants = {
     },
   },
 };
-  const isMobile = useIsMobile();
   
 export default function SliderAbout({ locale }: { locale: string }) {
   
-  const [containerHeight, setContainerHeight] = useState<number>(300);
+  const [containerHeight, setContainerHeight] = useState<number>(250);
 
   const [articles, setArticles] = useState<ArticleSingleTypeAbout[]>([]);
   const [[page, direction], setPage] = useState([0, 0]);
