@@ -65,10 +65,10 @@ export default function Slider({ locale }: { locale: string }) {
           key={page}
           custom={direction}
           variants={variants}
-          initial="enter"
+          initial="center"
           animate="center"
           exit="exit"
-          className="left absolute left-0 right-0 flex h-[460px] w-full"
+          className="left absolute left-0 right-0 flex h-full w-full"
           transition={{
             x: { type: "spring", stiffness: 300, damping: 30 },
             opacity: { duration: 0.2 },

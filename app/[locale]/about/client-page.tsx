@@ -42,10 +42,10 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 height={518}
                 alt={""} />
             </div>
-            <div className={classNames("mx-2 my-0 lg:my-2 md:my-1 indent-5 text-justify")}>
+            <div className={classNames("mx-2 my-0 indent-5 text-justify")}>
               {t("information3")}
             </div>
-            <div className={classNames("mx-2 my-0 lg:my-2 md:my-1 indent-5 text-justifyy")}>
+            <div className={classNames("mx-2 my-0 indent-5 text-justify")}>
               {t("information4")}
             </div>
             <div>

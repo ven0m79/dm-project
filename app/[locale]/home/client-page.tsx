@@ -10,20 +10,15 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import styles from "./Home.module.css";
-import Seo from "@app/[locale]/components/atoms/seo/Seo";
 
 export const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
   const t = useTranslations("Index");
 
   return (
     <MainLayout>
-      <Seo title="ДМ-ПРОЕКТ: Головна" description="ДМ-Проект є надійним партнером українських лікарів з 2009 року" />
-      {/* <div className="text-2xl text-blue-900 flex justify-center items-center valign-middle">{t('title')}</div> */}
       <div>
         <div className="flex flex-1 flex-col justify-center items-center">
-        <button className="flex mt-2 bg-red-600 font-bold text-2xl opacity-50 w-96 h-16 justify-center items-center">Test SERVER!</button>
           <Slider locale={locale} />
-
           <h2
             className={classNames(
               "justify-center items-center valign-middle mb-10",
@@ -37,7 +32,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
             className="flex flex-1 flex-row justify-end items-center self-center"
             style={{ width: "85%", maxWidth: "1400px" }}
           >
-            <div className={"text-2xl text-blue-800"}>
+            {/* <div className={"text-2xl text-blue-800"}>
               <div className={classNames("font-bold", styles["textHeader"])}>
                 {" "}
                 {t("delivered").toUpperCase()}
@@ -90,7 +85,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
             </div>
             <div>
               <MapOfUkraine locale={locale} />
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -99,14 +94,14 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
             "font-bold flex flex-1 flex-col text-slate-900 justify-center items-center m-auto py-7",
             styles["serviceTextHeader"],
           )}
-          style={{ width: "1400px" }}
+          style={{ width: "100%", maxWidth: "1400px" }}
         >
           {" "}
           <div className={styles.stroke}></div>
           <br />
           <br />
           {/*Сервіс та Проєктування*/}
-          <div className="flex flex-col" style={{ width: "1400px" }}>
+          {/* <div className="flex flex-col" style={{ width: "100%", maxWidth: "1400px" }}>
             <div
               className={classNames(
                 "flex flex-1 flex-col font-bold",
@@ -137,8 +132,8 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 </Link>
               </div>
             </div>
-          </div>
-          <div className="flex flex-col self-end" style={{ width: "1050px" }}>
+          </div> */}
+          {/* <div className="flex flex-col self-end" style={{ maxWidth: "1050px", width:"100%" }}>
             <div
               className={classNames(
                 "self-end mt-10",
@@ -177,7 +172,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 </Link>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
         <br />
 
@@ -190,7 +185,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
           >
             {t("partners").toUpperCase()}
           </div>
-          <div className="flex flex-1 flex-row justify-center items-center valign-middle bg-white">
+          {/* <div className="flex flex-1 flex-row justify-center items-center valign-middle bg-white w-full max-w-[1400px]">
             <div className={classNames("m-10", styles["block-partners"])}>
               <Link href="https://www.draeger.com"
                 target="_blank">
@@ -251,7 +246,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 />
               </Link>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </MainLayout>

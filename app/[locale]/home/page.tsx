@@ -6,11 +6,11 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   return locale === "ua"
     ? {
         title: "ДМ-ПРОЕКТ: Головна",
-        description: "ДМ-ПРОЕКТ Є НАДІЙНИМ ПАРТНЕРОМ УКРАЇНСЬКИХ ЛІКАРІВ З 2009 РОКУ",
+        description: "ДМ-проект є надійним партнером українських лікарів з 2009 року",
       }
     : {
         title: "DM-PROJECT: Main",
-        description: "DM-PROJECT HAS BEEN A RELIABLE PARTNER OF UKRAINIAN DOCTORS SINCE 2009",
+        description: "DM-project has been a reliable partner of ukrainian doctors since 2009",
       };
 }
 

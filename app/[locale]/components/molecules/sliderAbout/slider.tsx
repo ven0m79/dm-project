@@ -26,9 +26,9 @@ const variants = {
     },
   },
 };
-  
+
 export default function SliderAbout({ locale }: { locale: string }) {
-    const isMobile = useIsMobile();
+  const isMobile = useIsMobile();
   const [containerHeight, setContainerHeight] = useState<number>(800);
   const [articles, setArticles] = useState<ArticleSingleTypeAbout[]>([]);
   const [[page, direction], setPage] = useState([0, 0]);
@@ -70,7 +70,7 @@ export default function SliderAbout({ locale }: { locale: string }) {
 
   return (
     <div className="w-screen flex justify-center px-1">
-      <div className="container z-10" style={{ height: isMobile ? 250 :  containerHeight}}>
+      <div className="container z-10" style={{ height: isMobile ? 250 : containerHeight }}>
         <AnimatePresence initial={true} custom={direction}>
           <motion.div
             key={page}

@@ -15,14 +15,14 @@
 }
 
 .serviceText {
-    width: 800px;
+    max-width: 800px;
     line-height: 35px;
     font-size: 23px;
     font-weight: normal;
     color: #0061AA;
 }
 
-.serviceText:hover {
+.serviceText:hover { 
 
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
 }
@@ -75,7 +75,8 @@
   }
   .stroke {
     align-self: center;
-    width: 1240px;
+    max-width: 1240px;
+    width: 100%;
     height: 1px;
     margin-top: 5px;
     margin-bottom: 10px;
