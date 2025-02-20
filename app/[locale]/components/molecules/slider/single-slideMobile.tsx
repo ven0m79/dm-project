@@ -39,7 +39,7 @@ const animatedStylesForPhoto1 = {
 
 const animatedStylesForPhoto2 = {
   initial: {
-    x: "140%",
+    x: "70%",
     opacity: 0,
   },
   animate: {
@@ -97,7 +97,7 @@ const SingleSlideMobile: FC<ArticleSingleType> = ({
           transition={{ duration: 2, ease: "easeOut" }}
           style={{ fontSize: 20 }}
         >
-          <div className="mt-5 ml-3 w-1/2 text-lg leading-5">{description}</div>
+          <div className="mt-5 ml-3 w-1/2 text-sm leading-5">{description}</div>
         </motion.div>
       </div>
         <motion.a

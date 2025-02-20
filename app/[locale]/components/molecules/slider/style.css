@@ -8,7 +8,7 @@
   align-items: center;
   @media (max-width: 640px) {
     width: 100%;
-    height: 280px;
+    height: 260px;
     /* border: 1px solid red; */
 }
 }
@@ -31,7 +31,7 @@
   z-index: 2;
   @media (max-width: 640px) {
     font-size: 16px;
-    top: 80%;
+    top: calc(85% - 20px);
     width: 30px;
     height: 30px;
     /* border: 1px solid red; */
@@ -72,11 +72,8 @@ li {
   align-self: center;
   margin: 100px 0px 0px 130px;
   @media (max-width: 640px) {
-    margin: 0px 0px 0px 0px;
-    position: absolute;
+    margin: 10px 0px 0px 10px;
     font-size: 14px;
-    top: 55%;
-
     /* border: 1px solid red; */
     width: 150px;
     height: 25px;
@@ -97,11 +94,8 @@ li {
   align-self: center;
   margin: 100px 0px 0px 130px;
   @media (max-width: 640px) {
-    margin: 0px 0px 0px 0px;
-    position: absolute;
+    margin: 10px 0px 0px 10px;
     font-size: 14px;
-    top: 55%;
-
     /* border: 1px solid red; */
     width: 150px;
     height: 25px;

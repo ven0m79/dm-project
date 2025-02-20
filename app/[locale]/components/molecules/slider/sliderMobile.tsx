@@ -57,6 +57,14 @@ export default function SliderMobile({ locale }: { locale: string }) {
     }
   }, [locale]);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      paginate(1); 
+    }, 4000);
+  
+    return () => clearInterval(interval);
+  }, [page]); 
+
 
   return (
     <div className="example-container">
@@ -90,12 +98,12 @@ export default function SliderMobile({ locale }: { locale: string }) {
         </motion.div>
       </AnimatePresence>
 
-      <div className="next" onClick={() => paginate(1)}>
+      {/* <div className="next" onClick={() => paginate(1)}>
         {">"}
       </div>
       <div className="prev" onClick={() => paginate(-1)}>
         {">"}
-      </div>
+      </div> */}
     </div>
   );
 }
