@@ -30,7 +30,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
           }
           <h2
             className={classNames(
-              "w-full text-center mb-10",
+              "w-full text-center mb-5 sm:mb-10",
               styles["serviceTextHeader"],
             )}
           >
@@ -38,15 +38,14 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
           </h2>
 
           <div
-            className="flex flex-1 flex-row justify-end items-center self-center"
+            className="flex flex-1 flex-col justify-end items-center self-center sm:flex-row"
             style={{ width: "85%", maxWidth: "1400px" }}
           >
-            {/* <div className={"text-2xl text-blue-800"}>
+            <div className={"text-2xl text-blue-800"}>
               <div className={classNames("font-bold", styles["textHeader"])}>
                 {" "}
                 {t("delivered").toUpperCase()}
               </div>
-              <br />
               <div className="flex flex-1 flex-row items-center self-center">
                 <div className="self-start" style={{ width: "50px" }}>
                   <Image
@@ -76,12 +75,10 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                   {t("more-then2")}
                 </div>
               </div>
-              <br />
-              <div className={classNames("font-bold", styles["textHeader"])}>
+              <div className={classNames("font-bold mt-4", styles["textHeader"])}>
                 {" "}
                 {t("integrated").toUpperCase()}
               </div>
-              <br />
               <div className={classNames("", styles["putText"])}>
                 {t("integrated1")}
                 <br />
@@ -93,8 +90,8 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
               </div>
             </div>
             <div>
-              <MapOfUkraine locale={locale} />
-            </div> */}
+              {/* <MapOfUkraine locale={locale} /> */}
+            </div>
           </div>
         </div>
 
