@@ -11,12 +11,14 @@ import {
   SidebarContextProps,
   SidebarProvider,
 } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
+import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 
 const Content: FC<{
   children: ReactNode;
   locale: string;
 }> = ({ children, locale }) => {
   const { getData } = useContext(SidebarContext) as SidebarContextProps;
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     getData(locale);
@@ -29,17 +31,26 @@ const Content: FC<{
         styles.subCatalog,
       )}
     >
-      <div className="w-[300px]">
+      {typeof window !== "undefined" && isMobile ?
+        null
+        :
+        <div className="w-[300px]">
         {/* Компонента1 */}
         <LSidebar locale={locale} changeURLParams />
       </div>
+      }
+ 
       {/* Основное содержимое */}
       <div className="w-full">{children}</div>
 
-      <div className="w-[300px]">
-                {/* Компонента1 */}
-                <RSidebar locale={locale} changeURLParams />
+      {typeof window !== "undefined" && isMobile ?
+        null
+        :
+        <div className="w-[300px]">
+        {/* Компонента1 */}
+        <RSidebar locale={locale} changeURLParams />
       </div>
+      }
     </div>
   );
 };
