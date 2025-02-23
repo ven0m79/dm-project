@@ -11,7 +11,7 @@
 @media (max-width: 640px) {
     .textHeader {
         font-size: 16px;
-        line-height: 18px;
+        line-height: 22px;
     }
 }
 
@@ -24,7 +24,7 @@
 @media (max-width: 640px) {
     .serviceTextHeader {
         font-size: 16px;
-        line-height: 18px;
+        line-height: 22px;
     }
 }
 
@@ -34,6 +34,12 @@
     font-size: 23px;
     font-weight: normal;
     color: #0061AA;
+}
+@media (max-width: 640px) {
+    .serviceText {
+        font-size: 16px;
+        line-height: 22px;
+    }
 }
 
 .serviceText:hover {

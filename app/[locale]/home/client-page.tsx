@@ -90,7 +90,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
               </div>
             </div>
             <div>
-              {/* <MapOfUkraine locale={locale} /> */}
+              <MapOfUkraine locale={locale} />
             </div>
           </div>
         </div>
@@ -107,10 +107,10 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
           <br />
           <br />
           {/*Сервіс та Проєктування*/}
-          {/* <div className="flex flex-col" style={{ width: "100%", maxWidth: "1400px" }}>
+          <div className="flex flex-col" style={{ width: "100%", maxWidth: "1400px" }}>
             <div
               className={classNames(
-                "flex flex-1 flex-col font-bold",
+                "flex flex-1 flex-col font-bold pl-2",
                 styles["textHeader"],
               )}
             >
@@ -120,7 +120,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
               <Link href={"/services"}>
                 <div
                   className={classNames(
-                    "p-5 indent-5 text-justify",
+                    "sm:p-5 p-2 indent-5 text-justify",
                     styles["serviceText"],
                   )}
                 >
@@ -138,11 +138,11 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 </Link>
               </div>
             </div>
-          </div> */}
-          {/* <div className="flex flex-col self-end" style={{ maxWidth: "1050px", width:"100%" }}>
+          </div>
+          <div className="flex flex-col self-end" style={{ maxWidth: "1050px", width:"100%" }}>
             <div
               className={classNames(
-                "self-end mt-10",
+                "self-end mt-10 sm:mr-5 mr-2",
                 styles["serviceTextHeader"],
               )}
             >
@@ -178,81 +178,81 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 </Link>
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
         <br />
 
         <div className="flex flex-1 flex-col justify-center items-center">
           <div
             className={classNames(
-              "font-bold justify-center items-center valign-middle mt-10",
+              "font-bold justify-center items-center valign-middle sm:mt-10 mt-0",
               styles["textHeader"],
             )}
           >
             {t("partners").toUpperCase()}
           </div>
-          {/* <div className="flex flex-1 flex-row justify-center items-center valign-middle bg-white w-full max-w-[1400px]">
-            <div className={classNames("m-10", styles["block-partners"])}>
+          <div className="flex flex-1 flex-row justify-center items-center valign-middle bg-white w-full max-w-[1400px]">
+            <div className={classNames("m-3 sm:m-10", styles["block-partners"])}>
               <Link href="https://www.draeger.com"
                 target="_blank">
                 <Image
                   className={styles.img}
                   src="/logo-partners/dreger-log-partner.jpg"
-                  width={150}
-                  height={150}
+                  width={isMobile ? 60 : 150}
+                  height={isMobile ? 60 : 150}
                   alt="Logo DM-Project"
                 />
               </Link>
             </div>
-            <div className={classNames("m-10", styles["block-partners"])}>
+            <div className={classNames("m-3 sm:m-10", styles["block-partners"])}>
               <Link href="https://www.prohs.pt/en/home/"
                 target="_blank">
                 <Image
                   className={styles.img}
                   src="/logo-partners/prohs-log-partner.png"
-                  width={150}
-                  height={150}
+                  width={isMobile ? 60 : 150}
+                  height={isMobile ? 60 : 150}
                   alt="Logo Prohs"
                 />
               </Link>
             </div>
-            <div className={classNames("m-10", styles["block-partners"])}>
+            <div className={classNames("m-3 sm:m-10", styles["block-partners"])}>
               <Link href="https://www.at-os.com"
                 target="_blank">
                 <Image
                   className={styles.img}
                   src="/logo-partners/atos-log-partner.jpg"
-                  width={150}
-                  height={150}
+                  width={isMobile ? 60 : 150}
+                  height={isMobile ? 60 : 150}
                   alt="Logo AT-OS"
                 />
               </Link>
             </div>
-            <div className={classNames("m-10", styles["block-partners"])}>
+            <div className={classNames("m-3 sm:m-10", styles["block-partners"])}>
               <Link href="https://www.lojer.com"
                 target="_blank">
                 <Image
                   className={styles.img}
                   src="/logo-partners/lojer-log-partner.jpg"
-                  width={150}
-                  height={150}
+                  width={isMobile ? 60 : 150}
+                  height={isMobile ? 60 : 150}
                   alt="Logo Lojer"
                 />
               </Link>
             </div>
-            <div className={classNames("m-10", styles["block-partners"])}>
+            <div className={classNames("m-3 sm:m-10", styles["block-partners"])}>
               <Link href="http://renosem.com"
                 target="_blank">
                 <Image
                   className={styles.img}
                   src="/logo-partners/renosem-log-partner.jpg"
-                  width={150}
-                  height={150}
+                  width={isMobile ? 60 : 150}
+                  height={isMobile ? 60 : 150}
                   alt="Logo Renosem"
                 />
               </Link>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </MainLayout>
