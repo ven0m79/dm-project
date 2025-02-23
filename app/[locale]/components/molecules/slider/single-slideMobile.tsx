@@ -17,7 +17,7 @@ const animatedStyles = {
 
 const animatedStylesForButton = {
   initial: {
-    x: "35%",
+    x: "15%",
     opacity: 0,
   },
   animate: {
