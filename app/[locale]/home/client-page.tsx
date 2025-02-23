@@ -132,8 +132,8 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                   <Image
                     src="/service.jpg"
                     alt={"Сервіс"}
-                    width={250}
-                    height={250}
+                    width={isMobile ? 150 : 150}
+                    height={isMobile ? 150 : 150}
                   />
                 </Link>
               </div>
@@ -154,8 +154,8 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                   <Image
                     src="/projection.jpg"
                     alt={"Проектування"}
-                    width={250}
-                    height={250}
+                    width={isMobile ? 150 : 250}
+                    height={isMobile ? 150 : 150}
                   />
                 </Link>
               </div>
