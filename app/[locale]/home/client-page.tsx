@@ -38,7 +38,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
           </h2>
 
           <div
-            className="flex flex-1 flex-col justify-end items-center self-center sm:flex-row"
+            className="flex flex-1 flex-col justify-end items-center self-center sm:flex-row min-w-[300px]"
             style={{ width: "85%", maxWidth: "1400px" }}
           >
             <div className={"text-2xl text-blue-800"}>
@@ -89,7 +89,8 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 {t("integrated4")}
               </div>
             </div>
-            <div>
+            <div
+              className="min-w-[400px] w-full h-auto">
               <MapOfUkraine locale={locale} />
             </div>
           </div>
@@ -139,7 +140,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
               </div>
             </div>
           </div>
-          <div className="flex flex-col self-end" style={{ maxWidth: "1050px", width:"100%" }}>
+          <div className="flex flex-col self-end" style={{ maxWidth: "1050px", width: "100%" }}>
             <div
               className={classNames(
                 "self-end mt-10 sm:mr-5 mr-2",
@@ -191,68 +192,28 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
           >
             {t("partners").toUpperCase()}
           </div>
-          <div className="flex flex-1 flex-row justify-center items-center valign-middle bg-white w-full max-w-[1400px]">
-            <div className={classNames("m-2 sm:m-10", styles["block-partners"])}>
-              <Link href="https://www.draeger.com"
-                target="_blank">
-                <Image
-                  className={styles.img}
-                  src="/logo-partners/dreger-log-partner.jpg"
-                  width={isMobile ? 54 : 150}
-                  height={isMobile ? 54 : 150}
-                  alt="Logo DM-Project"
-                />
-              </Link>
-            </div>
-            <div className={classNames("m-3 sm:m-10", styles["block-partners"])}>
-              <Link href="https://www.prohs.pt/en/home/"
-                target="_blank">
-                <Image
-                  className={styles.img}
-                  src="/logo-partners/prohs-log-partner.png"
-                  width={isMobile ? 54 : 150}
-                  height={isMobile ? 54 : 150}
-                  alt="Logo Prohs"
-                />
-              </Link>
-            </div>
-            <div className={classNames("m-3 sm:m-10", styles["block-partners"])}>
-              <Link href="https://www.at-os.com"
-                target="_blank">
-                <Image
-                  className={styles.img}
-                  src="/logo-partners/atos-log-partner.jpg"
-                  width={isMobile ? 54 : 150}
-                  height={isMobile ? 54 : 150}
-                  alt="Logo AT-OS"
-                />
-              </Link>
-            </div>
-            <div className={classNames("m-3 sm:m-10", styles["block-partners"])}>
-              <Link href="https://www.lojer.com"
-                target="_blank">
-                <Image
-                  className={styles.img}
-                  src="/logo-partners/lojer-log-partner.jpg"
-                  width={isMobile ? 54 : 150}
-                  height={isMobile ? 54 : 150}
-                  alt="Logo Lojer"
-                />
-              </Link>
-            </div>
-            <div className={classNames("m-3 sm:m-10", styles["block-partners"])}>
-              <Link href="http://renosem.com"
-                target="_blank">
-                <Image
-                  className={styles.img}
-                  src="/logo-partners/renosem-log-partner.jpg"
-                  width={isMobile ? 54 : 150}
-                  height={isMobile ? 54 : 150}
-                  alt="Logo Renosem"
-                />
-              </Link>
-            </div>
+          <div className="flex justify-center items-center bg-white w-full max-w-[1000px] gap-4 sm:gap-10">
+            {[
+              { href: "https://www.draeger.com", src: "/logo-partners/dreger-log-partner.jpg", alt: "Logo DM-Project" },
+              { href: "https://www.prohs.pt/en/home/", src: "/logo-partners/prohs-log-partner.png", alt: "Logo Prohs" },
+              { href: "https://www.at-os.com", src: "/logo-partners/atos-log-partner.jpg", alt: "Logo AT-OS" },
+              { href: "https://www.lojer.com", src: "/logo-partners/lojer-log-partner.jpg", alt: "Logo Lojer" },
+              { href: "http://renosem.com", src: "/logo-partners/renosem-log-partner.jpg", alt: "Logo Renosem" }
+            ].map(({ href, src, alt }, index) => (
+              <div key={index} className="flex-1 min-w-[54px] max-w-[200px]">
+                <Link href={href} target="_blank">
+                  <Image
+                    className="w-full h-auto"
+                    src={src}
+                    width={200}
+                    height={200}
+                    alt={alt}
+                  />
+                </Link>
+              </div>
+            ))}
           </div>
+
         </div>
       </div>
     </MainLayout>

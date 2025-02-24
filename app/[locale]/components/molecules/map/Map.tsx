@@ -90,8 +90,9 @@ const MapOfUkraine = ({ locale }: { locale: string }) => {
 
       <div className="relative w-full flex justify-center">
         <><motion.svg
-          width="700px"
-          height="480px"
+          max-width="700px"
+          width="100%"
+          height="auto"
           viewBox="0.6875 0.6875 700 480"
           onHoverStart={() => {
             setIsHovering(true);
