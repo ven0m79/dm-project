@@ -151,7 +151,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
               {t("projectings")}
             </div>
             <div className="flex flex-1 flex-row">
-              <div className="pl-2">
+              <div className="pr-2">
                 <Link href={"/projects"}>
                   <Image
                     src="/projection.jpg"
@@ -165,7 +165,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 <Link href={"/projects"}>
                   <div
                     className={classNames(
-                      "p-4 text-justify",
+                      "p-2 text-justify  mt-10 sm:mr-5 mr-2",
                       styles["serviceText"],
                     )}
                   >
@@ -194,26 +194,26 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
             {t("partners").toUpperCase()}
           </div>
           <div className="flex flex-wrap justify-center items-center bg-white w-[90%] max-w-[1000px] gap-1 sm:gap-10">
-  {[
-    { href: "https://www.draeger.com", src: "/logo-partners/dreger-log-partner.jpg", alt: "Logo DM-Project" },
-    { href: "https://www.prohs.pt/en/home/", src: "/logo-partners/prohs-log-partner.png", alt: "Logo Prohs" },
-    { href: "https://www.at-os.com", src: "/logo-partners/atos-log-partner.jpg", alt: "Logo AT-OS" },
-    { href: "https://www.lojer.com", src: "/logo-partners/lojer-log-partner.jpg", alt: "Logo Lojer" },
-    { href: "http://renosem.com", src: "/logo-partners/renosem-log-partner.jpg", alt: "Logo Renosem" }
-  ].map(({ href, src, alt }, index) => (
-    <div key={index} className="flex-1 min-w-[60px] max-w-[120px] sm:max-w-[200px]">
-      <Link href={href} target="_blank">
-        <Image
-          className="w-full h-auto"
-          src={src}
-          width={200}
-          height={200}
-          alt={alt}
-        />
-      </Link>
-    </div>
-  ))}
-</div>
+            {[
+              { href: "https://www.draeger.com", src: "/logo-partners/dreger-log-partner.jpg", alt: "Logo DM-Project" },
+              { href: "https://www.prohs.pt/en/home/", src: "/logo-partners/prohs-log-partner.png", alt: "Logo Prohs" },
+              { href: "https://www.at-os.com", src: "/logo-partners/atos-log-partner.jpg", alt: "Logo AT-OS" },
+              { href: "https://www.lojer.com", src: "/logo-partners/lojer-log-partner.jpg", alt: "Logo Lojer" },
+              { href: "http://renosem.com", src: "/logo-partners/renosem-log-partner.jpg", alt: "Logo Renosem" }
+            ].map(({ href, src, alt }, index) => (
+              <div key={index} className="flex-1 min-w-[60px] max-w-[120px] sm:max-w-[200px]">
+                <Link href={href} target="_blank">
+                  <Image
+                    className="w-full h-auto"
+                    src={src}
+                    width={200}
+                    height={200}
+                    alt={alt}
+                  />
+                </Link>
+              </div>
+            ))}
+          </div>
 
 
         </div>
