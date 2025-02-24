@@ -58,7 +58,7 @@ const MapOfUkraine = ({ locale }: { locale: string }) => {
 
   return (
     <>{isMobile ?
-      <div className="relative w-screen flex justify-center flex-col px-2">
+      <div className="relative w-full flex justify-center flex-col px-2">
         <><motion.svg
           width="100%"
           height="auto"

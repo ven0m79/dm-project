@@ -89,10 +89,11 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 {t("integrated4")}
               </div>
             </div>
-            <div
-              className="min-w-[400px] w-full h-auto">
-              <MapOfUkraine locale={locale} />
-            </div>
+            <div className="flex justify-center items-center w-full">
+  <div className="min-w-[380px] max-w-full h-auto flex justify-center">
+    <MapOfUkraine locale={locale} />
+  </div>
+</div>
           </div>
         </div>
 
@@ -192,7 +193,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
           >
             {t("partners").toUpperCase()}
           </div>
-          <div className="flex justify-center items-center bg-white w-full max-w-[1000px] gap-4 sm:gap-10">
+          <div className="flex justify-center items-center bg-white w-[90%] max-w-[1000px] gap-5 sm:gap-10">
             {[
               { href: "https://www.draeger.com", src: "/logo-partners/dreger-log-partner.jpg", alt: "Logo DM-Project" },
               { href: "https://www.prohs.pt/en/home/", src: "/logo-partners/prohs-log-partner.png", alt: "Logo Prohs" },
@@ -200,7 +201,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
               { href: "https://www.lojer.com", src: "/logo-partners/lojer-log-partner.jpg", alt: "Logo Lojer" },
               { href: "http://renosem.com", src: "/logo-partners/renosem-log-partner.jpg", alt: "Logo Renosem" }
             ].map(({ href, src, alt }, index) => (
-              <div key={index} className="flex-1 min-w-[50px] max-w-[200px]">
+              <div key={index} className="flex-1 min-w-[60px] max-w-[200px]">
                 <Link href={href} target="_blank">
                   <Image
                     className="w-full h-auto"
