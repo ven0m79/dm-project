@@ -107,10 +107,14 @@ li {
 
 @media (max-width: 640px) {
   .singleLink:hover {
+    position: absolute;
+    bottom: 30px;  /* Смещение вниз */
+    left: 10px;    /* Смещение влево */
     font-size: 14px;
     /* border: 1px solid red; */
     width: 150px;
     height: 25px;
     padding: 5px;
+  
   }
 }
