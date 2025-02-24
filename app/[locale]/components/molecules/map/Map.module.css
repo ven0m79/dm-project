@@ -28,8 +28,8 @@
   .info-section {
     font-size: large;
     color: #f6dd97;
-    width: 100vw;
-    height: 80px;
+    /* width: 100vw; */
+    height: auto;
     background-color: #0061AA;
     border-radius: 10px;
   }

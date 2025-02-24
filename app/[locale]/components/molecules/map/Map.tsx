@@ -58,7 +58,7 @@ const MapOfUkraine = ({ locale }: { locale: string }) => {
 
   return (
     <>{isMobile ?
-      <div className="relative w-full flex justify-center flex-col px-2">
+      <div className="relative w-full flex justify-center flex-col">
         <><motion.svg
           width="100%"
           height="auto"
@@ -74,7 +74,7 @@ const MapOfUkraine = ({ locale }: { locale: string }) => {
           {selectedItem && (
             <div
               className={classNames(
-                "mt-4 min-w-full max-w-[90%] rounded-lg shadow-md text-center",
+                "mt-4 w-full max-w-[100%] bg-gray-900 rounded-lg shadow-md text-center py-2",
                 classes["info-section"]
               )}
             >
