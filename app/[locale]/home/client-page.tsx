@@ -192,14 +192,14 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
             {t("partners").toUpperCase()}
           </div>
           <div className="flex flex-1 flex-row justify-center items-center valign-middle bg-white w-full max-w-[1400px]">
-            <div className={classNames("m-3 sm:m-10", styles["block-partners"])}>
+            <div className={classNames("m-2 sm:m-10", styles["block-partners"])}>
               <Link href="https://www.draeger.com"
                 target="_blank">
                 <Image
                   className={styles.img}
                   src="/logo-partners/dreger-log-partner.jpg"
-                  width={isMobile ? 55 : 150}
-                  height={isMobile ? 55 : 150}
+                  width={isMobile ? 54 : 150}
+                  height={isMobile ? 54 : 150}
                   alt="Logo DM-Project"
                 />
               </Link>
@@ -210,8 +210,8 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 <Image
                   className={styles.img}
                   src="/logo-partners/prohs-log-partner.png"
-                  width={isMobile ? 55 : 150}
-                  height={isMobile ? 55 : 150}
+                  width={isMobile ? 54 : 150}
+                  height={isMobile ? 54 : 150}
                   alt="Logo Prohs"
                 />
               </Link>
@@ -222,8 +222,8 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 <Image
                   className={styles.img}
                   src="/logo-partners/atos-log-partner.jpg"
-                  width={isMobile ? 55 : 150}
-                  height={isMobile ? 55 : 150}
+                  width={isMobile ? 54 : 150}
+                  height={isMobile ? 54 : 150}
                   alt="Logo AT-OS"
                 />
               </Link>
@@ -234,8 +234,8 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 <Image
                   className={styles.img}
                   src="/logo-partners/lojer-log-partner.jpg"
-                  width={isMobile ? 55 : 150}
-                  height={isMobile ? 55 : 150}
+                  width={isMobile ? 54 : 150}
+                  height={isMobile ? 54 : 150}
                   alt="Logo Lojer"
                 />
               </Link>
@@ -246,8 +246,8 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 <Image
                   className={styles.img}
                   src="/logo-partners/renosem-log-partner.jpg"
-                  width={isMobile ? 55 : 150}
-                  height={isMobile ? 55 : 150}
+                  width={isMobile ? 54 : 150}
+                  height={isMobile ? 54 : 150}
                   alt="Logo Renosem"
                 />
               </Link>
