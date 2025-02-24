@@ -74,7 +74,7 @@ const MapOfUkraine = ({ locale }: { locale: string }) => {
           {selectedItem && (
             <div
               className={classNames(
-                "mt-4 w-full max-w-full bg-gray-900 rounded-lg shadow-md text-center",
+                "mt-4 min-w-full max-w-[90%] rounded-lg shadow-md text-center",
                 classes["info-section"]
               )}
             >
