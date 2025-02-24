@@ -73,7 +73,7 @@ li {
   list-style-type: none;
 }
 
-/* Исправление для .singleLink */
+
 .singleLink {
   display: flex;
   flex-direction: column;
@@ -85,10 +85,10 @@ li {
   padding: 10px;
   align-items: center;
   justify-content: center;
-  position: absolute !important;  /* Гарантирует, что остается absolute */
+  position: absolute !important;  
   bottom: 30px;
   left: 10px;
-  z-index: 10; /* Увеличивает приоритет слоя */
+  z-index: 10; 
 }
 
 @media (max-width: 640px) {
@@ -100,12 +100,12 @@ li {
   }
 }
 
-/* Стили для hover */
+
 .singleLink:hover {
   filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
 }
 
-/* Гарантия, что .singleLink всегда будет absolute */
+
 @media (max-width: 640px) {
   .singleLink,
   .singleLink:hover {
