@@ -193,7 +193,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
           >
             {t("partners").toUpperCase()}
           </div>
-          <div className="flex flex-wrap justify-center items-center bg-white w-[90%] max-w-[1000px] gap-5 sm:gap-10">
+          <div className="flex flex-wrap justify-center items-center bg-white w-[90%] max-w-[1000px] gap-1 sm:gap-10">
   {[
     { href: "https://www.draeger.com", src: "/logo-partners/dreger-log-partner.jpg", alt: "Logo DM-Project" },
     { href: "https://www.prohs.pt/en/home/", src: "/logo-partners/prohs-log-partner.png", alt: "Logo Prohs" },
