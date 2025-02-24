@@ -109,7 +109,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
           <br />
           <br />
           {/*Сервіс та Проєктування*/}
-          {/* <div className="flex flex-col" style={{ width: "100%", maxWidth: "1400px" }}>
+          <div className="flex flex-col" style={{ width: "100%", maxWidth: "1400px" }}>
             <div
               className={classNames(
                 "flex flex-1 flex-col font-bold pl-2",
@@ -140,8 +140,8 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 </Link>
               </div>
             </div>
-          </div> */}
-          {/* <div className="flex flex-col self-end" style={{ maxWidth: "1050px", width: "100%" }}>
+          </div>
+          <div className="flex flex-col self-end" style={{ maxWidth: "1050px", width: "100%" }}>
             <div
               className={classNames(
                 "self-end mt-10 sm:mr-5 mr-2",
@@ -180,7 +180,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 </Link>
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
         <br />
 
