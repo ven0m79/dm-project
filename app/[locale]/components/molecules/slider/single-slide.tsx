@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const animatedStyles = {
   initial: {
-    x: "5%",
+    x: "15%",
     opacity: 0,
   },
   animate: {

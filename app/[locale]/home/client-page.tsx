@@ -198,8 +198,8 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 <Image
                   className={styles.img}
                   src="/logo-partners/dreger-log-partner.jpg"
-                  width={isMobile ? 50 : 150}
-                  height={isMobile ? 50 : 150}
+                  width={isMobile ? 80 : 150}
+                  height={isMobile ? 80 : 150}
                   alt="Logo DM-Project"
                 />
               </Link>
@@ -210,8 +210,8 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 <Image
                   className={styles.img}
                   src="/logo-partners/prohs-log-partner.png"
-                  width={isMobile ? 50 : 150}
-                  height={isMobile ? 50 : 150}
+                  width={isMobile ? 80 : 150}
+                  height={isMobile ? 80 : 150}
                   alt="Logo Prohs"
                 />
               </Link>
@@ -222,8 +222,8 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 <Image
                   className={styles.img}
                   src="/logo-partners/atos-log-partner.jpg"
-                  width={isMobile ? 50 : 150}
-                  height={isMobile ? 50 : 150}
+                  width={isMobile ? 80 : 150}
+                  height={isMobile ? 80 : 150}
                   alt="Logo AT-OS"
                 />
               </Link>
@@ -234,8 +234,8 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 <Image
                   className={styles.img}
                   src="/logo-partners/lojer-log-partner.jpg"
-                  width={isMobile ? 50 : 150}
-                  height={isMobile ? 50 : 150}
+                  width={isMobile ? 80 : 150}
+                  height={isMobile ? 80 : 150}
                   alt="Logo Lojer"
                 />
               </Link>
@@ -246,8 +246,8 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 <Image
                   className={styles.img}
                   src="/logo-partners/renosem-log-partner.jpg"
-                  width={isMobile ? 50 : 150}
-                  height={isMobile ? 50 : 150}
+                  width={isMobile ? 80 : 150}
+                  height={isMobile ? 80 : 150}
                   alt="Logo Renosem"
                 />
               </Link>
