@@ -200,7 +200,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
               { href: "https://www.lojer.com", src: "/logo-partners/lojer-log-partner.jpg", alt: "Logo Lojer" },
               { href: "http://renosem.com", src: "/logo-partners/renosem-log-partner.jpg", alt: "Logo Renosem" }
             ].map(({ href, src, alt }, index) => (
-              <div key={index} className="flex-1 min-w-[54px] max-w-[200px]">
+              <div key={index} className="flex-1 min-w-[50px] max-w-[200px]">
                 <Link href={href} target="_blank">
                   <Image
                     className="w-full h-auto"
