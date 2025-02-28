@@ -9,7 +9,8 @@
 
 @media (max-width: 640px) {
     .subCatalog {
-        border: 1px solid green;  
+        margin-top: 20px;
+        /* border: 1px solid green;   */
     }
 }
 .subMenu {

@@ -20,11 +20,12 @@ const Content: FC<{
 }> = ({ children, locale }) => {
   const { getData } = useContext(SidebarContext) as SidebarContextProps;
   const isMobile = useIsMobile();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false);
+  const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false);
 
   // Блокировка скролла фона при открытом окне
   useEffect(() => {
-    if (isOpen) {
+    if (isLeftSidebarOpen || isRightSidebarOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -32,7 +33,7 @@ const Content: FC<{
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [isOpen]);
+  }, [isLeftSidebarOpen, isRightSidebarOpen]);
 
   useEffect(() => {
     getData(locale);
@@ -49,10 +50,10 @@ const Content: FC<{
         <>
           {/* Кнопка для открытия бокового меню */}
           <button
-            className="fixed top-4 left-4 z-50 bg-blue-500 text-white p-2 rounded-md"
-            onClick={() => setIsOpen(true)}
+            className="fixed top-52 left-2 z-50 bg-blue-500 text-white p-2 rounded-md"
+            onClick={() => setIsLeftSidebarOpen(true)}
           >
-            ☰ Меню
+            ☰ Каталог по типу призначення
           </button>
 
           {/* Всплывающее меню */}
@@ -60,14 +61,14 @@ const Content: FC<{
             drag="x"
             dragConstraints={{ left: 0, right: 200 }} // Можно немного потянуть влево
             initial={{ x: "-100%" }} // Начальное состояние (спрятано слева)
-            animate={{ x: isOpen ? "0%" : "-100%" }} // Анимация открытия/закрытия
+            animate={{ x: isLeftSidebarOpen ? "0%" : "-100%" }} // Анимация открытия/закрытия
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             className="fixed top-0 left-0 w-full h-full bg-white shadow-lg z-50 cursor-grab active:cursor-grabbing overflow-y-auto"
           >
             {/* Кнопка закрытия */}
             <button
               className="absolute top-4 right-4 text-xl text-slate-800"
-              onClick={() => setIsOpen(false)}
+              onClick={() => setIsLeftSidebarOpen(false)}
             >
               ✕
             </button>
@@ -79,10 +80,10 @@ const Content: FC<{
           </motion.div>
 
           {/* Затемнение фона при открытом меню */}
-          {isOpen && (
+          {isLeftSidebarOpen && (
             <div
               className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-30"
-              onClick={() => setIsOpen(false)}
+              onClick={() => setIsLeftSidebarOpen(false)}
             />
           )}
         </>
@@ -96,7 +97,46 @@ const Content: FC<{
       <div className="w-full">{children}</div>
 
       {typeof window !== "undefined" && isMobile ?
-        null
+        <>
+        {/* Кнопка для открытия бокового меню */}
+        <button
+          className="fixed top-64 right-2 z-50 bg-blue-500 text-white p-2 rounded-md"
+          onClick={() => setIsRightSidebarOpen(true)}
+        >
+          ☰ Каталог по типу обладнання
+        </button>
+
+        {/* Всплывающее меню */}
+        <motion.div
+          drag="x"
+          dragConstraints={{ left: 0, right: 200 }} // Можно немного потянуть влево
+          initial={{ x: "-100%" }} // Начальное состояние (спрятано слева)
+          animate={{ x: isRightSidebarOpen ? "0%" : "-100%" }} // Анимация открытия/закрытия
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          className="fixed top-0 left-0 w-full h-full bg-white shadow-lg z-50 cursor-grab active:cursor-grabbing overflow-y-auto"
+        >
+          {/* Кнопка закрытия */}
+          <button
+            className="absolute top-4 right-4 text-xl text-slate-800"
+            onClick={() => setIsRightSidebarOpen(false)}
+          >
+            ✕
+          </button>
+
+          {/* Контент внутри окна */}
+          <div className="p-4">
+            <RSidebar locale={locale} changeURLParams />
+          </div>
+        </motion.div>
+
+        {/* Затемнение фона при открытом меню */}
+        {isRightSidebarOpen && (
+          <div
+            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-30"
+            onClick={() => setIsRightSidebarOpen(false)}
+          />
+        )}
+      </>
         :
         <div className="w-[300px]">
           {/* Компонента1 */}
