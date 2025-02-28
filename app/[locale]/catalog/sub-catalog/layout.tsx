@@ -107,7 +107,7 @@ const Content: FC<{
         </button>
 
         {/* Всплывающее меню */}
-        <motion.div
+         <motion.div
           drag="x"
           dragConstraints={{ left: 0, right: 200 }} // Можно немного потянуть влево
           initial={{ x: "-100%" }} // Начальное состояние (спрятано слева)
