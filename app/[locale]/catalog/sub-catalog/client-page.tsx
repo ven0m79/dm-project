@@ -122,7 +122,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                 <div
                   key={el.id}
                   className={classNames(
-                    "mx-5 mb-5 flex flex-col justify-center items-center",
+                    "mx-1 mb-5 flex flex-col justify-center items-center",
                     styles.headSubCatalogBlock,
                   )}
                 >
