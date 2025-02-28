@@ -144,23 +144,3 @@ const MobileNav: FC<{}> = ({ }) => {
 }
 
 export default MobileNav;
-
-
-
-
-
-
-
-
-
-// Object.keys(NavLinks).map((el) => (
-//         <li
-//             key={el}
-//             className={classNames("text-[10px] sm:text-[12px] xl:text-[16px]", styles["link"], {
-//                 [styles["active"]]: pathname === '/lll' ? pathname === NavLinks[el].link : pathname.includes(NavLinks[el].link),
-//             })}
-//         >
-//             <Link href={NavLinks[el].link}>{t(NavLinks[el].title)}</Link>
-//         </li>
-//     ))
-

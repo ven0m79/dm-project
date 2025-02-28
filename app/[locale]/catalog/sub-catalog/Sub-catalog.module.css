@@ -3,10 +3,17 @@
     max-width: 1400px;
     min-width: none;
     align-content: center;
-    
-    /* border: 1px solid red; */
+    height: auto;
+    flex-grow: 1;
+    border: 1px solid red; 
 }
 
+@media (max-width: 640px) {
+    .subCatalog {
+        border: 1px solid green;  
+        flex-grow: 1;
+    }
+}
 .subMenu {
     border-radius: 10px;
     /* border: 1px solid blue; */
@@ -68,6 +75,11 @@
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     border-radius: 10px;
 }
+@media (max-width: 640px) {
+    .headSubCatalogBlock {
+        width: 132px;
+  }
+}
 .headSubCatalogBlockMini {
     font-size: 12px;
     color: black;
@@ -77,4 +89,12 @@
     width: 142px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     border-radius: 10px;
+}
+@media (max-width: 640px) {
+    .headSubCatalogBlockMini {
+        width: 108px;
+        font-size: 10px;
+        
+
+  }
 }

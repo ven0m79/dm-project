@@ -28,7 +28,6 @@
     align-self: center;
 
     @media (max-width: 640px) {
-        height: 120px;
         /* border: 1px solid blue; */
     }
 }
