@@ -57,12 +57,12 @@ const Content: FC<{
 
           {/* Всплывающее меню */}
           <motion.div
-            drag="y"
-            dragConstraints={{ top: 0, bottom: 300 }} // Можно немного потянуть вниз
-            initial={{ y: "100%" }} // Начальное состояние (скрыто)
-            animate={{ y: isOpen ? "0%" : "100%" }} // Анимация открытия/закрытия
+            drag="x"
+            dragConstraints={{ left: 0, right: 200 }} // Можно немного потянуть влево
+            initial={{ x: "-100%" }} // Начальное состояние (спрятано слева)
+            animate={{ x: isOpen ? "0%" : "-100%" }} // Анимация открытия/закрытия
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed top-0 left-0 w-full h-full bg-white shadow-lg z-40 cursor-grab active:cursor-grabbing overflow-y-auto"
+            className="fixed top-0 left-0 w-full h-full bg-white shadow-lg z-50 cursor-grab active:cursor-grabbing overflow-y-auto"
           >
             {/* Кнопка закрытия */}
             <button
