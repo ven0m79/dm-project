@@ -9,11 +9,8 @@ import MapOfUkraine from "@app/[locale]/components/molecules/map/Map";
 import Link from "next/link";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-
 import styles from "./Home.module.css";
 import { useIsMobile } from "../components/hooks/useIsMobile";
-
-
 
 export const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
   const t = useTranslations("Index");
@@ -96,7 +93,6 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
             </div>
           </div>
         </div>
-
         <div
           className={classNames(
             "font-bold flex flex-1 flex-col text-slate-900 justify-center items-center m-auto py-7",
@@ -214,8 +210,6 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
               </div>
             ))}
           </div>
-
-
         </div>
       </div>
     </MainLayout>
