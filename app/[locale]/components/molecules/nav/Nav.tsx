@@ -58,7 +58,7 @@ const Nav = () => {
   return (
     <>
       {typeof window !== "undefined" && isMobile ?
-        <nav className={classNames("flex-1 w-screen justify-center max-h-[50px] hidden", styles["navigation"])}>
+        <nav className={classNames("max-h-[0px]", styles["navigation"])}>
           <MobileNav />
         </nav>
         :

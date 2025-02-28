@@ -4,7 +4,7 @@
     min-width: none;
     align-content: center;
     height: auto;
-    border: 1px solid red; 
+    /* border: 1px solid red;  */
 }
 
 @media (max-width: 640px) {
