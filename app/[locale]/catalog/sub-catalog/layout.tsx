@@ -100,7 +100,7 @@ const Content: FC<{
         <>
         {/* Кнопка для открытия бокового меню */}
         <button
-          className="fixed top-64 right-2 z-50 bg-blue-500 text-white p-2 rounded-md"
+          className="fixed top-64 left-2 z-50 bg-blue-500 text-white p-2 rounded-md"
           onClick={() => setIsRightSidebarOpen(true)}
         >
           ☰ Каталог по типу обладнання
