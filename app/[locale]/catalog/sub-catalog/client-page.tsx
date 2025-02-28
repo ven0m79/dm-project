@@ -73,7 +73,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
     <>
       {typeof window !== "undefined" && isMobile ?
         <div
-        style={{ minHeight: "100dvh", height: selectedProducts.length > 2 ? "auto" : "100dvh" }}
+        
         className={classNames(
           "flex flex-1 flex-row justify-between self-center mb-5",
           styles.subCatalog,

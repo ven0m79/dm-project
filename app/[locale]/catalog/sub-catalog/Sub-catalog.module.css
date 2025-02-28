@@ -4,14 +4,12 @@
     min-width: none;
     align-content: center;
     height: auto;
-    flex-grow: 1;
     border: 1px solid red; 
 }
 
 @media (max-width: 640px) {
     .subCatalog {
         border: 1px solid green;  
-        flex-grow: 1;
     }
 }
 .subMenu {

@@ -36,16 +36,6 @@ export default function RootLayout({
   unstable_setRequestLocale(locale);
   const messages = useMessages();
 
-  const seoConfig = {
-    ...defaultSEOConfig,
-    openGraph: {
-      ...defaultSEOConfig.openGraph,
-      locale: locale === "ua" ? "ua_UA" : "en_US", // Установка языка.
-      url: `https://dm-project.com.ua`, // Динамическое URL.
-    },
-  };
-
-
   return (
     <html lang={locale}>
       <body
@@ -56,7 +46,6 @@ export default function RootLayout({
       >
         <main className="flex flex-1 flex-col items-center justify-center gap-12 w-100% bg-white">
           <NextIntlClientProvider locale={locale} messages={messages}>
-            {/* <DefaultSeo {...seoConfig} /> */}
             {children}
           </NextIntlClientProvider>
         </main>
