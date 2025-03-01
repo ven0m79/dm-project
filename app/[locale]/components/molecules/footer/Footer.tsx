@@ -22,7 +22,7 @@ const Footer = () => {
   return (
     <footer
       className={classNames(
-        "mt-auto flex flex-1 flex-col justify-center items-center w-screen",
+        "mt-auto flex flex-1 flex-col justify-center items-center w-screen bottom-0",
         styles["footer"],
       )}
     >
