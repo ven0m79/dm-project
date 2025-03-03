@@ -23,15 +23,18 @@ const Content: FC<{
   const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false);
   const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false);
 
-  // Блокировка скролла фона при открытом окне
   useEffect(() => {
+    document.body.style.overflowX = "hidden"; // Убираем горизонтальный скроллбар всегда
+  
     if (isLeftSidebarOpen || isRightSidebarOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflowY = "hidden"; // Блокируем вертикальный скролл при открытых сайдбарах
     } else {
-      document.body.style.overflow = "auto";
+      document.body.style.overflowY = "auto"; // Возвращаем вертикальный скролл
     }
+  
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflowX = "hidden";
+      document.body.style.overflowY = "auto";
     };
   }, [isLeftSidebarOpen, isRightSidebarOpen]);
 
@@ -42,7 +45,7 @@ const Content: FC<{
   return (
     <div
       className={classNames(
-        "flex flex-1 flex-row justify-between self-center mb-5 mt-5",
+        "flex flex-1 flex-row justify-between self-center mb-5 mt-5 mx-2",
         styles.subCatalog,
       )}
     >
@@ -59,9 +62,9 @@ const Content: FC<{
           {/* Всплывающее меню */}
           <motion.div
             drag="x"
-            dragConstraints={{ left: 0, right: 200 }} // Можно немного потянуть влево
-            initial={{ x: "-100%" }} // Начальное состояние (спрятано слева)
-            animate={{ x: isLeftSidebarOpen ? "0%" : "-100%" }} // Анимация открытия/закрытия
+            dragConstraints={{ left: 0, right: 200 }} 
+            initial={{ x: "-100%" }} 
+            animate={{ x: isLeftSidebarOpen ? "0%" : "-100%" }} 
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             className="fixed top-0 left-0 w-full h-full bg-white shadow-lg z-50 cursor-grab active:cursor-grabbing overflow-y-auto"
           >
@@ -94,7 +97,7 @@ const Content: FC<{
       )}
 
       {/* Основное содержимое */}
-      <div className="w-full">{children}</div>
+      <div className="w-screen">{children}</div>
 
       {typeof window !== "undefined" && isMobile ?
         <>

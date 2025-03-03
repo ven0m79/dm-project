@@ -7,12 +7,11 @@ import { useTranslations } from "next-intl";
 import { useNavigateTo } from "@app/[locale]/components/hooks/useNavigateTo";
 import styles from "./Footer.module.css";
 
-import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 
 const DesktopFooter: FC<{}> = ({ }) => {
     const { navigateWithDelay } = useNavigateTo();
     const t = useTranslations("Footer");
-    const isMobile = useIsMobile();
+    
 
     return (
         <><div className={styles.footerContainer}>

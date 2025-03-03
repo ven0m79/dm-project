@@ -28,7 +28,7 @@ const MainLayout: FC<MainLayoutProps> = ({
     <Suspense fallback="Loading">
       <main className={styles.main}>
         {noHeader ? null : <Header />}
-        {noNav ? null : <Nav />}
+        {noNav ? null : <Nav /> }
         {children}
         {noFooter ? null : <Footer />}
       </main>

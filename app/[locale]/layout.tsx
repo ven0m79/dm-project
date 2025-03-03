@@ -44,7 +44,7 @@ export default function RootLayout({
           inter.className,
         )}
       >
-        <main className="flex flex-1 flex-col items-center justify-center gap-12 w-100% bg-white">
+        <main className="flex flex-1 flex-col items-center justify-center gap-12 w-full bg-white">
           <NextIntlClientProvider locale={locale} messages={messages}>
             {children}
           </NextIntlClientProvider>

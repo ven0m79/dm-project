@@ -165,7 +165,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
             styles.subCatalog,
           )}
         >
-          <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-5 w-full items-start">
+          <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-5 w-full max-w-[800px] items-start">
             {selectedProducts && selectedProducts.length ? (
               selectedProducts.map((el) => {
                 return isAccessories[0] ? (

@@ -13,7 +13,6 @@
         /* border: 1px solid green;   */
     }
 }
-
 .subMenu {
     border-radius: 10px;
     /* border: 1px solid blue; */
@@ -31,7 +30,6 @@
     padding-bottom: 5px;
     padding-left: 15px;
 }
-
 .subCollapse:hover {
     background-color: #0060aa10;
     border-radius: 10px;
@@ -67,7 +65,6 @@
     padding-top: 5px;
     font-size: 18px;
 }
-
 .headSubCatalogBlock {
     color: black;
     display: flex;
@@ -77,13 +74,11 @@
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     border-radius: 10px;
 }
-
 @media (max-width: 640px) {
     .headSubCatalogBlock {
         width: 160px;
-    }
+  }
 }
-
 .headSubCatalogBlockMini {
     font-size: 12px;
     color: black;
@@ -94,24 +89,23 @@
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     border-radius: 10px;
 }
-
 @media (max-width: 640px) {
     .headSubCatalogBlockMini {
         width: 108px;
         font-size: 10px;
+        
 
-
-    }
+  }
 }
 
-.buttons {
+.buttons{
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     border-radius: 10px;
 }
-
 @media (max-width: 640px) {
     .buttons {
         box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
         border-radius: 10px;
-    }
+        
+  }
 }

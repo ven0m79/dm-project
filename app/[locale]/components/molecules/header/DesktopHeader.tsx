@@ -63,17 +63,19 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
             : "";
     }, [searchParams]);
 
-    return <><div className={classNames("w-screen", styles["lang"])}>
-        <div className={styles.langText}>
-            <Link href={`${pathname}${selectedCategory}`} locale="en">
-                EN
-            </Link>
-            {"   "}
-            <Link href={`${pathname}${selectedCategory}`} locale="ua">
-                UA
-            </Link>
+    return <>
+        <div className={classNames("w-screen", styles["lang"])}>
+            <div className={styles.langText}>
+                <Link href={`${pathname}${selectedCategory}`} locale="en">
+                    EN
+                </Link>
+                {"   "}
+                <Link href={`${pathname}${selectedCategory}`} locale="ua">
+                    UA
+                </Link>
+            </div>
         </div>
-    </div><div className={styles.containerWithLogo}>
+        <div className={styles.containerWithLogo}>
             <div className={styles.logo}>
                 <Link href={"/home"}>
                     <Image
