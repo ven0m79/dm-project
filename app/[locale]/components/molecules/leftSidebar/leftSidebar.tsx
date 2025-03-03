@@ -61,7 +61,7 @@ const customTheme: CustomFlowbiteTheme = {
       },
     },
     item: {
-      base: "flex items-center justify-center rounded-lg text-base font-normal text-[#0061AA] hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700",
+      base: "flex items-center justify-center rounded-lg text-base font-normal text-[#0061AA] hover:bg-gray-100",
       active: "text-red-500 bg-gray-100 dark:bg-gray-700",
       collapsed: {
         insideCollapse: "group w-full pl-8 transition duration-75",
