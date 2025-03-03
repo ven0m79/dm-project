@@ -50,7 +50,7 @@ const Content: FC<{
         <>
           {/* Кнопка для открытия бокового меню */}
           <button
-            className={classNames("absolute top-52 left-2 z-30 bg-white text-[#0077d2] p-2 rounded-md", styles.buttons)}
+            className={classNames("absolute top-52 left-2 z-30 bg-white text-[#0061AA] p-2 rounded-md", styles.buttons)}
             onClick={() => setIsLeftSidebarOpen(true)}
           >
             ☰ По призначенню
@@ -100,7 +100,7 @@ const Content: FC<{
         <>
           {/* Кнопка для открытия бокового меню */}
           <button
-            className={classNames("absolute top-52 right-2 z-30 bg-white text-[#0077d2] p-2 rounded-md", styles.buttons)}
+            className={classNames("absolute top-52 right-2 z-30 bg-white text-[#0061AA] p-2 rounded-md", styles.buttons)}
             onClick={() => setIsRightSidebarOpen(true)}
           >
             ☰ Тип обладнання

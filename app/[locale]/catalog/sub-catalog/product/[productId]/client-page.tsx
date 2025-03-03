@@ -16,7 +16,6 @@ import Loader from "@app/[locale]/components/atoms/loader/Loader";
 import { Tabs, CustomFlowbiteTheme } from "flowbite-react";
 import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
-import Seo from "@app/[locale]/components/atoms/seo/Seo";
 import DOMPurify from "dompurify";
 
 const customTheme: CustomFlowbiteTheme = {
@@ -142,7 +141,7 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
       <div className="flex self-center flex-row max-w-[800px] mb-8">
         <div className="flex flex-col p-1 min-h-[600px] flex-1">
           {loading ? (
-            <div className="flex w-screen h-4/5 justify-center items-center">
+            <div className="flex w-full h-4/5 justify-center items-center">
               <Loader />
             </div>
           ) : (
@@ -158,6 +157,7 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                     }}
                   >
                     <div className="flex flex-row w-full">
+                      <div>
                       <div className={classNames("m-4", styles.imageRadius)}>
                         <img
                           src={details?.images[0].src}
@@ -166,7 +166,11 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                           height={475}
                         />
                       </div>
-                      <div className="px-1 pt-28 w-[300px]">
+                      <div>
+
+                      </div>
+                      </div>
+                      <div className="px-1 pt-8 sm:pt-28 w-[300px]">
                         <h1 className={classNames("", styles.title)}>
                           {details?.name}
                         </h1>
@@ -197,7 +201,7 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                               /> */}
                           </>
                         ) : null}
-                        <div className="h-[100px]"></div>
+                        <div className="sm:h-[80px] h-[30px]"></div>
                         <br />
                         <div className="flex flex-col justify-between">
                           <div className={styles.downloadable}>
