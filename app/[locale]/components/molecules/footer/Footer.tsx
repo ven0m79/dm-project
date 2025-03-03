@@ -13,7 +13,7 @@ import DesktopFooter from "./DesktopFooter";
 
 
 const Footer = () => {
-  const { navigateWithDelay } = useNavigateTo();
+
 
   const t = useTranslations("Footer");
   const isMobile = useIsMobile();

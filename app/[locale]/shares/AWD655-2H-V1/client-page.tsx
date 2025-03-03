@@ -20,7 +20,7 @@ const AWD655_2h_v1 = () => {
                     "flex flex-col justify-center mb-5 w-full",
                     [styles.catalogContainerDeeper])}>
                     <p className="text-justify text-[18px] font-bold sm:text-[20px]">{t('shares-awd655-h2-v1-title')}</p>
-                    <p className="text-justify">{t('shares-awd655-h2-v1-prehead')} <span className="font-bold">9 500,00 у.о.</span></p>
+                    <p className="text-justify">{t('shares-awd655-h2-v1-prehead')} <span className="font-bold text-nowrap">9 500,00 у.о.</span></p>
                     <div className="flex flex-col w-full lg:flex-row">
                         <div className="lg:w-1/2 w-full  flex flax-wrap justify-center my-2">
                             <Image
