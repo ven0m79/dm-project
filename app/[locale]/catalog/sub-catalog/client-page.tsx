@@ -80,6 +80,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
         )}
       >
         <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-1 w-full items-start">
+          
           {selectedProducts && selectedProducts.length ? (
             selectedProducts.map((el) => {
               return isAccessories[0] ? (

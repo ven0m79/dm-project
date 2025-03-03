@@ -65,7 +65,7 @@ const MobileNav: FC<{}> = ({ }) => {
 
         <div className="">
             <motion.button
-                className="absolute top-10 right-10 h-10 w-10 rounded-xl bg-[#0061AA]/100 transition-colors"
+                className="absolute top-10 right-5 h-10 w-10 rounded-xl bg-[#0061AA]/100 transition-colors"
                 onClick={() => setIsOpen(!isOpen)}
                 title="Гамбургер основного меню">
                 <motion.span
