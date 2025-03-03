@@ -50,10 +50,10 @@ const Content: FC<{
         <>
           {/* Кнопка для открытия бокового меню */}
           <button
-            className="fixed top-52 left-2 z-50 bg-blue-500 text-white p-2 rounded-md"
+            className={classNames("absolute top-52 left-2 z-30 bg-white text-[#0077d2] p-2 rounded-md", styles.buttons)}
             onClick={() => setIsLeftSidebarOpen(true)}
           >
-            ☰ Каталог по типу призначення
+            ☰ По призначенню
           </button>
 
           {/* Всплывающее меню */}
@@ -98,45 +98,45 @@ const Content: FC<{
 
       {typeof window !== "undefined" && isMobile ?
         <>
-        {/* Кнопка для открытия бокового меню */}
-        <button
-          className="fixed top-64 left-2 z-50 bg-blue-500 text-white p-2 rounded-md"
-          onClick={() => setIsRightSidebarOpen(true)}
-        >
-          ☰ Каталог по типу обладнання
-        </button>
-
-        {/* Всплывающее меню */}
-         <motion.div
-          drag="x"
-          dragConstraints={{ left: 0, right: 200 }} // Можно немного потянуть влево
-          initial={{ x: "-100%" }} // Начальное состояние (спрятано слева)
-          animate={{ x: isRightSidebarOpen ? "0%" : "-100%" }} // Анимация открытия/закрытия
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          className="fixed top-0 left-0 w-full h-full bg-white shadow-lg z-50 cursor-grab active:cursor-grabbing overflow-y-auto"
-        >
-          {/* Кнопка закрытия */}
+          {/* Кнопка для открытия бокового меню */}
           <button
-            className="absolute top-4 right-4 text-xl text-slate-800"
-            onClick={() => setIsRightSidebarOpen(false)}
+            className={classNames("absolute top-52 right-2 z-30 bg-white text-[#0077d2] p-2 rounded-md", styles.buttons)}
+            onClick={() => setIsRightSidebarOpen(true)}
           >
-            ✕
+            ☰ Тип обладнання
           </button>
 
-          {/* Контент внутри окна */}
-          <div className="p-4">
-            <RSidebar locale={locale} changeURLParams />
-          </div>
-        </motion.div>
+          {/* Всплывающее меню */}
+          <motion.div
+            drag="x"
+            dragConstraints={{ left: 0, right: 200 }}
+            initial={{ x: "-100%" }}
+            animate={{ x: isRightSidebarOpen ? "0%" : "-100%" }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="fixed top-0 left-0 w-full h-full bg-white shadow-lg z-50 cursor-grab active:cursor-grabbing overflow-y-auto"
+          >
+            {/* Кнопка закрытия */}
+            <button
+              className="absolute top-4 right-4 text-xl text-slate-800"
+              onClick={() => setIsRightSidebarOpen(false)}
+            >
+              ✕
+            </button>
 
-        {/* Затемнение фона при открытом меню */}
-        {isRightSidebarOpen && (
-          <div
-            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-30"
-            onClick={() => setIsRightSidebarOpen(false)}
-          />
-        )}
-      </>
+            {/* Контент внутри окна */}
+            <div className="p-4">
+              <RSidebar locale={locale} changeURLParams />
+            </div>
+          </motion.div>
+
+          {/* Затемнение фона при открытом меню */}
+          {isRightSidebarOpen && (
+            <div
+              className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-30"
+              onClick={() => setIsRightSidebarOpen(false)}
+            />
+          )}
+        </>
         :
         <div className="w-[300px]">
           {/* Компонента1 */}
