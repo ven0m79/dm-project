@@ -139,11 +139,10 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
 
   return (
     <>
-      <Seo title={SEOData.title} description={SEOData.description} />
       <div className="flex self-center flex-row max-w-[800px] mb-8">
         <div className="flex flex-col p-1 min-h-[600px] flex-1">
           {loading ? (
-            <div className="flex w-[800px] h-[600px] justify-center items-center">
+            <div className="flex w-screen h-4/5 justify-center items-center">
               <Loader />
             </div>
           ) : (
