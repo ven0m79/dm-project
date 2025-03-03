@@ -11,6 +11,7 @@ import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 
 const MobileFooter: FC<{}> = ({ }) => {
     const t = useTranslations("Footer");
+    
 
     return (
         <>

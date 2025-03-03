@@ -1,3 +1,4 @@
+
 import classNames from "classnames";
 import React, { FC } from "react";
 import { Link } from "../../../../../config";
@@ -107,9 +108,10 @@ const DesktopFooter: FC<{}> = ({ }) => {
                 </div>
                 <Link
                     href="/catalog/sub-catalog?category=or-equipment"
-                    onClick={() => {
-                        navigateWithDelay("or-equipment");
-                    }}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        window.location.href = `/catalog/sub-catalog?category=or-equipment`;
+                      }}
                 >
                     <div
                         className={classNames(
@@ -122,9 +124,10 @@ const DesktopFooter: FC<{}> = ({ }) => {
 
                 <Link
                     href="/catalog/sub-catalog?category=icu-equipment"
-                    onClick={() => {
-                        navigateWithDelay("icu-equipment");
-                    }}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        window.location.href = `/catalog/sub-catalog?category=icu-equipment`;
+                      }}
                 >
                     <div
                         className={classNames(
@@ -136,9 +139,10 @@ const DesktopFooter: FC<{}> = ({ }) => {
                 </Link>
                 <Link
                     href="/catalog/sub-catalog?category=neonatal-equipment"
-                    onClick={() => {
-                        navigateWithDelay("neonatal-equipment");
-                    }}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        window.location.href = `/catalog/sub-catalog?category=neonatal-equipment`;
+                      }}
                 >
                     <div
                         className={classNames(
@@ -151,9 +155,10 @@ const DesktopFooter: FC<{}> = ({ }) => {
                 {/* додати функцію */}
                 <Link
                     href="/catalog/sub-catalog?category=cleaning-and-desinfecting-equipment"
-                    onClick={() => {
-                        navigateWithDelay("cleaning-and-desinfecting-equipment");
-                    }}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        window.location.href = `/catalog/sub-catalog?category=cleaning-and-desinfecting-equipment`;
+                      }}
                 >
                     <div
                         className={classNames(
@@ -165,9 +170,10 @@ const DesktopFooter: FC<{}> = ({ }) => {
                 </Link>
                 <Link
                     href="/catalog/sub-catalog?category=category=gas-management-systems"
-                    onClick={() => {
-                        navigateWithDelay("gas-management-systems");
-                    }}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        window.location.href = `/catalog/sub-catalog?category=gas-management-systems`;
+                      }}
                 >
                     <div
                         className={classNames(
@@ -179,9 +185,10 @@ const DesktopFooter: FC<{}> = ({ }) => {
                 </Link>
                 <Link
                     href="/catalog/sub-catalog?category=furniture"
-                    onClick={() => {
-                        navigateWithDelay("furniture");
-                    }}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        window.location.href = `/catalog/sub-catalog?category=furniture`;
+                      }}
                 >
                     <div
                         className={classNames(
@@ -193,9 +200,10 @@ const DesktopFooter: FC<{}> = ({ }) => {
                 </Link>
                 <Link
                     href="/catalog/sub-catalog?category=accessories"
-                    onClick={() => {
-                        navigateWithDelay("accessories");
-                    }}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        window.location.href = `/catalog/sub-catalog?category=accessories`;
+                      }}
                 >
                     <div
                         className={classNames(
