@@ -14,7 +14,7 @@ const MobileFooter: FC<{}> = ({ }) => {
 
     return (
         <>
-            <div className="items-center bottom-0 flex flex-1 flex-row justify-around max-h-[100px] mx-2 w-screen bg-black">
+            <div className="items-center bottom-0 flex flex-1 flex-row justify-around max-h-[100px] mx-2 w-screen">
                 <Link
                     href={"/catalog"}
                     className="flex flex-col items-center">
