@@ -91,7 +91,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                     styles.headSubCatalogBlockMini,
                   )}
                 >
-                  <div className="">
+                  <div className="w-full">
                     <Link
                       locale={locale}
                       key={el.id}
@@ -127,7 +127,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                     styles.headSubCatalogBlock,
                   )}
                 >
-                  <div className="">
+                  <div className="w-full">
                     <Link
                       locale={locale}
                       key={el.id}
@@ -140,8 +140,8 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                         <img
                           src={el.images[0].src}
                           alt={el.images[0].alt}
-                          width={200}
-                          height={250}
+                          width={isMobile ? 150 : 200}
+                          height={isMobile ? 150 : 200}
                         />
                       </div>
 
@@ -177,7 +177,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                       styles.headSubCatalogBlockMini,
                     )}
                   >
-                    <div className="">
+                    <div className="w-full text-center">
                       <Link
                         locale={locale}
                         key={el.id}
@@ -186,21 +186,22 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                           query: `category=${selectedCategory}`,
                         }}
                       >
-                        <div>{el.sku}</div>
+                        <div className="truncate w-full px-2">{el.sku}</div>
                         <div
-                          className={"cursor-pointer flex flex-1 justify-center"}
+                          className={"cursor-pointer flex flex-1 justify-center w-full"}
                         >
                           <img
                             src={el.images[0].src}
                             alt={el.images[0].alt}
                             width={130}
                             height={137}
+                            className="object-contain w-full h-auto"
                           />
                           {/* <div className="h-px mt-24 ml-20 text-[16px] flex self-center absolute text-red-500 font-bold">{el.price} $</div> */}
                         </div>
                         <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center"></div>
                         <div className="flex justify-center h-16">
-                          <h3 className="">{el.name} </h3>
+                          <h3 className="truncate text-center">{el.name} </h3>
                         </div>
                       </Link>
                     </div>
@@ -213,7 +214,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                       styles.headSubCatalogBlock,
                     )}
                   >
-                    <div className="">
+                    <div className="w-full text-center">
                       <Link
                         locale={locale}
                         key={el.id}
@@ -228,12 +229,13 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                             alt={el.images[0].alt}
                             width={200}
                             height={250}
+                            className="object-contain w-full h-auto"
                           />
                         </div>
 
                         <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center"></div>
                         <div className="flex justify-center">
-                          <h3 className="flex justify-center h-16">{el.name}</h3>
+                          <h3 className="flex justify-center h-16 truncate w-full px-2">{el.name}</h3>
                         </div>
                       </Link>
                     </div>
