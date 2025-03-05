@@ -186,7 +186,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                           query: `category=${selectedCategory}`,
                         }}
                       >
-                        <div className="truncate w-full px-2">{el.sku}</div>
+                        <div className="w-full px-2">{el.sku}</div>
                         <div
                           className={"cursor-pointer flex flex-1 justify-center w-full"}
                         >
@@ -201,7 +201,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                         </div>
                         <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center"></div>
                         <div className="flex justify-center h-16">
-                          <h3 className="truncate text-center">{el.name} </h3>
+                          <h3 className="text-center">{el.name} </h3>
                         </div>
                       </Link>
                     </div>
