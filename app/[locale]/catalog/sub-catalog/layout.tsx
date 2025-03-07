@@ -66,7 +66,7 @@ const Content: FC<{
             initial={{ x: "-100%" }} 
             animate={{ x: isLeftSidebarOpen ? "0%" : "-100%" }} 
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed top-0 left-0 w-full h-full bg-white/50 backdrop-blur-lg shadow-lg z-50 cursor-grab active:cursor-grabbing overflow-y-auto"
+            className="fixed top-0 left-0 w-full h-full bg-white/50 backdrop-blur-sm shadow-lg z-50 cursor-grab active:cursor-grabbing overflow-y-auto"
           >
             {/* Кнопка закрытия */}
             <button
