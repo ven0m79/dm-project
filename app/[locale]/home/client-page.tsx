@@ -125,7 +125,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                   {t("service-text")}
                 </div>
               </Link>
-              <div className="pr-2">
+              <div className="pr-2 w-1/2">
                 <Link href={"/services"}>
                   <Image
                     src="/service.jpg"
@@ -147,7 +147,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
               {t("projectings")}
             </div>
             <div className="flex flex-1 flex-row">
-              <div className="pr-2">
+              <div className="p-2 w-1/2">
                 <Link href={"/projects"}>
                   <Image
                     src="/projection.jpg"
@@ -161,7 +161,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 <Link href={"/projects"}>
                   <div
                     className={classNames(
-                      "p-2 text-justify  mt-10 sm:mr-5 mr-2",
+                      "pr-2 text-justify sm:mr-5 mr-0",
                       styles["serviceText"],
                     )}
                   >
