@@ -75,21 +75,21 @@ button {
   margin-bottom: 5px;
 }
 .img1 {
-  padding: 10px;
+  padding: 4px;
   display: flex;
   float: left;
 
   width: 100%;
 }
 .img2 {
-  padding: 10px;
+  padding-left: 4px;
   display: flex;
   float: right;
 
 }
 
 .img3 {
-  padding: 10px;
+  padding-right: 4px;
   display: flex;
   float: left;
 }

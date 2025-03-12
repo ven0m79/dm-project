@@ -20,7 +20,7 @@ import DOMPurify from "dompurify";
 
 const customTheme: CustomFlowbiteTheme = {
   tabs: {
-    base: "flex flex-col gap-2 ml-4",
+    base: "flex flex-col gap-2",
     tablist: {
       base: "flex text-center",
       styles: {
