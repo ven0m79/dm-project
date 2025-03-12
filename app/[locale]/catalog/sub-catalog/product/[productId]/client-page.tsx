@@ -158,7 +158,7 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                   >
                     <div className="flex flex-row w-full">
                       <div>
-                      <div className={classNames("m-4", styles.imageRadius)}>
+                      <div className={classNames("my-4 w-full h-auto", styles.imageRadius)}>
                         <img
                           src={details?.images[0].src}
                           alt={details?.images[0].alt}
