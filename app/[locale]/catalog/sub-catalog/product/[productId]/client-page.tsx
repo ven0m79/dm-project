@@ -164,13 +164,14 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                           alt={details?.images[0].alt}
                           width={450}
                           height={475}
+                          className="w-full h-auto"
                         />
                       </div>
                       <div>
 
                       </div>
                       </div>
-                      <div className="px-1 pt-8 sm:pt-28 w-[300px]">
+                      <div className="px-1 pt-8 sm:pt-28 w-1/2">
                         <h1 className={classNames("", styles.title)}>
                           {details?.name}
                         </h1>
