@@ -139,7 +139,7 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
   return (
     <>
       <div className="flex self-center flex-row max-w-[800px] mb-8">
-        <div className="flex flex-col p-1 min-h-[600px] flex-1">
+        <div className="flex flex-col py-1 px-2 min-h-[600px] flex-1">
           {loading ? (
             <div className="flex w-full h-4/5 justify-center items-center">
               <Loader />
