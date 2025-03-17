@@ -235,7 +235,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
 
                         <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center"></div>
                         <div className="flex justify-center">
-                          <h3 className="flex justify-center h-16 truncate w-full px-2">{el.name}</h3>
+                          <h3 className="flex justify-center h-16 w-full px-2">{el.name}</h3>
                         </div>
                       </Link>
                     </div>
