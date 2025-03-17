@@ -195,7 +195,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                             alt={el.images[0].alt}
                             width={130}
                             height={137}
-                            className="object-contain w-full h-auto"
+                            className="w-full h-auto"
                           />
                           {/* <div className="h-px mt-24 ml-20 text-[16px] flex self-center absolute text-red-500 font-bold">{el.price} $</div> */}
                         </div>
@@ -229,7 +229,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                             alt={el.images[0].alt}
                             width={200}
                             height={250}
-                            className="object-contain w-full h-auto"
+                            className="w-full h-auto"
                           />
                         </div>
 
