@@ -15,7 +15,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const strip = product?.short_description
   
   return {
-
     title: product?.name,
     description: strip.replace(/<[^>]*>/g, "").trim(),
   };
