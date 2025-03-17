@@ -10,22 +10,22 @@ const api = new WooCommerceRestApi({
 export default async function handler(req: any, res: any) {
   const responseData = {
     success: false,
-    products: [],
-    totalProducts: 0, // Добавляем свойство для общего количества записей
+    categories: [],
+    totalCategories: 0,
   };
 
   try {
-    const response = await api.get("products?per_page=100");
+    const response = await api.get("products/categories?per_page=100");
 
-    const totalProducts = parseInt(response.headers["x-wp-total"], 10); // Получаем общее количество записей
+    const totalCategories = parseInt(response.headers["x-wp-total"], 10); // Получаем общее количество категорий
 
     responseData.success = true;
-    responseData.products = response.data;
-    responseData.totalProducts = totalProducts; // Сохраняем общее количество записей
+    responseData.categories = response.data;
+    responseData.totalCategories = totalCategories; // Сохраняем общее количество категорий
 
     res.json(responseData);
   } catch (error) {
-    console.error("Error fetching products:");
+    console.error("Error fetching categories:", error);
     res.status(500).json(responseData);
   }
 }
