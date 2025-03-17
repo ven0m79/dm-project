@@ -1,0 +1,203 @@
+"use client";
+import classNames from "classnames";
+import React, { Dispatch, FC, SetStateAction, useEffect, useMemo, useState } from "react";
+import styles from "./Header.module.css";
+import Image from "next/image";
+import { Link, usePathname } from "../../../../../config";
+import { useTranslations, useLocale } from "next-intl";
+import clsx from "clsx";
+import Loader from "@app/[locale]/components/atoms/loader/loaderSearch";
+import {
+    Combobox,
+    ComboboxInput,
+    ComboboxOption,
+    ComboboxOptions,
+} from "@headlessui/react";
+import debounce from "lodash.debounce";
+import { useSearchParams } from "next/navigation";
+import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
+
+type TagType = {
+    id: number;
+    name: string;
+    slug: string;
+};
+
+type Product = {
+    tags: TagType[];
+    id: number;
+    name: string;
+    price: string;
+    permalink: string;
+}
+
+const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Dispatch<SetStateAction<string>>, products: Product[] }> = ({ searchTerm, setSearchTerm, loading, products }) => {
+    const t = useTranslations("Header");
+    const t2 = useTranslations("Index");
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+
+
+    const highlightText = (text: string, highlight: string) => {
+        const parts = text.split(new RegExp(`(${highlight})`, "gi"));
+        return (
+            <>
+                {parts.map((part, i) => (
+                    <span
+                        key={i}
+                        style={{
+                            color:
+                                part.toLowerCase() === highlight.toLowerCase() ? "blue" : "",
+                        }}
+                    >
+                        {part}
+                    </span>
+                ))}
+            </>
+        );
+    };
+
+    const selectedCategory = useMemo(() => {
+        return searchParams?.get("category")
+            ? `?category=${searchParams?.get("category")}`
+            : "";
+    }, [searchParams]);
+
+    return <>
+        <div className={classNames("w-screen", styles["lang"])}>
+            <div className={styles.langText}>
+                <Link href={`${pathname}${selectedCategory}`} locale="en">
+                    EN
+                </Link>
+                {"   "}
+                <Link href={`${pathname}${selectedCategory}`} locale="ua">
+                    UA
+                </Link>
+            </div>
+        </div>
+        <div className={styles.containerWithLogo}>
+            <div className={styles.logo}>
+                <Link href={"/home"}>
+                    <Image
+                        src="/logo-DM-project.png"
+                        width={120}
+                        height={75}
+                        alt="Logo DM Project" />
+                </Link>
+            </div>
+            <div className={styles.contactsGroupIcons}>
+                <Image
+                    src="/telephone.png"
+                    width={40}
+                    height={40}
+                    alt="Logo DM Project" />
+            </div>
+            <div
+                className={classNames(
+                    "text-[8px] sm:text-[10px] xl:text-[16px]",
+                    styles["contactsGroup"]
+                )}
+            >
+                <div>+380 44 520-12-24</div>
+                <div className="pt-1">+380 66 358-98-10</div>
+                <div className="pl-10">(cервіс)</div>
+            </div>
+            <div className={styles.contactsGroupIcons}>
+                <Image
+                    src="/email.png"
+                    width={40}
+                    height={40}
+                    alt="Logo DM Project" />
+            </div>
+            <div
+                className={classNames(
+                    "text-[8px] sm:text-[10px] xl:text-[16px]",
+                    styles["contactsGroup"]
+                )}
+            >
+                <div>allinfo@dm-project.com.ua</div>
+                <div>sales@dm-project.com.ua</div>
+                <div>service@dm-project.com.ua</div>
+            </div>
+            <div className={classNames("mx-auto max-w-76", styles["search"])}>
+                <Combobox value={searchTerm}>
+                    <div className="relative flex z-50">
+                        <ComboboxInput
+                            className={clsx(
+                                "w-full rounded-lg border-[#0061AA] border bg-white/5 py-1.5 pr-8 pl-3 text-sm/6 text-black",
+                                "focus: outline-none data-[focus]:outline-none data-[focus]:-outline-offset-2 data-[focus]:bg-sky-50"
+                            )}
+                            placeholder={t("placeholder")}
+                            onChange={(event) => setSearchTerm(event.target.value)} />
+
+                        {loading && (
+                            <div className="absolute right-5 mt-4">
+                                <Loader />
+                            </div>
+                        )}
+
+                        {products.length > 0 && (
+                            <ComboboxOptions
+                                anchor="bottom"
+                                transition
+                                className={clsx(
+                                    "w-[var(--input-width)] rounded-xl border-2 border-[#0061AA] bg-white p-1 [--anchor-gap:var(--spacing-1)] empty:invisible z-50",
+                                    "transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0"
+                                )}
+                            >
+                                {products.map((product) => (
+                                    <ComboboxOption
+                                        key={product.id}
+                                        value={product.name}
+                                        className="group flex cursor-default items-center gap-2 rounded-lg py-1.5 px-3 select-none data-[focus]:bg-sky-100"
+                                    >
+                                        <a
+                                            className={clsx("block, text-black")}
+                                            href={`/catalog/sub-catalog/product/${product.id}?category=${product.tags[0].name}`}
+                                        >
+                                            <div className="text-sm/6 text-black">
+                                                {highlightText(product.name, searchTerm)}
+                                            </div>
+                                        </a>
+                                    </ComboboxOption>
+                                ))}
+                            </ComboboxOptions>
+                        )}
+                    </div>
+                </Combobox>
+            </div>
+            <div className="flex flex-row pl-10">
+                <div
+                    className={classNames(
+                        "flex flex-row justify-center items-center",
+                        styles["socialMedia"]
+                    )}
+                >
+                    <Link href="http://youtube.com">
+                        <Image
+                            src="/youtube-ico.jpg"
+                            width={30}
+                            height={30}
+                            alt="Logo Youtube" />
+                    </Link>
+                </div>
+                <div
+                    className={classNames(
+                        "flex flex-column justify-center items-center",
+                        styles["socialMedia"]
+                    )}
+                >
+                    <Link href="http://facebook.com">
+                        <Image
+                            src="/facebook-ico.jpg"
+                            width={30}
+                            height={30}
+                            alt="Logo Facebook" />
+                    </Link>
+                </div>
+            </div>
+        </div></>
+
+}
+
+export default DesktopHeader;

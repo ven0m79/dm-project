@@ -39,7 +39,7 @@ const animatedStylesForPhoto1 = {
 
 const animatedStylesForPhoto2 = {
   initial: {
-    x: "70%",
+    x: "60%",
     opacity: 0,
   },
   animate: {
@@ -88,7 +88,7 @@ const SingleSlide: FC<ArticleSingleType> = ({
           transition={{ duration: 1.5, ease: "easeOut" }}
           style={{ fontSize: 40 }}
         >
-          <div className="mt-10 mx-32 w-screen">{title}</div>
+          <div className="mt-10 mx-32 w-1/2 flex-wrap">{title}</div>
         </motion.div>
         <motion.div
           className="pointer-events-none"

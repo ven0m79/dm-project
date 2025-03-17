@@ -6,7 +6,11 @@ import React from "react";
 
 import styles from "./Nav.module.css";
 
+import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
+
 import { Link, usePathname } from "../../../../../config";
+import DesktopNav from "./DesktopNav";
+import MobileNav from "./MobileNav";
 
 const NavLinks: {
   [key: string]: {
@@ -49,45 +53,20 @@ const NavLinks: {
 };
 
 const Nav = () => {
-  const pathname = usePathname();
-  const t = useTranslations("Menu");
-  const t2 = useTranslations("Index");
+  const isMobile = useIsMobile();
 
   return (
-    <div className={classNames(
-      "flex flex-1 w-full justify-center max-h-[50px]",
-      styles["colorBlue"])}>
-    <nav className={styles["navigation"]}>
-      <ul className="flex ms-center">
-        {Object.keys(NavLinks).map((el) => (
-          <li
-            key={el}
-            className={classNames("", styles["link"], {
-              [styles["active"]]: pathname === '/lll'? pathname === NavLinks[el].link : pathname.includes(NavLinks[el].link),
-            })}
-          >
-            <Link href={NavLinks[el].link}>{t(NavLinks[el].title)}</Link>
-          </li>
-        ))}
-      </ul>
-      <div className="items-end right-0 flex flex-1 flex-row w-full justify-end mx-2">
-        <div
-          className={classNames(
-            "flex justify-center items-center",
-            styles["back"],
-          )}
-        >
-          <Image
-            src="/drager-side.svg"
-            width={90}
-            height={36}
-            alt="Logo DM Project"
-          />
-        </div>
-        <div className={styles["backText"]}>{t2("authorized-representative")}</div>
-      </div>
-    </nav>
-    </div>
+    <>
+      {typeof window !== "undefined" && isMobile ?
+        <nav className={classNames("max-h-[0px]", styles["navigation"])}>
+          <MobileNav />
+        </nav>
+        :
+        <nav className={classNames("flex flex-1 w-screen justify-center max-h-[50px]", styles["navigation"])}>
+          <DesktopNav />
+        </nav >
+      }
+    </>
   );
 };
 

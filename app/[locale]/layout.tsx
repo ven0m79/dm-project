@@ -1,6 +1,9 @@
 import { Roboto } from "next/font/google";
 import { ReactNode } from "react";
 
+import { DefaultSeo } from "next-seo";
+import defaultSEOConfig from "../../next-seo.config";
+
 import { NextIntlClientProvider, useMessages } from "next-intl";
 
 import "./globals.css";
@@ -35,19 +38,13 @@ export default function RootLayout({
 
   return (
     <html lang={locale}>
-      <head>
-        <title>ДМ-проект</title>
-        <meta
-          name="description"
-          content="Компанія ДМ-ПРОЕКТ заснована у 2009 році як уповноважений представник німецької компанії Dräger в Україні, світового лідера з виробництва систем життєзабезпечення людини."></meta>
-      </head>
       <body
         className={cn(
           "flex min-h-screen overflow-x-hidden bg-gray-950 text-gray-50",
           inter.className,
         )}
       >
-        <main className="flex flex-1 flex-col items-center justify-center gap-12">
+        <main className="flex flex-1 flex-col items-center justify-center gap-12 w-full bg-white">
           <NextIntlClientProvider locale={locale} messages={messages}>
             {children}
           </NextIntlClientProvider>

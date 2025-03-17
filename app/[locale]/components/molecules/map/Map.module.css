@@ -3,6 +3,13 @@
   opacity: 0.5;
 }
 
+@media (max-width: 640px) {
+  .custom-path {
+    fill: #0061AA;
+    opacity: 0.5;
+  }
+}
+
 .custom-path:hover {
   fill: #0061AA;
   opacity: 1;
@@ -16,6 +23,18 @@
   background-color: #0061AA;
   border-radius: 10px;
 }
+
+@media (max-width: 640px) {
+  .info-section {
+    font-size: large;
+    color: #f6dd97;
+    /* width: 100vw; */
+    height: auto;
+    background-color: #0061AA;
+    border-radius: 10px;
+  }
+}
+
 .info-section-description {
   font-size: medium;
   color: #002766;

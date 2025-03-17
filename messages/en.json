@@ -3,6 +3,9 @@
     "menu": "Menu!",
     "in-Ukraine-2009": "DM-Project has been a reliable partner of Ukrainian doctors since 2009 ",
     "authorized-representative": "Authorized representative in Ukraine",
+    "authorized-representativeDreger1": "Authorized representative",
+    "authorized-representativeDreger2": " Dräger ",
+    "authorized-representativeDreger3": "in Ukraine",
     "delivered": "Delivered:",
     "more-then": "More than 4200 units of equipment",
     "more-then2": "More than 400 cities of Ukraine",
@@ -48,10 +51,14 @@
     "accessories": "Accessories",
     "adress": "03035, Kyiv, Ukraine, Mokra 16, office 385",
     "fax": "+380 44 520-12-24",
-    "all-right": "DM-Project. All rights reserved"
+    "all-right": "DM-Project. All rights reserved",
+    "productsMob": "Products",
+    "searchMob": "Search",
+    "contactsMob": "Contacts"
   },
   "Header": {
-    "placeholder": "Search..."
+    "placeholder": "Search...",
+    "products": "Products"
   },
   "AboutPage": {
     "information1": "DM-PROJECT was founded in 2009 as an authorized representative of the German company Dräger in Ukraine, the world leader in the production of human life support systems.",
@@ -291,4 +298,5 @@
     "shares-fabius-text8": "The Vista 120S has a 12’ colour TFT touchscreen, 8 channels (displaying up to 11 waveforms), a gas monitoring interface, stores up to 120 hours of key parameter trends, up to 1200 NIBP measurements and 200 alarm events, and lasts 350 minutes on battery power.",
     "shares-fabius-text9": "The Fabius plus XL / Vista 120S Anaesthesia Station will help you maximise your therapeutic potential and improve patient safety."
   }
+
 }

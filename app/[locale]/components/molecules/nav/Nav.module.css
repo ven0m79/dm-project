@@ -1,25 +1,23 @@
 .navigation {
   margin-top: 0vh;
-  height: 50px;
-  display: flex;
+  max-height: 100%;
   align-self: center;
-  width: 1400px;
+  width: 100vw;
   align-items: center;
   background-color: #0061AA;
-}
-
-.colorBlue {
-  background-color: #0061AA;
-  height: 50px;
+  text-wrap: nowrap;
+  vertical-align: middle;
+  /* border: 1px solid green; */
 }
 
 .back {
   width: 240px;
+  height: 50px;
+  /* border: 1px solid red; */
   margin-top: 0vh;
   display: flex;
   align-self: center;
   align-items: center;
-  height: 50px;
   background: radial-gradient(circle farthest-side, #ffffff 10%, #0061AA);
 }
 
@@ -30,7 +28,6 @@
   margin-left: 10px;
   height: 100%;
   font-family: Roboto;
-  font-size: 16px;
   color: white;
   /* border: solid 1px blue; */
   background-color: #0061AA;
@@ -38,25 +35,48 @@
 
 
 .link {
-  font-size: 16px;
-  height: 100%;
+  height: 50px;
   padding: 15px 11px 15px 11px;
-  color: white;
-
+  color: #D3DDE4;
   position: relative;
   font-family: "Roboto", sans-serif;
+
+  @media (max-width: 640px) {
+
+
+    /* border: 1px solid blue; */
+
+  }
 }
 
 .active {
-  height: 100%;
+  height: 50px;
   padding: 15px 15px 15px 15px;
   color: rgb(255, 255, 255);
   background-color: #002766;
   border-bottom: 3px solid #007F3D;
+
+  @media (max-width: 640px) {
+    padding: 15px 11px 15px 11px;
+    color: white;
+    background-color: transparent;
+    border-bottom: 0px solid #007F3D;
+    font-weight: bold;
+
+      /* border: 1px solid blue; */
+  }
 }
 
 .link:hover {
   transition: all 1.0s;
   background: #00276663;
   border-bottom: 3px solid #007F3D;
+  @media (max-width: 640px) {
+    color: white;
+    background-color: transparent;
+    border-bottom: 0px solid #007F3D;
+    font-weight: bold;
+
+      /* border: 1px solid blue; */
+  }
 }

@@ -1,40 +1,17 @@
-.catalogText {
-    display: flex;
-    flex-direction: column;
-    width: 1050px;
-    font-size: 18px;
-    color: black;
-    line-height: 27px;
-}
-
-.catalogMainPhoto {
-    width: 300px;
-    height: 300px;
-    background-image: url("../../../public/aboutDM.jpg");
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
 .catalogContainer {
     align-self: center;
-    width: 1400px;
-    border: 1px solid  transparent;
-}
+    max-width: 1400px;
 
-.aboutDecisions {
-    align-self: center;
-    width: 100%;
-    /* border: 1px solid #2f00ff; */
-}
-
-.image-radius {
-    border-radius: 10px;
-    border: 1px solid #ff0000;
+    @media (max-width: 640px) {
+        width: 100%;
+        /* border: 1px solid red; */
+    }
 }
 
 .block-decisions {
     justify-content: space-between;
-    width: 688px;
+    width: 100vh;
+    max-width: 678px;
     height: 150px;
     border-radius: 10px;
     /* border: 1px solid #0061AA; */
@@ -46,7 +23,12 @@
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 
     @media (max-width: 640px) {
-        width: 120px;
+        width: 97vw;
+        font-size: 18px;
+        height: 100px;
+        z-index: 49;
+        /* border: 1px solid blue; */
+
     }
 }
 
@@ -54,20 +36,40 @@
 
     transform: scale(1.03);
     transform-origin: left;
+
+    @media (max-width: 640px) {
+
+        z-index: 25;
+        /* border: 1px solid blue; */
+
+    }
 }
-.block-decisions:hover  {
+
+.block-decisions:hover {
 
     transform: scale(1.05);
     transform-origin: center;
     transition: all 0.5s;
 }
+
 .img {
     align-items: end;
     transition: all 0.5s;
+
+    @media (max-width: 640px) {
+        width: 80px;
+        height: 80px;
+
+    }
 }
+
 .span {
     transition: all 0.5s;
     transform-origin: right;
+
+    @media (max-width: 640px) {
+        line-height: 25px;
+    }
 }
 
 .block-decisions:hover .span {

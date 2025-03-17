@@ -1,7 +1,5 @@
 
 'use client' 
-
-
 import { GoogleMap } from  "@react-google-maps/api" ; 
 
 //Стиль карты 
@@ -16,7 +14,6 @@ const defaultMapCenter = {
 }
 
 const defaultMapZoom = 19;
-
 const defaultMapOptions = {
     zoomControl: true,
     tilt: 1,
@@ -26,14 +23,14 @@ const defaultMapOptions = {
 
 const  MapComponent = ( ) => { 
     return ( 
-        < div  className = "w-full" > 
+        <div  className = "flex items-center justify-center mx-0 w-full max-w-[390px] min-w-[200px]"> 
             < GoogleMap  
                 mapContainerStyle={defaultMapContainerStyle}
                 center={defaultMapCenter}
                 zoom={defaultMapZoom}
                 options={defaultMapOptions}> 
             </ GoogleMap > 
-        </ div >
+        </div>
      ) 
 }; 
 

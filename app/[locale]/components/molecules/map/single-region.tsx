@@ -12,7 +12,7 @@ import classNames from "classnames";
 }
 
 const SingleRegion: FC<
-  MapProps & { setHoveredItem: (val: MapProps) => void }
+  MapProps & { setHoveredItem: (val: MapProps) => void } 
 > = ({ setHoveredItem, ...props }) => {
   return (
     <>

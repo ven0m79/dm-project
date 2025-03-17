@@ -4,8 +4,15 @@
 }
 
 .textHeader {
-    font-size: 25px;
+    font-size: 23px;
     color: #002766;
+
+}
+@media (max-width: 640px) {
+    .textHeader {
+        font-size: 16px;
+        line-height: 22px;
+    }
 }
 
 .serviceTextHeader {
@@ -14,12 +21,25 @@
     color: #002766;
 }
 
+@media (max-width: 640px) {
+    .serviceTextHeader {
+        font-size: 16px;
+        line-height: 22px;
+    }
+}
+
 .serviceText {
-    width: 800px;
+    max-width: 800px;
     line-height: 35px;
     font-size: 23px;
     font-weight: normal;
     color: #0061AA;
+}
+@media (max-width: 640px) {
+    .serviceText {
+        font-size: 16px;
+        line-height: 22px;
+    }
 }
 
 .serviceText:hover {
@@ -29,9 +49,16 @@
 
 .putText {
     line-height: 33px;
-    font-size: 23px;
+    font-size: 20px;
     font-weight: normal;
     color: #0061AA;
+}
+
+@media (max-width: 640px) {
+    .putText {
+        font-size: 16px;
+        line-height: 18px;
+    }
 }
 
 .block-partners {
@@ -55,27 +82,30 @@
     text-indent: 20px;
     line-height: 27px;
     list-style-type: disc;
-  }
+}
 
-  .ul2 > li {
+.ul2>li {
     color: #002766;
     margin-right: 20px;
     padding-right: 20px;
-  }
-  
-  .ul2 > li > span {
+}
+
+.ul2>li>span {
     color: #002766;
     margin-right: 20px;
     padding-right: 20px;
-  }
+}
+
 .span1 {
     color: #002766;
     margin-right: 20px;
     padding-right: 20px;
-  }
-  .stroke {
+}
+
+.stroke {
     align-self: center;
-    width: 1240px;
+    max-width: 1240px;
+    width: 100%;
     height: 1px;
     margin-top: 5px;
     margin-bottom: 10px;

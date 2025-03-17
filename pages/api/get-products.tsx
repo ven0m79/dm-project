@@ -11,16 +11,21 @@ export default async function handler(req: any, res: any) {
   const responseData = {
     success: false,
     products: [],
+    totalProducts: 0, // Добавляем свойство для общего количества записей
   };
 
   try {
-    const { data } = await api.get("products/categories?per_page=100");
+    const response = await api.get("products?per_page=100");
+
+    const totalProducts = parseInt(response.headers["x-wp-total"], 10); // Получаем общее количество записей
 
     responseData.success = true;
-    responseData.products = data;
+    responseData.products = response.data;
+    responseData.totalProducts = totalProducts; // Сохраняем общее количество записей
 
     res.json(responseData);
   } catch (error) {
+    console.error("Error fetching products:");
     res.status(500).json(responseData);
   }
 }

@@ -16,8 +16,7 @@ type MainLayoutProps = {
 
 type Props = {
   locale: string;
-}
-
+};
 
 const MainLayout: FC<MainLayoutProps> = ({
   children,
@@ -26,14 +25,14 @@ const MainLayout: FC<MainLayoutProps> = ({
   noFooter = false,
 }) => {
   return (
-    <main className={(styles.main)}>
-      <Suspense fallback="Loading">
+    <Suspense fallback="Loading">
+      <main className={styles.main}>
         {noHeader ? null : <Header />}
-      </Suspense>
-      {noNav ? null : <Nav />}
-      {children}
-      {noFooter ? null : <Footer />}
-    </main>
+        {noNav ? null : <Nav /> }
+        {children}
+        {noFooter ? null : <Footer />}
+      </main>
+    </Suspense>
   );
 };
 

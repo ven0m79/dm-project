@@ -2,33 +2,29 @@
 
 import classNames from "classnames";
 import { CustomFlowbiteTheme, Sidebar as FBSidebar } from "flowbite-react";
-import { useSearchParams } from "next/navigation";
 
-import React, {
-  FC,
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { FC, memo, useCallback, useMemo } from "react";
 
 import styles from "../../../catalog/sub-catalog/Sub-catalog.module.css";
 
-import { fetchWooCommerceProductsBasedOnCategory } from "../../../../../utils/woocommerce.setup";
 import { TransformedCategoriesType } from "@app/[locale]/catalog/sub-catalog/helpers";
 import { usePathname, useRouter } from "../../../../../config";
+import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
+import {
+  LEFT_BAR_PARENT_ID,
+  LEFT_BAR_PARENT_ID_EN,
+} from "@app/[locale]/components/constants";
 
 const customTheme: CustomFlowbiteTheme = {
   sidebar: {
     root: {
       base: "h-full",
       inner:
-        "h-fit w-[300px] overflow-y-auto overflow-x-hidden py-3 rounded-xl bg-white dark:bg-gray-800",
+        "h-fit w-[300px] overflow-y-auto overflow-x-hidden py-3 rounded-xl bg-white/30 dark:bg-white/30 pt-14 -mt-10",
     },
     collapse: {
       button:
-        "group flex w-full items-center rounded-lg p-1 text-base font-normal text-[#0061AA] transition duration-75 hover:bg-[#0061aa10] dark:text-white dark:hover:bg-gray-700",
+        "group flex w-full items-center rounded-lg p-1 text-base font-normal text-[#0061AA] transition duration-75 hover:bg-[#0061aa10] dark:text-[#0061AA] dark:hover:bg-gray-700",
       icon: {
         base: "h-6 w-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white",
         open: {
@@ -65,7 +61,7 @@ const customTheme: CustomFlowbiteTheme = {
       },
     },
     item: {
-      base: "flex items-center justify-center rounded-lg text-base font-normal text-[#0061AA] hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700",
+      base: "flex items-center justify-center rounded-lg text-base font-normal text-[#0061AA] hover:bg-gray-100",
       active: "text-red-500 bg-gray-100 dark:bg-gray-700",
       collapsed: {
         insideCollapse: "group w-full pl-8 transition duration-75",
@@ -98,112 +94,68 @@ const customTheme: CustomFlowbiteTheme = {
   },
 };
 
-const LEFT_BAR_PARENT_ID = 50;
-const LEFT_BAR_PARENT_ID_EN = 52;
-
-const categoriesUAIdData = {
-  "or-equipment": 19,
-  "icu-equipment": 75,
-  "neonatal-equipment": 79,
-  "cleaning-and-desinfecting-equipment": 83,
-  "gas-management-systems": 87,
-  furniture: 91,
-  accessories: 95,
-};
-
-const categoriesENIdData = {
-  "or-equipment": 61,
-  "icu-equipment": 77,
-  "neonatal-equipment": 81,
-  "cleaning-and-desinfecting-equipment": 85,
-  "gas-management-systems": 89,
-  furniture: 93,
-  accessories: 97,
-};
-
 type SidebarProps = {
   locale: string;
-  items: TransformedCategoriesType[];
-  categoryTag?: string | null | keyof typeof categoriesUAIdData;
-  setSelectedCategoryItem?: (v: string) => void;
-  setSelectedProducts?: (v: any[]) => void;
   changeURLParams?: boolean;
   fromProductPage?: boolean;
 };
 
 const Content: FC<SidebarProps> = ({
-  items,
-  categoryTag,
   locale,
-  setSelectedProducts,
-  setSelectedCategoryItem,
   changeURLParams,
   fromProductPage,
 }) => {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
-  const currentIdsData = useMemo(
-    () => (locale === "ua" ? categoriesUAIdData : categoriesENIdData),
-    [locale],
-  );
+  const {
+    categories,
+    openedCategoryIds,
+    selectedCategoryId,
+    setSelectedCategoryId,
+    setSelectedCategory,
+    setOpenedCategoryIds,
+    getCategoryDetails,
+  } = useSidebar();
 
-  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>();
-  const [openedCategoryIds, setOpenedCategoryIds] = useState<number[]>([]);
-
-  const getCategoryDetails = useCallback(
-    async (id: number) => {
-      try {
-        const data = await fetchWooCommerceProductsBasedOnCategory(id, locale);
-
-        if (data) {
-          setSelectedProducts?.(data);
-        }
-      } catch (e) {
-        console.warn({ e });
-      }
-    },
-    [locale, setSelectedProducts],
+  const items = useMemo(
+    () => (locale === "ua" ? [categories?.[1] || []] : [categories?.[0] || []]),
+    [categories, locale],
   );
 
   const handleCollapseToggle = async (categoryId: number) => {
     setSelectedCategoryId(categoryId); // Highlight the selected category
 
     // Fetch products for the selected category
-    await getCategoryDetails(categoryId);
+    await getCategoryDetails(categoryId, locale);
 
     // After fetching, set the clicked category as the only open one
     // Toggle open state
     setOpenedCategoryIds((prevOpenedIds) => {
       const isOpened = prevOpenedIds.includes(categoryId);
-      const updatedIds = isOpened
+
+      return isOpened
         ? prevOpenedIds.filter((id) => id !== categoryId)
         : [...prevOpenedIds, categoryId];
-
-      // Save to localStorage
-      localStorage.setItem("openedCategories", JSON.stringify(updatedIds));
-
-      return updatedIds;
     });
 
-     const listCat = findParentCategories(items, categoryId);
-     console.log(listCat);
-     
-     if (!listCat || listCat.length === 0) {
+    const listCat = findParentCategories(items, categoryId);
+
+    if (!listCat || listCat.length === 0) {
       // Если listCat пустой, используем кликнутую категорию
       const clickedCategory = items
         .flatMap((item) => [item, ...(item.childrens || [])]) // Учитываем вложенные категории
         .find((item) => item.id === categoryId);
-  
       if (clickedCategory?.slug) {
         router.push(`/catalog/sub-catalog?category=${clickedCategory.slug}`);
+        setSelectedCategory(clickedCategory.slug);
       } else {
         console.warn("Clicked category not found or has no slug");
       }
     } else {
       // Если listCat содержит элементы, используем первый
       router.push(`/catalog/sub-catalog?category=${listCat[0].slug}`);
+      setSelectedCategory(listCat[0].slug);
     }
   };
 
@@ -270,7 +222,7 @@ const Content: FC<SidebarProps> = ({
             );
             const listCat = findParentCategories(items, category.id);
 
-            setSelectedCategoryItem?.(selectedParent?.slug || "");
+            setSelectedCategory(selectedParent?.slug || "");
             handleCollapseToggle(category.id);
 
             if (changeURLParams) {
@@ -306,8 +258,6 @@ const Content: FC<SidebarProps> = ({
         style={{ paddingLeft: `${paddingLeft}px` }}
         onClick={() => handleCollapseToggle(category.id)} // Fetch products on collapse open
       >
-        
-        
         {/* Recursively render children */}
         {category?.childrens?.length
           ? category.childrens.map(
@@ -318,47 +268,11 @@ const Content: FC<SidebarProps> = ({
     );
   };
 
-  useEffect(() => {
-    if (categoryTag) {
-      const updatedTag =
-        locale !== "ua"
-          ? categoryTag.includes("en")
-            ? categoryTag.slice(0, -3)
-            : categoryTag
-          : categoryTag;
-
-      const categoryId =
-        currentIdsData?.[updatedTag as keyof typeof currentIdsData];
-
-      if (categoryId) {
-        getCategoryDetails(categoryId);
-        setSelectedCategoryId(categoryId); // Ensure initial category is selected
-        setOpenedCategoryIds([categoryId]);
-      }
-    }
-  }, [categoryTag, currentIdsData, getCategoryDetails, locale]);
-
-  useEffect(() => {
-    const category = searchParams?.get("category");
-
-    if (category) {
-      // @ts-ignore
-      const categoryId = currentIdsData?.[category];
-
-      if (categoryId) {
-        getCategoryDetails(categoryId);
-        setSelectedCategoryId(categoryId);
-        setOpenedCategoryIds([categoryId]);
-        localStorage.setItem("openedCategories", JSON.stringify([categoryId]));
-      }
-    }
-  }, [currentIdsData, getCategoryDetails, searchParams]);
-
   return (
     <div
       className={classNames(
         "flex flex-1 flex-row justify-between",
-        styles.subCatalog,
+        styles.subMenu,
       )}
     >
       <div className="">
