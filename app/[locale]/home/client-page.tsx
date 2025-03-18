@@ -46,7 +46,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
               <div className="flex flex-1 flex-row items-center self-center">
                 <div className="self-start" style={{ width: "50px" }}>
                   <Image
-                    alt="Галочка"
+                    alt=""
                     width={25}
                     height={25}
                     src={"/galka.png"}
@@ -60,7 +60,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
               <div className="flex flex-1 flex-row">
                 <div className="self-start align-top" style={{ width: "50px" }}>
                   <Image
-                    alt="Галочка"
+                    alt=""
                     width={25}
                     height={25}
                     src={"/galka.png"}
