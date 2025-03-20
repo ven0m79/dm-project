@@ -25,17 +25,16 @@ export async function generateMetadata({
 
     // Extract the name of the category
     const categoryName = category[0]?.name || categorySlug; // Fallback to the slug if name is unavailable
+    const categoryDescription = category[0]?.description;
 
     return params.locale === "ua"
       ? {
           title: `ДМ-ПРОЕКТ: ${categoryName}`,
-          description:
-            "Пропонуємо Вам сучасне обладнання різних типів та призначень.",
+          description: `${categoryDescription}`,
         }
       : {
           title: `DM-PROJECT: ${categoryName}`,
-          description:
-            "Today, the company's main activities include not only the sale of high-quality medical equipment, but also the development and implementation of integrated solutions for medical institutions, from design to service and staff training.",
+          description: `${categoryDescription}`,
         };
   } catch (error) {
     console.error("Error fetching category:", error);
