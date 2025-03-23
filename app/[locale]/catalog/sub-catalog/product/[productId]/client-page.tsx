@@ -66,7 +66,6 @@ type Params = {
 
 const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
   const { productId }: Params = useParams<any>();
-
   const [loading, setLoading] = useState<boolean>(false);
   const [details, setDetails] = useState<SingleProductDetails | null>(null);
   const [crossSellProducts, setCrossSellProducts] = useState<

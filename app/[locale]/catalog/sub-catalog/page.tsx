@@ -29,13 +29,13 @@ export async function generateMetadata({
 
     return params.locale === "ua"
       ? {
-          title: `ДМ-ПРОЕКТ: ${categoryName}`,
-          description: `${categoryDescription}`,
-        }
+        title: `ДМ-ПРОЕКТ: ${categoryName}`,
+        description: `${categoryDescription}`,
+      }
       : {
-          title: `DM-PROJECT: ${categoryName}`,
-          description: `${categoryDescription}`,
-        };
+        title: `DM-PROJECT: ${categoryName}`,
+        description: `${categoryDescription}`,
+      };
   } catch (error) {
     console.error("Error fetching category:", error);
     return {
