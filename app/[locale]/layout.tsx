@@ -1,9 +1,5 @@
 import { Roboto } from "next/font/google";
 import { ReactNode } from "react";
-
-import { DefaultSeo } from "next-seo";
-import defaultSEOConfig from "../../next-seo.config";
-
 import { NextIntlClientProvider, useMessages } from "next-intl";
 
 import "./globals.css";

@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import React, { FC, ReactNode, Suspense } from "react";
 
 import { Nav, Footer, Header } from "@app/[locale]/components/molecules";
