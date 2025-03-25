@@ -125,7 +125,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                   {t("service-text")}
                 </div>
               </Link>
-              <div className="pr-2 w-1/2">
+              <div className="pr-2">
                 <Link href={"/services"}>
                   <Image
                     src="/service.jpg"
@@ -147,7 +147,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
               {t("projectings")}
             </div>
             <div className="flex flex-1 flex-row">
-              <div className="p-2 w-1/2">
+              <div className="p-2">
                 <Link href={"/projects"}>
                   <Image
                     src="/projection.jpg"
@@ -189,27 +189,73 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
           >
             {t("partners").toUpperCase()}
           </div>
-          <div className="flex flex-wrap justify-center items-center bg-white w-[90%] max-w-[1000px] gap-1 sm:gap-10">
-            {[
-              { href: "https://www.draeger.com", src: "/logo-partners/dreger-log-partner.jpg", alt: "Logo DM-Project" },
-              { href: "https://www.prohs.pt/en/home/", src: "/logo-partners/prohs-log-partner.png", alt: "Logo Prohs" },
-              { href: "https://www.at-os.com", src: "/logo-partners/atos-log-partner.jpg", alt: "Logo AT-OS" },
-              { href: "https://www.lojer.com", src: "/logo-partners/lojer-log-partner.jpg", alt: "Logo Lojer" },
-              { href: "http://renosem.com", src: "/logo-partners/renosem-log-partner.jpg", alt: "Logo Renosem" },
-              { href: "https://www.mipm.com/en", src: "/logo-partners/mimp.webp", alt: "Logo Mimp" }
-            ].map(({ href, src, alt }, index) => (
-              <div key={index} className="flex-1 min-w-[60px] max-w-[120px] sm:max-w-[200px]">
-                <Link href={href} target="_blank">
-                  <Image
-                    className="w-full h-auto"
-                    src={src}
-                    width={200}
-                    height={200}
-                    alt={alt}
-                  />
-                </Link>
-              </div>
-            ))}
+          <div className={classNames("flex my-5 flex-wrap justify-center items-center bg-white w-[90%] max-w-[1000px] gap-1 sm:gap-10")}>
+            <div className={classNames("flex-1 min-w-[60px] max-w-[120px] sm:max-w-[200px]", styles["block-partners"])}>
+              <Link href={"https://www.draeger.com"} target="_blank">
+                <Image
+                  className={classNames("w-full h-auto", styles.img)}
+                  src={"/logo-partners/dreger-log-partner.jpg"}
+                  width={200}
+                  height={isMobile ? 80 : 200}
+                  alt={"Logo DM-Project"}
+                />
+              </Link>
+            </div>
+            <div className={classNames("flex-1 min-w-[60px] max-w-[120px] sm:max-w-[200px]", styles["block-partners"])}>
+              <Link href={"https://www.prohs.pt/en/home/"} target="_blank">
+                <Image
+                  className={classNames("w-full h-auto", styles.img)}
+                  src={"/logo-partners/prohs-log-partner.png"}
+                  width={200}
+                  height={isMobile ? 80 : 200}
+                  alt={"Logo Prohs"}
+                />
+              </Link>
+            </div>
+            <div className={classNames("flex-1 min-w-[60px] max-w-[120px] sm:max-w-[200px]", styles["block-partners"])}>
+              <Link href={"https://www.at-os.com"} target="_blank">
+                <Image
+                  className={classNames("w-full h-auto", styles.img)}
+                  src={"/logo-partners/atos-log-partner.jpg"}
+                  width={200}
+                  height={isMobile ? 80 : 200}
+                  alt={"Logo AT-OS"}
+                />
+              </Link>
+            </div>
+            <div className={classNames("flex-1 min-w-[60px] max-w-[120px] sm:max-w-[200px]", styles["block-partners"])}>
+              <Link href={"https://www.lojer.com"} target="_blank">
+                <Image
+                  className={classNames("w-full h-auto", styles.img)}
+                  src={"/logo-partners/lojer-log-partner.jpg"}
+                  width={200}
+                  height={isMobile ? 80 : 200}
+                  alt={"Logo Lojer"}
+                />
+              </Link>
+            </div>
+            <div className={classNames("flex-1 min-w-[60px] max-w-[120px] sm:max-w-[200px]", styles["block-partners"])}>
+              <Link href={"http://renosem.com"} target="_blank">
+                <Image
+                  className={classNames("w-full h-auto", styles.img)}
+                  src={"/logo-partners/renosem-log-partner.jpg"}
+                  width={200}
+                  height={isMobile ? 80 : 200}
+                  alt={"Logo Renosem"}
+                />
+              </Link>
+            </div>
+            <div className={classNames("flex-1 min-w-[60px] max-w-[120px] sm:max-w-[200px]", styles["block-partners"])}>
+              <Link href={"https://www.mipm.com/en"} target="_blank">
+                <Image
+                  className={classNames("w-full h-auto", styles.img)}
+                  src={"/logo-partners/mimp.webp"}
+                  width={200}
+                  height={isMobile ? 80 : 200}
+                  alt={"Logo Mimp"}
+                />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

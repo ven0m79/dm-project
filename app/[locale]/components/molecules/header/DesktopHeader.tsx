@@ -187,12 +187,26 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
                         styles["socialMedia"]
                     )}
                 >
-                    <Link href="http://facebook.com">
+                    <Link href="https://m.facebook.com/dmprojectdrager/">
                         <Image
                             src="/facebook-ico.jpg"
                             width={30}
                             height={30}
                             alt="Logo Facebook" />
+                    </Link>
+                </div>
+                <div
+                    className={classNames(
+                        "flex flex-column justify-center items-center",
+                        styles["socialMedia"]
+                    )}
+                >
+                    <Link href="https://www.instagram.com/dmproject_drager?igsh=MWJuaWRidnJ5dTM2Zg==">
+                        <Image
+                            src="/instagram.webp"
+                            width={30}
+                            height={30}
+                            alt="Logo Instagram" />
                     </Link>
                 </div>
             </div>
