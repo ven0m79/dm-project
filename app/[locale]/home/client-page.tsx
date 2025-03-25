@@ -195,7 +195,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
               { href: "https://www.prohs.pt/en/home/", src: "/logo-partners/prohs-log-partner.png", alt: "Logo Prohs" },
               { href: "https://www.at-os.com", src: "/logo-partners/atos-log-partner.jpg", alt: "Logo AT-OS" },
               { href: "https://www.lojer.com", src: "/logo-partners/lojer-log-partner.jpg", alt: "Logo Lojer" },
-              { href: "http://renosem.com", src: "/logo-partners/renosem-log-partner.jpg", alt: "Logo Renosem" }
+              { href: "http://renosem.com", src: "/logo-partners/renosem-log-partner.jpg", alt: "Logo Renosem" },
               { href: "https://www.mipm.com/en", src: "/logo-partners/mimp.webp", alt: "Logo Mimp" }
             ].map(({ href, src, alt }, index) => (
               <div key={index} className="flex-1 min-w-[60px] max-w-[120px] sm:max-w-[200px]">
