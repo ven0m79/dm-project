@@ -33,7 +33,6 @@ type Product = {
 
 const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Dispatch<SetStateAction<string>>, products: Product[] }> = ({ searchTerm, setSearchTerm, loading, products }) => {
     const t = useTranslations("Header");
-    const t2 = useTranslations("Index");
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
