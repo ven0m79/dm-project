@@ -56,7 +56,14 @@ export default function Slider({ locale }: { locale: string }) {
       setArticles(Object.values(articlesEng));
     }
   }, [locale]);
-
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      paginate(1); 
+    }, 4000);
+  
+    return () => clearInterval(interval);
+  }, [page]); 
 
   return (
     <div className="example-container">
