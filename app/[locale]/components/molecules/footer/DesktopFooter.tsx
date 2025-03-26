@@ -48,12 +48,26 @@ const DesktopFooter: FC<{}> = ({ }) => {
                             styles["socialMedia"]
                         )}
                     >
-                        <Link href="http://facebook.com">
+                        <Link href="https://m.facebook.com/dmprojectdrager/">
                             <Image
                                 src="/facebook3.png"
                                 width={30}
                                 height={30}
                                 alt="Logo Facebook" />
+                        </Link>
+                    </div>
+                    <div
+                        className={classNames(
+                            "flex flex-row justify-center items-center",
+                            styles["socialMedia"]
+                        )}
+                    >
+                        <Link href="https://www.instagram.com/dmproject_drager?igsh=MWJuaWRidnJ5dTM2Zg==">
+                            <Image
+                                src="/instagram_white.webp"
+                                width={30}
+                                height={30}
+                                alt="Logo Instagram" />
                         </Link>
                     </div>
                 </div>
