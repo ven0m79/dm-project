@@ -13,9 +13,6 @@ import {
   ComboboxOption,
   ComboboxOptions,
 } from "@headlessui/react";
-import debounce from "lodash.debounce";
-import { useSearchParams } from "next/navigation";
-import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 
 type TagType = {
   id: number;
@@ -83,7 +80,7 @@ const MobileHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Di
       <div className="ml-4 w-1/4">
         <Link
           href={"/catalog"}
-          className="flex items-center">
+          className="flex items-center cursor-pointer">
           <Image
             src="/go-products.webp"
             width={25}
@@ -95,6 +92,7 @@ const MobileHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Di
       <div className="flex justify-center w-1/2">
         <Link href={"/home"}>
           <Image
+            className="cursor-pointer"
             src="/logo-DM-project.png"
             width={120}
             height={75}
@@ -105,7 +103,7 @@ const MobileHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Di
       <div className="flex justify-center w-1/4">
         <Link href={"/catalog"}>
           <Image
-            className="opacity-0"
+            className="opacity-0 cursor-pointer"
             src="/go-menu.webp"
             width={35}
             height={35}

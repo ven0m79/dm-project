@@ -36,6 +36,26 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
+    // **Создаём локальное состояние для ввода и debounce**
+    const [inputValue, setInputValue] = useState(searchTerm);
+
+    // **Debounce функция, обновляет setSearchTerm с задержкой**
+    const debouncedSearch = useMemo(
+        () => debounce((query) => setSearchTerm(query), 300),
+        [setSearchTerm]
+    );
+
+    // **Обновляем значение при вводе текста**
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(event.target.value);
+        debouncedSearch(event.target.value);
+    };
+
+    useEffect(() => {
+        return () => {
+            debouncedSearch.cancel(); // Очищаем debounce при размонтировании
+        };
+    }, [debouncedSearch]);
 
     const highlightText = (text: string, highlight: string) => {
         const parts = text.split(new RegExp(`(${highlight})`, "gi"));
@@ -127,7 +147,7 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
                                 "focus: outline-none data-[focus]:outline-none data-[focus]:-outline-offset-2 data-[focus]:bg-sky-50"
                             )}
                             placeholder={t("placeholder")}
-                            onChange={(event) => setSearchTerm(event.target.value)} />
+                            onChange={handleChange} />
 
                         {loading && (
                             <div className="absolute right-5 mt-4">
