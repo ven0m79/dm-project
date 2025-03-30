@@ -73,7 +73,6 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
     <>
       {typeof window !== "undefined" && isMobile ?
         <div
-
           className={classNames(
             "flex flex-1 flex-row justify-between self-center mb-5",
             styles.subCatalog,
@@ -110,6 +109,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                             alt={el.images[0].alt}
                             width={130}
                             height={137}
+                            className="w-full h-auto"
                           />
                           {/* <div className="h-px mt-24 ml-20 text-[16px] flex self-center absolute text-red-500 font-bold">{el.price} $</div> */}
                         </div>
@@ -144,6 +144,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                             alt={el.images[0].alt}
                             width={isMobile ? 150 : 200}
                             height={isMobile ? 150 : 200}
+                            className="w-full h-auto"
                           />
                         </div>
 
