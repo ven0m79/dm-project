@@ -16,7 +16,9 @@ export const api = new WooCommerceRestApi({
 
 export async function fetchWooCommerceProducts(id: number, locale: string) {
   try {
-    const response = await api.get(`products/categories/${id}?per_page=100&lang=${locale}`);
+    const response = await api.get(
+      `products/categories/${id}?per_page=100&lang=${locale}`,
+    );
 
     if (response.status === 200) {
       return response.data;
@@ -29,19 +31,38 @@ export async function fetchWooCommerceProducts(id: number, locale: string) {
 
 export async function fetchWooCommerceCategories(locale: string) {
   try {
-    const response = await api.get(`products/categories?per_page=100&lang=${locale}`);
+    let page = 1;
+    let totalPages = 1;
+    const result: WoocomerceCategoryType[] = [];
 
-    if (response.status === 200) {
-      return (await response.data) as WoocomerceCategoryType[];
-    }
+    do {
+      const response = await api.get(
+        `products/categories?per_page=100&page=${page}&lang=${locale}`,
+      );
+
+      if (response.status === 200) {
+        totalPages = parseInt(response.headers["x-wp-totalpages"], 10);
+        const data = await response.data;
+        result.push(...data);
+
+        page++;
+      }
+    } while (page <= totalPages);
+
+    return result;
   } catch (error) {
     throw new Error(error as string);
   }
 }
 
-export async function fetchWooCommerceProductsBasedOnCategory(id: number, locale: string) {
+export async function fetchWooCommerceProductsBasedOnCategory(
+  id: number,
+  locale: string,
+) {
   try {
-    const response = await api.get(`products?category=${id}&per_page=100&lang=${locale}`);
+    const response = await api.get(
+      `products?category=${id}&per_page=100&lang=${locale}`,
+    );
 
     if (response.status === 200) {
       return (await response.data) as SingleProductDetails[];
@@ -51,9 +72,14 @@ export async function fetchWooCommerceProductsBasedOnCategory(id: number, locale
   }
 }
 
-export async function fetchWooCommerceProductDetails(id: number, locale: string) {
+export async function fetchWooCommerceProductDetails(
+  id: number,
+  locale: string,
+) {
   try {
-    const response = await api.get(`products/${id}?per_page=100&lang=${locale}`);
+    const response = await api.get(
+      `products/${id}?per_page=100&lang=${locale}`,
+    );
 
     if (response.status === 200) {
       return (await response.data) as SingleProductDetails;
@@ -63,7 +89,10 @@ export async function fetchWooCommerceProductDetails(id: number, locale: string)
   }
 }
 
-export async function fetchWooCommerceCrossProductsDetails(ids: any, locale: string) {
+export async function fetchWooCommerceCrossProductsDetails(
+  ids: any,
+  locale: string,
+) {
   // Fetch product details for each ID in the array
   try {
     // Fetch product details for each ID in the array
@@ -80,14 +109,19 @@ export async function fetchWooCommerceCrossProductsDetails(ids: any, locale: str
   }
 }
 
-  export async function fetchWooCommerceProductsTitles(searchTerm: string, locale: string) {
-    try {
-      const response = await api.get(`products?search=${searchTerm}&locale=${locale}`);
+export async function fetchWooCommerceProductsTitles(
+  searchTerm: string,
+  locale: string,
+) {
+  try {
+    const response = await api.get(
+      `products?search=${searchTerm}&locale=${locale}`,
+    );
 
-      if (response.status === 200) {
-        return (await response.data) as SingleProductTitles;
-      }
-    } catch (error) {
-      throw new Error(error as string);
+    if (response.status === 200) {
+      return (await response.data) as SingleProductTitles;
     }
+  } catch (error) {
+    throw new Error(error as string);
   }
+}
