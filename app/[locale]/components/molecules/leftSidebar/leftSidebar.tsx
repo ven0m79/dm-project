@@ -2,11 +2,8 @@
 
 import classNames from "classnames";
 import { CustomFlowbiteTheme, Sidebar as FBSidebar } from "flowbite-react";
-
 import React, { FC, memo, useCallback, useMemo } from "react";
-
 import styles from "../../../catalog/sub-catalog/Sub-catalog.module.css";
-
 import { TransformedCategoriesType } from "@app/[locale]/catalog/sub-catalog/helpers";
 import { usePathname, useRouter } from "../../../../../config";
 import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
