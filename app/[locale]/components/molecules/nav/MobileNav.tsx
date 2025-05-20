@@ -121,14 +121,15 @@ const MobileNav: FC<{}> = ({ }) => {
                 </div>
                 <ul className="mt-4 text-white">
                     {Object.keys(NavLinks).map((el) => (
+                        <Link key={el} href={NavLinks[el].link}>
                         <li
-                            key={el}
-                            className={classNames("p-2 cursor-pointer", styles["link"], {
-                                [styles["active"]]: pathname === '/lll' ? pathname === NavLinks[el].link : pathname.includes(NavLinks[el].link),
-                            })}
+                          className={classNames("p-2", styles["link"], {
+                            [styles["active"]]: pathname === '/lll' ? pathname === NavLinks[el].link : pathname.includes(NavLinks[el].link),
+                          })}
                         >
-                            <Link href={NavLinks[el].link}>{t(NavLinks[el].title)}</Link>
+                          {t(NavLinks[el].title)}
                         </li>
+                      </Link>
                     ))}
 
                     <Link
