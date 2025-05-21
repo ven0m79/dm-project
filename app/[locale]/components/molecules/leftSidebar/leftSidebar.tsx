@@ -119,6 +119,7 @@ const Content: FC<SidebarProps> = ({
     () => (locale === "ua" ? [categories?.[1] || []] : [categories?.[0] || []]),
     [categories, locale],
   );
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   const handleCollapseToggle = async (categoryId: number) => {
     setSelectedCategoryId(categoryId); // Highlight the selected category
@@ -209,7 +210,6 @@ const Content: FC<SidebarProps> = ({
         className={classNames("cursor-pointer", {
           "bg-sky-200": selectedCategoryId === category.id,
         })}
-        // Apply padding only for levels >= 2
         style={{ paddingLeft: `${paddingLeft}px` }}
       >
         <div
@@ -222,18 +222,33 @@ const Content: FC<SidebarProps> = ({
             setSelectedCategory(selectedParent?.slug || "");
             handleCollapseToggle(category.id);
 
-            if (changeURLParams) {
-              router.push(`${pathname}?category=${listCat?.[0].slug}`);
-            }
+            const targetSlug = listCat?.[0]?.slug;
+            if (targetSlug) {
+              if (changeURLParams) {
+                router.push(`${pathname}?category=${targetSlug}`);
+              }
+              if (fromProductPage) {
+                router.push(`/catalog/sub-catalog?category=${targetSlug}`);
+              }
 
-            if (fromProductPage) {
-              router.push(`/catalog/sub-catalog?category=${listCat?.[0].slug}`);
+              // ✅ Принудительный переход на iOS
+              if (isIOS) {
+                window.location.href = `/catalog/sub-catalog?category=${targetSlug}`;
+              }
+            }
+          }}
+          onTouchStart={() => {
+            const listCat = findParentCategories(items, category.id);
+            const targetSlug = listCat?.[0]?.slug;
+            if (isIOS && targetSlug) {
+              window.location.href = `/catalog/sub-catalog?category=${targetSlug}`;
             }
           }}
         >
           {category.name}
         </div>
       </FBSidebar.Item>
+
     ) : (
       // Render collapse for items with children
       <FBSidebar.Collapse
@@ -258,8 +273,8 @@ const Content: FC<SidebarProps> = ({
         {/* Recursively render children */}
         {category?.childrens?.length
           ? category.childrens.map(
-              (child) => renderNestedCategories(child, level + 1), // Increase level for deeper nesting
-            )
+            (child) => renderNestedCategories(child, level + 1), // Increase level for deeper nesting
+          )
           : null}
       </FBSidebar.Collapse>
     );
