@@ -55,11 +55,13 @@ const MobileNav: FC<{}> = ({ }) => {
     const searchParams = useSearchParams();
     const pathname = usePathname();
 
+
     const selectedCategory = useMemo(() => {
         return searchParams?.get("category")
             ? `?category=${searchParams?.get("category")}`
             : "";
     }, [searchParams]);
+    
 
     return (
 
@@ -120,17 +122,34 @@ const MobileNav: FC<{}> = ({ }) => {
                     </div>
                 </div>
                 <ul className="mt-4 text-white">
-                    {Object.keys(NavLinks).map((el) => (
-                        <Link key={el} href={NavLinks[el].link}>
-                        <li
-                          className={classNames("p-2", styles["link"], {
-                            [styles["active"]]: pathname === '/lll' ? pathname === NavLinks[el].link : pathname.includes(NavLinks[el].link),
-                          })}
-                        >
-                          {t(NavLinks[el].title)}
-                        </li>
-                      </Link>
-                    ))}
+                    {Object.keys(NavLinks).map((el) => {
+  const href = NavLinks[el].link;
+
+  // Обработка для iOS-тач
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+  const handleTouchStart = () => {
+    if (isIOS) {
+      window.location.href = href;
+    }
+  };
+
+  return (
+    <Link key={el} href={href}>
+      <li
+        onTouchStart={handleTouchStart}
+        className={classNames("p-2", styles["link"], {
+          [styles["active"]]:
+            pathname === "/lll"
+              ? pathname === href
+              : pathname.includes(href),
+        })}
+      >
+        {t(NavLinks[el].title)}
+      </li>
+    </Link>
+  );
+})}
 
                     <Link
                         className="absolute top-5 right-4"
