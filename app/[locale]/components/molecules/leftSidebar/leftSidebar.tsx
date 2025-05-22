@@ -119,43 +119,11 @@ const Content: FC<SidebarProps> = ({
     () => (locale === "ua" ? [categories?.[1] || []] : [categories?.[0] || []]),
     [categories, locale],
   );
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-  const handleCollapseToggle = async (categoryId: number) => {
-    setSelectedCategoryId(categoryId); // Highlight the selected category
-
-    // Fetch products for the selected category
-    await getCategoryDetails(categoryId, locale);
-
-    // After fetching, set the clicked category as the only open one
-    // Toggle open state
-    setOpenedCategoryIds((prevOpenedIds) => {
-      const isOpened = prevOpenedIds.includes(categoryId);
-
-      return isOpened
-        ? prevOpenedIds.filter((id) => id !== categoryId)
-        : [...prevOpenedIds, categoryId];
-    });
-
-    const listCat = findParentCategories(items, categoryId);
-
-    if (!listCat || listCat.length === 0) {
-      // Если listCat пустой, используем кликнутую категорию
-      const clickedCategory = items
-        .flatMap((item) => [item, ...(item.childrens || [])]) // Учитываем вложенные категории
-        .find((item) => item.id === categoryId);
-      if (clickedCategory?.slug) {
-        router.push(`/catalog/sub-catalog?category=${clickedCategory.slug}`);
-        setSelectedCategory(clickedCategory.slug);
-      } else {
-        console.warn("Clicked category not found or has no slug");
-      }
-    } else {
-      // Если listCat содержит элементы, используем первый
-      router.push(`/catalog/sub-catalog?category=${listCat[0].slug}`);
-      setSelectedCategory(listCat[0].slug);
-    }
-  };
+  const isIOS = useMemo(
+    () => /iPad|iPhone|iPod/.test(navigator.userAgent),
+    [],
+  );
 
   const findParentCategories = useCallback(
     (
@@ -164,29 +132,26 @@ const Content: FC<SidebarProps> = ({
       parents: TransformedCategoriesType[] = [],
     ): TransformedCategoriesType[] | null => {
       for (const category of categories) {
-        // If the target category is found, return the parents list
         if (category.id === targetCategoryId) {
-          return parents; // Return the accumulated parents when the target is found
+          return parents;
         }
 
-        // If the category has children, search recursively
         if (category.childrens && category.childrens.length > 0) {
           const foundParents = findParentCategories(
             category.childrens,
             targetCategoryId,
-            [...parents, category], // Add the current category to the parents list
+            [...parents, category],
           );
 
           if (foundParents) {
             return foundParents.filter(
               (el) =>
                 el.id !== LEFT_BAR_PARENT_ID && el.id !== LEFT_BAR_PARENT_ID_EN,
-            ); // Return the full parent path if found
+            );
           }
         }
       }
-
-      return null; // Return null if the target category is not found
+      return null;
     },
     [],
   );
@@ -197,12 +162,37 @@ const Content: FC<SidebarProps> = ({
     );
   }, [findParentCategories, items, selectedCategoryId]);
 
+  const handleCollapseToggle = async (categoryId: number) => {
+    setSelectedCategoryId(categoryId);
+    await getCategoryDetails(categoryId, locale);
+
+    const parentCategories = findParentCategories(items, categoryId);
+
+    setOpenedCategoryIds((prev) => {
+      const combined = [...prev, ...(parentCategories?.map((c) => c.id) || [])];
+      const unique = Array.from(new Map(combined.map((id) => [id, true])).keys());
+      return unique;
+    });
+
+    const listCat = findParentCategories(items, categoryId);
+
+    const targetCategory = listCat?.[0] ?? items
+      .flatMap((item) => [item, ...(item.childrens || [])])
+      .find((item) => item.id === categoryId);
+
+    if (targetCategory?.slug) {
+      const targetUrl = `/catalog/sub-catalog?category=${targetCategory.slug}`;
+      isIOS ? (window.location.href = targetUrl) : router.push(targetUrl);
+      setSelectedCategory(targetCategory.slug);
+    }
+  };
+
   const renderNestedCategories = (
     category: TransformedCategoriesType,
-    level = 0, // Level starts at 0 for root
+    level = 0,
   ) => {
-    // Apply padding starting from level 2
-    const paddingLeft = level > 1 ? level * 7 : 0; // No padding for level 0 and level 1
+    const paddingLeft = level > 1 ? level * 7 : 0;
+
     return category?.childrens?.length === 0 ? (
       <FBSidebar.Item
         as="div"
@@ -214,29 +204,25 @@ const Content: FC<SidebarProps> = ({
       >
         <div
           onClick={() => {
-            const selectedParent = items[0]?.childrens?.find(
-              (item) => item.id === category.parent,
-            );
             const listCat = findParentCategories(items, category.id);
+            const targetSlug = listCat?.[0]?.slug;
 
-            setSelectedCategory(selectedParent?.slug || "");
             handleCollapseToggle(category.id);
 
-            if (changeURLParams) {
-              router.push(`${pathname}?category=${listCat?.[0].slug}`);
-            }
-            if (fromProductPage) {
-              router.push(`/catalog/sub-catalog?category=${listCat?.[0].slug}`);
+            if (targetSlug) {
+              const targetUrl =
+                fromProductPage || changeURLParams
+                  ? `/catalog/sub-catalog?category=${targetSlug}`
+                  : `${pathname}?category=${targetSlug}`;
 
+              isIOS ? (window.location.href = targetUrl) : router.push(targetUrl);
             }
           }}
         >
           {category.name}
         </div>
       </FBSidebar.Item>
-
     ) : (
-      // Render collapse for items with children
       <FBSidebar.Collapse
         open={
           category.id === LEFT_BAR_PARENT_ID ||
@@ -252,38 +238,23 @@ const Content: FC<SidebarProps> = ({
             category.id === LEFT_BAR_PARENT_ID_EN,
           "bg-sky-200": selectedCategoryId === category.id,
         })}
-        // Apply padding only for levels >= 2
         style={{ paddingLeft: `${paddingLeft}px` }}
-        onClick={() => handleCollapseToggle(category.id)} // Fetch products on collapse open
+        onClick={() => handleCollapseToggle(category.id)}
       >
-        {/* Recursively render children */}
         {category?.childrens?.length
-          ? category.childrens.map(
-            (child) => renderNestedCategories(child, level + 1), // Increase level for deeper nesting
-          )
+          ? category.childrens.map((child) =>
+              renderNestedCategories(child, level + 1),
+            )
           : null}
       </FBSidebar.Collapse>
     );
   };
 
   return (
-    <div
-      className={classNames(
-        "flex flex-1 flex-row justify-between",
-        styles.subMenu,
-      )}
-    >
-      <div className="">
-        {/*Оцю стилізувати*/}
-        <h3 className="text-blue-950 ml-5 font-bold mt-5">
-          {items?.[0]?.name}
-        </h3>
-
-        <FBSidebar
-          aria-label="Catalog"
-          className=""
-          theme={customTheme.sidebar}
-        >
+    <div className={classNames("flex flex-1 flex-row justify-between", styles.subMenu)}>
+      <div>
+        <h3 className="text-blue-950 ml-5 font-bold mt-5">{items?.[0]?.name}</h3>
+        <FBSidebar aria-label="Catalog" className="" theme={customTheme.sidebar}>
           <FBSidebar.ItemGroup>
             {items?.map((el) => renderNestedCategories(el))}
           </FBSidebar.ItemGroup>
