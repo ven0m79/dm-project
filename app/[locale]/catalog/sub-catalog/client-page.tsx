@@ -133,13 +133,16 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                     )}
                   >
                     <div className="w-full">
-                      <Link
-                        className="cursor-pointer"
-                        locale={locale}
+                      <div
                         key={el.id}
-                        href={{
-                          pathname: `/catalog/sub-catalog/product/${el.translations[locale as any]}`,
-                          query: `category=${selectedCategory}`,
+                        className="cursor-pointer"
+                        onClick={() => {
+                          const url = `/catalog/sub-catalog/product/${el.translations[locale as any]}?category=${encodeURIComponent(selectedCategory || "")}`;
+                          if (isIOS) {
+                            router.push(url); // Программная навигация
+                          } else {
+                            window.location.href = url; // Прямая загрузка страницы
+                          }
                         }}
                       >
                         <div className="cursor-pointer flex justify-center">
@@ -156,7 +159,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                         <div className="flex justify-center">
                           <h3 className="flex justify-center h-16">{el.name}</h3>
                         </div>
-                      </Link>
+                      </div>
                     </div>
                   </div>
                 );
