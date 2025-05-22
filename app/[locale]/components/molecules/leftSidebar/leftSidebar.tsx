@@ -222,26 +222,12 @@ const Content: FC<SidebarProps> = ({
             setSelectedCategory(selectedParent?.slug || "");
             handleCollapseToggle(category.id);
 
-            const targetSlug = listCat?.[0]?.slug;
-            if (targetSlug) {
-              if (changeURLParams) {
-                router.push(`${pathname}?category=${targetSlug}`);
-              }
-              if (fromProductPage) {
-                router.push(`/catalog/sub-catalog?category=${targetSlug}`);
-              }
-
-              // ✅ Принудительный переход на iOS
-              if (isIOS) {
-                window.location.href = `/catalog/sub-catalog?category=${targetSlug}`;
-              }
+            if (changeURLParams) {
+              router.push(`${pathname}?category=${listCat?.[0].slug}`);
             }
-          }}
-          onTouchStart={() => {
-            const listCat = findParentCategories(items, category.id);
-            const targetSlug = listCat?.[0]?.slug;
-            if (isIOS && targetSlug) {
-              window.location.href = `/catalog/sub-catalog?category=${targetSlug}`;
+            if (fromProductPage) {
+              router.push(`/catalog/sub-catalog?category=${listCat?.[0].slug}`);
+
             }
           }}
         >
