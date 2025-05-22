@@ -61,7 +61,7 @@ const MobileNav: FC<{}> = ({ }) => {
             ? `?category=${searchParams?.get("category")}`
             : "";
     }, [searchParams]);
-    
+
 
     return (
 
@@ -123,33 +123,33 @@ const MobileNav: FC<{}> = ({ }) => {
                 </div>
                 <ul className="mt-4 text-white">
                     {Object.keys(NavLinks).map((el) => {
-  const href = NavLinks[el].link;
+                        const href = NavLinks[el].link;
 
-  // Обработка для iOS-тач
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+                        // Обработка для iOS-тач
+                        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-  const handleTouchStart = () => {
-    if (isIOS) {
-      window.location.href = href;
-    }
-  };
+                        const handleTouchStart = () => {
+                            if (isIOS) {
+                                window.location.href = href;
+                            }
+                        };
 
-  return (
-    <Link key={el} href={href}>
-      <li
-        onTouchStart={handleTouchStart}
-        className={classNames("p-2", styles["link"], {
-          [styles["active"]]:
-            pathname === "/lll"
-              ? pathname === href
-              : pathname.includes(href),
-        })}
-      >
-        {t(NavLinks[el].title)}
-      </li>
-    </Link>
-  );
-})}
+                        return (
+                            <Link key={el} href={href}>
+                                <li
+                                    onTouchStart={handleTouchStart}
+                                    className={classNames("p-2", styles["link"], {
+                                        [styles["active"]]:
+                                            pathname === "/lll"
+                                                ? pathname === href
+                                                : pathname.includes(href),
+                                    })}
+                                >
+                                    {t(NavLinks[el].title)}
+                                </li>
+                            </Link>
+                        );
+                    })}
 
                     <Link
                         className="absolute top-5 right-4"
