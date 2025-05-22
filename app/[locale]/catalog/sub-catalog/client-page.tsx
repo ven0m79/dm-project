@@ -10,6 +10,7 @@ import { categoriesCreation, TransformedCategoriesType } from "./helpers";
 import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
 import { getCategoriesIds } from "@app/[locale]/components/constants";
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
+import { useRouter } from "next/navigation";
 
 export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   const {
@@ -24,6 +25,8 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
 
   const currentIdsData = useMemo(() => getCategoriesIds(locale), [locale]);
   const isMobile = useIsMobile();
+  const router = useRouter();
+  const isIOS = typeof window !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
   const getData = useCallback(async () => {
     try {
@@ -91,19 +94,20 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                     )}
                   >
                     <div className="w-full">
-                      <Link
-                        className="cursor-pointer"
-                        locale={locale}
+                      <div
                         key={el.id}
-                        href={{
-                          pathname: `/catalog/sub-catalog/product/${el.translations[locale as any]}`,
-                          query: `category=${selectedCategory}`,
+                        className="cursor-pointer"
+                        onClick={() => {
+                          const url = `/catalog/sub-catalog/product/${el.translations[locale as any]}?category=${encodeURIComponent(selectedCategory || "")}`;
+                          if (isIOS) {
+                            router.push(url); // Программная навигация
+                          } else {
+                            window.location.href = url; // Прямая загрузка страницы
+                          }
                         }}
                       >
                         <div>{el.sku}</div>
-                        <div
-                          className={"cursor-pointer flex flex-1 justify-center"}
-                        >
+                        <div className="cursor-pointer flex flex-1 justify-center">
                           <img
                             src={el.images[0].src}
                             alt={el.images[0].alt}
@@ -111,13 +115,13 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                             height={137}
                             className="w-full h-auto"
                           />
-                          {/* <div className="h-px mt-24 ml-20 text-[16px] flex self-center absolute text-red-500 font-bold">{el.price} $</div> */}
                         </div>
                         <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center"></div>
                         <div className="flex justify-center h-16">
-                          <h3 className="">{el.name} </h3>
+                          <h3>{el.name}</h3>
                         </div>
-                      </Link>
+                      </div>
+
                     </div>
                   </div>
                 ) : (
