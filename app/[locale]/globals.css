@@ -101,6 +101,11 @@ button {
   line-height: 27px;
   list-style-type: disc;
 }
+.ul1 > li {
+  color: #002766 !important;
+  margin-right: 20px;
+  padding-right: 20px;
+}
 
 .ul1 > li > span {
   color: #0061aa !important;
