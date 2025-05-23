@@ -13,6 +13,7 @@ import {
   ComboboxOption,
   ComboboxOptions,
 } from "@headlessui/react";
+import { useRouter } from "next/navigation";
 
 type TagType = {
   id: number;
@@ -31,6 +32,9 @@ type Product = {
 const MobileHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Dispatch<SetStateAction<string>>, products: Product[] }> = ({ searchTerm, setSearchTerm, loading, products }) => {
   const t = useTranslations("Header");
   const t2 = useTranslations("Index");
+
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const router = useRouter();
 
   // Создаём ref для поля поиска
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -78,40 +82,59 @@ const MobileHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Di
   return <div className="flex flex-1 flex-col self-start  h-svh border-2 border-cyan-500">
     <div className={classNames("flex flex-1 flex-row justify-center w-screen", [styles.logo])}>
       <div className="ml-4 w-1/4">
-        <Link
-          href={"/catalog"}
-          className="flex items-center cursor-pointer">
+        <div
+          className="flex items-center cursor-pointer"
+          onClick={() => {
+            const target = "/catalog";
+            isIOS ? (window.location.href = target) : router.push(target);
+          }}
+        >
           <Image
             src="/go-products.webp"
             width={25}
             height={25}
             alt="Перейти до каталогу продуктів"
-          /> <span className="ml-2 text-sm">{t("products")}</span>
-        </Link>
+          />
+          <span className="ml-2 text-sm">{t("products")}</span>
+        </div>
       </div>
+
       <div className="flex justify-center w-1/2">
-        <Link href={"/home"}>
+        <div
+          className="cursor-pointer"
+          onClick={() => {
+            const target = "/home";
+            isIOS ? (window.location.href = target) : router.push(target);
+          }}
+        >
           <Image
-            className="cursor-pointer"
             src="/logo-DM-project.png"
             width={120}
             height={75}
             alt="Logo DM Project"
           />
-        </Link>
+        </div>
       </div>
+
       <div className="flex justify-center w-1/4">
-        <Link href={"/catalog"}>
+        <div
+          className="cursor-pointer"
+          onClick={() => {
+            const target = "/catalog";
+            isIOS ? (window.location.href = target) : router.push(target);
+          }}
+        >
           <Image
-            className="opacity-0 cursor-pointer"
+            className="opacity-0"
             src="/go-menu.webp"
             width={35}
             height={35}
             alt="Відкити меню"
           />
-        </Link>
+        </div>
       </div>
     </div>
+
     <div className={classNames("flex justify-center items-center h-[30px] text-white text-nowrap bg-[#0061AA]", styles["backText"])}>
       {t2("authorized-representativeDreger1")}<span className="font-bold mx-1">{t2("authorized-representativeDreger2")}</span> {t2("authorized-representativeDreger3")}
     </div>
