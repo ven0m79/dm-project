@@ -212,48 +212,35 @@ const Content: FC<SidebarProps> = ({
     return category?.childrens?.length === 0 ? (
       <FBSidebar.Item
               as="div"
-              key={category.id}
-              className={classNames("cursor-pointer", {
-                "bg-sky-200": selectedCategoryId === category.id,
-              })}
-              style={{ paddingLeft: `${paddingLeft}px` }}
-            >
-              <div
-                onClick={() => {
-                  const selectedParent = items[0]?.childrens?.find(
-                    (item) => item.id === category.parent,
-                  );
-                  const listCat = findParentCategories(items, category.id);
-      
-                  setSelectedCategory(selectedParent?.slug || "");
-                  handleCollapseToggle(category.id);
-      
-                  const targetSlug = listCat?.[0]?.slug;
-                  if (targetSlug) {
-                    if (changeURLParams) {
-                      router.push(`${pathname}?category=${targetSlug}`);
-                    }
-                    if (fromProductPage) {
-                      router.push(`/catalog/sub-catalog?category=${targetSlug}`);
-                    }
-      
-                    // ✅ Принудительный переход на iOS
-                    if (isIOS) {
-                      window.location.href = `/catalog/sub-catalog?category=${targetSlug}`;
-                    }
-                  }
-                }}
-                onTouchStart={() => {
-                  const listCat = findParentCategories(items, category.id);
-                  const targetSlug = listCat?.[0]?.slug;
-                  if (isIOS && targetSlug) {
-                    window.location.href = `/catalog/sub-catalog?category=${targetSlug}`;
-                  }
-                }}
-              >
-                {category.name}
-              </div>
-            </FBSidebar.Item>
+        key={category.id}
+        className={classNames("cursor-pointer", {
+          "bg-sky-200": selectedCategoryId === category.id,
+        })}
+        // Apply padding only for levels >= 2
+        style={{ paddingLeft: `${paddingLeft}px` }}
+      >
+        <div
+          onClick={() => {
+            const selectedParent = items[0]?.childrens?.find(
+              (item) => item.id === category.parent,
+            );
+            const listCat = findParentCategories(items, category.id);
+
+            setSelectedCategory(selectedParent?.slug || "");
+            handleCollapseToggle(category.id);
+
+            if (changeURLParams) {
+              router.push(`${pathname}?category=${listCat?.[0].slug}`);
+            }
+
+            if (fromProductPage) {
+              router.push(`/catalog/sub-catalog?category=${listCat?.[0].slug}`);
+            }
+          }}
+        >
+          {category.name}
+        </div>
+      </FBSidebar.Item>
     ) : (
       // Render collapse for items with children
       <FBSidebar.Collapse
