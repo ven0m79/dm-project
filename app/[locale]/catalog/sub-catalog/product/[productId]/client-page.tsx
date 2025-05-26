@@ -178,7 +178,7 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                         <div
                           className={classNames("text-normal", styles.brand)}
                         >
-                          {"Бренд: "} {details?.brands[0]?.name}
+                          {"Виробник: "} {details?.brands[0]?.name}
                         </div>
                         <br />
 

@@ -26,8 +26,8 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
               <Image
                 src={vystavka}
                 className="w-full mt-2 px-1"
-                width={640}
-                height={480}
+                width={384}
+                height={518}
                 alt={""} />
             </div>
             <div className={classNames("mx-2 my-0 indent-5 text-justify")}>
@@ -64,9 +64,9 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
             <div>
               <Image
                 src={vystavka}
-                className="float-left w-full mr-2 mt-2 max-w-[430px]"
-                width={640}
-                height={480}
+                className="float-left w-full mr-2 mt-2 max-w-[240px]"
+                width={384}
+                height={518}
                 alt={""} />
             </div>
             <div className={classNames("flex flex-1 flex-col max-w-full min-w-[500px] text-[10px] lg:text-[14px] xl:text-[18px]", styles.aboutText)}>

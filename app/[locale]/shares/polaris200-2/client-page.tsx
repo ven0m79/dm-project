@@ -23,7 +23,7 @@ const SharesPolaris2002 = () => {
                     [styles.catalogContainerDeeper])}>
                     <p className="text-justify text-[18px] font-bold sm:text-[20px]">{t('shares-polaris200-2-title')}</p>
                     <div className="flex flex-wrap">
-                        <p className="indent-5 text-justify">{t('shares-polaris200-2-prehead')}<span className="font-bold text-nowrap">11 556,00 у.о.</span></p>
+                        <p className="indent-5 text-justify">{t('shares-polaris200-2-prehead')}<span className="font-bold text-nowrap">21 079,00 у.о.</span></p>
                         <div className="w-full flex flax-wrap justify-center my-2">
                             <Image
                                 className={classNames("w-1/2",styles.img)}
