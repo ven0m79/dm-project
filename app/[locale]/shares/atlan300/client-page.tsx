@@ -26,10 +26,10 @@ const SharesAtlan = () => {
           <div className="flex flex-col w-full lg:flex-row">
             <div className="lg:w-1/2 w-full  flex flax-wrap justify-center my-2">
               <Image
-                className={classNames("w-auto", styles.img)}
+                className={"w-auto h-full"}
                 src={atlan300_1}
-                width={490}
-                height={633}
+                width={390}
+                height={533}
                 alt="Atlan300"
               />
             </div>
