@@ -36,7 +36,7 @@ const SharesAtlan = () => {
             <div className="lg:w-1/2 w-full pl-0 lg:pl-10">
               -{" "}
               <span className="font-bold">
-                {t("shares-fabius-specific1")}
+                {t("shares-atlan300-specific1")}
               </span>
               <br />- {t("shares-atlan300-specific2")}
               <br />- {t("shares-atlan300-specific3")}
