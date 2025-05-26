@@ -14,13 +14,13 @@
 
 .title {
     font-size: 22px;
-    color: black;
+    color: #002766;
     margin-bottom: 10px;
     font-weight: bold;
 }
 .brand {
     font-size: 16px;
-    color: black;
+    color: #0061AA;
     text-transform: uppercase;
 }
 .available {

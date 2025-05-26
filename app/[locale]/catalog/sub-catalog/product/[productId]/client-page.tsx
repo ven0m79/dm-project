@@ -17,6 +17,7 @@ import { Tabs, CustomFlowbiteTheme } from "flowbite-react";
 import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import DOMPurify from "dompurify";
+import { useTranslations } from "next-intl";
 
 const customTheme: CustomFlowbiteTheme = {
   tabs: {
@@ -65,6 +66,7 @@ type Params = {
 };
 
 const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
+  const t = useTranslations("Product");
   const { productId }: Params = useParams<any>();
   const [loading, setLoading] = useState<boolean>(false);
   const [details, setDetails] = useState<SingleProductDetails | null>(null);
@@ -157,18 +159,18 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                   >
                     <div className="flex flex-row w-full">
                       <div>
-                      <div className={classNames("my-4 w-full h-auto", styles.imageRadius)}>
-                        <img
-                          src={details?.images[0].src}
-                          alt={details?.images[0].alt}
-                          width={450}
-                          height={475}
-                          className="w-full h-auto"
-                        />
-                      </div>
-                      <div>
+                        <div className={classNames("my-4 w-full h-auto", styles.imageRadius)}>
+                          <img
+                            src={details?.images[0].src}
+                            alt={details?.images[0].alt}
+                            width={450}
+                            height={475}
+                            className="w-full h-auto"
+                          />
+                        </div>
+                        <div>
 
-                      </div>
+                        </div>
                       </div>
                       <div className="px-1 pt-8 sm:pt-28 w-1/2">
                         <h1 className={classNames("", styles.title)}>
@@ -178,7 +180,7 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                         <div
                           className={classNames("text-normal", styles.brand)}
                         >
-                          {"Виробник: "} {details?.brands[0]?.name}
+                          {t("product-brand")} {details?.brands[0]?.name}
                         </div>
                         <br />
 
@@ -206,7 +208,7 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                         <div className="flex flex-col justify-between">
                           <div className={styles.downloadable}>
                             <Link href={"../../../../contacts"}>
-                              Запит комерційної пропозиції
+                              {t("product-request")}
                             </Link>
                           </div>
                           <br />
@@ -217,7 +219,7 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                               className={classNames("", styles.downloadable)}
                             >
                               <Link href={"../../../../services"}>
-                                Сервісне обслуговування
+                                {t("product-services")}
                               </Link>
                             </div>
                           )}
