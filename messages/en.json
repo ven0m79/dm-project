@@ -60,6 +60,11 @@
     "placeholder": "Search...",
     "products": "Products"
   },
+      "Product": {
+    "product-brand": "Manufacture:",
+    "product-request": "Request a Quote",
+    "product-services": "Our Services"
+  },
   "AboutPage": {
     "information1": "DM-PROJECT was founded in 2009 as an authorized representative of the German company Dräger in Ukraine, the world leader in the production of human life support systems.",
     "information2": "Today, the company's main activities include not only the sale of high-quality medical equipment, but also the development and implementation of integrated solutions for medical institutions, from design to service and staff training.",
