@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Head from 'next/head';
 import styles from './Project.module.css';
 import classNames from "classnames";
+import imgProj from '../../../public/projectings.webp';
 
 
 import { MainLayout } from "@app/[locale]/components/templates";
@@ -12,6 +13,7 @@ import { unstable_setRequestLocale } from "next-intl/server";
 
 import { useTranslations } from 'next-intl';
 import { useIsMobile } from "../components/hooks/useIsMobile";
+import Image from "next/image";
 
 export const ClientPage = () => {
   const t = useTranslations('ProjectPage');
@@ -25,15 +27,22 @@ export const ClientPage = () => {
           {t('title')}
         </div>
         <div className={styles.stroke}></div>
+
         <div className={classNames("flex flex-1 flex-row justify-normal items-start")}>
           <div className={classNames("flex flex-col justify-center items-start", styles.leftContainer)}>
 
             <div className={classNames("justify-normal items-start indent-4 mt-8")}>
               <p className=" pb-4">{t('project-head1')}</p>
+                            <Image
+                className="float-left mr-5 mt-2 w-full h-auto"
+                src={imgProj}
+                alt="photo"
+              />
             </div>
 
             <div className={classNames("justify-normal items-start indent-4 mt-8")}>
               <p className="text-bold pb-4">{t('project-head2')}</p>
+
             </div>
 
             <div className={classNames("justify-normal items-start indent-4 mt-8")}>
