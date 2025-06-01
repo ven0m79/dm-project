@@ -188,7 +188,7 @@ export const ClientPage = () => {
             </div>
           </div>
         </Link>
-        <Link
+        {/* <Link
           href={{
             pathname: "/shares/AWD655-2H-V1",
           }}
@@ -217,7 +217,7 @@ export const ClientPage = () => {
               />
             </div>
           </div>
-        </Link>
+        </Link> */}
         <Link
           href={{
             pathname: "/shares/AWD655-2H-V2",
