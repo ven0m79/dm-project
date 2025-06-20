@@ -118,7 +118,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                         </div>
                         <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center"></div>
                         <div className="flex justify-center h-16">
-                          <h3>{el.name}</h3>
+                          <h3 className={classNames(styles.headSubCatalogTitle)}>{el.name}</h3>
                         </div>
                       </div>
 
@@ -211,7 +211,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                         </div>
                         <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center"></div>
                         <div className="flex justify-center h-16">
-                          <h3 className="text-center">{el.name} </h3>
+                          <h3 className={classNames("text-center", styles.headSubCatalogTitle)}>{el.name} </h3>
                         </div>
                       </Link>
                     </div>
