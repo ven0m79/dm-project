@@ -64,9 +64,13 @@
     border-radius: 10px 10px 0 0;
     padding-top: 5px;
     font-size: 18px;
+
+}
+.headSubCatalogTitle {
+color: #002766
 }
 .headSubCatalogBlock {
-    color: black;
+    color: #002766;
     display: flex;
     text-align: center;
     padding: 5px;
@@ -81,7 +85,7 @@
 }
 .headSubCatalogBlockMini {
     font-size: 12px;
-    color: black;
+    color: #002766;
     display: flex;
     text-align: center;
     padding: 5px;
