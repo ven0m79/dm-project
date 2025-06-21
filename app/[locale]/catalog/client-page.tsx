@@ -7,6 +7,7 @@ import { Link } from "config";
 import Image from "next/image";
 import classNames from "classnames";
 import imgCons from "./icons-photo/consumables.webp";
+import imgMri from "./icons-photo/mri.webp";
 import imgFurniture from "./icons-photo/furniture-med.webp";
 import imgIntensive from "./icons-photo/intencive-terapy.webp";
 import imgMedgaz from "./icons-photo/med-gaz.webp";
@@ -14,7 +15,7 @@ import imgNeonat from "./icons-photo/neonat.webp";
 import imgOper from "./icons-photo/oper.webp";
 import imgSteriliz from "./icons-photo/sterilization.webp";
 import { useTranslations } from "next-intl";
-import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile"; 
+import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 
 export const ClientPage = () => {
   const t = useTranslations("Catalog1");
@@ -163,6 +164,29 @@ export const ClientPage = () => {
             />
           </div>
         </Link>
+        <Link
+          href={{
+            pathname: "/catalog/sub-catalog",
+            query: "category=mri-equipment",
+          }}
+        >
+          <div
+            className={classNames(
+              "flex flex-row items-center rounded-xl mx-1",
+              styles["block-decisions"],
+            )}
+          >
+            <span className={styles.span}>{t("mrt")}</span>
+            <Image
+              className={styles.img}
+              src={imgMri}
+              width={130}
+              height={130}
+              alt={t("mrt")}
+            />
+          </div>
+        </Link>
+
         <Link
           href={{
             pathname: "/catalog/sub-catalog",

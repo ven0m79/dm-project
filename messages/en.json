@@ -133,7 +133,8 @@
     "candd-equipment": "Cleaning and desinfecting equipment",
     "gas-systems": "Gas Management Systems",
     "other-equipment": "Other hospital equipment",
-    "accessories": "Accessories"
+    "accessories": "Accessories",
+    "mrt":"MRI equipment"
   },
   
   "ContactsPage": {
