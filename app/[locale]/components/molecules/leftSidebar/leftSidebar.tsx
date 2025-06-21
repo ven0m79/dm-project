@@ -197,6 +197,8 @@ const Content: FC<SidebarProps> = ({
     );
   }, [findParentCategories, items, selectedCategoryId]);
 
+
+  const customFirstLevelOrder = ["or-equipment", "icu-equipment", "neonatal-equipment", "cleaning-and-desinfecting-equipment", "gas-management-systems", "furniture", "mri-equipment", "accessories"] // Введи свої slug-и тут\
   const renderNestedCategories = (
     category: TransformedCategoriesType,
     level = 0, // Level starts at 0 for root
@@ -258,10 +260,20 @@ const Content: FC<SidebarProps> = ({
       >
         {/* Recursively render children */}
         {category?.childrens?.length
-          ? category.childrens.map(
-            (child) => renderNestedCategories(child, level + 1), // Increase level for deeper nesting
-          )
+          ? [...category.childrens]
+            .sort((a, b) => {
+              if (level === 0) {
+                // Довільний порядок згідно customFirstLevelOrder
+                const aIndex = customFirstLevelOrder.indexOf(a.slug);
+                const bIndex = customFirstLevelOrder.indexOf(b.slug);
+
+                return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
+              }
+              return a.name.localeCompare(b.name); // алфавітне сортування для інших рівнів
+            })
+            .map((child) => renderNestedCategories(child, level + 1))
           : null}
+
       </FBSidebar.Collapse>
     );
   };
