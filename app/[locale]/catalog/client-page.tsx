@@ -7,6 +7,7 @@ import { Link } from "config";
 import Image from "next/image";
 import classNames from "classnames";
 import imgCons from "./icons-photo/consumables.webp";
+import imgMri from "./icons-photo/mri.webp";
 import imgFurniture from "./icons-photo/furniture-med.webp";
 import imgIntensive from "./icons-photo/intencive-terapy.webp";
 import imgMedgaz from "./icons-photo/med-gaz.webp";
@@ -178,7 +179,7 @@ export const ClientPage = () => {
             <span className={styles.span}>{t("mrt")}</span>
             <Image
               className={styles.img}
-              src={imgCons}
+              src={imgMri}
               width={130}
               height={130}
               alt={t("mrt")}
