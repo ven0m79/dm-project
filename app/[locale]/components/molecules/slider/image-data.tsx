@@ -62,6 +62,14 @@ export const articlesUa: {
     more: "Перейти в розділ",
   },
   slide7: {
+    title: "Обладнання для кабінетів МРТ",
+    description: "Наркозно-дихальний апарат для роботи при МРТ, монітори пацієнта для роботи при МРТ",
+    link: "/catalog/sub-catalog?category=mri-equipment",
+    img1: "/slider-photo/mri(back).png",
+    img2: "/slider-photo/mri.png",
+    more: "Перейти в розділ",
+  },
+    slide8: {
     title: "Витратні матеріали та аксесуари",
     description: "Дихальні контури, фільтри, сорбент, маски, канюлі, аксесуари для моніторів, флоуметри, зволожувачі та багато іншого",
     link: "/catalog/sub-catalog?category=accessories",
@@ -122,7 +130,15 @@ export const articlesEng: {
     img2: "/slider-photo/furniture-med.png",
     more: "Read more",
   },
-  slide7: {
+    slide7: {
+    title: "MRI equipment",
+    description: "MRI-compatible anesthesia machine, MRI-compatible patient monitors",
+    link: "/catalog/sub-catalog?category=mri-equipment",
+    img1: "/slider-photo/mri(back).png",
+    img2: "/slider-photo/mri.png",
+    more: "Read more",
+  },
+  slide8: {
     title: "Consumables and accessories",
     description: "Breathing circuits, filters, sorbent, masks, cannulas, monitor accessories, flowmeters, humidifiers and much more",
     link: "/catalog/sub-catalog?category=accessories",
