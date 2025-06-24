@@ -53,7 +53,6 @@ const Header = () => {
       const response = await api.get("products?per_page=100", {
         params: {
           search: term,
-          per_page: 20,
           lang: locale,
         },
       });
