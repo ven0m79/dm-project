@@ -117,9 +117,9 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
                     styles["contactsGroup"]
                 )}
             >
-                <div>+380 44 520-12-24</div>
+                <div>+380 66 504-44-03</div>
                 <div className="pt-1">+380 66 358-98-10</div>
-                <div className="pl-10">(cервіс)</div>
+                <div className="pl-0">(cервісний відділ)</div>
             </div>
             <div className={styles.contactsGroupIcons}>
                 <Image
