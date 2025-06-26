@@ -118,8 +118,9 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
                 )}
             >
                 <div>+380 66 504-44-03</div>
+                <div className="pl-0">{t("sale-department")}</div>
                 <div className="pt-1">+380 66 358-98-10</div>
-                <div className="pl-0">(cервісний відділ)</div>
+                <div className="pl-0">{t("service-department")}</div>
             </div>
             <div className={styles.contactsGroupIcons}>
                 <Image
