@@ -58,7 +58,9 @@
   },
   "Header": {
     "placeholder": "Пошук...",
-    "products": "Продукти"
+    "products": "Продукти",
+    "sale-department": "(відділ продажів)",
+    "service-department": "(cервісний відділ)"
   },
     "Product": {
     "product-brand": "Виробник:",
