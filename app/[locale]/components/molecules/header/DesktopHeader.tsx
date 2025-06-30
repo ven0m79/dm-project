@@ -158,7 +158,7 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
 
                         {products.length > 0 && (
                             <ComboboxOptions
-                                anchor="bottom"
+                                anchor="bottom start"
                                 transition
                                 style={{ width: "calc(var(--input-width) * 2)" }}
                                 className={clsx(
