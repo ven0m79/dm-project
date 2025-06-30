@@ -161,7 +161,7 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
                                 anchor="bottom"
                                 transition
                                 className={clsx(
-                                    "w-[calc(200%)] rounded-xl border-2 border-[#0061AA] bg-white p-1 [--anchor-gap:var(--spacing-1)] empty:invisible z-50",
+                                    "w-[var(--input-width*2)] min-w-[200%] rounded-xl border-2 border-[#0061AA] bg-white p-1 [--anchor-gap:var(--spacing-1)] empty:invisible z-50",
                                     "transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0"
                                 )}
                             >
