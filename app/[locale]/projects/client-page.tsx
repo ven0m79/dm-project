@@ -6,6 +6,7 @@ import Head from 'next/head';
 import styles from './Project.module.css';
 import classNames from "classnames";
 import imgProj from '../../../public/projectings.webp';
+import imgProj1 from '../../../public/projectings1.webp';
 
 
 import { MainLayout } from "@app/[locale]/components/templates";
@@ -33,10 +34,10 @@ export const ClientPage = () => {
 
             <div className={classNames("justify-normal items-start indent-4 mt-8")}>
               <p className=" pb-4">{t('project-head1')}</p>
-                            <Image
+              <Image
                 className="float-left mr-5 mt-2 w-full h-auto"
                 src={imgProj}
-                alt="photo"
+                alt="projectings"
               />
             </div>
 
@@ -130,7 +131,11 @@ export const ClientPage = () => {
             <div className={classNames("")}>
               {t('project-paragraph24')}
             </div>
-
+              <Image
+                className="float-left mr-5 mt-2 w-full h-auto"
+                src={imgProj1}
+                alt="projectings"
+              />
           </div>
         </div>
       </div>
