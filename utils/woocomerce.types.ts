@@ -13,6 +13,10 @@ export type WoocomerceCategoryType = {
     self?: { href: string }[];
     collection?: { href: string }[];
   };
+    translations?: {
+    ua?: number;
+    en?: number;
+  };
 };
 
 export type ImageType = {

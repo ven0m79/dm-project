@@ -198,7 +198,52 @@ const Content: FC<SidebarProps> = ({
   }, [findParentCategories, items, selectedCategoryId]);
 
 
-  const customFirstLevelOrder = ["or-equipment", "icu-equipment", "neonatal-equipment", "cleaning-and-desinfecting-equipment", "gas-management-systems", "furniture", "mri-equipment", "accessories"] // Введи свої slug-и тут\
+  const customFirstLevelOrder = useMemo(() => {
+    const uaCategories = categories?.[1]?.childrens || [];
+    const enCategories = categories?.[0]?.childrens || [];
+
+    // Порядок, який ти хочеш, тільки для українських категорій
+    const uaOrder = [
+      "or-equipment",
+      "icu-equipment",
+      "neonatal-equipment",
+      "cleaning-and-desinfecting-equipment",
+      "gas-management-systems",
+      "furniture",
+      "mri-equipment",
+      "accessories",
+    ];
+
+    if (locale === "ua") {
+      return uaOrder;
+    }
+
+    if (locale === "en") {
+      // Автоматично будуємо порядок для англійської мови
+      const orderedEnSlugs = uaOrder
+        .map((uaSlug) => {
+          const uaCat = uaCategories.find((cat) => cat.slug === uaSlug);
+          const enId = uaCat?.translations?.en;
+          const enCat = enCategories.find((cat) => cat.id === enId);
+
+          console.log({
+            uaSlug,
+            uaCat,
+            enId,
+            enCat,
+          });
+          console.log("categories[1]:", categories?.[1]);
+          console.log("categories[0]:", categories?.[0]);
+
+          return enCat?.slug;
+        })
+        .filter(Boolean); // Видаляємо undefined, якщо щось не знайшли
+
+      return orderedEnSlugs;
+    }
+
+    return [];
+  }, [categories, locale]);
   const renderNestedCategories = (
     category: TransformedCategoriesType,
     level = 0, // Level starts at 0 for root
@@ -262,14 +307,12 @@ const Content: FC<SidebarProps> = ({
         {category?.childrens?.length
           ? [...category.childrens]
             .sort((a, b) => {
-              if (level === 0) {
-                // Довільний порядок згідно customFirstLevelOrder
+              if (level === 0 && customFirstLevelOrder.length > 0) {
                 const aIndex = customFirstLevelOrder.indexOf(a.slug);
                 const bIndex = customFirstLevelOrder.indexOf(b.slug);
-
                 return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
               }
-              return a.name.localeCompare(b.name); // алфавітне сортування для інших рівнів
+              return a.name.localeCompare(b.name);
             })
             .map((child) => renderNestedCategories(child, level + 1))
           : null}
