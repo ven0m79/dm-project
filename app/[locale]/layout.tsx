@@ -35,15 +35,15 @@ export default function RootLayout({
 
   return (
     <html lang={locale}>
-      <head>
-        {/* Google tag (gtag.js) */}
+            <head>
+        {/* ✅ Обидва скрипти у <head> */}
         <Script
+          strategy="beforeInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=AW-17295797148"
-          strategy="afterInteractive"
         />
         <Script
           id="gtag-init"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
@@ -54,7 +54,6 @@ export default function RootLayout({
           }}
         />
       </head>
-
       <body
         className={cn(
           "flex min-h-screen overflow-x-hidden bg-gray-950 text-gray-50",
