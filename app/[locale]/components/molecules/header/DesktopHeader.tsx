@@ -194,7 +194,7 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
                         styles["socialMedia"]
                     )}
                 >
-                    <Link href="http://youtube.com">
+                    <Link href="https://youtube.com/@draeger?si=cNuSHUm57sHZvnkI">
                         <Image
                             src="/youtube-ico.jpg"
                             width={30}
