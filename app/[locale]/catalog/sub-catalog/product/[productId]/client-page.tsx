@@ -205,7 +205,7 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                         ) : null}
                         <div className="sm:h-[80px] h-[30px]"></div>
                         <br />
-                        <div className="flex flex-col justify-between">
+                        <div className="flex flex-col justify-between items-center">
                           <div className={styles.downloadable}>
                             <Link href={"../../../../contacts"}>
                               {t("product-request")}
@@ -216,7 +216,7 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                             <div className=""></div>
                           ) : (
                             <div
-                              className={classNames("", styles.downloadable)}
+                              className={classNames("flex items-center", styles.downloadable)}
                             >
                               <Link href={"../../../../services"}>
                                 {t("product-services")}
