@@ -117,9 +117,11 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
                     styles["contactsGroup"]
                 )}
             >
-                <div>+380 66 504-44-03</div>
+                <div>
+                    <a href="tel:+380665044403" className="block hover:none">
+                        +380 66 504-44-03</a></div>
                 <div className="pl-0">{t("sale-department")}</div>
-                <div className="pt-1">+380 66 358-98-10</div>
+                <div className="pt-1"><a href="tel:+380665044403" className="block hover:none">+380 66 358-98-10</a></div>
                 <div className="pl-0">{t("service-department")}</div>
             </div>
             <div className={styles.contactsGroupIcons}>
@@ -135,9 +137,15 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
                     styles["contactsGroup"]
                 )}
             >
-                <div>allinfo@dm-project.com.ua</div>
-                <div>sales@dm-project.com.ua</div>
-                <div>service@dm-project.com.ua</div>
+                <div>  <a href="mailto:allinfo@dm-project.com.ua" className="block hover:underline">
+                    allinfo@dm-project.com.ua
+                </a></div>
+                <div>  <a href="mailto:sales@dm-project.com.ua" className="block hover:underline">
+                    sales@dm-project.com.ua
+                </a></div>
+                <div>  <a href="mailto:service@dm-project.com.ua" className="block hover:underline">
+                    service@dm-project.com.ua
+                </a></div>
             </div>
             <div className={classNames("mx-auto max-w-76", styles["search"])}>
                 <Combobox value={searchTerm}>
