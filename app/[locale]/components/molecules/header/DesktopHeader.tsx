@@ -137,13 +137,13 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
                     styles["contactsGroup"]
                 )}
             >
-                <div>  <a href="mailto:allinfo@dm-project.com.ua" className="block hover:underline">
+                <div>  <a href="mailto:allinfo@dm-project.com.ua" className="block hover:none">
                     allinfo@dm-project.com.ua
                 </a></div>
-                <div>  <a href="mailto:sales@dm-project.com.ua" className="block hover:underline">
+                <div>  <a href="mailto:sales@dm-project.com.ua" className="block hover:none">
                     sales@dm-project.com.ua
                 </a></div>
-                <div>  <a href="mailto:service@dm-project.com.ua" className="block hover:underline">
+                <div>  <a href="mailto:service@dm-project.com.ua" className="block hover:none">
                     service@dm-project.com.ua
                 </a></div>
             </div>
