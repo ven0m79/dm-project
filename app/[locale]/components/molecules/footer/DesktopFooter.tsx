@@ -34,7 +34,7 @@ const DesktopFooter: FC<{}> = ({ }) => {
                             styles["socialMedia"]
                         )}
                     >
-                        <Link href="http://youtube.com">
+                        <Link href="https://youtube.com/@draeger?si=cNuSHUm57sHZvnkI">
                             <Image
                                 src="/youtube3.png"
                                 width={30}
@@ -210,6 +210,21 @@ const DesktopFooter: FC<{}> = ({ }) => {
                         )}
                     >
                         {t("other-equipment")}
+                    </div>
+                </Link>
+                <Link
+                    href="/catalog/sub-catalog?category=mri-equipment"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        window.location.href = `/catalog/sub-catalog?category=mri-equipment`;
+                      }}
+                >
+                    <div
+                        className={classNames(
+                            "font-normal mt-1 ml-5 hover:text-green-600"
+                        )}
+                    >
+                        {t("mri-equipment")}
                     </div>
                 </Link>
                 <Link
