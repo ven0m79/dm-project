@@ -103,7 +103,7 @@ export const ClientPage = () => {
                 src={mail}
                 width={30}
                 height={30}
-                alt="logo_mail"
+                alt="logo_email"
               />
               <span>allinfo@dm-project.com.ua<br />
                 sales@dm-project.com.ua<br />
