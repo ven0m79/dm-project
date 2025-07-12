@@ -24,20 +24,34 @@ export const ClientPage = () => {
   const isMobile = useIsMobile();
   console.log({ isMobile });
 
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
+  const [status, setStatus] = useState('');
+
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     const data = { name, mobile, medicalFacility, city, email, message };
-    //console.log(data);
-    fetch('/api/contact', {
+
+    fetch('/api/send', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     })
-      .then(response => response.json())
-      .then(result => console.log('Success:', result))
-      .catch(error => console.error('Error:', error));;
+      .then(async response => {
+        console.log("📡 HTTP status:", response.status); // ⬅️ Статус відповіді
+
+        if (response.ok) {
+          setStatus('Ваше повідомлення надіслано. Дякуємо!');
+        } else {
+          const errorBody = await response.json();
+          console.error("❌ Помилка API:", errorBody); // ⬅️ Деталі помилки
+          setStatus('Помилка при надсиланні. Спробуйте пізніше.');
+        }
+      })
+      .catch(error => {
+        console.error("❌ Network error:", error); // ⬅️ Наприклад, 404 або проблема з сервером
+        setStatus('Сталася помилка.');
+      });
   };
   return (
     <MainLayout>
@@ -74,8 +88,10 @@ export const ClientPage = () => {
                 height={30}
                 alt="logo"
               />
-              <span>+380 44 520-12-24 <br />
-                +380 66 358-98-10 (cервіс)</span>
+              <span>+380 66 504-44-03<br />
+                (відділ продажів)<br />
+                +380 66 358-98-10<br />
+                (cервісний відділ)</span>
             </p>
             <p className="text-2xl justify-normal items-start indent-4 w-full mt-2 sm:indent-10">
               {t('contact-mail')}
@@ -87,7 +103,7 @@ export const ClientPage = () => {
                 src={mail}
                 width={30}
                 height={30}
-                alt="logo"
+                alt="logo_email"
               />
               <span>allinfo@dm-project.com.ua<br />
                 sales@dm-project.com.ua<br />
@@ -140,6 +156,7 @@ export const ClientPage = () => {
                 onChange={e => setMessage(e.target.value)}
               /><br />
               <button className={styles.yerSubmit} type="submit">{t('contact-form-submit')}</button>
+              {status && <p className="mt-4 text-sm text-green-600">{status}status</p>}
             </form>
 
           </div>
