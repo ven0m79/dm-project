@@ -11,6 +11,12 @@ import phone from "./contacts-photo/telephoneContacts.png";
 import adress from "./contacts-photo/locationContacts.png";
 import { useIsMobile } from "../components/hooks/useIsMobile";
 
+declare global {
+  interface Window {
+    dataLayer: Record<string, any>[];
+  }
+}
+
 export const ClientPage = () => {
   const t = useTranslations('ContactsPage');
   const [name, setName] = useState('');
@@ -42,6 +48,18 @@ export const ClientPage = () => {
 
         if (response.ok) {
           setStatus('Ваше повідомлення надіслано. Дякуємо!');
+             // ⬇️ Вставка події у GTM
+        if (typeof window !== 'undefined' && window.dataLayer) {
+          window.dataLayer.push({
+            event: "form_submit",
+            eventModel: {
+              form_id: "contact_form",
+              form_name: "Контактна форма",
+              form_destination: window.location.hostname,
+              form_length: 6, // у тебе: name, mobile, medicalFacility, city, email, message
+            },
+          });
+        }
         } else {
           const errorBody = await response.json();
           console.error("❌ Помилка API:", errorBody); // ⬅️ Деталі помилки
