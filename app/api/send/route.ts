@@ -10,7 +10,7 @@ export async function POST(req: Request) {
 
   try {
     const data = await resend.emails.send({
-      from: process.env.RESEND_FROM || "onboarding@resend.dev",
+      from: 'noreply@dm-project.com.ua',
       to: ["sales@dm-project.com.ua"], // можеш додати більше отримувачів
       subject: "Нове повідомлення з форми сайту",
       replyTo: email,
@@ -27,7 +27,7 @@ ${message}
     });
 
     console.log("✅ Лист надіслано, результат:", data);
-
+console.log("📨 FROM:", process.env.RESEND_FROM);
     return NextResponse.json({ success: true, data });
   } catch (error) {
     console.error("❌ Помилка при відправці:", error);
