@@ -156,7 +156,7 @@ export const ClientPage = () => {
                 onChange={e => setMessage(e.target.value)}
               /><br />
               <button className={styles.yerSubmit} type="submit">{t('contact-form-submit')}</button>
-              {status && <p className="mt-4 text-sm text-green-600">{status}status</p>}
+              {status && <p className="mt-4 text-sm text-green-600">{status}</p>}
             </form>
 
           </div>

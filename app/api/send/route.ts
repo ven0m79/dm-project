@@ -27,7 +27,8 @@ ${message}
     });
 
     console.log("✅ Лист надіслано, результат:", data);
-
+    console.log("📨 FROM:", process.env.RESEND_FROM);
+    
     return NextResponse.json({ success: true, data });
   } catch (error) {
     console.error("❌ Помилка при відправці:", error);
