@@ -144,6 +144,7 @@ export const ClientPage = () => {
                 placeholder={t('contact-form-name')}
                 id="name"
                 type="text"
+                value={name}
                 onChange={e => setName(e.target.value)}
               /><br />
               <input
@@ -151,6 +152,7 @@ export const ClientPage = () => {
                 placeholder={t('contact-form-mobile')}
                 id="mobile"
                 type="mobile"
+                value={mobile}
                 onChange={e => setMobile(e.target.value)}
               /><br />
               <input
@@ -158,6 +160,7 @@ export const ClientPage = () => {
                 placeholder={t('contact-form-medicalFacility')}
                 id="medicalFacility"
                 type="medicalFacility"
+                value={medicalFacility}
                 onChange={e => setMedicalFacility(e.target.value)}
               /><br />
               <input
@@ -165,6 +168,7 @@ export const ClientPage = () => {
                 placeholder={t('contact-form-city')}
                 id="city"
                 type="city"
+                value={city}
                 onChange={e => setCity(e.target.value)}
               /><br />
               <input
@@ -172,12 +176,14 @@ export const ClientPage = () => {
                 placeholder={t('contact-form-email')}
                 id="email"
                 type="email"
+                value={email}
                 onChange={e => setEmail(e.target.value)}
               /><br />
               <textarea
                 className={classNames("h-24 pt-2", styles.form)}
                 placeholder={t('contact-form-message')}
                 id="message"
+                value={message}
                 onChange={e => setMessage(e.target.value)}
               /><br />
               <button className={styles.yerSubmit} type="submit">{t('contact-form-submit')}</button>
