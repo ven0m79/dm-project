@@ -12,6 +12,12 @@ import { MapComponent } from "../components/molecules/googleMaps/map";
 import { useTranslations } from 'next-intl';
 import { useIsMobile } from "../components/hooks/useIsMobile";
 
+declare global {
+  interface Window {
+    dataLayer: Record<string, any>[];
+  }
+}
+
 export const ClientPage = () => {
   const t = useTranslations('ServicePage');
   const [name, setName] = useState('');
@@ -24,10 +30,53 @@ export const ClientPage = () => {
   const isMobile = useIsMobile();
   console.log({ isMobile });
 
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
+  const [status, setStatus] = useState('');
+
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     const data = { name, mobile, medicalFacility, city, email, message };
-    console.log(data);
+
+    fetch('/api/sendService', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then(async response => {
+        console.log("📡 HTTP status:", response.status); // ⬅️ Статус відповіді
+
+        if (response.ok) {
+          setStatus('Ваше повідомлення надіслано. Дякуємо!');
+          // ⬇️ Вставка події у GTM
+          if (typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+              event: "form_submit",
+              eventModel: {
+                form_id: "contact_form",
+                form_name: "Контактна форма",
+                form_destination: window.location.hostname,
+                form_length: 6, // у тебе: name, mobile, medicalFacility, city, email, message
+              },
+            });
+          }
+          // ⬇️ Очистити форму після успішної відправки
+          setName('');
+          setMobile('');
+          setMedicalFacility('');
+          setCity('');
+          setEmail('');
+          setMessage('');
+        } else {
+          const errorBody = await response.json();
+          console.error("❌ Помилка API:", errorBody); // ⬅️ Деталі помилки
+          setStatus('Помилка при надсиланні. Спробуйте пізніше.');
+        }
+      })
+      .catch(error => {
+        console.error("❌ Network error:", error); // ⬅️ Наприклад, 404 або проблема з сервером
+        setStatus('Сталася помилка.');
+      });
   };
 
   return (
@@ -120,10 +169,11 @@ export const ClientPage = () => {
                 onChange={e => setMessage(e.target.value)}
               /><br />
               <button className={styles.yerSubmit} type="submit">{t('contact-form-submit')}</button>
+              {status && <p className="mt-4 text-sm text-green-600">{status}</p>}
             </form>
             <div className={classNames("w-full h-full flex flex-col items-center justify-center", styles.howUsFind)}>
               <p className="mt-2 mb-3">{t('contact-prehead3')}</p>
-               <MapProvider>
+              <MapProvider>
                 <MapComponent />
               </MapProvider>
             </div>
