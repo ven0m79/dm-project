@@ -39,6 +39,21 @@ export default function RootLayout({
         {/* ✅ Обидва скрипти у <head> */}
         <Script
           strategy="beforeInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=GT-P3NZ9SN9" />
+        <Script
+          id="gtag-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'GT-P3NZ9SN9');`,
+          }}
+        />
+
+        <Script
+          strategy="beforeInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=AW-17295797148"
         />
         <Script
@@ -47,10 +62,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'AW-17295797148');
-            `,
+            function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-17295797148');
+        `,
           }}
         />
         <Script

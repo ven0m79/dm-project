@@ -48,18 +48,25 @@ export const ClientPage = () => {
 
         if (response.ok) {
           setStatus('Ваше повідомлення надіслано. Дякуємо!');
-             // ⬇️ Вставка події у GTM
-        if (typeof window !== 'undefined' && window.dataLayer) {
-          window.dataLayer.push({
-            event: "form_submit",
-            eventModel: {
-              form_id: "contact_form",
-              form_name: "Контактна форма",
-              form_destination: window.location.hostname,
-              form_length: 6, // у тебе: name, mobile, medicalFacility, city, email, message
-            },
-          });
-        }
+          // ⬇️ Вставка події у GTM
+          if (typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+              event: "form_submit",
+              eventModel: {
+                form_id: "contact_form",
+                form_name: "Контактна форма",
+                form_destination: window.location.hostname,
+                form_length: 6, // у тебе: name, mobile, medicalFacility, city, email, message
+              },
+            });
+          }
+          // ⬇️ Очистити форму після успішної відправки
+          setName('');
+          setMobile('');
+          setMedicalFacility('');
+          setCity('');
+          setEmail('');
+          setMessage('');
         } else {
           const errorBody = await response.json();
           console.error("❌ Помилка API:", errorBody); // ⬅️ Деталі помилки
