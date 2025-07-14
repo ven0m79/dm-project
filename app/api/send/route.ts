@@ -10,7 +10,7 @@ export async function POST(req: Request) {
 
   try {
     const data = await resend.emails.send({
-      from: process.env.RESEND_FROM || "onboarding@resend.dev",
+      from: process.env.RESEND_FROM!,
       to: ["sales@dm-project.com.ua"], // можеш додати більше отримувачів
       subject: "Нове повідомлення з форми сайту",
       replyTo: email,
