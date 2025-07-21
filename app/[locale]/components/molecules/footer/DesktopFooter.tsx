@@ -290,8 +290,8 @@ const DesktopFooter: FC<{}> = ({ }) => {
                         </div>
                         <br />
                         <div className={classNames("font-normal mt-1 ml-1")}>
-                            <a href="mailto:allinfo@dm-project.com.ua" className="block hover:none">allinfo@dm-project.com.ua</a> <br />
-                            <a href="mailto:sales@dm-project.com.ua" className="block hover:none">sales@dm-project.com.ua</a> <br />
+                            <a href="mailto:allinfo@dm-project.com.ua" className="block hover:none">allinfo@dm-project.com.ua</a>
+                            <a href="mailto:sales@dm-project.com.ua" className="block hover:none">sales@dm-project.com.ua</a>
                             <a href="mailto:service@dm-project.com.ua" className="block hover:none">service@dm-project.com.ua</a>
                         </div>
                     </div>
