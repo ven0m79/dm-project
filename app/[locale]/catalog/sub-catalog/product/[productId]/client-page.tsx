@@ -77,10 +77,10 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
   >([]);
 
   const youtubeMeta = details?.meta_data?.find((item: any) => item.key === "_nickx_video_text_url");
-const youtubeUrl =
-  Array.isArray(youtubeMeta?.value)
-    ? youtubeMeta?.value?.[0]
-    : youtubeMeta?.value;
+  const youtubeUrl =
+    Array.isArray(youtubeMeta?.value)
+      ? youtubeMeta?.value?.[0]
+      : youtubeMeta?.value;
 
   const selectedProductId = useMemo(() => {
     return (
@@ -270,17 +270,19 @@ const youtubeUrl =
                             </div>
                           </Tabs.Item>
                         )}
-                        {Array.isArray(details?.downloads) && details.downloads.length > 0 && (
-                          <Tabs.Item title="Завантаження" icon={HiAdjustments}>
-                            <div className={classNames("", styles.downloadabled)}>
-                              {details.downloads.map((el) => (
-                                <li key={el.id} className="mx-1">
-                                  <Link href={el.file}>{el.name}</Link>
-                                </li>
-                              ))}
-                            </div>
-                          </Tabs.Item>
-                        )}
+                        {details &&
+                          Array.isArray(details.downloads) &&
+                          details.downloads.length > 0 && (
+                            <Tabs.Item title="Завантаження" icon={HiAdjustments}>
+                              <div className={classNames("", styles.downloadabled)}>
+                                {details.downloads.map((el) => (
+                                  <li key={el.id} className="mx-1">
+                                    <Link href={el.file}>{el.name}</Link>
+                                  </li>
+                                ))}
+                              </div>
+                            </Tabs.Item>
+                          )}
 
                         {typeof youtubeUrl === "string" &&
                           youtubeUrl.startsWith("http") && (
