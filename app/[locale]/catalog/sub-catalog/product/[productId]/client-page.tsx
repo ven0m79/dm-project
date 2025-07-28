@@ -19,6 +19,8 @@ import { MdDashboard } from "react-icons/md";
 import DOMPurify from "dompurify";
 import { useTranslations } from "next-intl";
 
+
+
 const customTheme: CustomFlowbiteTheme = {
   tabs: {
     base: "flex flex-col gap-2",
@@ -73,6 +75,9 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
   const [crossSellProducts, setCrossSellProducts] = useState<
     SingleProductDetails[]
   >([]);
+
+  const youtubeMeta = details?.meta_data?.find((item: any) => item.key === "_nickx_video_text_url");
+  const youtubeUrl = youtubeMeta?.value;
 
   const selectedProductId = useMemo(() => {
     return (
@@ -281,7 +286,13 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                           </div>
                         </Tabs.Item>
                         <Tabs.Item title="Відео" icon={HiClipboardList}>
-                          Тут будуть лінки на ютуб...
+                          {youtubeUrl ? (
+                            <a href={youtubeUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+                              Переглянути відео на YouTube
+                            </a>
+                          ) : (
+                            "Відео відсутнє"
+                          )}
                         </Tabs.Item>
                       </Tabs>
                     </div>

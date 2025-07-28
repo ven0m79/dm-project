@@ -15,7 +15,7 @@ export default async function handler(req: any, res: any) {
   };
 
   try {
-    const response = await api.get("products/categories?per_page=100");
+    const response = await api.get("products?per_page=100"); // /categories
 
     const totalCategories = parseInt(response.headers["x-wp-total"], 10); // Получаем общее количество категорий
 
