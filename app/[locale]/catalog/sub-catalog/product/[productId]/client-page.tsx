@@ -77,8 +77,9 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
   >([]);
 
   const youtubeMeta = details?.meta_data?.find((item: any) => item.key === "_nickx_video_text_url");
-  const youtubeUrl = Array.isArray(youtubeMeta?.value)
-    ? youtubeMeta.value[0]
+const youtubeUrl =
+  Array.isArray(youtubeMeta?.value)
+    ? youtubeMeta?.value?.[0]
     : youtubeMeta?.value;
 
   const selectedProductId = useMemo(() => {
