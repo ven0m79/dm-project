@@ -77,7 +77,9 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
   >([]);
 
   const youtubeMeta = details?.meta_data?.find((item: any) => item.key === "_nickx_video_text_url");
-  const youtubeUrl = youtubeMeta?.value;
+  const youtubeUrl = Array.isArray(youtubeMeta?.value)
+    ? youtubeMeta.value[0]
+    : youtubeMeta?.value;
 
   const selectedProductId = useMemo(() => {
     return (
@@ -248,52 +250,52 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                             }}
                           />
                         </Tabs.Item>
-                        {isAccessories ? null : (
+                        {!isAccessories && crossSellProducts.length > 0 && (
                           <Tabs.Item
                             title="Аксесуари та комплектуючі"
                             icon={MdDashboard}
                           >
-                            <div
-                              className={classNames(
-                                "ml-10",
-                                styles.downloadabled,
-                              )}
-                            >
-                              {crossSellProducts.length > 0 ? (
-                                crossSellProducts.map((el) => (
-                                  <li key={el.id} className="mx-1">
-                                    <a
-                                      className={"text text-blue-900"}
-                                      href={`/catalog/sub-catalog/product/${el.id}?category=${el.tags[0].name}`}
-                                    >
-                                      {el.name}
-                                    </a>
-                                  </li>
-                                ))
-                              ) : (
-                                <p>No cross-sell products available.</p>
-                              )}
+                            <div className={classNames("ml-10", styles.downloadabled)}>
+                              {crossSellProducts.map((el) => (
+                                <li key={el.id} className="mx-1">
+                                  <a
+                                    className="text text-blue-900"
+                                    href={`/catalog/sub-catalog/product/${el.id}?category=${el.tags[0].name}`}
+                                  >
+                                    {el.name}
+                                  </a>
+                                </li>
+                              ))}
                             </div>
                           </Tabs.Item>
                         )}
-                        <Tabs.Item title="Загрузки" icon={HiAdjustments}>
-                          <div className={classNames("", styles.downloadabled)}>
-                            {details?.downloads?.map((el) => (
-                              <li key={el.id} className={classNames("mx-1")}>
-                                <Link href={el.file}>{el.name}</Link>
-                              </li>
-                            ))}
-                          </div>
-                        </Tabs.Item>
-                        <Tabs.Item title="Відео" icon={HiClipboardList}>
-                          {youtubeUrl ? (
-                            <a href={youtubeUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
-                              Переглянути відео на YouTube
-                            </a>
-                          ) : (
-                            "Відео відсутнє"
+                        {Array.isArray(details?.downloads) && details.downloads.length > 0 && (
+                          <Tabs.Item title="Завантаження" icon={HiAdjustments}>
+                            <div className={classNames("", styles.downloadabled)}>
+                              {details.downloads.map((el) => (
+                                <li key={el.id} className="mx-1">
+                                  <Link href={el.file}>{el.name}</Link>
+                                </li>
+                              ))}
+                            </div>
+                          </Tabs.Item>
+                        )}
+
+                        {typeof youtubeUrl === "string" &&
+                          youtubeUrl.startsWith("http") && (
+                            <Tabs.Item title="Відео" icon={HiClipboardList}>
+                              <a
+                                href={youtubeUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-600 underline"
+                              >
+                                Переглянути відео на YouTube
+                              </a>
+                            </Tabs.Item>
                           )}
-                        </Tabs.Item>
+
+
                       </Tabs>
                     </div>
                   </motion.div>
