@@ -32,6 +32,12 @@ export type TagType = {
   slug: string;
 };
 
+export type MetaDataType = {
+  id: number;
+  name: string;
+  value: string;
+};
+
 export type SingleProductDetails = {
   id: number;
   name: string;
@@ -61,6 +67,7 @@ export type SingleProductDetails = {
   translations: Record<string, number>[];
   cross_sell_ids: CrossSellIds[];
   parentCategory: string;
+  meta_data: MetaDataType[];
 };
 export type CrossSellIds = {
   id: number;
