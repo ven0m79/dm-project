@@ -1,7 +1,7 @@
 "use client";
 import classNames from "classnames";
 import Link from "next/link";
-import React, { FC, useCallback, useEffect, useMemo } from "react";
+import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 
 import { fetchWooCommerceCategories } from "../../../../utils/woocommerce.setup";
 import styles from "./Sub-catalog.module.css";
@@ -27,6 +27,10 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   const isMobile = useIsMobile();
   const router = useRouter();
   const isIOS = typeof window !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  const sortedProducts = [...selectedProducts].sort((a, b) => a.name.localeCompare(b.name));
+  const [visibleCount, setVisibleCount] = useState(15);
+  const productsToRender = sortedProducts.slice(0, visibleCount);
 
   const getData = useCallback(async () => {
     try {
@@ -83,8 +87,8 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
         >
           <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-1 w-full items-start">
 
-            {selectedProducts && selectedProducts.length ? (
-              selectedProducts.map((el) => {
+            {productsToRender && productsToRender.length ? (
+              productsToRender.map((el) => {
                 return isAccessories[0] ? (
                   <div
                     key={el.id}
@@ -177,8 +181,8 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
           )}
         >
           <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-5 w-full max-w-[800px] items-start">
-            {selectedProducts && selectedProducts.length ? (
-              selectedProducts.map((el) => {
+            {productsToRender && productsToRender.length ? (
+              productsToRender.map((el) => {
                 return isAccessories[0] ? (
                   <div
                     key={el.id}
@@ -256,9 +260,18 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
               <h2 className="text-amber-700"></h2>
             )}
           </div>
+
         </div>
       }
-
+      {sortedProducts.length > visibleCount && (
+        <div className="flex flex-1 w-full self-center items-center justify-center">
+          <button
+            className={classNames("justify-center", styles.downloadable)}
+            onClick={() => setVisibleCount(visibleCount + 15)}>
+            Завантажити ще
+          </button>
+        </div>
+      )}
     </>
   );
 };

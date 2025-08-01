@@ -60,13 +60,24 @@ export async function fetchWooCommerceProductsBasedOnCategory(
   locale: string,
 ) {
   try {
+    let page = 1;
+    let totalPages = 1;
+    const result: SingleProductDetails[] = [];
+     do {
     const response = await api.get(
-      `products?category=${id}&per_page=100&lang=${locale}`,
+      `products?category=${id}&per_page=100&page=${page}&lang=${locale}`,
     );
 
-    if (response.status === 200) {
-      return (await response.data) as SingleProductDetails[];
-    }
+      if (response.status === 200) {
+        totalPages = parseInt(response.headers["x-wp-totalpages"], 10);
+        const data = await response.data;
+        result.push(...data);
+
+        page++;
+      }
+    } while (page <= totalPages);
+
+    return result;
   } catch (error) {
     throw new Error(error as string);
   }
