@@ -110,7 +110,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                           }
                         }}
                       >
-                        <div>{el.sku}</div>
+                        <div>{el.sku.length > 7 ? `${el.sku.slice(0, 7)}..` : el.sku}</div>
                         <div className="cursor-pointer flex flex-1 justify-center">
                           <img
                             src={el.images[0].src}
@@ -200,7 +200,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                           query: `category=${selectedCategory}`,
                         }}
                       >
-                        <div className="w-full px-2">{el.sku}</div>
+                        <div className="w-full px-2">{el.sku.length > 7 ? `${el.sku.slice(0, 7)}..` : el.sku}</div>
                         <div
                           className={"cursor-pointer flex flex-1 justify-center w-full"}
                         >
