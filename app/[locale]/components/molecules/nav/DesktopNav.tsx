@@ -13,7 +13,7 @@ const NavLinks: {
 } = {
     home: {
         title: "menu-main",
-        link: "/home",
+        link: "/",
     },
     about: {
         title: "menu-about-us",

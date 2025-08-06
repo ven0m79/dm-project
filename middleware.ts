@@ -1,36 +1,49 @@
 import createMiddleware from "next-intl/middleware";
-import { locales, localePrefix } from "./config";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
+import { locales, defaultLocale, localePrefix } from "./config";
 
-export function middleware(req: {
-  url: string | URL; nextUrl: { pathname: any; clone: () => any; }; cookies: { get: (arg0: string) => { (): any; new(): any; value: any; }; }; 
-}) {
+export function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
-  const locale = pathname.split('/')[1];
-  const supportedLocales = ['ua', 'en'];
   const url = new URL(req.url);
   const hostname = url.hostname;
 
-  // Локаль из куки
-  const cookieLocale = req.cookies.get('locale')?.value;
-
-  // Если локаль отсутствует в пути и не задана в куки, перенаправляем на defaultLocale
-  if (!supportedLocales.includes(locale)) {
-    const defaultLocale = cookieLocale && supportedLocales.includes(cookieLocale) ? cookieLocale : 'ua';
-    const url = req.nextUrl.clone();
-    url.pathname = `/${defaultLocale}${pathname}`;
-    return NextResponse.redirect(url);
+  if (pathname.startsWith(`/${defaultLocale}/`)) {
+    const newUrl = req.nextUrl.clone();
+    newUrl.pathname = pathname.replace(`/${defaultLocale}`, "");
+    return NextResponse.redirect(newUrl, 301);
+  } else if (pathname === `/${defaultLocale}`) {
+    const newUrl = req.nextUrl.clone();
+    newUrl.pathname = "/";
+    return NextResponse.redirect(newUrl, 301);
   }
 
-  if (hostname.startsWith('test')) {
-    const response = NextResponse.next();
-    response.headers.set('X-Robots-Tag', 'noindex, nofollow');
-    return response;
+  if (pathname === "/home") {
+    const newUrl = req.nextUrl.clone();
+    newUrl.pathname = "/";
+    return NextResponse.redirect(newUrl, 301);
+  } else if (pathname === "/en/home") {
+    const newUrl = req.nextUrl.clone();
+    newUrl.pathname = "/en";
+    return NextResponse.redirect(newUrl, 301);
   }
 
-  return NextResponse.next();
+  const intlMiddleware = createMiddleware({
+    locales,
+    defaultLocale,
+    localePrefix,
+  });
+
+  const response = intlMiddleware(req);
+
+  if (hostname.startsWith("test")) {
+    response.headers.set("X-Robots-Tag", "noindex, nofollow");
+  }
+
+  return response;
 }
 
 export const config = {
-  matcher: ["/((?!api|_next|.*\\..*).*)"],
+  // This matcher configuration looks correct for catching all relevant paths
+  // and allowing next-intl to handle them.
+  matcher: ["/((?!api|_next|.*\\..*).*)", "/", "/(ua|en)/:path*"],
 };
