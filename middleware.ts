@@ -1,13 +1,11 @@
 import createMiddleware from "next-intl/middleware";
 import { NextResponse, NextRequest } from "next/server";
-import { locales } from "./config";
+import { locales, defaultLocale, localePrefix } from "./config";
 
 export function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
   const url = new URL(req.url);
   const hostname = url.hostname;
-
-  const defaultLocale = locales[0];
 
   if (pathname.startsWith(`/${defaultLocale}/`)) {
     const newUrl = req.nextUrl.clone();
@@ -18,7 +16,6 @@ export function middleware(req: NextRequest) {
     newUrl.pathname = "/";
     return NextResponse.redirect(newUrl, 301);
   }
-
 
   if (pathname === "/home") {
     const newUrl = req.nextUrl.clone();
@@ -33,7 +30,7 @@ export function middleware(req: NextRequest) {
   const intlMiddleware = createMiddleware({
     locales,
     defaultLocale,
-    localePrefix: "as-needed",
+    localePrefix,
   });
 
   const response = intlMiddleware(req);
