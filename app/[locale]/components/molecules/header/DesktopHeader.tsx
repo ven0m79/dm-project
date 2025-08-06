@@ -82,11 +82,20 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
     //         : "";
     // }, [searchParams]);
 
+    const currentLocale = useLocale();
+    const otherLocales = [
+        { code: "ua", label: "UA" },
+        { code: "en", label: "EN" },
+    ].filter(({ code }) => code !== currentLocale);
+
     return <>
         <div className={classNames("w-screen", styles["lang"])}>
             <div className={styles.langText}>
-                <Link href={{ pathname }} locale="en">EN</Link> {`     `}
-                <Link href={{ pathname }} locale="ua">UA</Link>
+                {otherLocales.map(({ code, label }) => (
+                    <Link key={code} href={{ pathname }} locale={code}>
+                        {label}
+                    </Link>
+                ))}
             </div>
         </div>
         <div className={styles.containerWithLogo}>

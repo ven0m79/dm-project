@@ -6,13 +6,13 @@ import getDynamicRoutes from "../../utils/getDynamicRoutes";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const baseUrl = "https://dm-project.com.ua";
-  const staticRoutes = ["/ua/catalog/sub-catalog?category=or-equipment",
-    "/ua/catalog/sub-catalog?category=icu-equipment",
-    "/ua/catalog/sub-catalog?category=neonatal-equipment",
-    "/ua/catalog/sub-catalog?category=cleaning-and-desinfecting-equipment",
-    "/ua/catalog/sub-catalog?category=gas-management-systems",
-    "/ua/catalog/sub-catalog?category=furniture",
-    "/ua/catalog/sub-catalog?category=accessories",
+  const staticRoutes = ["/catalog/sub-catalog?category=or-equipment",
+    "/catalog/sub-catalog?category=icu-equipment",
+    "/catalog/sub-catalog?category=neonatal-equipment",
+    "/catalog/sub-catalog?category=cleaning-and-desinfecting-equipment",
+    "/catalog/sub-catalog?category=gas-management-systems",
+    "/catalog/sub-catalog?category=furniture",
+    "/catalog/sub-catalog?category=accessories",
     "/en/catalog/sub-catalog?category=or-equipment",
     "/en/catalog/sub-catalog?category=icu-equipment",
     "/en/catalog/sub-catalog?category=neonatal-equipment",
