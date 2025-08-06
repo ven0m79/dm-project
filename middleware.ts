@@ -1,41 +1,52 @@
 import createMiddleware from "next-intl/middleware";
-import { locales, localePrefix } from "./config";
 import { NextResponse, NextRequest } from "next/server";
+import { locales } from "./config";
 
 export function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
   const url = new URL(req.url);
   const hostname = url.hostname;
 
-  const supportedLocales = ['ua', 'en'];
-  const defaultLocale = 'ua';
+  const defaultLocale = locales[0];
 
-  const pathLocale = pathname.split('/')[1];
-
-  // 🛑 Якщо є /ua у URL — редирект на шлях без /ua
-  if (pathLocale === 'ua') {
+  if (pathname.startsWith(`/${defaultLocale}/`)) {
     const newUrl = req.nextUrl.clone();
-    newUrl.pathname = pathname.replace(/^\/ua/, '') || '/';
-    return NextResponse.redirect(newUrl);
+    newUrl.pathname = pathname.replace(`/${defaultLocale}`, "");
+    return NextResponse.redirect(newUrl, 301);
+  } else if (pathname === `/${defaultLocale}`) {
+    const newUrl = req.nextUrl.clone();
+    newUrl.pathname = "/";
+    return NextResponse.redirect(newUrl, 301);
   }
 
-  // 🔁 Обробка middleware через next-intl
+
+  if (pathname === "/home") {
+    const newUrl = req.nextUrl.clone();
+    newUrl.pathname = "/";
+    return NextResponse.redirect(newUrl, 301);
+  } else if (pathname === "/en/home") {
+    const newUrl = req.nextUrl.clone();
+    newUrl.pathname = "/en";
+    return NextResponse.redirect(newUrl, 301);
+  }
+
   const intlMiddleware = createMiddleware({
-    locales: supportedLocales,
-    defaultLocale: defaultLocale,
-    localePrefix: 'as-needed',
+    locales,
+    defaultLocale,
+    localePrefix: "as-needed",
   });
 
   const response = intlMiddleware(req);
 
-  // 🕷️ Заборона індексації для subdomain test.*
-  if (hostname.startsWith('test')) {
-    response.headers.set('X-Robots-Tag', 'noindex, nofollow');
+  if (hostname.startsWith("test")) {
+    response.headers.set("X-Robots-Tag", "noindex, nofollow");
   }
 
   return response;
 }
 
 export const config = {
-  matcher: ["/((?!api|_next|.*\\..*).*)"],
+  // This matcher configuration looks correct for catching all relevant paths
+  // and allowing next-intl to handle them.
+  matcher: ["/((?!api|_next|.*\\..*).*)", "/", "/(ua|en)/:path*"],
 };
