@@ -1,34 +1,39 @@
 import createMiddleware from "next-intl/middleware";
 import { locales, localePrefix } from "./config";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
-export function middleware(req: {
-  url: string | URL; nextUrl: { pathname: any; clone: () => any; }; cookies: { get: (arg0: string) => { (): any; new(): any; value: any; }; }; 
-}) {
+export function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
-  const locale = pathname.split('/')[1];
-  const supportedLocales = ['ua', 'en'];
   const url = new URL(req.url);
   const hostname = url.hostname;
 
-  // Локаль из куки
-  const cookieLocale = req.cookies.get('locale')?.value;
+  const supportedLocales = ['ua', 'en'];
+  const defaultLocale = 'ua';
 
-  // Если локаль отсутствует в пути и не задана в куки, перенаправляем на defaultLocale
-  if (!supportedLocales.includes(locale)) {
-    const defaultLocale = cookieLocale && supportedLocales.includes(cookieLocale) ? cookieLocale : 'ua';
-    const url = req.nextUrl.clone();
-    url.pathname = `/${defaultLocale}${pathname}`;
-    return NextResponse.redirect(url);
+  const pathLocale = pathname.split('/')[1];
+
+  // 🛑 Якщо є /ua у URL — редирект на шлях без /ua
+  if (pathLocale === 'ua') {
+    const newUrl = req.nextUrl.clone();
+    newUrl.pathname = pathname.replace(/^\/ua/, '') || '/';
+    return NextResponse.redirect(newUrl);
   }
 
+  // 🔁 Обробка middleware через next-intl
+  const intlMiddleware = createMiddleware({
+    locales: supportedLocales,
+    defaultLocale: defaultLocale,
+    localePrefix: 'as-needed',
+  });
+
+  const response = intlMiddleware(req);
+
+  // 🕷️ Заборона індексації для subdomain test.*
   if (hostname.startsWith('test')) {
-    const response = NextResponse.next();
     response.headers.set('X-Robots-Tag', 'noindex, nofollow');
-    return response;
   }
 
-  return NextResponse.next();
+  return response;
 }
 
 export const config = {

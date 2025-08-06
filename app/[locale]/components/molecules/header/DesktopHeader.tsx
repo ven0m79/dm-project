@@ -76,27 +76,22 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
         );
     };
 
-    const selectedCategory = useMemo(() => {
-        return searchParams?.get("category")
-            ? `?category=${searchParams?.get("category")}`
-            : "";
-    }, [searchParams]);
+    // const selectedCategory = useMemo(() => {
+    //     return searchParams?.get("category")
+    //         ? `?category=${searchParams?.get("category")}`
+    //         : "";
+    // }, [searchParams]);
 
     return <>
         <div className={classNames("w-screen", styles["lang"])}>
             <div className={styles.langText}>
-                <Link href={`${pathname}${selectedCategory}`} locale="en">
-                    EN
-                </Link>
-                {"   "}
-                <Link href={`${pathname}${selectedCategory}`} locale="ua">
-                    UA
-                </Link>
+                <Link href={{ pathname }} locale="en">EN</Link> {`     `}
+                <Link href={{ pathname }} locale="ua">UA</Link>
             </div>
         </div>
         <div className={styles.containerWithLogo}>
             <div className={styles.logo}>
-                <Link href={"/home"}>
+                <Link href={"/"}>
                     <Image
                         src="/logo-DM-project.png"
                         width={120}

@@ -103,7 +103,7 @@ const MobileHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Di
         <div
           className="cursor-pointer"
           onClick={() => {
-            const target = "/home";
+            const target = "/";
             isIOS ? (window.location.href = target) : router.push(target);
           }}
         >

@@ -4,13 +4,13 @@ import classNames from "classnames";
 import React from "react";
 import { MainLayout } from "@app/[locale]/components/templates";
 import Slider from "@app/[locale]/components/molecules/slider/slider";
-import SliderMobile from "../components/molecules/slider/sliderMobile";
+import SliderMobile from "@app/[locale]/components/molecules/slider/sliderMobile";
 import MapOfUkraine from "@app/[locale]/components/molecules/map/Map";
 import Link from "next/link";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import styles from "./Home.module.css";
-import { useIsMobile } from "../components/hooks/useIsMobile";
+import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 
 export const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
   const t = useTranslations("Index");
