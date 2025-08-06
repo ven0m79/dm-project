@@ -34,7 +34,7 @@ type Product = {
 const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Dispatch<SetStateAction<string>>, products: Product[] }> = ({ searchTerm, setSearchTerm, loading, products }) => {
     const t = useTranslations("Header");
     const pathname = usePathname();
-    const searchParams = useSearchParams();
+    // const searchParams = useSearchParams();
 
     // **Создаём локальное состояние для ввода и debounce**
     const [inputValue, setInputValue] = useState(searchTerm);

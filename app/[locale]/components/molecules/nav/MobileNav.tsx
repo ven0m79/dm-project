@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import classNames from "classnames";
 import React, { FC, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./Nav.module.css";
@@ -62,6 +62,11 @@ const MobileNav: FC<{}> = ({ }) => {
             : "";
     }, [searchParams]);
 
+    const currentLocale = useLocale();
+    const otherLocales = [
+        { code: "ua", label: "UA" },
+        { code: "en", label: "EN" },
+    ].filter(({ code }) => code !== currentLocale);
 
     return (
 
@@ -111,53 +116,50 @@ const MobileNav: FC<{}> = ({ }) => {
             >
                 <div className="flex flex-row ml-3 mb-7">
                     <div className="p-2 hover:text-white cursor-pointer text-[#D3DDE4]">
-                        <Link href={`${pathname}${selectedCategory}`} locale="en">
-                            EN
-                        </Link>
-                    </div>
-                    <div className="p-2 hover:text-white cursor-pointer text-[#D3DDE4]">
-                        <Link href={`${pathname}${selectedCategory}`} locale="ua">
-                            UA
-                        </Link>
-                    </div>
-                </div>
-                <ul className="mt-4 text-white">
-                    {Object.keys(NavLinks).map((el) => {
-                        const href = NavLinks[el].link;
-
-                        // Обработка для iOS-тач
-                        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
-                        const handleTouchStart = () => {
-                            if (isIOS) {
-                                window.location.href = href;
-                            }
-                        };
-
-                        return (
-                            <Link key={el} href={href}>
-                                <li
-                                    onTouchStart={handleTouchStart}
-                                    className={classNames("p-2", styles["link"], {
-                                        [styles["active"]]:
-                                            pathname === "/lll"
-                                                ? pathname === href
-                                                : pathname.includes(href),
-                                    })}
-                                >
-                                    {t(NavLinks[el].title)}
-                                </li>
+                        {otherLocales.map(({ code, label }) => (
+                            <Link key={code} href={{ pathname }} locale={code}>
+                                {label}
                             </Link>
-                        );
-                    })}
+                        ))}
+                    </div>
+                    <ul className="mt-4 text-white">
+                        {Object.keys(NavLinks).map((el) => {
+                            const href = NavLinks[el].link;
 
-                    <Link
-                        className="absolute top-5 right-4"
-                        href={""}
-                        onClick={() => setIsOpen(false)}>
-                        <li className="text-white cursor-pointer text-2xl">✖</li>
-                    </Link>
-                </ul>
+                            // Обработка для iOS-тач
+                            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+                            const handleTouchStart = () => {
+                                if (isIOS) {
+                                    window.location.href = href;
+                                }
+                            };
+
+                            return (
+                                <Link key={el} href={href}>
+                                    <li
+                                        onTouchStart={handleTouchStart}
+                                        className={classNames("p-2", styles["link"], {
+                                            [styles["active"]]:
+                                                pathname === "/lll"
+                                                    ? pathname === href
+                                                    : pathname.includes(href),
+                                        })}
+                                    >
+                                        {t(NavLinks[el].title)}
+                                    </li>
+                                </Link>
+                            );
+                        })}
+
+                        <Link
+                            className="absolute top-5 right-4"
+                            href={""}
+                            onClick={() => setIsOpen(false)}>
+                            <li className="text-white cursor-pointer text-2xl">✖</li>
+                        </Link>
+                    </ul>
+                    </div>
             </motion.div>
         </div>
     )
