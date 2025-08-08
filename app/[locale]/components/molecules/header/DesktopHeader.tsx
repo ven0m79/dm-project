@@ -33,8 +33,7 @@ type Product = {
 
 const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Dispatch<SetStateAction<string>>, products: Product[] }> = ({ searchTerm, setSearchTerm, loading, products }) => {
     const t = useTranslations("Header");
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
+
 
     // **Создаём локальное состояние для ввода и debounce**
     const [inputValue, setInputValue] = useState(searchTerm);
@@ -76,6 +75,10 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
         );
     };
 
+
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+
     const selectedCategory = useMemo(() => {
         return searchParams?.get("category")
             ? `?category=${searchParams?.get("category")}`
@@ -88,11 +91,11 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
         { code: "en", label: "EN" },
     ].filter(({ code }) => code !== currentLocale);
 
-    return <>
+   return <>
         <div className={classNames("w-screen", styles["lang"])}>
             <div className={styles.langText}>
                 {otherLocales.map(({ code, label }) => (
-                    <Link key={code} href={`${pathname}${selectedCategory}`} locale={code}>
+                    <Link key={code} href={`${pathname}${selectedCategory}`}  locale={code}>
                         {label}
                     </Link>
                 ))}
@@ -121,9 +124,7 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
                     styles["contactsGroup"]
                 )}
             >
-                <div>
-                    <a href="tel:+380665044403" className="block hover:none">
-                        +380 66 504-44-03</a></div>
+                <div><a href="tel:+380754482535" className="block hover:none">+380 75-448-25-35</a></div>
                 <div className="pl-0">{t("sale-department")}</div>
                 <div className="pt-1"><a href="tel:+380665044403" className="block hover:none">+380 66 358-98-10</a></div>
                 <div className="pl-0">{t("service-department")}</div>
