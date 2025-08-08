@@ -113,10 +113,10 @@ export const ClientPage = () => {
                 height={30}
                 alt="logo"
               />
-              <span>+380 66 504-44-03<br />
-                (відділ продажів)<br />
-                +380 66 358-98-10<br />
-                (cервісний відділ)</span>
+              <p>
+                <a href="tel:+380754482535" className="block hover:none">+380 75-448-25-35 (відділ продажів)</a>
+                <a href="tel:+380665044403" className="block hover:none">+380 66 358-98-10 (cервісний відділ)</a>
+              </p>
             </p>
             <p className="text-2xl justify-normal items-start indent-4 w-full mt-2 sm:indent-10">
               {t('contact-mail')}
@@ -130,10 +130,10 @@ export const ClientPage = () => {
                 height={30}
                 alt="logo_email"
               />
-              <span>allinfo@dm-project.com.ua<br />
-                sales@dm-project.com.ua<br />
-                service@dm-project.com.ua
-              </span>
+              <p><a href="mailto:allinfo@dm-project.com.ua" className="block hover:none">allinfo@dm-project.com.ua</a>
+                <a href="mailto:sales@dm-project.com.ua" className="block hover:none">sales@dm-project.com.ua</a>
+                <a href="mailto:service@dm-project.com.ua" className="block hover:none">service@dm-project.com.ua</a>
+              </p>
             </p>
           </div>
           <div className="flex flex-1 w-1/2">
@@ -194,7 +194,7 @@ export const ClientPage = () => {
         </div>
 
       </div>
-    </MainLayout>
+    </MainLayout >
   );
 };
 
