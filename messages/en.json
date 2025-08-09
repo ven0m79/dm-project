@@ -305,5 +305,10 @@
     "shares-fabius-text7": "The Vista 120S patient monitor provides physiological monitoring for patients of all ages: 3-lead ECG, SpO2, temperature, respiration, and non-invasive blood pressure.",
     "shares-fabius-text8": "The Vista 120S has a 12’ colour TFT touchscreen, 8 channels (displaying up to 11 waveforms), a gas monitoring interface, stores up to 120 hours of key parameter trends, up to 1200 NIBP measurements and 200 alarm events, and lasts 350 minutes on battery power.",
     "shares-fabius-text9": "The Fabius plus XL / Vista 120S Anaesthesia Station will help you maximise your therapeutic potential and improve patient safety."
+  },
+  "NotFound": {
+    "title": "Page not found.",
+    "description": "Sorry, we couldn’t find the page you’re looking for."
   }
+
 }

@@ -65,5 +65,5 @@ export function middleware(req: NextRequest) {
 export const config = {
   // This matcher configuration looks correct for catching all relevant paths
   // and allowing next-intl to handle them.
-  matcher: ["/((?!api|_next|.*\\..*).*)", "/", "/(ua|en)/:path*"],
+  matcher: ["/((?!api|_next|.*\\..*).*)"],
 };
