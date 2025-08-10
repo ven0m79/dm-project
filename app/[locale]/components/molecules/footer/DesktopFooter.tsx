@@ -34,7 +34,7 @@ const DesktopFooter: FC<{}> = ({ }) => {
                             styles["socialMedia"]
                         )}
                     >
-                        <Link href="https://youtube.com/@draeger?si=cNuSHUm57sHZvnkI">
+                        <Link href="https://youtube.com/@draeger?si=cNuSHUm57sHZvnkI" target="_blank">
                             <Image
                                 src="/youtube3.png"
                                 width={30}
@@ -48,7 +48,7 @@ const DesktopFooter: FC<{}> = ({ }) => {
                             styles["socialMedia"]
                         )}
                     >
-                        <Link href="https://m.facebook.com/dmprojectdrager/">
+                        <Link href="https://m.facebook.com/dmprojectdrager/" target="_blank">
                             <Image
                                 src="/facebook3.png"
                                 width={30}
@@ -62,7 +62,7 @@ const DesktopFooter: FC<{}> = ({ }) => {
                             styles["socialMedia"]
                         )}
                     >
-                        <Link href="https://www.instagram.com/dmproject_drager?igsh=MWJuaWRidnJ5dTM2Zg==">
+                        <Link href="https://www.instagram.com/dmproject_drager?igsh=MWJuaWRidnJ5dTM2Zg==" target="_blank">
                             <Image
                                 src="/instagram_white.webp"
                                 width={30}
@@ -282,7 +282,7 @@ const DesktopFooter: FC<{}> = ({ }) => {
                     </div>
                     <div>
                         <div className={classNames("font-normal mt-1 ml-1")}>
-                            {t("adress")}
+                             <Link href="https://share.google/OF6z6AYY01nQkUYRX">{t("adress")}</Link>
                         </div>
                         <br />
                         <div className={classNames("font-normal mt-1 ml-1")}>

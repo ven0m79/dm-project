@@ -199,51 +199,39 @@ const Content: FC<SidebarProps> = ({
 
 
   const customFirstLevelOrder = useMemo(() => {
-    const uaCategories = categories?.[1]?.childrens || [];
-    const enCategories = categories?.[0]?.childrens || [];
+  const uaOrder = [
+    "or-equipment",
+    "icu-equipment",
+    "neonatal-equipment",
+    "cleaning-and-desinfecting-equipment",
+    "gas-management-systems",
+    "furniture",
+    "mri-equipment",
+    "accessories",
+  ];
 
-    // Порядок, який ти хочеш, тільки для українських категорій
-    const uaOrder = [
-      "or-equipment",
-      "icu-equipment",
-      "neonatal-equipment",
-      "cleaning-and-desinfecting-equipment",
-      "gas-management-systems",
-      "furniture",
-      "mri-equipment",
-      "accessories",
-    ];
+  // ✅ Статичний порядок для англійських категорій
+  const enOrder = [
+    "or-equipment-en",
+    "icu-equipment-en",
+    "neonatal-equipment-en",
+    "cleaning-and-desinfecting-equipment-en",
+    "gas-management-systems-en",
+    "furniture-en",
+    "mri-equipment-en",
+    "accessories-en",
+  ];
 
-    if (locale === "ua") {
-      return uaOrder;
-    }
+  if (locale === "ua") {
+    return uaOrder;
+  }
 
-    if (locale === "en") {
-      // Автоматично будуємо порядок для англійської мови
-      const orderedEnSlugs = uaOrder
-        .map((uaSlug) => {
-          const uaCat = uaCategories.find((cat) => cat.slug === uaSlug);
-          const enId = uaCat?.translations?.en;
-          const enCat = enCategories.find((cat) => cat.id === enId);
+  if (locale === "en") {
+    return enOrder;
+  }
 
-          console.log({
-            uaSlug,
-            uaCat,
-            enId,
-            enCat,
-          });
-          console.log("categories[1]:", categories?.[1]);
-          console.log("categories[0]:", categories?.[0]);
-
-          return enCat?.slug;
-        })
-        .filter(Boolean); // Видаляємо undefined, якщо щось не знайшли
-
-      return orderedEnSlugs;
-    }
-
-    return [];
-  }, [categories, locale]);
+  return [];
+}, [locale]);
   const renderNestedCategories = (
     category: TransformedCategoriesType,
     level = 0, // Level starts at 0 for root

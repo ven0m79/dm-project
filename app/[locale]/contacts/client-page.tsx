@@ -10,6 +10,7 @@ import mail from "./contacts-photo/emailContacts.png";
 import phone from "./contacts-photo/telephoneContacts.png";
 import adress from "./contacts-photo/locationContacts.png";
 import { useIsMobile } from "../components/hooks/useIsMobile";
+import Link from "next/link";
 
 declare global {
   interface Window {
@@ -97,9 +98,9 @@ export const ClientPage = () => {
                 src={adress}
                 width={30}
                 height={30}
-                alt="logo"
+                alt="logo"                
               />
-              {t('contact-adress1')}
+              <Link href="https://share.google/OF6z6AYY01nQkUYRX">{t('contact-adress1')}</Link>
             </p>
             <p className="text-2xl justify-normal items-start indent-4 mt-2 sm:indent-10">
               {t('contact-phone')}
@@ -115,7 +116,7 @@ export const ClientPage = () => {
               />
               <p>
                 <a href="tel:+380754482535" className="block hover:none">+380 75-448-25-35 (відділ продажів)</a>
-                <a href="tel:+380665044403" className="block hover:none">+380 66 358-98-10 (cервісний відділ)</a>
+                <a href="tel:+380663589810" className="block hover:none">+380 66 358-98-10 (cервісний відділ)</a>
               </p>
             </p>
             <p className="text-2xl justify-normal items-start indent-4 w-full mt-2 sm:indent-10">

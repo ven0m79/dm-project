@@ -117,7 +117,7 @@ const MobileNav: FC<{}> = ({ }) => {
                 <div className="flex flex-row ml-3 mb-7">
                     <div className="p-2 hover:text-white cursor-pointer text-[#D3DDE4]">
                         {otherLocales.map(({ code, label }) => (
-                            <Link key={code} href={{ pathname }} locale={code}>
+                            <Link key={code} href={`${pathname}${selectedCategory}`} locale={code}>
                                 {label}
                             </Link>
                         ))}

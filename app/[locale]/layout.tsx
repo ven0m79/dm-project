@@ -8,6 +8,9 @@ import "./globals.css";
 import { cn } from "@app/[locale]/components/molecules/lib/utils";
 import { unstable_setRequestLocale } from "next-intl/server";
 import Script from "next/script";
+// import { Metadata } from "next";
+// import  getHreflangLinks  from "@app/[locale]/components/atoms/hreflang/hreflang";
+
 
 const inter = Roboto({
   weight: ['400', '700'],
@@ -26,6 +29,21 @@ export function generateStaticParams() {
   return [{ locale: "ua" }, { locale: "en" }];
 }
 
+
+// export function generateMetadata(): Metadata {
+//   const path = ""; // Можна підставляти динамічно
+//   const hreflangs = getHreflangLinks(path);
+
+//   return {
+//     alternates: {
+//       languages: {
+//         uk: hreflangs.ua,
+//         en: hreflangs.en
+//       }
+//     }
+//   };
+// }
+
 export default function RootLayout({
   children,
   params: { locale },
@@ -36,6 +54,8 @@ export default function RootLayout({
   return (
     <html lang={locale}>
       <head>
+
+
         {/* ✅ Обидва скрипти у <head> */}
         <Script
           strategy="beforeInteractive"
