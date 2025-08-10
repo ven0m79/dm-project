@@ -126,7 +126,7 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
             >
                 <div><a href="tel:+380754482535" className="block hover:none">+380 75-448-25-35</a></div>
                 <div className="pl-0">{t("sale-department")}</div>
-                <div className="pt-1"><a href="tel:+380665044403" className="block hover:none">+380 66 358-98-10</a></div>
+                <div className="pt-1"><a href="tel:+380663589810" className="block hover:none">+380 66 358-98-10</a></div>
                 <div className="pl-0">{t("service-department")}</div>
             </div>
             <div className={styles.contactsGroupIcons}>
@@ -207,7 +207,7 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
                         styles["socialMedia"]
                     )}
                 >
-                    <Link href="https://youtube.com/@draeger?si=cNuSHUm57sHZvnkI">
+                    <Link href="https://youtube.com/@draeger?si=cNuSHUm57sHZvnkI" target="_blank">
                         <Image
                             src="/youtube-ico.jpg"
                             width={30}
@@ -221,7 +221,7 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
                         styles["socialMedia"]
                     )}
                 >
-                    <Link href="https://m.facebook.com/dmprojectdrager/">
+                    <Link href="https://m.facebook.com/dmprojectdrager/" target="_blank">
                         <Image
                             src="/facebook-ico.jpg"
                             width={30}
@@ -235,7 +235,7 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
                         styles["socialMedia"]
                     )}
                 >
-                    <Link href="https://www.instagram.com/dmproject_drager?igsh=MWJuaWRidnJ5dTM2Zg==">
+                    <Link href="https://www.instagram.com/dmproject_drager?igsh=MWJuaWRidnJ5dTM2Zg==" target="_blank">
                         <Image
                             src="/instagram.webp"
                             width={30}
