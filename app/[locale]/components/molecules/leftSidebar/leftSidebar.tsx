@@ -199,39 +199,38 @@ const Content: FC<SidebarProps> = ({
 
 
   const customFirstLevelOrder = useMemo(() => {
-  const uaOrder = [
-    "or-equipment",
-    "icu-equipment",
-    "neonatal-equipment",
-    "cleaning-and-desinfecting-equipment",
-    "gas-management-systems",
-    "furniture",
-    "mri-equipment",
-    "accessories",
-  ];
+    const uaOrder = [
+      "or-equipment",
+      "icu-equipment",
+      "neonatal-equipment",
+      "cleaning-and-desinfecting-equipment",
+      "gas-management-systems",
+      "furniture",
+      "mri-equipment",
+      "accessories",
+    ];
 
-  // ✅ Статичний порядок для англійських категорій
-  const enOrder = [
-    "or-equipment-en",
-    "icu-equipment-en",
-    "neonatal-equipment-en",
-    "cleaning-and-desinfecting-equipment-en",
-    "gas-management-systems-en",
-    "furniture-en",
-    "mri-equipment-en",
-    "accessories-en",
-  ];
+    const enOrder = [
+      "or-equipment-en",
+      "icu-equipment-en",
+      "neonatal-equipment-en",
+      "cleaning-and-desinfecting-equipment-en",
+      "gas-management-systems-en",
+      "furniture-en",
+      "mri-equipment-en",
+      "accessories-en",
+    ];
 
-  if (locale === "ua") {
-    return uaOrder;
-  }
+    if (locale === "ua") {
+      return uaOrder;
+    }
 
-  if (locale === "en") {
-    return enOrder;
-  }
+    if (locale === "en") {
+      return enOrder;
+    }
 
-  return [];
-}, [locale]);
+    return [];
+  }, [locale]);
   const renderNestedCategories = (
     category: TransformedCategoriesType,
     level = 0, // Level starts at 0 for root

@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     const data = await resend.emails.send({
       from: process.env.RESEND_FROM!,
       to: ["sales@dm-project.com.ua"], // можеш додати більше отримувачів
-      subject: "Нове повідомлення з форми сайту З Контакти",
+      subject: "Нове повідомлення з форми сайту Проектування",
       replyTo: email,
       text: `
         Ім’я: ${name}
