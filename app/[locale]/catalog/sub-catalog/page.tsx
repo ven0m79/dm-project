@@ -10,32 +10,44 @@ export async function generateMetadata({
   params,
   searchParams,
 }: Props): Promise<Metadata> {
-  const categorySlug = searchParams.category; // Get the category slug from the searchParams
+  const categorySlug = searchParams.category;
 
   try {
-    // Fetch category data from the API
-    const category = await fetch(
-      `https://api.dm-project.com.ua/wp-json/wc/v3/products/categories?slug=${categorySlug}&lang=${params.locale}&consumer_key=ck_8dee30956004b4c7f467a46247004a2f4cd650e5&consumer_secret=cs_1cf0a573275e5cafe5af6bddbb01f29b9592be20`
+    // 1️⃣ Отримуємо категорію по slug
+    const categories = await fetch(
+      `https://api.dm-project.com.ua/wp-json/wc/v3/products/categories?slug=${categorySlug}&lang=${params.locale}&consumer_key=ck_8dee30956004b4c7f467a46247004a2f4cd650e5&consumer_secret=cs_1cf0a573275e5cafe5af6bddbb01f29b9592be20`,
+      { cache: "no-store" }
     ).then((res) => res.json());
 
-    // Check if category data is found
-    if (!category || category.length === 0) {
+    if (!categories || categories.length === 0) {
       throw new Error("Category not found");
     }
 
-    // Extract the name of the category
-    const categoryName = category[0]?.name || categorySlug; // Fallback to the slug if name is unavailable
-    const categoryDescription = category[0]?.description;
+    let category = categories[0];
+    let categoryName = category?.name || categorySlug;
+    let categoryDescription = category?.description?.trim() || "";
+
+    // 2️⃣ Якщо опис пустий — робимо окремий запит по ID
+    if (!categoryDescription) {
+      const fullCategoryData = await fetch(
+        `https://api.dm-project.com.ua/wp-json/wc/v3/products/categories/${category.id}?lang=${params.locale}&consumer_key=ck_8dee30956004b4c7f467a46247004a2f4cd650e5&consumer_secret=cs_1cf0a573275e5cafe5af6bddbb01f29b9592be20`,
+        { cache: "no-store" }
+      ).then((res) => res.json());
+
+      if (fullCategoryData?.description?.trim()) {
+        categoryDescription = fullCategoryData.description.trim();
+      }
+    }
 
     return params.locale === "ua"
       ? {
-        title: `ДМ-ПРОЕКТ: ${categoryName}`,
-        description: `${categoryDescription}`,
-      }
+          title: `ДМ-ПРОЕКТ: ${categoryName}`,
+          description: categoryDescription,
+        }
       : {
-        title: `DM-PROJECT: ${categoryName}`,
-        description: `${categoryDescription}`,
-      };
+          title: `DM-PROJECT: ${categoryName}`,
+          description: categoryDescription,
+        };
   } catch (error) {
     console.error("Error fetching category:", error);
     return {

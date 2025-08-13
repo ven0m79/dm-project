@@ -32,7 +32,10 @@ export const categoriesUAIdData = {
   "operating-tables2": 277,
   "hospital-beds2": 962,
   "surgical-monitors2": 1087,
-};
+
+  "aspiration": 1157,
+  "for-infinity": 813,
+}
 
 export const categoriesENIdData = {
   "or-equipment": 61,
@@ -62,6 +65,9 @@ export const categoriesENIdData = {
   "operating-tables2-en": 279,
   "hospital-beds2-en": 964,
   "surgical-monitors2-en": 1089,
+
+  "aspiration-en": 1159,
+  "for-infinity-en": 815,
 };
 
 export const getCategoriesIds = (locale: string) =>
