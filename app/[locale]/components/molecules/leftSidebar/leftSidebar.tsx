@@ -152,7 +152,7 @@ const handleCollapseToggle = async (categoryId: number) => {
 
   const clickedCategory = findCategoryById(items, categoryId);
 
-  if (clickedCategory?.slug) {
+    if (clickedCategory?.slug) {
     setSelectedCategory(clickedCategory.slug);
 
     // Навигация: для iOS используем window.location.href
