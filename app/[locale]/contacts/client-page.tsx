@@ -29,7 +29,6 @@ export const ClientPage = () => {
 
 
   const isMobile = useIsMobile();
-  console.log({ isMobile });
 
   const [status, setStatus] = useState('');
 

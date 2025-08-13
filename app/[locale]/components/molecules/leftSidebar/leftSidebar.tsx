@@ -121,41 +121,43 @@ const Content: FC<SidebarProps> = ({
   );
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-  const handleCollapseToggle = async (categoryId: number) => {
-    setSelectedCategoryId(categoryId); // Highlight the selected category
+const handleCollapseToggle = async (categoryId: number) => {
+  setSelectedCategoryId(categoryId);
 
-    // Fetch products for the selected category
-    await getCategoryDetails(categoryId, locale);
+  // Завантажуємо продукти
+  await getCategoryDetails(categoryId, locale);
 
-    // After fetching, set the clicked category as the only open one
-    // Toggle open state
-    setOpenedCategoryIds((prevOpenedIds) => {
-      const isOpened = prevOpenedIds.includes(categoryId);
+  // Тогл відкритих категорій
+  setOpenedCategoryIds((prevOpenedIds) => {
+    const isOpened = prevOpenedIds.includes(categoryId);
+    return isOpened
+      ? prevOpenedIds.filter((id) => id !== categoryId)
+      : [...prevOpenedIds, categoryId];
+  });
 
-      return isOpened
-        ? prevOpenedIds.filter((id) => id !== categoryId)
-        : [...prevOpenedIds, categoryId];
-    });
-
-    const listCat = findParentCategories(items, categoryId);
-
-    if (!listCat || listCat.length === 0) {
-      // Если listCat пустой, используем кликнутую категорию
-      const clickedCategory = items
-        .flatMap((item) => [item, ...(item.childrens || [])]) // Учитываем вложенные категории
-        .find((item) => item.id === categoryId);
-      if (clickedCategory?.slug) {
-        router.push(`/catalog/sub-catalog?category=${clickedCategory.slug}`);
-        setSelectedCategory(clickedCategory.slug);
-      } else {
-        console.warn("Clicked category not found or has no slug");
+  // Знаходимо категорію за ID на будь-якому рівні
+  const findCategoryById = (
+    cats: TransformedCategoriesType[],
+    id: number
+  ): TransformedCategoriesType | null => {
+    for (const cat of cats) {
+      if (cat.id === id) return cat;
+      if (cat.childrens?.length) {
+        const found = findCategoryById(cat.childrens, id);
+        if (found) return found;
       }
-    } else {
-      // Если listCat содержит элементы, используем первый
-      router.push(`/catalog/sub-catalog?category=${listCat[0].slug}`);
-      setSelectedCategory(listCat[0].slug);
     }
+    return null;
   };
+
+  const clickedCategory = findCategoryById(items, categoryId);
+
+  if (clickedCategory?.slug) {
+    router.push(`/catalog/sub-catalog?category=${clickedCategory.slug}`);
+    setSelectedCategory(clickedCategory.slug);
+  }
+};
+
 
   const findParentCategories = useCallback(
     (
@@ -199,39 +201,38 @@ const Content: FC<SidebarProps> = ({
 
 
   const customFirstLevelOrder = useMemo(() => {
-  const uaOrder = [
-    "or-equipment",
-    "icu-equipment",
-    "neonatal-equipment",
-    "cleaning-and-desinfecting-equipment",
-    "gas-management-systems",
-    "furniture",
-    "mri-equipment",
-    "accessories",
-  ];
+    const uaOrder = [
+      "or-equipment",
+      "icu-equipment",
+      "neonatal-equipment",
+      "cleaning-and-desinfecting-equipment",
+      "gas-management-systems",
+      "furniture",
+      "mri-equipment",
+      "accessories",
+    ];
 
-  // ✅ Статичний порядок для англійських категорій
-  const enOrder = [
-    "or-equipment-en",
-    "icu-equipment-en",
-    "neonatal-equipment-en",
-    "cleaning-and-desinfecting-equipment-en",
-    "gas-management-systems-en",
-    "furniture-en",
-    "mri-equipment-en",
-    "accessories-en",
-  ];
+    const enOrder = [
+      "or-equipment-en",
+      "icu-equipment-en",
+      "neonatal-equipment-en",
+      "cleaning-and-desinfecting-equipment-en",
+      "gas-management-systems-en",
+      "furniture-en",
+      "mri-equipment-en",
+      "accessories-en",
+    ];
 
-  if (locale === "ua") {
-    return uaOrder;
-  }
+    if (locale === "ua") {
+      return uaOrder;
+    }
 
-  if (locale === "en") {
-    return enOrder;
-  }
+    if (locale === "en") {
+      return enOrder;
+    }
 
-  return [];
-}, [locale]);
+    return [];
+  }, [locale]);
   const renderNestedCategories = (
     category: TransformedCategoriesType,
     level = 0, // Level starts at 0 for root
@@ -272,40 +273,39 @@ const Content: FC<SidebarProps> = ({
 
     ) : (
       // Render collapse for items with children
-      <FBSidebar.Collapse
-        open={
-          category.id === LEFT_BAR_PARENT_ID ||
-          category.id === LEFT_BAR_PARENT_ID_EN ||
-          openedCategoryIds.includes(category.id) ||
-          selectedItemsNestedData?.includes(Number(category.id))
-        }
-        label={category.name}
-        key={category.id}
-        className={classNames({
-          "opacity-0 pointer-events-none mt-[-40px]":
-            category.id === LEFT_BAR_PARENT_ID ||
-            category.id === LEFT_BAR_PARENT_ID_EN,
-          "bg-sky-200": selectedCategoryId === category.id,
-        })}
-        // Apply padding only for levels >= 2
-        style={{ paddingLeft: `${paddingLeft}px` }}
-        onClick={() => handleCollapseToggle(category.id)} // Fetch products on collapse open
-      >
-        {/* Recursively render children */}
-        {category?.childrens?.length
-          ? [...category.childrens]
-            .sort((a, b) => {
-              if (level === 0 && customFirstLevelOrder.length > 0) {
-                const aIndex = customFirstLevelOrder.indexOf(a.slug);
-                const bIndex = customFirstLevelOrder.indexOf(b.slug);
-                return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
-              }
-              return a.name.localeCompare(b.name);
-            })
-            .map((child) => renderNestedCategories(child, level + 1))
-          : null}
+<FBSidebar.Collapse
+  open={
+    category.id === LEFT_BAR_PARENT_ID ||
+    category.id === LEFT_BAR_PARENT_ID_EN ||
+    openedCategoryIds.includes(category.id) ||
+    selectedItemsNestedData?.includes(Number(category.id))
+  }
+  label={category.name}
+  key={category.id}
+  className={classNames({
+    "opacity-0 pointer-events-none mt-[-40px]":
+      category.id === LEFT_BAR_PARENT_ID ||
+      category.id === LEFT_BAR_PARENT_ID_EN,
+    "bg-sky-200": selectedCategoryId === category.id,
+  })}
+  style={{ paddingLeft: `${paddingLeft}px` }}
+  onClick={() => handleCollapseToggle(category.id)}
+>
+  {category?.childrens?.length
+    ? [...category.childrens]
+        .sort((a, b) => {
+          if (level === 0 && customFirstLevelOrder.length > 0) {
+            const aIndex = customFirstLevelOrder.indexOf(a.slug);
+            const bIndex = customFirstLevelOrder.indexOf(b.slug);
+            return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
+          }
+          return a.name.localeCompare(b.name);
+        })
+        .map((child) => renderNestedCategories(child, level + 1))
+    : null}
+</FBSidebar.Collapse>
 
-      </FBSidebar.Collapse>
+
     );
   };
 
