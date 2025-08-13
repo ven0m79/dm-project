@@ -104,9 +104,9 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                         onClick={() => {
                           const url = `/catalog/sub-catalog/product/${el.translations[locale as any]}?category=${encodeURIComponent(selectedCategory || "")}`;
                           if (isIOS) {
-                            router.push(url); // Программная навигация
+                            window.location.href = url; // Для iOS всегда прямой переход
                           } else {
-                            window.location.href = url; // Прямая загрузка страницы
+                            router.push(url); // Для остальных через Next.js роутинг
                           }
                         }}
                       >
@@ -143,9 +143,9 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                         onClick={() => {
                           const url = `/catalog/sub-catalog/product/${el.translations[locale as any]}?category=${encodeURIComponent(selectedCategory || "")}`;
                           if (isIOS) {
-                            router.push(url); // Программная навигация
+                            window.location.href = url; // Для iOS всегда прямой переход
                           } else {
-                            window.location.href = url; // Прямая загрузка страницы
+                            router.push(url); // Для остальных через Next.js роутинг
                           }
                         }}
                       >
