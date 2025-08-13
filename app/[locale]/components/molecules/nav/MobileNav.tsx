@@ -114,7 +114,7 @@ const MobileNav: FC<{}> = ({ }) => {
                 transition={{ type: "tween", duration: 0.5 }} // Плавная анимация
                 className="fixed top-0 right-0 h-full w-1/2 bg-[#4E5A63E5]/90 shadow-lg backdrop-blur-lg p-5 z-50"
             >
-                <div className="flex flex-row ml-3 mb-7">
+                <div className="flex flex-col ml-3 mb-7">
                     <div className="p-2 hover:text-white cursor-pointer text-[#D3DDE4]">
                         {otherLocales.map(({ code, label }) => (
                             <Link key={code} href={`${pathname}${selectedCategory}`} locale={code}>
@@ -136,19 +136,21 @@ const MobileNav: FC<{}> = ({ }) => {
                             };
 
                             return (
-                                <Link key={el} href={href}>
-                                    <li
-                                        onTouchStart={handleTouchStart}
-                                        className={classNames("p-2", styles["link"], {
+                                <li
+                                    key={el}
+                                    className={classNames(
+                                        "text-[14px] sm:text-[14px] xl:text-[16px]",
+                                        styles["link"],
+                                        {
                                             [styles["active"]]:
-                                                pathname === "/lll"
-                                                    ? pathname === href
-                                                    : pathname.includes(href),
-                                        })}
-                                    >
-                                        {t(NavLinks[el].title)}
-                                    </li>
-                                </Link>
+                                                NavLinks[el].link === "/"
+                                                    ? pathname === "/"
+                                                    : pathname.startsWith(NavLinks[el].link),
+                                        }
+                                    )}
+                                >
+                                    <Link href={NavLinks[el].link}>{t(NavLinks[el].title)}</Link>
+                                </li>
                             );
                         })}
 
@@ -159,7 +161,7 @@ const MobileNav: FC<{}> = ({ }) => {
                             <li className="text-white cursor-pointer text-2xl">✖</li>
                         </Link>
                     </ul>
-                    </div>
+                </div>
             </motion.div>
         </div>
     )

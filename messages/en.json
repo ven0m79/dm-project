@@ -97,6 +97,14 @@
   },
   "ProjectPage": {
     "title": "Projects (Переклад Гугл)",
+    "project-form-name": "Name and Surname",
+    "project-form-mobile": "Phone number",
+    "project-form-medicalFacility": "The Name of the Medical Facility",
+    "project-form-city": "City",
+    "project-form-title": "Send Us Message",
+    "project-form-email": "E-mail",
+    "project-form-message": "Write Your Message Here...",
+    "project-form-submit": "SEND MESSAGE",
     "project-head1": "The design of medical facilities today is a fairly important separate branch of the medical business, which is developing quite quickly. Not every project company is able to complete the documentation of a modern medical facility at a decent level.",
     "project-head2": "LLC \"DM-PROJECT\" offers its customers a full range of services for the production of turnkey project documentation for the creation or re-equipment of a medical facility. Preparation of project documentation consists of 5 stages:",
     "project-prehead1": "1. Task analysis and preparation of the \"Medical task\"",
@@ -310,5 +318,4 @@
     "title": "Page not found.",
     "description": "Sorry, we couldn’t find the page you’re looking for."
   }
-
 }

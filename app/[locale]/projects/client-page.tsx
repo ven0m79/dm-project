@@ -84,7 +84,7 @@ export const ClientPage = () => {
           {t('title')}
         </div>
         <div className={styles.stroke}></div>
-        <div className="w-full w-max-[1400px] flex flex-row">
+        <div className="w-full max-w-[1400px] flex flex-col sd:flex-row">
           <div className={classNames("flex flex-1 flex-row justify-normal items-start")}>
             <div className={classNames("flex flex-col justify-center items-start", styles.leftContainer)}>
 
@@ -196,10 +196,10 @@ export const ClientPage = () => {
           </div>
           <div>
             <form onSubmit={handleSubmit} className={styles.container}>
-              <div className={styles.sendUsMessage}>{t('contact-form-title')}</div>
+              <div className={styles.sendUsMessage}>{t('project-form-title')}</div>
               <input
                 className={classNames("h-10", styles.form)}
-                placeholder={t('contact-form-name')}
+                placeholder={t('project-form-name')}
                 id="name"
                 type="text"
                 value={name}
@@ -207,7 +207,7 @@ export const ClientPage = () => {
               /><br />
               <input
                 className={classNames("h-10", styles.form)}
-                placeholder={t('contact-form-mobile')}
+                placeholder={t('project-form-mobile')}
                 id="mobile"
                 type="mobile"
                 value={mobile}
@@ -215,7 +215,7 @@ export const ClientPage = () => {
               /><br />
               <input
                 className={classNames("h-10", styles.form)}
-                placeholder={t('contact-form-medicalFacility')}
+                placeholder={t('project-form-medicalFacility')}
                 id="medicalFacility"
                 type="medicalFacility"
                 value={medicalFacility}
@@ -223,7 +223,7 @@ export const ClientPage = () => {
               /><br />
               <input
                 className={classNames("h-10", styles.form)}
-                placeholder={t('contact-form-city')}
+                placeholder={t('project-form-city')}
                 id="city"
                 type="city"
                 value={city}
@@ -231,7 +231,7 @@ export const ClientPage = () => {
               /><br />
               <input
                 className={classNames("h-10", styles.form)}
-                placeholder={t('contact-form-email')}
+                placeholder={t('project-form-email')}
                 id="email"
                 type="email"
                 value={email}
@@ -239,12 +239,12 @@ export const ClientPage = () => {
               /><br />
               <textarea
                 className={classNames("h-24 pt-2", styles.form)}
-                placeholder={t('contact-form-message')}
+                placeholder={t('project-form-message')}
                 id="message"
                 value={message}
                 onChange={e => setMessage(e.target.value)}
               /><br />
-              <button className={styles.yerSubmit} type="submit">{t('contact-form-submit')}</button>
+              <button className={styles.yerSubmit} type="submit">{t('project-form-submit')}</button>
               {status && <p className="mt-4 text-sm text-green-600">{status}</p>}
             </form>
           </div>
