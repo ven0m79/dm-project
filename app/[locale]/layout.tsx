@@ -121,7 +121,7 @@ export default function RootLayout({
             {children}
           </NextIntlClientProvider>
         </main>
-        <Script
+        {/* <Script
           id="binotel-widget"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
@@ -136,19 +136,27 @@ export default function RootLayout({
               })(document, window, 'script');
             `,
           }}
-          
-        />
-         {/* Binotel Widget */}
-        <Script id="binotel-widget" strategy="afterInteractive">
-          {`
-            (function(d, w, s) {
+
+        /> */}
+        {/* Binotel Widget */}
+        <Script
+          id="binotel-widget"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(d, w, s) {
               var widgetHash = '41zcyas3q551sr3dvq5x';
-              var gcw = d.createElement(s); gcw.type = 'text/javascript'; gcw.async = true;
+              var gcw = d.createElement(s); 
+              gcw.type = 'text/javascript'; 
+              gcw.async = true;
               gcw.src = '//widgets.binotel.com/getcall/widgets/' + widgetHash + '.js';
-              var sn = d.getElementsByTagName(s)[0]; sn.parentNode.insertBefore(gcw, sn);
+              var sn = d.getElementsByTagName(s)[0]; 
+              sn.parentNode.insertBefore(gcw, sn);
             })(document, window, 'script');
-          `}
-        </Script>
+         `,
+          }}
+        />
+
       </body>
     </html>
   );
