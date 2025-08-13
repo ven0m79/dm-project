@@ -121,49 +121,49 @@ const Content: FC<SidebarProps> = ({
   );
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-  const handleCollapseToggle = async (categoryId: number) => {
-    setSelectedCategoryId(categoryId);
+const handleCollapseToggle = async (categoryId: number) => {
+  setSelectedCategoryId(categoryId);
 
-    // Завантажуємо продукти
-    await getCategoryDetails(categoryId, locale);
+  // Завантажуємо продукти
+  await getCategoryDetails(categoryId, locale);
 
-    // Тогл відкритих категорій
-    setOpenedCategoryIds((prevOpenedIds) => {
-      const isOpened = prevOpenedIds.includes(categoryId);
-      return isOpened
-        ? prevOpenedIds.filter((id) => id !== categoryId)
-        : [...prevOpenedIds, categoryId];
-    });
+  // Тогл відкритих категорій
+  setOpenedCategoryIds((prevOpenedIds) => {
+    const isOpened = prevOpenedIds.includes(categoryId);
+    return isOpened
+      ? prevOpenedIds.filter((id) => id !== categoryId)
+      : [...prevOpenedIds, categoryId];
+  });
 
-    // Знаходимо категорію за ID на будь-якому рівні
-    const findCategoryById = (
-      cats: TransformedCategoriesType[],
-      id: number
-    ): TransformedCategoriesType | null => {
-      for (const cat of cats) {
-        if (cat.id === id) return cat;
-        if (cat.childrens?.length) {
-          const found = findCategoryById(cat.childrens, id);
-          if (found) return found;
-        }
-      }
-      return null;
-    };
-
-    const clickedCategory = findCategoryById(items, categoryId);
-
-    if (clickedCategory?.slug) {
-      setSelectedCategory(clickedCategory.slug);
-
-      // Навигация: для iOS используем window.location.href
-      const url = `/catalog/sub-catalog?category=${clickedCategory.slug}`;
-      if (isIOS) {
-        router.push(url);
-      } else {
-        window.location.href = url;
+  // Знаходимо категорію за ID на будь-якому рівні
+  const findCategoryById = (
+    cats: TransformedCategoriesType[],
+    id: number
+  ): TransformedCategoriesType | null => {
+    for (const cat of cats) {
+      if (cat.id === id) return cat;
+      if (cat.childrens?.length) {
+        const found = findCategoryById(cat.childrens, id);
+        if (found) return found;
       }
     }
+    return null;
   };
+
+  const clickedCategory = findCategoryById(items, categoryId);
+
+    if (clickedCategory?.slug) {
+    setSelectedCategory(clickedCategory.slug);
+
+    // Навигация: для iOS используем window.location.href
+    const url = `/catalog/sub-catalog?category=${clickedCategory.slug}`;
+    if (isIOS) {
+      window.location.href = url;
+    } else {
+      router.push(url);
+    }
+  }
+};
 
 
   const findParentCategories = useCallback(
@@ -280,37 +280,37 @@ const Content: FC<SidebarProps> = ({
 
     ) : (
       // Render collapse for items with children
-      <FBSidebar.Collapse
-        open={
-          category.id === LEFT_BAR_PARENT_ID ||
-          category.id === LEFT_BAR_PARENT_ID_EN ||
-          openedCategoryIds.includes(category.id) ||
-          selectedItemsNestedData?.includes(Number(category.id))
-        }
-        label={category.name}
-        key={category.id}
-        className={classNames({
-          "opacity-0 pointer-events-none mt-[-40px]":
-            category.id === LEFT_BAR_PARENT_ID ||
-            category.id === LEFT_BAR_PARENT_ID_EN,
-          "bg-sky-200": selectedCategoryId === category.id,
-        })}
-        style={{ paddingLeft: `${paddingLeft}px` }}
-        onClick={() => handleCollapseToggle(category.id)}
-      >
-        {category?.childrens?.length
-          ? [...category.childrens]
-            .sort((a, b) => {
-              if (level === 0 && customFirstLevelOrder.length > 0) {
-                const aIndex = customFirstLevelOrder.indexOf(a.slug);
-                const bIndex = customFirstLevelOrder.indexOf(b.slug);
-                return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
-              }
-              return a.name.localeCompare(b.name);
-            })
-            .map((child) => renderNestedCategories(child, level + 1))
-          : null}
-      </FBSidebar.Collapse>
+<FBSidebar.Collapse
+  open={
+    category.id === LEFT_BAR_PARENT_ID ||
+    category.id === LEFT_BAR_PARENT_ID_EN ||
+    openedCategoryIds.includes(category.id) ||
+    selectedItemsNestedData?.includes(Number(category.id))
+  }
+  label={category.name}
+  key={category.id}
+  className={classNames({
+    "opacity-0 pointer-events-none mt-[-40px]":
+      category.id === LEFT_BAR_PARENT_ID ||
+      category.id === LEFT_BAR_PARENT_ID_EN,
+    "bg-sky-200": selectedCategoryId === category.id,
+  })}
+  style={{ paddingLeft: `${paddingLeft}px` }}
+  onClick={() => handleCollapseToggle(category.id)}
+>
+  {category?.childrens?.length
+    ? [...category.childrens]
+        .sort((a, b) => {
+          if (level === 0 && customFirstLevelOrder.length > 0) {
+            const aIndex = customFirstLevelOrder.indexOf(a.slug);
+            const bIndex = customFirstLevelOrder.indexOf(b.slug);
+            return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
+          }
+          return a.name.localeCompare(b.name);
+        })
+        .map((child) => renderNestedCategories(child, level + 1))
+    : null}
+</FBSidebar.Collapse>
 
 
     );
