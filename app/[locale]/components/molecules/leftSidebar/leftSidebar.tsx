@@ -152,19 +152,11 @@ const handleCollapseToggle = async (categoryId: number) => {
 
   const clickedCategory = findCategoryById(items, categoryId);
 
-    if (clickedCategory?.slug) {
+  if (clickedCategory?.slug) {
+    router.push(`/catalog/sub-catalog?category=${clickedCategory.slug}`);
     setSelectedCategory(clickedCategory.slug);
-
-    // Навигация: для iOS используем window.location.href
-    const url = `/catalog/sub-catalog?category=${clickedCategory.slug}`;
-    if (isIOS) {
-      window.location.href = url;
-    } else {
-      router.push(url);
-    }
   }
 };
-
 
   const findParentCategories = useCallback(
     (

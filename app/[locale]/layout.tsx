@@ -8,6 +8,8 @@ import "./globals.css";
 import { cn } from "@app/[locale]/components/molecules/lib/utils";
 import { unstable_setRequestLocale } from "next-intl/server";
 import Script from "next/script";
+import { usePathname } from "next/navigation";
+import ClientScriptLoader from "@app/[locale]/components/atoms/scriptsBinotel/scriptsBinotel"
 // import { Metadata } from "next";
 // import  getHreflangLinks  from "@app/[locale]/components/atoms/hreflang/hreflang";
 
@@ -50,6 +52,8 @@ export default function RootLayout({
 }: LocaleLayoutProps) {
   unstable_setRequestLocale(locale);
   const messages = useMessages();
+
+
 
   return (
     <html lang={locale}>
@@ -138,25 +142,7 @@ export default function RootLayout({
           }}
 
         /> */}
-        {/* Binotel Widget */}
-        <Script
-          id="binotel-widget"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(d, w, s) {
-              var widgetHash = '41zcyas3q551sr3dvq5x';
-              var gcw = d.createElement(s); 
-              gcw.type = 'text/javascript'; 
-              gcw.async = true;
-              gcw.src = '//widgets.binotel.com/getcall/widgets/' + widgetHash + '.js';
-              var sn = d.getElementsByTagName(s)[0]; 
-              sn.parentNode.insertBefore(gcw, sn);
-            })(document, window, 'script');
-         `,
-          }}
-        />
-
+        <ClientScriptLoader />
       </body>
     </html>
   );
