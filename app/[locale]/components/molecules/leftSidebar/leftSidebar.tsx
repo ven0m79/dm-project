@@ -117,87 +117,89 @@ const Content: FC<SidebarProps> = ({
 
   const items = useMemo(
     () => (locale === "ua" ? [categories?.[1] || []] : [categories?.[0] || []]),
-    [categories, locale],
+    [categories, locale]
   );
+
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-const handleCollapseToggle = async (categoryId: number) => {
-  setSelectedCategoryId(categoryId);
+  const handleCollapseToggle = async (categoryId: number) => {
+    setSelectedCategoryId(categoryId);
 
-  // Завантажуємо продукти
-  await getCategoryDetails(categoryId, locale);
+    await getCategoryDetails(categoryId, locale);
 
-  // Тогл відкритих категорій
-  setOpenedCategoryIds((prevOpenedIds) => {
-    const isOpened = prevOpenedIds.includes(categoryId);
-    return isOpened
-      ? prevOpenedIds.filter((id) => id !== categoryId)
-      : [...prevOpenedIds, categoryId];
-  });
+    setOpenedCategoryIds((prevOpenedIds) => {
+      const isOpened = prevOpenedIds.includes(categoryId);
+      return isOpened
+        ? prevOpenedIds.filter((id) => id !== categoryId)
+        : [...prevOpenedIds, categoryId];
+    });
 
-  // Знаходимо категорію за ID на будь-якому рівні
-  const findCategoryById = (
-    cats: TransformedCategoriesType[],
-    id: number
-  ): TransformedCategoriesType | null => {
-    for (const cat of cats) {
-      if (cat.id === id) return cat;
-      if (cat.childrens?.length) {
-        const found = findCategoryById(cat.childrens, id);
-        if (found) return found;
+    const findCategoryById = (
+      cats: TransformedCategoriesType[],
+      id: number,
+      visited: Set<number> = new Set()
+    ): TransformedCategoriesType | null => {
+      for (const cat of cats) {
+        if (visited.has(cat.id)) continue;
+        visited.add(cat.id);
+
+        if (cat.id === id) return cat;
+        if (cat.childrens?.length) {
+          const found = findCategoryById(cat.childrens, id, visited);
+          if (found) return found;
+        }
       }
+      return null;
+    };
+
+    const clickedCategory = findCategoryById(items, categoryId);
+    if (clickedCategory?.slug) {
+      router.push(`/catalog/sub-catalog?category=${clickedCategory.slug}`);
+      setSelectedCategory(clickedCategory.slug);
     }
-    return null;
   };
-
-  const clickedCategory = findCategoryById(items, categoryId);
-
-  if (clickedCategory?.slug) {
-    router.push(`/catalog/sub-catalog?category=${clickedCategory.slug}`);
-    setSelectedCategory(clickedCategory.slug);
-  }
-};
 
   const findParentCategories = useCallback(
     (
       categories: TransformedCategoriesType[],
       targetCategoryId: number,
       parents: TransformedCategoriesType[] = [],
+      visited: Set<number> = new Set()
     ): TransformedCategoriesType[] | null => {
       for (const category of categories) {
-        // If the target category is found, return the parents list
+        if (visited.has(category.id)) continue;
+        visited.add(category.id);
+
         if (category.id === targetCategoryId) {
-          return parents; // Return the accumulated parents when the target is found
+          return parents;
         }
 
-        // If the category has children, search recursively
         if (category.childrens && category.childrens.length > 0) {
           const foundParents = findParentCategories(
             category.childrens,
             targetCategoryId,
-            [...parents, category], // Add the current category to the parents list
+            [...parents, category],
+            visited
           );
-
           if (foundParents) {
             return foundParents.filter(
               (el) =>
-                el.id !== LEFT_BAR_PARENT_ID && el.id !== LEFT_BAR_PARENT_ID_EN,
-            ); // Return the full parent path if found
+                el.id !== LEFT_BAR_PARENT_ID &&
+                el.id !== LEFT_BAR_PARENT_ID_EN
+            );
           }
         }
       }
-
-      return null; // Return null if the target category is not found
+      return null;
     },
-    [],
+    []
   );
 
   const selectedItemsNestedData = useMemo(() => {
     return findParentCategories(items, Number(selectedCategoryId))?.map(
-      (el) => el.id,
+      (el) => el.id
     );
   }, [findParentCategories, items, selectedCategoryId]);
-
 
   const customFirstLevelOrder = useMemo(() => {
     const uaOrder = [
@@ -222,110 +224,88 @@ const handleCollapseToggle = async (categoryId: number) => {
       "accessories-en",
     ];
 
-    if (locale === "ua") {
-      return uaOrder;
-    }
-
-    if (locale === "en") {
-      return enOrder;
-    }
-
-    return [];
+    return locale === "ua" ? uaOrder : locale === "en" ? enOrder : [];
   }, [locale]);
+
   const renderNestedCategories = (
     category: TransformedCategoriesType,
-    level = 0, // Level starts at 0 for root
+    level = 0
   ) => {
-    // Apply padding starting from level 2
-    const paddingLeft = level > 1 ? level * 7 : 0; // No padding for level 0 and level 1
-    return category?.childrens?.length === 0 ? (
-      <FBSidebar.Item
-        as="div"
+    const paddingLeft = level > 1 ? level * 7 : 0;
+
+    if (!category.childrens || category.childrens.length === 0) {
+      return (
+        <FBSidebar.Item
+          as="div"
+          key={category.id}
+          className={classNames("cursor-pointer", {
+            "bg-sky-200": selectedCategoryId === category.id,
+          })}
+          style={{ paddingLeft: `${paddingLeft}px` }}
+        >
+          <div
+            onClick={() => {
+              const selectedParent = items[0]?.childrens?.find(
+                (item) => item.id === category.parent
+              );
+              const listCat = findParentCategories(items, category.id);
+
+              setSelectedCategory(selectedParent?.slug || "");
+              handleCollapseToggle(category.id);
+
+              if (changeURLParams && listCat?.[0]?.slug) {
+                router.push(`${pathname}?category=${listCat[0].slug}`);
+              }
+              if (fromProductPage && listCat?.[0]?.slug) {
+                router.push(`/catalog/sub-catalog?category=${listCat[0].slug}`);
+              }
+            }}
+          >
+            {category.name}
+          </div>
+        </FBSidebar.Item>
+      );
+    }
+
+    return (
+      <FBSidebar.Collapse
+        open={
+          category.id === LEFT_BAR_PARENT_ID ||
+          category.id === LEFT_BAR_PARENT_ID_EN ||
+          openedCategoryIds.includes(category.id) ||
+          selectedItemsNestedData?.includes(Number(category.id))
+        }
+        label={category.name}
         key={category.id}
-        className={classNames("cursor-pointer", {
+        className={classNames({
+          "opacity-0 pointer-events-none mt-[-40px]":
+            category.id === LEFT_BAR_PARENT_ID ||
+            category.id === LEFT_BAR_PARENT_ID_EN,
           "bg-sky-200": selectedCategoryId === category.id,
         })}
         style={{ paddingLeft: `${paddingLeft}px` }}
+        onClick={() => handleCollapseToggle(category.id)}
       >
-        <div
-          onClick={() => {
-            const selectedParent = items[0]?.childrens?.find(
-              (item) => item.id === category.parent,
-            );
-            const listCat = findParentCategories(items, category.id);
-
-            setSelectedCategory(selectedParent?.slug || "");
-            handleCollapseToggle(category.id);
-
-            if (changeURLParams) {
-              router.push(`${pathname}?category=${listCat?.[0].slug}`);
+        {[...category.childrens]
+          .sort((a, b) => {
+            if (level === 0 && customFirstLevelOrder.length > 0) {
+              const aIndex = customFirstLevelOrder.indexOf(a.slug);
+              const bIndex = customFirstLevelOrder.indexOf(b.slug);
+              return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
             }
-            if (fromProductPage) {
-              router.push(`/catalog/sub-catalog?category=${listCat?.[0].slug}`);
-
-            }
-          }}
-        >
-          {category.name}
-        </div>
-      </FBSidebar.Item>
-
-    ) : (
-      // Render collapse for items with children
-<FBSidebar.Collapse
-  open={
-    category.id === LEFT_BAR_PARENT_ID ||
-    category.id === LEFT_BAR_PARENT_ID_EN ||
-    openedCategoryIds.includes(category.id) ||
-    selectedItemsNestedData?.includes(Number(category.id))
-  }
-  label={category.name}
-  key={category.id}
-  className={classNames({
-    "opacity-0 pointer-events-none mt-[-40px]":
-      category.id === LEFT_BAR_PARENT_ID ||
-      category.id === LEFT_BAR_PARENT_ID_EN,
-    "bg-sky-200": selectedCategoryId === category.id,
-  })}
-  style={{ paddingLeft: `${paddingLeft}px` }}
-  onClick={() => handleCollapseToggle(category.id)}
->
-  {category?.childrens?.length
-    ? [...category.childrens]
-        .sort((a, b) => {
-          if (level === 0 && customFirstLevelOrder.length > 0) {
-            const aIndex = customFirstLevelOrder.indexOf(a.slug);
-            const bIndex = customFirstLevelOrder.indexOf(b.slug);
-            return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
-          }
-          return a.name.localeCompare(b.name);
-        })
-        .map((child) => renderNestedCategories(child, level + 1))
-    : null}
-</FBSidebar.Collapse>
-
-
+            return a.name.localeCompare(b.name);
+          })
+          .map((child) => renderNestedCategories(child, level + 1))}
+      </FBSidebar.Collapse>
     );
   };
 
   return (
-    <div
-      className={classNames(
-        "flex flex-1 flex-row justify-between",
-        styles.subMenu,
-      )}
-    >
-      <div className="">
-        {/*Оцю стилізувати*/}
-        <h3 className="text-blue-950 ml-5 font-bold mt-5">
-          {items?.[0]?.name}
-        </h3>
+    <div className={classNames("flex flex-1 flex-row justify-between", styles.subMenu)}>
+      <div>
+        <h3 className="text-blue-950 ml-5 font-bold mt-5">{items?.[0]?.name}</h3>
 
-        <FBSidebar
-          aria-label="Catalog"
-          className=""
-          theme={customTheme.sidebar}
-        >
+        <FBSidebar aria-label="Catalog" theme={customTheme.sidebar}>
           <FBSidebar.ItemGroup>
             {items?.map((el) => renderNestedCategories(el))}
           </FBSidebar.ItemGroup>
