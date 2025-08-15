@@ -228,81 +228,81 @@ const Content: FC<SidebarProps> = ({
   }, [locale]);
 
   const renderNestedCategories = (
-  category: TransformedCategoriesType,
-  level = 0,
-  visited: Set<number> = new Set()
-) => {
-  if (visited.has(category.id)) return null; // запобігаємо рекурсії
-  visited.add(category.id);
+    category: TransformedCategoriesType,
+    level = 0,
+    visited: Set<number> = new Set()
+   ) => {
+    if (visited.has(category.id)) return null;
+    visited.add(category.id);
 
-  const paddingLeft = level > 1 ? level * 7 : 0;
+    const paddingLeft = level > 1 ? level * 7 : 0;
 
-  if (!category.childrens || category.childrens.length === 0) {
+    if (!category.childrens || category.childrens.length === 0) {
+      return (
+        <FBSidebar.Item
+          as="div"
+          key={category.id}
+          className={classNames("cursor-pointer", {
+            "bg-sky-200": selectedCategoryId === category.id,
+          })}
+          style={{ paddingLeft: `${paddingLeft}px` }}
+        >
+          <div
+            onClick={() => {
+              const selectedParent = items[0]?.childrens?.find(
+                (item) => item.id === category.parent
+              );
+              const listCat = findParentCategories(items, category.id);
+
+              setSelectedCategory(selectedParent?.slug || "");
+              handleCollapseToggle(category.id);
+
+              if (changeURLParams && listCat?.[0]?.slug) {
+                router.push(`${pathname}?category=${listCat[0].slug}`);
+              }
+              if (fromProductPage && listCat?.[0]?.slug) {
+                router.push(`/catalog/sub-catalog?category=${listCat[0].slug}`);
+              }
+            }}
+          >
+            {category.name}
+          </div>
+        </FBSidebar.Item>
+      );
+    }
+
     return (
-      <FBSidebar.Item
-        as="div"
+      <FBSidebar.Collapse
+        open={
+          category.id === LEFT_BAR_PARENT_ID ||
+          category.id === LEFT_BAR_PARENT_ID_EN ||
+          openedCategoryIds.includes(category.id) ||
+          selectedItemsNestedData?.includes(Number(category.id))
+        }
+        label={category.name}
         key={category.id}
-        className={classNames("cursor-pointer", {
+        className={classNames({
+          "opacity-0 pointer-events-none mt-[-40px]":
+            category.id === LEFT_BAR_PARENT_ID ||
+            category.id === LEFT_BAR_PARENT_ID_EN,
           "bg-sky-200": selectedCategoryId === category.id,
         })}
         style={{ paddingLeft: `${paddingLeft}px` }}
+        onClick={() => handleCollapseToggle(category.id)}
       >
-        <div
-          onClick={() => {
-            const selectedParent = items[0]?.childrens?.find(
-              (item) => item.id === category.parent
-            );
-            const listCat = findParentCategories(items, category.id);
-
-            setSelectedCategory(selectedParent?.slug || "");
-            handleCollapseToggle(category.id);
-
-            if (changeURLParams && listCat?.[0]?.slug) {
-              router.push(`${pathname}?category=${listCat[0].slug}`);
+        {[...category.childrens]
+          .sort((a, b) => {
+            if (level === 0 && customFirstLevelOrder.length > 0) {
+              const aIndex = customFirstLevelOrder.indexOf(a.slug);
+              const bIndex = customFirstLevelOrder.indexOf(b.slug);
+              return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
             }
-            if (fromProductPage && listCat?.[0]?.slug) {
-              router.push(`/catalog/sub-catalog?category=${listCat[0].slug}`);
-            }
-          }}
-        >
-          {category.name}
-        </div>
-      </FBSidebar.Item>
+            return a.name.localeCompare(b.name);
+          })
+          .map((child) => renderNestedCategories(child, level + 1, new Set(visited)))}
+      </FBSidebar.Collapse>
     );
-  }
-
-  return (
-    <FBSidebar.Collapse
-      open={
-        category.id === LEFT_BAR_PARENT_ID ||
-        category.id === LEFT_BAR_PARENT_ID_EN ||
-        openedCategoryIds.includes(category.id) ||
-        selectedItemsNestedData?.includes(Number(category.id))
-      }
-      label={category.name}
-      key={category.id}
-      className={classNames({
-        "opacity-0 pointer-events-none mt-[-40px]":
-          category.id === LEFT_BAR_PARENT_ID ||
-          category.id === LEFT_BAR_PARENT_ID_EN,
-        "bg-sky-200": selectedCategoryId === category.id,
-      })}
-      style={{ paddingLeft: `${paddingLeft}px` }}
-      onClick={() => handleCollapseToggle(category.id)}
-    >
-      {[...category.childrens]
-        .sort((a, b) => {
-          if (level === 0 && customFirstLevelOrder.length > 0) {
-            const aIndex = customFirstLevelOrder.indexOf(a.slug);
-            const bIndex = customFirstLevelOrder.indexOf(b.slug);
-            return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
-          }
-          return a.name.localeCompare(b.name);
-        })
-        .map((child) => renderNestedCategories(child, level + 1, new Set(visited)))}
-    </FBSidebar.Collapse>
-  );
-};
+  };
 
 
   return (
