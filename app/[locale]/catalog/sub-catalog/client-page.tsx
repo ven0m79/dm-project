@@ -64,7 +64,7 @@ useEffect(() => {
       getCategoryDetails(categoryId, locale);
       setSelectedCategoryId(categoryId);
       setOpenedCategoryIds([categoryId]);
-      initialLoadDoneRef.current = true; // ставимо прапорець, щоб effect більше не виконувався
+      initialLoadDoneRef.current = true; 
     }
   }
 }, [selectedCategory, currentIdsData, getCategoryDetails, locale, setSelectedCategoryId, setOpenedCategoryIds]);
