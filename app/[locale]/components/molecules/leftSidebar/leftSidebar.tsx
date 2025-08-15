@@ -299,7 +299,8 @@ const Content: FC<SidebarProps> = ({
             }
             return a.name.localeCompare(b.name);
           })
-          .map((child) => renderNestedCategories(child, level + 1, new Set(visited)))}
+          .map((child) => renderNestedCategories(child, level + 1, new Set(visited)))
+          }
       </FBSidebar.Collapse>
     );
   };

@@ -28,9 +28,11 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   const router = useRouter();
   const isIOS = typeof window !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-  const sortedProducts = [...selectedProducts].sort((a, b) => a.name.localeCompare(b.name));
+  const sortedProducts = useMemo(() => {
+    return [...selectedProducts].sort((a, b) => a.name.localeCompare(b.name));
+  }, [selectedProducts]);
   const [visibleCount, setVisibleCount] = useState(15);
-  const productsToRender = sortedProducts.slice(0, visibleCount);
+  const productsToRender = useMemo(() => sortedProducts.slice(0, visibleCount), [sortedProducts, visibleCount]);
 
   const getData = useCallback(async () => {
     try {
@@ -54,27 +56,20 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
     el.tags.map((el) => el.name).includes("accessories"),
   );
 
+
+  const [initialLoadDone, setInitialLoadDone] = useState(false);
   useEffect(() => {
-    if (selectedCategory && openedCategoryIds.length === 0) {
-      console.log(selectedCategory);
+    if (!initialLoadDone && selectedCategory) {
       // @ts-ignore
       const categoryId = currentIdsData?.[selectedCategory];
-
       if (categoryId) {
         getCategoryDetails(categoryId, locale);
         setSelectedCategoryId(categoryId);
         setOpenedCategoryIds([categoryId]);
+        setInitialLoadDone(true); // більше не викликаємо effect
       }
     }
-  }, [
-    currentIdsData,
-    getCategoryDetails,
-    locale,
-    openedCategoryIds.length,
-    selectedCategory,
-    setOpenedCategoryIds,
-    setSelectedCategoryId,
-  ]);
+  }, [initialLoadDone, selectedCategory, currentIdsData, getCategoryDetails, locale, setSelectedCategoryId, setOpenedCategoryIds]);
 
   return (
     <>
