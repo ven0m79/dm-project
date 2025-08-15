@@ -1,7 +1,7 @@
 "use client";
 import classNames from "classnames";
 import Link from "next/link";
-import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
+import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { fetchWooCommerceCategories } from "../../../../utils/woocommerce.setup";
 import styles from "./Sub-catalog.module.css";
@@ -55,19 +55,20 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   );
 
 
-  const [initialLoadDone, setInitialLoadDone] = useState(false);
+const initialLoadDoneRef = useRef(false);
+
 useEffect(() => {
-  if (!initialLoadDone && selectedCategory) {
-    // @ts-ignore
-    const categoryId = currentIdsData?.[selectedCategory];
+  if (!initialLoadDoneRef.current && selectedCategory) {
+    const categoryId = currentIdsData?.[selectedCategory as keyof typeof currentIdsData];
     if (categoryId) {
       getCategoryDetails(categoryId, locale);
       setSelectedCategoryId(categoryId);
       setOpenedCategoryIds([categoryId]);
-      setInitialLoadDone(true); // більше не викликаємо effect
+      initialLoadDoneRef.current = true; // ставимо прапорець, щоб effect більше не виконувався
     }
   }
-}, [initialLoadDone, selectedCategory, currentIdsData, getCategoryDetails, locale, setSelectedCategoryId, setOpenedCategoryIds]);
+}, [selectedCategory, currentIdsData, getCategoryDetails, locale, setSelectedCategoryId, setOpenedCategoryIds]);
+
 
   return (
     <>

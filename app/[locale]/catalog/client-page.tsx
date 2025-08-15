@@ -34,7 +34,7 @@ export const ClientPage = () => {
         <Link
           href={{
             pathname: "/catalog/sub-catalog",
-            query: "category=or-equipment",
+            query: { category: "or-equipment" }, // тепер це об'єкт, а не рядок
           }}
         >
           {/* sm:bg-amber-800 in classnames */}
