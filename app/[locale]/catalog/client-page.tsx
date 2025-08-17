@@ -32,31 +32,61 @@ export const ClientPage = () => {
           [styles.catalogContainer],
         )}
       >
-        <Link href={{ pathname: "/catalog/sub-catalog", query: { category: "or-equipment" } }}>
+        <Link
+          href="/catalog/sub-catalog?category=or-equipment"
+          onClick={(e) => {
+            e.preventDefault();
+            window.location.href = `/catalog/sub-catalog?category=or-equipment`;
+          }}
+        >
           <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
             <span className={styles.span}>{t("or-equipment")}</span>
             <Image className={styles.img} src={imgOper} width={130} height={130} alt={t("or-equipment")} />
           </div>
         </Link>
-        <Link href={{ pathname: "/catalog/sub-catalog", query: { category: "icu-equipment" } }}>
+        <Link
+          href="/catalog/sub-catalog?category=icu-equipment"
+          onClick={(e) => {
+            e.preventDefault();
+            window.location.href = `/catalog/sub-catalog?category=icu-equipment`;
+          }}
+        >
           <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
             <span className={styles.span}>{t("icu-equipment")}</span>
             <Image className={styles.img} src={imgIntensive} width={130} height={130} alt={t("icu-equipment")} />
           </div>
         </Link>
-        <Link href={{ pathname: "/catalog/sub-catalog", query: { category: "neonatal-equipment" } }}>
+        <Link
+          href="/catalog/sub-catalog?category=neonatal-equipment"
+          onClick={(e) => {
+            e.preventDefault();
+            window.location.href = `/catalog/sub-catalog?category=neonatal-equipment`;
+          }}
+        >
           <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
             <span className={styles.span}>{t("neonatal-equipment")}</span>
             <Image className={styles.img} src={imgNeonat} width={130} height={130} alt={t("neonatal-equipment")} />
           </div>
         </Link>
-        <Link href={{ pathname: "/catalog/sub-catalog", query: { category: "cleaning-and-desinfecting-equipment" } }}>
+        <Link
+          href="/catalog/sub-catalog?category=cleaning-and-desinfecting-equipment"
+          onClick={(e) => {
+            e.preventDefault();
+            window.location.href = `/catalog/sub-catalog?category=cleaning-and-desinfecting-equipment`;
+          }}
+        >
           <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
             <span className={styles.span}>{t("candd-equipment")}</span>
             <Image className={styles.img} src={imgSteriliz} width={130} height={130} alt={t("candd-equipment")} />
           </div>
         </Link>
-        <Link href={{ pathname: "/catalog/sub-catalog", query: { category: "gas-management-systems" } }}>
+        <Link
+          href="/catalog/sub-catalog?category=category=gas-management-systems"
+          onClick={(e) => {
+            e.preventDefault();
+            window.location.href = `/catalog/sub-catalog?category=gas-management-systems`;
+          }}
+        >
           <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
             <span className={styles.span}>{t("gas-systems")}</span>
             <Image className={styles.img} src={imgMedgaz} width={130} height={130} alt={t("gas-systems")} />
