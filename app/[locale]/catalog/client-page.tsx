@@ -1,7 +1,7 @@
 "use client";
+
 import React from "react";
 import styles from "./Catalog.module.css";
-
 import { MainLayout } from "@app/[locale]/components/templates";
 import { Link } from "config";
 import Image from "next/image";
@@ -19,7 +19,6 @@ import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 
 export const ClientPage = () => {
   const t = useTranslations("Catalog1");
-
   const isMobile = useIsMobile();
   console.log({ isMobile });
 
@@ -31,182 +30,52 @@ export const ClientPage = () => {
           [styles.catalogContainer],
         )}
       >
-        <Link
-          href={{
-            pathname: "/catalog/sub-catalog",
-            query: { category: "or-equipment" }, // тепер це об'єкт, а не рядок
-          }}
-        >
-          {/* sm:bg-amber-800 in classnames */}
-          <div
-            className={classNames(
-              "flex flex-row items-center rounded-xl mx-1",
-              styles["block-decisions"],
-            )}
-          >
+        <Link href={{ pathname: "/catalog/sub-catalog", query: { category: "or-equipment" } }}>
+          <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
             <span className={styles.span}>{t("or-equipment")}</span>
-            <Image
-              className={styles.img}
-              src={imgOper}
-              width={130}
-              height={130}
-              alt={t("or-equipment")}
-            />
+            <Image className={styles.img} src={imgOper} width={130} height={130} alt={t("or-equipment")} />
           </div>
         </Link>
-        <Link
-          href={{
-            pathname: "/catalog/sub-catalog",
-            query: "category=icu-equipment",
-          }}
-        >
-          <div
-            className={classNames(
-              "flex flex-row items-center rounded-xl mx-1",
-              styles["block-decisions"],
-            )}
-          >
+        <Link href={{ pathname: "/catalog/sub-catalog", query: { category: "icu-equipment" } }}>
+          <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
             <span className={styles.span}>{t("icu-equipment")}</span>
-            <Image
-              className={styles.img}
-              src={imgIntensive}
-              width={130}
-              height={130}
-              alt={t("icu-equipment")}
-            />
+            <Image className={styles.img} src={imgIntensive} width={130} height={130} alt={t("icu-equipment")} />
           </div>
         </Link>
-        <Link
-          href={{
-            pathname: "/catalog/sub-catalog",
-            query: "category=neonatal-equipment",
-          }}
-        >
-          <div
-            className={classNames(
-              "flex flex-row items-center rounded-xl mx-1",
-              styles["block-decisions"],
-            )}
-          >
+        <Link href={{ pathname: "/catalog/sub-catalog", query: { category: "neonatal-equipment" } }}>
+          <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
             <span className={styles.span}>{t("neonatal-equipment")}</span>
-            <Image
-              className={styles.img}
-              src={imgNeonat}
-              width={130}
-              height={130}
-              alt={t("neonatal-equipment")}
-            />
+            <Image className={styles.img} src={imgNeonat} width={130} height={130} alt={t("neonatal-equipment")} />
           </div>
         </Link>
-        <Link
-          href={{
-            pathname: "/catalog/sub-catalog",
-            query: "category=cleaning-and-desinfecting-equipment",
-          }}
-        >
-          <div
-            className={classNames(
-              "flex flex-row items-center rounded-xl mx-1",
-              styles["block-decisions"],
-            )}
-          >
+        <Link href={{ pathname: "/catalog/sub-catalog", query: { category: "cleaning-and-desinfecting-equipment" } }}>
+          <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
             <span className={styles.span}>{t("candd-equipment")}</span>
-            <Image
-              className={styles.img}
-              src={imgSteriliz}
-              width={130}
-              height={130}
-              alt={t("candd-equipment")}
-            />
+            <Image className={styles.img} src={imgSteriliz} width={130} height={130} alt={t("candd-equipment")} />
           </div>
         </Link>
-        <Link
-          href={{
-            pathname: "/catalog/sub-catalog",
-            query: "category=gas-management-systems",
-          }}
-        >
-          <div
-            className={classNames(
-              "flex flex-row items-center rounded-xl mx-1",
-              styles["block-decisions"],
-            )}
-          >
+        <Link href={{ pathname: "/catalog/sub-catalog", query: { category: "gas-management-systems" } }}>
+          <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
             <span className={styles.span}>{t("gas-systems")}</span>
-            <Image
-              className={styles.img}
-              src={imgMedgaz}
-              width={130}
-              height={130}
-              alt={t("gas-systems")}
-            />
+            <Image className={styles.img} src={imgMedgaz} width={130} height={130} alt={t("gas-systems")} />
           </div>
         </Link>
-        <Link
-          href={{
-            pathname: "/catalog/sub-catalog",
-            query: "category=furniture",
-          }}
-        >
-          <div
-            className={classNames(
-              "flex flex-row items-center rounded-xl mx-1",
-              styles["block-decisions"],
-            )}
-          >
+        <Link href={{ pathname: "/catalog/sub-catalog", query: { category: "furniture" } }}>
+          <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
             <span className={styles.span}>{t("other-equipment")}</span>
-            <Image
-              className={styles.img}
-              src={imgFurniture}
-              width={130}
-              height={130}
-              alt={t("other-equipment")}
-            />
+            <Image className={styles.img} src={imgFurniture} width={130} height={130} alt={t("other-equipment")} />
           </div>
         </Link>
-        <Link
-          href={{
-            pathname: "/catalog/sub-catalog",
-            query: "category=mri-equipment",
-          }}
-        >
-          <div
-            className={classNames(
-              "flex flex-row items-center rounded-xl mx-1",
-              styles["block-decisions"],
-            )}
-          >
+        <Link href={{ pathname: "/catalog/sub-catalog", query: { category: "mri-equipment" } }}>
+          <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
             <span className={styles.span}>{t("mrt")}</span>
-            <Image
-              className={styles.img}
-              src={imgMri}
-              width={130}
-              height={130}
-              alt={t("mrt")}
-            />
+            <Image className={styles.img} src={imgMri} width={130} height={130} alt={t("mrt")} />
           </div>
         </Link>
-
-        <Link
-          href={{
-            pathname: "/catalog/sub-catalog",
-            query: "category=accessories",
-          }}
-        >
-          <div
-            className={classNames(
-              "flex flex-row items-center rounded-xl mx-1",
-              styles["block-decisions"],
-            )}
-          >
+        <Link href={{ pathname: "/catalog/sub-catalog", query: { category: "accessories" } }}>
+          <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
             <span className={styles.span}>{t("accessories")}</span>
-            <Image
-              className={styles.img}
-              src={imgCons}
-              width={130}
-              height={130}
-              alt={t("accessories")}
-            />
+            <Image className={styles.img} src={imgCons} width={130} height={130} alt={t("accessories")} />
           </div>
         </Link>
       </div>

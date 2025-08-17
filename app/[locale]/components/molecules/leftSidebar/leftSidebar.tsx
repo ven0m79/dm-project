@@ -7,21 +7,16 @@ import styles from "../../../catalog/sub-catalog/Sub-catalog.module.css";
 import { TransformedCategoriesType } from "@app/[locale]/catalog/sub-catalog/helpers";
 import { usePathname, useRouter } from "../../../../../config";
 import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
-import {
-  LEFT_BAR_PARENT_ID,
-  LEFT_BAR_PARENT_ID_EN,
-} from "@app/[locale]/components/constants";
+import { LEFT_BAR_PARENT_ID, LEFT_BAR_PARENT_ID_EN } from "@app/[locale]/components/constants";
 
 const customTheme: CustomFlowbiteTheme = {
   sidebar: {
     root: {
       base: "h-full",
-      inner:
-        "h-fit w-[300px] overflow-y-auto overflow-x-hidden py-3 rounded-xl bg-white/30 dark:bg-white/30 pt-14 -mt-10",
+      inner: "h-fit w-[300px] overflow-y-auto overflow-x-hidden py-3 rounded-xl bg-white/30 dark:bg-white/30 pt-14 -mt-10",
     },
     collapse: {
-      button:
-        "group flex w-full items-center rounded-lg p-1 text-base font-normal text-[#0061AA] transition duration-75 hover:bg-[#0061aa10] dark:text-[#0061AA] dark:hover:bg-gray-700",
+      button: "group flex w-full items-center rounded-lg p-1 text-base font-normal text-[#0061AA] transition duration-75 hover:bg-[#0061aa10] dark:text-[#0061AA] dark:hover:bg-gray-700",
       icon: {
         base: "h-6 w-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white",
         open: {
@@ -97,11 +92,7 @@ type SidebarProps = {
   fromProductPage?: boolean;
 };
 
-const Content: FC<SidebarProps> = ({
-  locale,
-  changeURLParams,
-  fromProductPage,
-}) => {
+const Content: FC<SidebarProps> = ({ locale, changeURLParams, fromProductPage }) => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -117,46 +108,18 @@ const Content: FC<SidebarProps> = ({
 
   const items = useMemo(
     () => (locale === "ua" ? [categories?.[1] || []] : [categories?.[0] || []]),
-    [categories, locale]
+    [categories, locale],
   );
 
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   const handleCollapseToggle = async (categoryId: number) => {
+    // Тут ми більше не оновлюємо URL, тільки стан.
     setSelectedCategoryId(categoryId);
-
-    await getCategoryDetails(categoryId, locale);
-
     setOpenedCategoryIds((prevOpenedIds) => {
       const isOpened = prevOpenedIds.includes(categoryId);
-      return isOpened
-        ? prevOpenedIds.filter((id) => id !== categoryId)
-        : [...prevOpenedIds, categoryId];
+      return isOpened ? prevOpenedIds.filter((id) => id !== categoryId) : [...prevOpenedIds, categoryId];
     });
-
-    const findCategoryById = (
-      cats: TransformedCategoriesType[],
-      id: number,
-      visited: Set<number> = new Set()
-    ): TransformedCategoriesType | null => {
-      for (const cat of cats) {
-        if (visited.has(cat.id)) continue;
-        visited.add(cat.id);
-
-        if (cat.id === id) return cat;
-        if (cat.childrens?.length) {
-          const found = findCategoryById(cat.childrens, id, visited);
-          if (found) return found;
-        }
-      }
-      return null;
-    };
-
-    const clickedCategory = findCategoryById(items, categoryId);
-    if (clickedCategory?.slug) {
-      router.push(`/catalog/sub-catalog?category=${clickedCategory.slug}`);
-      setSelectedCategory(clickedCategory.slug);
-    }
   };
 
   const findParentCategories = useCallback(
@@ -164,7 +127,7 @@ const Content: FC<SidebarProps> = ({
       categories: TransformedCategoriesType[],
       targetCategoryId: number,
       parents: TransformedCategoriesType[] = [],
-      visited: Set<number> = new Set()
+      visited: Set<number> = new Set(),
     ): TransformedCategoriesType[] | null => {
       for (const category of categories) {
         if (visited.has(category.id)) continue;
@@ -179,26 +142,20 @@ const Content: FC<SidebarProps> = ({
             category.childrens,
             targetCategoryId,
             [...parents, category],
-            visited
+            visited,
           );
           if (foundParents) {
-            return foundParents.filter(
-              (el) =>
-                el.id !== LEFT_BAR_PARENT_ID &&
-                el.id !== LEFT_BAR_PARENT_ID_EN
-            );
+            return foundParents.filter((el) => el.id !== LEFT_BAR_PARENT_ID && el.id !== LEFT_BAR_PARENT_ID_EN);
           }
         }
       }
       return null;
     },
-    []
+    [],
   );
 
   const selectedItemsNestedData = useMemo(() => {
-    return findParentCategories(items, Number(selectedCategoryId))?.map(
-      (el) => el.id
-    );
+    return findParentCategories(items, Number(selectedCategoryId))?.map((el) => el.id);
   }, [findParentCategories, items, selectedCategoryId]);
 
   const customFirstLevelOrder = useMemo(() => {
@@ -230,8 +187,8 @@ const Content: FC<SidebarProps> = ({
   const renderNestedCategories = (
     category: TransformedCategoriesType,
     level = 0,
-    visited: Set<number> = new Set()
-   ) => {
+    visited: Set<number> = new Set(),
+  ) => {
     if (visited.has(category.id)) return null;
     visited.add(category.id);
 
@@ -249,19 +206,13 @@ const Content: FC<SidebarProps> = ({
         >
           <div
             onClick={() => {
-              const selectedParent = items[0]?.childrens?.find(
-                (item) => item.id === category.parent
-              );
               const listCat = findParentCategories(items, category.id);
-
-              setSelectedCategory(selectedParent?.slug || "");
-              handleCollapseToggle(category.id);
-
-              if (changeURLParams && listCat?.[0]?.slug) {
-                router.push(`${pathname}?category=${listCat[0].slug}`);
-              }
-              if (fromProductPage && listCat?.[0]?.slug) {
+              if (listCat?.[0]?.slug) {
+                // ✅ Навігація відбувається тут, коли ми клікнули на кінцевий елемент
+                setSelectedCategory(listCat[0].slug);
                 router.push(`/catalog/sub-catalog?category=${listCat[0].slug}`);
+                getCategoryDetails(category.id, locale);
+                setSelectedCategoryId(category.id);
               }
             }}
           >
@@ -283,8 +234,7 @@ const Content: FC<SidebarProps> = ({
         key={category.id}
         className={classNames({
           "opacity-0 pointer-events-none mt-[-40px]":
-            category.id === LEFT_BAR_PARENT_ID ||
-            category.id === LEFT_BAR_PARENT_ID_EN,
+            category.id === LEFT_BAR_PARENT_ID || category.id === LEFT_BAR_PARENT_ID_EN,
           "bg-sky-200": selectedCategoryId === category.id,
         })}
         style={{ paddingLeft: `${paddingLeft}px` }}
@@ -300,21 +250,17 @@ const Content: FC<SidebarProps> = ({
             return a.name.localeCompare(b.name);
           })
           .map((child) => renderNestedCategories(child, level + 1, new Set(visited)))
-          }
+        }
       </FBSidebar.Collapse>
     );
   };
-
 
   return (
     <div className={classNames("flex flex-1 flex-row justify-between", styles.subMenu)}>
       <div>
         <h3 className="text-blue-950 ml-5 font-bold mt-5">{items?.[0]?.name}</h3>
-
         <FBSidebar aria-label="Catalog" theme={customTheme.sidebar}>
-          <FBSidebar.ItemGroup>
-            {items?.map((el) => renderNestedCategories(el))}
-          </FBSidebar.ItemGroup>
+          <FBSidebar.ItemGroup>{items?.map((el) => renderNestedCategories(el))}</FBSidebar.ItemGroup>
         </FBSidebar>
       </div>
     </div>
