@@ -12,7 +12,7 @@ import styles from "./Footer.module.css";
 const DesktopFooter: FC<{}> = ({ }) => {
     const { navigateWithDelay } = useNavigateTo();
     const t = useTranslations("Footer");
-    
+
 
     return (
         <><div className={styles.footerContainer}>
@@ -125,7 +125,7 @@ const DesktopFooter: FC<{}> = ({ }) => {
                     onClick={(e) => {
                         e.preventDefault();
                         window.location.href = `/catalog/sub-catalog?category=or-equipment`;
-                      }}
+                    }}
                 >
                     <div
                         className={classNames(
@@ -141,7 +141,7 @@ const DesktopFooter: FC<{}> = ({ }) => {
                     onClick={(e) => {
                         e.preventDefault();
                         window.location.href = `/catalog/sub-catalog?category=icu-equipment`;
-                      }}
+                    }}
                 >
                     <div
                         className={classNames(
@@ -156,7 +156,7 @@ const DesktopFooter: FC<{}> = ({ }) => {
                     onClick={(e) => {
                         e.preventDefault();
                         window.location.href = `/catalog/sub-catalog?category=neonatal-equipment`;
-                      }}
+                    }}
                 >
                     <div
                         className={classNames(
@@ -172,7 +172,7 @@ const DesktopFooter: FC<{}> = ({ }) => {
                     onClick={(e) => {
                         e.preventDefault();
                         window.location.href = `/catalog/sub-catalog?category=cleaning-and-desinfecting-equipment`;
-                      }}
+                    }}
                 >
                     <div
                         className={classNames(
@@ -187,7 +187,7 @@ const DesktopFooter: FC<{}> = ({ }) => {
                     onClick={(e) => {
                         e.preventDefault();
                         window.location.href = `/catalog/sub-catalog?category=gas-management-systems`;
-                      }}
+                    }}
                 >
                     <div
                         className={classNames(
@@ -202,7 +202,7 @@ const DesktopFooter: FC<{}> = ({ }) => {
                     onClick={(e) => {
                         e.preventDefault();
                         window.location.href = `/catalog/sub-catalog?category=furniture`;
-                      }}
+                    }}
                 >
                     <div
                         className={classNames(
@@ -217,7 +217,7 @@ const DesktopFooter: FC<{}> = ({ }) => {
                     onClick={(e) => {
                         e.preventDefault();
                         window.location.href = `/catalog/sub-catalog?category=mri-equipment`;
-                      }}
+                    }}
                 >
                     <div
                         className={classNames(
@@ -232,7 +232,7 @@ const DesktopFooter: FC<{}> = ({ }) => {
                     onClick={(e) => {
                         e.preventDefault();
                         window.location.href = `/catalog/sub-catalog?category=accessories`;
-                      }}
+                    }}
                 >
                     <div
                         className={classNames(
@@ -282,7 +282,7 @@ const DesktopFooter: FC<{}> = ({ }) => {
                     </div>
                     <div>
                         <div className={classNames("font-normal mt-1 ml-1")}>
-                             <Link href="https://share.google/OF6z6AYY01nQkUYRX">{t("adress")}</Link>
+                            <Link href="https://share.google/OF6z6AYY01nQkUYRX">{t("adress")}</Link>
                         </div>
                         <br />
                         <div className={classNames("font-normal mt-1 ml-1")}>
