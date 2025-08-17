@@ -16,11 +16,13 @@ import imgOper from "./icons-photo/oper.webp";
 import imgSteriliz from "./icons-photo/sterilization.webp";
 import { useTranslations } from "next-intl";
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
+import { useRouter } from "next/navigation"; // ✅ новий імпорт
 
 export const ClientPage = () => {
   const t = useTranslations("Catalog1");
   const isMobile = useIsMobile();
   console.log({ isMobile });
+  const router = useRouter(); // ✅ тут працює
 
   return (
     <MainLayout>
@@ -60,19 +62,36 @@ export const ClientPage = () => {
             <Image className={styles.img} src={imgMedgaz} width={130} height={130} alt={t("gas-systems")} />
           </div>
         </Link>
-        <Link href={{ pathname: "/catalog/sub-catalog", query: { category: "furniture" } }}>
+        <Link
+          href="/catalog/sub-catalog?category=furniture"
+          onClick={(e) => {
+            e.preventDefault();
+            window.location.href = `/catalog/sub-catalog?category=furniture`;
+          }}
+        >
           <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
             <span className={styles.span}>{t("other-equipment")}</span>
             <Image className={styles.img} src={imgFurniture} width={130} height={130} alt={t("other-equipment")} />
           </div>
         </Link>
-        <Link href={{ pathname: "/catalog/sub-catalog", query: { category: "mri-equipment" } }}>
+        <Link
+          href="/catalog/sub-catalog?category=mri-equipment"
+          onClick={(e) => {
+            e.preventDefault();
+            window.location.href = `/catalog/sub-catalog?category=mri-equipment`;
+          }}
+        >
           <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
             <span className={styles.span}>{t("mrt")}</span>
             <Image className={styles.img} src={imgMri} width={130} height={130} alt={t("mrt")} />
           </div>
         </Link>
-        <Link href={{ pathname: "/catalog/sub-catalog", query: { category: "accessories" } }}>
+        <Link
+          href="/catalog/sub-catalog?category=accessories"
+          onClick={(e) => {
+            e.preventDefault();
+            window.location.href = `/catalog/sub-catalog?category=accessories`;
+          }}>
           <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
             <span className={styles.span}>{t("accessories")}</span>
             <Image className={styles.img} src={imgCons} width={130} height={130} alt={t("accessories")} />
