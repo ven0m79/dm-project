@@ -104,9 +104,9 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                         onClick={() => {
                           const url = `/catalog/sub-catalog/product/${el.translations[locale as any]}?category=${encodeURIComponent(selectedCategory || "")}`;
                           if (isIOS) {
-                            router.push(url); // Программная навигация
+                            router.push(url); 
                           } else {
-                            window.location.href = url; // Прямая загрузка страницы
+                            window.location.href = url;
                           }
                         }}
                       >
