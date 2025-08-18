@@ -33,6 +33,9 @@ export type SidebarContextProps = {
 
   openedCategoryIds: number[];
   setOpenedCategoryIds: Dispatch<SetStateAction<number[]>>;
+
+activeProduct: SingleProductDetails | null;
+setActiveProduct: (val: SingleProductDetails | null) => void;
 };
 export const SidebarContext = createContext<SidebarContextProps | undefined>(
   undefined,
@@ -49,6 +52,7 @@ export const SidebarProvider = ({ children }: { children: ReactNode }) => {
   const [selectedProducts, setSelectedProducts] = useState<
     SingleProductDetails[]
   >([]);
+  const [activeProduct, setActiveProduct] = useState<SingleProductDetails | null>(null);
 
   const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
     null,
@@ -99,6 +103,8 @@ export const SidebarProvider = ({ children }: { children: ReactNode }) => {
         setSelectedCategoryId,
         openedCategoryIds,
         setOpenedCategoryIds,
+        activeProduct,
+        setActiveProduct,
       }}
     >
       {children}

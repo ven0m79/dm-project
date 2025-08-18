@@ -1,9 +1,10 @@
-import { WoocomerceCategoryType } from "../../../../utils/woocomerce.types";
+import { SingleProductDetails, WoocomerceCategoryType } from "../../../../utils/woocomerce.types";
 
 const SKIPPED_CATEGORIES_ID = [16];
 
 export type TransformedCategoriesType = WoocomerceCategoryType & {
   childrens: TransformedCategoriesType[];
+  products?: SingleProductDetails[];
 };
 
 // оця хуйня робить всю магію з трансформацією твоїх категорій

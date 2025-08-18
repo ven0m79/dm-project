@@ -98,6 +98,23 @@ type SidebarProps = {
   fromProductPage?: boolean;
 };
 
+const getBreadcrumbPath = (
+  categories: TransformedCategoriesType[],
+  targetId: number,
+  parents: TransformedCategoriesType[] = []
+): TransformedCategoriesType[] | null => {
+  for (const cat of categories) {
+    if (cat.id === targetId) return parents;
+
+    if (cat.childrens?.length) {
+      const path = getBreadcrumbPath(cat.childrens, targetId, [...parents, cat]);
+      if (path) return path;
+    }
+  }
+  return null;
+};
+
+
 const Content: FC<SidebarProps> = ({
   locale,
   changeURLParams,

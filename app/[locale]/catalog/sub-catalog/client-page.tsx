@@ -10,7 +10,7 @@ import { categoriesCreation, TransformedCategoriesType } from "./helpers";
 import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
 import { getCategoriesIds } from "@app/[locale]/components/constants";
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   const {
@@ -26,6 +26,8 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   const currentIdsData = useMemo(() => getCategoriesIds(locale), [locale]);
   const isMobile = useIsMobile();
   const router = useRouter();
+  const searchParams = useSearchParams(); // ✅ відслідковуємо query
+  const categoryFromUrl = searchParams?.get("category") ?? "" // ✅ беремо `category` з URL
   const isIOS = typeof window !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
   const sortedProducts = [...selectedProducts].sort((a, b) => a.name.localeCompare(b.name));
@@ -54,27 +56,17 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
     el.tags.map((el) => el.name).includes("accessories"),
   );
 
-  useEffect(() => {
-    if (selectedCategory && openedCategoryIds.length === 0) {
-      console.log(selectedCategory);
-      // @ts-ignore
-      const categoryId = currentIdsData?.[selectedCategory];
-
+  // ✅ реагуємо на зміну `category` з URL
+useEffect(() => {
+    if (categoryFromUrl && currentIdsData) {
+      const categoryId = (currentIdsData as Record<string, number>)[categoryFromUrl];
       if (categoryId) {
         getCategoryDetails(categoryId, locale);
         setSelectedCategoryId(categoryId);
         setOpenedCategoryIds([categoryId]);
       }
     }
-  }, [
-    currentIdsData,
-    getCategoryDetails,
-    locale,
-    openedCategoryIds.length,
-    selectedCategory,
-    setOpenedCategoryIds,
-    setSelectedCategoryId,
-  ]);
+  }, [categoryFromUrl, currentIdsData, getCategoryDetails, locale, setOpenedCategoryIds, setSelectedCategoryId]);
 
   return (
     <>
@@ -104,7 +96,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                         onClick={() => {
                           const url = `/catalog/sub-catalog/product/${el.translations[locale as any]}?category=${encodeURIComponent(selectedCategory || "")}`;
                           if (isIOS) {
-                            router.push(url); 
+                            router.push(url);
                           } else {
                             window.location.href = url;
                           }
