@@ -2,6 +2,7 @@
 import React, { FC, useMemo } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { TransformedCategoriesType } from "@app/[locale]/catalog/sub-catalog/helpers";
+import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 
 type BreadcrumbsProps = {
   locale: string;
@@ -36,6 +37,7 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({
 }) => {
   const pathname = usePathname();
   const router = useRouter();
+  const isMobile = useIsMobile();
 
   const categoryPath = useMemo(
     () => findCategoryPath(categories, activeCategoryId),
@@ -53,8 +55,30 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({
   // Відкидаємо перший елемент ("Каталог по призначенню")
   const trimmedPath = fullPath.slice(1);
 
+  // --- Мобільний рендер ---
+  if (isMobile) {
+    const mobileItem =
+      trimmedPath.length > 1
+        ? trimmedPath[trimmedPath.length - 2] // остання клікабельна категорія перед товаром
+        : trimmedPath[0];
+
+    return (
+      <nav className="text-sm breadcrumbs mb-1 mt-2 ml-2">
+        <button
+          className="underline text-blue-600 hover:text-blue-800"
+          onClick={() =>
+            router.push(`/catalog/sub-catalog?category=${(mobileItem as any).slug}`)
+          }
+        >
+          {(mobileItem as any).name}
+        </button>
+      </nav>
+    );
+  }
+
+  // --- Десктопний рендер ---
   return (
-    <nav className="text-sm breadcrumbs mb-4">
+    <nav className="text-sm breadcrumbs mb-4 ml-6">
       {trimmedPath.map((item, idx) => {
         const isLast = idx === trimmedPath.length - 1;
         const slug = (item as any).slug;
@@ -64,9 +88,7 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({
             {!isLast ? (
               <button
                 className="underline hover:text-blue-800"
-                onClick={() => {
-                  router.push(`/catalog/sub-catalog?category=${slug}`);
-                }}
+                onClick={() => router.push(`/catalog/sub-catalog?category=${slug}`)}
               >
                 {(item as any).name}
               </button>
