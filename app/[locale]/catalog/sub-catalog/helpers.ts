@@ -7,9 +7,7 @@ export type TransformedCategoriesType = WoocomerceCategoryType & {
 };
 
 // оця хуйня робить всю магію з трансформацією твоїх категорій
-export function categoriesCreation(
-  categories: TransformedCategoriesType[] = [],
-) {
+export function categoriesCreation(categories: TransformedCategoriesType[] = []) {
   const categoriesInternal = categories.filter(
     (el) => !SKIPPED_CATEGORIES_ID.includes(el.id),
   );
