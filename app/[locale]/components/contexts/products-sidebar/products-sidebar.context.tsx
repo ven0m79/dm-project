@@ -6,7 +6,7 @@ import React, {
   SetStateAction,
   useCallback,
   useContext,
-  useEffect, // ✅ Додаємо useEffect
+  useEffect, 
   useState,
 } from "react";
 import {
@@ -19,7 +19,7 @@ import {
 } from "@app/[locale]/catalog/sub-catalog/helpers";
 import { SingleProductDetails } from "../../../../../utils/woocomerce.types";
 import { useSearchParams } from "next/navigation";
-import { getCategoriesIds } from "@app/[locale]/components/constants"; // ✅ Додаємо імпорт
+import { getCategoriesIds } from "@app/[locale]/components/constants";
 
 
 export type SidebarContextProps = {
