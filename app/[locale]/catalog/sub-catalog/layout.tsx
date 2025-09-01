@@ -30,8 +30,6 @@ const Content: FC<{ children: ReactNode; locale: string }> = ({ children, locale
     getData(locale);
   }, [getData, locale]);
 
-  const activeProductSlug = selectedProducts?.[0]?.slug;
-
   return (
     <div className={classNames("flex flex-1 flex-row justify-between self-center mb-5 mt-5 mx-2", styles.subCatalog)}>
       {/* Ліва панель */}

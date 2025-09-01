@@ -13,11 +13,18 @@ export type WoocomerceCategoryType = {
     self?: { href: string }[];
     collection?: { href: string }[];
   };
-    translations?: {
+  translations?: {
     ua?: number;
     en?: number;
   };
+  yoast_head_json: YoastHeadJson;
+  schema_json: string;
 };
+
+export type YoastHeadJson = {
+  title: string;
+  description: string;
+}
 
 export type ImageType = {
   alt: string;
