@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { ClientPage } from "./client-page";
-import Script from "next/script";
+import  parse  from "html-react-parser";
 
 type Props = {
   params: { locale: string };
-  searchParams: { category?: string };
+  searchParams: { category?: string }; // Зробив `category` опціональним, оскільки в URL його може не бути
 };
 
+// Функція generateMetadata залишається, як у вашому коді.
+// Вона відповідає за стандартні метатеги <title>, <meta name="description"> тощо.
 export async function generateMetadata({
   params,
   searchParams,
@@ -14,6 +16,7 @@ export async function generateMetadata({
   const categorySlug = searchParams.category;
 
   try {
+    // 1️⃣ Отримуємо категорію по slug
     const categories = await fetch(
       `https://api.dm-project.com.ua/wp-json/wc/v3/products/categories?slug=${categorySlug}&lang=${params.locale}&consumer_key=ck_8dee30956004b4c7f467a46247004a2f4cd650e5&consumer_secret=cs_1cf0a573275e5cafe5af6bddbb01f29b9592be20`,
       { cache: "no-store" }
@@ -24,8 +27,9 @@ export async function generateMetadata({
     }
 
     const category = categories[0];
-    const yoast = category?.yoast_head_json;
 
+    // 2️⃣ Беремо дані з Yoast SEO
+    const yoast = category?.yoast_head_json;
     const title = yoast?.title || category?.name || categorySlug;
     const description =
       yoast?.description || category?.description?.trim() || "";
@@ -52,39 +56,40 @@ export async function generateMetadata({
   }
 }
 
-// ⚡ Тут уже дістаємо schemaJson знову
-async function getSchemaJson(locale: string, categorySlug?: string) {
-  if (!categorySlug) return null;
-
-  const categories = await fetch(
-    `https://api.dm-project.com.ua/wp-json/wc/v3/products/categories?slug=${categorySlug}&lang=${locale}&consumer_key=ck_8dee30956004b4c7f467a46247004a2f4cd650e5&consumer_secret=cs_1cf0a573275e5cafe5af6bddbb01f29b9592be20`,
-    { cache: "no-store" }
-  ).then((res) => res.json());
-
-  if (!categories || categories.length === 0) return null;
-
-  const category = categories[0];
-  if (category?.schema_json) {
-    return typeof category.schema_json === "string"
-      ? category.schema_json
-      : JSON.stringify(category.schema_json, null, 2);
-  }
-
-  return null;
-}
-
+// ✅ Цей компонент стає асинхронним, щоб отримати дані для schema.org.
 export default async function Page({ params, searchParams }: Props) {
-  const schemaJson = await getSchemaJson(params.locale, searchParams.category);
+  let schemaJson = null;
+  const categorySlug = searchParams?.category;
+
+  if (categorySlug) {
+    try {
+      // 1️⃣ Повторно отримуємо дані категорії, щоб мати доступ до schema_json
+      // Це дозволяє зберегти generateMetadata чистим
+      const categories = await fetch(
+        `https://api.dm-project.com.ua/wp-json/wc/v3/products/categories?slug=${categorySlug}&lang=${params.locale}&consumer_key=ck_8dee30956004b4c7f467a46247004a2f4cd650e5&consumer_secret=cs_1cf0a573275e5cafe5af6bddbb01f29b9592be20`,
+        { cache: "no-store" }
+      ).then((res) => res.json());
+
+      const activeCategory = categories?.[0];
+      if (activeCategory?.schema_json) {
+        // ✅ Перетворюємо дані в JSON-рядок, якщо це об'єкт
+        schemaJson = typeof activeCategory.schema_json === "string"
+          ? activeCategory.schema_json
+          : JSON.stringify(activeCategory.schema_json);
+      }
+    } catch (error) {
+      console.error("Error fetching schema data on the server:", error);
+    }
+  }
 
   return (
     <>
-      {schemaJson && (
-        <Script
-          id="category-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: schemaJson }}
-        />
-      )}
+      <head>
+        {/* ✅ Рендеримо скрипт з schema.org тут, на сервері! */}
+        {schemaJson && (
+          <>{parse(schemaJson)}</>
+        )}
+      </head>
       <ClientPage locale={params.locale} />
     </>
   );

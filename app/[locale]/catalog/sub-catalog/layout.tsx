@@ -51,8 +51,8 @@ const Content: FC<{ children: ReactNode; locale: string }> = ({ children, locale
 
       {/* Основний контент + Breadcrumbs */}
       <div className="w-screen">
-        <Breadcrumbs
-          locale={locale} productOrCategoryId={0} type={"product"}        />
+        {/* <Breadcrumbs
+          locale={locale} productOrCategoryId={0} type={"product"}        /> */}
         {children}
       </div>
 
