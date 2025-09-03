@@ -67,7 +67,7 @@ async function getSchemaJson(locale: string, categorySlug?: string) {
   if (category?.schema_json) {
     return typeof category.schema_json === "string"
       ? category.schema_json
-      : JSON.stringify(category.schema_json);
+      : JSON.stringify(category.schema_json, null, 2);
   }
 
   return null;
