@@ -85,10 +85,7 @@ export default async function Page({ params, searchParams }: Props) {
   return (
     <>
       <head>
-        {/* ✅ Рендеримо скрипт з schema.org тут, на сервері! */}
-        {schemaJson && (
-          <>{parse(schemaJson)}</>
-        )}
+          {parse(schemaJson)}
       </head>
       <ClientPage locale={params.locale} />
     </>
