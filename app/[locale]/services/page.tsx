@@ -9,14 +9,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   return locale === "ua"
     ? {
-        title: "ДМ-ПРОЕКТ: Сервісне обслуговування",
+        title: "Сервісне обслуговування медичного обладнання | ДМ-Проект",
         description:
-          "Компанія ДМ-ПРОЕКТ проводить планомірну роботу з підтримки обладнання Dräger у робочому стані. В Україні налічується понад 4200 одиниць медичної апаратури Dräger, і для кожної з них існує індивідуальний план обслуговування, розроблений сервісною службою ДМ-ПРОЕКТ.",
+          "Гарантійне та післягарантійне обслуговування медичного обладнання Dräger. Технічна підтримка, сервіс і професійне навчання медичного персоналу. Надійний партнер для лікарень по всій Україні dm-project.com.ua",
       }
     : {
-        title: "DM-PROJECT: Service",
+        title: "Medical equipment servicing | DM-Project",
         description:
-          "The company DM-PROJECT carries out systematic work to maintain Dräger equipment in working condition. There are more than 4200 units of Dräger medical devices in Ukraine, and for each of them there is an individual service plan developed by the DM-PROJECT service department.",
+          "Warranty and post-warranty service for Dräger medical equipment. Technical support, service and professional training for medical personnel. A reliable partner for hospitals throughout Ukraine dm-project.com.ua",
       };
 }
 

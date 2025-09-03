@@ -9,14 +9,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   return locale === "ua"
     ? {
-        title: "ДМ-ПРОЕКТ: Головна",
+        title: "Медичне обладнання та оснащення для медзакладів | ДМ-Проект",
         description:
-          "ДМ-проект є надійним партнером українських лікарів з 2009 року",
+          "Купити медичне обладнання в Києві та Україні від виробника Dräger за кращими цінами. Замовити медичне оснащення для реанімаційних, операційних, неонатальних відділень та кабінетів мрт. Надійне рішення на dm-project.com.ua",
       }
     : {
-        title: "DM-PROJECT: Main",
+        title: "Medical Equipment and Supplies for Healthcare Facilities | DM-Project",
         description:
-          "DM-project has been a reliable partner of ukrainian doctors since 2009",
+          "Buy medical equipment in Kyiv and across Ukraine from Dräger at the best prices. Order medical supplies for intensive care, operating rooms, neonatal units, and MRI suites. Reliable solutions at dm-project.com.ua",
       };
 }
 

@@ -9,14 +9,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   return locale === "ua"
     ? {
-        title: "ДМ-ПРОЕКТ: Акційні пропозиції",
+        title: "Акції та спеціальні пропозиції на медичне обладнання | ДМ-Проект",
         description:
-          "«ДМ-ПРОЕКТ», уповноважений представник Drägerwerk AG & Co. KGaA (Німеччина) в Україні, пропонує до поставки наступні Акційні пропозиції медичне обладнання",
+          "Акційні пропозиції на медичне обладнання Dräger та оснащення для лікарень в Києві. Вигідні знижки, професійна консультація та сервіс. Купуйте обладнання для лікарень вигідно на dm-project.com.ua",
       }
     : {
-        title: "DM-PROJECT: Special offers",
+        title: "Promotions and special offers on medical equipment | DM-Project",
         description:
-          "«DM-PROEKT», an authorized representative of Drägerwerk AG & Co. KGaA (Germany) in Ukraine, offers the following promotional offers for medical equipment for delivery",
+          "Special offers on Dräger medical equipment and hospital supplies in Kyiv. Great discounts, professional advice and service. Buy hospital equipment at great prices on dm-project.com.ua",
       };
 }
 
