@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ClientPage } from "./client-page";
-//import parse from "html-react-parser";
+import  parse  from "html-react-parser";
 
 type Props = {
   params: { locale: string };
@@ -87,10 +87,7 @@ export default async function Page({ params, searchParams }: Props) {
       <head>
         {/* ✅ Рендеримо скрипт з schema.org тут, на сервері! */}
         {schemaJson && (
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: schemaJson }}
-          />
+          <>{parse(schemaJson)}</>
         )}
       </head>
       <ClientPage locale={params.locale} />
