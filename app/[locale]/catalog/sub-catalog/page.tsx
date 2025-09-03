@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ClientPage } from "./client-page";
+import Script from "next/script";
 
 type Props = {
   params: { locale: string };
@@ -29,15 +30,6 @@ export async function generateMetadata({
     const description =
       yoast?.description || category?.description?.trim() || "";
 
-    // ✅ Формуємо schema.org
-    let schemaJson: string | undefined;
-    if (category?.schema_json) {
-      schemaJson =
-        typeof category.schema_json === "string"
-          ? category.schema_json
-          : JSON.stringify(category.schema_json);
-    }
-
     return {
       title,
       description,
@@ -49,11 +41,6 @@ export async function generateMetadata({
         title: yoast?.twitter_title || title,
         description: yoast?.twitter_description || description,
       },
-      other: schemaJson
-        ? {
-            "script:ld+json": schemaJson, // ⚡ JSON-LD піде в <head>
-          }
-        : undefined,
     };
   } catch (error) {
     console.error("Error fetching category for metadata:", error);
@@ -65,6 +52,40 @@ export async function generateMetadata({
   }
 }
 
-export default function Page({ params }: Props) {
-  return <ClientPage locale={params.locale} />;
+// ⚡ Тут уже дістаємо schemaJson знову
+async function getSchemaJson(locale: string, categorySlug?: string) {
+  if (!categorySlug) return null;
+
+  const categories = await fetch(
+    `https://api.dm-project.com.ua/wp-json/wc/v3/products/categories?slug=${categorySlug}&lang=${locale}&consumer_key=ck_8dee30956004b4c7f467a46247004a2f4cd650e5&consumer_secret=cs_1cf0a573275e5cafe5af6bddbb01f29b9592be20`,
+    { cache: "no-store" }
+  ).then((res) => res.json());
+
+  if (!categories || categories.length === 0) return null;
+
+  const category = categories[0];
+  if (category?.schema_json) {
+    return typeof category.schema_json === "string"
+      ? category.schema_json
+      : JSON.stringify(category.schema_json, null, 2);
+  }
+
+  return null;
+}
+
+export default async function Page({ params, searchParams }: Props) {
+  const schemaJson = await getSchemaJson(params.locale, searchParams.category);
+
+  return (
+    <>
+      {schemaJson && (
+        <Script
+          id="category-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: schemaJson }}
+        />
+      )}
+      <ClientPage locale={params.locale} />
+    </>
+  );
 }
