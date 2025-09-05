@@ -7,7 +7,29 @@ const api = new WooCommerceRestApi({
   version: "wc/v3",
 });
 
-export default async function getDynamicRoutesCategory(req: any, res: any) {
+// === Кешування категорій у пам’яті ===
+let cache: {
+  data: string[] | null;
+  timestamp: number;
+} = {
+  data: null,
+  timestamp: 0,
+};
+
+const CACHE_TTL = 1000 * 60 * 60 * 24; // 1 година
+
+export default async function getDynamicRoutesCategory() {
+  const now = Date.now();
+
+  // Перевірка кешу
+  if (cache.data && now - cache.timestamp < CACHE_TTL) {
+    return {
+      success: true,
+      categories: cache.data,
+      error: null,
+    };
+  }
+
   const responseData = {
     success: false,
     categories: [] as string[],
@@ -17,25 +39,21 @@ export default async function getDynamicRoutesCategory(req: any, res: any) {
   try {
     const categoriesWithDetails: string[] = [];
     let page = 1;
-
     let totalPages = 1;
 
     do {
       const response = await api.get("products/categories?per_page=100", {
-        params: {
-          page: page,
-        },
+        params: { page },
       });
 
       const categories = response.data;
-      totalPages = parseInt(response.headers['x-wp-totalpages'], 10);
+      totalPages = parseInt(response.headers["x-wp-totalpages"], 10);
 
-      const categoriesLinks = categories.map((categories: any) => {
-        const tagSlug = categories.slug || "no-tag";
-        const lang = categories.lang || "en";
+      const categoriesLinks = categories.map((category: any) => {
+        const tagSlug = category.slug || "no-tag";
+        const lang = category.lang || "en";
 
-        return `/${lang}/catalog/sub-catalog?category=${tagSlug}`
-          ;
+        return `/${lang}/catalog/sub-catalog?category=${tagSlug}`;
       });
 
       categoriesWithDetails.push(...categoriesLinks);
@@ -43,12 +61,15 @@ export default async function getDynamicRoutesCategory(req: any, res: any) {
     } while (page <= totalPages);
 
     responseData.success = true;
-    responseData.categories = categoriesWithDetails; 
+    responseData.categories = categoriesWithDetails;
+
+    // Зберігаємо в кеш
+    cache.data = categoriesWithDetails;
+    cache.timestamp = Date.now();
 
     return responseData;
   } catch (error: any) {
-    console.error("Error fetching products:", error.message, error.response?.data);
-
+    console.error("Error fetching categories:", error.message, error.response?.data);
     responseData.error = error.message || "An unknown error occurred.";
     return responseData;
   }

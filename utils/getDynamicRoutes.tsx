@@ -16,7 +16,7 @@ let cache: {
   timestamp: 0,
 };
 
-const CACHE_TTL = 1000 * 60 * 60; // 1 година
+const CACHE_TTL = 1000 * 60 * 60 * 24; // 1 година
 
 export default async function getDynamicRoutes() {
   // Перевіряємо кеш

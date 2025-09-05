@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         // const dynamicResponse = await getDynamicRoutes(req, res);
         // const dynamicRoutes = dynamicResponse.success ? dynamicResponse.products : [];
 
-        const dynamicResponse = await getDynamicRoutesCategory(req, res);
+        const dynamicResponse = await getDynamicRoutesCategory();
         const dynamicRoutes = dynamicResponse.success ? dynamicResponse.categories : [];
         // Все маршруты
         const allRoutes = [...dynamicRoutes];
