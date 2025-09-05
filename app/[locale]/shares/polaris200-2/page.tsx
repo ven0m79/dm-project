@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
 
-import  SharesPolaris2002 from "./client-page";
+import SharesPolaris2002 from "./client-page";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
   return locale === "ua"
     ? {
-        title: "Світильник операційний Polaris 200 двокупольний",
-        description: "Системи хірургічного освітлення Polaris®200 забезпечують прохолодне світло з природними кольорами та насиченим контрастом для тисяч годин безтурботної роботи без навантаження на бюджет вашої лікарні.",
-      }
+      title: "Акція на Світильник операційний Polaris 200 двокупольний | ДМ-Проект",
+      description: "Акційна пропозиція на Світильник операційний Polaris 200 двокупольний від виробника Dräger у Києві. Актуальні акції та знижки на медичне обладнання з гарантією та сервісним обслуговуванням. Вигідні умови для медичних закладів на dm-project.com.ua",
+    }
     : {
-        title: "Double operating light Polaris 200",
-        description: "Polaris®200 surgical lighting systems provide cool light with natural colors and rich contrast for thousands of hours of worry-free work without straining your hospital budget.",
-      };
+      title: "Promotion on Double operating light Polaris 200 | DM-Project",
+      description: "Special offer on Double operating light Polaris 200 from manufacturer Dräger in Kyiv. Current promotions and discounts with warranty and service support. Favourable terms for medical institutions at dm-project.com.ua",
+    };
+
 }
 
 export default function Page() {
-  return <SharesPolaris2002  />;
+  return <SharesPolaris2002 />; 
 }
