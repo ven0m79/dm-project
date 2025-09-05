@@ -9,14 +9,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   return locale === "ua"
     ? {
-        title: "ДМ-ПРОЕКТ: Проектування",
+        title: "Проектування медичних закладів та лікарень | ДМ-Проект",
         description:
-          "Проектування медичних закладів на сьогоднішній день є досить важливою відокремленою галуззю медичного бізнесу, що досить швидко розвивається. Далеко не кожна проектна компанія здатна виконати документацію сучасного медичного закладу на гідному рівні. ДМ-ПРОЕКТ пропонує своїм замовникам повний спектр послуг з виготовлення проектної документації 'під ключ' на створення чи переоснащення медичного закладу",
+          "Проектування лікарень, клінік та діагностичних центрів в Києві та по Україні. Розробка проектної документації для медичних закладів, оснащення медичним обладнанням Dräger та авторський нагляд. Консультація та підтримка на dm-project.com.ua",
       }
     : {
-        title: "DM-PROJECT: Projects",
+        title: "Design of medical facilities and hospitals | DM-Project",
         description:
-          "The design of medical facilities today is a fairly important separate branch of the medical business, which is developing quite quickly. Not every project company is able to complete the documentation of a modern medical facility at a decent level. DM-PROJECT offers its customers a full range of services for the production of turnkey project documentation for the creation or re-equipment of a medical facility",
+          "Design of hospitals, clinics and diagnostic centres in Kyiv and across Ukraine. Development of project documentation for medical facilities, equipping with Dräger medical equipment and author supervision. Consultation and support at dm-project.com.ua",
       };
 }
 

@@ -5,12 +5,12 @@ import  SharesFabiusXL from "./client-page";
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
   return locale === "ua"
     ? {
-        title: "Апарат наркозно-дихальний Fabius plus XL та Монітор пацієнта Vista 120S",
-        description: "Ми пропонуємо готове рішення для вашої операційної – анестезіологічну станцію Fabius plus XL / Vista 120S. Поєднання наркозного апарата Fabius plus XL та мультипараметричного монітора Vista 120S забезпечує справжню інтегровану функціональність робочої станції.",
+        title: "Акція на Апарат наркозно-дихальний Dräger Fabius plus XL та Монітор пацієнта Dräger Vista 120S | ДМ-Проект",
+        description: "Акційна пропозиція на Апарат наркозно-дихальний Dräger Fabius plus XL та Монітор пацієнта Dräger Vista 120S від виробника Dräger у Києві. Актуальні акції та знижки на медичне обладнання з гарантією та сервісним обслуговуванням. Вигідні умови для медичних закладів на dm-project.com.ua",
       }
     : {
-        title: "Anesthesia workstation Fabius plus XL and Patient monitor Vista 120S",
-        description: "We offer a complete solution for your operating room - the Fabius plus XL / Vista 120S Аnesthesia Station. The combination of the Fabius plus XL anesthesia machine and the Vista 120S multiparameter monitor provides true integrated workstation functionality.",
+        title: "Promotion on Anesthesia workstation Dräger Fabius plus XL and Patient monitor Dräger Vista 120S | DM-Project",
+        description: "Special offer on the combination of Dräger Fabius plus XL anaesthesia machine and Dräger Vista 120S from manufacturer Dräger in Kyiv. Current promotions and discounts with warranty and service support. Favourable terms for medical institutions at dm-project.com.ua",
       };
 }
 

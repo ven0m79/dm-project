@@ -9,12 +9,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   return locale === "ua"
     ? {
-        title: "ДМ-ПРОЕКТ: Продукти",
+        title: "Основні категорії продуктів | ДМ-Проект",
         description:
           "Сьогодні основними видами діяльності компанії є не тільки продаж медичного обладнання високого класу, а й розробка та впровадження комплексних рішень для медичних закладів, починаючи з проектування і закінчуючи сервісом та навчанням персоналу.",
       }
     : {
-        title: "DM-PROJECT: Products",
+        title: "Main product categories | DM-Project",
         description:
           "Today, the company's main activities include not only the sale of high-quality medical equipment, but also the development and implementation of integrated solutions for medical institutions, from design to service and staff training.",
       };

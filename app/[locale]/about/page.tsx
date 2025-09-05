@@ -5,12 +5,12 @@ import { ClientPage } from "./client-page";
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
   return locale === "ua"
     ? {
-        title: "ДМ-ПРОЕКТ: Про компанію",
-        description: "Видами діяльності компанії є не тільки продаж медичного обладнання високого класу, а й розробка та впровадження комплексних рішень для медичних закладів, починаючи з проектування і закінчуючи сервісом та навчанням персоналу.",
+        title: "Медичне обладнання, проектування та сервіс | ДМ-Проект",
+        description: "ДМ-Проект лідер у сфері проектування та оснащення медичних закладів сучасним обладнанням Dräger. Гарантія якості, сервісне обслуговування медичного обладнання та навчання персоналу. Надійний партнер українських лікарів dm-project.com.ua",
       }
     : {
-        title: "DM-PROJECT: About company",
-        description: "DM-PROJECT was founded in 2009 as an authorized representative of the German company Dräger in Ukraine, the world leader in the production of human life support systems.",
+        title: "Medical equipment, design and service | DM-Project",
+        description: "DM-Project is a leader in the design and equipping of medical facilities with modern Dräger equipment. Quality assurance, medical equipment servicing and staff training. A reliable partner for Ukrainian doctors dm-project.com.ua",
       };
 }
 

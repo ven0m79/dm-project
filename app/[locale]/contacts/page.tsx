@@ -9,14 +9,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   return locale === "ua"
     ? {
-        title: "ДМ-ПРОЕКТ: Контакти",
+        title: "Контактна інформація компанії | ДМ-Проект",
         description:
-          "Контактна інформація компанії ДМ-ПРОЕКТ. Адреса офісу продажів. Номери телефонів компанії для зв'язку.",
+          "Контакти компанії ДМ-Проект, адреса, телефони, e-mail та форма звернення. Професійна консультація та підтримка з питань медичного обладнання Dräger. Зв’яжіться з нами на dm-project.com.ua",
       }
     : {
-        title: "DM-PROJECT: Contacts",
+        title: "Company contact information | DM-Project",
         description:
-          "Contact information of the company DM-PROJECT. Address of the sales office. Company phone numbers for communication.",
+          "DM-Project contact details, address, telephone numbers, email and contact form. Professional advice and support on Dräger medical equipment. Contact us at dm-project.com.ua",
       };
 }
 
