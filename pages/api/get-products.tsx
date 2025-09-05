@@ -13,7 +13,7 @@ export default async function handler(req: any, res: any) {
     let page = 1;
     let totalPages = 1;
     const allCategories: WoocomerceCategoryType[] = [];
-
+//
     do {
       const response = await api.get(
         `products/categories/?${page}per_page=100&page=${page}`
