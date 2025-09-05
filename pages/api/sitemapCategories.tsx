@@ -25,8 +25,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             return `
     <url>
       <loc>${baseUrl}${cleanRoute}</loc>
-      <changefreq>daily</changefreq>
-      <priority>0.7</priority>
     </url>`;
         });
 
