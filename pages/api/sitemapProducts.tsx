@@ -1,30 +1,26 @@
-// pages/api/sitemap.tsx
-
 import { NextApiRequest, NextApiResponse } from "next";
 import getDynamicRoutes from "../../utils/getDynamicRoutes";
-//import getDynamicRoutesCategory from "../../utils/getDynamicRoutesCategory";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const baseUrl = "https://dm-project.com.ua";
 
   try {
-    // Получаем динамические маршруты
-    const dynamicResponse = await getDynamicRoutes(req, res);
+    const dynamicResponse = await getDynamicRoutes();
     const dynamicRoutes = dynamicResponse.success ? dynamicResponse.products : [];
 
-     // Все маршруты
-    const allRoutes = [...dynamicRoutes];
+    const urls = dynamicRoutes.map((route: { url: string; date_modified: string }) => {
+      const cleanRoute = route.url.startsWith("/ua/")
+        ? route.url.replace(/^\/ua\//, "/")
+        : route.url;
 
-    // Формирование XML карты сайта
-    const urls = allRoutes.map((route) => {
-      // Якщо починається з "/ua/", замінюємо на "/"
-      const cleanRoute = route.startsWith("/ua/") ? route.replace(/^\/ua\//, "/") : route;
+      const lastmod = route.date_modified
+        ? new Date(route.date_modified).toISOString().split("T")[0] // YYYY-MM-DD
+        : new Date().toISOString().split("T")[0];
 
       return `
         <url>
           <loc>${baseUrl}${cleanRoute}</loc>
-          <changefreq>daily</changefreq>
-          <priority>0.7</priority>
+          <lastmod>${lastmod}</lastmod>
         </url>`;
     });
 
@@ -33,7 +29,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         ${urls.join("")}
       </urlset>`;
 
-    // Отправка карты сайта
     res.setHeader("Content-Type", "application/xml");
     res.status(200).send(sitemap);
   } catch (error) {
