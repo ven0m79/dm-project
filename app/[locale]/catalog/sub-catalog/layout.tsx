@@ -11,7 +11,12 @@ import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 import { motion } from "framer-motion";
 import Breadcrumbs from "@app/[locale]/components/atoms/breadcrumbs/breadcrumbs";
 
-const Content: FC<{ children: ReactNode; locale: string }> = ({ children, locale }) => {
+const Content: FC<{ children: ReactNode; locale: string; type: "category" | "product"; id: number }> = ({
+  children,
+  locale,
+  type,
+  id,
+}) => {
   const { getData, categories, selectedCategoryId, selectedProducts } = useSidebar();
   const isMobile = useIsMobile();
   const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false);
@@ -51,8 +56,7 @@ const Content: FC<{ children: ReactNode; locale: string }> = ({ children, locale
 
       {/* Основний контент + Breadcrumbs */}
       <div className="w-screen">
-        {/* <Breadcrumbs
-          locale={locale} productOrCategoryId={0} type={"product"}        /> */}
+        <Breadcrumbs locale={locale} type={type} id={id} />
         {children}
       </div>
 
@@ -76,11 +80,19 @@ const Content: FC<{ children: ReactNode; locale: string }> = ({ children, locale
   );
 };
 
-export default function Layout({ children, params: { locale } }: { children: ReactNode; params: { locale: string } }) {
+export default function Layout({
+  children,
+  params,
+}: {
+  children: ReactNode;
+  params: { locale: string; type: "category" | "product"; id: string };
+}) {
   return (
     <MainLayout>
-      <SidebarProvider locale={locale}>
-        <Content locale={locale}>{children}</Content>
+      <SidebarProvider locale={params.locale}>
+        <Content locale={params.locale} type={params.type} id={Number(params.id)}>
+          {children}
+        </Content>
       </SidebarProvider>
     </MainLayout>
   );

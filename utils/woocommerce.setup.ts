@@ -29,7 +29,7 @@ export async function fetchWooCommerceProducts(id: number, locale: string) {
   }
 }
 
-export async function fetchWooCommerceCategories(locale: string) {
+export async function fetchWooCommerceCategories(categoryId: number, locale: string) {
   try {
     let page = 1;
     let totalPages = 1;
@@ -52,6 +52,21 @@ export async function fetchWooCommerceCategories(locale: string) {
     return result;
   } catch (error) {
     throw new Error(error as string);
+  }
+}
+
+export async function fetchWooCommerceCategoryDetails(
+  categoryId: number,
+  locale: string
+): Promise<WoocomerceCategoryType | null> {
+  try {
+    const { data } = await api.get(`products/categories/${categoryId}`, {
+      lang: locale,
+    });
+    return data as WoocomerceCategoryType;
+  } catch (error) {
+    console.error("Помилка при завантаженні категорії:", error);
+    return null;
   }
 }
 
