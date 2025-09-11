@@ -35,6 +35,7 @@ export async function generateMetadata({
       yoast?.description || category?.description?.trim() || "";
 
     return {
+      metadataBase: new URL("https://dm-project.com.ua"),
       title,
       description,
       openGraph: {

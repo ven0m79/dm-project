@@ -243,7 +243,10 @@ const handleCollapseToggle = async (categoryId: number) => {
   const renderNestedCategories = (
     category: TransformedCategoriesType,
     level = 0, // Level starts at 0 for root
+    topLevelKey?: number,
+    
   ) => {
+    const key = topLevelKey ?? category.id;
     // Apply padding starting from level 2
     const paddingLeft = level > 1 ? level * 7 : 0; // No padding for level 0 and level 1
     return category?.childrens?.length === 0 ? (
@@ -335,7 +338,7 @@ const handleCollapseToggle = async (categoryId: number) => {
           theme={customTheme.sidebar}
         >
           <FBSidebar.ItemGroup>
-            {items?.map((el) => renderNestedCategories(el))}
+            {items?.map((el) => renderNestedCategories(el, 0, el.id))}
           </FBSidebar.ItemGroup>
         </FBSidebar>
       </div>
