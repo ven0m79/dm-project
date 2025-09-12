@@ -2,10 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import {
-  fetchWooCommerceCategoryDetails,
-  fetchWooCommerceProductDetails,
-} from "../../../../../utils/woocommerce.setup";
+import { fetchWooCommerceCategoryDetails, fetchWooCommerceProductDetails } from "../../../../../utils/woocommerce.setup";
 
 interface BreadcrumbItem {
   id: number;
@@ -22,15 +19,26 @@ interface BreadcrumbsProps {
 export default function Breadcrumbs({ type, id, locale }: BreadcrumbsProps) {
   const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbItem[]>([]);
 
+  console.log("[Breadcrumbs] Props:", { type, id, locale }); // додаємо лог
+
   useEffect(() => {
-    const buildBreadcrumbs = async () => {
+    console.log("[Breadcrumbs] useEffect викликано");
+
+    async function buildBreadcrumbs() {
       let trail: BreadcrumbItem[] = [{ id: 0, name: "Головна", url: `/${locale}` }];
+      console.log("[Breadcrumbs] Початковий trail:", trail);
+
+      if (!type || !id) {
+        console.warn("[Breadcrumbs] Некоректні props, не буду будувати breadcrumbs");
+        return;
+      }
 
       if (type === "product") {
         const product = await fetchWooCommerceProductDetails(id, locale);
+        console.log("[Breadcrumbs] Продукт:", product);
+
         if (product && product.categories.length > 0) {
-          const cat = product.categories[0];
-          const catTrail = await getCategoryTrail(cat.id, locale);
+          const catTrail = await getFullCategoryTrail(product.categories[0].id, locale);
           trail = [...trail, ...catTrail];
           trail.push({
             id: product.id,
@@ -41,12 +49,13 @@ export default function Breadcrumbs({ type, id, locale }: BreadcrumbsProps) {
       }
 
       if (type === "category") {
-        const catTrail = await getCategoryTrail(id, locale);
+        const catTrail = await getFullCategoryTrail(id, locale);
         trail = [...trail, ...catTrail];
       }
 
+      console.log("[Breadcrumbs] Фінальний trail перед setBreadcrumbs:", trail);
       setBreadcrumbs(trail);
-    };
+    }
 
     buildBreadcrumbs();
   }, [type, id, locale]);
@@ -67,28 +76,49 @@ export default function Breadcrumbs({ type, id, locale }: BreadcrumbsProps) {
   );
 }
 
-async function getCategoryTrail(categoryId: number, locale: string): Promise<BreadcrumbItem[]> {
+/**
+ * Формує повний шлях категорії через поле "parent" до самого верху.
+ */
+async function getFullCategoryTrail(categoryId: number, locale: string): Promise<BreadcrumbItem[]> {
   const trail: BreadcrumbItem[] = [];
-  const category = await fetchWooCommerceCategoryDetails(categoryId, locale);
+  let currentId: number | null = categoryId;
 
-  if (!category) return trail;
+  console.log("[getFullCategoryTrail] Старт для categoryId:", categoryId);
 
-  // Перевіряємо, чи поле custom_seo_description === "555444"
-  const hasSeo = category.custom_seo_description === "555444";
+  while (currentId) {
+    let category;
+    try {
+      category = await fetchWooCommerceCategoryDetails(currentId, locale);
+    } catch (err) {
+      console.error("[getFullCategoryTrail] Помилка fetchWooCommerceCategoryDetails:", err);
+      break;
+    }
 
-  if (hasSeo) {
-    trail.push({
+    if (!category) {
+      console.warn("[getFullCategoryTrail] Категорія не знайдена для id:", currentId);
+      break;
+    }
+
+    console.log("[getFullCategoryTrail] Поточна категорія:", category);
+
+    // Додаємо поточну категорію в початок масиву
+    trail.unshift({
       id: category.id,
       name: category.name,
       url: `/${locale}/catalog/sub-catalog/${category.id}`,
     });
+
+    console.log("[getFullCategoryTrail] Поточний trail:", trail);
+
+    // Переходимо до parent
+    if (category.parent && category.parent !== 0) {
+      currentId = category.parent;
+    } else {
+      currentId = null; // дійшли до верху
+      console.log("[getFullCategoryTrail] Досягли верху, currentId:", currentId);
+    }
   }
 
-  // Якщо є parent → рекурсія
-  if (category.parent > 0) {
-    const parentTrail = await getCategoryTrail(category.parent, locale);
-    return [...parentTrail, ...trail]; // формуємо шлях знизу вверх
-  }
-
+  console.log("[getFullCategoryTrail] Повертаємо trail:", trail);
   return trail;
 }
