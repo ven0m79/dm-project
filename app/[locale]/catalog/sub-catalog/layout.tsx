@@ -9,15 +9,12 @@ import styles from "./Sub-catalog.module.css";
 import { SidebarProvider, useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 import { motion } from "framer-motion";
-import Breadcrumbs from "@app/[locale]/components/atoms/breadcrumbs/breadcrumbs";
 
-const Content: FC<{ children: ReactNode; locale: string; type: "category" | "product"; id: number }> = ({
+const Content: FC<{ children: ReactNode; locale: string; }> = ({
   children,
   locale,
-  type,
-  id,
 }) => {
-  const { getData, categories, selectedCategoryId, selectedProducts } = useSidebar();
+  const { getData } = useSidebar();
   const isMobile = useIsMobile();
   const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false);
   const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false);
@@ -56,7 +53,6 @@ const Content: FC<{ children: ReactNode; locale: string; type: "category" | "pro
 
       {/* Основний контент + Breadcrumbs */}
       <div className="w-screen">
-        <Breadcrumbs locale={locale} type={type} id={id} />
         {children}
       </div>
 
@@ -80,19 +76,11 @@ const Content: FC<{ children: ReactNode; locale: string; type: "category" | "pro
   );
 };
 
-export default function Layout({
-  children,
-  params,
-}: {
-  children: ReactNode;
-  params: { locale: string; type: "category" | "product"; id: string };
-}) {
+export default function Layout({ children, params: { locale } }: { children: ReactNode; params: { locale: string } }) {
   return (
     <MainLayout>
-      <SidebarProvider locale={params.locale}>
-        <Content locale={params.locale} type={params.type} id={Number(params.id)}>
-          {children}
-        </Content>
+      <SidebarProvider locale={locale}>
+        <Content locale={locale}>{children}</Content>
       </SidebarProvider>
     </MainLayout>
   );

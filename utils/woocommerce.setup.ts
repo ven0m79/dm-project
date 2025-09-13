@@ -29,7 +29,7 @@ export async function fetchWooCommerceProducts(id: number, locale: string) {
   }
 }
 
-export async function fetchWooCommerceCategories(categoryId: number, locale: string) {
+export async function fetchWooCommerceCategories(locale: string) {
   try {
     let page = 1;
     let totalPages = 1;

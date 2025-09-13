@@ -3,7 +3,7 @@ import classNames from "classnames";
 import Link from "next/link";
 import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 
-import { fetchWooCommerceCategories } from "../../../../utils/woocommerce.setup";
+import { fetchWooCommerceCategories, fetchWooCommerceCategoryDetails } from "../../../../utils/woocommerce.setup";
 import styles from "./Sub-catalog.module.css";
 import { categoriesCreation, TransformedCategoriesType } from "./helpers";
 
@@ -11,6 +11,8 @@ import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/p
 import { getCategoriesIds } from "@app/[locale]/components/constants";
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 import { useRouter, useSearchParams } from "next/navigation";
+
+type BreadcrumbItem = { id: number | string; name: string; url: string };
 
 export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   const {
@@ -21,18 +23,64 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
     getCategoryDetails,
     setOpenedCategoryIds,
     openedCategoryIds,
+    selectedCategoryId,
   } = useSidebar();
+
+
 
   const currentIdsData = useMemo(() => getCategoriesIds(locale), [locale]);
   const isMobile = useIsMobile();
   const router = useRouter();
   const searchParams = useSearchParams(); // ✅ відслідковуємо query
-  const categoryFromUrl = searchParams?.get("category") ?? "" // ✅ беремо `category` з URL
+
   const isIOS = typeof window !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
   const sortedProducts = [...selectedProducts].sort((a, b) => a.name.localeCompare(b.name));
   const [visibleCount, setVisibleCount] = useState(15);
   const productsToRender = sortedProducts.slice(0, visibleCount);
+
+
+  const categoryFromUrl = searchParams?.get("category") ?? "" // ✅ беремо `category` з URL
+  // 🔹 Локальний state для хлібних крихт
+  const [breadcrumbsTrail, setBreadcrumbsTrail] = useState<BreadcrumbItem[]>([]);
+
+  // 🔹 Функція для побудови trail від поточної категорії вгору до root
+  const buildCategoryTrail = useCallback(
+    async (categoryId: number) => {
+      let trail: BreadcrumbItem[] = [];
+      let currentId: number | null = categoryId;
+
+      while (currentId) {
+        const category = await fetchWooCommerceCategoryDetails(currentId, locale);
+        if (!category) break;
+
+        // 🚫 Пропускаємо root (наприклад, якщо в нього parent === 0)
+        if (category.parent !== 0) {
+          trail.unshift({
+            id: category.id,
+            name: category.name,
+            url: `/${locale}/catalog/sub-catalog?category=${encodeURIComponent(
+              category.slug
+            )}`,
+          });
+        }
+
+        currentId =
+          category.parent && category.parent !== 0 ? category.parent : null;
+      }
+
+      // ✅ Додаємо "Головна" тільки один раз у початок
+      const homeUrl = locale === "ua" ? `/` : `/${locale}`;
+      const finalTrail: BreadcrumbItem[] = [
+        { id: "home", name: "Головна", url: homeUrl },
+        ...trail,
+      ];
+      setBreadcrumbsTrail(finalTrail);
+    },
+    [locale]
+  );
+
+
 
   const getData = useCallback(async () => {
     try {
@@ -57,16 +105,27 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   );
 
   // ✅ реагуємо на зміну `category` з URL
-useEffect(() => {
+  useEffect(() => {
     if (categoryFromUrl && currentIdsData) {
       const categoryId = (currentIdsData as Record<string, number>)[categoryFromUrl];
       if (categoryId) {
         getCategoryDetails(categoryId, locale);
         setSelectedCategoryId(categoryId);
         setOpenedCategoryIds([categoryId]);
+
+        // 🔹 побудова хлібних крихт
+        buildCategoryTrail(categoryId);
       }
     }
-  }, [categoryFromUrl, currentIdsData, getCategoryDetails, locale, setOpenedCategoryIds, setSelectedCategoryId]);
+  }, [
+    categoryFromUrl,
+    currentIdsData,
+    getCategoryDetails,
+    locale,
+    setOpenedCategoryIds,
+    setSelectedCategoryId,
+    buildCategoryTrail,
+  ]);
 
   return (
     <>
@@ -78,8 +137,8 @@ useEffect(() => {
           )}
         >
           <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-1 w-full items-start">
-
             {productsToRender && productsToRender.length ? (
+
               productsToRender.map((el) => {
                 return isAccessories[0] ? (
                   <div
@@ -168,10 +227,33 @@ useEffect(() => {
         :
         <div
           className={classNames(
-            "flex flex-1 flex-row justify-between self-center mb-5",
+            "flex flex-1 flex-col justify-between self-center mb-5",
             styles.subCatalog,
           )}
         >
+          <div className="mt-5 ml-4">
+            {/* Breadcrumbs */}
+            <nav aria-label="Breadcrumb" className={styles.headSubCatalogTitle}>
+              <ol className="flex flex-wrap gap-2">
+                {breadcrumbsTrail.map((el, idx) => {
+                  const isLast = idx === breadcrumbsTrail.length - 1;
+                  return (
+                    <li key={el.id} className="flex items-center gap-2">
+                      {idx > 0 && <span>/</span>}
+                      {isLast ? (
+                        <span className={styles.headSubCatalogTitle}>{el.name}</span>
+                      ) : (
+                        <Link href={el.url} className="hover:underline">
+                          {el.name}
+                        </Link>
+                      )}
+                    </li>
+                  );
+                })}
+              </ol>
+            </nav>
+          </div>
+
           <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-5 w-full max-w-[800px] items-start">
             {productsToRender && productsToRender.length ? (
               productsToRender.map((el) => {
