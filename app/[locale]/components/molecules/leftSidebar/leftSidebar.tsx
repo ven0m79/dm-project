@@ -121,11 +121,32 @@ const Content: FC<SidebarProps> = ({
   );
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
+const categoriesMap = useMemo(() => {
+  const map = new Map<number, TransformedCategoriesType>();
+
+  const traverse = (cats: TransformedCategoriesType[]) => {
+    cats.forEach((cat) => {
+      map.set(cat.id, cat);
+      if (cat.childrens?.length) {
+        traverse(cat.childrens);
+      }
+    });
+  };
+
+  if (items?.length) traverse(items);
+
+  return map;
+}, [items]);
+
+// ✅ Оновлений toggle
 const handleCollapseToggle = async (categoryId: number) => {
   setSelectedCategoryId(categoryId);
 
-  // Завантажуємо продукти
-  await getCategoryDetails(categoryId, locale);
+  // ✅ Якщо ще не завантажили — тільки тоді робимо fetch
+  const category = categoriesMap.get(categoryId);
+  if (category ) {
+    await getCategoryDetails(categoryId, locale);
+  }
 
   // Тогл відкритих категорій
   setOpenedCategoryIds((prevOpenedIds) => {
@@ -134,7 +155,6 @@ const handleCollapseToggle = async (categoryId: number) => {
       ? prevOpenedIds.filter((id) => id !== categoryId)
       : [...prevOpenedIds, categoryId];
   });
-
   // Знаходимо категорію за ID на будь-якому рівні
   const findCategoryById = (
     cats: TransformedCategoriesType[],
