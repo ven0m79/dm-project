@@ -220,15 +220,15 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
         >
           <div className="mt-5 ml-4">
             {/* Breadcrumbs */}
-            <nav aria-label="Breadcrumb" className={styles.headSubCatalogTitle}>
-              <ol className="flex flex-wrap gap-2">
+            <nav aria-label="Breadcrumb" className={styles.breadcrumbs}>
+              <ol className="flex flex-wrap gap-1">
                 {breadcrumbsTrail.map((el, idx) => {
                   const isLast = idx === breadcrumbsTrail.length - 1;
                   return (
-                    <li key={el.id} className="flex items-center gap-2">
+                    <li key={el.id} className="flex items-center gap-1">
                       {idx > 0 && <span>/</span>}
                       {isLast ? (
-                        <span className={styles.headSubCatalogTitle}>{el.name}</span>
+                        <span className={styles.breadcrumbs}>{el.name}</span>
                       ) : (
                         <Link href={el.url} className="hover:underline">
                           {el.name}

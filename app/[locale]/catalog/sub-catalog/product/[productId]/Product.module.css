@@ -24,6 +24,12 @@
     text-transform: uppercase;
 }
 
+.breadcrumbs {
+    color: #002766;
+    font-size: 14px;
+    letter-spacing: -0.5px;     /* трохи ближче букви одна до одної*/
+}
+
 .available {
     font-size: 16px;
     color: #007F3D;

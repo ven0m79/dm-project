@@ -12,7 +12,6 @@ import {
   LEFT_BAR_PARENT_ID_EN,
 } from "@app/[locale]/components/constants";
 
-// ✅ Кастомна тема для Flowbite Sidebar
 const customTheme: CustomFlowbiteTheme = {
   sidebar: {
     root: {

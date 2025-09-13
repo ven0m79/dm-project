@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import {
   fetchWooCommerceProductDetails,
   fetchWooCommerceCrossProductsDetails,
+  fetchWooCommerceCategoryDetails,
 } from "../../../../../../utils/woocommerce.setup";
 import { SingleProductDetails } from "../../../../../../utils/woocomerce.types";
 import Link from "next/link";
@@ -18,8 +19,7 @@ import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import DOMPurify from "dompurify";
 import { useTranslations } from "next-intl";
-
-
+import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
 
 const customTheme: CustomFlowbiteTheme = {
   tabs: {
@@ -67,6 +67,8 @@ type Params = {
   productId: string;
 };
 
+type BreadcrumbItem = { id: number | string; name: string; url: string };
+
 const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
   const t = useTranslations("Product");
   const { productId }: Params = useParams<any>();
@@ -76,63 +78,40 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
     SingleProductDetails[]
   >([]);
 
+  const { setOpenedCategoryIds } = useSidebar(); // для відкриття категорії в сайдбарі, якщо потр
+  const [breadcrumbsTrail, setBreadcrumbsTrail] = useState<BreadcrumbItem[]>([]); // 🔹 хлібні крихти
+
+  const isIOS = typeof window !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
   const youtubeMeta = details?.meta_data?.find((item: any) => item.key === "_nickx_video_text_url");
   const youtubeUrl =
     Array.isArray(youtubeMeta?.value)
       ? youtubeMeta?.value?.[0]
       : youtubeMeta?.value;
 
+  // 🔹 Визначення ID поточного продукту
   const selectedProductId = useMemo(() => {
-    return (
-      (!details
-        ? Number(productId)
-        : Number(details.translations?.[locale as any])) || 0
-    );
+    return (!details ? Number(productId) : Number(details.translations?.[locale as any])) || 0;
   }, [details, locale, productId]);
 
-  const isAccessories = details?.tags
-    ?.map((el) => el.name)
-    ?.includes("accessories");
+  const isAccessories = details?.tags?.map(el => el.name)?.includes("accessories");
 
-  const SEOData = useMemo(() => {
-    // Очистка описания
-    const cleanDescription = details?.short_description
-      ? DOMPurify.sanitize(details.short_description)
-      : "";
-
-    if (isAccessories) {
-      return {
-        title: details?.name || "",
-        description: cleanDescription,
-      };
-    }
-
-    return {
-      title: details?.name || "",
-      description: cleanDescription, // Всегда используем очищенное описание
-    };
-  }, [details?.name, details?.short_description, isAccessories]);
-
-  const getCategoryDetails = useCallback(async () => {
+  // 🔹 Функція завантаження деталей продукту та крос-селів
+  const getProductDetails = useCallback(async () => {
     setLoading(true);
-
     try {
-      const data = await fetchWooCommerceProductDetails(
-        selectedProductId,
-        locale,
-      );
-
+      const data = await fetchWooCommerceProductDetails(selectedProductId, locale);
       if (data) {
         setDetails(data);
 
-        if (data.cross_sell_ids?.length) {
-          const crossSellData = await fetchWooCommerceCrossProductsDetails(
-            data.cross_sell_ids,
-            locale,
-          );
-          setCrossSellProducts(crossSellData);
-          console.log("Cross-sell products:", crossSellData);
-        }
+        // 🔹 Хлібні крихти — беремо першу категорію продукту
+        const crossSellDataPromise = data.cross_sell_ids?.length
+          ? fetchWooCommerceCrossProductsDetails(data.cross_sell_ids, locale)
+          : Promise.resolve([]);
+
+        await buildCategoryTrail(data.categories, data.name, data.id);
+        const crossSellData = await crossSellDataPromise;
+        setCrossSellProducts(crossSellData || []);
       }
     } catch (e) {
       console.warn("Error fetching product details or cross-sell products:", e);
@@ -141,13 +120,89 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
     }
   }, [locale, selectedProductId]);
 
+  const getCategoryPath = async (categoryId: number, locale: string, visited: Set<number> = new Set()): Promise<BreadcrumbItem[]> => {
+    const category = await fetchWooCommerceCategoryDetails(categoryId, locale);
+    if (!category) return [];
+
+    // Якщо категорія верхнього рівня або вже була додана, пропускаємо
+    if (category.parent === 0 || visited.has(category.id)) return [];
+
+    visited.add(category.id);
+
+    const path: BreadcrumbItem[] = [];
+
+    // Рекурсивно додаємо батьків
+    if (category.parent) {
+      const parentPath = await getCategoryPath(category.parent, locale, visited);
+      path.push(...parentPath);
+    }
+
+    // Додаємо поточну категорію
+    path.push({
+      id: category.id,
+      name: category.name,
+      url: `/${locale}/catalog/sub-catalog?category=${encodeURIComponent(category.slug)}`,
+    });
+
+    return path;
+  };
+
+  // 🔹 Побудова хлібних крихт
+  const buildCategoryTrail = useCallback(
+    async (categories: any[], productName: string, productId: number) => {
+      const trail: BreadcrumbItem[] = [];
+      const homeUrl = locale === "ua" ? `/` : `/${locale}`;
+      trail.push({ id: "home", name: "Головна", url: homeUrl });
+
+      if (!categories || categories.length === 0) {
+        setBreadcrumbsTrail(trail);
+        return;
+      }
+
+      // Беремо **тільки першу (найглибшу) категорію**
+      const deepestCategory = categories[0];
+      const categoryPath = await getCategoryPath(deepestCategory.id, locale);
+      trail.push(...categoryPath);
+
+      // Додаємо сам продукт
+      trail.push({
+        id: productId,
+        name: productName,
+        url: `/${locale}/catalog/sub-catalog/product/${productId}?category=${encodeURIComponent(deepestCategory.slug)}`,
+      });
+
+      setBreadcrumbsTrail(trail);
+    },
+    [locale]
+  );
+
   useEffect(() => {
-    getCategoryDetails();
-  }, [getCategoryDetails]);
+    getProductDetails();
+  }, [getProductDetails]);
+
 
   return (
     <>
-      <div className="flex self-center flex-row max-w-[800px] mb-8">
+      <div className="flex self-center flex-col max-w-[800px] mb-8">
+        <div className="mt-5 ml-4">
+          <nav aria-label="Breadcrumb" className={classNames("flex", styles.breadcrumbs)}>
+            <ol className="flex flex-wrap gap-1">
+              {breadcrumbsTrail.map((el, index) => {
+                const isLast = index === breadcrumbsTrail.length - 1;
+                return (
+                  <li key={el.id} className="flex items-center gap-1">
+                    {isLast ? (
+                      <span>{el.name}</span> // останній елемент без лінка
+                    ) : (
+                      <Link href={el.url}>{el.name}</Link>
+                    )}
+                    {index < breadcrumbsTrail.length - 1 && "/"}
+                  </li>
+                );
+              })}
+            </ol>
+          </nav>
+        </div>
         <div className="flex flex-col py-1 px-2 min-h-[600px] flex-1">
           {loading ? (
             <div className="flex w-full h-4/5 justify-center items-center">
