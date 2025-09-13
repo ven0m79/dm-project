@@ -13,11 +13,9 @@ import styles from "./Product.module.css";
 import classNames from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import Loader from "@app/[locale]/components/atoms/loader/Loader";
-
 import { Tabs, CustomFlowbiteTheme } from "flowbite-react";
 import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
-import DOMPurify from "dompurify";
 import { useTranslations } from "next-intl";
 import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
 

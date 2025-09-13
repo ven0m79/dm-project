@@ -1,29 +1,58 @@
-"use client";
+// app/[locale]/components/hooks/useBreadcrumbs.ts
+import { useState, useCallback } from "react";
+import { fetchWooCommerceCategoryDetails } from "../../../../../utils/woocommerce.setup";
 
-import React from "react";
-import Link from "next/link";
+export type BreadcrumbItem = { id: number | string; name: string; url: string };
 
-interface BreadcrumbItem {
-  id: number | string;
-  name: string;
-  url: string;
-}
+export function useBreadcrumbs(locale: string) {
+  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbItem[]>([]);
 
-export default function Breadcrumbs({ trail }: { trail: BreadcrumbItem[] }) {
-  if (!trail || !trail.length) return null;
+  const getCategoryPath = useCallback(
+    async (categoryId: number, visited = new Set<number>()): Promise<BreadcrumbItem[]> => {
+      const category = await fetchWooCommerceCategoryDetails(categoryId, locale);
+      if (!category || category.parent === 0 || visited.has(category.id)) return [];
 
-  return (
-    <nav aria-label="Breadcrumb" className="text-sm text-gray-600 mb-4">
-      <ol className="flex flex-wrap gap-2">
-        {trail.map((el, idx) => (
-          <li key={el.id} className="flex items-center gap-2">
-            {idx > 0 && <span>/</span>}
-            <Link href={el.url} className="hover:underline">
-              {el.name}
-            </Link>
-          </li>
-        ))}
-      </ol>
-    </nav>
+      visited.add(category.id);
+      const path: BreadcrumbItem[] = category.parent
+        ? [...await getCategoryPath(category.parent, visited)]
+        : [];
+
+      path.push({
+        id: category.id,
+        name: category.name,
+        url: `/${locale}/catalog/sub-catalog?category=${encodeURIComponent(category.slug)}`,
+      });
+
+      return path;
+    },
+    [locale]
   );
+
+  const buildCategoryTrail = useCallback(
+    async (categories: any[], productName?: string, productId?: number) => {
+      const trail: BreadcrumbItem[] = [];
+      const homeUrl = locale === "ua" ? `/` : `/${locale}`;
+      trail.push({ id: "home", name: "Головна", url: homeUrl });
+
+      if (categories && categories.length) {
+        const deepestCategory = categories[0];
+        const categoryPath = await getCategoryPath(deepestCategory.id);
+        trail.push(...categoryPath);
+
+        if (productName && productId) {
+          trail.push({
+            id: productId,
+            name: productName,
+            url: `/${locale}/catalog/sub-catalog/product/${productId}?category=${encodeURIComponent(deepestCategory.slug)}`,
+          });
+        }
+      }
+
+      setBreadcrumbs(trail);
+      return trail;
+    },
+    [locale, getCategoryPath]
+  );
+
+  return { breadcrumbs, setBreadcrumbs, buildCategoryTrail };
 }
