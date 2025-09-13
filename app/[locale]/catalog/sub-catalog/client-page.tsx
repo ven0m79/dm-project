@@ -26,8 +26,6 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
     selectedCategoryId,
   } = useSidebar();
 
-
-
   const currentIdsData = useMemo(() => getCategoriesIds(locale), [locale]);
   const isMobile = useIsMobile();
   const router = useRouter();
@@ -47,40 +45,29 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   // 🔹 Функція для побудови trail від поточної категорії вгору до root
   const buildCategoryTrail = useCallback(
     async (categoryId: number) => {
-      let trail: BreadcrumbItem[] = [];
+      const categories: any[] = [];
       let currentId: number | null = categoryId;
 
       while (currentId) {
         const category = await fetchWooCommerceCategoryDetails(currentId, locale);
         if (!category) break;
-
-        // 🚫 Пропускаємо root (наприклад, якщо в нього parent === 0)
-        if (category.parent !== 0) {
-          trail.unshift({
-            id: category.id,
-            name: category.name,
-            url: `/${locale}/catalog/sub-catalog?category=${encodeURIComponent(
-              category.slug
-            )}`,
-          });
-        }
-
-        currentId =
-          category.parent && category.parent !== 0 ? category.parent : null;
+        categories.unshift(category);
+        currentId = category.parent && category.parent !== 0 ? category.parent : null;
       }
 
-      // ✅ Додаємо "Головна" тільки один раз у початок
+      const filteredTrail = categories
+        .slice(1) // 🔥 пропускаємо першого батька
+        .map((category) => ({
+          id: category.id,
+          name: category.name,
+          url: `/${locale}/catalog/sub-catalog?category=${encodeURIComponent(category.slug)}`,
+        }));
+
       const homeUrl = locale === "ua" ? `/` : `/${locale}`;
-      const finalTrail: BreadcrumbItem[] = [
-        { id: "home", name: "Головна", url: homeUrl },
-        ...trail,
-      ];
-      setBreadcrumbsTrail(finalTrail);
+      setBreadcrumbsTrail([{ id: "home", name: "Головна", url: homeUrl }, ...filteredTrail]);
     },
     [locale]
   );
-
-
 
   const getData = useCallback(async () => {
     try {
@@ -104,7 +91,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
     el.tags.map((el) => el.name).includes("accessories"),
   );
 
-  // ✅ реагуємо на зміну `category` з URL
+  //  реагуємо на зміну `category` з URL
   useEffect(() => {
     if (categoryFromUrl && currentIdsData) {
       const categoryId = (currentIdsData as Record<string, number>)[categoryFromUrl];
@@ -113,7 +100,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
         setSelectedCategoryId(categoryId);
         setOpenedCategoryIds([categoryId]);
 
-        // 🔹 побудова хлібних крихт
+        // побудова хлібних крихт
         buildCategoryTrail(categoryId);
       }
     }
