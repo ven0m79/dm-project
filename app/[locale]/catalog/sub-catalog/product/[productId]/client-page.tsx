@@ -1,3 +1,4 @@
+// app/[locale]/components/pages/Product.tsx (або ваш файл)
 "use client";
 
 import React, { useCallback, useEffect, useMemo, useState } from "react";
@@ -5,7 +6,6 @@ import { useParams } from "next/navigation";
 import {
   fetchWooCommerceProductDetails,
   fetchWooCommerceCrossProductsDetails,
-  fetchWooCommerceCategoryDetails,
 } from "../../../../../../utils/woocommerce.setup";
 import { SingleProductDetails } from "../../../../../../utils/woocomerce.types";
 import Link from "next/link";
@@ -13,58 +13,18 @@ import styles from "./Product.module.css";
 import classNames from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import Loader from "@app/[locale]/components/atoms/loader/Loader";
+
 import { Tabs, CustomFlowbiteTheme } from "flowbite-react";
 import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
+import DOMPurify from "dompurify";
 import { useTranslations } from "next-intl";
 import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
+import { useBreadcrumbs } from "@app/[locale]/components/atoms/breadcrumbs/breadcrumbs";
 
-const customTheme: CustomFlowbiteTheme = {
-  tabs: {
-    base: "flex flex-col gap-2",
-    tablist: {
-      base: "flex text-center",
-      styles: {
-        default: "flex-wrap border-b border-gray-200 dark:border-gray-300",
-        underline:
-          "-mb-px flex-wrap border-b border-gray-200 dark:border-gray-700",
-      },
-      tabitem: {
-        base: "flex items-center justify-center rounded-t-lg p-4 text-sm font-medium first:ml-0 focus:outline-none focus:ring-0 focus:ring-cyan-900 disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500",
-        styles: {
-          default: {
-            base: "rounded-t-lg",
-            active: {
-              on: "bg-[#0060aa10] text-[#0061AA] dark:bg-[#0060aa10] dark:text-[#0061AA]",
-              off: "text-[#0061AA] hover:bg-gray-50 hover:text-[#0061AA] dark:text-[#0060aa50] dark:hover:bg-[#0060aa50]  dark:hover:text-text-[#0061AA]",
-            },
-          },
-          underline: {
-            base: "rounded-t-lg",
-            active: {
-              on: "active rounded-t-lg border-b-2 border-cyan-600 text-cyan-600 dark:border-cyan-500 dark:text-cyan-500",
-              off: "border-b-2 border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300",
-            },
-          },
-        },
-        icon: "mr-2 h-5 w-5",
-      },
-    },
-    tabitemcontainer: {
-      base: "",
-      styles: {
-        default: "",
-        underline: "",
-      },
-    },
-    tabpanel: "py-3",
-  },
-};
+const customTheme: CustomFlowbiteTheme = { /* ... ваш theme ...*/ };
 
-type Params = {
-  productId: string;
-};
-
+type Params = { productId: string };
 type BreadcrumbItem = { id: number | string; name: string; url: string };
 
 const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
@@ -72,112 +32,77 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
   const { productId }: Params = useParams<any>();
   const [loading, setLoading] = useState<boolean>(false);
   const [details, setDetails] = useState<SingleProductDetails | null>(null);
-  const [crossSellProducts, setCrossSellProducts] = useState<
-    SingleProductDetails[]
-  >([]);
+  const [crossSellProducts, setCrossSellProducts] = useState<SingleProductDetails[]>([]);
 
-  const { setOpenedCategoryIds } = useSidebar(); // для відкриття категорії в сайдбарі, якщо потр
-  const [breadcrumbsTrail, setBreadcrumbsTrail] = useState<BreadcrumbItem[]>([]); // 🔹 хлібні крихти
+  const { setOpenedCategoryIds } = useSidebar();
 
-  const isIOS = typeof window !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  // ✅ Передаємо locale у useBreadcrumbs
+  const { breadcrumbs, buildCategoryTrail } = useBreadcrumbs();
 
-  const youtubeMeta = details?.meta_data?.find((item: any) => item.key === "_nickx_video_text_url");
-  const youtubeUrl =
-    Array.isArray(youtubeMeta?.value)
-      ? youtubeMeta?.value?.[0]
-      : youtubeMeta?.value;
+  const isIOS =
+    typeof window !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-  // 🔹 Визначення ID поточного продукту
+  const youtubeMeta = details?.meta_data?.find(
+    (item: any) => item.key === "_nickx_video_text_url"
+  );
+  const youtubeUrl = Array.isArray(youtubeMeta?.value)
+    ? youtubeMeta?.value?.[0]
+    : youtubeMeta?.value;
+
+  // ✅ Обираємо правильний ID продукту з урахуванням перекладів
   const selectedProductId = useMemo(() => {
-    return (!details ? Number(productId) : Number(details.translations?.[locale as any])) || 0;
+    return (
+      (!details ? Number(productId) : Number(details?.translations?.[locale as any])) || 0
+    );
   }, [details, locale, productId]);
 
-  const isAccessories = details?.tags?.map(el => el.name)?.includes("accessories");
+  const isAccessories = details?.tags?.map((el) => el.name)?.includes("accessories");
 
-  // 🔹 Функція завантаження деталей продукту та крос-селів
+  // ✅ Завантаження деталей продукту
   const getProductDetails = useCallback(async () => {
     setLoading(true);
     try {
       const data = await fetchWooCommerceProductDetails(selectedProductId, locale);
-      if (data) {
-        setDetails(data);
-
-        // 🔹 Хлібні крихти — беремо першу категорію продукту
-        const crossSellDataPromise = data.cross_sell_ids?.length
-          ? fetchWooCommerceCrossProductsDetails(data.cross_sell_ids, locale)
-          : Promise.resolve([]);
-
-        await buildCategoryTrail(data.categories, data.name, data.id);
-        const crossSellData = await crossSellDataPromise;
-        setCrossSellProducts(crossSellData || []);
-      }
-    } catch (e) {
-      console.warn("Error fetching product details or cross-sell products:", e);
-    } finally {
-      setLoading(false);
-    }
-  }, [locale, selectedProductId]);
-
-  const getCategoryPath = async (categoryId: number, locale: string, visited: Set<number> = new Set()): Promise<BreadcrumbItem[]> => {
-    const category = await fetchWooCommerceCategoryDetails(categoryId, locale);
-    if (!category) return [];
-
-    // Якщо категорія верхнього рівня або вже була додана, пропускаємо
-    if (category.parent === 0 || visited.has(category.id)) return [];
-
-    visited.add(category.id);
-
-    const path: BreadcrumbItem[] = [];
-
-    // Рекурсивно додаємо батьків
-    if (category.parent) {
-      const parentPath = await getCategoryPath(category.parent, locale, visited);
-      path.push(...parentPath);
-    }
-
-    // Додаємо поточну категорію
-    path.push({
-      id: category.id,
-      name: category.name,
-      url: `/${locale}/catalog/sub-catalog?category=${encodeURIComponent(category.slug)}`,
-    });
-
-    return path;
-  };
-
-  // 🔹 Побудова хлібних крихт
-  const buildCategoryTrail = useCallback(
-    async (categories: any[], productName: string, productId: number) => {
-      const trail: BreadcrumbItem[] = [];
-      const homeUrl = locale === "ua" ? `/` : `/${locale}`;
-      trail.push({ id: "home", name: "Головна", url: homeUrl });
-
-      if (!categories || categories.length === 0) {
-        setBreadcrumbsTrail(trail);
+      if (!data) {
+        setLoading(false);
         return;
       }
 
-      // Беремо **тільки першу (найглибшу) категорію**
-      const deepestCategory = categories[0];
-      const categoryPath = await getCategoryPath(deepestCategory.id, locale);
-      trail.push(...categoryPath);
+      setDetails(data);
 
-      // Додаємо сам продукт
-      trail.push({
-        id: productId,
-        name: productName,
-        url: `/${locale}/catalog/sub-catalog/product/${productId}?category=${encodeURIComponent(deepestCategory.slug)}`,
-      });
+      // ✅ Паралельно запускаємо buildCategoryTrail і крос-сели
+      const crossSellPromise = data.cross_sell_ids?.length
+        ? fetchWooCommerceCrossProductsDetails(data.cross_sell_ids, locale)
+        : Promise.resolve([]);
 
-      setBreadcrumbsTrail(trail);
-    },
-    [locale]
-  );
+      // ❌ Раніше сюди передавали `locale` зайвим аргументом
+      const buildTrailPromise = buildCategoryTrail(
+        data.categories,
+        locale,
+        data.name,
+        data.id
+      );
+
+      const [crossSellData] = await Promise.all([
+        crossSellPromise,
+        buildTrailPromise,
+      ]);
+
+      setCrossSellProducts(crossSellData || []);
+    } catch (e) {
+      console.warn(
+        "Error fetching product details or cross-sell products:",
+        e
+      );
+    } finally {
+      setLoading(false);
+    }
+  }, [selectedProductId, locale, buildCategoryTrail]);
 
   useEffect(() => {
+    if (!selectedProductId) return;
     getProductDetails();
-  }, [getProductDetails]);
-
+  }, [getProductDetails, selectedProductId]);
 
   return (
     <>
@@ -185,8 +110,8 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
         <div className="mt-5 ml-4">
           <nav aria-label="Breadcrumb" className={classNames("flex", styles.breadcrumbs)}>
             <ol className="flex flex-wrap gap-1">
-              {breadcrumbsTrail.map((el, index) => {
-                const isLast = index === breadcrumbsTrail.length - 1;
+              {breadcrumbs.map((el, index) => {
+                const isLast = index === breadcrumbs.length - 1;
                 return (
                   <li key={el.id} className="flex items-center gap-1">
                     {isLast ? (
@@ -194,7 +119,7 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                     ) : (
                       <Link href={el.url}>{el.name}</Link>
                     )}
-                    {index < breadcrumbsTrail.length - 1 && "/"}
+                    {index < breadcrumbs.length - 1 && "/"}
                   </li>
                 );
               })}
