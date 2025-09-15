@@ -58,7 +58,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
 
   const isAccessories = selectedProducts?.map((el) => el.tags.map((el) => el.name).includes("accessories"));
 
-  // реагуємо на зміну category в URL       const categoryId = (currentIdsData as Record<string, number>)[categoryFromUrl];
+  // реагуємо на зміну category в URL     
   const [lastCategory, setLastCategory] = useState<string | null>(null);
 
 useEffect(() => {
