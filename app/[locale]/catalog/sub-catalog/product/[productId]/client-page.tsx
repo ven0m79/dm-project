@@ -22,10 +22,51 @@ import { useTranslations } from "next-intl";
 import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
 import { useBreadcrumbs } from "@app/[locale]/components/atoms/breadcrumbs/breadcrumbs";
 
-const customTheme: CustomFlowbiteTheme = { /* ... ваш theme ...*/ };
+
+const customTheme: CustomFlowbiteTheme = {
+  tabs: {
+    base: "flex flex-col gap-2",
+    tablist: {
+      base: "flex text-center",
+      styles: {
+        default: "flex-wrap border-b border-gray-200 dark:border-gray-300",
+        underline:
+          "-mb-px flex-wrap border-b border-gray-200 dark:border-gray-700",
+      },
+      tabitem: {
+        base: "flex items-center justify-center rounded-t-lg p-4 text-sm font-medium first:ml-0 focus:outline-none focus:ring-0 focus:ring-cyan-900 disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500",
+        styles: {
+          default: {
+            base: "rounded-t-lg",
+            active: {
+              on: "bg-[#0060aa10] text-[#0061AA] dark:bg-[#0060aa10] dark:text-[#0061AA]",
+              off: "text-[#0061AA] hover:bg-gray-50 hover:text-[#0061AA] dark:text-[#0060aa50] dark:hover:bg-[#0060aa50]  dark:hover:text-text-[#0061AA]",
+            },
+          },
+          underline: {
+            base: "rounded-t-lg",
+            active: {
+              on: "active rounded-t-lg border-b-2 border-cyan-600 text-cyan-600 dark:border-cyan-500 dark:text-cyan-500",
+              off: "border-b-2 border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300",
+            },
+          },
+        },
+        icon: "mr-2 h-5 w-5",
+      },
+    },
+    tabitemcontainer: {
+      base: "",
+      styles: {
+        default: "",
+        underline: "",
+      },
+    },
+    tabpanel: "py-3",
+  },
+};
+
 
 type Params = { productId: string };
-type BreadcrumbItem = { id: number | string; name: string; url: string };
 
 const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
   const t = useTranslations("Product");

@@ -61,6 +61,8 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   // реагуємо на зміну category в URL     
   const [lastCategory, setLastCategory] = useState<string | null>(null);
 
+
+// підозра!!! - довбаний юз ефект з рекурсієй  
 useEffect(() => {
   if (!categoryFromUrl || categoryFromUrl === lastCategory) return;
 

@@ -4,12 +4,8 @@ import { fetchWooCommerceCategoryDetails } from "../../../../../utils/woocommerc
 
 export type BreadcrumbItem = { id: number | string; name: string; url: string };
 
-/**
- * Хук для побудови breadcrumbs.
- * - кешує результати fetch-ів категорій
- * - будує шлях від кореня до вибраної категорії, пропускаючи топ-level (parent === 0)
- * - дозволяє вибрати категорію за custom_seo_description === '555444' (перевіряє meta_data)
- */
+/*побудова breadcrumbs.  */
+
 export function useBreadcrumbs() {
   const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbItem[]>([]);
   const cacheRef = useRef<Map<number, any>>(new Map());
@@ -52,12 +48,7 @@ export function useBreadcrumbs() {
     [fetchCategoryCached]
   );
 
-  /**
-   * Побудувати trail
-   * categories: масив категорій продукту (має принаймні поле id)
-   * locale: строка локалі ('ua', 'en' ...)
-   * productName/productId — якщо потрібен елемент для продукту в кінці
-   */
+  /*   Побудувати trail   */
   const buildCategoryTrail = useCallback(
     async (categories: any[] | undefined, locale: string, productName?: string, productId?: number) => {
       const trail: BreadcrumbItem[] = [];
