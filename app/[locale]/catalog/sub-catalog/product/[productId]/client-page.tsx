@@ -199,7 +199,7 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
 
                         </div>
                       </div>
-                      <div className="px-1 pt-8 sm:pt-28 w-1/2">
+                      <div className="px-1 pt-0 sm:pt-10 w-1/2">
                         <h1 className={classNames("", styles.title)}>
                           {details?.name}
                         </h1>
@@ -221,16 +221,28 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                             >
                               {"Артикул: "}
                               {details?.sku}
+
                             </div>
-                            {/* <div
-                                className="content mt-5"
-                                dangerouslySetInnerHTML={{
-                                  __html: details?.short_description || "",
-                                }}
-                              /> */}
+                            <div
+                              className={classNames(
+                                "text-normal sm:mt-12 mt-6 justify-center",
+                              )}
+                            >
+                              {details?.price && (
+                                <span className={classNames("", styles.price1)}><span className="font-bold text-[#002766]">Ціна:</span> {String(details.price).replace(".", ",")} {t("grn")}</span>
+                              )}
+                            </div>
                           </>
-                        ) : null}
-                        <div className="sm:h-[80px] h-[30px]"></div>
+                        ) : <div
+                          className={classNames(
+                            "text-normal sm:mt-16 mt-6",
+                          )}
+                        >
+                          {details?.price && (
+                            <span className={classNames("lowercase", styles.price)}>{String(details.price).replace(".", ",")} {t("grn")}</span>
+                          )}
+                        </div>}
+                        <div className="sm:h-[20px] h-[5px]"></div>
                         <br />
                         <div className="flex flex-col justify-between items-center">
                           <div className={styles.downloadable}>

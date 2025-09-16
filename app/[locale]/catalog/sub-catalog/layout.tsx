@@ -51,7 +51,7 @@ const Content: FC<{ children: ReactNode; locale: string; }> = ({
         <div className="w-[300px]"><LSidebar locale={locale} changeURLParams /></div>
       )}
 
-      {/* Основний контент + Breadcrumbs */}
+      {/* Основний контент */}
       <div className="w-screen">
         {children}
       </div>

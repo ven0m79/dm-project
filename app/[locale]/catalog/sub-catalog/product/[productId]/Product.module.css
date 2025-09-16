@@ -30,6 +30,24 @@
     letter-spacing: -0.5px;     /* трохи ближче букви одна до одної*/
 }
 
+.price {
+    color: #002766;
+    font-size: 18px;
+
+}
+
+.price1 {
+    color: #0061AA;
+    font-size: 18px;
+
+}
+
+.price2 {
+    color: #007F3D;
+    font-size: 18px;
+}
+
+
 .available {
     font-size: 16px;
     color: #007F3D;
