@@ -81,7 +81,7 @@ const Content: FC<SidebarProps> = ({
     setSelectedCategoryId,
     setSelectedCategory,
     setOpenedCategoryIds,
-    getCategoryDetails,
+
   } = useSidebar();
 
   // ✅ Вибір "кореневих" елементів залежно від мови
@@ -112,33 +112,18 @@ const Content: FC<SidebarProps> = ({
   }, [items]);
 
   // ✅ Оновлений toggle (без findCategoryById, тільки через categoriesMap)
-  const handleCollapseToggle = async (categoryId: number) => {
+  const handleCollapseToggle = (categoryId: number) => {
+    // Встановлюємо id для виділення
     setSelectedCategoryId(categoryId);
 
-    const clickedCategory = categoriesMap.get(categoryId);
-
-    if (clickedCategory) {
-      // Завантажуємо додаткові дані для категорії
-      await getCategoryDetails(categoryId, locale);
-
-      // Встановлюємо поточну категорію в контекст
-      setSelectedCategory(clickedCategory.slug);
-
-      // Навігація
-      const url = `/catalog/sub-catalog?category=${clickedCategory.slug}`;
-      if (isIOS) {
-        window.location.href = url;
-      } else {
-        router.push(url);
-      }
-    }
-
-    // Тогл відкриття/закриття категорії
+    // Тогл відкриття / закриття
     setOpenedCategoryIds((prevOpenedIds) =>
       prevOpenedIds.includes(categoryId)
         ? prevOpenedIds.filter((id) => id !== categoryId)
         : [...prevOpenedIds, categoryId],
     );
+    // НЕ викликаємо getCategoryDetails і НЕ змінюємо URL тут
+    // Навігацію робимо тільки в місці, де потрібно (нижче — у клику по leaf)
   };
 
   // ✅ Рекурсивний пошук всіх "батьківських" категорій
@@ -232,21 +217,21 @@ const Content: FC<SidebarProps> = ({
         >
           <div
             onClick={() => {
-              const listCat = findParentCategories(items, category.id);
-
               handleCollapseToggle(category.id);
 
-              // Оновлюємо URL якщо потрібно
+              // 🔹 Використовуємо slug вибраної категорії
               if (changeURLParams) {
-                router.push(`${pathname}?category=${listCat?.[0].slug}`);
+                router.push(`${pathname}?category=${category.slug}`);
               }
+
               if (fromProductPage) {
-                router.push(`/catalog/sub-catalog?category=${listCat?.[0].slug}`);
+                router.push(`/catalog/sub-catalog?category=${category.slug}`);
               }
             }}
           >
             {category.name}
           </div>
+
         </FBSidebar.Item>
       );
     }
@@ -269,7 +254,18 @@ const Content: FC<SidebarProps> = ({
           "bg-sky-200": selectedCategoryId === category.id,
         })}
         style={{ paddingLeft: `${paddingLeft}px` }}
-        onClick={() => handleCollapseToggle(category.id)}
+        onClick={() => {
+          handleCollapseToggle(category.id);
+
+          // 🔹 Додаємо зміну URL для категорій з підкатегоріями
+          if (changeURLParams) {
+            router.push(`${pathname}?category=${category.slug}`);
+          }
+
+          if (fromProductPage) {
+            router.push(`/catalog/sub-catalog?category=${category.slug}`);
+          }
+        }}
       >
         {category.childrens
           ?.sort((a, b) => {
@@ -282,6 +278,7 @@ const Content: FC<SidebarProps> = ({
           })
           .map((child) => renderNestedCategories(child, level + 1))}
       </FBSidebar.Collapse>
+
     );
   };
 

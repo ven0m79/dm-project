@@ -37,49 +37,28 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
 
   const sortedProducts = [...selectedProducts].sort((a, b) => a.name.localeCompare(b.name));
   const [visibleCount, setVisibleCount] = useState(15);
-  const productsToRender = sortedProducts.slice(0, visibleCount);
+  const productsToRender = useMemo(
+    () => sortedProducts.slice(0, visibleCount),
+    [sortedProducts, visibleCount]
+  );
 
   const categoryFromUrl = searchParams?.get("category") ?? "";
 
-  const getData = useCallback(async () => {
-    try {
-      const data = await fetchWooCommerceCategories(locale);
-      if (data) {
-        setCategories(categoriesCreation(data as unknown as TransformedCategoriesType[]));
-      }
-    } catch (e) {
-      console.warn({ e });
-    }
-  }, [locale, setCategories]);
+  // підозра!!! - довбаний юз ефект з рекурсієй  
+  const categoryId = useMemo(() => {
+    return (currentIdsData as Record<string, number>)[categoryFromUrl];
+  }, [categoryFromUrl, currentIdsData]);
 
-  useEffect(() => {
-    getData();
-  }, [getData]);
-
-  const isAccessories = selectedProducts?.map((el) => el.tags.map((el) => el.name).includes("accessories"));
-
-  // реагуємо на зміну category в URL     
-  const [lastCategory, setLastCategory] = useState<string | null>(null);
-
-
-// підозра!!! - довбаний юз ефект з рекурсієй  
 useEffect(() => {
-  if (!categoryFromUrl || categoryFromUrl === lastCategory) return;
-
-  async function onCategoryChange() {
-    const categoryId = (currentIdsData as Record<string, number>)[categoryFromUrl];
     if (!categoryId) return;
 
+    // виконуємо фетч товарів та оновлюємо контекст/крихти
     getCategoryDetails(categoryId, locale);
     setSelectedCategoryId(categoryId);
     setOpenedCategoryIds([categoryId]);
-    await buildCategoryTrail([{ id: categoryId }], locale);
+    buildCategoryTrail([{ id: categoryId } as any], locale);
+  }, [categoryId, locale, getCategoryDetails, setOpenedCategoryIds, setSelectedCategoryId, buildCategoryTrail]);
 
-    setLastCategory(categoryFromUrl); // зберігаємо останню оброблену категорію
-  }
-
-  onCategoryChange();
-}, [categoryFromUrl, currentIdsData, getCategoryDetails, locale, setOpenedCategoryIds, setSelectedCategoryId, buildCategoryTrail, lastCategory]);
   return (
     <>
       {typeof window !== "undefined" && isMobile ? (

@@ -1,4 +1,3 @@
-// app/[locale]/components/pages/Product.tsx (або ваш файл)
 "use client";
 
 import React, { useCallback, useEffect, useMemo, useState } from "react";
@@ -80,6 +79,11 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
   // ✅ Передаємо locale у useBreadcrumbs
   const { breadcrumbs, buildCategoryTrail } = useBreadcrumbs();
 
+  const brandLogos: Record<string, string> = {
+    "dräger": "Країна походження",
+  };
+  const brandName = details?.brands?.[0]?.name; 
+
   const isIOS =
     typeof window !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
@@ -100,45 +104,50 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
   const isAccessories = details?.tags?.map((el) => el.name)?.includes("accessories");
 
   // ✅ Завантаження деталей продукту
-  const getProductDetails = useCallback(async () => {
-    setLoading(true);
-    try {
-      const data = await fetchWooCommerceProductDetails(selectedProductId, locale);
-      if (!data) {
-        setLoading(false);
-        return;
-      }
+const getProductDetails = useCallback(async () => {
+  setLoading(true);
 
-      setDetails(data);
+  try {
+    // 🚀 1. Основний запит (деталі продукту)
+    // робимо його першим, бо від нього залежать інші (id крос-селів, категорії)
+    const data = await fetchWooCommerceProductDetails(Number(productId), locale);
 
-      // ✅ Паралельно запускаємо buildCategoryTrail і крос-сели
-      const crossSellPromise = data.cross_sell_ids?.length
-        ? fetchWooCommerceCrossProductsDetails(data.cross_sell_ids, locale)
-        : Promise.resolve([]);
-
-      // ❌ Раніше сюди передавали `locale` зайвим аргументом
-      const buildTrailPromise = buildCategoryTrail(
-        data.categories,
-        locale,
-        data.name,
-        data.id
-      );
-
-      const [crossSellData] = await Promise.all([
-        crossSellPromise,
-        buildTrailPromise,
-      ]);
-
-      setCrossSellProducts(crossSellData || []);
-    } catch (e) {
-      console.warn(
-        "Error fetching product details or cross-sell products:",
-        e
-      );
-    } finally {
+    if (!data) {
       setLoading(false);
+      return;
     }
-  }, [selectedProductId, locale, buildCategoryTrail]);
+
+    setDetails(data);
+
+    // 🚀 2. Запускаємо додаткові запити ПАРАЛЕЛЬНО
+    // - крос-сели
+    // - побудова breadcrumbs
+    const crossSellPromise = data.cross_sell_ids?.length
+      ? fetchWooCommerceCrossProductsDetails(data.cross_sell_ids, locale)
+      : Promise.resolve([]); // якщо немає cross-sell → повертаємо пустий масив
+
+    const buildTrailPromise = buildCategoryTrail(
+      data.categories, // масив категорій для breadcrumbs
+      locale,
+      data.name,
+      data.id
+    );
+
+    // 🚀 3. Чекаємо обидва проміси паралельно
+    const [crossSellData] = await Promise.all([
+      crossSellPromise,
+      buildTrailPromise,
+    ]);
+
+    // 🚀 4. Зберігаємо дані в state
+    setCrossSellProducts(crossSellData || []);
+  } catch (e) {
+    console.warn("❌ Error fetching product details or cross-sell products:", e);
+  } finally {
+    setLoading(false);
+  }
+}, [productId, locale, buildCategoryTrail]);
+
 
   useEffect(() => {
     if (!selectedProductId) return;
@@ -205,9 +214,15 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                         </h1>
                         <br />
                         <div
-                          className={classNames("text-normal", styles.brand)}
+                          className={classNames("text-normal w-full h-auto", styles.brand)}
                         >
                           {t("product-brand")} {details?.brands[0]?.name}
+                          {/* {brandName && brandLogos[brandName] && (
+                            <Image
+                              src={brandLogos[brandName] as StaticImageData}
+                              alt={brandName}
+                            />
+                          )} */}
                         </div>
                         <br />
 
