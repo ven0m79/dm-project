@@ -73,7 +73,6 @@ const Content: FC<SidebarProps> = ({
   const router = useRouter();
   const pathname = usePathname();
 
-  // ✅ Беремо дані з контексту Sidebar
   const {
     categories,
     openedCategoryIds,
@@ -81,19 +80,15 @@ const Content: FC<SidebarProps> = ({
     setSelectedCategoryId,
     setSelectedCategory,
     setOpenedCategoryIds,
-
   } = useSidebar();
 
-  // ✅ Вибір "кореневих" елементів залежно від мови
   const items = useMemo(
     () => (locale === "ua" ? [categories?.[1] || []] : [categories?.[0] || []]),
     [categories, locale],
   );
 
-  // ✅ Перевірка на iOS (щоб вирішити як робити навігацію)
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-  // ✅ Створюємо швидкий lookup Map для категорій
   const categoriesMap = useMemo(() => {
     const map = new Map<number, TransformedCategoriesType>();
 
@@ -111,22 +106,16 @@ const Content: FC<SidebarProps> = ({
     return map;
   }, [items]);
 
-  // ✅ Оновлений toggle (без findCategoryById, тільки через categoriesMap)
   const handleCollapseToggle = (categoryId: number) => {
-    // Встановлюємо id для виділення
     setSelectedCategoryId(categoryId);
 
-    // Тогл відкриття / закриття
     setOpenedCategoryIds((prevOpenedIds) =>
       prevOpenedIds.includes(categoryId)
         ? prevOpenedIds.filter((id) => id !== categoryId)
         : [...prevOpenedIds, categoryId],
     );
-    // НЕ викликаємо getCategoryDetails і НЕ змінюємо URL тут
-    // Навігацію робимо тільки в місці, де потрібно (нижче — у клику по leaf)
   };
 
-  // ✅ Рекурсивний пошук всіх "батьківських" категорій
   const findParentCategories = useCallback(
     (
       categories: TransformedCategoriesType[],
@@ -159,14 +148,12 @@ const Content: FC<SidebarProps> = ({
     [],
   );
 
-  // ✅ Список id усіх parent-ів для розкриття потрібних Collapse
   const selectedItemsNestedData = useMemo(() => {
     return findParentCategories(items, Number(selectedCategoryId))?.map(
       (el) => el.id,
     );
   }, [findParentCategories, items, selectedCategoryId]);
 
-  // ✅ Кастомний порядок для першого рівня категорій
   const customFirstLevelOrder = useMemo(() => {
     const uaOrder = [
       "or-equipment",
@@ -195,7 +182,6 @@ const Content: FC<SidebarProps> = ({
     return [];
   }, [locale]);
 
-  // ✅ Рекурсивний рендер категорій
   const renderNestedCategories = (
     category: TransformedCategoriesType,
     level = 0,
@@ -204,8 +190,11 @@ const Content: FC<SidebarProps> = ({
     const key = topLevelKey ?? category.id;
     const paddingLeft = level > 1 ? level * 7 : 0;
 
-    // 🔹 Якщо категорія без дітей → Item
     if (!category.childrens?.length) {
+      if (!key) {
+        return null;
+      }
+
       return (
         <FBSidebar.Item
           as="div"
@@ -219,7 +208,6 @@ const Content: FC<SidebarProps> = ({
             onClick={() => {
               handleCollapseToggle(category.id);
 
-              // 🔹 Використовуємо slug вибраної категорії
               if (changeURLParams) {
                 router.push(`${pathname}?category=${category.slug}`);
               }
@@ -231,12 +219,10 @@ const Content: FC<SidebarProps> = ({
           >
             {category.name}
           </div>
-
         </FBSidebar.Item>
       );
     }
 
-    // 🔹 Якщо є діти → Collapse
     return (
       <FBSidebar.Collapse
         open={
@@ -257,7 +243,6 @@ const Content: FC<SidebarProps> = ({
         onClick={() => {
           handleCollapseToggle(category.id);
 
-          // 🔹 Додаємо зміну URL для категорій з підкатегоріями
           if (changeURLParams) {
             router.push(`${pathname}?category=${category.slug}`);
           }
@@ -272,13 +257,14 @@ const Content: FC<SidebarProps> = ({
             if (level === 0 && customFirstLevelOrder.length > 0) {
               const aIndex = customFirstLevelOrder.indexOf(a.slug);
               const bIndex = customFirstLevelOrder.indexOf(b.slug);
-              return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
+              return (
+                (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex)
+              );
             }
             return a.name.localeCompare(b.name);
           })
           .map((child) => renderNestedCategories(child, level + 1))}
       </FBSidebar.Collapse>
-
     );
   };
 
@@ -290,7 +276,6 @@ const Content: FC<SidebarProps> = ({
       )}
     >
       <div className="">
-        {/* 🔹 Заголовок (назва кореневого елементу) */}
         <h3 className="text-blue-950 ml-5 font-bold mt-5">
           {items?.[0]?.name}
         </h3>
