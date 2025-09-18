@@ -128,13 +128,10 @@ const Content: FC<SidebarProps> = ({
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   const handleCollapseToggle = async (categoryId: number) => {
-    setSelectedCategoryId(categoryId); // Highlight the selected category
+    setSelectedCategoryId(categoryId);
 
-    // Fetch products for the selected category
     await getCategoryDetails(categoryId, locale);
 
-    // After fetching, set the clicked category as the only open one
-    // Toggle open state
     setOpenedCategoryIds((prevOpenedIds) => {
       const isOpened = prevOpenedIds.includes(categoryId);
 
@@ -146,7 +143,6 @@ const Content: FC<SidebarProps> = ({
     const listCat = findParentCategories(items, categoryId);
 
     if (!listCat || listCat.length === 0) {
-      // Если listCat пустой, используем кликнутую категорию
       const clickedCategory = items
         .flatMap((item) => [item, ...(item.childrens || [])]) // Учитываем вложенные категории
         .find((item) => item.id === categoryId);
@@ -157,7 +153,6 @@ const Content: FC<SidebarProps> = ({
         console.warn("Clicked category not found or has no slug");
       }
     } else {
-      // Если listCat содержит элементы, используем первый
       router.push(`/catalog/sub-catalog?category=${listCat[0].slug}`);
     }
   };
@@ -169,30 +164,28 @@ const Content: FC<SidebarProps> = ({
       parents: TransformedCategoriesType[] = [],
     ): TransformedCategoriesType[] | null => {
       for (const category of categories) {
-        // If the target category is found, return the parents list
         if (category.id === targetCategoryId) {
-          return parents; // Return the accumulated parents when the target is found
+          return parents;
         }
 
-        // If the category has children, search recursively
         if (category.childrens && category.childrens.length > 0) {
           const foundParents = findParentCategories(
             category.childrens,
             targetCategoryId,
-            [...parents, category], // Add the current category to the parents list
+            [...parents, category],
           );
 
           if (foundParents) {
             return foundParents.filter(
               (el) =>
-                // @ts-ignore
-                el.id !== RIGHT_BAR_PARENT_ID && el.id !== RIGHT_BAR_PARENT_ID_EN,
-            ); // Return the full parent path if found
+                el.id !== RIGHT_BAR_PARENT_ID &&
+                el.id !== RIGHT_BAR_PARENT_ID_EN,
+            );
           }
         }
       }
 
-      return null; // Return null if the target category is not found
+      return null;
     },
     [],
   );
@@ -205,13 +198,12 @@ const Content: FC<SidebarProps> = ({
 
   const renderNestedCategories = (
     category: TransformedCategoriesType,
-    level = 0, // Level starts at 0 for root
+    level = 0,
   ) => {
-    // Apply padding starting from level 2
-    const paddingLeft = level > 1 ? level * 7 : 0; // No padding for level 0 and level 1
+    const paddingLeft = level > 1 ? level * 7 : 0;
     return category?.childrens?.length === 0 ? (
       <FBSidebar.Item
-              as="div"
+        as="div"
         key={category.id}
         className={classNames("cursor-pointer", {
           "bg-sky-200": selectedCategoryId === category.id,
@@ -265,8 +257,8 @@ const Content: FC<SidebarProps> = ({
         {/* Recursively render children */}
         {category?.childrens?.length
           ? category.childrens.map(
-            (child) => renderNestedCategories(child, level + 1), // Increase level for deeper nesting
-          )
+              (child) => renderNestedCategories(child, level + 1), // Increase level for deeper nesting
+            )
           : null}
       </FBSidebar.Collapse>
     );

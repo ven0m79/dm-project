@@ -1,4 +1,3 @@
-// app/[locale]/components/pages/Sub-catalog.tsx  (або ваш файл, який ти показував)
 "use client";
 
 import classNames from "classnames";
