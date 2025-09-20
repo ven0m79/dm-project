@@ -57,7 +57,7 @@ const Content: FC<{ children: ReactNode; locale: string; }> = ({
       </div>
 
       {/* Права панель */}
-      {typeof window !== "undefined" && isMobile ? (
+      {/* {typeof window !== "undefined" && isMobile ? (
         <>
           <button className={classNames("absolute top-52 right-2 z-30 bg-transparent text-[#0061AA] p-2 rounded-md", styles.buttons)}
             onClick={() => setIsRightSidebarOpen(true)}>☰ Тип обладнання</button>
@@ -71,7 +71,7 @@ const Content: FC<{ children: ReactNode; locale: string; }> = ({
         </>
       ) : (
         <div className="w-[300px]"><RSidebar locale={locale} changeURLParams /></div>
-      )}
+      )} */}
     </div>
   );
 };

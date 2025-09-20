@@ -221,7 +221,7 @@ const Content: FC<SidebarProps> = ({
 
               // 🔹 Використовуємо slug вибраної категорії
               if (changeURLParams) {
-                router.push(`${pathname}?category=${category.slug}`);
+                router.push(`${pathname.replace(/\/product\/\d+/, "")}?category=${category.slug}`);
               }
 
               if (fromProductPage) {
@@ -259,7 +259,7 @@ const Content: FC<SidebarProps> = ({
 
           // 🔹 Додаємо зміну URL для категорій з підкатегоріями
           if (changeURLParams) {
-            router.push(`${pathname}?category=${category.slug}`);
+            router.push(`${pathname.replace(/\/product\/\d+/, "")}?category=${category.slug}`);
           }
 
           if (fromProductPage) {

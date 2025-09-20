@@ -1,4 +1,3 @@
-// app/[locale]/components/pages/Sub-catalog.tsx  (або ваш файл, який ти показував)
 "use client";
 
 import classNames from "classnames";
@@ -42,6 +41,9 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
     [sortedProducts, visibleCount]
   );
 
+  const isAccessories = sortedProducts?.map((el) =>
+    el.tags.map((el) => el.name).includes("accessories"),
+  );
   const categoryFromUrl = searchParams?.get("category") ?? "";
 
   // підозра!!! - довбаний юз ефект з рекурсієй  
@@ -49,7 +51,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
     return (currentIdsData as Record<string, number>)[categoryFromUrl];
   }, [categoryFromUrl, currentIdsData]);
 
-useEffect(() => {
+  useEffect(() => {
     if (!categoryId) return;
 
     // виконуємо фетч товарів та оновлюємо контекст/крихти
@@ -68,7 +70,13 @@ useEffect(() => {
               productsToRender.map((el) => {
                 // ... UI без змін
                 return (
-                  <div key={el.id} className={classNames("mx-1 mb-5 flex flex-col justify-center items-center", styles.headSubCatalogBlock)}>
+                  <div
+                    key={el.id}
+                    className={classNames(
+                      "mx-1 mb-5 flex flex-col justify-center items-center",
+                      isAccessories[0] ? styles.headSubCatalogBlockMini : styles.headSubCatalogBlock
+                    )}
+                  >
                     <div className="w-full">
                       <div
                         className="cursor-pointer"
@@ -123,7 +131,15 @@ useEffect(() => {
           <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-5 w-full max-w-[800px] items-start">
             {productsToRender?.length ? (
               productsToRender.map((el) => (
-                <div key={el.id} className={classNames("mx-5 mb-5 flex flex-col justify-center items-center", styles.headSubCatalogBlock)}>
+                <div
+                  key={el.id}
+                  className={classNames(
+                    isAccessories[0] ? "mx-1" : "mx-5",
+                    "mb-5 flex flex-col justify-center items-center",
+                    isAccessories[0] ? styles.headSubCatalogBlockMini : styles.headSubCatalogBlock
+                  )}
+                >
+
                   <div className="w-full text-center">
                     <Link locale={locale} href={{ pathname: `/catalog/sub-catalog/product/${el.translations[locale as any]}`, query: `category=${selectedCategory}` }}>
                       <div className="cursor-pointer flex justify-center">
@@ -131,7 +147,7 @@ useEffect(() => {
                       </div>
                       <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center"></div>
                       <div className="flex justify-center">
-                        <h3 className="flex justify-center h-16 w-full px-2">{el.name}</h3>
+                        <h3 className="flex justify-center h-20 w-full px-2">{el.name}</h3>
                       </div>
                     </Link>
                   </div>
