@@ -134,12 +134,12 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                 <div
                   key={el.id}
                   className={classNames(
-                    isAccessories[0] ? "mx-1" : "mx-5",
                     "mb-5 flex flex-col justify-center items-center",
-                    isAccessories[0] ? styles.headSubCatalogBlockMini : styles.headSubCatalogBlock
+                    isAccessories[0]
+                      ? `mx-1 ${styles.headSubCatalogBlockMini}`
+                      : `mx-5 ${styles.headSubCatalogBlock}`
                   )}
                 >
-
                   <div className="w-full text-center">
                     <Link locale={locale} href={{ pathname: `/catalog/sub-catalog/product/${el.translations[locale as any]}`, query: `category=${selectedCategory}` }}>
                       <div className="cursor-pointer flex justify-center">

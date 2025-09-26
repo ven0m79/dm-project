@@ -20,6 +20,7 @@ import DOMPurify from "dompurify";
 import { useTranslations } from "next-intl";
 import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
 import { useBreadcrumbs } from "@app/[locale]/components/atoms/breadcrumbs/breadcrumbs";
+import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 
 
 const customTheme: CustomFlowbiteTheme = {
@@ -78,11 +79,112 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
 
   // ✅ Передаємо locale у useBreadcrumbs
   const { breadcrumbs, buildCategoryTrail } = useBreadcrumbs();
+  const isMobile = useIsMobile();
+  const [isOpen, setIsOpen] = useState(false);
+  const renderBreadcrumbs = () => {
+    if (isMobile) {
+
+      // 👉 мобільна версія
+      return (
+        <div className="relative flex flex-row">
+          {/* Кнопка відкриття/закриття */}
+          <button
+            onClick={() => setIsOpen((prev) => !prev)}
+            className="w-8 h-8 flex items-center justify-center"
+          >
+            <motion.svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              className="text-[#0061AA]"
+              initial={false}
+              animate={{ rotate: isOpen ? 45 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <rect
+                x="4"
+                y="4"
+                width="16"
+                height="16"
+                rx="4"
+                fill="none"                // прозорий фон
+                stroke="currentColor"      // колір рамки = text-gray-700
+                strokeWidth="2"            // товщина контуру
+              />
+            </motion.svg>
+
+          </button>
+          <div className="flex self-center justify-center text-[#002766] max-w-[85vw]">
+            {details?.name}
+          </div>
+
+
+          {/* Меню */}
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="absolute left-0 top-12 w-[90vw] max-w-sm bg-white/50 text-[#0061AA] backdrop-blur-sm shadow-lg z-49 cursor-grab active:cursor-grabbing overflow-y-auto"
+              >
+                <ol className="flex flex-col gap-2 text-sm ml-3">
+                  {breadcrumbs.map((el, index) => {
+                    const isLast = index === breadcrumbs.length - 1;
+                    return (
+                      <li key={el.id} className="flex flex-col">
+                        {isLast ? (
+                          <span className=""></span>
+                        ) : (
+                          <Link
+                            href={el.url}
+                            className="text-[#0061AA]"
+                            onClick={() => setIsOpen(false)} // закриваємо після кліку
+                          >
+                            {el.name}
+                          </Link>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ol>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      );
+
+    }
+
+
+    // 👉 десктопна версія (твоя стара логіка)
+    return (
+      <nav aria-label="Breadcrumb" className={classNames("flex", styles.breadcrumbs)}>
+        <ol className="flex flex-wrap gap-1">
+          {breadcrumbs.map((el, index) => {
+            const isLast = index === breadcrumbs.length - 1;
+            return (
+              <li key={el.id} className="flex items-center gap-1">
+                {isLast ? (
+                  <span>{el.name}</span>
+                ) : (
+                  <Link href={el.url}>{el.name}</Link>
+                )}
+                {index < breadcrumbs.length - 1 && "/"}
+              </li>
+            );
+          })}
+        </ol>
+      </nav>
+    );
+  };
 
   const brandLogos: Record<string, string> = {
     "dräger": "Країна походження",
   };
-  const brandName = details?.brands?.[0]?.name; 
+  const brandName = details?.brands?.[0]?.name;
 
   const isIOS =
     typeof window !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -104,49 +206,49 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
   const isAccessories = details?.tags?.map((el) => el.name)?.includes("accessories");
 
   // ✅ Завантаження деталей продукту
-const getProductDetails = useCallback(async () => {
-  setLoading(true);
+  const getProductDetails = useCallback(async () => {
+    setLoading(true);
 
-  try {
-    // 🚀 1. Основний запит (деталі продукту)
-    // робимо його першим, бо від нього залежать інші (id крос-селів, категорії)
-    const data = await fetchWooCommerceProductDetails(Number(productId), locale);
+    try {
+      // 🚀 1. Основний запит (деталі продукту)
+      // робимо його першим, бо від нього залежать інші (id крос-селів, категорії)
+      const data = await fetchWooCommerceProductDetails(Number(productId), locale);
 
-    if (!data) {
+      if (!data) {
+        setLoading(false);
+        return;
+      }
+
+      setDetails(data);
+
+      // 🚀 2. Запускаємо додаткові запити ПАРАЛЕЛЬНО
+      // - крос-сели
+      // - побудова breadcrumbs
+      const crossSellPromise = data.cross_sell_ids?.length
+        ? fetchWooCommerceCrossProductsDetails(data.cross_sell_ids, locale)
+        : Promise.resolve([]); // якщо немає cross-sell → повертаємо пустий масив
+
+      const buildTrailPromise = buildCategoryTrail(
+        data.categories, // масив категорій для breadcrumbs
+        locale,
+        data.name,
+        data.id
+      );
+
+      // 🚀 3. Чекаємо обидва проміси паралельно
+      const [crossSellData] = await Promise.all([
+        crossSellPromise,
+        buildTrailPromise,
+      ]);
+
+      // 🚀 4. Зберігаємо дані в state
+      setCrossSellProducts(crossSellData || []);
+    } catch (e) {
+      console.warn("❌ Error fetching product details or cross-sell products:", e);
+    } finally {
       setLoading(false);
-      return;
     }
-
-    setDetails(data);
-
-    // 🚀 2. Запускаємо додаткові запити ПАРАЛЕЛЬНО
-    // - крос-сели
-    // - побудова breadcrumbs
-    const crossSellPromise = data.cross_sell_ids?.length
-      ? fetchWooCommerceCrossProductsDetails(data.cross_sell_ids, locale)
-      : Promise.resolve([]); // якщо немає cross-sell → повертаємо пустий масив
-
-    const buildTrailPromise = buildCategoryTrail(
-      data.categories, // масив категорій для breadcrumbs
-      locale,
-      data.name,
-      data.id
-    );
-
-    // 🚀 3. Чекаємо обидва проміси паралельно
-    const [crossSellData] = await Promise.all([
-      crossSellPromise,
-      buildTrailPromise,
-    ]);
-
-    // 🚀 4. Зберігаємо дані в state
-    setCrossSellProducts(crossSellData || []);
-  } catch (e) {
-    console.warn("❌ Error fetching product details or cross-sell products:", e);
-  } finally {
-    setLoading(false);
-  }
-}, [productId, locale, buildCategoryTrail]);
+  }, [productId, locale, buildCategoryTrail]);
 
 
   useEffect(() => {
@@ -157,25 +259,10 @@ const getProductDetails = useCallback(async () => {
   return (
     <>
       <div className="flex self-center flex-col max-w-[800px] mb-8">
-        <div className="mt-5 ml-4">
-          <nav aria-label="Breadcrumb" className={classNames("flex", styles.breadcrumbs)}>
-            <ol className="flex flex-wrap gap-1">
-              {breadcrumbs.map((el, index) => {
-                const isLast = index === breadcrumbs.length - 1;
-                return (
-                  <li key={el.id} className="flex items-center gap-1">
-                    {isLast ? (
-                      <span>{el.name}</span> // останній елемент без лінка
-                    ) : (
-                      <Link href={el.url}>{el.name}</Link>
-                    )}
-                    {index < breadcrumbs.length - 1 && "/"}
-                  </li>
-                );
-              })}
-            </ol>
-          </nav>
+        <div className={classNames("mt-5", { "ml-2": isMobile, "ml-4": !isMobile })}>
+          {renderBreadcrumbs()}
         </div>
+
         <div className="flex flex-col py-1 px-2 min-h-[600px] flex-1">
           {loading ? (
             <div className="flex w-full h-4/5 justify-center items-center">
@@ -217,12 +304,7 @@ const getProductDetails = useCallback(async () => {
                           className={classNames("text-normal w-full h-auto", styles.brand)}
                         >
                           {t("product-brand")} {details?.brands[0]?.name}
-                          {/* {brandName && brandLogos[brandName] && (
-                            <Image
-                              src={brandLogos[brandName] as StaticImageData}
-                              alt={brandName}
-                            />
-                          )} */}
+
                         </div>
                         <br />
 
