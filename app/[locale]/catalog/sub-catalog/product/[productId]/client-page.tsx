@@ -290,6 +290,7 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                             width={450}
                             height={475}
                             priority
+                            unoptimized
                             className="w-full h-auto rounded-lg"
                           />
                         </div>
