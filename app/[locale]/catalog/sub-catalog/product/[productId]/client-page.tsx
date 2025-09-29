@@ -298,7 +298,7 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                         </div>
                       </div>
                       <div className="px-1 pt-0 sm:pt-10 w-1/2">
-                        <h1 className={classNames("", styles.title)}>
+                        <h1 className="text-[22px] font-bold text-[#002766] mb-[10px]">
                           {details?.name}
                         </h1>
                         <br />
@@ -328,7 +328,7 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                               )}
                             >
                               {details?.price && (
-                                <span className={classNames("", styles.price1)}><span className="font-bold text-[#002766]">Ціна:</span> {String(details.price).replace(".", ",")} {t("grn")}</span>
+                                <span className="text-[#0061AA] text-[18px]"><span className="font-bold text-[#002766]">Ціна:</span> {String(details.price).replace(".", ",")} {t("grn")}</span>
                               )}
                             </div>
                           </>

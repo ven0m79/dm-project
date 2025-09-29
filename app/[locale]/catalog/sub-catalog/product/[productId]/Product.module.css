@@ -1,21 +1,7 @@
-.productMainPhoto {
-    width: 300px;
-    height: 300px;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
 .imageRadius {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     padding: 10px;
     border-radius: 10px;
-}
-
-.title {
-    font-size: 22px;
-    color: #002766;
-    margin-bottom: 10px;
-    font-weight: bold;
 }
 
 .brand {
@@ -29,24 +15,6 @@
     font-size: 14px;
     letter-spacing: -0.5px;     /* трохи ближче букви одна до одної*/
 }
-
-.price {
-    color: #002766;
-    font-size: 18px;
-
-}
-
-.price1 {
-    color: #0061AA;
-    font-size: 18px;
-
-}
-
-.price2 {
-    color: #007F3D;
-    font-size: 18px;
-}
-
 
 .available {
     font-size: 16px;
