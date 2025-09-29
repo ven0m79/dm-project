@@ -40,7 +40,13 @@ const Content: FC<{ children: ReactNode; locale: string; }> = ({
           <button className={classNames("absolute top-52 left-2 z-30 bg-transparent text-[#0061AA] p-2 rounded-md", styles.buttons)}
             onClick={() => setIsLeftSidebarOpen(true)}>☰ По призначенню</button>
 
-          <motion.div drag="x" dragConstraints={{ left: 0, right: 200 }} initial={{ x: "-100%" }} animate={{ x: isLeftSidebarOpen ? "0%" : "-100%" }} transition={{ type: "spring", stiffness: 300, damping: 30 }} className="fixed top-0 left-0 w-full h-full bg-white/50 backdrop-blur-sm shadow-lg z-50 cursor-grab active:cursor-grabbing overflow-y-auto">
+          <motion.div
+            drag="x"
+            dragConstraints={{ left: 0, right: 200 }}
+            initial={{ x: "-100%" }}
+            animate={{ x: isLeftSidebarOpen ? "0%" : "-100%" }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="fixed top-0 left-0 w-full h-full bg-white/50 backdrop-blur-sm shadow-lg z-50 cursor-grab active:cursor-grabbing overflow-y-auto">
             <button className="absolute top-7 right-3 text-xl text-slate-800 font-bold text-[30px]" onClick={() => setIsLeftSidebarOpen(false)}>✕</button>
             <div className="p-4"><LSidebar locale={locale} changeURLParams /></div>
           </motion.div>

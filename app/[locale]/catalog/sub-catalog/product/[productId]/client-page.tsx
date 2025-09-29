@@ -129,7 +129,7 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="absolute left-0 top-12 w-[90vw] max-w-sm bg-white/50 text-[#0061AA] backdrop-blur-sm shadow-lg z-49 cursor-grab active:cursor-grabbing overflow-y-auto"
+                className="absolute left-0 top-10 w-[90vw] max-w-sm bg-white/50 text-[#0061AA] backdrop-blur-sm shadow-lg z-49 cursor-grab active:cursor-grabbing overflow-y-auto"
               >
                 <ol className="flex flex-col gap-2 text-sm ml-3">
                   {breadcrumbs.map((el, index) => {
@@ -160,7 +160,7 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
     }
 
 
-    // 👉 десктопна версія (твоя стара логіка)
+    // 👉 десктопна версія (стара логіка)
     return (
       <nav aria-label="Breadcrumb" className={classNames("flex", styles.breadcrumbs)}>
         <ol className="flex flex-wrap gap-1">

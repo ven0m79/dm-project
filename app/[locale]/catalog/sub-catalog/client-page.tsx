@@ -70,74 +70,75 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   return (
     <>
       {typeof window !== "undefined" && isMobile ? (
-        <div className={classNames("flex flex-1 flex-col justify-between self-center mb-5", styles.subCatalog)}>
-
-          {/* Кнопка відкриття/закриття */}
-          <button
-            onClick={() => setIsOpen((prev) => !prev)}
-            className="w-8 h-8 flex items-center justify-center"
-          >
-            <motion.svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-              className="text-[#0061AA]"
-              initial={false}
-              animate={{ rotate: isOpen ? 45 : 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <rect
-                x="4"
-                y="4"
-                width="16"
-                height="16"
-                rx="4"
-                fill="none"                // прозорий фон
-                stroke="currentColor"      // колір рамки = text-gray-700
-                strokeWidth="2"            // товщина контуру
-              />
-            </motion.svg>
-
-          </button>
-          <div className="flex justify-center text-[#002766] max-w-[85vw] bg-slate-400">
-            {breadcrumbs.length > 0
-              ? breadcrumbs[breadcrumbs.length - 1].name
-              : "Категорія не вибрана"}
-          </div>
-
-          {/* Меню */}
-          <AnimatePresence>
-            {isOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="absolute left-0 top-12 w-[90vw] max-w-sm bg-white/50 text-[#0061AA] backdrop-blur-sm shadow-lg z-49 cursor-grab active:cursor-grabbing overflow-y-auto"
+        <>
+          <div className={classNames("relative flex flex-1 flex-row justify-between self-center mb-5 ml-2", styles.subCatalog)}>
+            <div className="flex-none">
+              {/* Кнопка відкриття/закриття */}
+              <button
+                onClick={() => setIsOpen((prev) => !prev)}
+                className="w-8 h-8 flex items-center justify-center"
               >
-                <ol className="flex items-center gap-1">
-                  {breadcrumbs.map((el, idx) => {
-                    const isLast = idx === breadcrumbs.length - 1;
-                    return (
-                      <li key={el.id} className="flex flex-col items-center gap-1">
+                <motion.svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  className="text-[#0061AA]"
+                  initial={false}
+                  animate={{ rotate: isOpen ? 45 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <rect
+                    x="4"
+                    y="4"
+                    width="16"
+                    height="16"
+                    rx="4"
+                    fill="none" // прозорий фон
+                    stroke="currentColor" // колір рамки = text-gray-700
+                    strokeWidth="2" // товщина контуру
+                  />
+                </motion.svg>
 
-                        {isLast ? (
-                          <span className="text-black">{el.name}</span>
-                        ) : (
-                          <Link href={el.url} className="hover:underline">
-                            {el.name}
-                          </Link>
-                        )}
-                      </li>
-                    );
-                  })}
-                </ol>
+              </button>
+            </div>
+            <div className="flex flex-1">
+              <h1 className="self-center text-[#002766] max-w-[85vw]">{breadcrumbs[breadcrumbs.length - 1]?.name}</h1>
+            </div>
+          </div>
+          <div className="w-full h-auto">
+            {/* Меню */}
+            <AnimatePresence>
+              {isOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute left-1 top-[280px] w-[90vw] max-w-sm bg-white/50 text-[#0061AA] backdrop-blur-sm shadow-lg z-49 cursor-grab active:cursor-grabbing overflow-y-auto"
+                >
+                  <ol className="flex items-start flex-col text-sm ml-3">
+                    {breadcrumbs.map((el, idx) => {
+                      const isLast = idx === breadcrumbs.length - 1;
+                      return (
+                        <li key={el.id} className="flex flex-col items-start gap-1 p-1">
 
-              </motion.div>
-            )}
-          </AnimatePresence>
+                          {isLast ? (
+                            <span className="text-black"></span>
+                          ) : (
+                            <Link href={el.url} className="hover:underline">
+                              {el.name}
+                            </Link>
+                          )}
+                        </li>
+                      );
+                    })}
+                  </ol>
 
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
           <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-1 w-full items-start">
             {productsToRender?.length ? (
               productsToRender.map((el) => {
@@ -174,11 +175,12 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
             ) : (
               <h2 className="text-amber-700"></h2>
             )}
-          </div>
-        </div>
+          </div></>
+
       ) : (
         <div className={classNames("flex flex-1 flex-col justify-between self-center mb-5", styles.subCatalog)}>
           <div className="mt-5 ml-4">
+            <h1 className="text-[22px] font-bold text-[#002766] mb-2">{breadcrumbs[breadcrumbs.length - 1]?.name}</h1>
             {/* Breadcrumbs */}
             <nav aria-label="Breadcrumb" className={styles.breadcrumbs}>
               <ol className="flex flex-wrap gap-1">
