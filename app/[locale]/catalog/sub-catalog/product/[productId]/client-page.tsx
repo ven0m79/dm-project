@@ -21,6 +21,7 @@ import { useTranslations } from "next-intl";
 import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
 import { useBreadcrumbs } from "@app/[locale]/components/atoms/breadcrumbs/breadcrumbs";
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
+import Image from "next/image";
 
 
 const customTheme: CustomFlowbiteTheme = {
@@ -283,12 +284,13 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                     <div className="flex flex-row w-full">
                       <div>
                         <div className={classNames("my-4 w-full h-auto", styles.imageRadius)}>
-                          <img
-                            src={details?.images[0].src}
-                            alt={details?.images[0].alt}
+                          <Image
+                            src={details?.images[0].src || "/placeholder.png"}
+                            alt={details?.images[0].alt || details?.name || ""}
                             width={450}
                             height={475}
-                            className="w-full h-auto"
+                            priority
+                            className="w-full h-auto rounded-lg"
                           />
                         </div>
                         <div>
@@ -374,6 +376,7 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                         >
                           <div
                             className="content w-fit"
+                            suppressHydrationWarning
                             dangerouslySetInnerHTML={{
                               __html: details?.description || "",
                             }}
@@ -412,20 +415,17 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                             </Tabs.Item>
                           )}
 
-                        {typeof youtubeUrl === "string" &&
-                          youtubeUrl.startsWith("http") && (
-                            <Tabs.Item title="Відео" icon={HiClipboardList}>
-                              <a
-                                href={youtubeUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-blue-600 underline"
-                              >
-                                Переглянути відео на YouTube
-                              </a>
-                            </Tabs.Item>
-                          )}
-
+                        {youtubeUrl && (
+                          <Tabs.Item title="Відео" icon={HiClipboardList}>
+                            <button
+                              onClick={() => window.open(youtubeUrl, "_blank")}
+                              className="text-blue-600 underline"
+                              rel="noopener noreferrer"
+                            >
+                              Переглянути відео на YouTube
+                            </button>
+                          </Tabs.Item>
+                        )}
 
                       </Tabs>
                     </div>

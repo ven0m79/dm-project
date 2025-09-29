@@ -13,6 +13,8 @@ import { getCategoriesIds } from "@app/[locale]/components/constants";
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useBreadcrumbs } from "@app/[locale]/components/atoms/breadcrumbs/breadcrumbs";
+import { AnimatePresence, motion } from "framer-motion";
+import { SingleProductDetails } from "../../../../utils/woocomerce.types";
 
 type BreadcrumbItem = { id: number | string; name: string; url: string };
 
@@ -41,6 +43,8 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
     [sortedProducts, visibleCount]
   );
 
+  const [details, setDetails] = useState<SingleProductDetails | null>(null);
+
   const isAccessories = sortedProducts?.map((el) =>
     el.tags.map((el) => el.name).includes("accessories"),
   );
@@ -61,10 +65,79 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
     buildCategoryTrail([{ id: categoryId } as any], locale);
   }, [categoryId, locale, getCategoryDetails, setOpenedCategoryIds, setSelectedCategoryId, buildCategoryTrail]);
 
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
       {typeof window !== "undefined" && isMobile ? (
-        <div className={classNames("flex flex-1 flex-row justify-between self-center mb-5", styles.subCatalog)}>
+        <div className={classNames("flex flex-1 flex-col justify-between self-center mb-5", styles.subCatalog)}>
+
+          {/* Кнопка відкриття/закриття */}
+          <button
+            onClick={() => setIsOpen((prev) => !prev)}
+            className="w-8 h-8 flex items-center justify-center"
+          >
+            <motion.svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              className="text-[#0061AA]"
+              initial={false}
+              animate={{ rotate: isOpen ? 45 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <rect
+                x="4"
+                y="4"
+                width="16"
+                height="16"
+                rx="4"
+                fill="none"                // прозорий фон
+                stroke="currentColor"      // колір рамки = text-gray-700
+                strokeWidth="2"            // товщина контуру
+              />
+            </motion.svg>
+
+          </button>
+          <div className="flex justify-center text-[#002766] max-w-[85vw] bg-slate-400">
+            {breadcrumbs.length > 0
+              ? breadcrumbs[breadcrumbs.length - 1].name
+              : "Категорія не вибрана"}
+          </div>
+
+          {/* Меню */}
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="absolute left-0 top-12 w-[90vw] max-w-sm bg-white/50 text-[#0061AA] backdrop-blur-sm shadow-lg z-49 cursor-grab active:cursor-grabbing overflow-y-auto"
+              >
+                <ol className="flex items-center gap-1">
+                  {breadcrumbs.map((el, idx) => {
+                    const isLast = idx === breadcrumbs.length - 1;
+                    return (
+                      <li key={el.id} className="flex flex-col items-center gap-1">
+
+                        {isLast ? (
+                          <span className="text-black">{el.name}</span>
+                        ) : (
+                          <Link href={el.url} className="hover:underline">
+                            {el.name}
+                          </Link>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ol>
+
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-1 w-full items-start">
             {productsToRender?.length ? (
               productsToRender.map((el) => {
@@ -87,7 +160,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                         }}
                       >
                         <div className="cursor-pointer flex justify-center">
-                          <img src={el.images[0].src} alt={el.images[0].alt} width={isMobile ? 150 : 200} height={isMobile ? 150 : 200} className="w-full h-auto" />
+                          <img src={el.images[0].src} alt={el.images[0].alt} width={150} height={150} className="w-full h-auto" />
                         </div>
                         <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center"></div>
                         <div className="flex justify-center">
