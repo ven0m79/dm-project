@@ -112,15 +112,17 @@ const Content: FC<SidebarProps> = ({
   }, [items]);
 
   // ✅ Оновлений toggle (без findCategoryById, тільки через categoriesMap)
-  const handleCollapseToggle = (categoryId: number) => {
+  const handleCollapseToggle = (category: TransformedCategoriesType) => {
     // Встановлюємо id для виділення
-    setSelectedCategoryId(categoryId);
+    setSelectedCategoryId(category.id);
+      // Встановлюємо slug або name як поточну категорію
+  setSelectedCategory(category.slug); // або category.name, якщо потрібна назва
 
     // Тогл відкриття / закриття
     setOpenedCategoryIds((prevOpenedIds) =>
-      prevOpenedIds.includes(categoryId)
-        ? prevOpenedIds.filter((id) => id !== categoryId)
-        : [...prevOpenedIds, categoryId],
+      prevOpenedIds.includes(category.id)
+        ? prevOpenedIds.filter((id) => id !== category.id)
+        : [...prevOpenedIds, category.id],
     );
     // НЕ викликаємо getCategoryDetails і НЕ змінюємо URL тут
     // Навігацію робимо тільки в місці, де потрібно (нижче — у клику по leaf)
@@ -217,7 +219,7 @@ const Content: FC<SidebarProps> = ({
         >
           <div
             onClick={() => {
-              handleCollapseToggle(category.id);
+              handleCollapseToggle(category);
 
               // 🔹 Використовуємо slug вибраної категорії
               if (changeURLParams) {
@@ -255,7 +257,7 @@ const Content: FC<SidebarProps> = ({
         })}
         style={{ paddingLeft: `${paddingLeft}px` }}
         onClick={() => {
-          handleCollapseToggle(category.id);
+          handleCollapseToggle(category);
 
           // 🔹 Додаємо зміну URL для категорій з підкатегоріями
           if (changeURLParams) {

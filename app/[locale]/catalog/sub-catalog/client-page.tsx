@@ -67,6 +67,30 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const { categories } = useSidebar();
+
+  // Map id → description категорії
+  const categoriesDescriptionMap = useMemo(() => {
+    const map = new Map<number, string>();
+
+    const traverse = (cats: TransformedCategoriesType[]) => {
+      cats.forEach(cat => {
+        map.set(cat.id, cat.description || ""); // беремо description
+        if (cat.childrens?.length) traverse(cat.childrens);
+      });
+    };
+
+    if (categories?.length) traverse(categories);
+
+    return map;
+  }, [categories]);
+
+  // отримуємо description за categoryId
+  const categoryDescription = useMemo(() => {
+    if (!categoryId) return "";
+    return categoriesDescriptionMap.get(categoryId) || "";
+  }, [categoryId, categoriesDescriptionMap]);
+
   return (
     <>
       {typeof window !== "undefined" && isMobile ? (
@@ -239,8 +263,18 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
           <button className={classNames("justify-center", styles.downloadable)} onClick={() => setVisibleCount(visibleCount + 15)}>
             Завантажити ще
           </button>
+
         </div>
+
       )}
+      <p
+        className="content text-[#0077d2] text-[15px] leading-[1.5] pt-5 text-justify"
+        suppressHydrationWarning
+        style={{ textIndent: "15px" }}
+        dangerouslySetInnerHTML={{
+          __html: categoryDescription || "",
+        }}
+      />
     </>
   );
 };

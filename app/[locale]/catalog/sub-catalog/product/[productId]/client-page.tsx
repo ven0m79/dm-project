@@ -12,17 +12,14 @@ import styles from "./Product.module.css";
 import classNames from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import Loader from "@app/[locale]/components/atoms/loader/Loader";
-
 import { Tabs, CustomFlowbiteTheme } from "flowbite-react";
 import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
-import DOMPurify from "dompurify";
 import { useTranslations } from "next-intl";
 import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
 import { useBreadcrumbs } from "@app/[locale]/components/atoms/breadcrumbs/breadcrumbs";
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 import Image from "next/image";
-
 
 const customTheme: CustomFlowbiteTheme = {
   tabs: {
@@ -65,7 +62,6 @@ const customTheme: CustomFlowbiteTheme = {
     tabpanel: "py-3",
   },
 };
-
 
 type Params = { productId: string };
 
@@ -182,12 +178,7 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
     );
   };
 
-  const brandLogos: Record<string, string> = {
-    "dräger": "Країна походження",
-  };
-  const brandName = details?.brands?.[0]?.name;
-
-  const isIOS =
+    const isIOS =
     typeof window !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
   const youtubeMeta = details?.meta_data?.find(
@@ -223,8 +214,7 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
       setDetails(data);
 
       // 🚀 2. Запускаємо додаткові запити ПАРАЛЕЛЬНО
-      // - крос-сели
-      // - побудова breadcrumbs
+      // - крос-сели - побудова breadcrumbs
       const crossSellPromise = data.cross_sell_ids?.length
         ? fetchWooCommerceCrossProductsDetails(data.cross_sell_ids, locale)
         : Promise.resolve([]); // якщо немає cross-sell → повертаємо пустий масив
