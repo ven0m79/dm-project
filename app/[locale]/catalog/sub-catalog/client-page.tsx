@@ -148,7 +148,14 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                         <li key={el.id} className="flex flex-col items-start gap-1 p-1">
 
                           {isLast ? (
-                            <span className="text-black"></span>
+                            <span className={styles.breadcrumbs}></span>
+                          ) : isIOS ? (
+                            <span
+                              onClick={() => router.push(el.url)}
+                              className="hover:underline cursor-pointer text-blue-600 active:text-blue-800"
+                            >
+                              {el.name}
+                            </span>
                           ) : (
                             <Link href={el.url} className="hover:underline">
                               {el.name}
@@ -215,6 +222,13 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                       {idx > 0 && <span>/</span>}
                       {isLast ? (
                         <span className={styles.breadcrumbs}>{el.name}</span>
+                      ) : isIOS ? (
+                        <span
+                          onClick={() => router.push(el.url)}
+                          className="hover:underline cursor-pointer text-blue-600 active:text-blue-800"
+                        >
+                          {el.name}
+                        </span>
                       ) : (
                         <Link href={el.url} className="hover:underline">
                           {el.name}
