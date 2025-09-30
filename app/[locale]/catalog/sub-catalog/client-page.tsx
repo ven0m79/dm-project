@@ -268,7 +268,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
 
       )}
       <p
-        className="content text-[#0077d2] text-[15px] leading-[1.5] pt-5 text-justify"
+        className="content text-[#0077d2] text-[15px] leading-[1.5] p-2 text-justify"
         suppressHydrationWarning
         style={{ textIndent: "15px" }}
         dangerouslySetInnerHTML={{
