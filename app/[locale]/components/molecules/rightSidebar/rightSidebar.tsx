@@ -2,12 +2,8 @@
 
 import classNames from "classnames";
 import { CustomFlowbiteTheme, Sidebar as FBSidebar } from "flowbite-react";
-//import { useSearchParams } from "next/navigation";
-
 import React, { FC, memo, useCallback, useMemo } from "react";
-
 import styles from "../../../catalog/sub-catalog/Sub-catalog.module.css";
-
 import { TransformedCategoriesType } from "@app/[locale]/catalog/sub-catalog/helpers";
 import { usePathname, useRouter } from "../../../../../config";
 import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
@@ -97,7 +93,6 @@ const customTheme: CustomFlowbiteTheme = {
 
 type SidebarProps = {
   locale: string;
-
   changeURLParams?: boolean;
   fromProductPage?: boolean;
 };
@@ -117,7 +112,6 @@ const Content: FC<SidebarProps> = ({
     setSelectedCategoryId,
     setSelectedCategory,
     setOpenedCategoryIds,
-    getCategoryDetails,
   } = useSidebar();
 
   const items = useMemo(
@@ -125,41 +119,43 @@ const Content: FC<SidebarProps> = ({
     [categories, locale],
   );
 
+  // ✅ Перевірка на iOS (щоб вирішити як робити навігацію)
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-  const handleCollapseToggle = async (categoryId: number) => {
-    setSelectedCategoryId(categoryId); // Highlight the selected category
 
-    // Fetch products for the selected category
-    await getCategoryDetails(categoryId, locale);
+  // ✅ Створюємо швидкий lookup Map для категорій
+  const categoriesMap = useMemo(() => {
+    const map = new Map<number, TransformedCategoriesType>();
 
-    // After fetching, set the clicked category as the only open one
-    // Toggle open state
-    setOpenedCategoryIds((prevOpenedIds) => {
-      const isOpened = prevOpenedIds.includes(categoryId);
+    const traverse = (cats: TransformedCategoriesType[]) => {
+      cats.forEach((cat) => {
+        map.set(cat.id, cat);
+        if (cat.childrens?.length) {
+          traverse(cat.childrens);
+        }
+      });
+    };
 
-      return isOpened
-        ? prevOpenedIds.filter((id) => id !== categoryId)
-        : [...prevOpenedIds, categoryId];
-    });
+    if (items?.length) traverse(items);
 
-    const listCat = findParentCategories(items, categoryId);
+    return map;
+  }, [items]);
 
-    if (!listCat || listCat.length === 0) {
-      // Если listCat пустой, используем кликнутую категорию
-      const clickedCategory = items
-        .flatMap((item) => [item, ...(item.childrens || [])]) // Учитываем вложенные категории
-        .find((item) => item.id === categoryId);
+  // ✅ Оновлений toggle (без findCategoryById, тільки через categoriesMap)
+  const handleCollapseToggle = (category: TransformedCategoriesType) => {
+    // Встановлюємо id для виділення
+    setSelectedCategoryId(category.id);
+    // Встановлюємо slug або name як поточну категорію
+    setSelectedCategory(category.slug); // або category.name, якщо потрібна назва
 
-      if (clickedCategory?.slug) {
-        router.push(`/catalog/sub-catalog?category=${clickedCategory.slug}`);
-      } else {
-        console.warn("Clicked category not found or has no slug");
-      }
-    } else {
-      // Если listCat содержит элементы, используем первый
-      router.push(`/catalog/sub-catalog?category=${listCat[0].slug}`);
-    }
+    // Тогл відкриття / закриття
+    setOpenedCategoryIds((prevOpenedIds) =>
+      prevOpenedIds.includes(category.id)
+        ? prevOpenedIds.filter((id) => id !== category.id)
+        : [...prevOpenedIds, category.id],
+    );
+    // НЕ викликаємо getCategoryDetails і НЕ змінюємо URL тут
+    // Навігацію робимо тільки в місці, де потрібно (нижче — у клику по leaf)
   };
 
   const findParentCategories = useCallback(
@@ -169,80 +165,82 @@ const Content: FC<SidebarProps> = ({
       parents: TransformedCategoriesType[] = [],
     ): TransformedCategoriesType[] | null => {
       for (const category of categories) {
-        // If the target category is found, return the parents list
         if (category.id === targetCategoryId) {
-          return parents; // Return the accumulated parents when the target is found
+          return parents; // Знайшли — повертаємо список батьків
         }
 
-        // If the category has children, search recursively
         if (category.childrens && category.childrens.length > 0) {
           const foundParents = findParentCategories(
             category.childrens,
             targetCategoryId,
-            [...parents, category], // Add the current category to the parents list
+            [...parents, category],
           );
 
           if (foundParents) {
             return foundParents.filter(
               (el) =>
-                // @ts-ignore
                 el.id !== RIGHT_BAR_PARENT_ID && el.id !== RIGHT_BAR_PARENT_ID_EN,
-            ); // Return the full parent path if found
+            );
           }
         }
       }
 
-      return null; // Return null if the target category is not found
+      return null;
     },
     [],
   );
 
+  // ✅ Список id усіх parent-ів для розкриття потрібних Collapse
   const selectedItemsNestedData = useMemo(() => {
     return findParentCategories(items, Number(selectedCategoryId))?.map(
       (el) => el.id,
     );
   }, [findParentCategories, items, selectedCategoryId]);
 
+  // ✅ Рекурсивний рендер категорій
   const renderNestedCategories = (
     category: TransformedCategoriesType,
     level = 0, // Level starts at 0 for root
+    topLevelKey?: number,
   ) => {
     // Apply padding starting from level 2
+    const key = topLevelKey ?? category.id;
     const paddingLeft = level > 1 ? level * 7 : 0; // No padding for level 0 and level 1
-    return category?.childrens?.length === 0 ? (
-      <FBSidebar.Item
-              as="div"
-        key={category.id}
-        className={classNames("cursor-pointer", {
-          "bg-sky-200": selectedCategoryId === category.id,
-        })}
-        // Apply padding only for levels >= 2
-        style={{ paddingLeft: `${paddingLeft}px` }}
-      >
-        <div
-          onClick={() => {
-            const selectedParent = items[0]?.childrens?.find(
-              (item) => item.id === category.parent,
-            );
-            const listCat = findParentCategories(items, category.id);
 
-            setSelectedCategory(selectedParent?.slug || "");
-            handleCollapseToggle(category.id);
-
-            if (changeURLParams) {
-              router.push(`${pathname}?category=${listCat?.[0].slug}`);
-            }
-
-            if (fromProductPage) {
-              router.push(`/catalog/sub-catalog?category=${listCat?.[0].slug}`);
-            }
-          }}
+    // 🔹 Якщо категорія без дітей → Item
+    if (!category.childrens?.length) {
+      return (
+        <FBSidebar.Item
+          as="div"
+          key={category.id}
+          className={classNames("cursor-pointer", {
+            "bg-sky-200": selectedCategoryId === category.id,
+          })}
+          style={{ paddingLeft: `${paddingLeft}px` }}
         >
-          {category.name}
-        </div>
-      </FBSidebar.Item>
-    ) : (
-      // Render collapse for items with children
+          <div
+            onClick={() => {
+              handleCollapseToggle(category);
+
+              // 🔹 Використовуємо slug вибраної категорії
+              if (changeURLParams) {
+                router.push(`${pathname.replace(/\/product\/\d+/, "")}?category=${category.slug}`);
+              }
+
+              if (fromProductPage) {
+                router.push(`/catalog/sub-catalog?category=${category.slug}`);
+              }
+            }}
+          >
+            {category.name}
+          </div>
+
+        </FBSidebar.Item>
+      );
+    }
+
+    // 🔹 Якщо є діти → Collapse
+    return (
       <FBSidebar.Collapse
         open={
           category.id === RIGHT_BAR_PARENT_ID ||
@@ -258,11 +256,20 @@ const Content: FC<SidebarProps> = ({
             category.id === RIGHT_BAR_PARENT_ID_EN,
           "bg-sky-200": selectedCategoryId === category.id,
         })}
-        // Apply padding only for levels >= 2
         style={{ paddingLeft: `${paddingLeft}px` }}
-        onClick={() => handleCollapseToggle(category.id)} // Fetch products on collapse open
-      >
-        {/* Recursively render children */}
+        onClick={() => {
+          handleCollapseToggle(category);
+
+          // 🔹 Додаємо зміну URL для категорій з підкатегоріями
+          if (changeURLParams) {
+            router.push(`${pathname.replace(/\/product\/\d+/, "")}?category=${category.slug}`);
+          }
+
+          if (fromProductPage) {
+            router.push(`/catalog/sub-catalog?category=${category.slug}`);
+          }
+        }}
+      >{/* Recursively render children */}
         {category?.childrens?.length
           ? category.childrens.map(
             (child) => renderNestedCategories(child, level + 1), // Increase level for deeper nesting
@@ -280,18 +287,14 @@ const Content: FC<SidebarProps> = ({
       )}
     >
       <div className="">
-        {/*Оцю стилізувати*/}
+        {/* 🔹 Заголовок (назва кореневого елементу) */}
         <h3 className="text-blue-950 ml-5 font-bold mt-5">
           {items?.[0]?.name}
         </h3>
 
-        <FBSidebar
-          aria-label="Catalog"
-          className=""
-          theme={customTheme.sidebar}
-        >
+        <FBSidebar aria-label="Catalog" theme={customTheme.sidebar}>
           <FBSidebar.ItemGroup>
-            {items?.map((el) => renderNestedCategories(el))}
+            {items?.map((el) => renderNestedCategories(el, 0, el.id))}
           </FBSidebar.ItemGroup>
         </FBSidebar>
       </div>
@@ -299,8 +302,6 @@ const Content: FC<SidebarProps> = ({
   );
 };
 
-const Sidebar: FC<SidebarProps> = (props) => {
-  return <Content {...props} />;
-};
+const Sidebar: FC<SidebarProps> = (props) => <Content {...props} />;
 
 export default memo(Sidebar);

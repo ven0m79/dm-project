@@ -3,7 +3,9 @@ import { useCallback, useRef, useState } from "react";
 import { fetchWooCommerceCategoryDetails } from "../../../../../utils/woocommerce.setup";
 
 export type BreadcrumbItem = { id: number | string; name: string; url: string };
-
+  
+// ✅ Перевірка на iOS (щоб вирішити як робити навігацію)
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 /*побудова breadcrumbs.  */
 
 export function useBreadcrumbs() {

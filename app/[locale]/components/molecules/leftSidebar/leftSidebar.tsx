@@ -81,7 +81,6 @@ const Content: FC<SidebarProps> = ({
     setSelectedCategoryId,
     setSelectedCategory,
     setOpenedCategoryIds,
-
   } = useSidebar();
 
   // ✅ Вибір "кореневих" елементів залежно від мови
@@ -115,8 +114,8 @@ const Content: FC<SidebarProps> = ({
   const handleCollapseToggle = (category: TransformedCategoriesType) => {
     // Встановлюємо id для виділення
     setSelectedCategoryId(category.id);
-      // Встановлюємо slug або name як поточну категорію
-  setSelectedCategory(category.slug); // або category.name, якщо потрібна назва
+    // Встановлюємо slug або name як поточну категорію
+    setSelectedCategory(category.slug); // або category.name, якщо потрібна назва
 
     // Тогл відкриття / закриття
     setOpenedCategoryIds((prevOpenedIds) =>
