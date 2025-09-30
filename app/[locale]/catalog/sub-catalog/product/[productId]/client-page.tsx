@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import {
   fetchWooCommerceProductDetails,
   fetchWooCommerceCrossProductsDetails,
@@ -71,12 +71,14 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [details, setDetails] = useState<SingleProductDetails | null>(null);
   const [crossSellProducts, setCrossSellProducts] = useState<SingleProductDetails[]>([]);
+  const isIOS = typeof window !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
   const { setOpenedCategoryIds } = useSidebar();
 
   // ✅ Передаємо locale у useBreadcrumbs
   const { breadcrumbs, buildCategoryTrail } = useBreadcrumbs();
   const isMobile = useIsMobile();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const renderBreadcrumbs = () => {
     if (isMobile) {
@@ -134,12 +136,15 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                       <li key={el.id} className="flex flex-col">
                         {isLast ? (
                           <span className=""></span>
-                        ) : (
-                          <Link
-                            href={el.url}
-                            className="text-[#0061AA]"
-                            onClick={() => setIsOpen(false)} // закриваємо після кліку
+                        ) : isIOS ? (
+                          <span
+                            onClick={() => router.push(el.url)}
+                            className="hover:underline cursor-pointer text-blue-600 active:text-blue-800"
                           >
+                            {el.name}
+                          </span>
+                        ) : (
+                          <Link href={el.url} className="hover:underline">
                             {el.name}
                           </Link>
                         )}
@@ -166,8 +171,17 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
               <li key={el.id} className="flex items-center gap-1">
                 {isLast ? (
                   <span>{el.name}</span>
+                ) : isIOS ? (
+                  <span
+                    onClick={() => router.push(el.url)}
+                    className="hover:underline cursor-pointer text-blue-600 active:text-blue-800"
+                  >
+                    {el.name}
+                  </span>
                 ) : (
-                  <Link href={el.url}>{el.name}</Link>
+                  <Link href={el.url} className="hover:underline">
+                    {el.name}
+                  </Link>
                 )}
                 {index < breadcrumbs.length - 1 && "/"}
               </li>
@@ -178,8 +192,6 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
     );
   };
 
-    const isIOS =
-    typeof window !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
   const youtubeMeta = details?.meta_data?.find(
     (item: any) => item.key === "_nickx_video_text_url"
