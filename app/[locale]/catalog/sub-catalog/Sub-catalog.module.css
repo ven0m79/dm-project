@@ -1,5 +1,4 @@
 .subCatalog {
-    width: 100%;
     max-width: 1400px;
     min-width: none;
     align-content: center;
@@ -67,8 +66,14 @@
 
 }
 .headSubCatalogTitle {
-color: #002766
+color: #002766;
 }
+.breadcrumbs {
+color: #002766;
+font-size: 14px;
+letter-spacing: -0.5px; /* трохи ближче букви одна до одної*/
+}
+
 .headSubCatalogBlock {
     color: #002766;
     display: flex;

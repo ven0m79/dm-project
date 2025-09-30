@@ -19,6 +19,7 @@ export type WoocomerceCategoryType = {
   };
   yoast_head_json: YoastHeadJson;
   schema_json: string;
+  custom_seo_description: string;
 };
 
 export type YoastHeadJson = {

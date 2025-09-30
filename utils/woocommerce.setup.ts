@@ -55,6 +55,21 @@ export async function fetchWooCommerceCategories(locale: string) {
   }
 }
 
+export async function fetchWooCommerceCategoryDetails(
+  categoryId: number,
+  locale: string
+): Promise<WoocomerceCategoryType | null> {
+  try {
+    const { data } = await api.get(`products/categories/${categoryId}`, {
+      lang: locale,
+    });
+    return data as WoocomerceCategoryType;
+  } catch (error) {
+    console.error("Помилка при завантаженні категорії:", error);
+    return null;
+  }
+}
+
 export async function fetchWooCommerceProductsBasedOnCategory(
   id: number,
   locale: string,

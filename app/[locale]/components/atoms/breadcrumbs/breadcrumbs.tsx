@@ -1,124 +1,123 @@
-"use client";
-import React, { FC, useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
-import Link from "next/link";
-import WooCommerceRestApi from "@woocommerce/woocommerce-rest-api";
+// app/[locale]/components/hooks/useBreadcrumbs.ts
+import { useCallback, useRef, useState } from "react";
+import { fetchWooCommerceCategoryDetails } from "../../../../../utils/woocommerce.setup";
 
-type BreadcrumbItem = {
-  position: number;
-  name: string;
-  item?: string; // може бути відсутнім для останнього елемента
-};
+export type BreadcrumbItem = { id: number | string; name: string; url: string };
+  
+// ✅ Перевірка на iOS (щоб вирішити як робити навігацію)
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+/*побудова breadcrumbs.  */
 
-type BreadcrumbsProps = {
-  locale: string;
-  productOrCategoryId: number; // id продукту або категорії
-  type: "product" | "category"; // щоб знати, який ендпоінт
-};
-
-const api = new WooCommerceRestApi({
-  url: "https://api.dm-project.com.ua",
-  consumerKey: "ck_8dee30956004b4c7f467a46247004a2f4cd650e5",
-  consumerSecret: "cs_1cf0a573275e5cafe5af6bddbb01f29b9592be20",
-  version: "wc/v3",
-  queryStringAuth: true,
-});
-
-const Breadcrumbs: FC<BreadcrumbsProps> = ({
-  locale,
-  productOrCategoryId,
-  type,
-}) => {
-  const pathname = usePathname();
-  const isMobile = useIsMobile();
+export function useBreadcrumbs() {
   const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbItem[]>([]);
+  const cacheRef = useRef<Map<number, any>>(new Map());
 
-  useEffect(() => {
-    async function fetchBreadcrumbs() {
-      try {
-        let endpoint =
-          type === "product"
-            ? `products/${productOrCategoryId}?lang=${locale}`
-            : `products/categories/${productOrCategoryId}?lang=${locale}`;
+  const fetchCategoryCached = useCallback(async (id: number, locale: string) => {
+    const cache = cacheRef.current;
+    if (cache.has(id)) return cache.get(id);
+    const cat = await fetchWooCommerceCategoryDetails(id, locale);
+    cache.set(id, cat);
+    return cat;
+  }, []);
 
-        const response = await api.get(endpoint);
+  const getCategoryPath = useCallback(
+    async (categoryId: number, locale: string): Promise<BreadcrumbItem[]> => {
+      const visited = new Set<number>();
+      const stack: { id: number; name: string; slug: string }[] = [];
 
-        if (response.status === 200) {
-          const data = response.data;
+      let currentId: number | null = categoryId;
+      while (currentId && !visited.has(currentId)) {
+        visited.add(currentId);
+        const cat = await fetchCategoryCached(currentId, locale);
+        if (!cat) break;
 
-          // ✅ шукаємо BreadcrumbList у Yoast SEO JSON
-          const breadcrumbGraph = data?.yoast_head_json?.schema?.["@graph"]?.find(
-            (el: any) => el["@type"] === "BreadcrumbList"
-          );
+        // Якщо верхній (root) — не додаємо його і зупиняємось
+        if (cat.parent === 0) break;
 
-          if (breadcrumbGraph?.itemListElement) {
-            const parsed: BreadcrumbItem[] =
-              breadcrumbGraph.itemListElement.map((el: any) => ({
-                position: el.position,
-                name: el.name,
-                item: el.item,
-              }));
+        stack.push({ id: cat.id, name: cat.name, slug: cat.slug });
+        currentId = cat.parent && cat.parent !== 0 ? cat.parent : null;
+      }
 
-            setBreadcrumbs(parsed);
+      // stack = [leaf, parent, ...] -> треба перевернути, щоб з кореня до листка
+      return stack
+        .reverse()
+        .map((c) => ({
+          id: c.id,
+          name: c.name,
+          url: `/${locale}/catalog/sub-catalog?category=${encodeURIComponent(c.slug)}`,
+        }));
+    },
+    [fetchCategoryCached]
+  );
+
+  /*   Побудувати trail   */
+  const buildCategoryTrail = useCallback(
+    async (categories: any[] | undefined, locale: string, productName?: string, productId?: number) => {
+      const trail: BreadcrumbItem[] = [];
+      const homeUrl = locale === "ua" ? `/` : `/${locale}`;
+      trail.push({ id: "home", name: "Головна", url: homeUrl });
+
+      if (!categories || categories.length === 0) {
+        setBreadcrumbs(trail);
+        return trail;
+      }
+
+      // 1) Спробуємо знайти категорію з custom_seo_description === '555444'
+      let chosenCategoryId: number | null = null;
+
+      if (categories.length === 1) {
+        chosenCategoryId = categories[0].id;
+      } else {
+        // фетчимо деталі усіх категорій паралельно (але використовуємо кеш)
+        const details = await Promise.all(
+          categories.map((c) => fetchCategoryCached(Number(c.id), locale))
+        );
+
+        const special = details.find(
+          (d) =>
+            d &&
+            Array.isArray(d.meta_data) &&
+            d.meta_data.some((m: any) => String(m.key) === "custom_seo_description" && String(m.value).includes("555444"))
+        );
+
+        chosenCategoryId = special ? special.id : categories[0].id;
+      }
+
+      // 2) Отримуємо шлях від кореня до chosenCategory (skip top parent)
+      if (chosenCategoryId) {
+        const categoryPath = await getCategoryPath(Number(chosenCategoryId), locale);
+
+        // Дедуплікація (щоб уникнути дублювань)
+        const seen = new Set<number | string>();
+        const uniquePath: BreadcrumbItem[] = [];
+        for (const p of categoryPath) {
+          if (!seen.has(p.id)) {
+            uniquePath.push(p);
+            seen.add(p.id);
           }
         }
-      } catch (err) {
-        console.error("Failed to fetch breadcrumbs:", err);
+
+        trail.push(...uniquePath);
+
+        // 3) Додаємо сам продукт (як останній елемент, без посилання — це в компоненті вирішуємо)
+        if (productName && productId) {
+          trail.push({
+            id: productId,
+            name: productName,
+            url: `/${locale}/catalog/sub-catalog/product/${productId}?category=${encodeURIComponent(
+              (categories.find((c) => c.id === chosenCategoryId)?.slug || "")
+            )}`,
+          });
+        }
       }
-    }
 
-    fetchBreadcrumbs();
-  }, [productOrCategoryId, locale, type]);
-
-  if (!breadcrumbs || breadcrumbs.length === 0) return null;
-
-  // --- Мобільна версія ---
-  if (isMobile) {
-    const mobileItem =
-      breadcrumbs.length > 1
-        ? breadcrumbs[breadcrumbs.length - 2]
-        : breadcrumbs[0];
-
-    return (
-      <nav className="text-sm breadcrumbs mb-1 mt-2 ml-2">
-        {mobileItem.item ? (
-          <Link
-            href={mobileItem.item}
-            className="underline text-blue-600 hover:text-blue-800"
-          >
-            {mobileItem.name}
-          </Link>
-        ) : (
-          <span className="text-gray-500">{mobileItem.name}</span>
-        )}
-      </nav>
-    );
-  }
-
-  // --- Десктопна версія ---
-  return (
-    <nav className="text-sm breadcrumbs mb-4 ml-6">
-      {breadcrumbs.map((item, idx) => {
-        const isLast = idx === breadcrumbs.length - 1;
-        return (
-          <React.Fragment key={idx}>
-            {!isLast && item.item ? (
-              <Link
-                href={item.item}
-                className="underline text-blue-600 hover:text-blue-800"
-              >
-                {item.name}
-              </Link>
-            ) : (
-              <span className="text-gray-500">{item.name}</span>
-            )}
-            {!isLast && " / "}
-          </React.Fragment>
-        );
-      })}
-    </nav>
+      setBreadcrumbs(trail);
+      return trail;
+    },
+    [fetchCategoryCached, getCategoryPath]
   );
-};
 
-export default Breadcrumbs;
+  const clearBreadcrumbs = useCallback(() => setBreadcrumbs([]), []);
+
+  return { breadcrumbs, setBreadcrumbs, buildCategoryTrail, clearBreadcrumbs };
+}

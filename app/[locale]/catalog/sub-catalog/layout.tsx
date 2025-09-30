@@ -9,10 +9,12 @@ import styles from "./Sub-catalog.module.css";
 import { SidebarProvider, useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 import { motion } from "framer-motion";
-import Breadcrumbs from "@app/[locale]/components/atoms/breadcrumbs/breadcrumbs";
 
-const Content: FC<{ children: ReactNode; locale: string }> = ({ children, locale }) => {
-  const { getData, categories, selectedCategoryId, selectedProducts } = useSidebar();
+const Content: FC<{ children: ReactNode; locale: string; }> = ({
+  children,
+  locale,
+}) => {
+  const { getData } = useSidebar();
   const isMobile = useIsMobile();
   const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false);
   const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false);
@@ -38,7 +40,13 @@ const Content: FC<{ children: ReactNode; locale: string }> = ({ children, locale
           <button className={classNames("absolute top-52 left-2 z-30 bg-transparent text-[#0061AA] p-2 rounded-md", styles.buttons)}
             onClick={() => setIsLeftSidebarOpen(true)}>☰ По призначенню</button>
 
-          <motion.div drag="x" dragConstraints={{ left: 0, right: 200 }} initial={{ x: "-100%" }} animate={{ x: isLeftSidebarOpen ? "0%" : "-100%" }} transition={{ type: "spring", stiffness: 300, damping: 30 }} className="fixed top-0 left-0 w-full h-full bg-white/50 backdrop-blur-sm shadow-lg z-50 cursor-grab active:cursor-grabbing overflow-y-auto">
+          <motion.div
+            drag="x"
+            dragConstraints={{ left: 0, right: 200 }}
+            initial={{ x: "-100%" }}
+            animate={{ x: isLeftSidebarOpen ? "0%" : "-100%" }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="fixed top-0 left-0 w-full h-full bg-white/50 backdrop-blur-sm shadow-lg z-50 cursor-grab active:cursor-grabbing overflow-y-auto">
             <button className="absolute top-7 right-3 text-xl text-slate-800 font-bold text-[30px]" onClick={() => setIsLeftSidebarOpen(false)}>✕</button>
             <div className="p-4"><LSidebar locale={locale} changeURLParams /></div>
           </motion.div>
@@ -49,10 +57,8 @@ const Content: FC<{ children: ReactNode; locale: string }> = ({ children, locale
         <div className="w-[300px]"><LSidebar locale={locale} changeURLParams /></div>
       )}
 
-      {/* Основний контент + Breadcrumbs */}
+      {/* Основний контент */}
       <div className="w-screen">
-        {/* <Breadcrumbs
-          locale={locale} productOrCategoryId={0} type={"product"}        /> */}
         {children}
       </div>
 
