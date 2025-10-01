@@ -11,20 +11,26 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import styles from "./Home.module.css";
 import { useIsMobile } from "../components/hooks/useIsMobile";
+import dynamic from "next/dynamic";
 
 export const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
   const t = useTranslations("Index");
   const isMobile = useIsMobile();
+  const [showSlider, setShowSlider] = React.useState(false);
+  const MapOfUkraineMobile = dynamic(
+  () => import("@app/[locale]/components/molecules/map/Map"),
+  { ssr: false }
+);
+
+  React.useEffect(() => {
+    setShowSlider(true);
+  }, []);
 
   return (
     <MainLayout>
       <div>
         <div className="flex flex-1 flex-col justify-center items-center">
-          {typeof window !== "undefined" && isMobile ?
-            <SliderMobile locale={locale} />
-            :
-            <Slider locale={locale} />
-          }
+          {showSlider && (isMobile ? <SliderMobile locale={locale} /> : <Slider locale={locale} />)}
           <h2
             className={classNames(
               "w-full text-center mb-5 sm:mb-10",
@@ -88,7 +94,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
             </div>
             <div className="flex justify-center items-center w-full">
               <div className="min-w-[320px] w-full h-auto flex justify-center">
-                <MapOfUkraine locale={locale} />
+                {isMobile ? <MapOfUkraineMobile locale={locale} /> : <MapOfUkraine locale={locale} />}
               </div>
             </div>
           </div>
