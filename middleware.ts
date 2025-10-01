@@ -6,6 +6,7 @@ export function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
   const url = new URL(req.url);
   const hostname = url.hostname;
+  const defaultLocale = locales[0];
 
   if (pathname.startsWith(`/${defaultLocale}/`)) {
     const newUrl = req.nextUrl.clone();

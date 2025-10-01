@@ -70,12 +70,15 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   return (
     <>
       {/* Breadcrumbs */}
-      <h1 className="text-[22px] font-bold text-[#002766] mb-2 ml-2">{breadcrumbs[breadcrumbs.length - 1]?.name}</h1>
+
       <div className={classNames("mt-5", { "ml-2": isMobile, "ml-4": !isMobile })}>
         {isMobile ? (
           <MobileBreadcrumbs breadcrumbs={breadcrumbs} isIOS={isIOS} router={router} detailsName={breadcrumbs[breadcrumbs.length - 1]?.name} />
         ) : (
-          <DesktopBreadcrumbs breadcrumbs={breadcrumbs} isIOS={isIOS} router={router} />
+                <>
+                <h1 className="text-[22px] font-bold text-[#002766] mb-2 ml-2">{breadcrumbs[breadcrumbs.length - 1]?.name}</h1>
+                <DesktopBreadcrumbs breadcrumbs={breadcrumbs} isIOS={isIOS} router={router} />
+                </>
         )}
       </div>
 
