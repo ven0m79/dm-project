@@ -1,21 +1,14 @@
 "use client";
-
 import classNames from "classnames";
 import Link from "next/link";
 import React, { FC, useMemo, useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
-
 import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
 import { useBreadcrumbs } from "@app/[locale]/components/atoms/breadcrumbs/breadcrumbs";
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
-
-import { fetchWooCommerceCategories } from "../../../../utils/woocommerce.setup";
 import styles from "./Sub-catalog.module.css";
 import { TransformedCategoriesType } from "./helpers";
 import { getCategoriesIds } from "@app/[locale]/components/constants";
-import { SingleProductDetails } from "../../../../utils/woocomerce.types";
-
 import MobileBreadcrumbs from "./product/[productId]/MobileBreadcrumbs";
 import DesktopBreadcrumbs from "./product/[productId]/DesktopBreadcrumbs";
 
