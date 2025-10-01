@@ -7,15 +7,15 @@ export function middleware(req: NextRequest) {
   const url = new URL(req.url);
   const hostname = url.hostname;
 
-  // if (pathname.startsWith(`/${defaultLocale}/`)) {
-  //   const newUrl = req.nextUrl.clone();
-  //   newUrl.pathname = pathname.replace(`/${defaultLocale}`, "");
-  //   return NextResponse.redirect(newUrl, 301);
-  // } else if (pathname === `/${defaultLocale}`) {
-  //   const newUrl = req.nextUrl.clone();
-  //   newUrl.pathname = "/";
-  //   return NextResponse.redirect(newUrl, 301);
-  // }
+  if (pathname.startsWith(`/${defaultLocale}/`)) {
+    const newUrl = req.nextUrl.clone();
+    newUrl.pathname = pathname.replace(`/${defaultLocale}`, "");
+    return NextResponse.redirect(newUrl, 301);
+  } else if (pathname === `/${defaultLocale}`) {
+    const newUrl = req.nextUrl.clone();
+    newUrl.pathname = "/";
+    return NextResponse.redirect(newUrl, 301);
+  }
 
  // --- 🔁 301 редірект з www + /ua на canonical домен без локалі ---
   const isWWW = hostname.startsWith("www.");
