@@ -15,16 +15,17 @@ import { useIsMobile } from "../components/hooks/useIsMobile";
 export const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
   const t = useTranslations("Index");
   const isMobile = useIsMobile();
+  const [showSlider, setShowSlider] = React.useState(false);
+
+  React.useEffect(() => {
+    setShowSlider(true);
+  }, []);
 
   return (
     <MainLayout>
       <div>
         <div className="flex flex-1 flex-col justify-center items-center">
-          {typeof window !== "undefined" && isMobile ?
-            <SliderMobile locale={locale} />
-            :
-            <Slider locale={locale} />
-          }
+          {showSlider && (isMobile ? <SliderMobile locale={locale} /> : <Slider locale={locale} />)}
           <h2
             className={classNames(
               "w-full text-center mb-5 sm:mb-10",
