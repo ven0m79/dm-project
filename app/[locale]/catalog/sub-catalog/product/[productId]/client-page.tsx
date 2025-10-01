@@ -20,8 +20,8 @@ import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/p
 import { useBreadcrumbs } from "@app/[locale]/components/atoms/breadcrumbs/breadcrumbs";
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 import Image from "next/image";
-
-import dynamic from "next/dynamic";
+import MobileBreadcrumbs from "./MobileBreadcrumbs";
+import DesktopBreadcrumbs from "./DesktopBreadcrumbs";
 
 const customTheme: CustomFlowbiteTheme = {
   tabs: {
@@ -77,28 +77,11 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
 
   const { setOpenedCategoryIds } = useSidebar();
 
-  const MobileBreadcrumbs = dynamic(() => import("./MobileBreadcrumbs"), { ssr: false });
-  const DesktopBreadcrumbs = dynamic(() => import("./DesktopBreadcrumbs"), { ssr: false });
-
   // ✅ Передаємо locale у useBreadcrumbs
   const { breadcrumbs, buildCategoryTrail } = useBreadcrumbs();
   const isMobile = useIsMobile();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const renderBreadcrumbs = () => {
-    if (isMobile) {
-      return (
-        <MobileBreadcrumbs
-          breadcrumbs={breadcrumbs}
-          isIOS={isIOS}
-          router={router}
-          detailsName={details?.name}
-        />
-      );
-    }
-
-    return <DesktopBreadcrumbs breadcrumbs={breadcrumbs} isIOS={isIOS} router={router} />;
-  };
 
   const youtubeMeta = details?.meta_data?.find(
     (item: any) => item.key === "_nickx_video_text_url"
@@ -120,17 +103,15 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
   const getProductDetails = useCallback(async () => {
     setLoading(true);
     try {
-      // 🚀 fetch паралельно
-      const productPromise = fetchWooCommerceProductDetails(Number(productId), locale);
+      const data = await fetchWooCommerceProductDetails(Number(productId), locale);
 
-      // cross-sell можна стартувати одразу, якщо ми знаємо productId
+      if (!data) {
+        setLoading(false);
+        return;
+      }
 
-      // очікуємо основний продукт
-      const data = await productPromise;
-      if (!data) return setLoading(false);
       setDetails(data);
 
-      // паралельно fetch крос-селів та build breadcrumbs
       const [crossSellData] = await Promise.all([
         data.cross_sell_ids?.length
           ? fetchWooCommerceCrossProductsDetails(data.cross_sell_ids, locale)
@@ -146,8 +127,6 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
     }
   }, [productId, locale, buildCategoryTrail]);
 
-
-
   useEffect(() => {
     if (!selectedProductId) return;
     getProductDetails();
@@ -157,9 +136,9 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
     <>
       <div className="flex self-center flex-col max-w-[800px] mb-8">
         <div className={classNames("mt-5", { "ml-2": isMobile, "ml-4": !isMobile })}>
-          {renderBreadcrumbs()}
+          {isMobile ? <MobileBreadcrumbs breadcrumbs={breadcrumbs} isIOS={isIOS} router={router} detailsName={details?.name} />
+            : <DesktopBreadcrumbs breadcrumbs={breadcrumbs} isIOS={isIOS} router={router} />}
         </div>
-
         <div className="flex flex-col py-1 px-2 min-h-[600px] flex-1">
           {loading ? (
             <div className="flex w-full h-4/5 justify-center items-center">
@@ -262,7 +241,6 @@ const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
                       </div>
                     </div>
                     <div className={styles.stroke}></div>
-
                     <div className="text-black">
                       <Tabs aria-label="Default tabs" theme={customTheme.tabs}>
                         <Tabs.Item
