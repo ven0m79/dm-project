@@ -1,3 +1,4 @@
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Roboto } from "next/font/google";
 import { ReactNode } from "react";
 import { NextIntlClientProvider, useMessages } from "next-intl";
@@ -123,6 +124,7 @@ export default function RootLayout({
         <main className="flex flex-1 flex-col items-center justify-center gap-12 w-full bg-white">
           <NextIntlClientProvider locale={locale} messages={messages}>
             {children}
+            <SpeedInsights />
           </NextIntlClientProvider>
         </main>
         <ClientScriptLoader />
