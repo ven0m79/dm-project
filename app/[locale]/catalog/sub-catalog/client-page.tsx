@@ -94,7 +94,14 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
               )}
             >
               <div className="w-full text-center">
-                <Link locale={locale} href={{ pathname: `/catalog/sub-catalog/product/${el.translations[locale as any]}`, query: `category=${selectedCategory}` }}>
+                <div
+                        className="cursor-pointer"
+                        onClick={() => {
+                          const url = `/catalog/sub-catalog/product/${el.translations[locale as any]}?category=${encodeURIComponent(selectedCategory || "")}`;
+                          if (isIOS) router.push(url);
+                          else window.location.href = url;
+                        }}
+                      >
                   <div className="cursor-pointer flex justify-center">
                     <img src={el.images[0].src} alt={el.images[0].alt} width={200} height={250} className="w-full h-auto" />
                   </div>
@@ -102,7 +109,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                   <div className="flex justify-center">
                     <h3 className="flex justify-center h-20 w-full px-2">{el.name}</h3>
                   </div>
-                </Link>
+                </div>
               </div>
             </div>
           ))
