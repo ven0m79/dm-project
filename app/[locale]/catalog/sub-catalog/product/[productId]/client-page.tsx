@@ -173,6 +173,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                     <div className={styles.downloadable}>
                       <Link href={"../../../../contacts"}>{t("product-request")}</Link>
                     </div>
+                    <br/>
                     {!isAccessories && (
                       <div className={classNames("flex items-center", styles.downloadable)}>
                         <Link href={"../../../../services"}>{t("product-services")}</Link>
