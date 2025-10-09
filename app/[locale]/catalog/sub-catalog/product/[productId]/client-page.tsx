@@ -1,27 +1,22 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import {
-  fetchWooCommerceProductDetails,
-  fetchWooCommerceCrossProductsDetails,
-} from "../../../../../../utils/woocommerce.setup";
 import { SingleProductDetails } from "../../../../../../utils/woocomerce.types";
 import Link from "next/link";
-import styles from "./Product.module.css";
+import Image from "next/image";
 import classNames from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
-import Loader from "@app/[locale]/components/atoms/loader/Loader";
 import { Tabs, CustomFlowbiteTheme } from "flowbite-react";
 import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import { useTranslations } from "next-intl";
-import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
 import { useBreadcrumbs } from "@app/[locale]/components/atoms/breadcrumbs/breadcrumbs";
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
-import Image from "next/image";
+import Loader from "@app/[locale]/components/atoms/loader/Loader";
 import MobileBreadcrumbs from "./MobileBreadcrumbs";
 import DesktopBreadcrumbs from "./DesktopBreadcrumbs";
+import styles from "./Product.module.css";
 
 const customTheme: CustomFlowbiteTheme = {
   tabs: {
@@ -65,254 +60,181 @@ const customTheme: CustomFlowbiteTheme = {
   },
 };
 
-type Params = { productId: string };
 
-const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
-  const t = useTranslations("Product");
-  const { productId }: Params = useParams<any>();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [details, setDetails] = useState<SingleProductDetails | null>(null);
-  const [crossSellProducts, setCrossSellProducts] = useState<SingleProductDetails[]>([]);
-  const isIOS = typeof window !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-  const { setOpenedCategoryIds } = useSidebar();
-
-  // ✅ Передаємо locale у useBreadcrumbs
-  const { breadcrumbs, buildCategoryTrail } = useBreadcrumbs();
-  const isMobile = useIsMobile();
-  const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
-
-  const youtubeMeta = details?.meta_data?.find(
-    (item: any) => item.key === "_nickx_video_text_url"
-  );
-  const youtubeUrl = Array.isArray(youtubeMeta?.value)
-    ? youtubeMeta?.value?.[0]
-    : youtubeMeta?.value;
-
-  // ✅ Обираємо правильний ID продукту з урахуванням перекладів
-  const selectedProductId = useMemo(() => {
-    return (
-      (!details ? Number(productId) : Number(details?.translations?.[locale as any])) || 0
-    );
-  }, [details, locale, productId]);
-
-  const isAccessories = details?.tags?.map((el) => el.name)?.includes("accessories");
-
-  // ✅ Завантаження деталей продукту
-  const getProductDetails = useCallback(async () => {
-    setLoading(true);
-    try {
-      const data = await fetchWooCommerceProductDetails(Number(productId), locale);
-
-      if (!data) {
-        setLoading(false);
-        return;
-      }
-
-      setDetails(data);
-
-      const [crossSellData] = await Promise.all([
-        data.cross_sell_ids?.length
-          ? fetchWooCommerceCrossProductsDetails(data.cross_sell_ids, locale)
-          : Promise.resolve([]),
-        buildCategoryTrail(data.categories, locale, data.name, data.id),
-      ]);
-
-      setCrossSellProducts(crossSellData || []);
-    } catch (e) {
-      console.warn("❌ Error fetching product details or cross-sell products:", e);
-    } finally {
-      setLoading(false);
-    }
-  }, [productId, locale, buildCategoryTrail]);
-
-  useEffect(() => {
-    if (!selectedProductId) return;
-    getProductDetails();
-  }, [getProductDetails, selectedProductId]);
-
-  return (
-    <>
-      <div className="flex self-center flex-col max-w-[800px] mb-8">
-        <div className={classNames("mt-5", { "ml-2": isMobile, "ml-4": !isMobile })}>
-          {isMobile ? <MobileBreadcrumbs breadcrumbs={breadcrumbs} isIOS={isIOS} router={router} detailsName={details?.name} />
-            : <DesktopBreadcrumbs breadcrumbs={breadcrumbs} isIOS={isIOS} router={router} />}
-        </div>
-        <div className="flex flex-col py-1 px-2 min-h-[600px] flex-1">
-          {loading ? (
-            <div className="flex w-full h-4/5 justify-center items-center">
-              <Loader />
-            </div>
-          ) : (
-            <>
-              <AnimatePresence>
-                {!loading && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{
-                      delay: 0.4,
-                    }}
-                  >
-                    <div className="flex flex-row w-full">
-                      <div>
-                        <div className={classNames("my-4 w-full h-auto", styles.imageRadius)}>
-                          <Image
-                            src={details?.images[0].src || "/placeholder.png"}
-                            alt={details?.images[0].alt || details?.name || ""}
-                            width={450}
-                            height={475}
-                            priority
-                            unoptimized
-                            className="w-full h-auto rounded-lg"
-                          />
-                        </div>
-                        <div>
-
-                        </div>
-                      </div>
-                      <div className="px-1 pt-0 sm:pt-10 w-1/2">
-                        <h1 className="text-[22px] font-bold text-[#002766] mb-[10px]">
-                          {details?.name}
-                        </h1>
-                        <br />
-                        <div
-                          className={classNames("text-normal w-full h-auto", styles.brand)}
-                        >
-                          {t("product-brand")} {details?.brands[0]?.name}
-
-                        </div>
-                        <br />
-
-                        {isAccessories ? (
-                          <>
-                            <div
-                              className={classNames(
-                                "text-normal",
-                                styles.brand,
-                              )}
-                            >
-                              {"Артикул: "}
-                              {details?.sku}
-
-                            </div>
-                            <div
-                              className={classNames(
-                                "text-normal sm:mt-12 mt-6 justify-center",
-                              )}
-                            >
-                              {details?.price && (
-                                <span className="text-[#0061AA] text-[18px]"><span className="font-bold text-[#002766]">Ціна:</span> {String(details.price).replace(".", ",")} {t("grn")}</span>
-                              )}
-                            </div>
-                          </>
-                        ) : <div
-                          className={classNames(
-                            "text-normal sm:mt-16 mt-6",
-                          )}
-                        >
-                          {details?.price && (
-                            <span className={classNames("lowercase", styles.price)}>{String(details.price).replace(".", ",")} {t("grn")}</span>
-                          )}
-                        </div>}
-                        <div className="sm:h-[20px] h-[5px]"></div>
-                        <br />
-                        <div className="flex flex-col justify-between items-center">
-                          <div className={styles.downloadable}>
-                            <Link href={"../../../../contacts"}>
-                              {t("product-request")}
-                            </Link>
-                          </div>
-                          <br />
-                          {isAccessories ? (
-                            <div className=""></div>
-                          ) : (
-                            <div
-                              className={classNames("flex items-center", styles.downloadable)}
-                            >
-                              <Link href={"../../../../services"}>
-                                {t("product-services")}
-                              </Link>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    <div className={styles.stroke}></div>
-                    <div className="text-black">
-                      <Tabs aria-label="Default tabs" theme={customTheme.tabs}>
-                        <Tabs.Item
-                          active
-                          title="Опис"
-                          icon={HiUserCircle}
-                          className="bg-red"
-                        >
-                          <div
-                            className="content w-fit"
-                            suppressHydrationWarning
-                            dangerouslySetInnerHTML={{
-                              __html: details?.description || "",
-                            }}
-                          />
-                        </Tabs.Item>
-                        {!isAccessories && crossSellProducts.length > 0 && (
-                          <Tabs.Item
-                            title="Аксесуари та комплектуючі"
-                            icon={MdDashboard}
-                          >
-                            <div className={classNames("ml-10", styles.downloadabled)}>
-                              {crossSellProducts.map((el) => (
-                                <li key={el.id} className="mx-1">
-                                  <a
-                                    className="text text-blue-900"
-                                    href={`/catalog/sub-catalog/product/${el.id}?category=${el.tags[0].name}`}
-                                  >
-                                    {el.name}
-                                  </a>
-                                </li>
-                              ))}
-                            </div>
-                          </Tabs.Item>
-                        )}
-                        {details &&
-                          Array.isArray(details.downloads) &&
-                          details.downloads.length > 0 && (
-                            <Tabs.Item title="Завантаження" icon={HiAdjustments}>
-                              <div className={classNames("", styles.downloadabled)}>
-                                {details.downloads.map((el) => (
-                                  <li key={el.id} className="mx-1">
-                                    <Link href={el.file}>{el.name}</Link>
-                                  </li>
-                                ))}
-                              </div>
-                            </Tabs.Item>
-                          )}
-
-                        {youtubeUrl && (
-                          <Tabs.Item title="Відео" icon={HiClipboardList}>
-                            <button
-                              onClick={() => window.open(youtubeUrl, "_blank")}
-                              className="text-blue-600 underline"
-                              rel="noopener noreferrer"
-                            >
-                              Переглянути відео на YouTube
-                            </button>
-                          </Tabs.Item>
-                        )}
-
-                      </Tabs>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </>
-          )}
-        </div>
-      </div>
-    </>
-  );
+type ClientPageProps = {
+  params: { locale: string };
+  serverData: {
+    details: SingleProductDetails | null;
+    crossSellProducts: SingleProductDetails[];
+  };
 };
 
-export default ClientPage;
+export default function ClientPage({ params: { locale }, serverData }: ClientPageProps) {
+  const t = useTranslations("Product");
+  const { productId } = useParams<any>();
+  const router = useRouter();
+  const isMobile = useIsMobile();
+
+  // ✅ Використовуємо serverData
+  const [details] = useState<SingleProductDetails | null>(serverData.details);
+  const [crossSellProducts] = useState<SingleProductDetails[]>(serverData.crossSellProducts);
+  const [loading] = useState<boolean>(!details);
+
+  // ✅ Breadcrumbs
+ const { breadcrumbs, buildCategoryTrail } = useBreadcrumbs();
+  const isIOS = typeof window !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  // ✅ YouTube meta
+  const youtubeMeta = details?.meta_data?.find((item: any) => item.key === "_nickx_video_text_url");
+  const youtubeUrl = Array.isArray(youtubeMeta?.value) ? youtubeMeta?.value[0] : youtubeMeta?.value;
+
+  const isAccessories = details?.tags?.map((el) => el.name)?.includes("accessories");
+ 
+  // ✅ Викликаємо buildCategoryTrail після mount
+  React.useEffect(() => {
+    if (details?.categories?.length) {
+      buildCategoryTrail(details.categories, locale, details.name, details.id);
+    }
+  }, [details, locale, buildCategoryTrail]);
+
+  if (!details) {
+    return (
+      <div className="flex w-full h-4/5 justify-center items-center">
+        <Loader />
+      </div>
+    );
+  }
+  return (
+    <div className="flex self-center flex-col max-w-[800px] mb-8">
+      {/* Breadcrumbs */}
+      <div className={classNames("mt-5", { "ml-2": isMobile, "ml-4": !isMobile })}>
+        {isMobile ? (
+          <MobileBreadcrumbs breadcrumbs={breadcrumbs} isIOS={isIOS} router={router} detailsName={details.name} />
+        ) : (
+          <DesktopBreadcrumbs breadcrumbs={breadcrumbs} isIOS={isIOS} router={router} />
+        )}
+      </div>
+
+      {/* Основний контент */}
+      <div className="flex flex-col py-1 px-2 min-h-[600px] flex-1">
+        {loading ? (
+          <div className="flex w-full h-4/5 justify-center items-center">
+            <Loader />
+          </div>
+        ) : (
+          <AnimatePresence>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ delay: 0.4 }}>
+              <div className="flex flex-row w-full">
+                {/* Зображення */}
+                <div>
+                  <div className={classNames("my-4 w-full h-auto", styles.imageRadius)}>
+                    <Image
+                      src={details.images[0]?.src || "/placeholder.png"}
+                      alt={details.images[0]?.alt || details.name || ""}
+                      width={450}
+                      height={475}
+                      priority
+                      unoptimized
+                      className="w-full h-auto rounded-lg"
+                    />
+                  </div>
+                </div>
+
+                {/* Інформація про продукт */}
+                <div className="px-1 pt-0 sm:pt-10 w-1/2">
+                  <h1 className="text-[22px] font-bold text-[#002766] mb-[10px]">{details.name}</h1>
+                  <div className={classNames("text-normal w-full h-auto", styles.brand)}>
+                    {t("product-brand")} {details.brands[0]?.name}
+                  </div>
+
+                  {isAccessories ? (
+                    <>
+                      <div className={classNames("text-normal", styles.brand)}>Артикул: {details.sku}</div>
+                      <div className={classNames("text-normal sm:mt-12 mt-6 justify-center")}>
+                        {details.price && (
+                          <span className="text-[#0061AA] text-[18px]">
+                            <span className="font-bold text-[#002766]">Ціна:</span> {String(details.price).replace(".", ",")} {t("grn")}
+                          </span>
+                        )}
+                      </div>
+                    </>
+                  ) : (
+                    <div className={classNames("text-normal sm:mt-16 mt-6")}>
+                      {details.price && (
+                        <span className={classNames("lowercase", styles.price)}>
+                          {String(details.price).replace(".", ",")} {t("grn")}
+                        </span>
+                      )}
+                    </div>
+                  )}
+
+                  <div className="sm:h-[20px] h-[5px]"></div>
+                  <div className="flex flex-col justify-between items-center">
+                    <div className={styles.downloadable}>
+                      <Link href={"../../../../contacts"}>{t("product-request")}</Link>
+                    </div>
+                    <br/>
+                    {!isAccessories && (
+                      <div className={classNames("flex items-center", styles.downloadable)}>
+                        <Link href={"../../../../services"}>{t("product-services")}</Link>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.stroke}></div>
+
+              {/* Tabs */}
+              <div className="text-black">
+                <Tabs aria-label="Default tabs" theme={customTheme.tabs}>
+                  <Tabs.Item active title="Опис" icon={HiUserCircle}>
+                    <div
+                      className="content w-fit"
+                      suppressHydrationWarning
+                      dangerouslySetInnerHTML={{ __html: details.description || "" }}
+                    />
+                  </Tabs.Item>
+
+                  {!isAccessories && crossSellProducts.length > 0 && (
+                    <Tabs.Item title="Аксесуари та комплектуючі" icon={MdDashboard}>
+                      <div className={classNames("ml-10", styles.downloadabled)}>
+                        {crossSellProducts.map((el) => (
+                          <li key={el.id} className="mx-1">
+                            <a className="text text-blue-900" href={`/catalog/sub-catalog/product/${el.id}?category=${el.tags[0].name}`}>
+                              {el.name}
+                            </a>
+                          </li>
+                        ))}
+                      </div>
+                    </Tabs.Item>
+                  )}
+
+                  {details.downloads?.length > 0 && (
+                    <Tabs.Item title="Завантаження" icon={HiAdjustments}>
+                      <div className={classNames("", styles.downloadabled)}>
+                        {details.downloads.map((el) => (
+                          <li key={el.id} className="mx-1">
+                            <Link href={el.file}>{el.name}</Link>
+                          </li>
+                        ))}
+                      </div>
+                    </Tabs.Item>
+                  )}
+
+                  {youtubeUrl && (
+                    <Tabs.Item title="Відео" icon={HiClipboardList}>
+                      <button onClick={() => window.open(youtubeUrl, "_blank")} className="text-blue-600 underline" rel="noopener noreferrer">
+                        Переглянути відео на YouTube
+                      </button>
+                    </Tabs.Item>
+                  )}
+                </Tabs>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        )}
+      </div>
+    </div>
+  );
+}
