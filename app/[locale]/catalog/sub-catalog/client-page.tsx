@@ -87,12 +87,11 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
             return (
               <div key={el.id} className={classNames("mb-5 flex flex-col justify-center items-center", cardClass)}>
                 <div className="w-full text-center">
-                  <div className="cursor-pointer" 
-                                          onClick={() => {
-                          const url = `/catalog/sub-catalog/product/${el.translations[locale as any]}?category=${encodeURIComponent(selectedCategory || "")}`;
-                          if (isIOS) router.push(url);
-                          else window.location.href = url;
-                        }}>
+                  <div className="cursor-pointer"
+                    onClick={() => {
+                      if (isIOS) router.push(url);
+                      else window.location.href = url;
+                    }}>
                     <div className="cursor-pointer flex justify-center">
                       <img
                         src={el.images[0].src}
