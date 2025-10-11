@@ -9,7 +9,6 @@ import "./globals.css";
 import { cn } from "@app/[locale]/components/molecules/lib/utils";
 import { unstable_setRequestLocale } from "next-intl/server";
 import Script from "next/script";
-import { usePathname } from "next/navigation";
 import ClientScriptLoader from "@app/[locale]/components/atoms/scriptsBinotel/scriptsBinotel"
 // import { Metadata } from "next";
 // import  getHreflangLinks  from "@app/[locale]/components/atoms/hreflang/hreflang";
