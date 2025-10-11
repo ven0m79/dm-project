@@ -28,9 +28,9 @@ const Content: FC<{ children: ReactNode; locale: string; }> = ({
     };
   }, [isLeftSidebarOpen, isRightSidebarOpen]);
 
-  useEffect(() => {
-    getData(locale);
-  }, [getData, locale]);
+  // useEffect(() => {
+  //   getData(locale);
+  // }, [getData, locale]);
 
   return (
     <div className={classNames("flex flex-1 flex-row justify-between self-center mb-5 mt-5 mx-2", styles.subCatalog)}>
