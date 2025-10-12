@@ -45,7 +45,7 @@ export const ClientPage = () => {
         >
           <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
             <span className={styles.span}>{t("or-equipment")}</span>
-            <Image className={styles.img} src={imgOper} width={130} height={130} alt={t("or-equipment")} />
+            <Image className={styles.img} src={imgOper} width={130} height={130} priority alt={t("or-equipment")} />
           </div>
         </Link>
 
