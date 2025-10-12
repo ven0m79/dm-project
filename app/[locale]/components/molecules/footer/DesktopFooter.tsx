@@ -8,7 +8,6 @@ import { useTranslations } from "next-intl";
 import { useNavigateTo } from "@app/[locale]/components/hooks/useNavigateTo";
 import styles from "./Footer.module.css";
 
-
 const DesktopFooter: FC<{}> = ({ }) => {
     const { navigateWithDelay } = useNavigateTo();
     const t = useTranslations("Footer");
