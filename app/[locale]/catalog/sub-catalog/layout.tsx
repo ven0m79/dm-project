@@ -94,7 +94,9 @@ const Content: FC<{ children: ReactNode; locale: string }> = ({ children, locale
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         className="fixed top-0 left-0 w-full h-full bg-white/50 backdrop-blur-sm shadow-lg z-50 cursor-grab active:cursor-grabbing overflow-y-auto">
         <button className="absolute top-4 right-4 text-xl text-slate-800" onClick={() => setIsRightSidebarOpen(false)}>✕</button>
-        <div className="p-4"><RSidebar locale={locale} changeURLParams /></div>
+        <div className="p-4">
+          <RSidebar locale={locale} changeURLParams />
+        </div>
       </motion.div>
 
       {isRightSidebarOpen && (

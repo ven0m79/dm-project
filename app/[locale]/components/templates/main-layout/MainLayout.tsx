@@ -24,6 +24,7 @@ const MainLayout: FC<MainLayoutProps> = ({
   noFooter = false,
 }) => {
   return (
+    
     <Suspense fallback="Loading">
       <main className={styles.main}>
         {noHeader ? null : <Header />}

@@ -1,10 +1,12 @@
-// app/[locale]/catalog/sub-catalog/page.tsx (server)
 import type { Metadata } from "next";
-import { cache } from "react";
 import { ClientPage } from "./client-page";
 import parse from "html-react-parser";
+import { cache } from "react";
 
-type Props = { params: { locale: string }; searchParams: { category?: string } };
+type Props = {
+  params: { locale: string };
+  searchParams: { category?: string };
+};
 
 export const revalidate = 300;
 
@@ -54,17 +56,16 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   };
 }
 
+
+// 🔹 Сторінка
 export default async function Page({ params, searchParams }: Props) {
   const category = await fetchCategory(params.locale, searchParams.category);
 
-  // Render schema.org as JSON-LD <script> (lighter than parsing HTML)
-  const schemaJson =
-    category?.schema_json
-      ? (typeof category.schema_json === "string"
-          ? category.schema_json
-          : JSON.stringify(category.schema_json))
-      : null;
-
+  const schemaJson = category?.schema_json
+    ? typeof category.schema_json === "string"
+      ? category.schema_json
+      : JSON.stringify(category.schema_json)
+    : null;
 
   return (
     <>
