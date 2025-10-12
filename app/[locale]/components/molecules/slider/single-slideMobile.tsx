@@ -71,6 +71,7 @@ const SingleSlideMobile: FC<ArticleSingleType> = ({
 
       <motion.img
         src={img2}
+        fetchPriority="high"
         alt=""
         width={200}
         height={200}
