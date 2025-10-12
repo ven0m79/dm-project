@@ -3,9 +3,6 @@
 import classNames from "classnames";
 import React from "react";
 import { MainLayout } from "@app/[locale]/components/templates";
-import Slider from "@app/[locale]/components/molecules/slider/slider";
-import SliderMobile from "../components/molecules/slider/sliderMobile";
-import MapOfUkraine from "@app/[locale]/components/molecules/map/Map";
 import Link from "next/link";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
@@ -13,18 +10,23 @@ import styles from "./Home.module.css";
 import { useIsMobile } from "../components/hooks/useIsMobile";
 import dynamic from "next/dynamic";
 
+const Slider = dynamic(() => import("@app/[locale]/components/molecules/slider/slider"), { ssr: false });
+const SliderMobile = dynamic(() => import("@app/[locale]/components/molecules/slider/sliderMobile"), { ssr: false });
+const MapOfUkraine = dynamic(() => import("@app/[locale]/components/molecules/map/Map"), { ssr: false });
+const MapOfUkraineMobile = dynamic(() => import("@app/[locale]/components/molecules/map/Map"), { ssr: false });
+
 export const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
   const t = useTranslations("Index");
   const isMobile = useIsMobile();
   const [showSlider, setShowSlider] = React.useState(false);
-  const MapOfUkraineMobile = dynamic(
-  () => import("@app/[locale]/components/molecules/map/Map"),
-  { ssr: false }
-);
-
   React.useEffect(() => {
-    setShowSlider(true);
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => setShowSlider(true));
+    } else {
+      setTimeout(() => setShowSlider(true), 200);
+    }
   }, []);
+
 
   return (
     <MainLayout>
