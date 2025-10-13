@@ -35,8 +35,11 @@
   }
 }
 
-html, body {
+html {
   font-family: var(--font-roboto) !important;
+}
+
+body {
   margin: 0 !important;
 }
 

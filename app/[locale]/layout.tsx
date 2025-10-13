@@ -56,7 +56,7 @@ export default function RootLayout({
 
 
   return (
-    <html lang={locale} className={roboto.variable}>
+    <html lang={locale}>
       <head>
 
 
