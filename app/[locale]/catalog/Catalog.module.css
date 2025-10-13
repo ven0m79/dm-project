@@ -2,9 +2,11 @@
     align-self: center;
     max-width: 1400px;
     min-height: 300px;
+    font-family: "Roboto", sans-serif;
 
     @media (max-width: 640px) {
         width: 100%;
+        font-family: "Roboto", sans-serif;
         /* border: 1px solid red; */
     }
 }

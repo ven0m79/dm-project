@@ -39,7 +39,7 @@
 
 html, body {
   margin: 0 !important;
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-roboto);
 }
 
 ul {
