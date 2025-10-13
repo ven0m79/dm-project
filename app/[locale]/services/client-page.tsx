@@ -102,6 +102,7 @@ export const ClientPage = () => {
                 width={400}
                 height={300}
                 alt="photo"
+                priority
               />
               <p>{t('contact-paragraph1')}</p>
               <p>{t('contact-paragraph2')}</p>
