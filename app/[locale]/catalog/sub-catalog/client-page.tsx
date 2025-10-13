@@ -10,6 +10,7 @@ import styles from "./Sub-catalog.module.css";
 import { getCategoriesIds } from "@app/[locale]/components/constants";
 import MobileBreadcrumbs from "./product/[productId]/MobileBreadcrumbs";
 import DesktopBreadcrumbs from "./product/[productId]/DesktopBreadcrumbs";
+import Image from "next/image";
 
 export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   const {
@@ -93,13 +94,15 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                       else window.location.href = url;
                     }}>
                     <div className="cursor-pointer flex justify-center">
-                      <img
+                      <Image
                         src={el.images[0].src}
                         alt={el.images[0].alt}
                         width={200}
                         height={250}
-                        loading="lazy"
-                        className="w-full h-auto"
+                        fetchPriority="high"
+                        className="w-full h-auto object-contain"
+                        sizes="(max-width: 768px) 200px, (max-width: 1200px) 400px, 800px" // ✅ адаптивність
+                        priority // тільки перше зображення для LCP
                       />
                     </div>
                     <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center" />
