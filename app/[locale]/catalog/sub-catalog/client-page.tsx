@@ -74,50 +74,49 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
         )}
       </div>
 
-      {/* Products */}
-      <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-0 w-full items-start">
-        {productsToRender?.length ? (
-          productsToRender.map((el) => {
-            const isAccessories = el.tags?.some((t) => t.name === "accessories");
-            const cardClass = isAccessories
-              ? `mx-0 ${styles.headSubCatalogBlockMini}`
-              : `mx-2 ${styles.headSubCatalogBlock}`;
+        <div className="flex flex-wrap justify-start self-start mt-4 mb-4 ml-2 items-start">
+          {productsToRender?.length ? (
+            productsToRender.map((el) => {
+              const isAccessories = el.tags?.some((t) => t.name === "accessories");
+              const cardClass = isAccessories
+                ? `mx-1 sm:mx-2 ${styles.headSubCatalogBlockMini}`
+                : `mx-1 sm:mx-7 ${styles.headSubCatalogBlock}`;
 
-            const url = `/catalog/sub-catalog/product/${el.translations[locale as any]}?category=${encodeURIComponent(selectedCategory || "")}`;
+              const url = `/catalog/sub-catalog/product/${el.translations[locale as any]}?category=${encodeURIComponent(selectedCategory || "")}`;
 
-            return (
-              <div key={el.id} className={classNames("mb-5 flex flex-col justify-center items-center", cardClass)}>
-                <div className="w-full text-center">
-                  <div className="cursor-pointer"
-                    onClick={() => {
-                      if (isIOS) router.push(url);
-                      else window.location.href = url;
-                    }}>
-                    <div className="cursor-pointer flex justify-center">
-                      <Image
-                        src={el.images[0].src}
-                        alt={el.images[0].alt}
-                        width={200}
-                        height={250}
-                        fetchPriority="high"
-                        className="w-full h-auto object-contain"
-                        sizes="(max-width: 768px) 200px, (max-width: 1200px) 400px, 800px" // ✅ адаптивність
-                        priority // тільки перше зображення для LCP
-                      />
-                    </div>
-                    <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center" />
-                    <div className="flex justify-center">
-                      <h3 className="flex justify-center h-20 w-full px-2">{el.name}</h3>
+              return (
+                <div key={el.id} className={classNames("mb-5 flex flex-col justify-center items-center", cardClass)}>
+                  <div className="w-full text-center">
+                    <div className="cursor-pointer"
+                      onClick={() => {
+                        if (isIOS) router.push(url);
+                        else window.location.href = url;
+                      }}>
+                      <div className="cursor-pointer flex justify-center">
+                        <Image
+                          src={el.images[0].src}
+                          alt={el.images[0].alt}
+                          width={200}
+                          height={250}
+                          fetchPriority="high"
+                          className="w-full h-auto object-contain"
+                          sizes="(max-width: 768px) 200px, (max-width: 1200px) 400px, 800px" // ✅ адаптивність
+                          priority // тільки перше зображення для LCP
+                        />
+                      </div>
+                      <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center" />
+                      <div className="flex justify-center">
+                        <h3 className="flex justify-center h-20 w-full px-2">{el.name}</h3>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          })
-        ) : (
-          <h2 className="text-amber-700" />
-        )}
-      </div>
+              );
+            })
+          ) : (
+            <h2 className="text-amber-700" />
+          )}
+        </div>
 
       {/* Load more */}
       {sortedProducts.length > visibleCount && (
