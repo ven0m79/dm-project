@@ -51,11 +51,18 @@ const nextConfig = {
       },
     ];
   },
-  images: {
-    formats: ['image/avif', 'image/webp'], // ✅ найефективніші формати
-    domains: ['api.dm-project.com.ua'], // ✅ якщо картинки тягнуться ззовні
-    deviceSizes: [320, 480, 768, 1024, 1280, 1600], // ✅ адаптивні розміри
-  },
+images: {
+  formats: ['image/avif', 'image/webp'],
+  domains: ['api.dm-project.com.ua'],
+  remotePatterns: [
+    {
+      protocol: 'https',
+      hostname: 'api.dm-project.com.ua',
+      pathname: '/**',
+    },
+  ],
+  deviceSizes: [320, 480, 768, 1024, 1280, 1600],
+},
 };
 
 export default withNextIntl(nextConfig);
