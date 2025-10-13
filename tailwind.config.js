@@ -8,11 +8,7 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-  extend: {
-    fontFamily: {
-      roboto: ['var(--font-roboto)', 'sans-serif'],
-    },
+    extend: {},
   },
-},
   plugins: [],
 }

@@ -22,7 +22,6 @@
 /* підключення змінної шрифту від next/font */
 
 :root {
-  --font-roboto: "Roboto", sans-serif;
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -30,7 +29,6 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --font-roboto: "Roboto", sans-serif;
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
@@ -38,8 +36,8 @@
 }
 
 html, body {
+  font-family: var(--font-roboto) !important;
   margin: 0 !important;
-  font-family: var(--font-roboto);
 }
 
 ul {

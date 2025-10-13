@@ -32,7 +32,6 @@ button:hover {
     background-color: rgba(255, 155, 155, 0.2);
     width: 220px;
     height: 120px;
-    font-family: 'Edu QLD Beginner', Verdana, Geneva, Tahoma, sans-serif;
     font-size: 23px;
     color: cornsilk;
     border-radius: 5%;
@@ -44,7 +43,6 @@ button:hover {
     inset 0 0 20px rgba(0,0,0,.1);
 }
 .circ-button:hover {
-    font-family: 'Edu QLD Beginner', Verdana, Geneva, Tahoma, sans-serif;
     text-shadow: 1px 1px 2px rgb(1, 1, 1);
     font-size: 24px;
 

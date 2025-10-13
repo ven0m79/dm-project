@@ -4,13 +4,11 @@
     align-content: center;
     height: auto;
     /* border: 1px solid red;  */
-    font-family: "Roboto", sans-serif;
 }
 
 @media (max-width: 640px) {
     .subCatalog {
         margin-top: 20px;
-        font-family: "Roboto", sans-serif;
         /* border: 1px solid green;   */
     }
 }

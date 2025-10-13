@@ -27,7 +27,6 @@
   align-items: center;
   margin-left: 10px;
   height: 100%;
-  font-family: Roboto;
   color: white;
   /* border: solid 1px blue; */
   background-color: #0061AA;
@@ -39,8 +38,7 @@
   padding: 15px 11px 15px 11px;
   color: #D3DDE4;
   position: relative;
-  font-family: "Roboto", sans-serif;
-
+  
   @media (max-width: 640px) {
 
 
