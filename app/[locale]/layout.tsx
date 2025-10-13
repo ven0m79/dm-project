@@ -14,12 +14,12 @@ import ClientScriptLoader from "@app/[locale]/components/atoms/scriptsBinotel/sc
 // import  getHreflangLinks  from "@app/[locale]/components/atoms/hreflang/hreflang";
 
 
-const inter = Roboto({
-  weight: ['400', '700'],
+const roboto = Roboto({
+  weight: ['400', '500', '700'],
   style: ['normal', 'italic'],
-  subsets: ['cyrillic'],
+  subsets: ['latin', 'cyrillic'],
   display: 'swap',
-  adjustFontFallback: false,
+  variable: '--font-roboto',
 })
 
 interface LocaleLayoutProps {
@@ -56,7 +56,7 @@ export default function RootLayout({
 
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className={roboto.variable}>
       <head>
 
 
@@ -109,7 +109,7 @@ export default function RootLayout({
       <body
         className={cn(
           "flex min-h-screen overflow-x-hidden bg-gray-950 text-gray-50",
-          inter.className,
+          roboto.className,
         )}
       >
         <noscript>
