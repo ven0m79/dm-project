@@ -56,7 +56,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   return (
     <>
       {/* Breadcrumbs */}
-      <div className={classNames("mt-5", { "ml-2": isMobile, "ml-4": !isMobile })}>
+      <div className={classNames("mt-6 left-0 w-full", { "ml-0": isMobile, "ml-4": !isMobile })}>
         {isMobile ? (
           <MobileBreadcrumbs
             breadcrumbs={breadcrumbs}
@@ -81,7 +81,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
             const isAccessories = el.tags?.some((t) => t.name === "accessories");
             const cardClass = isAccessories
               ? `mx-1 ${styles.headSubCatalogBlockMini}`
-              : `mx-5 ${styles.headSubCatalogBlock}`;
+              : `mx-2 ${styles.headSubCatalogBlock}`;
 
             const url = `/catalog/sub-catalog/product/${el.translations[locale as any]}?category=${encodeURIComponent(selectedCategory || "")}`;
 
