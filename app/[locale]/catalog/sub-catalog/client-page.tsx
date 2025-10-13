@@ -81,7 +81,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
             const isAccessories = el.tags?.some((t) => t.name === "accessories");
             const cardClass = isAccessories
               ? `mx-1 ${styles.headSubCatalogBlockMini}`
-              : `mx-4 ${styles.headSubCatalogBlock}`;
+              : `mx-5 ${styles.headSubCatalogBlock}`;
 
             const url = `/catalog/sub-catalog/product/${el.translations[locale as any]}?category=${encodeURIComponent(selectedCategory || "")}`;
 

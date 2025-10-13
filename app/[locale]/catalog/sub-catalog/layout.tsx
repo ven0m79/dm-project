@@ -6,7 +6,7 @@ import RSidebar from "@app/[locale]/components/molecules/rightSidebar/rightSideb
 import { MainLayout } from "@app/[locale]/components/templates";
 import classNames from "classnames";
 import styles from "./Sub-catalog.module.css";
-import { SidebarProvider, useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
+import { SidebarProvider } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 import { motion } from "framer-motion";
 
@@ -14,7 +14,6 @@ const Content: FC<{ children: ReactNode; locale: string; }> = ({
   children,
   locale,
 }) => {
-  const { getData } = useSidebar();
   const isMobile = useIsMobile();
   const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false);
   const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false);
@@ -58,7 +57,7 @@ const Content: FC<{ children: ReactNode; locale: string; }> = ({
       )}
 
       {/* Основний контент */}
-      <div className="w-screen">
+      <div className="w-full">
         {children}
       </div>
 
