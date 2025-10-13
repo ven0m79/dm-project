@@ -75,12 +75,12 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
       </div>
 
       {/* Products */}
-      <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-1 w-full items-start">
+      <div className="flex flex-wrap justify-start self-start mt-4 mb-4 mx-0 w-full items-start">
         {productsToRender?.length ? (
           productsToRender.map((el) => {
             const isAccessories = el.tags?.some((t) => t.name === "accessories");
             const cardClass = isAccessories
-              ? `mx-1 ${styles.headSubCatalogBlockMini}`
+              ? `mx-0 ${styles.headSubCatalogBlockMini}`
               : `mx-2 ${styles.headSubCatalogBlock}`;
 
             const url = `/catalog/sub-catalog/product/${el.translations[locale as any]}?category=${encodeURIComponent(selectedCategory || "")}`;
