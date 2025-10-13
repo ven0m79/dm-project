@@ -4,14 +4,17 @@
     align-content: center;
     height: auto;
     /* border: 1px solid red;  */
+    font-family: "Roboto", sans-serif;
 }
 
 @media (max-width: 640px) {
     .subCatalog {
         margin-top: 20px;
+        font-family: "Roboto", sans-serif;
         /* border: 1px solid green;   */
     }
 }
+
 .subMenu {
     border-radius: 10px;
     /* border: 1px solid blue; */
@@ -29,6 +32,7 @@
     padding-bottom: 5px;
     padding-left: 15px;
 }
+
 .subCollapse:hover {
     background-color: #0060aa10;
     border-radius: 10px;
@@ -65,13 +69,16 @@
     font-size: 18px;
 
 }
+
 .headSubCatalogTitle {
-color: #002766;
+    color: #002766;
 }
+
 .breadcrumbs {
-color: #002766;
-font-size: 14px;
-letter-spacing: -0.5px; /* трохи ближче букви одна до одної*/
+    color: #002766;
+    font-size: 14px;
+    letter-spacing: -0.5px;
+    /* трохи ближче букви одна до одної*/
 }
 
 .headSubCatalogBlock {
@@ -83,11 +90,13 @@ letter-spacing: -0.5px; /* трохи ближче букви одна до од
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     border-radius: 10px;
 }
+
 @media (max-width: 640px) {
     .headSubCatalogBlock {
         width: 160px;
-  }
+    }
 }
+
 .headSubCatalogBlockMini {
     font-size: 12px;
     color: #002766;
@@ -98,25 +107,27 @@ letter-spacing: -0.5px; /* трохи ближче букви одна до од
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     border-radius: 10px;
 }
+
 @media (max-width: 640px) {
     .headSubCatalogBlockMini {
         width: 108px;
         font-size: 10px;
-        
 
-  }
+
+    }
 }
 
-.buttons{
+.buttons {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     border-radius: 10px;
 }
+
 @media (max-width: 640px) {
     .buttons {
         box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
         border-radius: 10px;
-        
-  }
+
+    }
 }
 
 .downloadable {
