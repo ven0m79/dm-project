@@ -35,8 +35,10 @@
   }
 }
 
-html, body {
+html,
+body {
   margin: 0 !important;
+  font-family: var(--font-roboto) !important;
 }
 
 ul {

@@ -10,7 +10,6 @@ import { cn } from "@app/[locale]/components/molecules/lib/utils";
 import { unstable_setRequestLocale } from "next-intl/server";
 import Script from "next/script";
 import ClientScriptLoader from "@app/[locale]/components/atoms/scriptsBinotel/scriptsBinotel"
-import clsx from 'clsx';
 // import { Metadata } from "next";
 // import  getHreflangLinks  from "@app/[locale]/components/atoms/hreflang/hreflang";
 
@@ -53,8 +52,6 @@ export default function RootLayout({
 }: LocaleLayoutProps) {
   unstable_setRequestLocale(locale);
   const messages = useMessages();
-
-
 
   return (
     <html lang={locale}>
@@ -108,7 +105,10 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={clsx("flex min-h-screen overflow-x-hidden bg-gray-950 text-gray-50", roboto.className, )}
+        className={cn(
+          "flex min-h-screen overflow-x-hidden bg-gray-950 text-gray-50",
+          roboto.variable,
+        )}
       >
         <noscript>
           <iframe
