@@ -10,6 +10,7 @@ import { cn } from "@app/[locale]/components/molecules/lib/utils";
 import { unstable_setRequestLocale } from "next-intl/server";
 import Script from "next/script";
 import ClientScriptLoader from "@app/[locale]/components/atoms/scriptsBinotel/scriptsBinotel"
+import clsx from 'clsx';
 // import { Metadata } from "next";
 // import  getHreflangLinks  from "@app/[locale]/components/atoms/hreflang/hreflang";
 
@@ -107,10 +108,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={cn(
-          "flex min-h-screen overflow-x-hidden bg-gray-950 text-gray-50",
-          roboto.className,
-        )}
+        className={clsx("flex min-h-screen overflow-x-hidden bg-gray-950 text-gray-50", roboto.className, )}
       >
         <noscript>
           <iframe
