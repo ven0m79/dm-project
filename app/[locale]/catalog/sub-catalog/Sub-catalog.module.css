@@ -1,5 +1,6 @@
 .subCatalog {
     max-width: 1400px;
+    width: 100%;
     min-width: none;
     align-content: center;
     height: auto;
