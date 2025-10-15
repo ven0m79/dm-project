@@ -11,12 +11,14 @@ import { getCategoriesIds } from "@app/[locale]/components/constants";
 import MobileBreadcrumbs from "./product/[productId]/MobileBreadcrumbs";
 import DesktopBreadcrumbs from "./product/[productId]/DesktopBreadcrumbs";
 import Image from "next/image";
+import { TransformedCategoriesType } from "./helpers";
 
 export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   const {
     selectedProducts,
     setSelectedCategoryId,
     setOpenedCategoryIds,
+    categories,
     selectedCategory,
   } = useSidebar();
 
@@ -52,6 +54,22 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
     () => sortedProducts.slice(0, visibleCount),
     [sortedProducts, visibleCount]
   );
+    const categoriesDescriptionMap = useMemo(() => {
+    const map = new Map<number, string>();
+    const traverse = (cats: TransformedCategoriesType[]) => {
+      cats.forEach(cat => {
+        map.set(cat.id, cat.description || "");
+        if (cat.childrens?.length) traverse(cat.childrens);
+      });
+    };
+    if (categories?.length) traverse(categories);
+    return map;
+  }, [categories]);
+
+  const categoryDescription = useMemo(() => {
+    if (!categoryId) return "";
+    return categoriesDescriptionMap.get(categoryId) || "";
+  }, [categoryId, categoriesDescriptionMap]);
 
   return (
     <>
@@ -74,49 +92,49 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
         )}
       </div>
 
-        <div className="flex flex-wrap justify-start self-start mt-4 mb-4 ml-2 items-start">
-          {productsToRender?.length ? (
-            productsToRender.map((el) => {
-              const isAccessories = el.tags?.some((t) => t.name === "accessories");
-              const cardClass = isAccessories
-                ? `mx-1 sm:mx-2 ${styles.headSubCatalogBlockMini}`
-                : `mx-1 sm:mx-6 ${styles.headSubCatalogBlock}`;
+      <div className="flex flex-wrap justify-start self-start mt-4 mb-4 ml-2 items-start">
+        {productsToRender?.length ? (
+          productsToRender.map((el) => {
+            const isAccessories = el.tags?.some((t) => t.name === "accessories");
+            const cardClass = isAccessories
+              ? `mx-1 sm:mx-2 ${styles.headSubCatalogBlockMini}`
+              : `mx-1 sm:mx-6 ${styles.headSubCatalogBlock}`;
 
-              const url = `/catalog/sub-catalog/product/${el.translations[locale as any]}?category=${encodeURIComponent(selectedCategory || "")}`;
+            const url = `/catalog/sub-catalog/product/${el.translations[locale as any]}?category=${encodeURIComponent(selectedCategory || "")}`;
 
-              return (
-                <div key={el.id} className={classNames("mb-5 flex flex-col justify-center items-center", cardClass)}>
-                  <div className="w-full text-center">
-                    <div className="cursor-pointer"
-                      onClick={() => {
-                        if (isIOS) router.push(url);
-                        else window.location.href = url;
-                      }}>
-                      <div className="cursor-pointer flex justify-center">
-                        <Image
-                          src={el.images[0].src}
-                          alt={el.images[0].alt}
-                          width={200}
-                          height={250}
-                          fetchPriority="high"
-                          className="w-full h-auto object-contain"
-                          sizes="(max-width: 768px) 200px, (max-width: 1200px) 400px, 800px" // ✅ адаптивність
-                          priority // тільки перше зображення для LCP
-                        />
-                      </div>
-                      <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center" />
-                      <div className="flex justify-center">
-                        <h3 className="flex justify-center h-20 w-full px-2">{el.name}</h3>
-                      </div>
+            return (
+              <div key={el.id} className={classNames("mb-5 flex flex-col justify-center items-center", cardClass)}>
+                <div className="w-full text-center">
+                  <div className="cursor-pointer"
+                    onClick={() => {
+                      if (isIOS) router.push(url);
+                      else window.location.href = url;
+                    }}>
+                    <div className="cursor-pointer flex justify-center">
+                      <Image
+                        src={el.images[0].src}
+                        alt={el.images[0].alt}
+                        width={200}
+                        height={250}
+                        fetchPriority="high"
+                        className="w-full h-auto object-contain"
+                        sizes="(max-width: 768px) 200px, (max-width: 1200px) 400px, 800px" // ✅ адаптивність
+                        priority // тільки перше зображення для LCP
+                      />
+                    </div>
+                    <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center" />
+                    <div className="flex justify-center">
+                      <h3 className="flex justify-center h-20 w-full px-2">{el.name}</h3>
                     </div>
                   </div>
                 </div>
-              );
-            })
-          ) : (
-            <h2 className="text-amber-700" />
-          )}
-        </div>
+              </div>
+            );
+          })
+        ) : (
+          <h2 className="text-amber-700" />
+        )}
+      </div>
 
       {/* Load more */}
       {sortedProducts.length > visibleCount && (
@@ -129,6 +147,13 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
           </button>
         </div>
       )}
+      {/* Category description */}
+      <p
+        className="content text-[#0077d2] text-[15px] leading-[1.5] p-2 text-justify"
+        suppressHydrationWarning
+        style={{ textIndent: "15px" }}
+        dangerouslySetInnerHTML={{ __html: categoryDescription || "" }}
+      />
     </>
   );
 };
