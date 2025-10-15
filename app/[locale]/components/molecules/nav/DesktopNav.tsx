@@ -49,7 +49,7 @@ const DesktopNav: FC<{}> = ({ }) => {
     const pathname = usePathname();
     const t = useTranslations("Menu");
     const t2 = useTranslations("Index");
-    return <div className="items-center right-0 flex flex-1 flex-row justify-center mx-0">
+    return <div className="items-center right-0 flex flex-1 flex-row justify-center mx-0 shrink-0 max-h-[50px]">
         <div className="">
             <ul className="flex ms-center">
                 {Object.keys(NavLinks).map((el) => (

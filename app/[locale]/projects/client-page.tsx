@@ -94,6 +94,7 @@ export const ClientPage = () => {
                   className="float-left mr-5 mt-2 w-full h-auto"
                   src={imgProj}
                   alt="projectings"
+                  priority
                 />
               </div>
 

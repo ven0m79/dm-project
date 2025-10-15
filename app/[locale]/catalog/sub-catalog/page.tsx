@@ -1,39 +1,45 @@
 import type { Metadata } from "next";
 import { ClientPage } from "./client-page";
 import parse from "html-react-parser";
+import { cache } from "react";
 
 type Props = {
   params: { locale: string };
   searchParams: { category?: string };
 };
 
-// 🔹 Спільний хелпер для завантаження категорії
-async function fetchCategory(locale: string, slug?: string) {
-  if (!slug) return null;
+export const revalidate = 300;
 
+const fetchCategory = cache(async (locale: string, slug?: string) => {
+  if (!slug) return null;
   try {
-    const categories = await fetch(`https://api.dm-project.com.ua/wp-json/wc/v3/products/categories?slug=${slug}&lang=${locale}&consumer_key=${process.env.WC_CONSUMER_KEY}&consumer_secret=${process.env.WC_CONSUMER_SECRET}`, { next: { revalidate: 300 } }).then(res => res.json());
-    return categories?.[0] || null;
-  } catch (err) {
-    console.error("❌ fetchCategory error:", err);
+    const url = new URL("https://api.dm-project.com.ua/wp-json/wc/v3/products/categories");
+    url.searchParams.set("slug", slug);
+    url.searchParams.set("lang", locale);
+    url.searchParams.set("consumer_key", process.env.WC_CONSUMER_KEY!);
+    url.searchParams.set("consumer_secret", process.env.WC_CONSUMER_SECRET!);
+
+    const res = await fetch(url, { next: { revalidate } });
+    const categories = await res.json();
+    return categories?.[0] ?? null;
+  } catch (e) {
+    console.error("fetchCategory error:", e);
     return null;
   }
-}
+});
 
-// 🔹 Генерація SEO метаданих
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const category = await fetchCategory(params.locale, searchParams.category);
-
   if (!category) {
     return {
-      title: `DM-PROJECT: ${searchParams.category}`,
+      title: `DM-PROJECT: ${searchParams.category ?? "Catalog"}`,
       description: "Error fetching category details. Please try again later.",
+      metadataBase: new URL("https://dm-project.com.ua"),
     };
   }
-
   const yoast = category.yoast_head_json;
   const title = yoast?.title || category.name || searchParams.category;
-  const description = yoast?.description || category.description?.trim() || "";
+  const description = yoast?.description || (category.description || "").trim();
 
   return {
     metadataBase: new URL("https://dm-project.com.ua"),
@@ -49,6 +55,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     },
   };
 }
+
 
 // 🔹 Сторінка
 export default async function Page({ params, searchParams }: Props) {

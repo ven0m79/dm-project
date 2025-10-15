@@ -13,6 +13,9 @@
     padding-right: 20px;
     text-align: justify;
 }
+.leftContainer img {
+  min-height: 300px; /* відповідно до height з Image */
+}
 .container {
     max-width: 390px;
     width: 100%;

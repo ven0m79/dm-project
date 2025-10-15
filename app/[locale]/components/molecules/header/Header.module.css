@@ -3,7 +3,6 @@
     background: rgb(255, 255, 255);
     align-self: center;
     color: #002766;
-    font-family: "Roboto", sans-serif;
     font-size: 16px;
 
     @media (max-width: 640px) {
@@ -45,7 +44,6 @@
 .searchMob {
     @media (max-width: 640px) {
         /* border: 1px solid black; */
-
     }
 
 }
@@ -55,7 +53,7 @@
     margin: 10px 5px 10px 50px;
     /*top right button left*/
     vertical-align: middle;
-    font-family: "Roboto", sans-serif;
+
 }
 
 .contactsGroup {
@@ -63,7 +61,6 @@
     margin: 10px 10px 10px 10px;
     /*top right button left*/
     vertical-align: middle;
-    font-family: "Roboto", sans-serif;
 }
 
 .search {
@@ -74,7 +71,6 @@
     outline: none;
 
     vertical-align: middle;
-    font-family: "Roboto", sans-serif;
     padding: 0 20px;
     z-index: 50;
 }
@@ -85,7 +81,6 @@
     vertical-align: middle;
     text-align: right;
     background-color: #0061AAa5;
-    font-family: "Roboto", sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -95,7 +90,6 @@
 .langText {
     width: 100%;
     max-width: 1400px;
-    font-family: "Roboto";
     font-weight: 500;
 
 }

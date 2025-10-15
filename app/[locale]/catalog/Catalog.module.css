@@ -1,6 +1,7 @@
 .catalogContainer {
     align-self: center;
     max-width: 1400px;
+    min-height: 300px;
 
     @media (max-width: 640px) {
         width: 100%;

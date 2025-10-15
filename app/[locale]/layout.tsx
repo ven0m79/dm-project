@@ -9,18 +9,17 @@ import "./globals.css";
 import { cn } from "@app/[locale]/components/molecules/lib/utils";
 import { unstable_setRequestLocale } from "next-intl/server";
 import Script from "next/script";
-import { usePathname } from "next/navigation";
 import ClientScriptLoader from "@app/[locale]/components/atoms/scriptsBinotel/scriptsBinotel"
 // import { Metadata } from "next";
 // import  getHreflangLinks  from "@app/[locale]/components/atoms/hreflang/hreflang";
 
 
-const inter = Roboto({
-  weight: ['400', '700'],
+const roboto = Roboto({
+  weight: ['400', '500', '700'],
   style: ['normal', 'italic'],
-  subsets: ['cyrillic'],
+  subsets: ['latin', 'cyrillic'],
   display: 'swap',
-  adjustFontFallback: false,
+  variable: '--font-roboto',
 })
 
 interface LocaleLayoutProps {
@@ -54,8 +53,6 @@ export default function RootLayout({
   unstable_setRequestLocale(locale);
   const messages = useMessages();
 
-
-
   return (
     <html lang={locale}>
       <head>
@@ -63,11 +60,11 @@ export default function RootLayout({
 
         {/* ✅ Обидва скрипти у <head> */}
         <Script
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=GT-P3NZ9SN9" />
         <Script
           id="gtag-init"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
           window.dataLayer = window.dataLayer || [];
@@ -78,12 +75,12 @@ export default function RootLayout({
         />
 
         <Script
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=AW-17295797148"
         />
         <Script
           id="gtag-init"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
@@ -95,7 +92,7 @@ export default function RootLayout({
         />
         <Script
           id="gtm-script"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -110,7 +107,7 @@ export default function RootLayout({
       <body
         className={cn(
           "flex min-h-screen overflow-x-hidden bg-gray-950 text-gray-50",
-          inter.className,
+          roboto.variable,
         )}
       >
         <noscript>

@@ -2,9 +2,9 @@
 @import "../../node_modules/tailwindcss/components.css";
 @import "../../node_modules/tailwindcss/utilities.css";
 
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"); */
 
-@font-face {
+/* @font-face {
   font-family: "Roboto";
   src: url("https://db.onlinewebfonts.com/t/0033a2fbc0329740fb86c1cfd134cb94.eot");
   src:
@@ -18,7 +18,8 @@
       format("truetype"),
     url("https://db.onlinewebfonts.com/t/0033a2fbc0329740fb86c1cfd134cb94.svg#Roboto")
       format("svg");
-}
+} */
+/* підключення змінної шрифту від next/font */
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -34,9 +35,10 @@
   }
 }
 
+html,
 body {
   margin: 0 !important;
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-roboto) !important;
 }
 
 ul {
@@ -56,6 +58,7 @@ button {
   margin-top: 20px;
   margin-bottom: 5px;
 }
+
 .h3 {
   font-size: 18px;
   font-weight: bold;
@@ -65,6 +68,7 @@ button {
   margin-top: 20px;
   margin-bottom: 5px;
 }
+
 .h4 {
   font-size: 16px;
   font-weight: bold;
@@ -74,6 +78,7 @@ button {
   margin-top: 20px;
   margin-bottom: 5px;
 }
+
 .img1 {
   padding: 4px;
   display: flex;
@@ -81,6 +86,7 @@ button {
 
   width: 100%;
 }
+
 .img2 {
   padding-left: 4px;
   display: flex;
@@ -93,19 +99,21 @@ button {
   display: flex;
   float: left;
 }
+
 .ul1 {
   font-size: 16px;
   color: #0061aa !important;
   text-align: justify;
-  
+
   line-height: 27px;
   list-style-type: disc;
 }
-.ul1 > li {
+
+.ul1>li {
   color: #0061aa !important;
 }
 
-.ul1 > li > span {
+.ul1>li>span {
   color: #0061aa !important;
   margin-right: 20px;
   text-indent: 20px;
@@ -115,31 +123,33 @@ button {
   font-size: 24px;
   color: #0061aa !important;
   text-align: justify;
-  
+
   line-height: 27px;
   list-style-type: disc;
 }
 
-.ul2 > li {
+.ul2>li {
   color: #002766 !important;
   margin-right: 20px;
   padding-right: 20px;
 }
 
-.ul2 > li > span {
+.ul2>li>span {
   color: #002766 !important;
   margin-right: 20px;
   padding-right: 20px;
 }
+
 .ul3 {
   font-size: 16px;
   color: #0061aa !important;
   text-align: justify;
-  
+
   line-height: 27px;
   list-style-type: disc;
 }
-.ul3 > li {
+
+.ul3>li {
   display: block;
   color: #0061aa !important;
 
@@ -148,7 +158,7 @@ button {
 }
 
 
-.ul3 > li > span {
+.ul3>li>span {
   margin-right: 20px;
 }
 
@@ -160,6 +170,7 @@ button {
   text-indent: 20px;
   line-height: 27px;
 }
+
 .productTextBack {
   font-size: 14px;
   font-weight: normal;
@@ -167,6 +178,7 @@ button {
   background-color: #f8f8f8;
   text-align: justify;
 }
+
 .productDesc {
   font-size: 16px;
   font-weight: normal;
@@ -175,21 +187,24 @@ button {
   text-indent: 20px;
   line-height: 27px;
 }
+
 .stroke {
   align-self: center;
   width: 100%;
-  height: 1px; 
+  height: 1px;
   margin-top: 15px;
   margin-bottom: 10px;
   background: linear-gradient(to right, #ffffff00 0%, #0061AA 45%, #0061AA 55%, #ffffff00 100%);
 
 }
+
 .table1 {
   margin-top: 20px;
   font-size: 14px;
   color: #0061aa;
   line-height: 27px;
 }
+
 .thead1 {
   font-size: 16px;
   color: #0061aa;
@@ -201,21 +216,25 @@ button {
   /* change color here */
   color: #1c4c5b
 }
+
 .lds-roller,
 .lds-roller div,
 .lds-roller div:after {
   box-sizing: border-box;
 }
+
 .lds-roller {
   display: inline-block;
   position: relative;
   width: 80px;
   height: 80px;
 }
+
 .lds-roller div {
   animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   transform-origin: 40px 40px;
 }
+
 .lds-roller div:after {
   content: " ";
   display: block;
@@ -226,66 +245,84 @@ button {
   background: currentColor;
   margin: -3.6px 0 0 -3.6px;
 }
+
 .lds-roller div:nth-child(1) {
   animation-delay: -0.036s;
 }
+
 .lds-roller div:nth-child(1):after {
   top: 62.62742px;
   left: 62.62742px;
 }
+
 .lds-roller div:nth-child(2) {
   animation-delay: -0.072s;
 }
+
 .lds-roller div:nth-child(2):after {
   top: 67.71281px;
   left: 56px;
 }
+
 .lds-roller div:nth-child(3) {
   animation-delay: -0.108s;
 }
+
 .lds-roller div:nth-child(3):after {
   top: 70.90963px;
   left: 48.28221px;
 }
+
 .lds-roller div:nth-child(4) {
   animation-delay: -0.144s;
 }
+
 .lds-roller div:nth-child(4):after {
   top: 72px;
   left: 40px;
 }
+
 .lds-roller div:nth-child(5) {
   animation-delay: -0.18s;
 }
+
 .lds-roller div:nth-child(5):after {
   top: 70.90963px;
   left: 31.71779px;
 }
+
 .lds-roller div:nth-child(6) {
   animation-delay: -0.216s;
 }
+
 .lds-roller div:nth-child(6):after {
   top: 67.71281px;
   left: 24px;
 }
+
 .lds-roller div:nth-child(7) {
   animation-delay: -0.252s;
 }
+
 .lds-roller div:nth-child(7):after {
   top: 62.62742px;
   left: 17.37258px;
 }
+
 .lds-roller div:nth-child(8) {
   animation-delay: -0.288s;
 }
+
 .lds-roller div:nth-child(8):after {
   top: 56px;
   left: 12.28719px;
 }
+
 @keyframes lds-roller {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -293,20 +330,26 @@ button {
 
 /*loader styles*/
 .lds-roller-container1 {
-  position: absolute; /* Change to absolute or fixed based on your need */
-  top: 50%;           /* Adjust position */
+  position: absolute;
+  /* Change to absolute or fixed based on your need */
+  top: 50%;
+  /* Adjust position */
   left: 50%;
-  transform: translate(-50%, -50%);  /* Center it in the middle of the screen */
+  transform: translate(-50%, -50%);
+  /* Center it in the middle of the screen */
 }
+
 .lds-roller1 {
   /* change color here */
   color: #1500ffaa
 }
+
 .lds-roller1,
 .lds-roller1 div,
 .lds-roller1 div:after {
   box-sizing: border-box;
 }
+
 .lds-roller1 {
   transform: scale(0.2);
   display: inline-block;
@@ -314,11 +357,13 @@ button {
   width: 40px;
   height: 40px;
 }
+
 .lds-roller1 div {
   animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   transform: scale(0.2);
   transform-origin: 40px 40px;
 }
+
 .lds-roller1 div:after {
   content: " ";
   display: block;
@@ -329,66 +374,84 @@ button {
   background: currentColor;
   margin: -3.6px 0 0 -3.6px;
 }
+
 .lds-roller1 div:nth-child(1) {
   animation-delay: -0.036s;
 }
+
 .lds-roller1 div:nth-child(1):after {
   top: 62.62742px;
   left: 62.62742px;
 }
+
 .lds-roller1 div:nth-child(2) {
   animation-delay: -0.072s;
 }
+
 .lds-roller1 div:nth-child(2):after {
   top: 67.71281px;
   left: 56px;
 }
+
 .lds-roller1 div:nth-child(3) {
   animation-delay: -0.108s;
 }
+
 .lds-roller1 div:nth-child(3):after {
   top: 70.90963px;
   left: 48.28221px;
 }
+
 .lds-roller1 div:nth-child(4) {
   animation-delay: -0.144s;
 }
+
 .lds-roller1 div:nth-child(4):after {
   top: 72px;
   left: 40px;
 }
+
 .lds-roller1 div:nth-child(5) {
   animation-delay: -0.18s;
 }
+
 .lds-roller1 div:nth-child(5):after {
   top: 70.90963px;
   left: 31.71779px;
 }
+
 .lds-roller1 div:nth-child(6) {
   animation-delay: -0.216s;
 }
+
 .lds-roller1 div:nth-child(6):after {
   top: 67.71281px;
   left: 24px;
 }
+
 .lds-roller1 div:nth-child(7) {
   animation-delay: -0.252s;
 }
+
 .lds-roller1 div:nth-child(7):after {
   top: 62.62742px;
   left: 17.37258px;
 }
+
 .lds-roller1 div:nth-child(8) {
   animation-delay: -0.288s;
 }
+
 .lds-roller1 div:nth-child(8):after {
   top: 56px;
   left: 12.28719px;
 }
+
 @keyframes lds-roller1 {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
