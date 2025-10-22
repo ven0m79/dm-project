@@ -104,6 +104,13 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
       </div>
     );
   }
+
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <div className="flex self-center flex-col max-w-[800px] mb-8">
       {/* Breadcrumbs */}
@@ -154,7 +161,11 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                         {details.price && (
                           <span className="text-[#0061AA] text-[18px]">
                             <span className="font-bold text-[#002766]">
-                              {/\s|,|;/.test(details.sku || "") ? "Ціна від:" : "Ціна:"}
+                              {!mounted
+                                ? "Ціна:" // Під час SSR і до гідрації — завжди однаково
+                                : /\s|,|;/.test(details.sku || "")
+                                  ? "Ціна від:"
+                                  : "Ціна:"}
                             </span>{" "}
                             {String(details.price).replace(".", ",")} {t("grn")}
                           </span>
