@@ -54,7 +54,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
     () => sortedProducts.slice(0, visibleCount),
     [sortedProducts, visibleCount]
   );
-    const categoriesDescriptionMap = useMemo(() => {
+  const categoriesDescriptionMap = useMemo(() => {
     const map = new Map<number, string>();
     const traverse = (cats: TransformedCategoriesType[]) => {
       cats.forEach(cat => {
@@ -110,6 +110,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                       if (isIOS) router.push(url);
                       else window.location.href = url;
                     }}>
+                    <div className="w-full px-2">{el.sku.length > 7 ? `${el.sku.slice(0, 7)}..` : el.sku}</div>
                     <div className="cursor-pointer flex justify-center">
                       <Image
                         src={el.images[0].src}

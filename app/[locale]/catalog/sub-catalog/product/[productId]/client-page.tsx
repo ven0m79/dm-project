@@ -81,7 +81,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
   const [loading] = useState<boolean>(!details);
 
   // ✅ Breadcrumbs
- const { breadcrumbs, buildCategoryTrail } = useBreadcrumbs();
+  const { breadcrumbs, buildCategoryTrail } = useBreadcrumbs();
   const isIOS = typeof window !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
   // ✅ YouTube meta
@@ -89,7 +89,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
   const youtubeUrl = Array.isArray(youtubeMeta?.value) ? youtubeMeta?.value[0] : youtubeMeta?.value;
 
   const isAccessories = details?.tags?.map((el) => el.name)?.includes("accessories");
- 
+
   // ✅ Викликаємо buildCategoryTrail після mount
   React.useEffect(() => {
     if (details?.categories?.length) {
@@ -153,7 +153,10 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                       <div className={classNames("text-normal sm:mt-12 mt-6 justify-center")}>
                         {details.price && (
                           <span className="text-[#0061AA] text-[18px]">
-                            <span className="font-bold text-[#002766]">Ціна:</span> {String(details.price).replace(".", ",")} {t("grn")}
+                            <span className="font-bold text-[#002766]">
+                              {/\s|,|;/.test(details.sku || "") ? "Ціна від:" : "Ціна:"}
+                            </span>{" "}
+                            {String(details.price).replace(".", ",")} {t("grn")}
                           </span>
                         )}
                       </div>
@@ -173,7 +176,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                     <div className={styles.downloadable}>
                       <Link href={"../../../../contacts"}>{t("product-request")}</Link>
                     </div>
-                    <br/>
+                    <br />
                     {!isAccessories && (
                       <div className={classNames("flex items-center", styles.downloadable)}>
                         <Link href={"../../../../services"}>{t("product-services")}</Link>
