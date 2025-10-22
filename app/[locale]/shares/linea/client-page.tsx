@@ -24,6 +24,7 @@ const SharesLinea = () => {
                     <h3 className="text-justify text-[18px] font-bold sm:text-[20px]">{t('shares-linea-title')}</h3>
                     <div className="flex flex-wrap">
                         <p className="indent-5 text-justify">{t('shares-linea-prehead')} <span className="font-bold text-nowrap">3 103,00 у.о.</span></p>
+                                  <p><span className="font-bold">{t("shares-atlan300-pehead1")}</span></p>
                         <div className="w-full flex flax-wrap justify-center my-2">
                             <Image
                                 className={classNames("w-1/2",styles.img)}

@@ -22,7 +22,8 @@ const SharesAtlan = () => {
             "flex flex-col justify-center mb-5 w-full",
             [styles.catalogContainerDeeper],)}>
           <h3 className="text-justify text-[18px] font-bold sm:text-[20px]">{t("shares-atlan300-title")}</h3>
-          <p className="text-justify">{t("shares-atlan300-pehead")}{" "}<span className="font-bold">51 700,00 у.о.</span><br /><span className="font-bold">(можливе розтермінування після індивілуальної консультаціі)</span></p>
+          <p className="text-justify">{t("shares-atlan300-pehead")}{" "}<span className="font-bold">51 700,00 у.о.</span></p>
+          <p><span className="font-bold">{t("shares-atlan300-pehead1")}</span></p>
           <div className="flex flex-col w-full lg:flex-row">
             <div className="lg:w-1/2 w-full  flex flax-wrap justify-center my-2">
               <Image

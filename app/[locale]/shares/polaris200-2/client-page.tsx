@@ -15,7 +15,7 @@ const SharesPolaris2002 = () => {
         <MainLayout>
             <div
                 className={classNames(
-                    "w-full flex flex-wrap justify-center mb-3 mt-3", 
+                    "w-full flex flex-wrap justify-center mb-3 mt-3",
                 )}
             >
                 <div className={classNames(
@@ -24,16 +24,17 @@ const SharesPolaris2002 = () => {
                     <p className="text-justify text-[18px] font-bold sm:text-[20px]">{t('shares-polaris200-2-title')}</p>
                     <div className="flex flex-wrap">
                         <p className="indent-5 text-justify">{t('shares-polaris200-2-prehead')}<span className="font-bold text-nowrap">21 079,00 у.о.</span></p>
+                        <p><span className="font-bold">{t("shares-atlan300-pehead1")}</span></p>
                         <div className="w-full flex flax-wrap justify-center my-2">
                             <Image
-                                className={classNames("w-1/2",styles.img)}
+                                className={classNames("w-1/2", styles.img)}
                                 src={polaris2_1}
                                 width={400}
                                 height={100}
                                 alt="polaris200-2"
                             />
                             <Image
-                                className={classNames("w-1/2",styles.img)}
+                                className={classNames("w-1/2", styles.img)}
                                 src={polaris2_2}
                                 width={400}
                                 height={100}
@@ -47,7 +48,7 @@ const SharesPolaris2002 = () => {
                         </div>
 
                         <div className={classNames("self-center my-2 indent-5 text-justify", styles["catalogContainer"])}>
-                            
+
                             <p className="my-2">{t('shares-polaris200-2-text1')}</p>
                             <p className="my-2">{t('shares-polaris200-2-text2')}</p>
                             <Image

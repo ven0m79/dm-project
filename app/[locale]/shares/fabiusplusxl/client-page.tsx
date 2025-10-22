@@ -23,6 +23,7 @@ const SharesFabiusXL = () => {
                     [styles.catalogContainerDeeper])}>
                     <h3 className="text-justify text-[18px] font-bold sm:text-[20px]">{t('shares-fabius-title')}</h3>
                     <p className="text-justify">{t('shares-fabius-pehead')} <span className="font-bold text-nowrap">45 450,00 у.о.</span></p>
+                    <p><span className="font-bold">{t("shares-atlan300-pehead1")}</span></p>
                     <div className="flex flex-col w-full lg:flex-row">
                         <div className="lg:w-1/2 w-full  flex flax-wrap justify-center my-2">
                             <Image
