@@ -80,20 +80,13 @@ export const ClientPage = () => {
       });
   };
   
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const urlParams = new URLSearchParams(window.location.search);
-      const nameFromQuery = urlParams.get("productName");
+useEffect(() => {
+  const nameFromQuery = searchParams?.get("productName");
+  if (nameFromQuery) {
+    setProductName(decodeURIComponent(nameFromQuery));
+  }
+}, [searchParams]);
 
-      if (nameFromQuery) {
-        setProductName(decodeURIComponent(nameFromQuery));
-
-        // 🧹 Очищаємо URL від параметра
-        const newUrl = window.location.pathname;
-        window.history.replaceState({}, "", newUrl);
-      }
-    }
-  }, []);
 
   return (
     <MainLayout>

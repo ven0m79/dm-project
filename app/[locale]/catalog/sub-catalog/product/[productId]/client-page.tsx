@@ -98,6 +98,10 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
     }
   }, [details, locale, buildCategoryTrail]);
 
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
   if (!details) {
     return (
       <div className="flex w-full h-4/5 justify-center items-center">
@@ -105,6 +109,8 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
       </div>
     );
   }
+
+
 
   return (
     <div className="flex self-center flex-col max-w-[800px] mb-8">
@@ -182,12 +188,13 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                     <div className={styles.downloadable}>
                       <Link
                         href={{
-                          pathname: "../../../../contacts",
-                          query: { productName: details.name },
+                          pathname: `/${locale}/contacts`,
+                          query: { productName: encodeURIComponent(details.name) },
                         }}
                       >
                         {t("product-request")}
                       </Link>
+
                     </div>
                     <br />
                     {!isAccessories && (
