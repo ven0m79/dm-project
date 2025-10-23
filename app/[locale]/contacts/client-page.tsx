@@ -79,14 +79,21 @@ export const ClientPage = () => {
         setStatus('Сталася помилка.');
       });
   };
-
+  
   useEffect(() => {
-    const nameFromQuery = searchParams?.get("productName");
-    if (nameFromQuery) setProductName(decodeURIComponent(nameFromQuery));
-    // 🧹 Очищаємо URL від параметра після зчитування
-    const newUrl = window.location.pathname; // поточна сторінка без параметрів
-    window.history.replaceState({}, "", newUrl);
-  }, [searchParams]);
+    if (typeof window !== "undefined") {
+      const urlParams = new URLSearchParams(window.location.search);
+      const nameFromQuery = urlParams.get("productName");
+
+      if (nameFromQuery) {
+        setProductName(decodeURIComponent(nameFromQuery));
+
+        // 🧹 Очищаємо URL від параметра
+        const newUrl = window.location.pathname;
+        window.history.replaceState({}, "", newUrl);
+      }
+    }
+  }, []);
 
   return (
     <MainLayout>
