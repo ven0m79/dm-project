@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { useState } from 'react';
 import styles from './Contacts.module.css';
 import classNames from "classnames";
@@ -79,140 +79,143 @@ export const ClientPage = () => {
         setStatus('Сталася помилка.');
       });
   };
-  
-useEffect(() => {
-  const nameFromQuery = searchParams?.get("productName");
-  if (nameFromQuery) {
-    setProductName(decodeURIComponent(nameFromQuery));
-  }
-}, [searchParams]);
+
+  useEffect(() => {
+    const nameFromQuery = searchParams?.get("productName");
+    if (nameFromQuery) {
+      setProductName(decodeURIComponent(nameFromQuery));
+    }
+  }, [searchParams]);
 
 
   return (
     <MainLayout>
-      <div className={classNames("flex flex-1 flex-col self-center h-auto", styles.main)}>
-        <div className={styles.sendUsMessage}>
-          {t('title')}
-        </div>
-        <div className={styles.stroke}></div>
-        <div className={classNames("flex flex-wrap justify-between items-start ", styles.catalogText)}>
-          <div className={classNames("flex flex-col justify-normal items-start ", styles.catalogAdress)}>
-            <p className="text-2xl justify-normal items-start indent-4 mt-2 sm:indent-10">
-              {t('contact-adress')}
-            </p>
-            <p className={styles.stroke1}></p>
-            <p className="flex items-center gap-3 mt-2 mb-10 text-wrap ml-10">
-              <Image
-                className={""}
-                src={adress}
-                width={30}
-                height={30}
-                alt="logo"
-              />
-              <Link href="https://share.google/OF6z6AYY01nQkUYRX">{t('contact-adress1')}</Link>
-            </p>
-            <p className="text-2xl justify-normal items-start indent-4 mt-2 sm:indent-10">
-              {t('contact-phone')}
-            </p>
-            <p className={styles.stroke1}></p>
-            <p className="flex items-center gap-3 mt-2 mb-10 text-wrap ml-10">
-              <Image
-                className={""}
-                src={phone}
-                width={30}
-                height={30}
-                alt="logo"
-              />
-              <p>
-                <a href="tel:+380754482535" className="block hover:none">+380 75-448-25-35 (відділ продажів)</a>
-                <a href="tel:+380663589810" className="block hover:none">+380 66 358-98-10 (cервісний відділ)</a>
-              </p>
-            </p>
-            <p className="text-2xl justify-normal items-start indent-4 w-full mt-2 sm:indent-10">
-              {t('contact-mail')}
-            </p>
-            <p className={styles.stroke1}></p>
-            <p className="flex items-center gap-3 mt-2 mb-10 text-wrap ml-10">
-              <Image
-                className={""}
-                src={mail}
-                width={30}
-                height={30}
-                alt="logo_email"
-              />
-              <p><a href="mailto:allinfo@dm-project.com.ua" className="block hover:none">allinfo@dm-project.com.ua</a>
-                <a href="mailto:sales@dm-project.com.ua" className="block hover:none">sales@dm-project.com.ua</a>
-                <a href="mailto:service@dm-project.com.ua" className="block hover:none">service@dm-project.com.ua</a>
-              </p>
-            </p>
+      <Suspense fallback={<div>Loading...</div>}>
+        <div className={classNames("flex flex-1 flex-col self-center h-auto", styles.main)}>
+          <div className={styles.sendUsMessage}>
+            {t('title')}
           </div>
-          <div className="flex flex-1 w-1/2">
-            <form onSubmit={handleSubmit} className={styles.container}>
-              <div className={styles.sendUsMessage}>{t('contact-form-title')}</div>
-              <input
-                className={classNames("h-10", styles.form)}
-                placeholder={t('contact-form-name')}
-                id="name"
-                type="text"
-                value={name}
-                onChange={e => setName(e.target.value)}
-              /><br />
-              <input
-                className={classNames("h-10", styles.form)}
-                placeholder={t('contact-form-mobile')}
-                id="mobile"
-                type="text"
-                value={mobile}
-                onChange={e => setMobile(e.target.value)}
-              /><br />
-              <input
-                className={classNames("h-10", styles.form)}
-                placeholder={t('contact-form-medicalFacility')}
-                id="medicalFacility"
-                type="text"
-                value={medicalFacility}
-                onChange={e => setMedicalFacility(e.target.value)}
-              /><br />
-              <input
-                className={classNames("h-10", styles.form)}
-                placeholder={t('contact-form-productName')}
-                id="productName"
-                type="text"
-                value={productName}
-                onChange={e => setProductName(e.target.value)}
-              /><br />
-              <input
-                className={classNames("h-10", styles.form)}
-                placeholder={t('contact-form-city')}
-                id="city"
-                type="text"
-                value={city}
-                onChange={e => setCity(e.target.value)}
-              /><br />
-              <input
-                className={classNames("h-10", styles.form)}
-                placeholder={t('contact-form-email')}
-                id="email"
-                type="text"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-              /><br />
-              <textarea
-                className={classNames("h-24 pt-2", styles.form)}
-                placeholder={t('contact-form-message')}
-                id="message"
-                value={message}
-                onChange={e => setMessage(e.target.value)}
-              /><br />
-              <button className={styles.yerSubmit} type="submit">{t('contact-form-submit')}</button>
-              {status && <p className="mt-2 text-sm text-green-600">{status}</p>}
-            </form>
+          <div className={styles.stroke}></div>
+          <div className={classNames("flex flex-wrap justify-between items-start ", styles.catalogText)}>
+            <div className={classNames("flex flex-col justify-normal items-start ", styles.catalogAdress)}>
+              <p className="text-2xl justify-normal items-start indent-4 mt-2 sm:indent-10">
+                {t('contact-adress')}
+              </p>
+              <p className={styles.stroke1}></p>
+              <p className="flex items-center gap-3 mt-2 mb-10 text-wrap ml-10">
+                <Image
+                  className={""}
+                  src={adress}
+                  width={30}
+                  height={30}
+                  alt="logo"
+                />
+                <Link href="https://share.google/OF6z6AYY01nQkUYRX">{t('contact-adress1')}</Link>
+              </p>
+              <p className="text-2xl justify-normal items-start indent-4 mt-2 sm:indent-10">
+                {t('contact-phone')}
+              </p>
+              <p className={styles.stroke1}></p>
+              <p className="flex items-center gap-3 mt-2 mb-10 text-wrap ml-10">
+                <Image
+                  className={""}
+                  src={phone}
+                  width={30}
+                  height={30}
+                  alt="logo"
+                />
+                <p>
+                  <a href="tel:+380754482535" className="block hover:none">+380 75-448-25-35 (відділ продажів)</a>
+                  <a href="tel:+380663589810" className="block hover:none">+380 66 358-98-10 (cервісний відділ)</a>
+                </p>
+              </p>
+              <p className="text-2xl justify-normal items-start indent-4 w-full mt-2 sm:indent-10">
+                {t('contact-mail')}
+              </p>
+              <p className={styles.stroke1}></p>
+              <p className="flex items-center gap-3 mt-2 mb-10 text-wrap ml-10">
+                <Image
+                  className={""}
+                  src={mail}
+                  width={30}
+                  height={30}
+                  alt="logo_email"
+                />
+                <p><a href="mailto:allinfo@dm-project.com.ua" className="block hover:none">allinfo@dm-project.com.ua</a>
+                  <a href="mailto:sales@dm-project.com.ua" className="block hover:none">sales@dm-project.com.ua</a>
+                  <a href="mailto:service@dm-project.com.ua" className="block hover:none">service@dm-project.com.ua</a>
+                </p>
+              </p>
+            </div>
+            <div className="flex flex-1 w-1/2">
+              <form onSubmit={handleSubmit} className={styles.container}>
+                <div className={styles.sendUsMessage}>{t('contact-form-title')}</div>
+                <input
+                  className={classNames("h-10", styles.form)}
+                  placeholder={t('contact-form-name')}
+                  id="name"
+                  type="text"
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                /><br />
+                <input
+                  className={classNames("h-10", styles.form)}
+                  placeholder={t('contact-form-mobile')}
+                  id="mobile"
+                  type="text"
+                  value={mobile}
+                  onChange={e => setMobile(e.target.value)}
+                /><br />
+                <input
+                  className={classNames("h-10", styles.form)}
+                  placeholder={t('contact-form-medicalFacility')}
+                  id="medicalFacility"
+                  type="text"
+                  value={medicalFacility}
+                  onChange={e => setMedicalFacility(e.target.value)}
+                /><br />
+                <input
+                  className={classNames("h-10", styles.form)}
+                  placeholder={t('contact-form-productName')}
+                  id="productName"
+                  type="text"
+                  value={productName}
+                  onChange={e => setProductName(e.target.value)}
+                /><br />
+                <input
+                  className={classNames("h-10", styles.form)}
+                  placeholder={t('contact-form-city')}
+                  id="city"
+                  type="text"
+                  value={city}
+                  onChange={e => setCity(e.target.value)}
+                /><br />
+                <input
+                  className={classNames("h-10", styles.form)}
+                  placeholder={t('contact-form-email')}
+                  id="email"
+                  type="text"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                /><br />
+                <textarea
+                  className={classNames("h-24 pt-2", styles.form)}
+                  placeholder={t('contact-form-message')}
+                  id="message"
+                  value={message}
+                  onChange={e => setMessage(e.target.value)}
+                /><br />
+                <button className={styles.yerSubmit} type="submit">{t('contact-form-submit')}</button>
+                {status && <p className="mt-2 text-sm text-green-600">{status}</p>}
+              </form>
 
+            </div>
           </div>
-        </div>
 
-      </div>
+        </div>
+      </Suspense>
     </MainLayout >
+
   );
 };
 
