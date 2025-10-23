@@ -106,10 +106,6 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
     );
   }
 
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
   return (
     <div className="flex self-center flex-col max-w-[800px] mb-8">
       {/* Breadcrumbs */}
