@@ -1,5 +1,5 @@
 'use client'
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from 'react';
 import styles from './Contacts.module.css';
 import classNames from "classnames";
@@ -11,6 +11,7 @@ import phone from "./contacts-photo/telephoneContacts.png";
 import adress from "./contacts-photo/locationContacts.png";
 import { useIsMobile } from "../components/hooks/useIsMobile";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 declare global {
   interface Window {
@@ -23,14 +24,13 @@ export const ClientPage = () => {
   const [name, setName] = useState('');
   const [mobile, setMobile] = useState('');
   const [medicalFacility, setMedicalFacility] = useState('');
+  const [productName, setProductName] = useState('');
   const [city, setCity] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-
-
   const isMobile = useIsMobile();
-
   const [status, setStatus] = useState('');
+  const searchParams = useSearchParams();
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -56,7 +56,7 @@ export const ClientPage = () => {
                 form_id: "contact_form",
                 form_name: "Контактна форма",
                 form_destination: window.location.hostname,
-                form_length: 6, // у тебе: name, mobile, medicalFacility, city, email, message
+                form_length: 7, // у мене: name, mobile, medicalFacility, productName, city, email, message
               },
             });
           }
@@ -64,6 +64,7 @@ export const ClientPage = () => {
           setName('');
           setMobile('');
           setMedicalFacility('');
+          setProductName('');
           setCity('');
           setEmail('');
           setMessage('');
@@ -78,9 +79,18 @@ export const ClientPage = () => {
         setStatus('Сталася помилка.');
       });
   };
+
+  useEffect(() => {
+    const nameFromQuery = searchParams?.get("productName");
+    if (nameFromQuery) setProductName(decodeURIComponent(nameFromQuery));
+    // 🧹 Очищаємо URL від параметра після зчитування
+    const newUrl = window.location.pathname; // поточна сторінка без параметрів
+    window.history.replaceState({}, "", newUrl);
+  }, [searchParams]);
+
   return (
     <MainLayout>
-      <div className={classNames("flex flex-1 flex-col self-center", styles.main)}>
+      <div className={classNames("flex flex-1 flex-col self-center h-auto", styles.main)}>
         <div className={styles.sendUsMessage}>
           {t('title')}
         </div>
@@ -97,7 +107,7 @@ export const ClientPage = () => {
                 src={adress}
                 width={30}
                 height={30}
-                alt="logo"                
+                alt="logo"
               />
               <Link href="https://share.google/OF6z6AYY01nQkUYRX">{t('contact-adress1')}</Link>
             </p>
@@ -151,7 +161,7 @@ export const ClientPage = () => {
                 className={classNames("h-10", styles.form)}
                 placeholder={t('contact-form-mobile')}
                 id="mobile"
-                type="mobile"
+                type="text"
                 value={mobile}
                 onChange={e => setMobile(e.target.value)}
               /><br />
@@ -159,15 +169,23 @@ export const ClientPage = () => {
                 className={classNames("h-10", styles.form)}
                 placeholder={t('contact-form-medicalFacility')}
                 id="medicalFacility"
-                type="medicalFacility"
+                type="text"
                 value={medicalFacility}
                 onChange={e => setMedicalFacility(e.target.value)}
               /><br />
               <input
                 className={classNames("h-10", styles.form)}
+                placeholder={t('contact-form-productName')}
+                id="productName"
+                type="text"
+                value={productName}
+                onChange={e => setProductName(e.target.value)}
+              /><br />
+              <input
+                className={classNames("h-10", styles.form)}
                 placeholder={t('contact-form-city')}
                 id="city"
-                type="city"
+                type="text"
                 value={city}
                 onChange={e => setCity(e.target.value)}
               /><br />
@@ -175,7 +193,7 @@ export const ClientPage = () => {
                 className={classNames("h-10", styles.form)}
                 placeholder={t('contact-form-email')}
                 id="email"
-                type="email"
+                type="text"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
               /><br />
@@ -187,7 +205,7 @@ export const ClientPage = () => {
                 onChange={e => setMessage(e.target.value)}
               /><br />
               <button className={styles.yerSubmit} type="submit">{t('contact-form-submit')}</button>
-              {status && <p className="mt-4 text-sm text-green-600">{status}</p>}
+              {status && <p className="mt-2 text-sm text-green-600">{status}</p>}
             </form>
 
           </div>

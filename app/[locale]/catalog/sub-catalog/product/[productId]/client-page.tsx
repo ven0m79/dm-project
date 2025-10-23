@@ -185,7 +185,14 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                   <div className="sm:h-[20px] h-[5px]"></div>
                   <div className="flex flex-col justify-between items-center">
                     <div className={styles.downloadable}>
-                      <Link href={"../../../../contacts"}>{t("product-request")}</Link>
+                      <Link
+                        href={{
+                          pathname: "../../../../contacts",
+                          query: { productName: details.name },
+                        }}
+                      >
+                        {t("product-request")}
+                      </Link>
                     </div>
                     <br />
                     {!isAccessories && (

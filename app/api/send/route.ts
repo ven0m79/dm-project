@@ -4,7 +4,7 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY_FOR_CONTACTS);
 
 export async function POST(req: Request) {
-  const { name, mobile, medicalFacility, city, email, message } = await req.json();
+  const { name, mobile, medicalFacility, productName, city, email, message } = await req.json();
 
   try {
     const data = await resend.emails.send({
@@ -15,18 +15,17 @@ export async function POST(req: Request) {
       text: `
         Ім’я: ${name}
         Мобільний: ${mobile}
+        Назва товару: ${productName}
         Медичний заклад: ${medicalFacility}
         Місто: ${city}
         Email: ${email}
-
-Повідомлення:
-${message}
+        Повідомлення: ${message}
       `,
     });
 
     console.log("✅ Лист надіслано, результат:", data);
     console.log("📨 FROM:", process.env.RESEND_FROM);
-    
+
     return NextResponse.json({ success: true, data });
   } catch (error) {
     console.error("❌ Помилка при відправці:", error);
