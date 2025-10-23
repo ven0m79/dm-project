@@ -30,11 +30,22 @@ export const ClientPage = () => {
   const [message, setMessage] = useState('');
   const isMobile = useIsMobile();
   const [status, setStatus] = useState('');
-  const searchParams = useSearchParams();
+  //const searchParams = useSearchParams();
+
+
+useEffect(() => {
+  if (!productName && typeof window !== "undefined") {
+    const params = new URLSearchParams(window.location.search);
+    const productFromUrl = params.get("productName");
+    if (productFromUrl) setProductName(productFromUrl.replace(/\+/g, " "));
+  }
+}, [productName]);
+
+
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    const data = { name, mobile, medicalFacility, city, email, message };
+    const data = { name, mobile, medicalFacility, productName, city, email, message };
 
     fetch('/api/send', {
       method: 'POST',
@@ -79,14 +90,6 @@ export const ClientPage = () => {
         setStatus('Сталася помилка.');
       });
   };
-
-  useEffect(() => {
-    const nameFromQuery = searchParams?.get("productName");
-    if (nameFromQuery) {
-      setProductName(decodeURIComponent(nameFromQuery));
-    }
-  }, [searchParams]);
-
 
   return (
     <MainLayout>
