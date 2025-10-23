@@ -188,13 +188,12 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                     <div className={styles.downloadable}>
                       <Link
                         href={{
-                          pathname: `/${locale}/contacts`,
-                          query: { productName: encodeURIComponent(details.name) },
+                          pathname: "../../../../contacts",
+                          query: { productName: details.name },
                         }}
                       >
                         {t("product-request")}
                       </Link>
-
                     </div>
                     <br />
                     {!isAccessories && (
