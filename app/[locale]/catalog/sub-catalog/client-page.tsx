@@ -120,6 +120,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                         fetchPriority="high"
                         className="w-full h-auto object-contain"
                         sizes="(max-width: 768px) 200px, (max-width: 1200px) 400px, 800px" // ✅ адаптивність
+                        unoptimized
                         priority // тільки перше зображення для LCP
                       />
                     </div>
