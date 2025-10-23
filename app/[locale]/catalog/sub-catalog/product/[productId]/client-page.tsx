@@ -89,6 +89,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
   const youtubeUrl = Array.isArray(youtubeMeta?.value) ? youtubeMeta?.value[0] : youtubeMeta?.value;
 
   const isAccessories = details?.tags?.map((el) => el.name)?.includes("accessories");
+  const [mounted, setMounted] = React.useState(false);
 
   // ✅ Викликаємо buildCategoryTrail після mount
   React.useEffect(() => {
@@ -104,8 +105,6 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
       </div>
     );
   }
-
-  const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
     setMounted(true);
