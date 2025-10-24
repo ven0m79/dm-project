@@ -31,6 +31,7 @@ export const ClientPage = () => {
   const isMobile = useIsMobile();
   const [status, setStatus] = useState('');
   //const searchParams = useSearchParams();
+  const [isProductFromUrl, setIsProductFromUrl] = useState(false); // ✅ новий стейт
 
   const [isClient, setIsClient] = useState(false);
 
@@ -43,6 +44,7 @@ export const ClientPage = () => {
       const params = new URLSearchParams(window.location.search);
       const productFromUrl = params.get("productName");
       if (productFromUrl) setProductName(productFromUrl.replace(/\+/g, " "));
+      setIsProductFromUrl(true); // ✅ позначаємо, що прийшло з URL
     }
   }, [productName]);
 
@@ -98,63 +100,63 @@ export const ClientPage = () => {
 
   return (
     <MainLayout>
-        <div className={classNames("flex flex-1 flex-col self-center h-auto", styles.main)}>
-          <div className={styles.sendUsMessage}>
-            {t('title')}
+      <div className={classNames("flex flex-1 flex-col self-center h-auto", styles.main)}>
+        <div className={styles.sendUsMessage}>
+          {t('title')}
+        </div>
+        <div className={styles.stroke}></div>
+        <div className={classNames("flex flex-wrap justify-between items-start ", styles.catalogText)}>
+          <div className={classNames("flex flex-col justify-normal items-start ", styles.catalogAdress)}>
+            <p className="text-2xl justify-normal items-start indent-4 mt-2 sm:indent-10">
+              {t('contact-adress')}
+            </p>
+            <p className={styles.stroke1}></p>
+            <p className="flex items-center gap-3 mt-2 mb-10 text-wrap ml-10">
+              <Image
+                className={""}
+                src={adress}
+                width={30}
+                height={30}
+                alt="logo"
+              />
+              <Link href="https://share.google/OF6z6AYY01nQkUYRX">{t('contact-adress1')}</Link>
+            </p>
+            <p className="text-2xl justify-normal items-start indent-4 mt-2 sm:indent-10">
+              {t('contact-phone')}
+            </p>
+            <p className={styles.stroke1}></p>
+            <p className="flex items-center gap-3 mt-2 mb-10 text-wrap ml-10">
+              <Image
+                className={""}
+                src={phone}
+                width={30}
+                height={30}
+                alt="logo"
+              />
+              <p>
+                <a href="tel:+380754482535" className="block hover:none">+380 75-448-25-35 (відділ продажів)</a>
+                <a href="tel:+380663589810" className="block hover:none">+380 66 358-98-10 (cервісний відділ)</a>
+              </p>
+            </p>
+            <p className="text-2xl justify-normal items-start indent-4 w-full mt-2 sm:indent-10">
+              {t('contact-mail')}
+            </p>
+            <p className={styles.stroke1}></p>
+            <p className="flex items-center gap-3 mt-2 mb-10 text-wrap ml-10">
+              <Image
+                className={""}
+                src={mail}
+                width={30}
+                height={30}
+                alt="logo_email"
+              />
+              <p><a href="mailto:allinfo@dm-project.com.ua" className="block hover:none">allinfo@dm-project.com.ua</a>
+                <a href="mailto:sales@dm-project.com.ua" className="block hover:none">sales@dm-project.com.ua</a>
+                <a href="mailto:service@dm-project.com.ua" className="block hover:none">service@dm-project.com.ua</a>
+              </p>
+            </p>
           </div>
-          <div className={styles.stroke}></div>
-          <div className={classNames("flex flex-wrap justify-between items-start ", styles.catalogText)}>
-            <div className={classNames("flex flex-col justify-normal items-start ", styles.catalogAdress)}>
-              <p className="text-2xl justify-normal items-start indent-4 mt-2 sm:indent-10">
-                {t('contact-adress')}
-              </p>
-              <p className={styles.stroke1}></p>
-              <p className="flex items-center gap-3 mt-2 mb-10 text-wrap ml-10">
-                <Image
-                  className={""}
-                  src={adress}
-                  width={30}
-                  height={30}
-                  alt="logo"
-                />
-                <Link href="https://share.google/OF6z6AYY01nQkUYRX">{t('contact-adress1')}</Link>
-              </p>
-              <p className="text-2xl justify-normal items-start indent-4 mt-2 sm:indent-10">
-                {t('contact-phone')}
-              </p>
-              <p className={styles.stroke1}></p>
-              <p className="flex items-center gap-3 mt-2 mb-10 text-wrap ml-10">
-                <Image
-                  className={""}
-                  src={phone}
-                  width={30}
-                  height={30}
-                  alt="logo"
-                />
-                <p>
-                  <a href="tel:+380754482535" className="block hover:none">+380 75-448-25-35 (відділ продажів)</a>
-                  <a href="tel:+380663589810" className="block hover:none">+380 66 358-98-10 (cервісний відділ)</a>
-                </p>
-              </p>
-              <p className="text-2xl justify-normal items-start indent-4 w-full mt-2 sm:indent-10">
-                {t('contact-mail')}
-              </p>
-              <p className={styles.stroke1}></p>
-              <p className="flex items-center gap-3 mt-2 mb-10 text-wrap ml-10">
-                <Image
-                  className={""}
-                  src={mail}
-                  width={30}
-                  height={30}
-                  alt="logo_email"
-                />
-                <p><a href="mailto:allinfo@dm-project.com.ua" className="block hover:none">allinfo@dm-project.com.ua</a>
-                  <a href="mailto:sales@dm-project.com.ua" className="block hover:none">sales@dm-project.com.ua</a>
-                  <a href="mailto:service@dm-project.com.ua" className="block hover:none">service@dm-project.com.ua</a>
-                </p>
-              </p>
-            </div>
-            <div className="flex flex-1 w-1/2">
+          <div className="flex flex-1 w-1/2">
             {isClient && (
               <form onSubmit={handleSubmit} className={styles.container}>
                 <div className={styles.sendUsMessage}>{t('contact-form-title')}</div>
@@ -198,14 +200,19 @@ export const ClientPage = () => {
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                 /><br />
-                <input
-                  className={classNames("h-10", styles.form)}
-                  placeholder={t('contact-form-productName')}
-                  id="productName"
-                  type="text"
-                  value={productName}
-                  onChange={e => setProductName(e.target.value)}
-                /><br />
+              <input
+                className={classNames(
+                  "h-10",
+                  styles.form,
+                  { "text-blue-600 font-semibold": isProductFromUrl } // ✅ синій текст, якщо з URL
+                )}
+                placeholder={t('contact-form-productName')}
+                id="productName"
+                type="text"
+                value={productName}
+                onChange={e => setProductName(e.target.value)}
+                readOnly={isProductFromUrl} // ✅ заблоковано, якщо з URL
+              /><br />
                 <textarea
                   className={classNames("h-24 pt-2", styles.form)}
                   placeholder={t('contact-form-message')}
@@ -217,10 +224,10 @@ export const ClientPage = () => {
                 {status && <p className="mt-2 text-sm text-green-600">{status}</p>}
               </form>
             )}
-            </div>
           </div>
-
         </div>
+
+      </div>
     </MainLayout >
 
   );
