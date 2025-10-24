@@ -11,7 +11,6 @@ import phone from "./contacts-photo/telephoneContacts.png";
 import adress from "./contacts-photo/locationContacts.png";
 import { useIsMobile } from "../components/hooks/useIsMobile";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 
 declare global {
   interface Window {
@@ -39,14 +38,17 @@ export const ClientPage = () => {
     setIsClient(true);
   }, []);
 
-  useEffect(() => {
-    if (!productName && typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const productFromUrl = params.get("productName");
-      if (productFromUrl) setProductName(productFromUrl.replace(/\+/g, " "));
-      setIsProductFromUrl(true); // ✅ позначаємо, що прийшло з URL
+useEffect(() => {
+  if (typeof window !== "undefined") {
+    const params = new URLSearchParams(window.location.search);
+    const productFromUrl = params.get("productName");
+
+    if (productFromUrl) {
+      setProductName(productFromUrl.replace(/\+/g, " "));
+      setIsProductFromUrl(true); // ✅ тільки якщо параметр є
     }
-  }, [productName]);
+  }
+}, []);
 
 
 
@@ -201,10 +203,7 @@ export const ClientPage = () => {
                   onChange={e => setEmail(e.target.value)}
                 /><br />
               <input
-                className={classNames(
-                  "h-10",
-                  styles.form,
-                  { "text-blue-600 font-semibold": isProductFromUrl } // ✅ синій текст, якщо з URL
+                className={classNames("h-10", styles.form, { "bg-[#0060aa3b] text-blue-100 cursor-default": isProductFromUrl } // ✅ синій текст, якщо з URL
                 )}
                 placeholder={t('contact-form-productName')}
                 id="productName"
