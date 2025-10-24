@@ -8,9 +8,11 @@ import linea1 from "./linea1.webp";
 import linea2 from "./linea2.webp";
 import linea3 from "./linea3.webp";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 const SharesLinea = () => {
     const t = useTranslations('Shares');
+    const t1 = useTranslations("Product");
     return (
         <MainLayout>
             <div
@@ -24,17 +26,17 @@ const SharesLinea = () => {
                     <h3 className="text-justify text-[18px] font-bold sm:text-[20px]">{t('shares-linea-title')}</h3>
                     <div className="flex flex-wrap">
                         <p className="indent-5 text-justify">{t('shares-linea-prehead')} <span className="font-bold text-nowrap">3 103,00 у.о.</span></p>
-                                  <p><span className="font-bold">{t("shares-atlan300-pehead1")}</span></p>
+                        <p><span className="font-bold">{t("shares-atlan300-pehead1")}</span></p>
                         <div className="w-full flex flax-wrap justify-center my-2">
                             <Image
-                                className={classNames("w-1/2",styles.img)}
+                                className={classNames("w-1/2", styles.img)}
                                 src={linea1}
                                 width={400}
                                 height={100}
                                 alt="linea"
                             />
                             <Image
-                                className={classNames("w-1/2",styles.img)}
+                                className={classNames("w-1/2", styles.img)}
                                 src={linea2}
                                 width={400}
                                 height={100}
@@ -52,6 +54,16 @@ const SharesLinea = () => {
                             -	{t('shares-linea-specific8')}<br />
                             -	{t('shares-linea-specific9')}<br />
                             -	{t('shares-linea-specific10')}<br />
+                            <div className={styles.downloadable}>
+                                <Link
+                                    href={{
+                                        pathname: "../../../../contacts",
+                                        query: { productName: t('shares-linea-prehead') },
+                                    }}
+                                >
+                                    {t1("product-request")}
+                                </Link>
+                            </div>
                         </div>
                         <div className={classNames("self-center my-2 indent-5 text-justify", styles["catalogContainer"])}>
                             <Image
