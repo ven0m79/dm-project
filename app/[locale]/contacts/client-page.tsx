@@ -203,7 +203,7 @@ useEffect(() => {
                   onChange={e => setEmail(e.target.value)}
                 /><br />
               <input
-                className={classNames("h-10", styles.form, { "bg-[#0060aa3b] text-blue-100 cursor-default": isProductFromUrl } // ✅ синій текст, якщо з URL
+                className={classNames("h-10", styles.form, { "bg-[#ECF3FE] cursor-default": isProductFromUrl } // ✅ синій текст, якщо з URL
                 )}
                 placeholder={t('contact-form-productName')}
                 id="productName"
