@@ -32,20 +32,25 @@ export const ClientPage = () => {
   const [status, setStatus] = useState('');
   //const searchParams = useSearchParams();
 
+  const [isClient, setIsClient] = useState(false);
 
-useEffect(() => {
-  if (!productName && typeof window !== "undefined") {
-    const params = new URLSearchParams(window.location.search);
-    const productFromUrl = params.get("productName");
-    if (productFromUrl) setProductName(productFromUrl.replace(/\+/g, " "));
-  }
-}, [productName]);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!productName && typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const productFromUrl = params.get("productName");
+      if (productFromUrl) setProductName(productFromUrl.replace(/\+/g, " "));
+    }
+  }, [productName]);
 
 
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    const data = { name, mobile, medicalFacility, productName, city, email, message };
+    const data = { name, city, medicalFacility, mobile, email, productName, message };
 
     fetch('/api/send', {
       method: 'POST',
@@ -67,7 +72,7 @@ useEffect(() => {
                 form_id: "contact_form",
                 form_name: "Контактна форма",
                 form_destination: window.location.hostname,
-                form_length: 7, // у мене: name, mobile, medicalFacility, productName, city, email, message
+                form_length: 7, // у мене: name, city, medicalFacility, mobile, email, productName, message
               },
             });
           }
@@ -93,7 +98,6 @@ useEffect(() => {
 
   return (
     <MainLayout>
-      <Suspense fallback={<div>Loading...</div>}>
         <div className={classNames("flex flex-1 flex-col self-center h-auto", styles.main)}>
           <div className={styles.sendUsMessage}>
             {t('title')}
@@ -151,6 +155,7 @@ useEffect(() => {
               </p>
             </div>
             <div className="flex flex-1 w-1/2">
+            {isClient && (
               <form onSubmit={handleSubmit} className={styles.container}>
                 <div className={styles.sendUsMessage}>{t('contact-form-title')}</div>
                 <input
@@ -163,11 +168,11 @@ useEffect(() => {
                 /><br />
                 <input
                   className={classNames("h-10", styles.form)}
-                  placeholder={t('contact-form-mobile')}
-                  id="mobile"
+                  placeholder={t('contact-form-city')}
+                  id="city"
                   type="text"
-                  value={mobile}
-                  onChange={e => setMobile(e.target.value)}
+                  value={city}
+                  onChange={e => setCity(e.target.value)}
                 /><br />
                 <input
                   className={classNames("h-10", styles.form)}
@@ -179,19 +184,11 @@ useEffect(() => {
                 /><br />
                 <input
                   className={classNames("h-10", styles.form)}
-                  placeholder={t('contact-form-productName')}
-                  id="productName"
+                  placeholder={t('contact-form-mobile')}
+                  id="mobile"
                   type="text"
-                  value={productName}
-                  onChange={e => setProductName(e.target.value)}
-                /><br />
-                <input
-                  className={classNames("h-10", styles.form)}
-                  placeholder={t('contact-form-city')}
-                  id="city"
-                  type="text"
-                  value={city}
-                  onChange={e => setCity(e.target.value)}
+                  value={mobile}
+                  onChange={e => setMobile(e.target.value)}
                 /><br />
                 <input
                   className={classNames("h-10", styles.form)}
@@ -200,6 +197,14 @@ useEffect(() => {
                   type="text"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
+                /><br />
+                <input
+                  className={classNames("h-10", styles.form)}
+                  placeholder={t('contact-form-productName')}
+                  id="productName"
+                  type="text"
+                  value={productName}
+                  onChange={e => setProductName(e.target.value)}
                 /><br />
                 <textarea
                   className={classNames("h-24 pt-2", styles.form)}
@@ -211,12 +216,11 @@ useEffect(() => {
                 <button className={styles.yerSubmit} type="submit">{t('contact-form-submit')}</button>
                 {status && <p className="mt-2 text-sm text-green-600">{status}</p>}
               </form>
-
+            )}
             </div>
           </div>
 
         </div>
-      </Suspense>
     </MainLayout >
 
   );
