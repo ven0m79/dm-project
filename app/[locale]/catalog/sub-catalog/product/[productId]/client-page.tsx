@@ -217,6 +217,27 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                       dangerouslySetInnerHTML={{ __html: details.description || "" }}
                     />
                   </Tabs.Item>
+                  {details.attributes?.length > 0 && (
+                    <Tabs.Item title="Характеристики" icon={HiAdjustments}>
+                      <div className={classNames("p-4 rounded-xl shadow", styles.downloadabled)}>
+                        <ul className="divide-y divide-gray-200 ">
+                          {details.attributes.map((attr, index) => (
+                            <li key={index} className="py-2 flex justify-between  text-[#0061AA]">
+                              <span className="font-medium">{attr.name}</span>
+                              <span className="text-right">
+                                <span className="text-right">
+                                  {Array.isArray(attr.options)
+                                    ? attr.options.join(", ")
+                                    : attr.options}
+                                </span>
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </Tabs.Item>
+                  )}
+
 
                   {!isAccessories && crossSellProducts.length > 0 && (
                     <Tabs.Item title="Аксесуари та комплектуючі" icon={MdDashboard}>
