@@ -8,10 +8,12 @@ import polaris1 from "./polaris200-1.webp";
 import polaris2 from "./polaris200-2.webp";
 import polaris3 from "./polaris200-3.webp";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 const SharesPolaris200 = () => {
 
     const t = useTranslations('Shares');
+    const t1 = useTranslations("Product");
     return (
         <MainLayout>
             <div
@@ -22,10 +24,31 @@ const SharesPolaris200 = () => {
                 <div className={classNames(
                     "flex flex-col justify-center mb-5 w-full",
                     [styles.catalogContainerDeeper])}>
-                    <p className="text-justify text-[18px] font-bold sm:text-[20px]">{t('shares-polaris200-title')}</p>
+
                     <div className="flex flex-wrap">
-                        <p className="indent-5 text-justify">{t('shares-polaris200-prehead')}<span className="font-bold text-nowrap">11 556,00 у.о.</span></p>
-                        <p><span className="font-bold">{t("shares-atlan300-pehead1")}</span></p>
+                        <div className="flex flex-1 flex-row">
+                            <div className="flex flex-col w-full h-auto justify-center">
+                                <h3 className="text-justify text-[18px] font-bold sm:text-[20px]">{t('shares-polaris200-title')}</h3>
+                                <p className="indent-5 text-justify">{t('shares-polaris200-prehead')}
+                                    <span className="font-bold text-nowrap"> 11 556,00 у.о.
+                                    </span>
+                                </p>
+                                <p className="font-bold">{t("shares-atlan300-pehead1")}</p>
+                            </div>
+                            <div className="flex mx-3">
+                                <div className={styles.downloadable}>
+                                    <Link
+                                        href={{
+                                            pathname: "../../../../contacts",
+                                            query: { productName: t('shares-polaris200-prehead') },
+                                        }}
+                                    >
+                                        {t1("product-request")}
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+
                         <div className="w-full flex flax-wrap justify-center my-2">
                             <Image
                                 className={classNames("w-1/2", styles.img)}

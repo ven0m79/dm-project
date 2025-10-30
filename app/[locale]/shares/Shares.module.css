@@ -109,14 +109,37 @@
 } 
 
 .downloadable {
-    text-align: center;
-    width: 254px;
-    padding: 5px;
-    margin: 10px 0 10px 0;
-    font-size: 16px;
-    color: #ffffff;
-    background-color: #0061AA;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-    cursor: pointer;
-    border-radius: 10px;
+  text-align: center;
+  width: 154px;
+  padding: 5px;
+  margin: 10px 0 10px 0;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #0061AA;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: transform 0.2s ease-in-out;
+  animation: pulse 1.5s infinite; /* ✅ додаємо анімацію */
+}
+
+/* Ефект при наведенні (опціонально — щоб підсилити відчуття кліку) */
+.downloadable:hover {
+  transform: scale(1.05);
+}
+
+/* Ключові кадри для пульсації */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 97, 170, 0.6);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(0, 97, 170, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 97, 170, 0);
+  }
 }

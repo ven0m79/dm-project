@@ -23,10 +23,30 @@ const SharesLinea = () => {
                 <div className={classNames(
                     "flex flex-col justify-center mb-5 w-full",
                     [styles.catalogContainerDeeper])}>
-                    <h3 className="text-justify text-[18px] font-bold sm:text-[20px]">{t('shares-linea-title')}</h3>
+
                     <div className="flex flex-wrap">
-                        <p className="indent-5 text-justify">{t('shares-linea-prehead')} <span className="font-bold text-nowrap">3 103,00 у.о.</span></p>
-                        <p><span className="font-bold">{t("shares-atlan300-pehead1")}</span></p>
+                        <div className="flex flex-1 flex-row">
+                            <div className="flex flex-col w-full h-auto justify-center">
+                                <h3 className="text-justify text-[18px] font-bold sm:text-[20px]">{t('shares-linea-title')}</h3>
+                                <p className="indent-5 text-justify">{t('shares-linea-prehead')}
+                                    <span className="font-bold text-nowrap"> 3 103,00 у.о.
+                                    </span>
+                                </p>
+                                <p className="font-bold">{t("shares-atlan300-pehead1")}</p>
+                            </div>
+                            <div className="flex mx-3">
+                                <div className={styles.downloadable}>
+                                    <Link
+                                        href={{
+                                            pathname: "../../../../contacts",
+                                            query: { productName: t('shares-linea-prehead') },
+                                        }}
+                                    >
+                                        {t1("product-request")}
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
                         <div className="w-full flex flax-wrap justify-center my-2">
                             <Image
                                 className={classNames("w-1/2", styles.img)}
@@ -54,16 +74,6 @@ const SharesLinea = () => {
                             -	{t('shares-linea-specific8')}<br />
                             -	{t('shares-linea-specific9')}<br />
                             -	{t('shares-linea-specific10')}<br />
-                            <div className={styles.downloadable}>
-                                <Link
-                                    href={{
-                                        pathname: "../../../../contacts",
-                                        query: { productName: t('shares-linea-prehead') },
-                                    }}
-                                >
-                                    {t1("product-request")}
-                                </Link>
-                            </div>
                         </div>
                         <div className={classNames("self-center my-2 indent-5 text-justify", styles["catalogContainer"])}>
                             <Image

@@ -6,9 +6,11 @@ import Image from "next/image";
 import classNames from "classnames";
 import awd655_2h_v2 from "./awd655-2h-v2.webp"
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 const AWD655_2h_v2 = () => {
     const t = useTranslations('Shares');
+        const t1 = useTranslations("Product");
     return (
         <MainLayout>
             <div
@@ -19,9 +21,33 @@ const AWD655_2h_v2 = () => {
                 <div className={classNames(
                     "flex flex-col justify-center mb-5 w-full",
                     [styles.catalogContainerDeeper])}>
-                    <p className="text-justify text-[18px] font-bold sm:text-[20px]">{t('shares-awd655-h2-v2-title')}</p>
-                    <p className="text-justify">{t('shares-awd655-h2-v2-prehead')} <span className="font-bold text-nowrap">9 500,00 у.о.</span></p>
-                    <p><span className="font-bold">{t("shares-atlan300-pehead1")}</span></p>
+
+                    <div className="flex flex-1 flex-row">
+                        <div className="flex flex-col w-full h-auto justify-center">
+                            <h3 className="text-justify text-[18px] font-bold sm:text-[20px]">{t('shares-awd655-h2-v2-title')}</h3>
+                            <p className="indent-5 text-justify">{t('shares-awd655-h2-v2-prehead')}
+                                <span className="font-bold text-nowrap"> 9 500,00 у.о.
+                                </span>
+                            </p>
+                            <p className="font-bold">{t("shares-atlan300-pehead1")}</p>
+                        </div>
+                        <div className="flex mx-3">
+                            <div className={styles.downloadable}>
+                                <Link
+                                    href={{
+                                        pathname: "../../../../contacts",
+                                        query: { productName: t('shares-awd655-h2-v2-prehead') },
+                                    }}
+                                >
+                                    {t1("product-request")}
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
                     <div className="flex flex-col w-full lg:flex-row">
                         <div className="lg:w-1/2 w-full  flex flax-wrap justify-center my-2">
                             <Image
@@ -49,7 +75,8 @@ const AWD655_2h_v2 = () => {
                         </div>
                     </div>
                 </div>
-                <div className={classNames("self-center m-3 indent-5 text-justify", styles["catalogContainer"])}>
+                <div className={classNames("self-center m-3 indent-5 text-justify",
+                    [styles.catalogContainerDeeper])}>
                     <p className="my-2">{t('shares-awd655-h2-v1-text1')}</p>
                     <p className="my-2">{t('shares-awd655-h2-v1-text2')}</p>
                     <p className="my-2">{t('shares-awd655-h2-v1-text3')}</p>

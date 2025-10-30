@@ -7,9 +7,11 @@ import classNames from "classnames";
 import fabius1 from "./fabius1.webp";
 import fabius3 from "./fabius3.webp";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 const SharesFabiusXL = () => {
     const t = useTranslations('Shares');
+    const t1 = useTranslations("Product");
     return (
         <MainLayout>
             <div
@@ -21,9 +23,32 @@ const SharesFabiusXL = () => {
                 <div className={classNames(
                     "flex flex-col justify-center mb-5 w-full",
                     [styles.catalogContainerDeeper])}>
-                    <h3 className="text-justify text-[18px] font-bold sm:text-[20px]">{t('shares-fabius-title')}</h3>
-                    <p className="text-justify">{t('shares-fabius-pehead')} <span className="font-bold text-nowrap">45 450,00 у.о.</span></p>
-                    <p><span className="font-bold">{t("shares-atlan300-pehead1")}</span></p>
+
+
+                    <div className="flex flex-1 flex-row">
+                        <div className="flex flex-col w-full h-auto justify-center">
+                            <h3 className="text-justify text-[18px] font-bold sm:text-[20px]">{t('shares-fabius-title')}</h3>
+                            <p className="indent-5 text-justify">{t('shares-fabius-pehead')}
+                                <span className="font-bold text-nowrap"> 45 450,00 у.о.
+                                </span>
+                            </p>
+                            <p className="font-bold">{t("shares-atlan300-pehead1")}</p>
+                        </div>
+                        <div className="flex mx-3">
+                            <div className={styles.downloadable}>
+                                <Link
+                                    href={{
+                                        pathname: "../../../../contacts",
+                                        query: { productName: t('shares-fabius-pehead') },
+                                    }}
+                                >
+                                    {t1("product-request")}
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div className="flex flex-col w-full lg:flex-row">
                         <div className="lg:w-1/2 w-full  flex flax-wrap justify-center my-2">
                             <Image
@@ -67,11 +92,12 @@ const SharesFabiusXL = () => {
                         </div>
                     </div>
                 </div>
-                <div className={classNames("self-center m-3 indent-5 text-justify", styles["catalogContainer"])}>
+                <div className={classNames("self-center m-3 indent-5 text-justify",
+                    [styles.catalogContainerDeeper])}>
                     <p className="my-2">{t('shares-fabius-text1')}</p>
                     <p className="my-2">{t('shares-fabius-text2')}</p>
                     <Image
-                        className={"w-1/2 float-right mt-1 mb-3 mx-3"}
+                        className={"w-1/2 float-right mt-1 mb-3 ml-3"}
                         src={fabius3}
                         width={500}
                         height={100}

@@ -7,9 +7,11 @@ import classNames from "classnames";
 import atlan300_1 from "./atlan300_1.webp";
 import atlan300_2 from "./atlan300_2.webp";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 const SharesAtlan = () => {
   const t = useTranslations("Shares");
+  const t1 = useTranslations("Product");
   return (
     <MainLayout>
       <div
@@ -18,12 +20,32 @@ const SharesAtlan = () => {
         )}
       >
         <div
-          className={classNames(
-            "flex flex-col justify-center mb-5 w-full",
+          className={classNames("flex flex-col justify-center mb-5 w-full",
             [styles.catalogContainerDeeper],)}>
-          <h3 className="text-justify text-[18px] font-bold sm:text-[20px]">{t("shares-atlan300-title")}</h3>
-          <p className="text-justify">{t("shares-atlan300-pehead")}{" "}<span className="font-bold">51 700,00 у.о.</span></p>
-          <p><span className="font-bold">{t("shares-atlan300-pehead1")}</span></p>
+
+          <div className="flex flex-1 flex-row">
+            <div className="flex flex-col w-full h-auto justify-center">
+              <h3 className="text-justify text-[18px] font-bold sm:text-[20px]">{t("shares-atlan300-title")}</h3>
+              <p className="indent-5 text-justify">{t("shares-atlan300-pehead")}
+                <span className="font-bold text-nowrap"> 51 700,00 у.о.
+                </span>
+              </p>
+              <p className="font-bold">{t("shares-atlan300-pehead1")}</p>
+            </div>
+            <div className="flex mx-3">
+              <div className={styles.downloadable}>
+                <Link
+                  href={{
+                    pathname: "../../../../contacts",
+                    query: { productName: t('shares-atlan300-pehead') },
+                  }}
+                >
+                  {t1("product-request")}
+                </Link>
+              </div>
+            </div>
+          </div>
+
           <div className="flex flex-col w-full lg:flex-row">
             <div className="lg:w-1/2 w-full  flex flax-wrap justify-center my-2">
               <Image
@@ -81,13 +103,11 @@ const SharesAtlan = () => {
         <div
           className={classNames(
             "self-center m-3 indent-5 text-justify",
-            styles["catalogContainer"],
-          )}
-        >
+            [styles.catalogContainerDeeper],)}>
           <p className="my-2">{t("shares-atlan300-text1")}</p>
           <p className="my-2">{t("shares-atlan300-text2")}</p>
           <Image
-            className={"w-1/2 float-right mt-1 mb-3 mx-3"}
+            className={"w-1/2 float-right mt-1 mb-3 ml-3"}
             src={atlan300_2}
             width={500}
             height={100}
