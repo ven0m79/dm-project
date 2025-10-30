@@ -107,6 +107,7 @@ export type AttributesType = {
   position: number;
   visible: boolean;
   variation: boolean;
+  options: string;
 };
 export type SingleProductTitles = {
   id: number;
