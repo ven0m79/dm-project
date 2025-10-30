@@ -25,8 +25,6 @@ const SharesPolaris2002 = () => {
                     [styles.catalogContainerDeeper])}>
 
                     <div className="flex flex-wrap">
-                        
-                        
 
                         <div className="flex flex-1 flex-col sm:flex-row">
                             <div className="flex flex-col w-full h-auto justify-center">

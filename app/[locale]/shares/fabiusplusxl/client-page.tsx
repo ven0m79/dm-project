@@ -25,16 +25,16 @@ const SharesFabiusXL = () => {
                     [styles.catalogContainerDeeper])}>
 
 
-                    <div className="flex flex-1 flex-row">
+                    <div className="flex flex-1 flex-col sm:flex-row">
                         <div className="flex flex-col w-full h-auto justify-center">
-                            <h3 className="text-justify text-[18px] font-bold sm:text-[20px]">{t('shares-fabius-title')}</h3>
+                            <h3 className="indent-5 sm:indent-2 text-justify text-[18px] font-bold sm:text-[20px]">{t('shares-fabius-title')}</h3>
                             <p className="indent-5 text-justify">{t('shares-fabius-pehead')}
                                 <span className="font-bold text-nowrap"> 45 450,00 у.о.
                                 </span>
                             </p>
                             <p className="font-bold">{t("shares-atlan300-pehead1")}</p>
                         </div>
-                        <div className="flex mx-3">
+                        <div className="flex mx-3 justify-center">
                             <div className={styles.downloadable}>
                                 <Link
                                     href={{
