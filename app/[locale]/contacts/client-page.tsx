@@ -1,5 +1,5 @@
 'use client'
-import React from "react";
+import React, { Suspense, useEffect } from "react";
 import { useState } from 'react';
 import styles from './Contacts.module.css';
 import classNames from "classnames";
@@ -23,18 +23,38 @@ export const ClientPage = () => {
   const [name, setName] = useState('');
   const [mobile, setMobile] = useState('');
   const [medicalFacility, setMedicalFacility] = useState('');
+  const [productName, setProductName] = useState('');
   const [city, setCity] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-
-
   const isMobile = useIsMobile();
-
   const [status, setStatus] = useState('');
+  //const searchParams = useSearchParams();
+  const [isProductFromUrl, setIsProductFromUrl] = useState(false); // ✅ новий стейт
+
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+useEffect(() => {
+  if (typeof window !== "undefined") {
+    const params = new URLSearchParams(window.location.search);
+    const productFromUrl = params.get("productName");
+
+    if (productFromUrl) {
+      setProductName(productFromUrl.replace(/\+/g, " "));
+      setIsProductFromUrl(true); // ✅ тільки якщо параметр є
+    }
+  }
+}, []);
+
+
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    const data = { name, mobile, medicalFacility, city, email, message };
+    const data = { name, city, medicalFacility, mobile, email, productName, message };
 
     fetch('/api/send', {
       method: 'POST',
@@ -56,7 +76,7 @@ export const ClientPage = () => {
                 form_id: "contact_form",
                 form_name: "Контактна форма",
                 form_destination: window.location.hostname,
-                form_length: 6, // у тебе: name, mobile, medicalFacility, city, email, message
+                form_length: 7, // у мене: name, city, medicalFacility, mobile, email, productName, message
               },
             });
           }
@@ -64,6 +84,7 @@ export const ClientPage = () => {
           setName('');
           setMobile('');
           setMedicalFacility('');
+          setProductName('');
           setCity('');
           setEmail('');
           setMessage('');
@@ -78,9 +99,10 @@ export const ClientPage = () => {
         setStatus('Сталася помилка.');
       });
   };
+
   return (
     <MainLayout>
-      <div className={classNames("flex flex-1 flex-col self-center", styles.main)}>
+      <div className={classNames("flex flex-1 flex-col self-center h-auto", styles.main)}>
         <div className={styles.sendUsMessage}>
           {t('title')}
         </div>
@@ -97,7 +119,7 @@ export const ClientPage = () => {
                 src={adress}
                 width={30}
                 height={30}
-                alt="logo"                
+                alt="logo"
               />
               <Link href="https://share.google/OF6z6AYY01nQkUYRX">{t('contact-adress1')}</Link>
             </p>
@@ -137,64 +159,76 @@ export const ClientPage = () => {
             </p>
           </div>
           <div className="flex flex-1 w-1/2">
-            <form onSubmit={handleSubmit} className={styles.container}>
-              <div className={styles.sendUsMessage}>{t('contact-form-title')}</div>
+            {isClient && (
+              <form onSubmit={handleSubmit} className={styles.container}>
+                <div className={styles.sendUsMessage}>{t('contact-form-title')}</div>
+                <input
+                  className={classNames("h-10", styles.form)}
+                  placeholder={t('contact-form-name')}
+                  id="name"
+                  type="text"
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                /><br />
+                <input
+                  className={classNames("h-10", styles.form)}
+                  placeholder={t('contact-form-city')}
+                  id="city"
+                  type="text"
+                  value={city}
+                  onChange={e => setCity(e.target.value)}
+                /><br />
+                <input
+                  className={classNames("h-10", styles.form)}
+                  placeholder={t('contact-form-medicalFacility')}
+                  id="medicalFacility"
+                  type="text"
+                  value={medicalFacility}
+                  onChange={e => setMedicalFacility(e.target.value)}
+                /><br />
+                <input
+                  className={classNames("h-10", styles.form)}
+                  placeholder={t('contact-form-mobile')}
+                  id="mobile"
+                  type="text"
+                  value={mobile}
+                  onChange={e => setMobile(e.target.value)}
+                /><br />
+                <input
+                  className={classNames("h-10", styles.form)}
+                  placeholder={t('contact-form-email')}
+                  id="email"
+                  type="text"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                /><br />
               <input
-                className={classNames("h-10", styles.form)}
-                placeholder={t('contact-form-name')}
-                id="name"
+                className={classNames("h-10", styles.form, { "bg-[#ECF3FE] cursor-default": isProductFromUrl } // ✅ синій текст, якщо з URL
+                )}
+                placeholder={t('contact-form-productName')}
+                id="productName"
                 type="text"
-                value={name}
-                onChange={e => setName(e.target.value)}
+                value={productName}
+                onChange={e => setProductName(e.target.value)}
+                readOnly={isProductFromUrl} // ✅ заблоковано, якщо з URL
               /><br />
-              <input
-                className={classNames("h-10", styles.form)}
-                placeholder={t('contact-form-mobile')}
-                id="mobile"
-                type="mobile"
-                value={mobile}
-                onChange={e => setMobile(e.target.value)}
-              /><br />
-              <input
-                className={classNames("h-10", styles.form)}
-                placeholder={t('contact-form-medicalFacility')}
-                id="medicalFacility"
-                type="medicalFacility"
-                value={medicalFacility}
-                onChange={e => setMedicalFacility(e.target.value)}
-              /><br />
-              <input
-                className={classNames("h-10", styles.form)}
-                placeholder={t('contact-form-city')}
-                id="city"
-                type="city"
-                value={city}
-                onChange={e => setCity(e.target.value)}
-              /><br />
-              <input
-                className={classNames("h-10", styles.form)}
-                placeholder={t('contact-form-email')}
-                id="email"
-                type="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-              /><br />
-              <textarea
-                className={classNames("h-24 pt-2", styles.form)}
-                placeholder={t('contact-form-message')}
-                id="message"
-                value={message}
-                onChange={e => setMessage(e.target.value)}
-              /><br />
-              <button className={styles.yerSubmit} type="submit">{t('contact-form-submit')}</button>
-              {status && <p className="mt-4 text-sm text-green-600">{status}</p>}
-            </form>
-
+                <textarea
+                  className={classNames("h-24 pt-2", styles.form)}
+                  placeholder={t('contact-form-message')}
+                  id="message"
+                  value={message}
+                  onChange={e => setMessage(e.target.value)}
+                /><br />
+                <button className={styles.yerSubmit} type="submit">{t('contact-form-submit')}</button>
+                {status && <p className="mt-2 text-sm text-green-600">{status}</p>}
+              </form>
+            )}
           </div>
         </div>
 
       </div>
     </MainLayout >
+
   );
 };
 

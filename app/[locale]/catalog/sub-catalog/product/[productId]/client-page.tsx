@@ -81,7 +81,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
   const [loading] = useState<boolean>(!details);
 
   // ✅ Breadcrumbs
- const { breadcrumbs, buildCategoryTrail } = useBreadcrumbs();
+  const { breadcrumbs, buildCategoryTrail } = useBreadcrumbs();
   const isIOS = typeof window !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
   // ✅ YouTube meta
@@ -89,13 +89,18 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
   const youtubeUrl = Array.isArray(youtubeMeta?.value) ? youtubeMeta?.value[0] : youtubeMeta?.value;
 
   const isAccessories = details?.tags?.map((el) => el.name)?.includes("accessories");
- 
+  const [mounted, setMounted] = React.useState(false);
+
   // ✅ Викликаємо buildCategoryTrail після mount
   React.useEffect(() => {
     if (details?.categories?.length) {
       buildCategoryTrail(details.categories, locale, details.name, details.id);
     }
   }, [details, locale, buildCategoryTrail]);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   if (!details) {
     return (
@@ -104,6 +109,9 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
       </div>
     );
   }
+
+
+
   return (
     <div className="flex self-center flex-col max-w-[800px] mb-8">
       {/* Breadcrumbs */}
@@ -153,7 +161,14 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                       <div className={classNames("text-normal sm:mt-12 mt-6 justify-center")}>
                         {details.price && (
                           <span className="text-[#0061AA] text-[18px]">
-                            <span className="font-bold text-[#002766]">Ціна:</span> {String(details.price).replace(".", ",")} {t("grn")}
+                            <span className="font-bold text-[#002766]">
+                              {!mounted
+                                ? "Ціна:" // Під час SSR і до гідрації — завжди однаково
+                                : /\s|,|;/.test(details.sku || "")
+                                  ? "Ціна від:"
+                                  : "Ціна:"}
+                            </span>{" "}
+                            {String(details.price).replace(".", ",")} {t("grn")}
                           </span>
                         )}
                       </div>
@@ -171,9 +186,16 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                   <div className="sm:h-[20px] h-[5px]"></div>
                   <div className="flex flex-col justify-between items-center">
                     <div className={styles.downloadable}>
-                      <Link href={"../../../../contacts"}>{t("product-request")}</Link>
+                      <Link
+                        href={{
+                          pathname: "../../../../contacts",
+                          query: { productName: details.name },
+                        }}
+                      >
+                        {t("product-request")}
+                      </Link>
                     </div>
-                    <br/>
+                    <br />
                     {!isAccessories && (
                       <div className={classNames("flex items-center", styles.downloadable)}>
                         <Link href={"../../../../services"}>{t("product-services")}</Link>

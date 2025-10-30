@@ -8,9 +8,11 @@ import linea1 from "./linea1.webp";
 import linea2 from "./linea2.webp";
 import linea3 from "./linea3.webp";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 const SharesLinea = () => {
     const t = useTranslations('Shares');
+    const t1 = useTranslations("Product");
     return (
         <MainLayout>
             <div
@@ -21,19 +23,40 @@ const SharesLinea = () => {
                 <div className={classNames(
                     "flex flex-col justify-center mb-5 w-full",
                     [styles.catalogContainerDeeper])}>
-                    <h3 className="text-justify text-[18px] font-bold sm:text-[20px]">{t('shares-linea-title')}</h3>
+
                     <div className="flex flex-wrap">
-                        <p className="indent-5 text-justify">{t('shares-linea-prehead')} <span className="font-bold text-nowrap">3 103,00 у.о.</span></p>
+                        <div className="flex flex-1 flex-col sm:flex-row">
+                            <div className="flex flex-col w-full h-auto justify-center">
+                                <h3 className="indent-5 sm:indent-2 text-justify text-[18px] font-bold sm:text-[20px]">{t('shares-linea-title')}</h3>
+                                <p className="indent-5 text-justify">{t('shares-linea-prehead')}
+                                    <span className="font-bold text-nowrap"> 3 103,00 у.о.
+                                    </span>
+                                </p>
+                                <p className="font-bold">{t("shares-atlan300-pehead1")}</p>
+                            </div>
+                            <div className="flex mx-3 justify-center">
+                                <div className={styles.downloadable}>
+                                    <Link
+                                        href={{
+                                            pathname: "../../../../contacts",
+                                            query: { productName: t('shares-linea-prehead') },
+                                        }}
+                                    >
+                                        {t1("product-request")}
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
                         <div className="w-full flex flax-wrap justify-center my-2">
                             <Image
-                                className={classNames("w-1/2",styles.img)}
+                                className={classNames("w-1/2", styles.img)}
                                 src={linea1}
                                 width={400}
                                 height={100}
                                 alt="linea"
                             />
                             <Image
-                                className={classNames("w-1/2",styles.img)}
+                                className={classNames("w-1/2", styles.img)}
                                 src={linea2}
                                 width={400}
                                 height={100}
