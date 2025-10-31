@@ -75,14 +75,11 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
   const { breadcrumbs, buildCategoryTrail } = useBreadcrumbs();
   const isIOS = typeof window !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
   const [mounted, setMounted] = useState(false);
-
   const carouselRef = useRef<HTMLDivElement | null>(null);
   const thumbnailRefs = useRef<(HTMLButtonElement | null)[]>([]);
-
   const youtubeMeta = details?.meta_data?.find((item: any) => item.key === "_nickx_video_text_url");
   const youtubeUrl = Array.isArray(youtubeMeta?.value) ? youtubeMeta?.value[0] : youtubeMeta?.value;
   const isAccessories = details?.tags?.map((el) => el.name)?.includes("accessories");
-
 
   // 🧩 Усі хуки — тільки на верхньому рівні:
   useEffect(() => setMounted(true), []);
@@ -221,7 +218,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                     </div>
 
                     {/* Кнопки керування */}
-                    <div className="absolute inset-y-0 flex items-center justify-between w-full px-5 pointer-events-none">
+                    <div className="absolute inset-y-0 flex items-center justify-between w-full sm:px-5 px-0 pointer-events-none">
                       {/* Ліва кнопка або порожній блок */}
                       <div className="w-10 flex justify-start">
                         {selectedImage > 0 && (
