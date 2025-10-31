@@ -117,7 +117,14 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
 
   const prevImage = () => scrollToImage(selectedImage - 1);
   const nextImage = () => scrollToImage(selectedImage + 1);
-  
+
+  // 🧩 Стан для модального вікна
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Відкрити/закрити модальне вікно
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <div className="flex self-center flex-col max-w-[900px] mb-8">
       {/* Breadcrumbs */}
@@ -147,14 +154,15 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                 <div className="flex flex-col w-1/2 items-center">
                   {/* Основне зображення */}
                   <div
+                    onClick={openModal}
                     className={classNames(
-                      "relative w-full max-w-[350px] h-[375px] rounded-lg overflow-hidden shadow-md flex items-center justify-center"
+                      "relative w-full max-w-[350px] h-[375px] rounded-lg overflow-hidden shadow-md flex items-center justify-center cursor-zoom-in"
                     )}
                   >
                     <Image
                       src={details.images?.[selectedImage]?.src || "/placeholder.png"}
                       alt={details.images?.[selectedImage]?.alt || details.name || ""}
-                      fill // замість width/height — робить абсолютне позиціонування
+                      fill
                       className="object-contain transition-transform duration-300 hover:scale-105 p-3"
                       sizes="(max-width: 768px) 100vw, 350px"
                       priority
@@ -166,7 +174,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                     {/* Контейнер із мініатюрами */}
                     <div
                       ref={carouselRef}
-                      className="flex overflow-hidden space-x-2 px-10 max-w-[300px] snap-x snap-mandatory scroll-smooth mt-2 mb-4"
+                      className="flex overflow-hidden space-x-2 sm:px-10 px-20 max-w-[300px] snap-x snap-mandatory scroll-smooth mt-2 mb-4"
                     >
                       {details.images?.length ? (
                         details.images.map((img, index) => {
@@ -188,7 +196,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                               onClick={() => setSelectedImage(index)}
                               disabled={!isVisible}
                               className={classNames(
-                                "flex-shrink-0 snap-center border rounded-md overflow-hidden transition-all duration-300 w-[70px] h-[70px] focus:outline-none",
+                                "flex-shrink-0 snap-center border rounded-md overflow-hidden transition-all duration-300 w-[40px] h-[40px] sm:w-[70px] sm:h-[70px] focus:outline-none",
                                 isActive
                                   ? "border-[#0061AA] shadow-md opacity-100"
                                   : isVisible
@@ -399,6 +407,76 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
           </AnimatePresence>
         )}
       </div>
+      {/* 🪟 Модальне вікно зображення */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={closeModal}
+          >
+            <motion.div
+              className={classNames(
+                "relative bg-white rounded-xl overflow-hidden flex items-center justify-center",
+                isMobile ? "w-[95vw] h-[90vh]" : "w-[600px] h-[600px]"
+              )}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={(e) => e.stopPropagation()} // щоб не закривалось при кліку по самому вікну
+            >
+              {/* Основне зображення */}
+              <Image
+                src={details.images?.[selectedImage]?.src || "/placeholder.png"}
+                alt={details.images?.[selectedImage]?.alt || details.name || ""}
+                fill
+                className="object-contain bg-white"
+                sizes="(max-width: 768px) 100vw, 600px"
+                unoptimized
+              />
+
+              {/* Кнопка закриття */}
+              <button
+                onClick={closeModal}
+                className="absolute top-3 right-3 text-white bg-black/50 rounded-full p-2 hover:bg-black/80 transition"
+              >
+                ✕
+              </button>
+
+              {/* Кнопки навігації */}
+              {details.images.length > 1 && (
+                <>
+                  {selectedImage > 0 && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        prevImage();
+                      }}
+                      className="absolute bottom-3 left-3 text-white bg-black/40 hover:bg-black/70 rounded-full p-3 transition"
+                    >
+                      ←
+                    </button>
+                  )}
+                  {selectedImage < details.images.length - 1 && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        nextImage();
+                      }}
+                      className="absolute bottom-3 right-3 text-white bg-black/40 hover:bg-black/70 rounded-full p-3 transition"
+                    >
+                      →
+                    </button>
+                  )}
+                </>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
