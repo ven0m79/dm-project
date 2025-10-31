@@ -84,13 +84,14 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
   const isAccessories = details?.tags?.map((el) => el.name)?.includes("accessories");
 
 
+  // 🧩 Усі хуки — тільки на верхньому рівні:
+  useEffect(() => setMounted(true), []);
+
   useEffect(() => {
     if (details?.categories?.length) {
       buildCategoryTrail(details.categories, locale, details.name, details.id);
     }
   }, [details, locale, buildCategoryTrail]);
-
-  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     const active = thumbnailRefs.current[selectedImage];
@@ -103,6 +104,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
     }
   }, [selectedImage]);
 
+  // ⛔ Не умовний виклик хуків — просто умовний рендер
   if (!details) {
     return (
       <div className="flex w-full h-4/5 justify-center items-center">
@@ -116,22 +118,9 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
     setSelectedImage(index);
   };
 
-  // Для стрілок
   const prevImage = () => scrollToImage(selectedImage - 1);
   const nextImage = () => scrollToImage(selectedImage + 1);
-
-  // Автоскрол до центру активної мініатюри
-  useEffect(() => {
-    const active = thumbnailRefs.current[selectedImage];
-    if (active) {
-      active.scrollIntoView({
-        behavior: "smooth",
-        inline: "center",
-        block: "nearest",
-      });
-    }
-  }, [selectedImage]);
-
+  
   return (
     <div className="flex self-center flex-col max-w-[900px] mb-8">
       {/* Breadcrumbs */}
