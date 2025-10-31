@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { SingleProductDetails } from "../../../../../../utils/woocomerce.types";
 import Link from "next/link";
@@ -25,8 +25,7 @@ const customTheme: CustomFlowbiteTheme = {
       base: "flex text-center",
       styles: {
         default: "flex-wrap border-b border-gray-200 dark:border-gray-300",
-        underline:
-          "-mb-px flex-wrap border-b border-gray-200 dark:border-gray-700",
+        underline: "-mb-px flex-wrap border-b border-gray-200 dark:border-gray-700",
       },
       tabitem: {
         base: "flex items-center justify-center rounded-t-lg p-4 text-sm font-medium first:ml-0 focus:outline-none focus:ring-0 focus:ring-cyan-900 disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500",
@@ -35,7 +34,7 @@ const customTheme: CustomFlowbiteTheme = {
             base: "rounded-t-lg",
             active: {
               on: "bg-[#0060aa10] text-[#0061AA] dark:bg-[#0060aa10] dark:text-[#0061AA]",
-              off: "text-[#0061AA] hover:bg-gray-50 hover:text-[#0061AA] dark:text-[#0060aa50] dark:hover:bg-[#0060aa50]  dark:hover:text-text-[#0061AA]",
+              off: "text-[#0061AA] hover:bg-gray-50 hover:text-[#0061AA] dark:text-[#0060aa50] dark:hover:bg-[#0060aa50] dark:hover:text-text-[#0061AA]",
             },
           },
           underline: {
@@ -49,17 +48,10 @@ const customTheme: CustomFlowbiteTheme = {
         icon: "mr-2 h-5 w-5",
       },
     },
-    tabitemcontainer: {
-      base: "",
-      styles: {
-        default: "",
-        underline: "",
-      },
-    },
+    tabitemcontainer: { base: "", styles: { default: "", underline: "" } },
     tabpanel: "py-3",
   },
 };
-
 
 type ClientPageProps = {
   params: { locale: string };
@@ -75,32 +67,41 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
   const router = useRouter();
   const isMobile = useIsMobile();
 
-  // ✅ Використовуємо serverData
   const [details] = useState<SingleProductDetails | null>(serverData.details);
   const [crossSellProducts] = useState<SingleProductDetails[]>(serverData.crossSellProducts);
   const [loading] = useState<boolean>(!details);
+  const [selectedImage, setSelectedImage] = useState<number>(0);
 
-  // ✅ Breadcrumbs
   const { breadcrumbs, buildCategoryTrail } = useBreadcrumbs();
   const isIOS = typeof window !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const [mounted, setMounted] = useState(false);
 
-  // ✅ YouTube meta
+  const carouselRef = useRef<HTMLDivElement | null>(null);
+  const thumbnailRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
   const youtubeMeta = details?.meta_data?.find((item: any) => item.key === "_nickx_video_text_url");
   const youtubeUrl = Array.isArray(youtubeMeta?.value) ? youtubeMeta?.value[0] : youtubeMeta?.value;
-
   const isAccessories = details?.tags?.map((el) => el.name)?.includes("accessories");
-  const [mounted, setMounted] = React.useState(false);
 
-  // ✅ Викликаємо buildCategoryTrail після mount
-  React.useEffect(() => {
+
+  useEffect(() => {
     if (details?.categories?.length) {
       buildCategoryTrail(details.categories, locale, details.name, details.id);
     }
   }, [details, locale, buildCategoryTrail]);
 
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => setMounted(true), []);
+
+  useEffect(() => {
+    const active = thumbnailRefs.current[selectedImage];
+    if (active) {
+      active.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest",
+      });
+    }
+  }, [selectedImage]);
 
   if (!details) {
     return (
@@ -110,10 +111,29 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
     );
   }
 
+  const scrollToImage = (index: number) => {
+    if (index < 0 || index >= details.images.length) return;
+    setSelectedImage(index);
+  };
 
+  // Для стрілок
+  const prevImage = () => scrollToImage(selectedImage - 1);
+  const nextImage = () => scrollToImage(selectedImage + 1);
+
+  // Автоскрол до центру активної мініатюри
+  useEffect(() => {
+    const active = thumbnailRefs.current[selectedImage];
+    if (active) {
+      active.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest",
+      });
+    }
+  }, [selectedImage]);
 
   return (
-    <div className="flex self-center flex-col max-w-[800px] mb-8">
+    <div className="flex self-center flex-col max-w-[900px] mb-8">
       {/* Breadcrumbs */}
       <div className={classNames("mt-5", { "ml-2": isMobile, "ml-4": !isMobile })}>
         {isMobile ? (
@@ -131,25 +151,123 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
           </div>
         ) : (
           <AnimatePresence>
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ delay: 0.4 }}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ delay: 0.4 }}>
               <div className="flex flex-row w-full">
-                {/* Зображення */}
-                <div>
-                  <div className={classNames("my-4 w-full h-auto", styles.imageRadius)}>
+                {/* 🖼️ Галерея з мініатюрами */}
+                <div className="flex flex-col w-1/2 items-center">
+                  {/* Основне зображення */}
+                  <div
+                    className={classNames(
+                      "relative w-full max-w-[350px] h-[375px] rounded-lg overflow-hidden shadow-md flex items-center justify-center"
+                    )}
+                  >
                     <Image
-                      src={details.images[0]?.src || "/placeholder.png"}
-                      alt={details.images[0]?.alt || details.name || ""}
-                      width={450}
-                      height={475}
+                      src={details.images?.[selectedImage]?.src || "/placeholder.png"}
+                      alt={details.images?.[selectedImage]?.alt || details.name || ""}
+                      fill // замість width/height — робить абсолютне позиціонування
+                      className="object-contain transition-transform duration-300 hover:scale-105 p-3"
+                      sizes="(max-width: 768px) 100vw, 350px"
                       priority
-                      unoptimized
-                      className="w-full h-auto rounded-lg"
                     />
                   </div>
+
+                  {/* Карусель мініатюр */}
+                  <div className="relative w-full flex flex-col items-center my-4">
+                    {/* Контейнер із мініатюрами */}
+                    <div
+                      ref={carouselRef}
+                      className="flex overflow-hidden space-x-2 px-10 max-w-[300px] snap-x snap-mandatory scroll-smooth mt-2 mb-4"
+                    >
+                      {details.images?.length ? (
+                        details.images.map((img, index) => {
+                          const isActive = selectedImage === index;
+                          let isVisible = false;
+
+                          // Визначаємо відображувані індекси так, щоб завжди було 3
+                          const start = Math.max(0, Math.min(selectedImage - 1, (details.images.length || 0) - 3));
+                          const end = start + 2;
+
+                          if (index >= start && index <= end) {
+                            isVisible = true;
+                          }
+
+                          return (
+                            <button
+                              key={index}
+                              ref={(el) => (thumbnailRefs.current[index] = el)}
+                              onClick={() => setSelectedImage(index)}
+                              disabled={!isVisible}
+                              className={classNames(
+                                "flex-shrink-0 snap-center border rounded-md overflow-hidden transition-all duration-300 w-[70px] h-[70px] focus:outline-none",
+                                isActive
+                                  ? "border-[#0061AA] shadow-md opacity-100"
+                                  : isVisible
+                                    ? "border-gray-300 opacity-40 hover:opacity-80"
+                                    : "opacity-0 pointer-events-none scale-90"
+                              )}
+                            >
+                              <div className="w-full h-full flex justify-center items-center bg-white">
+                                <Image
+                                  src={img.src}
+                                  alt={img.alt || details.name || ""}
+                                  width={60}
+                                  height={60}
+                                  className={classNames(
+                                    "object-contain transition-transform duration-300",
+                                    isActive ? "scale-110" : "scale-100"
+                                  )}
+                                  unoptimized
+                                />
+                              </div>
+                            </button>
+                          );
+                        })
+                      ) : (
+                        <span className="text-gray-500 text-sm italic">Немає зображень</span>
+                      )}
+                    </div>
+
+                    {/* Кнопки керування */}
+                    <div className="absolute inset-y-0 flex items-center justify-between w-full px-5 pointer-events-none">
+                      {/* Ліва кнопка або порожній блок */}
+                      <div className="w-10 flex justify-start">
+                        {selectedImage > 0 && (
+                          <button
+                            onClick={prevImage}
+                            className="pointer-events-auto shadow rounded-full p-2 transition text-[#0061AA] hover:scale-110 bg-white"
+                          >
+                            ←
+                          </button>
+                        )}
+                      </div>
+
+                      {/* Права кнопка або порожній блок */}
+                      <div className="w-10 flex justify-end">
+                        {selectedImage < (details.images?.length || 0) - 1 && (
+                          <button
+                            onClick={nextImage}
+                            className="pointer-events-auto shadow rounded-full p-2 transition text-[#0061AA] hover:scale-110 bg-white"
+                          >
+                            →
+                          </button>
+                        )}
+                      </div>
+                    </div>
+
+                  </div>
+
+
+
+
+
                 </div>
 
-                {/* Інформація про продукт */}
-                <div className="px-1 pt-0 sm:pt-10 w-1/2">
+                {/* ℹ️ Інформація */}
+                <div className="px-4 pt-0 sm:pt-10 w-1/2">
                   <h1 className="text-[22px] font-bold text-[#002766] mb-[10px]">{details.name}</h1>
                   <div className={classNames("text-normal w-full h-auto", styles.brand)}>
                     {t("product-brand")} {details.brands[0]?.name}
@@ -162,11 +280,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                         {details.price && (
                           <span className="text-[#0061AA] text-[18px]">
                             <span className="font-bold text-[#002766]">
-                              {!mounted
-                                ? "Ціна:" // Під час SSR і до гідрації — завжди однаково
-                                : /\s|,|;/.test(details.sku || "")
-                                  ? "Ціна від:"
-                                  : "Ціна:"}
+                              {!mounted ? "Ціна:" : /\s|,|;/.test(details.sku || "") ? "Ціна від:" : "Ціна:"}
                             </span>{" "}
                             {String(details.price).replace(".", ",")} {t("grn")}
                           </span>
@@ -217,34 +331,51 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                       dangerouslySetInnerHTML={{ __html: details.description || "" }}
                     />
                   </Tabs.Item>
+
                   {details.attributes?.length > 0 && (
                     <Tabs.Item title="Характеристики" icon={HiAdjustments}>
-                      <div className={classNames("p-4 rounded-xl shadow", styles.downloadabled)}>
-                        <ul className="divide-y divide-gray-200 ">
-                          {details.attributes.map((attr, index) => (
-                            <li key={index} className="py-2 flex justify-between  text-[#0061AA]">
-                              <span className="font-medium">{attr.name}</span>
-                              <span className="text-right">
-                                <span className="text-right">
+                      <div className="overflow-hidden rounded-xl shadow border border-gray-200">
+                        <table className="w-full border-collapse text-sm">
+                          <tbody>
+                            {details.attributes.map((attr, index) => (
+                              <tr
+                                key={index}
+                                className={classNames(
+                                  "transition-colors",
+                                  index % 2 === 0 ? "bg-white" : "bg-[#f8f8f8]", // темніший відтінок синього
+                                  "hover:bg-[#dceaf7]" // при наведенні — ще трохи насиченіший
+                                )}
+                              >
+                                {/* Назва характеристики */}
+                                <td className="py-3 px-4 font-medium text-[#0061AA] w-1/3 border-b border-gray-100">
+                                  {attr.name}
+                                </td>
+
+                                {/* Значення характеристики */}
+                                <td className="py-3 px-4 text-[#0061AA] border-b border-gray-100 text-right">
                                   {Array.isArray(attr.options)
                                     ? attr.options.join(", ")
                                     : attr.options}
-                                </span>
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
                       </div>
                     </Tabs.Item>
-                  )}
 
+
+                  )}
 
                   {!isAccessories && crossSellProducts.length > 0 && (
                     <Tabs.Item title="Аксесуари та комплектуючі" icon={MdDashboard}>
                       <div className={classNames("ml-10", styles.downloadabled)}>
                         {crossSellProducts.map((el) => (
                           <li key={el.id} className="mx-1">
-                            <a className="text text-blue-900" href={`/catalog/sub-catalog/product/${el.id}?category=${el.tags[0].name}`}>
+                            <a
+                              className="text text-blue-900"
+                              href={`/catalog/sub-catalog/product/${el.id}?category=${el.tags[0].name}`}
+                            >
                               {el.name}
                             </a>
                           </li>
@@ -267,7 +398,11 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
 
                   {youtubeUrl && (
                     <Tabs.Item title="Відео" icon={HiClipboardList}>
-                      <button onClick={() => window.open(youtubeUrl, "_blank")} className="text-blue-600 underline" rel="noopener noreferrer">
+                      <button
+                        onClick={() => window.open(youtubeUrl, "_blank")}
+                        className="text-blue-600 underline"
+                        rel="noopener noreferrer"
+                      >
                         Переглянути відео на YouTube
                       </button>
                     </Tabs.Item>
