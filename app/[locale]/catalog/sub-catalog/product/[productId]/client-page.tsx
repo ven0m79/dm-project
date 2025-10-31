@@ -81,6 +81,9 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
   const youtubeUrl = Array.isArray(youtubeMeta?.value) ? youtubeMeta?.value[0] : youtubeMeta?.value;
   const isAccessories = details?.tags?.map((el) => el.name)?.includes("accessories");
 
+    // 🧩 Стан для модального вікна
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
   // 🧩 Усі хуки — тільки на верхньому рівні:
   useEffect(() => setMounted(true), []);
 
@@ -118,8 +121,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
   const prevImage = () => scrollToImage(selectedImage - 1);
   const nextImage = () => scrollToImage(selectedImage + 1);
 
-  // 🧩 Стан для модального вікна
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   // Відкрити/закрити модальне вікно
   const openModal = () => setIsModalOpen(true);
