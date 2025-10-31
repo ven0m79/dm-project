@@ -404,79 +404,81 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                 </Tabs>
               </div>
             </motion.div>
+            {/* 🪟 Модальне вікно зображення */}
+            {isModalOpen && (
+              <motion.div
+                className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={closeModal}
+              >
+                <motion.div
+                  className={classNames(
+                    "relative bg-white rounded-xl overflow-hidden flex items-center justify-center",
+                    isMobile ? "w-[95vw] h-[90vh]" : "w-[600px] h-[600px]"
+                  )}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.8, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  onClick={(e) => e.stopPropagation()} // щоб не закривалось при кліку по самому вікну
+                >
+                  {/* Основне зображення */}
+                  <Image
+                    src={details.images?.[selectedImage]?.src || "/placeholder.png"}
+                    alt={details.images?.[selectedImage]?.alt || details.name || ""}
+                    fill
+                    className="object-contain bg-white"
+                    sizes="(max-width: 768px) 100vw, 600px"
+                    unoptimized
+                  />
+
+                  {/* Кнопка закриття */}
+                  <button
+                    onClick={closeModal}
+                    className="absolute top-3 right-3 text-white bg-black/50 rounded-full p-2 hover:bg-black/80 transition"
+                  >
+                    ✕
+                  </button>
+
+                  {/* Кнопки навігації */}
+                  {details.images.length > 1 && (
+                    <>
+                      {selectedImage > 0 && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            prevImage();
+                          }}
+                          className="absolute bottom-3 left-3 text-white bg-black/40 hover:bg-black/70 rounded-full p-3 transition"
+                        >
+                          ←
+                        </button>
+                      )}
+                      {selectedImage < details.images.length - 1 && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            nextImage();
+                          }}
+                          className="absolute bottom-3 right-3 text-white bg-black/40 hover:bg-black/70 rounded-full p-3 transition"
+                        >
+                          →
+                        </button>
+                      )}
+                    </>
+                  )}
+                </motion.div>
+              </motion.div>
+            )}
+
           </AnimatePresence>
         )}
       </div>
-      {/* 🪟 Модальне вікно зображення */}
-      <AnimatePresence>
-        {isModalOpen && (
-          <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={closeModal}
-          >
-            <motion.div
-              className={classNames(
-                "relative bg-white rounded-xl overflow-hidden flex items-center justify-center",
-                isMobile ? "w-[95vw] h-[90vh]" : "w-[600px] h-[600px]"
-              )}
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={(e) => e.stopPropagation()} // щоб не закривалось при кліку по самому вікну
-            >
-              {/* Основне зображення */}
-              <Image
-                src={details.images?.[selectedImage]?.src || "/placeholder.png"}
-                alt={details.images?.[selectedImage]?.alt || details.name || ""}
-                fill
-                className="object-contain bg-white"
-                sizes="(max-width: 768px) 100vw, 600px"
-                unoptimized
-              />
 
-              {/* Кнопка закриття */}
-              <button
-                onClick={closeModal}
-                className="absolute top-3 right-3 text-white bg-black/50 rounded-full p-2 hover:bg-black/80 transition"
-              >
-                ✕
-              </button>
 
-              {/* Кнопки навігації */}
-              {details.images.length > 1 && (
-                <>
-                  {selectedImage > 0 && (
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        prevImage();
-                      }}
-                      className="absolute bottom-3 left-3 text-white bg-black/40 hover:bg-black/70 rounded-full p-3 transition"
-                    >
-                      ←
-                    </button>
-                  )}
-                  {selectedImage < details.images.length - 1 && (
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        nextImage();
-                      }}
-                      className="absolute bottom-3 right-3 text-white bg-black/40 hover:bg-black/70 rounded-full p-3 transition"
-                    >
-                      →
-                    </button>
-                  )}
-                </>
-              )}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
     </div>
   );
 }
