@@ -32,23 +32,25 @@ export default async function Page({ params }: Props) {
   const product = (await fetchWooCommerceProductDetails(Number(productId), locale)) ?? null;
 
   // ✅ Крос-продажі
+  const crossSellIds = product?.cross_sell_ids ?? [];
   const crossSellProducts =
-  Array.isArray(product?.cross_sell_ids) && product.cross_sell_ids.length > 0
-    ? await fetchWooCommerceCrossProductsDetails(
-        product.cross_sell_ids.map((id: any) => (typeof id === "object" ? id.id : id)),
+    crossSellIds.length > 0
+      ? await fetchWooCommerceCrossProductsDetails(
+        crossSellIds.map((id: any) => (typeof id === "object" ? id.id : id)),
         locale
       )
-    : [];
-
+      : [];
 
   // ✅ Пов'язані товари
+  const relatedIds = product?.related_ids ?? [];
   const relatedProducts =
-  Array.isArray(product?.related_ids) && product.related_ids.length > 0
-    ? await fetchWooCommerceCrossProductsDetails(
-        product.related_ids.map((id: any) => (typeof id === "object" ? id.id : id)),
+    relatedIds.length > 0
+      ? await fetchWooCommerceCrossProductsDetails(
+        relatedIds.map((id: any) => (typeof id === "object" ? id.id : id)),
         locale
       )
-    : [];
+      : [];
+
 
   // 🔹 Повертаємо все у ClientPage
   return (
