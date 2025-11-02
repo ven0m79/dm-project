@@ -1,4 +1,3 @@
-// app/[locale]/catalog/sub-catalog/product/[productId]/page.tsx
 import type { Metadata } from "next";
 import ClientPage from "./client-page";
 import {
@@ -29,20 +28,36 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const { productId, locale } = params;
 
-  // ✅ Фетчимо дані одразу на сервері
- const product = (await fetchWooCommerceProductDetails(Number(productId), locale)) ?? null;
+  // ✅ Завантажуємо головний товар
+  const product = (await fetchWooCommerceProductDetails(Number(productId), locale)) ?? null;
 
+  // ✅ Крос-продажі
   const crossSellProducts =
-    product?.cross_sell_ids?.length
-      ? await fetchWooCommerceCrossProductsDetails(product.cross_sell_ids, locale)
-      : [];
+  Array.isArray(product?.cross_sell_ids) && product.cross_sell_ids.length > 0
+    ? await fetchWooCommerceCrossProductsDetails(
+        product.cross_sell_ids.map((id: any) => (typeof id === "object" ? id.id : id)),
+        locale
+      )
+    : [];
 
+
+  // ✅ Пов'язані товари
+  const relatedProducts =
+  Array.isArray(product?.related_ids) && product.related_ids.length > 0
+    ? await fetchWooCommerceCrossProductsDetails(
+        product.related_ids.map((id: any) => (typeof id === "object" ? id.id : id)),
+        locale
+      )
+    : [];
+
+  // 🔹 Повертаємо все у ClientPage
   return (
     <ClientPage
       params={params}
       serverData={{
         details: product,
-        crossSellProducts: crossSellProducts,
+        crossSellProducts,
+        relatedProducts,
       }}
     />
   );

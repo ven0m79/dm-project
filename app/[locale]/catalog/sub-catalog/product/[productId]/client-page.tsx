@@ -58,6 +58,7 @@ type ClientPageProps = {
   serverData: {
     details: SingleProductDetails | null;
     crossSellProducts: SingleProductDetails[];
+    relatedProducts: SingleProductDetails[];
   };
 };
 
@@ -69,6 +70,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
 
   const [details] = useState<SingleProductDetails | null>(serverData.details);
   const [crossSellProducts] = useState<SingleProductDetails[]>(serverData.crossSellProducts);
+  const [relatedProducts] = useState<SingleProductDetails[]>(serverData.relatedProducts ?? []);
   const [loading] = useState<boolean>(!details);
   const [selectedImage, setSelectedImage] = useState<number>(0);
 
@@ -81,10 +83,10 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
   const youtubeUrl = Array.isArray(youtubeMeta?.value) ? youtubeMeta?.value[0] : youtubeMeta?.value;
   const isAccessories = details?.tags?.map((el) => el.name)?.includes("accessories");
 
-    // 🧩 Стан для модального вікна
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
-  // 🧩 Усі хуки — тільки на верхньому рівні:
+  const scrollContainer = useRef<HTMLDivElement | null>(null);
+
+
   useEffect(() => setMounted(true), []);
 
   useEffect(() => {
@@ -104,7 +106,6 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
     }
   }, [selectedImage]);
 
-  // ⛔ Не умовний виклик хуків — просто умовний рендер
   if (!details) {
     return (
       <div className="flex w-full h-4/5 justify-center items-center">
@@ -121,9 +122,6 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
   const prevImage = () => scrollToImage(selectedImage - 1);
   const nextImage = () => scrollToImage(selectedImage + 1);
 
-
-
-  // Відкрити/закрити модальне вікно
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
@@ -150,11 +148,11 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ delay: 0.4 }}>
+              transition={{ delay: 0.4 }}
+            >
               <div className="flex flex-row w-full">
-                {/* 🖼️ Галерея з мініатюрами */}
+                {/* Галерея з мініатюрами */}
                 <div className="flex flex-col w-1/2 items-center">
-                  {/* Основне зображення */}
                   <div
                     onClick={openModal}
                     className={classNames(
@@ -171,9 +169,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                     />
                   </div>
 
-                  {/* Карусель мініатюр */}
                   <div className="relative w-full flex flex-col items-center my-4">
-                    {/* Контейнер із мініатюрами */}
                     <div
                       ref={carouselRef}
                       className="flex overflow-hidden space-x-2 sm:px-10 px-20 max-w-[300px] snap-x snap-mandatory scroll-smooth mt-2 mb-4"
@@ -182,14 +178,9 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                         details.images.map((img, index) => {
                           const isActive = selectedImage === index;
                           let isVisible = false;
-
-                          // Визначаємо відображувані індекси так, щоб завжди було 3
-                          const start = Math.max(0, Math.min(selectedImage - 1, (details.images.length || 0) - 3));
+                          const start = Math.max(0, Math.min(selectedImage - 1, details.images.length - 3));
                           const end = start + 2;
-
-                          if (index >= start && index <= end) {
-                            isVisible = true;
-                          }
+                          if (index >= start && index <= end) isVisible = true;
 
                           return (
                             <button
@@ -226,43 +217,10 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                         <span className="text-gray-500 text-sm italic">Немає зображень</span>
                       )}
                     </div>
-
-                    {/* Кнопки керування */}
-                    <div className="absolute inset-y-0 flex items-center justify-between w-full sm:px-5 px-0 pointer-events-none">
-                      {/* Ліва кнопка або порожній блок */}
-                      <div className="w-10 flex justify-start">
-                        {selectedImage > 0 && (
-                          <button
-                            onClick={prevImage}
-                            className="pointer-events-auto shadow rounded-full p-2 transition text-[#0061AA] hover:scale-110 bg-white"
-                          >
-                            ←
-                          </button>
-                        )}
-                      </div>
-
-                      {/* Права кнопка або порожній блок */}
-                      <div className="w-10 flex justify-end">
-                        {selectedImage < (details.images?.length || 0) - 1 && (
-                          <button
-                            onClick={nextImage}
-                            className="pointer-events-auto shadow rounded-full p-2 transition text-[#0061AA] hover:scale-110 bg-white"
-                          >
-                            →
-                          </button>
-                        )}
-                      </div>
-                    </div>
-
                   </div>
-
-
-
-
-
                 </div>
 
-                {/* ℹ️ Інформація */}
+                {/* Інформація */}
                 <div className="px-4 pt-0 sm:pt-10 w-1/2">
                   <h1 className="text-[22px] font-bold text-[#002766] mb-[10px]">{details.name}</h1>
                   <div className={classNames("text-normal w-full h-auto", styles.brand)}>
@@ -338,20 +296,15 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                                 key={index}
                                 className={classNames(
                                   "transition-colors",
-                                  index % 2 === 0 ? "bg-white" : "bg-[#f8f8f8]", // темніший відтінок синього
-                                  "hover:bg-[#dceaf7]" // при наведенні — ще трохи насиченіший
+                                  index % 2 === 0 ? "bg-white" : "bg-[#f8f8f8]",
+                                  "hover:bg-[#dceaf7]"
                                 )}
                               >
-                                {/* Назва характеристики */}
                                 <td className="py-3 px-4 font-medium text-[#0061AA] w-1/3 border-b border-gray-100">
                                   {attr.name}
                                 </td>
-
-                                {/* Значення характеристики */}
                                 <td className="py-3 px-4 text-[#0061AA] border-b border-gray-100 text-right">
-                                  {Array.isArray(attr.options)
-                                    ? attr.options.join(", ")
-                                    : attr.options}
+                                  {Array.isArray(attr.options) ? attr.options.join(", ") : attr.options}
                                 </td>
                               </tr>
                             ))}
@@ -359,8 +312,6 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                         </table>
                       </div>
                     </Tabs.Item>
-
-
                   )}
 
                   {!isAccessories && crossSellProducts.length > 0 && (
@@ -405,82 +356,149 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                   )}
                 </Tabs>
               </div>
-            </motion.div>
-            {/* 🪟 Модальне вікно зображення */}
-            {isModalOpen && (
-              <motion.div
-                className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={closeModal}
-              >
+
+              {/* Схожі товари після Tabs */}
+              <div className="mt-6 w-full">
+                <h3 className="text-lg font-semibold text-[#0061AA] mb-4">
+                  Схожі товари
+                </h3>
+
+                {relatedProducts && relatedProducts.length > 0 ? (
+                  <div className="relative w-full h-auto max-w-[900px] mx-auto py-1 ">
+                    {/* Контейнер для скролу */}
+                    <div
+                      id="related-scroll"
+                      className="flex gap-4 overflow-x-auto scroll-smooth no-scrollbar px-5 py-1"
+                      ref={scrollContainer}
+                    >
+                      {relatedProducts.map((el) => {
+                        const category = el.tags?.[0]?.name || "default-category";
+                        const imageSrc = el.images?.[0]?.src || "/placeholder.png";
+
+                        return (
+                          <Link
+                            key={el.id}
+                            href={`/catalog/sub-catalog/product/${el.id}?category=${category}`}
+                            className="w-[140px] flex-shrink-0 shadow-md rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-200 flex flex-col bg-white"
+                          >
+                            <div className="w-full h-[200px] flex items-center justify-center overflow-hidden px-1">
+                              <Image
+                                width={140}
+                                height={140}
+                                src={imageSrc}
+                                alt={el.name}
+                                className="object-contain w-full h-full p-1"
+                              />
+                            </div>
+                            <div className="p-3 flex-grow flex items-center justify-center">
+                              <p className="text-center text-sm font-normal text-[#0061AA] line-clamp-3 hover:text-[#004a80] transition-colors">
+                                {el.name}
+                              </p>
+                            </div>
+                          </Link>
+                        );
+                      })}
+                    </div>
+
+                    {/* Кнопка "←"
+                    <button
+                      onClick={() => {
+                        const container = document.getElementById("related-scroll");
+                        if (container) container.scrollBy({ left: -300, behavior: "smooth" });
+                      }}
+                      className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 hover:bg-gray-100"
+                    >
+                      ←
+                    </button>
+
+                    {/* Кнопка "→" *}
+                    <button
+                      onClick={() => {
+                        const container = document.getElementById("related-scroll");
+                        if (container) container.scrollBy({ left: 300, behavior: "smooth" });
+                      }}
+                      className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 hover:bg-gray-100"
+                    >
+                      →
+                    </button> */}
+                  </div>
+                ) : (
+                  <p className="text-gray-500 italic">Схожих товарів немає</p>
+                )}
+
+              </div>
+
+
+
+              {/* Модальне вікно зображення */}
+              {isModalOpen && (
                 <motion.div
-                  className={classNames(
-                    "relative bg-white rounded-xl overflow-hidden flex items-center justify-center",
-                    isMobile ? "w-[95vw] h-[90vh]" : "w-[600px] h-[600px]"
-                  )}
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.8, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  onClick={(e) => e.stopPropagation()} // щоб не закривалось при кліку по самому вікну
+                  className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={closeModal}
                 >
-                  {/* Основне зображення */}
-                  <Image
-                    src={details.images?.[selectedImage]?.src || "/placeholder.png"}
-                    alt={details.images?.[selectedImage]?.alt || details.name || ""}
-                    fill
-                    className="object-contain bg-white"
-                    sizes="(max-width: 768px) 100vw, 600px"
-                    unoptimized
-                  />
-
-                  {/* Кнопка закриття */}
-                  <button
-                    onClick={closeModal}
-                    className="absolute top-3 right-3 text-white bg-black/50 rounded-full p-2 hover:bg-black/80 transition"
+                  <motion.div
+                    className={classNames(
+                      "relative bg-white rounded-xl overflow-hidden flex items-center justify-center",
+                      isMobile ? "w-[95vw] h-[90vh]" : "w-[600px] h-[600px]"
+                    )}
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.8, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    onClick={(e) => e.stopPropagation()}
                   >
-                    ✕
-                  </button>
+                    <Image
+                      src={details.images?.[selectedImage]?.src || "/placeholder.png"}
+                      alt={details.images?.[selectedImage]?.alt || details.name || ""}
+                      fill
+                      className="object-contain bg-white"
+                      sizes="(max-width: 768px) 100vw, 600px"
+                      unoptimized
+                    />
 
-                  {/* Кнопки навігації */}
-                  {details.images.length > 1 && (
-                    <>
-                      {selectedImage > 0 && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            prevImage();
-                          }}
-                          className="absolute bottom-3 left-3 text-white bg-black/40 hover:bg-black/70 rounded-full p-3 transition"
-                        >
-                          ←
-                        </button>
-                      )}
-                      {selectedImage < details.images.length - 1 && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            nextImage();
-                          }}
-                          className="absolute bottom-3 right-3 text-white bg-black/40 hover:bg-black/70 rounded-full p-3 transition"
-                        >
-                          →
-                        </button>
-                      )}
-                    </>
-                  )}
+                    <button
+                      onClick={closeModal}
+                      className="absolute top-3 right-3 text-white bg-black/50 rounded-full p-2 hover:bg-black/80 transition"
+                    >
+                      ✕
+                    </button>
+
+                    {details.images.length > 1 && (
+                      <>
+                        {selectedImage > 0 && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              prevImage();
+                            }}
+                            className="absolute bottom-3 left-3 text-white bg-black/40 hover:bg-black/70 rounded-full p-3 transition"
+                          >
+                            ←
+                          </button>
+                        )}
+                        {selectedImage < details.images.length - 1 && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              nextImage();
+                            }}
+                            className="absolute bottom-3 right-3 text-white bg-black/40 hover:bg-black/70 rounded-full p-3 transition"
+                          >
+                            →
+                          </button>
+                        )}
+                      </>
+                    )}
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            )}
-
+              )}
+            </motion.div>
           </AnimatePresence>
         )}
       </div>
-
-
-
     </div>
   );
 }
