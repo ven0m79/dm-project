@@ -35,9 +35,9 @@ export default function Slider({ locale }: { locale: string }) {
   const [[page, direction], setPage] = useState([0, 0]);
   const index = wrap(0, articles .length, page);
 
-const paginate = React.useCallback((newDirection: number) => {
-  setPage(([currentPage]) => [currentPage + newDirection, newDirection]);
-}, []);
+  const paginate = (newDirection: number) => {
+    setPage([page + newDirection, newDirection]);
+  };
 
   const swipeConfidenceThreshold = 10000;
   const swipePower = (offset: number, velocity: number) => {
@@ -63,7 +63,7 @@ const paginate = React.useCallback((newDirection: number) => {
     }, 4000);
   
     return () => clearInterval(interval);
-  }, [page, paginate]); 
+  }, [page]); 
 
   return (
     <div className="example-container">

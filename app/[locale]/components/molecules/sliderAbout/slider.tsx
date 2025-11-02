@@ -34,9 +34,9 @@ export default function SliderAbout({ locale }: { locale: string }) {
   const [[page, direction], setPage] = useState([0, 0]);
   const index = wrap(0, articles.length, page);
 
-const paginate = React.useCallback((newDirection: number) => {
-  setPage(([currentPage]) => [currentPage + newDirection, newDirection]);
-}, []);
+  const paginate = (newDirection: number) => {
+    setPage([page + newDirection, newDirection]);
+  };
 
   const goToSlide = (index: number) => {
     setPage([index, 0]);
@@ -66,7 +66,7 @@ const paginate = React.useCallback((newDirection: number) => {
     }, 3500);
 
     return () => clearInterval(intervalId);
-  }, [page, paginate]);
+  }, [page]);
 
   return (
     <div className="w-screen flex justify-center px-1">
