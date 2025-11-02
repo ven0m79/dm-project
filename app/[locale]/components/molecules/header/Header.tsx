@@ -73,7 +73,7 @@ const Header = () => {
     }
   };
 
-  const debouncedHandleSearch = useMemo(() => debounce(handleSearch, 500), []);
+  const debouncedHandleSearch = useMemo(() => debounce(handleSearch, 500), [handleSearch]);
 
   useEffect(() => {
     if (searchTerm.length > 0) {

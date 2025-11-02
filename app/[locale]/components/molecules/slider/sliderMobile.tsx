@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { wrap } from "popmotion";
 
 import "./style.css";
-import {ArticleSingleType, articlesUa, articlesEng} from "./image-data";
+import { ArticleSingleType, articlesUa, articlesEng } from "./image-data";
 import SingleSlideMobile from "./single-slideMobile";
 
 
@@ -33,11 +33,12 @@ export default function SliderMobile({ locale }: { locale: string }) {
 
   const [articles, setArticles] = useState<ArticleSingleType[]>([])
   const [[page, direction], setPage] = useState([0, 0]);
-  const index = wrap(0, articles .length, page);
+  const index = wrap(0, articles.length, page);
 
-  const paginate = (newDirection: number) => {
-    setPage([page + newDirection, newDirection]);
-  };
+  const paginate = React.useCallback((newDirection: number) => {
+    setPage(([currentPage]) => [currentPage + newDirection, newDirection]);
+  }, []);
+
 
   const swipeConfidenceThreshold = 10000;
   const swipePower = (offset: number, velocity: number) => {
@@ -59,11 +60,11 @@ export default function SliderMobile({ locale }: { locale: string }) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      paginate(1); 
+      paginate(1);
     }, 4000);
-  
+
     return () => clearInterval(interval);
-  }, [page]); 
+  }, [page, paginate]);
 
 
   return (
