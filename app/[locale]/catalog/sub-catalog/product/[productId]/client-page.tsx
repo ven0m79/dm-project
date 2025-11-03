@@ -149,10 +149,10 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ delay: 0.4 }}
-            >
-              <div className="flex flex-row w-full">
-                {/* Галерея з мініатюрами */}
+            ><div className="flex flex-row w-full">
+                {/* 🖼️ Галерея з мініатюрами */}
                 <div className="flex flex-col w-1/2 items-center">
+                  {/* Основне зображення */}
                   <div
                     onClick={openModal}
                     className={classNames(
@@ -169,7 +169,9 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                     />
                   </div>
 
+                  {/* Карусель мініатюр */}
                   <div className="relative w-full flex flex-col items-center my-4">
+                    {/* Контейнер із мініатюрами */}
                     <div
                       ref={carouselRef}
                       className="flex overflow-hidden space-x-2 sm:px-10 px-20 max-w-[300px] snap-x snap-mandatory scroll-smooth mt-2 mb-4"
@@ -178,9 +180,14 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                         details.images.map((img, index) => {
                           const isActive = selectedImage === index;
                           let isVisible = false;
-                          const start = Math.max(0, Math.min(selectedImage - 1, details.images.length - 3));
+
+                          // Визначаємо відображувані індекси так, щоб завжди було 3
+                          const start = Math.max(0, Math.min(selectedImage - 1, (details.images.length || 0) - 3));
                           const end = start + 2;
-                          if (index >= start && index <= end) isVisible = true;
+
+                          if (index >= start && index <= end) {
+                            isVisible = true;
+                          }
 
                           return (
                             <button
@@ -217,7 +224,40 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                         <span className="text-gray-500 text-sm italic">Немає зображень</span>
                       )}
                     </div>
+
+                    {/* Кнопки керування */}
+                    <div className="absolute inset-y-0 flex items-center justify-between w-full sm:px-5 px-0 pointer-events-none">
+                      {/* Ліва кнопка або порожній блок */}
+                      <div className="w-10 flex justify-start">
+                        {selectedImage > 0 && (
+                          <button
+                            onClick={prevImage}
+                            className="pointer-events-auto shadow rounded-full p-2 transition text-[#0061AA] hover:scale-110 bg-white"
+                          >
+                            ←
+                          </button>
+                        )}
+                      </div>
+
+                      {/* Права кнопка або порожній блок */}
+                      <div className="w-10 flex justify-end">
+                        {selectedImage < (details.images?.length || 0) - 1 && (
+                          <button
+                            onClick={nextImage}
+                            className="pointer-events-auto shadow rounded-full p-2 transition text-[#0061AA] hover:scale-110 bg-white"
+                          >
+                            →
+                          </button>
+                        )}
+                      </div>
+                    </div>
+
                   </div>
+
+
+
+
+
                 </div>
 
                 {/* Інформація */}
@@ -400,7 +440,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                       })}
                     </div>
 
-                    {/* Кнопка "←"
+                    {/* Кнопка "←"*}
                     <button
                       onClick={() => {
                         const container = document.getElementById("related-scroll");
