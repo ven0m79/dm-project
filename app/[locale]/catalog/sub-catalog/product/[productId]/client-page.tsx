@@ -440,7 +440,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                       })}
                     </div>
 
-                    {/* Кнопка "←"*}
+                    {/* Кнопка "←" */}
                     <button
                       onClick={() => {
                         const container = document.getElementById("related-scroll");
@@ -451,7 +451,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                       ←
                     </button>
 
-                    {/* Кнопка "→" *}
+                    {/* Кнопка "→" */}
                     <button
                       onClick={() => {
                         const container = document.getElementById("related-scroll");
@@ -460,7 +460,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                       className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 hover:bg-gray-100"
                     >
                       →
-                    </button> */}
+                    </button>
                   </div>
                 ) : (
                   <p className="text-gray-500 italic">Схожих товарів немає</p>
@@ -506,7 +506,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                       ✕
                     </button>
 
-                    {details.images.length > 1 && (
+                    {details.images?.length > 1 && (
                       <>
                         {selectedImage > 0 && (
                           <button
@@ -519,7 +519,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                             ←
                           </button>
                         )}
-                        {selectedImage < details.images.length - 1 && (
+                        {selectedImage < details.images?.length - 1 && (
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
