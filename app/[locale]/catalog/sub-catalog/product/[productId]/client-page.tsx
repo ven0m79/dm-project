@@ -115,7 +115,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
   }
 
   const scrollToImage = (index: number) => {
-    if (index < 0 || index >= details.images.length) return;
+    if (index < 0 || index >= details.images?.length) return;
     setSelectedImage(index);
   };
 
@@ -156,7 +156,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                   <div
                     onClick={openModal}
                     className={classNames(
-                      "relative w-full max-w-[350px] h-[375px] rounded-lg overflow-hidden shadow-md flex items-center justify-center cursor-zoom-in"
+                      "relative w-full max-w-[350px] h-[200px] sm:h-[375px] rounded-lg overflow-hidden shadow-md flex items-center justify-center cursor-zoom-in"
                     )}
                   >
                     <Image
@@ -343,9 +343,12 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                                 <td className="py-3 px-4 font-medium text-[#0061AA] w-1/3 border-b border-gray-100">
                                   {attr.name}
                                 </td>
-                                <td className="py-3 px-4 text-[#0061AA] border-b border-gray-100 text-right">
-                                  {Array.isArray(attr.options) ? attr.options.join(", ") : attr.options}
+                                <td className="py-3 px-4 text-[#0061AA] border-b border-gray-100 text-left whitespace-pre-line">
+                                  {Array.isArray(attr.options)
+                                    ? attr.options.join(", ").replace(/\\n-?/g, "\n- ")
+                                    : (attr.options as string)?.replace(/\\n-?/g, "\n- ")}
                                 </td>
+
                               </tr>
                             ))}
                           </tbody>
@@ -467,8 +470,6 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                 )}
 
               </div>
-
-
 
               {/* Модальне вікно зображення */}
               {isModalOpen && (
