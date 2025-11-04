@@ -156,7 +156,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                   <div
                     onClick={openModal}
                     className={classNames(
-                      "relative w-full max-w-[350px] h-[375px] rounded-lg overflow-hidden shadow-md flex items-center justify-center cursor-zoom-in"
+                      "relative w-full max-w-[350px] h-[200px] sm:h-[375px] rounded-lg overflow-hidden shadow-md flex items-center justify-center cursor-zoom-in"
                     )}
                   >
                     <Image
