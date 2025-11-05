@@ -9,7 +9,7 @@ import Image from 'next/image';
 import mail from "./contacts-photo/emailContacts.png";
 import phone from "./contacts-photo/telephoneContacts.png";
 import adress from "./contacts-photo/locationContacts.png";
-import { useIsMobile } from "../components/hooks/useIsMobile";
+//import { useIsMobile } from "../components/hooks/useIsMobile";
 import Link from "next/link";
 
 declare global {
@@ -27,7 +27,7 @@ export const ClientPage = () => {
   const [city, setCity] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const isMobile = useIsMobile();
+  //const isMobile = useIsMobile();
   const [status, setStatus] = useState('');
   //const searchParams = useSearchParams();
   const [isProductFromUrl, setIsProductFromUrl] = useState(false); // ✅ новий стейт

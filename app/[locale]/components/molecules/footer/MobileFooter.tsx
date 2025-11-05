@@ -9,10 +9,8 @@ import styles from "./Footer.module.css";
 
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 
-const MobileFooter: FC<{}> = ({ }) => {
-    const t = useTranslations("Footer");
+const MobileFooter: FC<{ t: any }> = ({ t }) => {
     
-
     return (
         <>
             <div className="items-center bottom-0 flex flex-1 flex-row justify-around max-h-[100px] mx-2 w-screen">

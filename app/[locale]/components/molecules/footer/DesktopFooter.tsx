@@ -5,13 +5,11 @@ import { Link } from "../../../../../config";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
-import { useNavigateTo } from "@app/[locale]/components/hooks/useNavigateTo";
+//import { useNavigateTo } from "@app/[locale]/components/hooks/useNavigateTo";
 import styles from "./Footer.module.css";
 
-const DesktopFooter: FC<{}> = ({ }) => {
-    const { navigateWithDelay } = useNavigateTo();
-    const t = useTranslations("Footer");
-
+const DesktopFooter: FC<{ t: any }> = ({ t }) => {
+    //const { navigateWithDelay } = useNavigateTo();
 
     return (
         <><div className={styles.footerContainer}>
