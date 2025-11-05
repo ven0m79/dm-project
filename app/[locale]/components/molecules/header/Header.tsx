@@ -40,7 +40,7 @@ const Header = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const isMobile = useIsMobile();
-  const [mounted, setMounted] = useState(false);
+  //const [mounted, setMounted] = useState(false);
 
   const handleSearch = async (term: string) => {
     if (term.length < 3) {
@@ -87,8 +87,8 @@ const Header = () => {
     };
   }, [searchTerm, debouncedHandleSearch]);
 
-  useEffect(() => setMounted(true), []);
-  if (!mounted) return null;
+  // useEffect(() => setMounted(true), []);
+  // if (!mounted) return null;
 
   return (
     <header className={classNames("mt-top flex flex-col", styles["header"])}>

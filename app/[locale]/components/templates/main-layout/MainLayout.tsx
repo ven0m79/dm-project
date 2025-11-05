@@ -1,6 +1,7 @@
 import React, { FC, ReactNode, Suspense } from "react";
 
-import { Nav, Footer, Header } from "@app/[locale]/components/molecules";
+import { Nav, Footer } from "@app/[locale]/components/molecules";
+import HeaderWrapper from "@app/[locale]/components/molecules/header/HeaderWrapper";
 import "@app/[locale]/globals.css";
 import "@app/[locale]/reset.css";
 
@@ -27,7 +28,7 @@ const MainLayout: FC<MainLayoutProps> = ({
     
     <Suspense fallback="Loading">
       <main className={styles.main}>
-        {noHeader ? null : <Header />}
+        {noHeader ? null : <HeaderWrapper />}
         {noNav ? null : <Nav /> }
         {children}
         {noFooter ? null : <Footer />}
