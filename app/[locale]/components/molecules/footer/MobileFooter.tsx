@@ -2,14 +2,14 @@ import classNames from "classnames";
 import React, { FC } from "react";
 import { Link } from "../../../../../config";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+//import { useTranslations } from "next-intl";
 
-import { useNavigateTo } from "@app/[locale]/components/hooks/useNavigateTo";
+//import { useNavigateTo } from "@app/[locale]/components/hooks/useNavigateTo";
 import styles from "./Footer.module.css";
 
-import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
+//import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 
-const MobileFooter: FC<{ t: any }> = ({ t }) => {
+const MobileFooter: FC<{ t: (key: string) => string }> = ({ t }) => {
     
     return (
         <>

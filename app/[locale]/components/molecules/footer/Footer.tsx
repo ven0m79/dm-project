@@ -1,5 +1,4 @@
 import { useTranslations } from "next-intl";
-import DesktopFooter from "./DesktopFooter";
 import MobileFooterWrapper from "./MobileFooterWrapper";
 import classNames from "classnames";
 import styles from "./Footer.module.css";
@@ -17,7 +16,6 @@ export default function Footer() {
     >
       {/* MobileFooterWrapper вирішує, що рендерити */}
       <MobileFooterWrapper t={t} />
-
     </footer>
   );
 }
