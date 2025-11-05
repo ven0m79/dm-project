@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import classNames from "classnames";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./Nav.module.css";
 
@@ -54,10 +54,15 @@ const NavLinks: {
 
 const Nav = () => {
   const isMobile = useIsMobile();
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return null;
 
   return (
     <>
-      {typeof window !== "undefined" && isMobile ?
+      {isMobile ?
         <nav className={classNames("max-h-[0px]", styles["navigation"])}>
           <MobileNav />
         </nav>

@@ -1,39 +1,21 @@
-import classNames from "classnames";
-import React from "react";
-import { Link } from "../../../../../config";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
-
-import { useNavigateTo } from "@app/[locale]/components/hooks/useNavigateTo";
+import MobileFooterWrapper from "./MobileFooterWrapper";
+import classNames from "classnames";
 import styles from "./Footer.module.css";
 
-import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
-import MobileFooter from "./MobileFooter";
-import DesktopFooter from "./DesktopFooter";
-
-
-const Footer = () => {
-
-
+export default function Footer() {
   const t = useTranslations("Footer");
-  const isMobile = useIsMobile();
-  console.log({ isMobile });
 
+  // Server component — нічого клієнтського тут не має бути
   return (
-    <footer
+        <footer
       className={classNames(
         "mt-auto flex flex-1 flex-col justify-center items-center w-screen bottom-0",
         styles["footer"],
       )}
     >
-      {typeof window !== "undefined" && isMobile ?
-        <MobileFooter />
-        :
-        <DesktopFooter />
-      }
+      {/* MobileFooterWrapper вирішує, що рендерити */}
+      <MobileFooterWrapper t={t} />
     </footer>
-
   );
-};
-
-export default Footer;
+}

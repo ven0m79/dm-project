@@ -2,17 +2,15 @@ import classNames from "classnames";
 import React, { FC } from "react";
 import { Link } from "../../../../../config";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+//import { useTranslations } from "next-intl";
 
-import { useNavigateTo } from "@app/[locale]/components/hooks/useNavigateTo";
+//import { useNavigateTo } from "@app/[locale]/components/hooks/useNavigateTo";
 import styles from "./Footer.module.css";
 
-import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
+//import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 
-const MobileFooter: FC<{}> = ({ }) => {
-    const t = useTranslations("Footer");
+const MobileFooter: FC<{ t: (key: string) => string }> = ({ t }) => {
     
-
     return (
         <>
             <div className="items-center bottom-0 flex flex-1 flex-row justify-around max-h-[100px] mx-2 w-screen">
