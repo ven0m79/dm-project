@@ -151,3 +151,19 @@ export async function fetchWooCommerceProductsTitles(
     throw new Error(error as string);
   }
 }
+
+export async function fetchWooCommerceProductVariations(
+  productId: number,
+  locale: string
+) {
+  try {
+    const response = await api.get(`products/${productId}/variations${locale ? `?lang=${locale}` : ""}`);
+    if (response.status === 200) {
+      return response.data;
+    }
+    return [];
+  } catch (error) {
+    console.error("Помилка при завантаженні варіацій:", error);
+    return [];
+  }
+}
