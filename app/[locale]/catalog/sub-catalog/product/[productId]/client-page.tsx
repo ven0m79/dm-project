@@ -17,6 +17,7 @@ import Loader from "@app/[locale]/components/atoms/loader/Loader";
 import MobileBreadcrumbs from "./MobileBreadcrumbs";
 import DesktopBreadcrumbs from "./DesktopBreadcrumbs";
 import styles from "./Product.module.css";
+import ProductDetails from "./selectedPrice";
 
 const customTheme: CustomFlowbiteTheme = {
   tabs: {
@@ -277,6 +278,8 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                               {!mounted ? "Ціна:" : /\s|,|;/.test(details.sku || "") ? "Ціна від:" : "Ціна:"}
                             </span>{" "}
                             {String(details.price).replace(".", ",")} {t("grn")}
+
+                            <ProductDetails details={details} />
                           </span>
                         )}
                       </div>
@@ -293,7 +296,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
 
                   <div className="sm:h-[20px] h-[5px]"></div>
                   <div className="flex flex-col justify-between items-center">
-                    <div className={styles.downloadable}>
+                    {/* <div className={styles.downloadable}>
                       <Link
                         href={{
                           pathname: "../../../../contacts",
@@ -302,7 +305,7 @@ export default function ClientPage({ params: { locale }, serverData }: ClientPag
                       >
                         {t("product-request")}
                       </Link>
-                    </div>
+                    </div> */}
                     <br />
                     {!isAccessories && (
                       <div className={classNames("flex items-center", styles.downloadable)}>

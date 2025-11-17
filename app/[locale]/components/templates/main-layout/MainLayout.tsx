@@ -14,9 +14,9 @@ type MainLayoutProps = {
   noFooter?: boolean;
 };
 
-type Props = {
-  locale: string;
-};
+// type Props = {
+//   locale: string;
+// };
 
 const MainLayout: FC<MainLayoutProps> = ({
   children,
@@ -25,7 +25,6 @@ const MainLayout: FC<MainLayoutProps> = ({
   noFooter = false,
 }) => {
   return (
-    
     <Suspense fallback="Loading">
       <main className={styles.main}>
         {noHeader ? null : <HeaderWrapper />}
