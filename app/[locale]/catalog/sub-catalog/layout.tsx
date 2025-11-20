@@ -84,7 +84,7 @@ const Content: FC<{ children: ReactNode; locale: string; }> = ({
 export default function Layout({ children, params: { locale } }: { children: ReactNode; params: { locale: string } }) {
   return (
     <MainLayout>
-      <SidebarProvider locale={locale}>
+      <SidebarProvider locale={locale} initialCategories={[]}>
         <Content locale={locale}>{children}</Content>
       </SidebarProvider>
     </MainLayout>

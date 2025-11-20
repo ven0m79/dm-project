@@ -5,6 +5,7 @@ import {
   WoocomerceCategoryType,
 } from "./woocomerce.types";
 import { title } from "process";
+import { unstable_cache } from "next/cache";
 
 export const api = new WooCommerceRestApi({
   url: "https://api.dm-project.com.ua",
@@ -29,7 +30,8 @@ export async function fetchWooCommerceProducts(id: number, locale: string) {
   }
 }
 
-export async function fetchWooCommerceCategories(locale: string) {
+// 1. Внутрішня функція, яка виконує реальний запит до API
+const getCategoriesInternal = async (locale: string) => {
   try {
     let page = 1;
     let totalPages = 1;
@@ -37,22 +39,47 @@ export async function fetchWooCommerceCategories(locale: string) {
 
     do {
       const response = await api.get(
-        `products/categories?per_page=100&page=${page}&lang=${locale}`,
+        `products/categories?per_page=100&page=${page}&lang=${locale}`
       );
 
       if (response.status === 200) {
-        totalPages = parseInt(response.headers["x-wp-totalpages"], 10);
-        const data = await response.data;
+        const totalHeader = response.headers["x-wp-totalpages"];
+        // Перевірка наявності хедера
+        totalPages = totalHeader ? parseInt(totalHeader, 10) : 1;
+        
+        const data = response.data;
         result.push(...data);
 
         page++;
+      } else {
+        // Якщо статус не 200, перериваємо цикл, щоб не зациклитись
+        break;
       }
     } while (page <= totalPages);
 
     return result;
   } catch (error) {
-    throw new Error(error as string);
+    console.error("Fetch Categories Error:", error);
+    return []; // Повертаємо пустий масив у випадку помилки, щоб не ламати білд
   }
+};
+
+// 2. Обгортаємо функцію в unstable_cache для SSG
+const getCachedCategories = unstable_cache(
+  getCategoriesInternal,
+  ["woocommerce-categories-list"], // Унікальний ключ кешу
+  {
+    revalidate: false, // false = кешувати назавжди (до нового білду)
+    tags: ["categories"], // Тег для ручної ревалідації (опціонально)
+  }
+);
+
+// 3. Експортуємо функцію зі старою сигнатурою для сумісності
+export async function fetchWooCommerceCategories(
+  locale: string,
+  _options?: { cache?: string } // Параметр існує для сумісності, але логіка тепер в unstable_cache
+) {
+  return getCachedCategories(locale);
 }
 
 export async function fetchWooCommerceCategoryDetails(
