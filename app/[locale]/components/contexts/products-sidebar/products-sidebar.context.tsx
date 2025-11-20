@@ -66,7 +66,7 @@ export const SidebarProvider = ({ children, locale }: { children: ReactNode; loc
 
   const getCategoriesData = useCallback(async () => {
     try {
-      const data = await fetchWooCommerceCategories(locale, { cache: "force-cache" });
+      const data = await fetchWooCommerceCategories(locale);
       if (data) {
         setCategories(
           categoriesCreation(data as unknown as TransformedCategoriesType[])
