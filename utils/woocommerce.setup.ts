@@ -5,6 +5,7 @@ import {
   WoocomerceCategoryType,
 } from "./woocomerce.types";
 import { title } from "process";
+import { unstable_cache } from "next/cache";
 
 export const api = new WooCommerceRestApi({
   url: "https://api.dm-project.com.ua",
@@ -29,31 +30,39 @@ export async function fetchWooCommerceProducts(id: number, locale: string) {
   }
 }
 
-export async function fetchWooCommerceCategories(locale: string) {
+const getCategoriesInternal = async (locale: string): Promise<WoocomerceCategoryType[]> => {
   try {
     let page = 1;
     let totalPages = 1;
     const result: WoocomerceCategoryType[] = [];
 
     do {
-      const response = await api.get(
-        `products/categories?per_page=100&page=${page}&lang=${locale}`,
-      );
-
+      const response = await api.get(`products/categories?per_page=100&page=${page}&lang=${locale}`);
       if (response.status === 200) {
-        totalPages = parseInt(response.headers["x-wp-totalpages"], 10);
-        const data = await response.data;
-        result.push(...data);
+        const totalHeader = response.headers["x-wp-totalpages"];
+        totalPages = totalHeader ? parseInt(totalHeader, 10) : 1;
 
+        result.push(...response.data);
         page++;
-      }
+      } else break;
     } while (page <= totalPages);
 
     return result;
   } catch (error) {
-    throw new Error(error as string);
+    console.error("Fetch Categories Error:", error);
+    return [];
   }
-}
+};
+
+// Серверний кеш, дані кешуються до білду
+export const fetchWooCommerceCategories = unstable_cache(
+  getCategoriesInternal,
+  ["woocommerce-categories-list"], // унікальний ключ
+  {
+    revalidate: false, // false = кеш до нового білду
+    tags: ["categories"], // для ISR ревалідації (опціонально)
+  }
+);
 
 export async function fetchWooCommerceCategoryDetails(
   categoryId: number,
