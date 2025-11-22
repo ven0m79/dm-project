@@ -30,39 +30,36 @@ export async function fetchWooCommerceProducts(id: number, locale: string) {
   }
 }
 
-const getCategoriesInternal = async (locale: string): Promise<WoocomerceCategoryType[]> => {
+export async function fetchWooCommerceCategories(locale: string) {
   try {
     let page = 1;
     let totalPages = 1;
     const result: WoocomerceCategoryType[] = [];
 
     do {
-      const response = await api.get(`products/categories?per_page=100&page=${page}&lang=${locale}`);
-      if (response.status === 200) {
-        const totalHeader = response.headers["x-wp-totalpages"];
-        totalPages = totalHeader ? parseInt(totalHeader, 10) : 1;
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_WOO_API}/products/categories?per_page=100&page=${page}&lang=${locale}`,
+        {
+          cache: "force-cache", // <-- КЕШ ДО БІЛДУ
+          next: { revalidate: 60 * 60 * 24 }, // 24h (можеш поставити 0 для FULL BUILD CACHE)
+        }
+      );
 
-        result.push(...response.data);
-        page++;
-      } else break;
+      if (!response.ok) throw new Error("Bad response");
+
+      totalPages = parseInt(response.headers.get("x-wp-totalpages") || "1", 10);
+      const data = await response.json();
+
+      result.push(...data);
+      page++;
     } while (page <= totalPages);
 
     return result;
   } catch (error) {
-    console.error("Fetch Categories Error:", error);
-    return [];
+    throw new Error(String(error));
   }
-};
+}
 
-// Серверний кеш, дані кешуються до білду
-export const fetchWooCommerceCategories = unstable_cache(
-  getCategoriesInternal,
-  ["woocommerce-categories-list"], // унікальний ключ
-  {
-    revalidate: false, // false = кеш до нового білду
-    tags: ["categories"], // для ISR ревалідації (опціонально)
-  }
-);
 
 export async function fetchWooCommerceCategoryDetails(
   categoryId: number,
