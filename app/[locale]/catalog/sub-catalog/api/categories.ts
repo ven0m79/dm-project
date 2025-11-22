@@ -3,6 +3,6 @@ import { categoriesCreation, TransformedCategoriesType } from "@app/[locale]/cat
 
 // Серверна функція для отримання категорій з кешуванням
 export async function getCategories(locale: string): Promise<TransformedCategoriesType[]> {
-  const data = await fetchWooCommerceCategories(locale, { cache: "force-cache" });
+  const data = await fetchWooCommerceCategories(locale);
   return categoriesCreation(data as TransformedCategoriesType[]);
 }
