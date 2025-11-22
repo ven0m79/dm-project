@@ -40,25 +40,33 @@ export async function fetchWooCommerceCategories(locale: string) {
       const response = await api.get(
         `products/categories?per_page=100&page=${page}&lang=${locale}`,
         {
-          cache: "force-cache", // <-- КЕШ ДО БІЛДУ
-          next: { revalidate: 60 * 60 * 24 }, // 24h (можеш поставити 0 для FULL BUILD CACHE)
+          // ❗ ЦЕ працює ТІЛЬКИ для fetch, але Next.js дозволяє передати це axios (і просто ігнорує)
+          // але через це не буде помилки
+          next: { revalidate: 60 * 60 * 24 },
         }
       );
 
-      if (!response.ok) throw new Error("Bad response");
+      // axios — це не fetch, перевірка інша:
+      if (response.status !== 200) {
+        throw new Error("Bad response: " + response.status);
+      }
 
-      totalPages = parseInt(response.headers.get("x-wp-totalpages") || "1", 10);
-      const data = await response.json();
+      // axios headers — звичайний об’єкт
+      totalPages = parseInt(response.headers["x-wp-totalpages"] || "1", 10);
 
+      const data = response.data;
       result.push(...data);
+
       page++;
     } while (page <= totalPages);
 
     return result;
   } catch (error) {
+    console.error("WooCommerce fetch error:", error);
     throw new Error(String(error));
   }
 }
+
 
 
 export async function fetchWooCommerceCategoryDetails(
