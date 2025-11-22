@@ -37,8 +37,8 @@ export async function fetchWooCommerceCategories(locale: string) {
     const result: WoocomerceCategoryType[] = [];
 
     do {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_WOO_API}/products/categories?per_page=100&page=${page}&lang=${locale}`,
+      const response = await api.get(
+        `products/categories?per_page=100&page=${page}&lang=${locale}`,
         {
           cache: "force-cache", // <-- КЕШ ДО БІЛДУ
           next: { revalidate: 60 * 60 * 24 }, // 24h (можеш поставити 0 для FULL BUILD CACHE)
