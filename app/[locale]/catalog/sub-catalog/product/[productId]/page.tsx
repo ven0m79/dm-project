@@ -1,66 +1,89 @@
 import type { Metadata } from "next";
+import { cache } from "react";
+import { notFound } from "next/navigation";
+
 import ClientPage from "./client-page";
 import {
-  fetchWooCommerceProductDetails,
-  fetchWooCommerceCrossProductsDetails,
+    fetchWooCommerceProductDetails,
+    fetchWooCommerceCrossProductsDetails,
 } from "../../../../../../utils/woocommerce.setup";
 
 type Props = {
-  params: { locale: string; productId: string };
+    params: { locale: string; productId: string };
 };
 
-// 🧠 Генерація метаданих (SEO)
+export const revalidate = 3600; // cache page & data for 1 hour
+
+// Shared, memoized data loader for this route (used by both page + metadata)
+const getProduct = cache(
+    async (id: number, locale: string) =>
+        (await fetchWooCommerceProductDetails(id, locale)) ?? null,
+);
+
+// SEO metadata (SSR, re-uses the same cached product fetch)
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const id = params.productId;
-  const product = await fetch(
-    `https://api.dm-project.com.ua/wp-json/wc/v3/products/${id}?lang=${params.locale}&consumer_key=ck_8dee30956004b4c7f467a46247004a2f4cd650e5&consumer_secret=cs_1cf0a573275e5cafe5af6bddbb01f29b9592be20`
-  ).then((res) => res.json());
+    const id = Number(params.productId);
+    const { locale } = params;
 
-  const strip = product?.short_description?.replace(/<[^>]*>/g, "").trim() || "";
+    const product = await getProduct(id, locale);
 
-  return {
-    title: product?.name || "Product",
-    description: strip,
-  };
+    if (!product) {
+        return {
+            title: "Product",
+            description: "",
+        };
+    }
+
+    const strip =
+        product?.short_description
+            ?.replace(/<[^>]*>/g, "")
+            .trim() || "";
+
+    return {
+        title: product.name || "Product",
+        description: strip,
+    };
 }
 
-// 🟢 Основний SSR-компонент
+// Main SSR page
 export default async function Page({ params }: Props) {
-  const { productId, locale } = params;
+    const { productId, locale } = params;
+    const id = Number(productId);
 
-  // ✅ Завантажуємо головний товар
-  const product = (await fetchWooCommerceProductDetails(Number(productId), locale)) ?? null;
+    const product = await getProduct(id, locale);
 
-  // ✅ Крос-продажі
-  const crossSellIds = product?.cross_sell_ids ?? [];
-  const crossSellProducts =
-    crossSellIds.length > 0
-      ? await fetchWooCommerceCrossProductsDetails(
-        crossSellIds.map((id: any) => (typeof id === "object" ? id.id : id)),
-        locale
-      )
-      : [];
+    if (!product) {
+        notFound();
+    }
 
-  // ✅ Пов'язані товари
-  const relatedIds = product?.related_ids ?? [];
-  const relatedProducts =
-    relatedIds.length > 0
-      ? await fetchWooCommerceCrossProductsDetails(
-        relatedIds.map((id: any) => (typeof id === "object" ? id.id : id)),
-        locale
-      )
-      : [];
+    // Cross-sell products
+    const crossSellIds = product?.cross_sell_ids ?? [];
+    const crossSellProducts =
+        crossSellIds.length > 0
+            ? await fetchWooCommerceCrossProductsDetails(
+                crossSellIds.map((id: any) => (typeof id === "object" ? id.id : id)),
+                locale,
+            )
+            : [];
 
+    // Related products
+    const relatedIds = product?.related_ids ?? [];
+    const relatedProducts =
+        relatedIds.length > 0
+            ? await fetchWooCommerceCrossProductsDetails(
+                relatedIds.map((id: any) => (typeof id === "object" ? id.id : id)),
+                locale,
+            )
+            : [];
 
-  // 🔹 Повертаємо все у ClientPage
-  return (
-    <ClientPage
-      params={params}
-      serverData={{
-        details: product,
-        crossSellProducts,
-        relatedProducts,
-      }}
-    />
-  );
+    return (
+        <ClientPage
+            params={params}
+            serverData={{
+                details: product,
+                crossSellProducts,
+                relatedProducts,
+            }}
+        />
+    );
 }

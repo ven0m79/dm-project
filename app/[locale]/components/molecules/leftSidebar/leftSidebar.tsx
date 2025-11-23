@@ -89,54 +89,28 @@ const Content: FC<SidebarProps> = ({
     [categories, locale],
   );
 
-  // ✅ Перевірка на iOS (щоб вирішити як робити навігацію)
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
-  // ✅ Створюємо швидкий lookup Map для категорій
-  const categoriesMap = useMemo(() => {
-    const map = new Map<number, TransformedCategoriesType>();
-
-    const traverse = (cats: TransformedCategoriesType[]) => {
-      cats.forEach((cat) => {
-        map.set(cat.id, cat);
-        if (cat.childrens?.length) {
-          traverse(cat.childrens);
-        }
-      });
-    };
-
-    if (items?.length) traverse(items);
-
-    return map;
-  }, [items]);
-
-  // ✅ Оновлений toggle (без findCategoryById, тільки через categoriesMap)
+  // ✅ Оновлений toggle
   const handleCollapseToggle = (category: TransformedCategoriesType) => {
-    // Встановлюємо id для виділення
     setSelectedCategoryId(category.id);
-    // Встановлюємо slug або name як поточну категорію
-    setSelectedCategory(category.slug); // або category.name, якщо потрібна назва
+    setSelectedCategory(category.slug);
 
-    // Тогл відкриття / закриття
     setOpenedCategoryIds((prevOpenedIds) =>
       prevOpenedIds.includes(category.id)
         ? prevOpenedIds.filter((id) => id !== category.id)
         : [...prevOpenedIds, category.id],
     );
-    // НЕ викликаємо getCategoryDetails і НЕ змінюємо URL тут
-    // Навігацію робимо тільки в місці, де потрібно (нижче — у клику по leaf)
   };
 
   // ✅ Рекурсивний пошук всіх "батьківських" категорій
   const findParentCategories = useCallback(
     (
-      categories: TransformedCategoriesType[],
+      cats: TransformedCategoriesType[],
       targetCategoryId: number,
       parents: TransformedCategoriesType[] = [],
     ): TransformedCategoriesType[] | null => {
-      for (const category of categories) {
+      for (const category of cats) {
         if (category.id === targetCategoryId) {
-          return parents; // Знайшли — повертаємо список батьків
+          return parents;
         }
 
         if (category.childrens && category.childrens.length > 0) {
@@ -220,9 +194,10 @@ const Content: FC<SidebarProps> = ({
             onClick={() => {
               handleCollapseToggle(category);
 
-              // 🔹 Використовуємо slug вибраної категорії
               if (changeURLParams) {
-                router.push(`${pathname.replace(/\/product\/\d+/, "")}?category=${category.slug}`);
+                router.push(
+                  `${pathname.replace(/\/product\/\d+/, "")}?category=${category.slug}`,
+                );
               }
 
               if (fromProductPage) {
@@ -232,7 +207,6 @@ const Content: FC<SidebarProps> = ({
           >
             {category.name}
           </div>
-
         </FBSidebar.Item>
       );
     }
@@ -247,7 +221,7 @@ const Content: FC<SidebarProps> = ({
           selectedItemsNestedData?.includes(Number(category.id))
         }
         label={category.name}
-        key={category.id}
+        key={key}
         className={classNames({
           "opacity-0 pointer-events-none mt-[-40px]":
             category.id === LEFT_BAR_PARENT_ID ||
@@ -258,9 +232,10 @@ const Content: FC<SidebarProps> = ({
         onClick={() => {
           handleCollapseToggle(category);
 
-          // 🔹 Додаємо зміну URL для категорій з підкатегоріями
           if (changeURLParams) {
-            router.push(`${pathname.replace(/\/product\/\d+/, "")}?category=${category.slug}`);
+            router.push(
+              `${pathname.replace(/\/product\/\d+/, "")}?category=${category.slug}`,
+            );
           }
 
           if (fromProductPage) {
@@ -273,13 +248,14 @@ const Content: FC<SidebarProps> = ({
             if (level === 0 && customFirstLevelOrder.length > 0) {
               const aIndex = customFirstLevelOrder.indexOf(a.slug);
               const bIndex = customFirstLevelOrder.indexOf(b.slug);
-              return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
+              return (
+                (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex)
+              );
             }
             return a.name.localeCompare(b.name);
           })
           .map((child) => renderNestedCategories(child, level + 1))}
       </FBSidebar.Collapse>
-
     );
   };
 
@@ -290,7 +266,7 @@ const Content: FC<SidebarProps> = ({
         styles.subMenu,
       )}
     >
-      <div className="">
+      <div>
         {/* 🔹 Заголовок (назва кореневого елементу) */}
         <h3 className="text-blue-950 ml-5 font-bold mt-5">
           {items?.[0]?.name}

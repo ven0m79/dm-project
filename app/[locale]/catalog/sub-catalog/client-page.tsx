@@ -12,6 +12,7 @@ import MobileBreadcrumbs from "./product/[productId]/MobileBreadcrumbs";
 import DesktopBreadcrumbs from "./product/[productId]/DesktopBreadcrumbs";
 import Image from "next/image";
 import { TransformedCategoriesType } from "./helpers";
+import {isIOS} from "../../../../utils/constants";
 
 export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   const {
@@ -22,17 +23,14 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
     selectedCategory,
   } = useSidebar();
 
-  const { breadcrumbs, buildCategoryTrail } = useBreadcrumbs();
   const currentIdsData = useMemo(() => getCategoriesIds(locale), [locale]);
-  const isMobile = useIsMobile();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const isIOS = typeof navigator !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
   const categoryFromUrl = searchParams?.get("category") ?? "";
   const categoryId = useMemo(
     () => (currentIdsData as Record<string, number>)[categoryFromUrl],
-    [categoryFromUrl, currentIdsData]
+    [categoryFromUrl, currentIdsData],
   );
 
   // ✅ Only UI state here (Provider fetches products by URL)
@@ -40,24 +38,23 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
     if (!categoryId) return;
     setSelectedCategoryId(categoryId);
     setOpenedCategoryIds([categoryId]);
-    buildCategoryTrail([{ id: categoryId } as any], locale);
-  }, [categoryId, locale, setOpenedCategoryIds, setSelectedCategoryId, buildCategoryTrail]);
+  }, [categoryId, locale, setOpenedCategoryIds, setSelectedCategoryId]);
 
   // ✅ Memoize sorting
   const sortedProducts = useMemo(
     () => [...selectedProducts].sort((a, b) => a.name.localeCompare(b.name)),
-    [selectedProducts]
+    [selectedProducts],
   );
 
   const [visibleCount, setVisibleCount] = useState(15);
   const productsToRender = useMemo(
     () => sortedProducts.slice(0, visibleCount),
-    [sortedProducts, visibleCount]
+    [sortedProducts, visibleCount],
   );
   const categoriesDescriptionMap = useMemo(() => {
     const map = new Map<number, string>();
     const traverse = (cats: TransformedCategoriesType[]) => {
-      cats.forEach(cat => {
+      cats.forEach((cat) => {
         map.set(cat.id, cat.description || "");
         if (cat.childrens?.length) traverse(cat.childrens);
       });
@@ -73,29 +70,12 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
 
   return (
     <>
-      {/* Breadcrumbs */}
-      <div className={classNames("mt-6 left-0 w-full", { "ml-0": isMobile, "ml-4": !isMobile })}>
-        {isMobile ? (
-          <MobileBreadcrumbs
-            breadcrumbs={breadcrumbs}
-            isIOS={isIOS}
-            router={router}
-            detailsName={breadcrumbs[breadcrumbs.length - 1]?.name}
-          />
-        ) : (
-          <>
-            <h1 className="text-[22px] font-bold text-[#002766] mb-2 ml-2">
-              {breadcrumbs[breadcrumbs.length - 1]?.name}
-            </h1>
-            <DesktopBreadcrumbs breadcrumbs={breadcrumbs} isIOS={isIOS} router={router} />
-          </>
-        )}
-      </div>
-
       <div className="flex flex-wrap justify-start self-start mt-4 mb-4 ml-2 items-start">
         {productsToRender?.length ? (
           productsToRender.map((el) => {
-            const isAccessories = el.tags?.some((t) => t.name === "accessories");
+            const isAccessories = el.tags?.some(
+              (t) => t.name === "accessories",
+            );
             const cardClass = isAccessories
               ? `mx-1 sm:mx-2 ${styles.headSubCatalogBlockMini}`
               : `mx-1 sm:mx-6 ${styles.headSubCatalogBlock}`;
@@ -103,14 +83,24 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
             const url = `/catalog/sub-catalog/product/${el.translations[locale as any]}?category=${encodeURIComponent(selectedCategory || "")}`;
 
             return (
-              <div key={el.id} className={classNames("mb-5 flex flex-col justify-center items-center", cardClass)}>
+              <div
+                key={el.id}
+                className={classNames(
+                  "mb-5 flex flex-col justify-center items-center",
+                  cardClass,
+                )}
+              >
                 <div className="w-full text-center">
-                  <div className="cursor-pointer"
+                  <div
+                    className="cursor-pointer"
                     onClick={() => {
                       if (isIOS) router.push(url);
                       else window.location.href = url;
-                    }}>
-                    <div className="w-full px-2">{el.sku.length > 7 ? `${el.sku.slice(0, 7)}..` : el.sku}</div>
+                    }}
+                  >
+                    <div className="w-full px-2">
+                      {el.sku.length > 7 ? `${el.sku.slice(0, 7)}..` : el.sku}
+                    </div>
                     <div className="cursor-pointer flex justify-center">
                       <Image
                         src={el.images[0].src}
@@ -125,7 +115,9 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                     </div>
                     <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center" />
                     <div className="flex justify-center">
-                      <h3 className="flex justify-center h-20 w-full px-2">{el.name}</h3>
+                      <h3 className="flex justify-center h-20 w-full px-2">
+                        {el.name}
+                      </h3>
                     </div>
                   </div>
                 </div>

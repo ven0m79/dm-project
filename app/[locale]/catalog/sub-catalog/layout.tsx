@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, ReactNode, useEffect, useState } from "react";
+import React, { FC, ReactNode, useEffect, useMemo, useState } from "react";
 import LSidebar from "@app/[locale]/components/molecules/leftSidebar/leftSidebar";
 import RSidebar from "@app/[locale]/components/molecules/rightSidebar/rightSidebar";
 import { MainLayout } from "@app/[locale]/components/templates";
@@ -9,6 +9,9 @@ import styles from "./Sub-catalog.module.css";
 import { SidebarProvider } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 import { motion } from "framer-motion";
+import { getCategoriesIds } from "@app/[locale]/components/constants";
+import { useSearchParams } from "next/navigation";
+import Breadcrumbs from "@app/[locale]/components/molecules/breadcrumbs/Breadcrumbs";
 
 const flipTransition = {
   type: "spring",
@@ -20,9 +23,19 @@ const Content: FC<{ children: ReactNode; locale: string }> = ({
   children,
   locale,
 }) => {
+  const searchParams = useSearchParams();
+
   const isMobile = useIsMobile();
+
   const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false);
   const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false);
+
+  const currentIdsData = useMemo(() => getCategoriesIds(locale), [locale]);
+  const categoryFromUrl = searchParams?.get("category") ?? "";
+  const categoryId = useMemo(
+    () => (currentIdsData as Record<string, number>)[categoryFromUrl],
+    [categoryFromUrl, currentIdsData],
+  );
 
   useEffect(() => {
     document.body.style.overflowX = "hidden";
@@ -39,7 +52,7 @@ const Content: FC<{ children: ReactNode; locale: string }> = ({
     <div
       className={classNames(
         "flex flex-1 flex-row justify-between self-center mb-5 mt-5 mx-2",
-        styles.subCatalog
+        styles.subCatalog,
       )}
     >
       {/* ------------------------------
@@ -50,7 +63,7 @@ const Content: FC<{ children: ReactNode; locale: string }> = ({
           <button
             className={classNames(
               "absolute top-52 left-2 z-30 bg-transparent text-[#0061AA] p-2 rounded-md",
-              styles.buttons
+              styles.buttons,
             )}
             onClick={() => setIsLeftSidebarOpen(true)}
           >
@@ -99,9 +112,10 @@ const Content: FC<{ children: ReactNode; locale: string }> = ({
       {/* ------------------------------
            Основний контент
       -------------------------------- */}
-      <motion.div layout className="w-full">
+      <div className="w-full">
+        {/*<Breadcrumbs categoryId={categoryId} locale={locale} />*/}
         {children}
-      </motion.div>
+      </div>
 
       {/* ------------------------------
            Права панель
@@ -111,7 +125,7 @@ const Content: FC<{ children: ReactNode; locale: string }> = ({
           <button
             className={classNames(
               "absolute top-52 right-2 z-30 bg-transparent text-[#0061AA] p-2 rounded-md",
-              styles.buttons
+              styles.buttons,
             )}
             onClick={() => setIsRightSidebarOpen(true)}
           >
