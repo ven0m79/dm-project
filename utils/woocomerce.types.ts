@@ -25,7 +25,7 @@ export type WoocomerceCategoryType = {
 export type YoastHeadJson = {
   title: string;
   description: string;
-}
+};
 
 export type ImageType = {
   alt: string;
@@ -77,8 +77,8 @@ export type SingleProductDetails = {
   related_ids: number[];
   parentCategory: string;
   meta_data: MetaDataType[];
+  variations?: any[];
 };
-
 
 export type BrandsType = {
   id: number;
