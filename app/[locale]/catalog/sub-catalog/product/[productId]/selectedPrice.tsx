@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-
 import styles from "../../Sub-catalog.module.css";
 import Link from "next/link";
 

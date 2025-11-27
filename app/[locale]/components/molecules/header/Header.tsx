@@ -58,8 +58,8 @@ const Header = () => {
         },
       });
 
-      console.log("API Response:", response.data);
-      console.log("Total products fetched:", response.data.length);
+      //console.log("API Response:", response.data);
+      //console.log("Total products fetched:", response.data.length);
 
       if (response.status === 200) {
         const filteredProducts = response.data.filter((product: Product) =>

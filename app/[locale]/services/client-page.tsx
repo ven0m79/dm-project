@@ -26,10 +26,8 @@ export const ClientPage = () => {
   const [city, setCity] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-
-  const isMobile = useIsMobile();
-  console.log({ isMobile });
-
+//  const isMobile = useIsMobile();
+  
   const [status, setStatus] = useState('');
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
@@ -44,7 +42,7 @@ export const ClientPage = () => {
       body: JSON.stringify(data),
     })
       .then(async response => {
-        console.log("📡 HTTP status:", response.status); // ⬅️ Статус відповіді
+        //console.log("📡 HTTP status:", response.status); // ⬅️ Статус відповіді
 
         if (response.ok) {
           setStatus('Ваше повідомлення надіслано. Дякуємо!');
