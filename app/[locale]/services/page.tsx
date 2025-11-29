@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { ClientPage } from "./client-page";
+import { ClientPage } from "./client-page1";
 
 export async function generateMetadata({
   params: { locale },

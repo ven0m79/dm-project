@@ -18,15 +18,13 @@ export async function POST(req: Request) {
         Медичний заклад: ${medicalFacility}
         Місто: ${city}
         Email: ${email}
-
-Повідомлення:
-${message}
+        Повідомлення: ${message}
       `,
     });
 
     //console.log("✅ Лист надіслано, результат:", data);
-   // console.log("📨 FROM:", process.env.RESEND_FROM);
-    
+    // console.log("📨 FROM:", process.env.RESEND_FROM);
+
     return NextResponse.json({ success: true, data });
   } catch (error) {
     console.error("❌ Помилка при відправці:", error);
