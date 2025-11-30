@@ -54,6 +54,7 @@ const SharesLinea = () => {
                                 width={400}
                                 height={100}
                                 alt="linea"
+                                unoptimized
                             />
                             <Image
                                 className={classNames("w-1/2", styles.img)}
@@ -61,6 +62,7 @@ const SharesLinea = () => {
                                 width={400}
                                 height={100}
                                 alt="linea"
+                                unoptimized
                             />
                         </div>
                         <div className="w-screen">
@@ -82,6 +84,7 @@ const SharesLinea = () => {
                                 width={500}
                                 height={100}
                                 alt="linea"
+                                unoptimized
                             />
                             <p className="my-2">{t('shares-linea-text1')}</p>
                             <p className="my-2">{t('shares-linea-text2')}</p>

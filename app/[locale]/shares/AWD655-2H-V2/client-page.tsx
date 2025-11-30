@@ -56,6 +56,7 @@ const AWD655_2h_v2 = () => {
                                 width={290}
                                 height={300}
                                 alt="awd655-h2-v2"
+                                unoptimized
                             />
 
                         </div>

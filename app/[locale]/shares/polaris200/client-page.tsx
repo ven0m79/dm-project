@@ -56,6 +56,7 @@ const SharesPolaris200 = () => {
                                 width={400}
                                 height={100}
                                 alt="polaris200"
+                                unoptimized
                             />
                             <Image
                                 className={classNames("w-1/2", styles.img)}
@@ -63,6 +64,7 @@ const SharesPolaris200 = () => {
                                 width={400}
                                 height={100}
                                 alt="polaris200"
+                                unoptimized
                             />
                         </div>
                         <div className="w-screen">
@@ -81,6 +83,7 @@ const SharesPolaris200 = () => {
                                 width={500}
                                 height={100}
                                 alt="polaris200"
+                                unoptimized
                             />
                             <p className="my-2">{t('shares-polaris200-text3')}</p>
                             <p className="my-2">{t('shares-polaris200-text4')}</p>

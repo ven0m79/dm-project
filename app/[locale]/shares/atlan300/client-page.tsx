@@ -54,6 +54,7 @@ const SharesAtlan = () => {
                 width={390}
                 height={533}
                 alt="Atlan300"
+                unoptimized
               />
             </div>
             <div className="lg:w-1/2 w-full pl-0 lg:pl-10">
@@ -112,6 +113,7 @@ const SharesAtlan = () => {
             width={500}
             height={100}
             alt="Atlan300"
+            unoptimized
           />
           <p className="my-2">{t("shares-atlan300-text3")}</p>
           <p className="my-2">{t("shares-atlan300-text4")}</p>
