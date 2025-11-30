@@ -8,7 +8,6 @@ import { useTranslations } from 'next-intl';
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-// 🔹 Не імпортуємо картинки через import, беремо з public
 const imgSrc = "/service/povshednyy.webp";
 const imgSrc1 = "/service/shvl.webp";
 const imgSrc2 = "/service/narkoz.webp";

@@ -49,36 +49,32 @@ const nextConfig = {
     loader: "default",
     formats: ["image/avif", "image/webp"],
 
-    /** 
-     * 🟢 ONLY remotePatterns — сучасний підхід
-     * Покриває всі випадки WooCommerce (API + сайт, http/https)
-     */
     remotePatterns: [
       {
         protocol: "https",
         hostname: "api.dm-project.com.ua",
         pathname: "/**",
       },
-      {
-        protocol: "https",
-        hostname: "dm-project.com.ua",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "www.dm-project.com.ua",
-        pathname: "/**",
-      },
-      {
-        protocol: "http",
-        hostname: "dm-project.com.ua",
-        pathname: "/**",
-      },
-      {
-        protocol: "http",
-        hostname: "www.dm-project.com.ua",
-        pathname: "/**",
-      },
+      // {
+      //   protocol: "https",
+      //   hostname: "dm-project.com.ua",
+      //   pathname: "/**",
+      // },
+      // {
+      //   protocol: "https",
+      //   hostname: "www.dm-project.com.ua",
+      //   pathname: "/**",
+      // },
+      // {
+      //   protocol: "http",
+      //   hostname: "dm-project.com.ua",
+      //   pathname: "/**",
+      // },
+      // {
+      //   protocol: "http",
+      //   hostname: "www.dm-project.com.ua",
+      //   pathname: "/**",
+      // },
     ],
 
     deviceSizes: [320, 480, 768, 1024, 1280, 1600],
