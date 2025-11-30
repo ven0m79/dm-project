@@ -17,38 +17,7 @@ const nextConfig = {
   },
 
   // Хедери для кешування
-  async headers() {
-    return [
-      {
-        source: "/_next/static/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      {
-        source: "/service/:path*", // локальні картинки в public/service/
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      {
-        source: "/fonts/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-    ];
-  },
-
+ 
   // Додатково: дозволяємо оптимізацію локальних картинок без проблем на продакшені
   experimental: {
     images: {
