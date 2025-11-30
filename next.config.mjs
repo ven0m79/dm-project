@@ -34,14 +34,14 @@ const nextConfig = {
         ],
       },
       {
-        source: "/:path*.{ico,png,svg,webp}",
+        source: "/(.*)",
         headers: [
           {
             key: "Cache-Control",
             value: "public, max-age=31536000, immutable",
           },
         ],
-      },
+      }
     ];
   },
 
