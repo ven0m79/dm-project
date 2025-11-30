@@ -7,14 +7,19 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
 
-  // Оптимізація картинок
+
   images: {
-    loader: "default",
-    formats: ["image/avif", "image/webp"],
-    deviceSizes: [320, 480, 768, 1024, 1280, 1600, 1920],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60, // 1 хвилина кешування, можна більше
-  },
+  unoptimized: false,
+  formats: ["image/avif", "image/webp"],
+  remotePatterns: [
+    {
+      protocol: "https",
+      hostname: "api.dm-project.com.ua",
+      pathname: "/**",
+    },
+  ],
+},
+
 
   // Хедери для кешування
   async headers() {
