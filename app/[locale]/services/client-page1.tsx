@@ -4,16 +4,17 @@ import { useState } from 'react';
 import classNames from "classnames";
 import { MainLayout } from "@app/[locale]/components/templates";
 import styles from './Service.module.css';
-import imgSrc from './photos/povshednyy.webp';
-import imgSrc1 from './photos/shvl.webp';
-import imgSrc2 from './photos/narkoz.webp';
-import imgSrc3 from './photos/neonatal.webp';
-import imgSrc4 from './photos/monitor.webp';
-import imgSrc6 from './photos/gaz.webp';
 import { useTranslations } from 'next-intl';
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+// 🔹 Не імпортуємо картинки через import, беремо з public
+const imgSrc = "/service/povshednyy.webp";
+const imgSrc1 = "/service/shvl.webp";
+const imgSrc2 = "/service/narkoz.webp";
+const imgSrc3 = "/service/neonatal.webp";
+const imgSrc4 = "/service/monitor.webp";
+const imgSrc6 = "/service/gaz.webp";
 
 declare global {
     interface Window {
@@ -219,7 +220,7 @@ export const ClientPage = () => {
                                         whileHover={{ scale: 1.05 }}
                                     >
                                         <div className="w-full h-full relative rounded-2xl overflow-hidden flex items-start justify-center">
-                                            <Image src={card.front} alt={card.title} className="object-cover pt-16" width={170} />
+                                            <Image src={card.front} alt={card.title} className="object-cover pt-16" width={170} height={200} />
                                             <h3 className="absolute bottom-0 left-0 right-0 bg-[#002766]/50 text-white text-lg font-semibold p-3 h-20">
                                                 {card.title}
                                             </h3>
