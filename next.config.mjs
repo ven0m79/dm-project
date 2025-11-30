@@ -19,6 +19,7 @@ const nextConfig = {
   // Хедери для кешування
   async headers() {
     return [
+      // 1. Кешуємо Next.js статичні файли (JS/CSS) на 1 рік
       {
         source: "/_next/static/:path*",
         headers: [
@@ -28,6 +29,19 @@ const nextConfig = {
           },
         ],
       },
+
+      // 2. Кешуємо картинки з public/images на 1 рік
+      {
+        source: "/images/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+
+      // 3. Кешуємо шрифти
       {
         source: "/fonts/:path*",
         headers: [
@@ -37,8 +51,29 @@ const nextConfig = {
           },
         ],
       },
+
+      // 4. Кешуємо SVG, ICO, WEBP, PNG у корені public/
+      {
+        source: "/:path*\\.(ico|png|svg|webp|jpg|jpeg)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+
+      // 5. Забороняємо кешування HTML сторінок (SSR/ISR/Routes)
+      {
+        source: "/((?!_next/static|images|fonts).*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-store, must-revalidate",
+          },
+        ],
+      },
     ];
   },
-};
-
+}
 export default withNextIntl(nextConfig);
