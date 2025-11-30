@@ -49,6 +49,17 @@ export const ClientPage = () => {
         "Калібрування систем та модулів",
         "Тестування та звіт з рекомендаціями",
     ];
+    const items2 = [
+        "Офіційна робота за регламентами виробників",
+        "Досвід у сервісуванні широкого спектра обладнання",
+        "Спеціалізоване навчання інженерів",
+        "Використання оригінальних комплектуючих",
+        "Оперативне реагування",
+        "Власний сервісний центр",
+        "Прозора звітність",
+        "Сервісні пакети під потреби медзакладу",
+        "Склад запчастин у Києві постійно поповнюється",
+    ];
     const tableData = [
         {
             label: "Основна мета",
@@ -98,6 +109,11 @@ export const ClientPage = () => {
     const row1Size = Math.ceil(items1.length / row1Count);
     for (let i = 0; i < items1.length; i += row1Size) {
         rows1.push(items1.slice(i, i + row1Size));
+    }
+
+    const rows2 = [];
+    for (let i = 0; i < items2.length; i += 3) {
+        rows2.push(items2.slice(i, i + 3));
     }
 
     const planRef = React.useRef<HTMLDivElement>(null);
@@ -154,7 +170,6 @@ export const ClientPage = () => {
             });
     };
 
-
     return (
         <MainLayout>
             <div className={classNames("flex flex-1 flex-col self-center", styles.main)}>
@@ -163,7 +178,7 @@ export const ClientPage = () => {
                 </div>
                 <div className={styles.stroke}></div>
 
-                <div className={classNames("flex flex-col flex-1 justify-normal items-start w-full max-w-[1400px]")}>
+                <div className={classNames("flex flex-col flex-1 justify-normal items-start w-full max-w-[1400px] text-lg")}>
                     {/* Left Section */}
                     <div className={classNames("flex flex-col justify-normal items-start w-full", styles.servContainer)}>
                         <span className="text-[24px] py-3 self-center text-[#002766]">Технічне обслуговування медичного обладнання</span>
@@ -241,12 +256,11 @@ export const ClientPage = () => {
                                         className="flex items-start gap-4 p-6 pl-8 bg-gray-50 rounded-2xl w-[33%] shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
                                     >
                                         <span className="flex-shrink-0 text-green-500 font-bold text-xl -mt-0.5">✓</span>
-                                        <span className="flex-1 text-[#0061AA] mt-1">{item}</span>
+                                        <span className="flex-1 text-[#0061AA]">{item}</span>
                                     </div>
                                 ))}
                             </div>
                         ))}
-
                     </div>
                     <span ref={planRef} className="text-[24px] py-3 text-[#002766] self-center">{'Планове технічне обслуговування'}</span>
                     <div className={classNames("flex max-w-[1400px] w-full", styles.servContainer1)}>
@@ -263,7 +277,7 @@ export const ClientPage = () => {
                                         className="flex items-start gap-4 p-6 pl-8 bg-gray-50 rounded-2xl shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
                                     >
                                         <span className="text-green-500 font-bold text-xl">✓</span>
-                                        <span className="text-[#0061AA] mt-1">{item}</span>
+                                        <span className="text-[#0061AA]">{item}</span>
                                     </div>
                                 ))}
                             </div>
@@ -310,9 +324,47 @@ export const ClientPage = () => {
                         </table>
                     </div>
 
+                    <span className="text-[24px] py-3 self-center text-[#002766]">Переваги нашого сервісу</span>
+                    <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
+                        {rows2.map((row2, rowIndex) => (
+                            <div className="flex gap-4" key={rowIndex}>
+                                {row2.map((item, i) => (
+                                    <div
+                                        key={i}
+                                        className="flex items-start gap-4 p-6 pl-8 bg-gray-50 rounded-2xl w-[33%] shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
+                                    >
+                                        <span className="flex-shrink-0 text-green-500 font-bold text-xl -mt-0.5">✓</span>
+                                        <span className="flex-1 text-[#0061AA]">{item}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="text-[#0061AA]">
+                        <h3 className="text-2xl font-semibold mt-4 text-left text-[#0061AA]">Сертифікація інженерів</h3>
+                        <p className="flex self-center text-left leading-relaxed">Інженери ДМ-ПРОЕКТ мають підтверджені виробниками обладнання сертифікати і проходять регулярне навчання, включно зі спеціалізованими курсами Dräger у Німеччині. Це гарантує коректність, безпечність і точність усіх сервісних операцій.</p>
+                    </div>
+
+                    <div className={classNames("flex max-w-[1400px] w-full", styles.servContainer1)}>
+                        <div className="flex-1 pr-8">
+
+                            <h3 className="text-2xl font-semibold mt-4 text-left">Географія сервісу</h3>
+                            <p className="self-center text-left leading-relaxed">{`Сервіс компанії покриває `}<strong>всю територію України.</strong> {`Працюють виїзні бригади, які забезпечують оперативне реагування у різних регіонах. Можливе індивідуальне планування візитів у межах сервісних пакетів або SLA.`}</p>
+
+                        </div>
+                        <div className="flex-1 relative">
+                            <Image
+                                src={imgSrc}
+                                alt="ТО"
+                                fill
+                                className="object-cover rounded-2xl"
+                            />
+                        </div>
+                    </div>
 
 
-                    {/* Form Section */}
+
 
                     {showForm && (
                         <motion.div
@@ -334,10 +386,10 @@ export const ClientPage = () => {
                                     type="button"
                                     onClick={() => {
                                         setShowForm(false);
-                                          setStatus('');
+                                        setStatus('');
                                     }
-                                }
-                                   
+                                    }
+
                                     className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
                                 >
                                     ×
@@ -396,11 +448,7 @@ export const ClientPage = () => {
                             </motion.form>
                         </motion.div>
                     )}
-
-
-
                 </div>
-
             </div>
         </MainLayout >
     );

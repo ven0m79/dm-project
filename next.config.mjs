@@ -6,18 +6,15 @@ const withNextIntl = createNextIntlPlugin("./i18n.ts");
 const nextConfig = {
   async headers() {
     return [
-      // 🧩 Кешування статичних файлів Next.js
       {
         source: "/_next/static/:path*",
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable", // 1 рік
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
-
-      // 🖼️ Кешування зображень (якщо вони в /public/images або /images)
       {
         source: "/images/:path*",
         headers: [
@@ -27,8 +24,6 @@ const nextConfig = {
           },
         ],
       },
-
-      // 📦 Кешування шрифтів (якщо є в /public/fonts)
       {
         source: "/fonts/:path*",
         headers: [
@@ -38,8 +33,6 @@ const nextConfig = {
           },
         ],
       },
-
-      // 🧰 Додатково: кешування favicon та іконок
       {
         source: "/:path*.{ico,png,svg,webp}",
         headers: [
@@ -51,16 +44,42 @@ const nextConfig = {
       },
     ];
   },
+
   images: {
-    formats: ['image/avif', 'image/webp'],
-    domains: ['api.dm-project.com.ua'],
+    formats: ["image/avif", "image/webp"],
+
+    /** 
+     * 🟢 ONLY remotePatterns — сучасний підхід
+     * Покриває всі випадки WooCommerce (API + сайт, http/https)
+     */
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'api.dm-project.com.ua',
-        pathname: '/**',
+        protocol: "https",
+        hostname: "api.dm-project.com.ua",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "dm-project.com.ua",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "www.dm-project.com.ua",
+        pathname: "/**",
+      },
+      {
+        protocol: "http",
+        hostname: "dm-project.com.ua",
+        pathname: "/**",
+      },
+      {
+        protocol: "http",
+        hostname: "www.dm-project.com.ua",
+        pathname: "/**",
       },
     ],
+
     deviceSizes: [320, 480, 768, 1024, 1280, 1600],
   },
 };
