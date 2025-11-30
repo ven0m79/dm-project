@@ -4,8 +4,8 @@ import styles from "./../Shares.module.css";
 import { MainLayout } from "@app/[locale]/components/templates";
 import Image from "next/image";
 import classNames from "classnames";
-import atlan300_1 from "./atlan300_1.webp";
-import atlan300_2 from "./atlan300_2.webp";
+import atlan3001 from "./atlan300_1.webp";
+import atlan3002 from "./atlan300_2.webp";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
@@ -50,7 +50,7 @@ const SharesAtlan = () => {
             <div className="lg:w-1/2 w-full  flex flax-wrap justify-center my-2">
               <Image
                 className={"w-auto h-full"}
-                src={atlan300_1}
+                src={atlan3001}
                 width={390}
                 height={533}
                 alt="Atlan300"
@@ -108,7 +108,7 @@ const SharesAtlan = () => {
           <p className="my-2">{t("shares-atlan300-text2")}</p>
           <Image
             className={"w-1/2 float-right mt-1 mb-3 ml-3"}
-            src={atlan300_2}
+            src={atlan3002}
             width={500}
             height={100}
             alt="Atlan300"
