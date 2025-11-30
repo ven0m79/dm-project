@@ -14,6 +14,8 @@ const imgSrc2 = "/service/narkoz.webp";
 const imgSrc3 = "/service/neonatal.webp";
 const imgSrc4 = "/service/monitor.webp";
 const imgSrc6 = "/service/gaz.webp";
+const imgSrcUkr = "/service/ukraine.webp";
+const imgSrcLearn = "/service/learning.webp";
 
 declare global {
     interface Window {
@@ -60,6 +62,25 @@ export const ClientPage = () => {
         "Сервісні пакети під потреби медзакладу",
         "Склад запчастин у Києві постійно поповнюється",
     ];
+
+    const items3 = [
+        "Апарати ШВЛ",
+        "Анестезіологічні станції",
+        "Наркозно-дихальні апарати",
+        "Монітори пацієнта",
+        "Неонатальне обладнання",
+        "Хірургічне освітлення",
+        "Обладнання для медичного газопостачання",
+    ];
+    const items4 = [
+        "Запуск і підготовка до роботи",
+        "Налаштування параметрів",
+        "Моніторинг роботи",
+        "Реагування на нестандартні ситуації",
+        "Профілактика помилок користувача",
+        "Підвищення ефективності експлуатації",
+    ];
+
     const tableData = [
         {
             label: "Основна мета",
@@ -235,7 +256,7 @@ export const ClientPage = () => {
                                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                                         whileHover={{ scale: 1.05 }}
                                     >
-                                        <ul className="list-disc space-y-1">
+                                        <ul className="list-disc space-y-1 text-[16px]">
                                             {card.back.map((item, i) => (<li className="before:content-['•'] before:mr-2" key={i}>{item}</li>))}
                                         </ul>
                                     </motion.div>
@@ -346,25 +367,90 @@ export const ClientPage = () => {
                         <p className="flex self-center text-left leading-relaxed">Інженери ДМ-ПРОЕКТ мають підтверджені виробниками обладнання сертифікати і проходять регулярне навчання, включно зі спеціалізованими курсами Dräger у Німеччині. Це гарантує коректність, безпечність і точність усіх сервісних операцій.</p>
                     </div>
 
-                    <div className={classNames("flex max-w-[1400px] w-full", styles.servContainer1)}>
-                        <div className="flex-1 pr-8">
+                    <div className={classNames("flex max-w-[1400px] w-full items-stretch", styles.servContainer1)}>
+                        <div className="flex-1 pr-1 flex flex-col justify-center">
 
                             <h3 className="text-2xl font-semibold mt-4 text-left">Географія сервісу</h3>
-                            <p className="self-center text-left leading-relaxed">{`Сервіс компанії покриває `}<strong>всю територію України.</strong> {`Працюють виїзні бригади, які забезпечують оперативне реагування у різних регіонах. Можливе індивідуальне планування візитів у межах сервісних пакетів або SLA.`}</p>
+                            <p className="self-center text-left leading-relaxed">
+                                Сервіс компанії покриває <strong>всю територію України.</strong>
+                                Працюють виїзні бригади, які забезпечують оперативне реагування
+                                у різних регіонах. Можливе індивідуальне планування візитів
+                                у межах сервісних пакетів або SLA.
+                            </p>
 
+                        </div>
+
+                        <div className="flex justify-end items-start">
+                            <Image
+                                src={imgSrcUkr}
+                                alt="Ukraine"
+                                width={400}       // 662 реальна ширина зображення
+                                height={284}      // 442 реальна висота зображення
+                                className="rounded-2xl object-contain"
+                            />
+                        </div>
+                    </div>
+
+                    <div className={classNames("flex flex-col justify-normal items-start w-full", styles.servContainer)}>
+                        <span className="text-[24px] py-3 self-center text-[#002766]">Офіційний сервіс Dräger в Україні</span>
+                        <p className="flex self-center leading-relaxed">На сервісному супроводі — понад 5000 одиниць обладнання Dräger. Інженери проходять навчання у Dräger Academy та мають право офіційно надавати послуги з сервісу.</p>
+
+                    </div>
+
+                    <div className="flex flex-1 flex-col w-full">
+                        <h3 className="text-2xl font-semibold my-4 text-left text-[#0061AA]">Обладнання Dräger:</h3>
+                        <div className="flex flex-wrap gap-1 pb-6 w-full">
+                            {items3.map((item, i) => (
+                                <div
+                                    key={i}
+                                    className="flex items-start gap-4 p-6 pl-8 bg-gray-50 rounded-2xl shadow-[inset_4px_0_0_0_rgba(0,102,204,1)] w-[33%]"
+                                >
+                                    <span className="text-green-500 font-bold text-xl">✓</span>
+                                    <span className="text-[#0061AA]">{item}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="flex flex-col justify-normal items-start w-full text-[#0061AA]">
+                        <h3 className="text-2xl font-semibold my-4 text-left text-[#0061AA]">Переваги сервісу Dräger від ДМ-ПРОЕКТ:</h3>
+                        <ul className="list-disc space-y-1 leading-relaxed">
+                            <li className="ml-16 before:mr-2">єдиний в Україні уповноважений офіційний сервіс</li>
+                            <li className="ml-16 before:mr-2">індивідуальні плани ТО</li>
+                            <li className="ml-16 before:mr-2">дотримання усіх регламентів</li>
+                            <li className="ml-16 before:mr-2">використання оригінальних сервісних комплектів</li>
+                            <li className="ml-16 before:mr-2">підтримка повного циклу експлуатації</li>
+                        </ul>
+                    </div>
+
+                    <span className="text-[24px] py-3 text-[#002766] self-center">{'Навчання медичного персоналу'}</span>
+
+                    <div className={classNames("flex max-w-[1400px] w-full", styles.servContainer1)}>
+                        <div className="flex-1 pr-8">
+                            <p className="flex self-center text-left leading-relaxed">Навчання є частиною сервісного супроводу. Проводиться під час встановлення, після оновлення ПЗ або при розширенні функціоналу.</p>
+
+                            <h3 className="text-2xl font-semibold mt-4 text-left">Навчальні сценарії:</h3>
+
+                            <div className="mx-auto space-y-4 pb-6 w-full">
+                                {items4.map((item, i) => (
+                                    <div
+                                        key={i}
+                                        className="flex items-start gap-4 p-6 pl-8 bg-gray-50 rounded-2xl shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
+                                    >
+                                        <span className="text-green-500 font-bold text-xl">✓</span>
+                                        <span className="text-[#0061AA]">{item}</span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                         <div className="flex-1 relative">
                             <Image
-                                src={imgSrc}
+                                src={imgSrcLearn}
                                 alt="ТО"
                                 fill
                                 className="object-cover rounded-2xl"
                             />
                         </div>
                     </div>
-
-
-
 
                     {showForm && (
                         <motion.div
@@ -389,7 +475,6 @@ export const ClientPage = () => {
                                         setStatus('');
                                     }
                                     }
-
                                     className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
                                 >
                                     ×
