@@ -10,10 +10,11 @@ import Image from "next/image";
 
 const imgSrc = "/service/povshednyy.webp";
 const imgSrc1 = "/service/shvl.webp";
-const imgSrc2 = "/service/narkoz.webp";
+const imgSrc2 = "/service/narkoz1.webp";
 const imgSrc3 = "/service/neonatal.webp";
-const imgSrc4 = "/service/monitor.webp";
-const imgSrc6 = "/service/gaz.webp";
+const imgSrc4 = "/service/monitor1.webp";
+const imgSrc5 = "/service/dez.webp";
+const imgSrc6 = "/service/gaz1.webp";
 const imgSrcUkr = "/service/ukraine.webp";
 const imgSrcLearn = "/service/learning.webp";
 
@@ -30,7 +31,7 @@ export const ClientPage = () => {
         { id: 2, front: imgSrc2, title: "Наркозно-дихальні апарати (НДА)", back: ["Fabius Family", "Primus", "Vapor 2000 Family (Sev / Iso / Hal / Enf)", "Блок газоаналізу Scio / Vamos Family", "Perseus A500", "Atlan Family"] },
         { id: 3, front: imgSrc3, title: "Неонатологічне обладнання", back: ["Реанімаційний стіл Babytherm 8000 / 8004 / 8010", "Інкубатор Caleo", "Інкубатор Isolette 8000 / C2000", "Гібридний інкубатор Babyleo TN500", "Стіл реанімаційний Resuscitaire RW-82", "Білірубінометр JM-105", "Транспортний інкубатор TI 500"] },
         { id: 4, front: imgSrc4, title: "Моніторинг пацієнта", back: ["Центральна станція моніторингу ICS (оновлене ПЗ)", "Монітор пацієнта IACS", "Монітори Gamma Family (Delta/Delta XL/Gamma/Gamma XL/Vista)", "Монітор пацієнта Vista Family (120/120S)", "Infinity C700", "Infinity GW", "Акумуляторні батареї SpO₂ та ЕКГ TESLA M3 / TESLA DUO"] },
-        { id: 5, front: imgSrc6, title: "Мийно-дезінфекційні машини", back: ["AWD655-8/8L мийно-дезінфекційна машина", "AWD655-10 мийно-дезінфекційна машина"] },
+        { id: 5, front: imgSrc5, title: "Мийно-дезінфекційні машини", back: ["AWD655-8/8L мийно-дезінфекційна машина", "AWD655-10 мийно-дезінфекційна машина"] },
         { id: 6, front: imgSrc6, title: "Системи медичного газопостачання", back: ["Газові розетки та розетки вакууму", "Стельові консолі Agila / Movita / Ambia / Ponta", "Настінні панелі Gemina / Linea"] }
     ];
     const items = [
