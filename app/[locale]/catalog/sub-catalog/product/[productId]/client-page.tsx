@@ -303,19 +303,31 @@ export default function ClientPage({
                 )}
 
                 <div className="sm:h-[20px] h-[5px]" />
-                <div className="flex flex-col justify-between items-center">
+                <div className="flex flex-col justify-between items-center gap-5">
                   <br />
                   {!isAccessories && (
-                    <div
-                      className={classNames(
-                        "flex items-center",
-                        styles.downloadable,
-                      )}
-                    >
-                      <Link href={"../../../../services"}>
-                        {t("product-services")}
-                      </Link>
-                    </div>
+                    <>
+                      <div className={styles.downloadable}>
+                        <Link
+                          href={{
+                            pathname: "../../../../contacts",
+                            query: { productName: details.name },
+                          }}
+                        >
+                          {t("product-request")}
+                        </Link>
+                      </div>
+                      <div
+                        className={classNames(
+                          "flex items-center",
+                          styles.downloadable
+                        )}
+                      >
+                        <Link href={"../../../../services"}>
+                          {t("product-services")}
+                        </Link>
+                      </div>
+                    </>
                   )}
                 </div>
               </div>
@@ -356,12 +368,12 @@ export default function ClientPage({
                               <td className="py-3 px-4 text-[#0061AA] border-b border-gray-100 text-left whitespace-pre-line">
                                 {Array.isArray(attr.options)
                                   ? attr.options
-                                      .join(", ")
-                                      .replace(/\\n-?/g, "\n- ")
+                                    .join(", ")
+                                    .replace(/\\n-?/g, "\n- ")
                                   : (attr.options as string)?.replace(
-                                      /\\n-?/g,
-                                      "\n- ",
-                                    )}
+                                    /\\n-?/g,
+                                    "\n- ",
+                                  )}
                               </td>
                             </tr>
                           ))}
