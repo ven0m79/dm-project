@@ -13,18 +13,16 @@ import polaris from "./polaris200/polaris200-trans.webp";
 import polaris2 from "./polaris200-2/polaris200-2-trans.webp";
 import fabiusplusxl from "./fabiusplusxl/Fabius_plus_XL-trans.webp";
 import atlan from "./atlan300/atlan300-trans.webp";
-import awd655_h2_v1 from "./AWD655-2H-V1/awd655-2h-v1-trans.webp";
+//import awd655_h2_v1 from "./AWD655-2H-V1/awd655-2h-v1-trans.webp";
 import awd655_h2_v2 from "./AWD655-2H-V2/awd655-2h-v2-trans.webp";
 import { useTranslations } from "next-intl";
-import { useIsMobile } from "../components/hooks/useIsMobile";
+//import { useIsMobile } from "../components/hooks/useIsMobile";
 
 
 
 export const ClientPage = () => {
   const t = useTranslations('Shares');
-
-  const isMobile = useIsMobile();
-  console.log({ isMobile });
+  //const isMobile = useIsMobile();
 
   return (
     <MainLayout>

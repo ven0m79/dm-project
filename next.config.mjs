@@ -4,20 +4,38 @@ const withNextIntl = createNextIntlPlugin("./i18n.ts");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+
+
+  images: {
+  unoptimized: false,
+  formats: ["image/avif", "image/webp"],
+  remotePatterns: [
+    {
+      protocol: "https",
+      hostname: "api.dm-project.com.ua",
+      pathname: "/**",
+    },
+  ],
+},
+
+
+  // Хедери для кешування
   async headers() {
     return [
-      // 🧩 Кешування статичних файлів Next.js
+      // 1. Кешуємо Next.js статичні файли (JS/CSS) на 1 рік
       {
         source: "/_next/static/:path*",
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable", // 1 рік
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
 
-      // 🖼️ Кешування зображень (якщо вони в /public/images або /images)
+      // 2. Кешуємо картинки з public/images на 1 рік
       {
         source: "/images/:path*",
         headers: [
@@ -28,7 +46,7 @@ const nextConfig = {
         ],
       },
 
-      // 📦 Кешування шрифтів (якщо є в /public/fonts)
+      // 3. Кешуємо шрифти
       {
         source: "/fonts/:path*",
         headers: [
@@ -39,30 +57,28 @@ const nextConfig = {
         ],
       },
 
-      // 🧰 Додатково: кешування favicon та іконок
+      // 4. Кешуємо SVG, ICO, WEBP, PNG у корені public/
       {
-        source: "/:path*.{ico,png,svg,webp}",
+        source: "/:path*\\.(ico|png|svg|webp|jpg|jpeg)",
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            value: "public, max-age=1, immutable",
+          },
+        ],
+      },
+
+      // 5. Забороняємо кешування HTML сторінок (SSR/ISR/Routes)
+      {
+        source: "/((?!_next/static|images|fonts).*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-store, must-revalidate",
           },
         ],
       },
     ];
   },
-  images: {
-    formats: ['image/avif', 'image/webp'],
-    domains: ['api.dm-project.com.ua'],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'api.dm-project.com.ua',
-        pathname: '/**',
-      },
-    ],
-    deviceSizes: [320, 480, 768, 1024, 1280, 1600],
-  },
-};
-
+}
 export default withNextIntl(nextConfig);

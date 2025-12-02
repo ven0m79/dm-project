@@ -1,4 +1,5 @@
 "use client";
+
 import React, {
   createContext,
   Dispatch,
@@ -6,21 +7,19 @@ import React, {
   SetStateAction,
   useCallback,
   useContext,
-  useEffect, 
+  useEffect,
   useState,
 } from "react";
-import {
-  fetchWooCommerceCategories,
-  fetchWooCommerceProductsBasedOnCategory,
-} from "../../../../../utils/woocommerce.setup";
 import {
   categoriesCreation,
   TransformedCategoriesType,
 } from "@app/[locale]/catalog/sub-catalog/helpers";
-import { SingleProductDetails } from "../../../../../utils/woocomerce.types";
+import {
+  SingleProductDetails,
+  WoocomerceCategoryType,
+} from "../../../../../utils/woocomerce.types";
 import { useSearchParams } from "next/navigation";
 import { getCategoriesIds } from "@app/[locale]/components/constants";
-
 
 export type SidebarContextProps = {
   selectedCategory?: string | null;
@@ -43,10 +42,19 @@ export type SidebarContextProps = {
 };
 
 export const SidebarContext = createContext<SidebarContextProps | undefined>(
-  undefined
+  undefined,
 );
 
-export const SidebarProvider = ({ children, locale }: { children: ReactNode; locale: string }) => { // ✅ Додаємо locale
+// 🔹 Simple client-side caches so we don't refetch within one browser session
+const categoriesCache = new Map<string, TransformedCategoriesType[]>();
+const productsCache = new Map<string, SingleProductDetails[]>();
+
+type SidebarProviderProps = {
+  children: ReactNode;
+  locale: string;
+};
+
+export const SidebarProvider = ({ children, locale }: SidebarProviderProps) => {
   const searchParams = useSearchParams();
   const selectedCategoryFromParams = searchParams?.get("category");
 
@@ -57,56 +65,100 @@ export const SidebarProvider = ({ children, locale }: { children: ReactNode; loc
   const [selectedProducts, setSelectedProducts] = useState<
     SingleProductDetails[]
   >([]);
-  const [activeProduct, setActiveProduct] = useState<SingleProductDetails | null>(null);
+  const [activeProduct, setActiveProduct] =
+    useState<SingleProductDetails | null>(null);
 
   const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
-    null
+    null,
   );
   const [openedCategoryIds, setOpenedCategoryIds] = useState<number[]>([]);
 
-  const getCategoriesData = useCallback(async () => {
-    try {
-      const data = await fetchWooCommerceCategories(locale);
-      if (data) {
-        setCategories(
-          categoriesCreation(data as unknown as TransformedCategoriesType[])
-        );
-      }
-    } catch (e) {
-      console.warn({ e });
+  // ✅ Load categories with client-side + server-side caching (via API route)
+  const getCategoriesData = useCallback(async (localeParam: string) => {
+    const cacheKey = localeParam;
+
+    // 1) Client-side cache
+    if (categoriesCache.has(cacheKey)) {
+      setCategories(categoriesCache.get(cacheKey)!);
+      return;
     }
-  }, [locale]);
-  
+
+    try {
+      const res = await fetch(
+        `/api/woocommerce/categories?locale=${encodeURIComponent(localeParam)}`,
+      );
+
+      if (!res.ok) {
+        console.warn("Failed to fetch categories", res.status);
+        return;
+      }
+
+      const raw = (await res.json()) as WoocomerceCategoryType[];
+      const transformed = categoriesCreation(
+        raw as unknown as TransformedCategoriesType[],
+      );
+
+      categoriesCache.set(cacheKey, transformed);
+      setCategories(transformed);
+    } catch (e) {
+      console.warn("Error while fetching categories:", e);
+    }
+  }, []);
+
+  // ✅ Load products for a category (using server-cached data via API route)
   const getCategoryDetails = useCallback(
-    async (id: number, locale: string) => {
+    async (id: number, localeParam: string) => {
+      const cacheKey = `${localeParam}:${id}`;
+
+      if (productsCache.has(cacheKey)) {
+        setSelectedProducts(productsCache.get(cacheKey)!);
+        return;
+      }
+
       try {
-        const data = await fetchWooCommerceProductsBasedOnCategory(id, locale);
-        if (data) {
-          setSelectedProducts(data);
+        const res = await fetch(
+          `/api/woocommerce/category-products?locale=${encodeURIComponent(
+            localeParam,
+          )}&categoryId=${encodeURIComponent(String(id))}`,
+        );
+
+        if (!res.ok) {
+          console.warn("Failed to fetch category products", res.status);
+          return;
         }
+
+        const data = (await res.json()) as SingleProductDetails[];
+
+        productsCache.set(cacheKey, data);
+        setSelectedProducts(data);
       } catch (e) {
-        console.warn({ e });
+        console.warn("Error while fetching category products:", e);
       }
     },
-    [setSelectedProducts]
+    [],
   );
-  
-  // useEffect для синхронізації activeCategoryId та завантаження продуктів
-useEffect(() => {
-  const categoryId = selectedCategoryFromParams
-    ? getCategoriesIds(locale)?.[selectedCategoryFromParams as keyof typeof getCategoriesIds]
-    : null;
-  setSelectedCategoryId(categoryId || null);
 
-  if (categoryId) {
-    getCategoryDetails(categoryId, locale);
-  }
-}, [selectedCategoryFromParams, getCategoryDetails, locale]);
+  // 🔁 Sync selectedCategoryId + products with URL search param
+  useEffect(() => {
+    const idsMap = getCategoriesIds(locale) as
+      | Record<string, number>
+      | undefined;
 
-// getCategoriesData викликаємо один раз після завантаження компоненту
-useEffect(() => {
-  getCategoriesData();
-}, [getCategoriesData]);
+    const categoryId = selectedCategoryFromParams
+      ? idsMap?.[selectedCategoryFromParams]
+      : null;
+
+    setSelectedCategoryId(categoryId || null);
+
+    if (categoryId) {
+      getCategoryDetails(categoryId, locale);
+    }
+  }, [selectedCategoryFromParams, getCategoryDetails, locale]);
+
+  // 🔁 Fetch categories on mount (once per locale thanks to cache)
+  useEffect(() => {
+    getCategoriesData(locale);
+  }, [getCategoriesData, locale]);
 
   return (
     <SidebarContext.Provider

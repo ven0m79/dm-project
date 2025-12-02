@@ -42,7 +42,7 @@ export const ClientPage = () => {
       body: JSON.stringify(data),
     })
       .then(async response => {
-        console.log("📡 HTTP status:", response.status); // ⬅️ Статус відповіді
+        //("📡 HTTP status:", response.status); // ⬅️ Статус відповіді
 
         if (response.ok) {
           setStatus('Ваше повідомлення надіслано. Дякуємо!');

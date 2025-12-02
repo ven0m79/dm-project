@@ -4,7 +4,6 @@ import {
   SingleProductDetails,
   WoocomerceCategoryType,
 } from "./woocomerce.types";
-import { title } from "process";
 
 export const api = new WooCommerceRestApi({
   url: "https://api.dm-project.com.ua",
@@ -38,26 +37,37 @@ export async function fetchWooCommerceCategories(locale: string) {
     do {
       const response = await api.get(
         `products/categories?per_page=100&page=${page}&lang=${locale}`,
+        {
+          // ❗ ЦЕ працює ТІЛЬКИ для fetch, але Next.js дозволяє передати це axios (і просто ігнорує)
+          // але через це не буде помилки
+          next: { revalidate: 60 * 60 * 24 },
+        },
       );
 
-      if (response.status === 200) {
-        totalPages = parseInt(response.headers["x-wp-totalpages"], 10);
-        const data = await response.data;
-        result.push(...data);
-
-        page++;
+      // axios — це не fetch, перевірка інша:
+      if (response.status !== 200) {
+        throw new Error("Bad response: " + response.status);
       }
+
+      // axios headers — звичайний об’єкт
+      totalPages = parseInt(response.headers["x-wp-totalpages"] || "1", 10);
+
+      const data = response.data;
+      result.push(...data);
+
+      page++;
     } while (page <= totalPages);
 
     return result;
   } catch (error) {
-    throw new Error(error as string);
+    console.error("WooCommerce fetch error:", error);
+    throw new Error(String(error));
   }
 }
 
 export async function fetchWooCommerceCategoryDetails(
   categoryId: number,
-  locale: string
+  locale: string,
 ): Promise<WoocomerceCategoryType | null> {
   try {
     const { data } = await api.get(`products/categories/${categoryId}`, {
@@ -78,10 +88,10 @@ export async function fetchWooCommerceProductsBasedOnCategory(
     let page = 1;
     let totalPages = 1;
     const result: SingleProductDetails[] = [];
-     do {
-    const response = await api.get(
-      `products?category=${id}&per_page=100&page=${page}&lang=${locale}`,
-    );
+    do {
+      const response = await api.get(
+        `products?category=${id}&per_page=100&page=${page}&lang=${locale}`,
+      );
 
       if (response.status === 200) {
         totalPages = parseInt(response.headers["x-wp-totalpages"], 10);
@@ -107,8 +117,21 @@ export async function fetchWooCommerceProductDetails(
       `products/${id}?per_page=100&lang=${locale}`,
     );
 
+    let updatedData = {};
+
     if (response.status === 200) {
-      return (await response.data) as SingleProductDetails;
+      updatedData = response.data;
+
+      const variationsResponse = await api.get(
+        `products/${response.data.id}/variations${locale ? `?lang=${locale}` : ""}`,
+      );
+      if (variationsResponse.status === 200) {
+        updatedData = {
+          ...response.data,
+          variations: variationsResponse.data,
+        };
+      }
+      return (await updatedData) as SingleProductDetails;
     }
   } catch (error) {
     throw new Error(error as string);
@@ -149,21 +172,5 @@ export async function fetchWooCommerceProductsTitles(
     }
   } catch (error) {
     throw new Error(error as string);
-  }
-}
-
-export async function fetchWooCommerceProductVariations(
-  productId: number,
-  locale: string
-) {
-  try {
-    const response = await api.get(`products/${productId}/variations${locale ? `?lang=${locale}` : ""}`);
-    if (response.status === 200) {
-      return response.data;
-    }
-    return [];
-  } catch (error) {
-    console.error("Помилка при завантаженні варіацій:", error);
-    return [];
   }
 }

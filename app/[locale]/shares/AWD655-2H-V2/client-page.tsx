@@ -4,7 +4,7 @@ import styles from "./../Shares.module.css";
 import { MainLayout } from "@app/[locale]/components/templates";
 import Image from "next/image";
 import classNames from "classnames";
-import awd655_2h_v2 from "./awd655-2h-v2.webp"
+import awd655_2h_v2 from "../../../../public/shares/awd655-2h-v2.webp"
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
@@ -56,6 +56,7 @@ const AWD655_2h_v2 = () => {
                                 width={290}
                                 height={300}
                                 alt="awd655-h2-v2"
+                                unoptimized
                             />
 
                         </div>

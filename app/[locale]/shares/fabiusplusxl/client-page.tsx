@@ -57,6 +57,7 @@ const SharesFabiusXL = () => {
                                 width={390}
                                 height={533}
                                 alt="FabiusXL"
+                                unoptimized
                             />
                         </div>
                         <div className="lg:w-1/2 w-full pl-0 lg:pl-10">
@@ -102,6 +103,7 @@ const SharesFabiusXL = () => {
                         width={500}
                         height={100}
                         alt="FabiusXL"
+                        unoptimized
                     />
                     <p className="my-2">{t('shares-fabius-text3')}</p>
                     <p className="my-2">{t('shares-fabius-text4')}</p>
