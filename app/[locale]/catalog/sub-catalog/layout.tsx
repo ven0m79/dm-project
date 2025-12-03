@@ -51,7 +51,7 @@ const Content: FC<{ children: ReactNode; locale: string }> = ({
   return (
     <div
       className={classNames(
-        "flex flex-1 flex-row justify-between self-center mb-5 mt-5 mx-2",
+        "flex flex-1 flex-row justify-between self-center mb-5 mx-2",
         styles.subCatalog,
       )}
     >
@@ -112,7 +112,7 @@ const Content: FC<{ children: ReactNode; locale: string }> = ({
       {/* ------------------------------
            Основний контент
       -------------------------------- */}
-      <div className="w-full">
+      <div className="w-full mt-5">
         {/*<Breadcrumbs categoryId={categoryId} locale={locale} />*/}
         {children}
       </div>

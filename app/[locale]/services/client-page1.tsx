@@ -241,7 +241,7 @@ export const ClientPage = () => {
                                         whileHover={{ scale: 1.05 }}
                                     >
                                         <div className="w-full h-full relative rounded-2xl overflow-hidden flex items-start justify-center">
-                                            <Image src={card.front} alt={card.title} className="object-cover pt-16" width={170} height={200} unoptimized />
+                                            <Image src={card.front} alt={card.title} className="object-cover pt-16" width={170} height={200}/>
                                             <h3 className="absolute bottom-0 left-0 right-0 bg-[#002766]/50 text-white text-lg font-semibold p-3 h-20">
                                                 {card.title}
                                             </h3>
