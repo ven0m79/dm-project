@@ -17,7 +17,7 @@ const customTheme: CustomFlowbiteTheme = {
     root: {
       base: "h-full",
       inner:
-        "h-fit w-[300px] overflow-y-auto overflow-x-hidden py-3 rounded-xl bg-white/30 dark:bg-white/30 pt-14 -mt-10",
+        "h-fit w-[300px] overflow-y-auto overflow-x-hidden py-3 rounded-xl bg-white/30 dark:bg-white/30",
     },
     collapse: {
       button:

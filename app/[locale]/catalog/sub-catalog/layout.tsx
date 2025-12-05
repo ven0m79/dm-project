@@ -104,7 +104,7 @@ const Content: FC<{ children: ReactNode; locale: string }> = ({
           )}
         </>
       ) : (
-        <motion.div layout className="w-[300px]">
+        <motion.div layout className="w-[300px] mt-5">
           <LSidebar locale={locale} changeURLParams />
         </motion.div>
       )}
@@ -166,7 +166,7 @@ const Content: FC<{ children: ReactNode; locale: string }> = ({
           )}
         </>
       ) : (
-        <motion.div layout className="w-[300px]">
+        <motion.div layout className="w-[300px] mt-5">
           <RSidebar locale={locale} changeURLParams />
         </motion.div>
       )}
