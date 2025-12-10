@@ -27,12 +27,12 @@ declare global {
 export const ClientPage = () => {
     const t = useTranslations('ServicePage');
     const cards = [
-        { id: 1, front: imgSrc1, title: "ШВЛ", back: ["Babylog Family (8000 / 8000plus)", "Carina", "Savina Family (Savina 300 / Select / Classic)", "Evita Family (V300 / 500 / VN500 / 600 / 800, Evita S2 / CAP / 2dura / 4XL)", "Oxylog VE300 / VE300plus РТО", "Oxylog Family (2000plus / 3000 / 3000plus / VE300 / VE300plus)"] },
-        { id: 2, front: imgSrc2, title: "Наркозно-дихальні апарати (НДА)", back: ["Fabius Family", "Primus", "Vapor 2000 Family (Sev / Iso / Hal / Enf)", "Блок газоаналізу Scio / Vamos Family", "Perseus A500", "Atlan Family"] },
-        { id: 3, front: imgSrc3, title: "Неонатологічне обладнання", back: ["Реанімаційний стіл Babytherm 8000 / 8004 / 8010", "Інкубатор Caleo", "Інкубатор Isolette 8000 / C2000", "Гібридний інкубатор Babyleo TN500", "Стіл реанімаційний Resuscitaire RW-82", "Білірубінометр JM-105", "Транспортний інкубатор TI 500"] },
-        { id: 4, front: imgSrc4, title: "Моніторинг пацієнта", back: ["Центральна станція моніторингу ICS (оновлене ПЗ)", "Монітор пацієнта IACS", "Монітори Gamma Family (Delta/Delta XL/Gamma/Gamma XL/Vista)", "Монітор пацієнта Vista Family (120/120S)", "Infinity C700", "Infinity GW", "Акумуляторні батареї SpO₂ та ЕКГ TESLA M3 / TESLA DUO"] },
-        { id: 5, front: imgSrc5, title: "Мийно-дезінфекційні машини", back: ["AWD655-8/8L мийно-дезінфекційна машина", "AWD655-10 мийно-дезінфекційна машина"] },
-        { id: 6, front: imgSrc6, title: "Системи медичного газопостачання", back: ["Газові розетки та розетки вакууму", "Стельові консолі Agila / Movita / Ambia / Ponta", "Настінні панелі Gemina / Linea"] }
+        { id: 1, front: imgSrc1, title: "Апарати штучної вентиляції легень (ШВЛ)", subtitle: ["ШВЛ для дорослих, дітей і новонароджених", "спеціалізовані неонатальні апарати"], back: ["Babylog Family (8000 / 8000plus / VN500 / VN600 / VN800)", "Carina", "Savina Family (Savina 300 / Select / Classic)", "Evita Family (V300 / V500 / V600 / V800,  S2 / CAP / Evita 2dura /Evita 4, Evita XL)", "Oxylog Family (2000plus / 3000 / 3000plus / VE300)"] },
+        { id: 2, front: imgSrc2, title: "Наркозно-дихальні апарати (НДА) та комплектуючі", subtitle: ["анестезіологічні станції","наркозно-дихальні апарати"], back: ["Primus", "Perseus A500", "Atlan A3xx Family", "Випаровувачі Vapor 2000/3000 Family (Sev / Iso / Hal / Des)", "Блоки газоаналізу Scio / Vamos Family"] },
+        { id: 3, front: imgSrc3, title: "Обладнання для неонатології", subtitle: ["інкубатори","транспортні інкубатори","відкриті реанімаційні системи та ін."], back: ["Реанімаційні столики Babytherm 8000 / 8004 / 8010", "Реанімаційні столики Resuscitaire RW-82/Babyroo TN300 Інкубатор Caleo Інкубатор Isolette 8000 / 8000 plus/ C2000", "Транспортний інкубатор TI 500", "Гібридний інкубатор Babyleo TN500", "Білірубінометр JM-105", "Лампа для фототерапії Bililux"] },
+        { id: 4, front: imgSrc4, title: "Моніторинг пацієнта", subtitle: ["монітори пацієнта","центральні станції моніторингу"], back: ["Центральні станції моніторингу Infinity Central Station / Vista Central Station ", "Монітори пацієнта IACS (Infinity Acute Care System) та M540", "Монітори Infinity Family (Delta / Delta XL / Gamma / Gamma XL / Vista)","Монітори пацієнта Vista Family (Vista 120/120 S/300/300 S)", "Амагнітні монітори пацієнта TESLA M3 / TESLA DUO"] },
+        { id: 5, front: imgSrc5, title: "Стерилізаційне та дезінфекційне обладнання", subtitle: ["мийно-дезінфекційні машини", "парові стерилізатори", "низькотемпературні (плазмові) стерилізатори"], back: ["Мийно-дезінфекційні машини серії AWD655","Машини для дезінфекції суден серії AF2","Парові стерилізатори серії PROHS FJ","Низькотемпературні плазмові стерилізатори серії RENO"] },
+        { id: 6, front: imgSrc6, title: "Системи медичного газопостачання, медичні архітектурні системи та операційні світильники", subtitle: [], back: ["Газові розетки та розетки вакууму", "Стельові консолі Agila / Movita / Ambia / Ponta", "Настінні панелі Gemina / Linea"] }
     ];
     const items = [
         "Планове технічне обслуговування",
@@ -195,10 +195,10 @@ export const ClientPage = () => {
     return (
         <MainLayout>
             <div className={classNames("flex flex-1 flex-col self-center", styles.main)}>
-                <div className={styles.sendUsMessage}>
+                {/* <div className={styles.sendUsMessage}>
                     {t('title')}
                 </div>
-                <div className={styles.stroke}></div>
+                <div className={styles.stroke}></div> */}
 
                 <div className={classNames("flex flex-col flex-1 justify-normal items-start w-full max-w-[1400px] text-lg")}>
                     {/* Left Section */}
@@ -223,14 +223,14 @@ export const ClientPage = () => {
                     </div>
                     <div className={classNames("flex flex-col justify-normal items-start w-full", styles.servContainer1)}>
                         <span className="text-[24px] py-3 self-center text-[#002766]">Яке обладнання ми обслуговуємо</span>
-                        <p className="flex self-center leading-relaxed">Повний спектр медичної техніки Dräger для лікувальних закладів</p>
+                        {/* <p className="flex self-center leading-relaxed">Повний спектр медичної техніки Dräger для лікувальних закладів</p> */}
                     </div>
-                    <div className="flex justify-center self-center py-10">
-                        <div className="w-full max-w-[1400px] flex flex-wrap justify-center gap-5">
+                    <div className="flex justify-center self-center py-3 w-full max-w-[1400px]">
+                        <div className="w-full h-auto flex flex-wrap justify-center gap-5">
                             {cards.map(card => (
                                 <div
                                     key={card.id}
-                                    className="relative w-52 h-96 cursor-pointer perspective"
+                                    className="relative cursor-pointer w-[32%] h-[500px]"
                                     onClick={() => toggleFlip(card.id)}
                                 >
                                     {/* FRONT */}
@@ -241,9 +241,12 @@ export const ClientPage = () => {
                                         whileHover={{ scale: 1.05 }}
                                     >
                                         <div className="w-full h-full relative rounded-2xl overflow-hidden flex items-start justify-center">
-                                            <Image src={card.front} alt={card.title} className="object-cover pt-16" width={170} height={200}/>
-                                            <h3 className="absolute bottom-0 left-0 right-0 bg-[#002766]/50 text-white text-lg font-semibold p-3 h-20">
-                                                {card.title}
+                                            <Image src={card.front} alt={card.title} className="object-cover pt-2" width={300} height={0} />
+                                            <h3 className="absolute bottom-0 left-0 right-0 bg-[#0061AA]/100 text-white text-lg font-semibold p-3 h-32">
+                                                {card.title}<br />
+                                                <ul className="list-disc space-y-1 text-[16px]">
+                                                    {card.subtitle?.map((item, i) => (<li className="before:content-['•'] before:mr-2" key={i}>{item}</li>))}
+                                                </ul>
                                             </h3>
                                         </div>
                                     </motion.div>
@@ -251,14 +254,14 @@ export const ClientPage = () => {
 
                                     {/* BACK */}
                                     <motion.div
-                                        className="absolute inset-0 rounded-2xl backface-hidden shadow-[0_6px_15px_rgba(0,51,120,0.45)] bg-[#0061AA] text-white flex justify-center text-left px-4 py-4 leading-tight"
+                                        className="absolute inset-0 rounded-2xl backface-hidden shadow-[0_6px_15px_rgba(0,51,120,0.45)] bg-[#0061AA] text-white flex justify-left items-center text-left px-4 py-4 leading-tight"
                                         style={{ rotateY: 180 }}
                                         animate={{ rotateY: flipped[card.id] ? 360 : 180 }}
                                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                                         whileHover={{ scale: 1.05 }}
                                     >
-                                        <ul className="list-disc space-y-1 text-[16px]">
-                                            {card.back.map((item, i) => (<li className="before:content-['•'] before:mr-2" key={i}>{item}</li>))}
+                                        <ul className="list-disc space-y-1 text-[20px]">
+                                            {card.back.map((item, i) => (<li className="py-2 before:content-['•'] before:mr-2" key={i}>{item}</li>))}
                                         </ul>
                                     </motion.div>
                                 </div>
@@ -267,7 +270,7 @@ export const ClientPage = () => {
                         <style>{`.perspective { perspective: 1200px; } .backface-hidden { backface-visibility: hidden; }`}</style>
                     </div>
 
-                    <span className="text-[24px] py-3 self-center text-[#002766]">Які сервіси ми виконуємо</span>
+                    <span className="text-[24px] py-5 self-center text-[#002766]">Які сервіси ми виконуємо</span>
 
                     <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
                         {rows.map((row, rowIndex) => (
@@ -453,6 +456,9 @@ export const ClientPage = () => {
                         </div>
                     </div>
 
+
+
+
                     {showForm && (
                         <motion.div
                             className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" // full screen + overlay
@@ -535,7 +541,7 @@ export const ClientPage = () => {
                         </motion.div>
                     )}
                 </div>
-            </div>
+            </div >
         </MainLayout >
     );
 };
