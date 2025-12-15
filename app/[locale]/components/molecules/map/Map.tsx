@@ -110,32 +110,32 @@ const MapOfUkraine = ({ locale }: { locale: string }) => {
 
         </motion.svg>
           <AnimatePresence>
-  {isHovering && coords?.x && coords?.y && (
-    <motion.div
-      className="absolute pointer-events-none z-50"
-      initial={{ opacity: 0 }}
-      animate={{
-        opacity: 1,
-        x: coords.x,
-        y: coords.y,
-      }}
-      exit={{ opacity: 0 }}
-      transition={{ type: "spring", stiffness: 70 }}
-    >
-      <div
-        className={classNames(
-          "flex flex-col items-center justify-center",
-          classes["info-section"]
-        )}
-      >
-        {hoveredItem?.name}
-        <div className={classes["info-section-description"]}>
-          {hoveredItem?.description}
-        </div>
-      </div>
-    </motion.div>
-  )}
-</AnimatePresence>
+            {isHovering && coords?.x && coords?.y && (
+              <motion.div
+                className="absolute pointer-events-none z-50"
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: 1,
+                  x: coords.x,
+                  y: coords.y,
+                }}
+                exit={{ opacity: 0 }}
+                transition={{ type: "spring", stiffness: 70 }}
+              >
+                <div
+                  className={classNames(
+                    "flex flex-col items-center justify-center",
+                    classes["info-section"]
+                  )}
+                >
+                  {hoveredItem?.name}
+                  <div className={classes["info-section-description"]}>
+                    {hoveredItem?.description}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
         </>
       </div>

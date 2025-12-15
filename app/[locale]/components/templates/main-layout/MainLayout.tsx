@@ -28,9 +28,15 @@ const MainLayout: FC<MainLayoutProps> = ({
     <Suspense fallback="Loading">
       <main className={styles.main}>
         {noHeader ? null : <HeaderWrapper />}
-        {noNav ? null : <Nav /> }
+        <div className="h-[50px]">
+          {noNav ? null : <Nav />}
+        </div>
+<div className="flex-1"> {/* Ось магія: ця властивість змушує його займати весь вільний простір */}
         {children}
-        {noFooter ? null : <Footer />}
+    </div>
+        <div className="h-[383px]">
+          {noFooter ? null : <Footer />}
+        </div>
       </main>
     </Suspense>
   );

@@ -67,7 +67,7 @@ const Nav = () => {
           <MobileNav />
         </nav>
         :
-        <nav className={classNames("flex flex-1 w-screen justify-center max-h-[50px]", styles["navigation"])}>
+        <nav className={classNames("flex flex-1 w-screen justify-center h-[50px]", styles["navigation"])}>
           <DesktopNav />
         </nav >
       }
