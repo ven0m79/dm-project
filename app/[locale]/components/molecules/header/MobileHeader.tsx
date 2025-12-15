@@ -3,7 +3,7 @@ import classNames from "classnames";
 import React, { Dispatch, FC, SetStateAction, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./Header.module.css";
 import Image from "next/image";
-import { Link, usePathname } from "../../../../../config";
+//import { Link, usePathname } from "../../../../../i18n/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import clsx from "clsx";
 import Loader from "@app/[locale]/components/atoms/loader/loaderSearch";

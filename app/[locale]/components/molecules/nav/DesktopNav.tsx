@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import classNames from "classnames";
 import React, { FC } from "react";
 import styles from "./Nav.module.css";
-import { Link, usePathname } from "../../../../../config";
+import { Link, usePathname } from "../../../../../i18n/navigation";
 
 const NavLinks: {
     [key: string]: {

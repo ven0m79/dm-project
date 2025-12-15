@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import classNames from "classnames";
 import React, { FC, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./Nav.module.css";
-import { Link, usePathname } from "../../../../../config";
+import { Link, usePathname } from "../../../../../i18n/navigation";
 
 import { motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";

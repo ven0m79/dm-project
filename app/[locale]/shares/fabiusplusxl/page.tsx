@@ -2,7 +2,15 @@ import type { Metadata } from "next";
 
 import  SharesFabiusXL from "./client-page";
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+
+type PageProps = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata(
+  { params }: PageProps
+): Promise<Metadata> {
+  const { locale } = await params;
   return locale === "ua"
     ? {
         title: "Акція на Апарат наркозно-дихальний Dräger Fabius plus XL та Монітор пацієнта Dräger Vista 120S | ДМ-Проект",

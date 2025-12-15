@@ -8,7 +8,7 @@ import styles from "./Nav.module.css";
 
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 
-import { Link, usePathname } from "../../../../../config";
+//import { Link, usePathname } from "../../../../../i18n/navigation";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 

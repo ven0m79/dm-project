@@ -2,7 +2,15 @@ import type { Metadata } from "next";
 
 import  AWD655_2h_v1 from "./client-page";
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+
+type PageProps = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata(
+  { params }: PageProps
+): Promise<Metadata> {
+  const { locale } = await params;
   return locale === "ua"
     ? {
         title: "Мийно-дезінфекційна машина AWD655-2H",

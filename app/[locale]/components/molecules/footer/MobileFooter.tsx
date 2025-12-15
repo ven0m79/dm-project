@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { FC } from "react";
-import { Link } from "../../../../../config";
+import { Link } from "../../../../../i18n/navigation";
 import Image from "next/image";
 //import { useTranslations } from "next-intl";
 
