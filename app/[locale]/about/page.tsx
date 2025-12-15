@@ -12,7 +12,7 @@ export async function generateMetadata({
   const { locale } = await params;
 
   // 💡 ОПЦІЙНО: Можна додати setRequestLocale, але зазвичай це роблять у компоненті Page або Layout
-  // setRequestLocale(locale); 
+  setRequestLocale(locale); 
 
   return locale === "ua"
     ? {
