@@ -193,7 +193,7 @@ export default function ClientPage({
                         return (
                           <button
                             key={index}
-                            ref={(el) => (thumbnailRefs.current[index] = el)}
+                            ref={(el) => void (thumbnailRefs.current[index] = el)}
                             onClick={() => setSelectedImage(index)}
                             disabled={!isVisible}
                             className={classNames(
