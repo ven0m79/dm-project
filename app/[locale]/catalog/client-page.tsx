@@ -3,7 +3,7 @@
 import React from "react";
 import styles from "./Catalog.module.css";
 import { MainLayout } from "@app/[locale]/components/templates";
-import { Link } from "config";
+import { Link } from "../../../i18n/navigation";
 import Image from "next/image";
 import classNames from "classnames";
 import imgCons from "./icons-photo/consumables.webp";

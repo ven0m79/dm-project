@@ -1,3 +1,4 @@
+// app/[locale]/layout.tsx
 import { ReactNode } from 'react';
 import { Roboto } from 'next/font/google';
 import { getMessages } from 'next-intl/server';
@@ -22,11 +23,8 @@ const roboto = Roboto({
 });
 
 export default async function LocaleLayout({ children, params }: Props) {
-  // ✅ Розкриваємо проміс
-  const resolvedParams = await params;
-  const locale = resolvedParams?.locale;
-
-  if (!locale || !hasLocale(routing.locales, locale)) notFound();
+  const { locale } = await params; // чекаємо Promise
+  if (!hasLocale(routing.locales, locale)) notFound();
 
   const messages = await getMessages({ locale });
 

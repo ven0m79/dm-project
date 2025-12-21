@@ -31,10 +31,10 @@ const MainLayout: FC<MainLayoutProps> = ({
         <div className="h-[50px]">
           {noNav ? null : <Nav />}
         </div>
-<div className="flex-1"> {/* Ось магія: ця властивість змушує його займати весь вільний простір */}
+<div className="flex-1 w-full items-center self-center justify-center"> {/* Ось магія: ця властивість змушує його займати весь вільний простір */}
         {children}
     </div>
-        <div className="h-[383px]">
+        <div className="h-[319px]">
           {noFooter ? null : <Footer />}
         </div>
       </main>

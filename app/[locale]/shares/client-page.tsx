@@ -4,7 +4,7 @@ import styles from "./Shares.module.css";
 
 import { MainLayout } from "@app/[locale]/components/templates";
 
-import { Link } from "config";
+import { Link } from "../../../i18n/navigation";
 import Image from "next/image";
 import classNames from "classnames";
 

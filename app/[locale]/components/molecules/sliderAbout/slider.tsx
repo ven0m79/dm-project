@@ -103,16 +103,16 @@ export default function SliderAbout({ locale }: { locale: string }) {
 
             />
           </motion.div>
-<div 
-             key="next-button" // 🟢 ДОДАНО УНІКАЛЬНИЙ КЛЮЧ
-             className="next1" 
-             onClick={() => paginate(1)}>
+          <div
+            key="next-button" // 🟢 ДОДАНО УНІКАЛЬНИЙ КЛЮЧ
+            className="next1"
+            onClick={() => paginate(1)}>
             {">"}
           </div>
-          <div 
-             key="prev-button" // 🟢 ДОДАНО УНІКАЛЬНИЙ КЛЮЧ
-             className="prev1" 
-             onClick={() => paginate(-1)}>
+          <div
+            key="prev-button" // 🟢 ДОДАНО УНІКАЛЬНИЙ КЛЮЧ
+            className="prev1"
+            onClick={() => paginate(-1)}>
             {">"}
           </div>
         </AnimatePresence>
