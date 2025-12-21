@@ -18,10 +18,12 @@ const flipTransition: Transition = {
   damping: 28,
 };
 
-const Content: FC<{ children: ReactNode; locale: string }> = ({
-  children,
-  locale,
-}) => {
+type Props = {
+  children: ReactNode;
+  params: Promise<{ locale: string }>;
+};
+
+const Content: React.FC<{ children: ReactNode; locale: string }> = ({ children, locale }) => {
   const searchParams = useSearchParams();
   const isMobile = useIsMobile();
 
@@ -137,13 +139,8 @@ const Content: FC<{ children: ReactNode; locale: string }> = ({
   );
 };
 
-export default function ClientLayout({
-  children,
-  locale,
-}: {
-  children: ReactNode;
-  locale: string;
-}) {
+export default async function ClientLayout({ children, params }: Props) {
+  const { locale } = await params; // ✅ unwrap params
   return (
     <MainLayout>
       <SidebarProvider locale={locale}>
