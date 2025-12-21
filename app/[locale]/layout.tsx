@@ -23,7 +23,8 @@ const roboto = Roboto({
 });
 
 export default async function LocaleLayout({ children, params }: Props) {
-  const { locale } = await params; // чекаємо Promise
+    const resolvedParams = await params; // обов’язково unwrap
+  const { locale } = await resolvedParams; // чекаємо Promise
   if (!hasLocale(routing.locales, locale)) notFound();
 
   const messages = await getMessages({ locale });
