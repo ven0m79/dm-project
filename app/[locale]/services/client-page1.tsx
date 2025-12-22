@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl';
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Snowfall from "react-snowfall"
+import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 
 const imgSrc = "/service/povshednyy.webp";
 const imgSrc1 = "/service/shvl.webp";
@@ -19,6 +20,7 @@ const imgSrc6 = "/service/gaz1.webp";
 const imgSrcUkr = "/service/ukraine.webp";
 const imgSrcLearn = "/service/learning.webp";
 
+
 declare global {
     interface Window {
         dataLayer: Record<string, any>[];
@@ -27,6 +29,7 @@ declare global {
 
 export const ClientPage = () => {
     const t = useTranslations('ServicePage');
+    const isMobile = useIsMobile();
     const cards = [
         { id: 1, front: imgSrc1, title: "Апарати штучної вентиляції легень (ШВЛ)", subtitle: ["ШВЛ для дорослих, дітей і новонароджених", "спеціалізовані неонатальні апарати"], back: ["Babylog Family (8000 / 8000plus / VN500 / VN600 / VN800)", "Carina", "Savina Family (Savina 300 / Select / Classic)", "Evita Family (V300 / V500 / V600 / V800,  S2 / CAP / Evita 2dura /Evita 4, Evita XL)", "Oxylog Family (2000plus / 3000 / 3000plus / VE300)"] },
         { id: 2, front: imgSrc2, title: "Наркозно-дихальні апарати (НДА) та комплектуючі", subtitle: ["анестезіологічні станції", "наркозно-дихальні апарати"], back: ["Primus", "Perseus A500", "Atlan A3xx Family", "Випаровувачі Vapor 2000/3000 Family (Sev / Iso / Hal / Des)", "Блоки газоаналізу Scio / Vamos Family"] },
@@ -195,15 +198,13 @@ export const ClientPage = () => {
 
     return (
         <MainLayout>
-            <div className="z-50 h-auto">
-                <Snowfall color="white" speed={[1.0, 3.0]} style={{
-                    position: "fixed",
-                    width: "100vw",
-                    height: "100vh",
-                    zIndex: 50,
-                    pointerEvents: "none",
-                }} />
-            </div>
+            <Snowfall color="white" speed={[1.0, 3.0]} style={{
+                position: "fixed",
+                width: "100vw",
+                height: "100vh",
+                zIndex: 50,
+                pointerEvents: "none",
+            }} />
             <div className={classNames("flex flex-1 flex-col self-center", styles.main)}>
                 {/* <div className={styles.sendUsMessage}>
                     {t('title')}
@@ -236,49 +237,73 @@ export const ClientPage = () => {
                         {/* <p className="flex self-center leading-relaxed">Повний спектр медичної техніки Dräger для лікувальних закладів</p> */}
                     </div>
                     <div className="flex justify-center self-center py-3 w-full max-w-[1400px]">
-                        <div className="w-full h-auto flex flex-wrap justify-center gap-5">
-                            {cards.map(card => (
+                        <div className="w-full flex flex-wrap justify-center gap-4">
+                            {cards.map((card) => (
                                 <div
                                     key={card.id}
-                                    className="relative cursor-pointer w-[32%] h-[500px]"
+                                    className="relative perspective cursor-pointer"
                                     onClick={() => toggleFlip(card.id)}
                                 >
-                                    {/* FRONT */}
+                                    {/* Motion wrapper для flip */}
                                     <motion.div
-                                        className="absolute inset-0 rounded-2xl backface-hidden shadow-[0_6px_15px_rgba(0,51,120,0.45)]"
+                                        className="relative w-full h-full preserve-3d rounded-2xl backface-hidden shadow-[0_6px_15px_rgba(0,51,120,0.45)]"
+                                        style={{
+                                            width: "min(13rem, 20vw)",
+                                            height: "min(28rem, 35vw)",
+                                        }}
                                         animate={{ rotateY: flipped[card.id] ? 180 : 0 }}
                                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                                        whileHover={{ scale: 1.05 }}
+
                                     >
-                                        <div className="w-full h-full relative rounded-2xl overflow-hidden flex items-start justify-center">
-                                            <Image src={card.front} alt={card.title} className="object-cover pt-2" width={300} height={0} />
-                                            <h3 className="absolute bottom-0 left-0 right-0 bg-[#0061AA]/100 text-white text-lg font-semibold p-3 h-32">
-                                                {card.title}<br />
-                                                <ul className="list-disc space-y-1 text-[16px] text-white">
-                                                    {card.subtitle?.map((item, i) => (<li className="before:content-['•'] before:mr-2" key={i}>{item}</li>))}
-                                                </ul>
-                                            </h3>
+                                        {/* FRONT */}
+                                        <div className="w-full h-full relative rounded-2xl overflow-hidden">
+                                            {/* Додаємо flex, щоб центрувати картинку по горизонталі (mx-auto) та притиснути до верху */}
+                                            <div className="relative w-full h-full flex flex-col items-center pt-2">
+                                                <Image
+                                                    src={card.front}
+                                                    alt={card.title}
+                                                    width={isMobile ? 160 : 200}
+                                                    height={isMobile ? 190 : 230}
+                                                    className="object-contain" // зберігає пропорції
+                                                    priority={false}
+                                                />
+
+                                                <h3 className="absolute bottom-0 left-0 right-0 bg-[#0061AA] text-white p-2 h-32 text-base">
+                                                    {card.title}
+                                                    {/* {card.subtitle && (
+                                                        <ul className="list-disc pl-5 mt-2 text-[14px]">
+                                                            {card.subtitle.map((s, i) => (
+                                                                <li key={i}>{s}</li>
+                                                            ))}
+                                                        </ul>
+                                                    )} */}
+                                                </h3>
+                                            </div>
                                         </div>
-                                    </motion.div>
 
-
-                                    {/* BACK */}
-                                    <motion.div
-                                        className="absolute inset-0 rounded-2xl backface-hidden shadow-[0_6px_15px_rgba(0,51,120,0.45)] bg-[#0061AA] text-white flex justify-left items-center text-left px-4 py-4 leading-tight"
-                                        style={{ rotateY: 180 }}
-                                        animate={{ rotateY: flipped[card.id] ? 360 : 180 }}
-                                        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                                        whileHover={{ scale: 1.05 }}
-                                    >
-                                        <ul className="list-disc space-y-1 text-[20px] text-white">
-                                            {card.back.map((item, i) => (<li className="py-2 before:content-['•'] before:mr-2" key={i}>{item}</li>))}
-                                        </ul>
+                                        {/* BACK */}
+                                        <div
+                                            className="absolute inset-0 backface-hidden rounded-2xl bg-[#0061AA] text-white p-2 overflow-auto"
+                                            style={{ transform: "rotateY(180deg)" }}
+                                        >
+                                            <ul className="list-disc pl-5 space-y-1 text-[16px]  leading-relaxed">
+                                                {card.back.map((item, i) => (
+                                                    <li key={i}>{item}</li>
+                                                ))}
+                                            </ul>
+                                        </div>
                                     </motion.div>
                                 </div>
                             ))}
                         </div>
-                        <style>{`.perspective { perspective: 1200px; } .backface-hidden { backface-visibility: hidden; }`}</style>
+
+                        <style>{`
+        .perspective { perspective: 1200px; }
+        .preserve-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+      `}</style>
                     </div>
+
 
                     <span className="text-[24px] py-5 self-center text-[#002766]">Які сервіси ми виконуємо</span>
 
