@@ -258,13 +258,13 @@ export const ClientPage = () => {
                                         {/* FRONT */}
                                         <div className="w-full h-full relative rounded-2xl overflow-hidden">
                                             {/* Додаємо flex, щоб центрувати картинку по горизонталі (mx-auto) та притиснути до верху */}
-                                            <div className="relative w-full h-full flex flex-col items-center pt-2">
+                                            <div className="relative w-full h-full flex flex-col items-center">
                                                 <Image
                                                     src={card.front}
                                                     alt={card.title}
                                                     width={isMobile ? 160 : 200}
                                                     height={isMobile ? 190 : 230}
-                                                    className="object-contain" // зберігає пропорції
+                                                    className="object-contain pt-4" // зберігає пропорції
                                                     priority={false}
                                                 />
 
@@ -286,7 +286,7 @@ export const ClientPage = () => {
                                             className="absolute inset-0 backface-hidden rounded-2xl bg-[#0061AA] text-white p-2 overflow-auto"
                                             style={{ transform: "rotateY(180deg)" }}
                                         >
-                                            <ul className="list-disc pl-5 space-y-1 text-[16px]  leading-relaxed">
+                                            <ul className="list-disc pl-1 space-y-1 text-[16px] leading-relaxed">
                                                 {card.back.map((item, i) => (
                                                     <li key={i}>{item}</li>
                                                 ))}
