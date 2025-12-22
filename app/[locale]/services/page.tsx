@@ -12,7 +12,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { locale } = await params;
 
-  return locale === "ua"
+  return locale !== "en"
     ? {
       title: "Сервісне обслуговування медичного обладнання | ДМ-Проект",
       description:

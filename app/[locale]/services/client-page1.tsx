@@ -286,7 +286,7 @@ export const ClientPage = () => {
                                             className="absolute inset-0 backface-hidden rounded-2xl bg-[#0061AA] text-white p-2 overflow-auto"
                                             style={{ transform: "rotateY(180deg)" }}
                                         >
-                                            <ul className="list-disc pl-2 space-y-1 text-[16px] leading-relaxed">
+                                            <ul className="list-disc pl-2 space-y-1 text-[16px] leading-relaxed text-white">
                                                 {card.back.map((item, i) => (
                                                     <li key={i}>{item}</li>
                                                 ))}
