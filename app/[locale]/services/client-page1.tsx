@@ -248,8 +248,8 @@ export const ClientPage = () => {
                                     <motion.div
                                         className="relative w-full h-full preserve-3d rounded-2xl backface-hidden shadow-[0_6px_15px_rgba(0,51,120,0.45)]"
                                         style={{
-                                            width: "min(13rem, 20vw)",
-                                            height: "min(28rem, 35vw)",
+                                            width: "13rem",
+                                            height: "30rem",
                                         }}
                                         animate={{ rotateY: flipped[card.id] ? 180 : 0 }}
                                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
@@ -286,7 +286,7 @@ export const ClientPage = () => {
                                             className="absolute inset-0 backface-hidden rounded-2xl bg-[#0061AA] text-white p-2 overflow-auto"
                                             style={{ transform: "rotateY(180deg)" }}
                                         >
-                                            <ul className="list-disc pl-1 space-y-1 text-[16px] leading-relaxed">
+                                            <ul className="list-disc pl-2 space-y-1 text-[16px] leading-relaxed">
                                                 {card.back.map((item, i) => (
                                                     <li key={i}>{item}</li>
                                                 ))}
