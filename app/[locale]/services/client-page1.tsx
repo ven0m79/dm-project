@@ -249,7 +249,7 @@ export const ClientPage = () => {
                                         className="relative w-full h-full preserve-3d rounded-2xl backface-hidden shadow-[0_6px_15px_rgba(0,51,120,0.45)]"
                                         style={{
                                             width: "13rem",
-                                            height: "30rem",
+                                            height: "24rem",
                                         }}
                                         animate={{ rotateY: flipped[card.id] ? 180 : 0 }}
                                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
