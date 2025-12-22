@@ -268,7 +268,7 @@ export const ClientPage = () => {
                                                     priority={false}
                                                 />
 
-                                                <h3 className="absolute bottom-0 left-0 right-0 bg-[#0061AA] text-white p-2 h-32 text-base">
+                                                <h3 className="absolute bottom-0 left-0 right-0 bg-[#0061AA] text-white p-2 h-32 text-base text-center">
                                                     {card.title}
                                                     {/* {card.subtitle && (
                                                         <ul className="list-disc pl-5 mt-2 text-[14px]">
@@ -297,11 +297,7 @@ export const ClientPage = () => {
                             ))}
                         </div>
 
-                        <style>{`
-        .perspective { perspective: 1200px; }
-        .preserve-3d { transform-style: preserve-3d; }
-        .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-      `}</style>
+                        <style>{`.perspective { perspective: 1200px; } .preserve-3d { transform-style: preserve-3d; } .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }`}</style>
                     </div>
 
 
