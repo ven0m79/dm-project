@@ -244,7 +244,7 @@ export const ClientPage = () => {
                                             <Image src={card.front} alt={card.title} className="object-cover pt-2" width={300} height={0} />
                                             <h3 className="absolute bottom-0 left-0 right-0 bg-[#0061AA]/100 text-white text-lg font-semibold p-3 h-32">
                                                 {card.title}<br />
-                                                <ul className="list-disc space-y-1 text-[16px]">
+                                                <ul className="list-disc space-y-1 text-[16px] text-white">
                                                     {card.subtitle?.map((item, i) => (<li className="before:content-['•'] before:mr-2" key={i}>{item}</li>))}
                                                 </ul>
                                             </h3>
@@ -260,7 +260,7 @@ export const ClientPage = () => {
                                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                                         whileHover={{ scale: 1.05 }}
                                     >
-                                        <ul className="list-disc space-y-1 text-[20px]">
+                                        <ul className="list-disc space-y-1 text-[20px] text-white">
                                             {card.back.map((item, i) => (<li className="py-2 before:content-['•'] before:mr-2" key={i}>{item}</li>))}
                                         </ul>
                                     </motion.div>
