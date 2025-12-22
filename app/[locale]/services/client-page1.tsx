@@ -288,7 +288,7 @@ export const ClientPage = () => {
                                         >
                                             <ul className={classNames("list-disc pl-2 space-y-1 text-[16px] leading-relaxed", styles.whiteText)}>
                                                 {card.back.map((item, i) => (
-                                                    <li key={i}>{item}</li>
+                                                    <li className="text-white" key={i}>{item}</li>
                                                 ))}
                                             </ul>
                                         </div>
