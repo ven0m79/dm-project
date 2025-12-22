@@ -7,6 +7,7 @@ import styles from './Service.module.css';
 import { useTranslations } from 'next-intl';
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Snowfall from "react-snowfall"
 
 const imgSrc = "/service/povshednyy.webp";
 const imgSrc1 = "/service/shvl.webp";
@@ -28,11 +29,11 @@ export const ClientPage = () => {
     const t = useTranslations('ServicePage');
     const cards = [
         { id: 1, front: imgSrc1, title: "Апарати штучної вентиляції легень (ШВЛ)", subtitle: ["ШВЛ для дорослих, дітей і новонароджених", "спеціалізовані неонатальні апарати"], back: ["Babylog Family (8000 / 8000plus / VN500 / VN600 / VN800)", "Carina", "Savina Family (Savina 300 / Select / Classic)", "Evita Family (V300 / V500 / V600 / V800,  S2 / CAP / Evita 2dura /Evita 4, Evita XL)", "Oxylog Family (2000plus / 3000 / 3000plus / VE300)"] },
-        { id: 2, front: imgSrc2, title: "Наркозно-дихальні апарати (НДА) та комплектуючі", subtitle: ["анестезіологічні станції","наркозно-дихальні апарати"], back: ["Primus", "Perseus A500", "Atlan A3xx Family", "Випаровувачі Vapor 2000/3000 Family (Sev / Iso / Hal / Des)", "Блоки газоаналізу Scio / Vamos Family"] },
-        { id: 3, front: imgSrc3, title: "Обладнання для неонатології", subtitle: ["інкубатори","транспортні інкубатори","відкриті реанімаційні системи та ін."], back: ["Реанімаційні столики Babytherm 8000 / 8004 / 8010", "Реанімаційні столики Resuscitaire RW-82/Babyroo TN300 Інкубатор Caleo Інкубатор Isolette 8000 / 8000 plus/ C2000", "Транспортний інкубатор TI 500", "Гібридний інкубатор Babyleo TN500", "Білірубінометр JM-105", "Лампа для фототерапії Bililux"] },
-        { id: 4, front: imgSrc4, title: "Моніторинг пацієнта", subtitle: ["монітори пацієнта","центральні станції моніторингу"], back: ["Центральні станції моніторингу Infinity Central Station / Vista Central Station ", "Монітори пацієнта IACS (Infinity Acute Care System) та M540", "Монітори Infinity Family (Delta / Delta XL / Gamma / Gamma XL / Vista)","Монітори пацієнта Vista Family (Vista 120/120 S/300/300 S)", "Амагнітні монітори пацієнта TESLA M3 / TESLA DUO"] },
-        { id: 5, front: imgSrc5, title: "Стерилізаційне та дезінфекційне обладнання", subtitle: ["мийно-дезінфекційні машини", "парові стерилізатори", "низькотемпературні (плазмові) стерилізатори"], back: ["Мийно-дезінфекційні машини серії AWD655","Машини для дезінфекції суден серії AF2","Парові стерилізатори серії PROHS FJ","Низькотемпературні плазмові стерилізатори серії RENO"] },
-        { id: 6, front: imgSrc6, title: "Системи медичного газопостачання, медичні архітектурні системи та операційні світильники", subtitle: ["системи постачання кисню, повітря, вакууму та закису азоту", "газорозподільні панелі", "газові розетки та розетки вакууму", "стельові консолі ", "настінні панелі ", "операційні світильники (мобільні, стельові)"], back: ["Системи постачання кисню, повітря, вакууму та закису азоту","Газові розетки та розетки вакууму","Стельові консолі Agila / Movita / Ambia / Ponta","Настінні панелі Gemina / Linea","Операційні світильники Polaris 100/200/600"] }
+        { id: 2, front: imgSrc2, title: "Наркозно-дихальні апарати (НДА) та комплектуючі", subtitle: ["анестезіологічні станції", "наркозно-дихальні апарати"], back: ["Primus", "Perseus A500", "Atlan A3xx Family", "Випаровувачі Vapor 2000/3000 Family (Sev / Iso / Hal / Des)", "Блоки газоаналізу Scio / Vamos Family"] },
+        { id: 3, front: imgSrc3, title: "Обладнання для неонатології", subtitle: ["інкубатори", "транспортні інкубатори", "відкриті реанімаційні системи та ін."], back: ["Реанімаційні столики Babytherm 8000 / 8004 / 8010", "Реанімаційні столики Resuscitaire RW-82/Babyroo TN300 Інкубатор Caleo Інкубатор Isolette 8000 / 8000 plus/ C2000", "Транспортний інкубатор TI 500", "Гібридний інкубатор Babyleo TN500", "Білірубінометр JM-105", "Лампа для фототерапії Bililux"] },
+        { id: 4, front: imgSrc4, title: "Моніторинг пацієнта", subtitle: ["монітори пацієнта", "центральні станції моніторингу"], back: ["Центральні станції моніторингу Infinity Central Station / Vista Central Station ", "Монітори пацієнта IACS (Infinity Acute Care System) та M540", "Монітори Infinity Family (Delta / Delta XL / Gamma / Gamma XL / Vista)", "Монітори пацієнта Vista Family (Vista 120/120 S/300/300 S)", "Амагнітні монітори пацієнта TESLA M3 / TESLA DUO"] },
+        { id: 5, front: imgSrc5, title: "Стерилізаційне та дезінфекційне обладнання", subtitle: ["мийно-дезінфекційні машини", "парові стерилізатори", "низькотемпературні (плазмові) стерилізатори"], back: ["Мийно-дезінфекційні машини серії AWD655", "Машини для дезінфекції суден серії AF2", "Парові стерилізатори серії PROHS FJ", "Низькотемпературні плазмові стерилізатори серії RENO"] },
+        { id: 6, front: imgSrc6, title: "Системи медичного газопостачання, медичні архітектурні системи та операційні світильники", subtitle: ["системи постачання кисню, повітря, вакууму та закису азоту", "газорозподільні панелі", "газові розетки та розетки вакууму", "стельові консолі ", "настінні панелі ", "операційні світильники (мобільні, стельові)"], back: ["Системи постачання кисню, повітря, вакууму та закису азоту", "Газові розетки та розетки вакууму", "Стельові консолі Agila / Movita / Ambia / Ponta", "Настінні панелі Gemina / Linea", "Операційні світильники Polaris 100/200/600"] }
     ];
     const items = [
         "Планове технічне обслуговування",
@@ -194,6 +195,15 @@ export const ClientPage = () => {
 
     return (
         <MainLayout>
+            <div className="z-50 h-auto">
+                <Snowfall color="white" speed={[1.0, 3.0]} style={{
+                    position: "fixed",
+                    width: "100vw",
+                    height: "100vh",
+                    zIndex: 50,
+                    pointerEvents: "none",
+                }} />
+            </div>
             <div className={classNames("flex flex-1 flex-col self-center", styles.main)}>
                 {/* <div className={styles.sendUsMessage}>
                     {t('title')}
@@ -272,7 +282,7 @@ export const ClientPage = () => {
 
                     <span className="text-[24px] py-5 self-center text-[#002766]">Які сервіси ми виконуємо</span>
 
-                    <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
+                    {/* <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
                         {rows.map((row, rowIndex) => (
                             <div className="flex gap-4" key={rowIndex}>
                                 {row.map((item, i) => (
@@ -286,7 +296,7 @@ export const ClientPage = () => {
                                 ))}
                             </div>
                         ))}
-                    </div>
+                    </div> */}
                     <span ref={planRef} className="text-[24px] py-3 text-[#002766] self-center">{'Планове технічне обслуговування'}</span>
                     <div className={classNames("flex max-w-[1400px] w-full", styles.servContainer1)}>
                         <div className="flex-1 pr-8">
@@ -334,7 +344,7 @@ export const ClientPage = () => {
                                 </tr>
                             </thead>
 
-                            <tbody className="text-[#0054A6]">
+                            {/* <tbody className="text-[#0054A6]">
                                 {tableData.map((row, index) => (
                                     <tr
                                         key={index}
@@ -345,12 +355,12 @@ export const ClientPage = () => {
                                         <td className="p-4">{row.emergency}</td>
                                     </tr>
                                 ))}
-                            </tbody>
+                            </tbody> */}
                         </table>
                     </div>
 
                     <span className="text-[24px] py-3 self-center text-[#002766]">Переваги нашого сервісу</span>
-                    <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
+                    {/* <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
                         {rows2.map((row2, rowIndex) => (
                             <div className="flex gap-4" key={rowIndex}>
                                 {row2.map((item, i) => (
@@ -364,7 +374,7 @@ export const ClientPage = () => {
                                 ))}
                             </div>
                         ))}
-                    </div>
+                    </div> */}
 
                     <div className="text-[#0061AA]">
                         <h3 className="text-2xl font-semibold mt-4 text-left text-[#0061AA]">Сертифікація інженерів</h3>
