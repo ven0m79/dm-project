@@ -85,7 +85,7 @@ const Content: FC<SidebarProps> = ({
 
   // ✅ Вибір "кореневих" елементів залежно від мови
   const items = useMemo(
-    () => (locale === "ua" ? [categories?.[0] || []] : [categories?.[1] || []]),
+    () => (locale === "ua" ? [categories?.[1] || []] : [categories?.[0] || []]),
     [categories, locale],
   );
 

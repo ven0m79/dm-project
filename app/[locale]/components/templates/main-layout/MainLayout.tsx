@@ -31,7 +31,7 @@ const MainLayout: FC<MainLayoutProps> = ({
         <div className="h-[50px]">
           {noNav ? null : <Nav />}
         </div>
-        <div className="flex flex-1 w-full items-center self-center justify-cente">
+        <div className="flex flex-1 w-full items-center justify-center">
           {children}
         </div>
         <div className="h-[319px]">

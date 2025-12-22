@@ -107,7 +107,7 @@ const Content: FC<SidebarProps> = ({ locale, changeURLParams, fromProductPage })
   } = useSidebar();
 
   // Вибір кореневих елементів
-const items = useMemo(() => (locale === "ua" ? [categories?.[1] || []] : [categories?.[0] || []]), [categories, locale]);
+const items = useMemo(() => (locale === "ua" ? [categories?.[0] || []] : [categories?.[1] || []]), [categories, locale]);
 
   const handleCollapseToggle = (category: TransformedCategoriesType) => {
     setSelectedCategoryId(category.id);
