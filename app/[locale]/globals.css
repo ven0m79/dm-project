@@ -43,6 +43,7 @@ body {
 
 ul {
   overflow-y: hidden;
+  list-style-type: disc;
 }
 
 button {
