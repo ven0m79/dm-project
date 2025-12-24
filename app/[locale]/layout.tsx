@@ -31,8 +31,8 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale}>
-      <body className={cn('flex min-h-screen overflow-x-hidden bg-gray-950 text-gray-50', roboto.variable)}>
-        <main className="flex flex-1 flex-col items-center justify-center gap-12 w-full bg-white">
+      <body className={cn('flex min-h-screen overflow-x-hidden', roboto.variable)}>
+        <main className="flex flex-1 flex-col items-center justify-center gap-12 w-full">
           <NextIntlClientProvider locale={locale} messages={messages}>
             {children}
           </NextIntlClientProvider>

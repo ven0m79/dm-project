@@ -5,10 +5,11 @@ import classNames from "classnames";
 import { MainLayout } from "@app/[locale]/components/templates";
 import styles from './Service.module.css';
 import { useTranslations } from 'next-intl';
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Snowfall from "react-snowfall"
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
+
 
 const imgSrc = "/service/povshednyy.webp";
 const imgSrc1 = "/service/shvl.webp";
@@ -19,6 +20,7 @@ const imgSrc5 = "/service/dez.webp";
 const imgSrc6 = "/service/gaz1.webp";
 const imgSrcUkr = "/service/ukraine.webp";
 const imgSrcLearn = "/service/learning.webp";
+const imgCert = "/service/certificate.webp";
 
 
 declare global {
@@ -32,7 +34,7 @@ export const ClientPage = () => {
     const isMobile = useIsMobile();
     const cards = [
         { id: 1, front: imgSrc1, title: "Апарати штучної вентиляції легень (ШВЛ)", subtitle: ["ШВЛ для дорослих, дітей і новонароджених", "спеціалізовані неонатальні апарати"], back: ["Babylog Family (8000 / 8000plus / VN500 / VN600 / VN800)", "Carina", "Savina Family (Savina 300 / Select / Classic)", "Evita Family (V300 / V500 / V600 / V800,  S2 / CAP / Evita 2dura /Evita 4, Evita XL)", "Oxylog Family (2000plus / 3000 / 3000plus / VE300)"] },
-        { id: 2, front: imgSrc2, title: "Наркозно-дихальні апарати (НДА) та комплектуючі", subtitle: ["анестезіологічні станції", "наркозно-дихальні апарати"], back: ["Fabius Family","Primus", "Perseus A500", "Atlan Family (Atlan A100/A300/A350)", "Випаровувачі Vapor 2000/3000 Family (Sev / Iso / Hal / Des)", "Блоки газоаналізу Scio / Vamos Family"] },
+        { id: 2, front: imgSrc2, title: "Наркозно-дихальні апарати (НДА) та комплектуючі", subtitle: ["анестезіологічні станції", "наркозно-дихальні апарати"], back: ["Fabius Family", "Primus", "Perseus A500", "Atlan Family (Atlan A100/A300/A350)", "Випаровувачі Vapor 2000/3000 Family (Sev / Iso / Hal / Des)", "Блоки газоаналізу Scio / Vamos Family"] },
         { id: 3, front: imgSrc3, title: "Обладнання для неонатології", subtitle: ["інкубатори", "транспортні інкубатори", "відкриті реанімаційні системи та ін."], back: ["Реанімаційні столики Babytherm 8000 / 8004 / 8010", "Реанімаційні столики Resuscitaire RW-82/Babyroo TN300 Інкубатор Caleo Інкубатор Isolette 8000 / 8000 plus/ C2000", "Транспортний інкубатор TI 500", "Гібридний інкубатор Babyleo TN500", "Білірубінометр JM-105", "Лампа для фототерапії Bililux"] },
         { id: 4, front: imgSrc4, title: "Моніторинг пацієнта", subtitle: ["монітори пацієнта", "центральні станції моніторингу"], back: ["Центральні станції моніторингу Infinity Central Station / Vista Central Station ", "Монітори пацієнта IACS (Infinity Acute Care System) та M540", "Монітори Infinity Family (Delta / Delta XL / Gamma / Gamma XL / Vista)", "Монітори пацієнта Vista Family (Vista 120/120 S/300/300 S)", "Амагнітні монітори пацієнта TESLA M3 / TESLA DUO"] },
         { id: 5, front: imgSrc5, title: "Стерилізаційне та дезінфекційне обладнання", subtitle: ["мийно-дезінфекційні машини", "парові стерилізатори", "низькотемпературні (плазмові) стерилізатори"], back: ["Мийно-дезінфекційні машини серії AWD655", "Машини для дезінфекції суден серії AF2", "Парові стерилізатори серії PROHS FJ", "Низькотемпературні плазмові стерилізатори серії RENO"] },
@@ -47,7 +49,7 @@ export const ClientPage = () => {
         "Оновлення та налаштування ПЗ",
         "Аудит технічного стану",
         "Підбір і заміна оригінальних запчастин",
-        "Ще один пункт",
+        "Разове ТО та комплексні сервісні пакети",
     ];
     const items1 = [
         "Діагностика та візуальний огляд",
@@ -70,8 +72,7 @@ export const ClientPage = () => {
 
     const items3 = [
         "Апарати ШВЛ",
-        "Анестезіологічні станції",
-        "Наркозно-дихальні апарати",
+        "Анестезіологічні станції та Наркозно-дихальні апарати",
         "Монітори пацієнта",
         "Неонатальне обладнання",
         "Хірургічне освітлення",
@@ -85,6 +86,19 @@ export const ClientPage = () => {
         "Профілактика помилок користувача",
         "Підвищення ефективності експлуатації",
     ];
+    const items5 = [
+        "Гарантія на виконані роботи",
+        "Гарантія на встановлені оригінальні запчастини",
+        "Документальне підтвердження всіх етапів",
+        "Сервіс відповідно до міжнародних вимог",
+    ];
+    const items6 = [
+        "типу обладнання",
+        "стану та обсягу сервісних робіт",
+        "необхідних запчастин",
+        "вибраного сервісного пакета",
+    ];
+
 
     const tableData = [
         {
@@ -111,6 +125,8 @@ export const ClientPage = () => {
 
     const [flipped, setFlipped] = useState<Record<number, boolean>>({});
     const [showForm, setShowForm] = useState(false);
+
+    const [open, setOpen] = useState(false);
 
     const [name, setName] = useState('');
     const [mobile, setMobile] = useState('');
@@ -205,12 +221,8 @@ export const ClientPage = () => {
                 zIndex: 50,
                 pointerEvents: "none",
             }} />
-            <div className={classNames("flex flex-1 flex-col self-center", styles.main)}>
-                {/* <div className={styles.sendUsMessage}>
-                    {t('title')}
-                </div>
-                <div className={styles.stroke}></div> */}
 
+            <div className={classNames("flex flex-1 flex-col self-center", styles.main)}>
                 <div className={classNames("flex flex-col flex-1 justify-normal items-start w-full max-w-[1400px] text-lg")}>
                     {/* Left Section */}
                     <div className={classNames("flex flex-col justify-normal items-start w-full", styles.servContainer)}>
@@ -218,23 +230,20 @@ export const ClientPage = () => {
                         <p className="flex self-center leading-relaxed">ДМ-ПРОЕКТ забезпечує повний цикл сервісного супроводу медичної техніки: встановлення, діагностику, планові та аварійні ремонти, калібрування, оновлення програмного забезпечення та відновлення працездатності. Роботи виконуються у медзакладах або у сертифікованому сервісному центрі.</p>
                         <span className="flex flex-row w-full h-auto justify-center gap-5 my-3">
                             <button
-                                className={styles.servSubmit}
+                                className={styles.servSubmit1}
                                 type="button"  // змінено з submit на button
                                 onClick={handleShowForm}
                             >
                                 {'Подати заявку на сервіс'}
                             </button>
 
-                            <button className={styles.servSubmit} type="button" onClick={scrollToPlan}>
+                            <button className={styles.servSubmit1} type="button" onClick={scrollToPlan}>
                                 {'Дізнатись більше'}
                             </button>
-
-
                         </span>
                     </div>
                     <div className={classNames("flex flex-col justify-normal items-start w-full", styles.servContainer1)}>
                         <span className="text-[24px] py-3 self-center text-[#002766]">Яке обладнання ми обслуговуємо</span>
-                        {/* <p className="flex self-center leading-relaxed">Повний спектр медичної техніки Dräger для лікувальних закладів</p> */}
                     </div>
                     <div className="flex justify-center self-center py-3 w-full max-w-[1400px]">
                         <div className="w-full flex flex-wrap justify-center gap-4">
@@ -303,7 +312,7 @@ export const ClientPage = () => {
 
                     <span className="text-[24px] py-5 self-center text-[#002766]">Які сервіси ми виконуємо</span>
 
-                    {/* <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
+                    <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
                         {rows.map((row, rowIndex) => (
                             <div className="flex gap-4" key={rowIndex}>
                                 {row.map((item, i) => (
@@ -317,11 +326,11 @@ export const ClientPage = () => {
                                 ))}
                             </div>
                         ))}
-                    </div> */}
+                    </div>
                     <span ref={planRef} className="text-[24px] py-3 text-[#002766] self-center">{'Планове технічне обслуговування'}</span>
-                    <div className={classNames("flex max-w-[1400px] w-full", styles.servContainer1)}>
+                    <div className={classNames("flex self-center max-w-[1400px] w-full", styles.servContainer1)}>
                         <div className="flex-1 pr-8">
-                            <p className="flex self-center text-left leading-relaxed">Планове ТО проводиться відповідно до регламентів виробників і враховує інтенсивність використання обладнання. Такий метод мінімізує ризики збоїв, продовжує ресурс техніки й забезпечує безперервність клінічних процесів.</p>
+                            <p className="text-justify indent-5 leading-relaxed">Планове ТО проводиться відповідно до регламентів виробників і враховує інтенсивність використання обладнання. Такий метод мінімізує ризики збоїв, продовжує ресурс техніки й забезпечує безперервність клінічних процесів.</p>
 
                             <h3 className="text-2xl font-semibold mt-4 text-left">Етапи планового ТО:</h3>
 
@@ -348,13 +357,12 @@ export const ClientPage = () => {
                         </div>
                     </div>
                     <div className="text-[#0061AA]">
-                        <h3 className="text-2xl font-semibold mt-4 text-left text-[#0061AA]">Етапи планового ТО:</h3>
+                        <h3 className="text-2xl font-semibold mt-4 text-left text-[#0061AA]">Аварійний ремонт і строки реагування</h3>
                         <p className="flex self-center text-left leading-relaxed">Сервісна служба оперативно реагує на аварійні запити та швидко відновлює працездатність критичного обладнання.</p>
                         <p className="flex self-center text-left leading-relaxed"><strong>Стандартний час відповіді</strong> — максимально швидкий у межах робочого графіка. Оперативні виїзди інженерів забезпечують виконання робіт у короткі строки.</p>
+                        <p className="flex self-center text-left leading-relaxed">Оперативні виїзди інженерів забезпечують виконання робіт у короткі строки.</p>
                     </div>
-
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Планове ТО vs Аварійний ремонт'}</span>
-
                     <div className="w-full overflow-x-auto">
                         <table className="w-full border-collapse">
                             <thead>
@@ -364,8 +372,7 @@ export const ClientPage = () => {
                                     <th className="p-4 w-[38%] text-center font-semibold">Аварійний ремонт</th>
                                 </tr>
                             </thead>
-
-                            {/* <tbody className="text-[#0054A6]">
+                            <tbody className="text-[#0054A6]">
                                 {tableData.map((row, index) => (
                                     <tr
                                         key={index}
@@ -376,12 +383,11 @@ export const ClientPage = () => {
                                         <td className="p-4">{row.emergency}</td>
                                     </tr>
                                 ))}
-                            </tbody> */}
+                            </tbody>
                         </table>
                     </div>
-
                     <span className="text-[24px] py-3 self-center text-[#002766]">Переваги нашого сервісу</span>
-                    {/* <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
+                    <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
                         {rows2.map((row2, rowIndex) => (
                             <div className="flex gap-4" key={rowIndex}>
                                 {row2.map((item, i) => (
@@ -395,43 +401,97 @@ export const ClientPage = () => {
                                 ))}
                             </div>
                         ))}
-                    </div> */}
-
-                    <div className="text-[#0061AA]">
-                        <h3 className="text-2xl font-semibold mt-4 text-left text-[#0061AA]">Сертифікація інженерів</h3>
-                        <p className="flex self-center text-left leading-relaxed">Інженери ДМ-ПРОЕКТ мають підтверджені виробниками обладнання сертифікати і проходять регулярне навчання, включно зі спеціалізованими курсами Dräger у Німеччині. Це гарантує коректність, безпечність і точність усіх сервісних операцій.</p>
                     </div>
 
-                    <div className={classNames("flex max-w-[1400px] w-full items-stretch", styles.servContainer1)}>
-                        <div className="flex-1 pr-1 flex flex-col justify-center">
+                    <div className={classNames("flex self-center justify-around w-full", styles.servContainer1)}>
+                        <div className="flex flex-col pr-8">
+                            <div className="flex-1flex flex-col justify-start">
+                                <h3 className="text-2xl font-semibold mt-4 text-left text-[#0061AA]">Сертифікація інженерів</h3>
+                                <p className="text-justify indent-5 leading-relaxed">Інженери ДМ-ПРОЕКТ мають підтверджені виробниками обладнання сертифікати і проходять регулярне навчання, включно зі спеціалізованими курсами Dräger у Німеччині. Це гарантує коректність, безпечність і точність усіх сервісних операцій.</p>
+                            </div>
+                            {/* Превʼю */}
+                            <div className="flex justify-center items-start">
+                                <motion.div
+                                    whileHover={{ scale: 1.03 }}
+                                    whileTap={{ scale: 0.97 }}
+                                    className="cursor-pointer"
+                                    onClick={() => setOpen(true)}
+                                >
+                                    <Image
+                                        src={imgCert}
+                                        alt="Ukraine"
+                                        width={300}
+                                        height={383}
+                                        className="rounded-2xl object-contain"
+                                    />
+                                </motion.div>
+                                <AnimatePresence>
+                                    {open && (
+                                        <motion.div
+                                            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            exit={{ opacity: 0 }}
+                                            onClick={() => setOpen(false)}   // клік по фону
+                                        >
+                                            <motion.div
+                                                initial={{ scale: 0.85, opacity: 0 }}
+                                                animate={{ scale: 1, opacity: 1 }}
+                                                exit={{ scale: 0.85, opacity: 0 }}
+                                                transition={{ duration: 0.35, ease: "easeOut" }}
+                                                className="relative z-30"
+                                                style={{
+                                                    width: "90vw",
+                                                    height: "90vh",
+                                                }}
+                                            >
+                                                <Image
+                                                    src={imgCert}
+                                                    alt="Ukraine certificate full"
+                                                    fill
+                                                    className="rounded-2xl object-contain"
+                                                    priority
 
-                            <h3 className="text-2xl font-semibold mt-4 text-left">Географія сервісу</h3>
-                            <p className="self-center text-left leading-relaxed">
-                                Сервіс компанії покриває <strong>всю територію України.</strong>
-                                Працюють виїзні бригади, які забезпечують оперативне реагування
-                                у різних регіонах. Можливе індивідуальне планування візитів
-                                у межах сервісних пакетів або SLA.
-                            </p>
+                                                />
 
+                                                <button
+                                                    onClick={() => setOpen(false)}
+                                                    className="absolute -top-3 -right-3 w-9 h-9 rounded-full bg-white text-black shadow flex items-center justify-center text-lg font-semibold"
+                                                >
+                                                    ×
+                                                </button>
+                                            </motion.div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
                         </div>
-
-                        <div className="flex justify-end items-start">
-                            <Image
-                                src={imgSrcUkr}
-                                alt="Ukraine"
-                                width={400}       // 662 реальна ширина зображення
-                                height={284}      // 442 реальна висота зображення
-                                className="rounded-2xl object-contain"
-                            />
+                        <div className="flex flex-col pl-8">
+                            <div className="flex flex-col justify-start">
+                                <h3 className="text-2xl font-semibold mt-4 text-left">Географія сервісу</h3>
+                                <p className="text-justify indent-5 leading-relaxed">
+                                    Сервіс компанії покриває <strong>всю територію України</strong> (окрім тимчасово окупованих територій та зони бойових дій).
+                                    Працюють виїзні бригади, які забезпечують оперативне реагування
+                                    у різних регіонах. Можливе індивідуальне планування візитів
+                                    у межах сервісних пакетів або SLA.
+                                </p>
+                            </div>
+                            <div className="flex justify-center items-start w-full h-auto">
+                                <Image
+                                    src={imgSrcUkr}
+                                    alt="Ukraine"
+                                    width={500}       // 662 реальна ширина зображення
+                                    height={383}      // 442 реальна висота зображення
+                                    className="rounded-2xl object-contain"
+                                />
+                            </div>
                         </div>
                     </div>
-
                     <div className={classNames("flex flex-col justify-normal items-start w-full", styles.servContainer)}>
                         <span className="text-[24px] py-3 self-center text-[#002766]">Офіційний сервіс Dräger в Україні</span>
                         <p className="flex self-center leading-relaxed">На сервісному супроводі — понад 5000 одиниць обладнання Dräger. Інженери проходять навчання у Dräger Academy та мають право офіційно надавати послуги з сервісу.</p>
 
                     </div>
-
                     <div className="flex flex-1 flex-col w-full">
                         <h3 className="text-2xl font-semibold my-4 text-left text-[#0061AA]">Обладнання Dräger:</h3>
                         <div className="flex flex-wrap gap-1 pb-6 w-full">
@@ -446,9 +506,12 @@ export const ClientPage = () => {
                             ))}
                         </div>
                     </div>
+
+
+
                     <div className="flex flex-col justify-normal items-start w-full text-[#0061AA]">
-                        <h3 className="text-2xl font-semibold my-4 text-left text-[#0061AA]">Переваги сервісу Dräger від ДМ-ПРОЕКТ:</h3>
-                        <ul className="list-disc space-y-1 leading-relaxed">
+                        <h3 className="text3xl font-semibold my-4 text-left text-[#0061AA]">Переваги сервісу Dräger від ДМ-ПРОЕКТ:</h3>
+                        <ul className="list-disc space-y-1 leading-relaxed ">
                             <li className="ml-16 before:mr-2">єдиний в Україні уповноважений офіційний сервіс</li>
                             <li className="ml-16 before:mr-2">індивідуальні плани ТО</li>
                             <li className="ml-16 before:mr-2">дотримання усіх регламентів</li>
@@ -458,13 +521,10 @@ export const ClientPage = () => {
                     </div>
 
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Навчання медичного персоналу'}</span>
-
-                    <div className={classNames("flex max-w-[1400px] w-full", styles.servContainer1)}>
+                    <p className="flex self-center text-left leading-relaxed text-[#0061AA]">Навчання є частиною сервісного супроводу. Проводиться під час встановлення, після оновлення ПЗ або при розширенні функціоналу.</p>
+                    <div className={classNames("flex max-w-[1400px] w-full justify-center self-center", styles.servContainer1)}>
                         <div className="flex-1 pr-8">
-                            <p className="flex self-center text-left leading-relaxed">Навчання є частиною сервісного супроводу. Проводиться під час встановлення, після оновлення ПЗ або при розширенні функціоналу.</p>
-
                             <h3 className="text-2xl font-semibold mt-4 text-left">Навчальні сценарії:</h3>
-
                             <div className="mx-auto space-y-4 pb-6 w-full">
                                 {items4.map((item, i) => (
                                     <div
@@ -487,7 +547,83 @@ export const ClientPage = () => {
                         </div>
                     </div>
 
+                    <span className="text-[24px] py-3 text-[#002766] self-center">{'Гарантії сервісу'}</span>
+                    <p className="flex self-center text-left leading-relaxed text-[#0061AA]">ДМ-ПРОЕКТ надає сервіс із чітко прописаними гарантіями на роботи, запчастини та документацію, дотримуючись вимог виробників і міжнародних стандартів.</p>
+                    <div className={classNames("flex max-w-[1400px] w-full justify-center self-center pt-2", styles.servContainer1)}>
+                        <div className="flex-1 pr-8">
+                            <div className="flex flex-wrap gap-1 pb-6 w-full">
+                                {items5.map((item, i) => (
+                                    <div
+                                        key={i}
+                                        className="flex items-start gap-4 p-6 pl-8 bg-gray-50 rounded-2xl shadow-[inset_4px_0_0_0_rgba(0,102,204,1)] w-[33%]"
+                                    >
+                                        <span className="text-green-500 font-bold text-xl">✓</span>
+                                        <span className="text-[#0061AA]">{item}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
 
+                    <span className="text-[24px] py-3 text-[#002766] self-center">{'Вартість та принцип формування'}</span>
+                    <p className="flex self-center text-left leading-relaxed text-[#0061AA]">Вартість формується індивідуально, залежно від:</p>
+                    <div className={classNames("flex max-w-[1400px] w-full justify-center self-center pt-2", styles.servContainer1)}>
+                        <div className="flex-1 pr-8">
+                            <div className="flex flex-wrap gap-1 pb-6 w-full">
+                                {items6.map((item, i) => (
+                                    <div
+                                        key={i}
+                                        className="flex items-start gap-4 p-6 pl-8 bg-gray-50 rounded-2xl shadow-[inset_4px_0_0_0_rgba(0,102,204,1)] w-[33%]"
+                                    >
+                                        <span className="text-green-500 font-bold text-xl">✓</span>
+                                        <span className="text-[#0061AA]">{item}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                    <div className={classNames("flex justify-center items-center", styles.servButton)}>
+                        <button
+                            className={styles.servSubmit1}
+                            type="button"  // змінено з submit на button
+                            onClick={handleShowForm}
+                        >
+                            {'Подати заявку на сервіс'}
+                        </button>
+                    </div>
+                    <span className="text-[24px] py-3 text-[#002766] self-center">{'Повний життєвий цикл обладнання'}</span>
+                    <p className="flex self-center text-left leading-relaxed text-[#0061AA]">ДМ-ПРОЕКТ забезпечує повний сервісний цикл підтримки — від встановлення та інсталяції обладнання до стабільної та надійної експлуатації протягом багатьох років</p>
+
+                    <div className={classNames("w-full max-w-5xl mx-auto rounded-xl bg-blue-50/60 px-6 py-8", styles.servContainer)}>
+                        <h2 className="mb-7 text-center text-2xl  font-normal text-[#002766]">
+                            Контакти сервісної служби
+                        </h2>
+
+                        <div className="flex flex-col gap-6 text-center sm:flex-row">
+                            <div className="flex-1 space-y-1">
+                                <p className="text-lg font-medium text-[#0061AA]">Телефон</p>
+                                <p className="text-lg font-semibold text-blue-900">
+                                    +38 066 368 98 10
+                                </p>
+                            </div>
+
+                            <div className="flex-1 space-y-1">
+                                <p className="text-lg font-medium text-[#0061AA]">Години роботи</p>
+                                <p className="text-lg font-semibold text-blue-900">
+                                    Пн–Пт, 09:00–18:00
+                                </p>
+                            </div>
+
+                            <div className="flex-1 space-y-1">
+                                <p className="text-lg font-medium text-[#0061AA]">
+                                    Запити та рахунки
+                                </p>
+                                <p className="text-lg font-semibold text-blue-900">
+                                    За підтвердженням
+                                </p>
+                            </div>
+                        </div>
+                    </div>
 
 
                     {showForm && (
