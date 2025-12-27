@@ -251,7 +251,7 @@ export default function ServiceMobile() {
                     </div>
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Планове ТО vs Аварійний ремонт'}</span>
                     <div className="w-full overflow-x-auto">
-                        <table className="w-full border-collapse">
+                        {/* <table className="w-full border-collapse">
                             <thead>
                                 <tr className="bg-[#0067C5] text-white text-left">
                                     <th className="py-1 w-[34%]"></th>
@@ -271,7 +271,7 @@ export default function ServiceMobile() {
                                     </tr>
                                 ))}
                             </tbody>
-                        </table>
+                        </table> */}
                     </div>
                     <span className="text-[24px] py-3 self-center text-[#002766]">Переваги нашого сервісу</span>
                     <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
