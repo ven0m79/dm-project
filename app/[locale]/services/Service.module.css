@@ -1,14 +1,9 @@
 .whiteText {
         color: #ffffff !important; 
 }
-
-
-
-
 .main {
     max-width: 1400px;
 }
-
 .leftContainer {
     text-indent: 15px;
     display: flex;
@@ -21,12 +16,10 @@
     padding-right: 20px;
     text-align: justify;
 }
-
 .leftContainer img {
     min-height: 300px;
     /* відповідно до height з Image */
 }
-
 .container {
     max-width: 500px;
     width: 100%;

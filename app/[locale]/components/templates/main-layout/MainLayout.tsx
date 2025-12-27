@@ -28,13 +28,13 @@ const MainLayout: FC<MainLayoutProps> = ({
     <Suspense fallback="Loading">
       <main className={styles.main}>
         {noHeader ? null : <HeaderWrapper />}
-        <div className="h-[50px]">
+        <div className="sm:h-[50px] h-[0px]">
           {noNav ? null : <Nav />}
         </div>
         <div className="flex flex-1 w-full items-center justify-center">
           {children}
         </div>
-        <div className="h-[319px]">
+        <div className="">
           {noFooter ? null : <Footer />}
         </div>
       </main>

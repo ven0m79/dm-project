@@ -2,25 +2,13 @@
 import React from "react";
 import { useState } from 'react';
 import classNames from "classnames";
-import { MainLayout } from "@app/[locale]/components/templates";
 import styles from './Service.module.css';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Snowfall from "react-snowfall"
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
-
-
-const imgSrc = "/service/povshednyy.webp";
-const imgSrc1 = "/service/shvl.webp";
-const imgSrc2 = "/service/narkoz1.webp";
-const imgSrc3 = "/service/neonatal.webp";
-const imgSrc4 = "/service/monitor1.webp";
-const imgSrc5 = "/service/dez.webp";
-const imgSrc6 = "/service/gaz1.webp";
-const imgSrcUkr = "/service/ukraine.webp";
-const imgSrcLearn = "/service/learning.webp";
-const imgCert = "/service/certificate.webp";
+import { cards, items, items1, items2, items3, items4, items5, items6, tableData, pics } from "./data";
 
 
 declare global {
@@ -29,103 +17,11 @@ declare global {
     }
 }
 
-export const ClientPage = () => {
+export default function ServiceDesktop() {
     const t = useTranslations('ServicePage');
     const isMobile = useIsMobile();
-    const cards = [
-        { id: 1, front: imgSrc1, title: "Апарати штучної вентиляції легень (ШВЛ)", subtitle: ["ШВЛ для дорослих, дітей і новонароджених", "спеціалізовані неонатальні апарати"], back: ["Babylog Family (8000 / 8000plus / VN500 / VN600 / VN800)", "Carina", "Savina Family (Savina 300 / Select / Classic)", "Evita Family (V300 / V500 / V600 / V800,  S2 / CAP / Evita 2dura /Evita 4, Evita XL)", "Oxylog Family (2000plus / 3000 / 3000plus / VE300)"] },
-        { id: 2, front: imgSrc2, title: "Наркозно-дихальні апарати (НДА) та комплектуючі", subtitle: ["анестезіологічні станції", "наркозно-дихальні апарати"], back: ["Fabius Family", "Primus", "Perseus A500", "Atlan Family (Atlan A100/A300/A350)", "Випаровувачі Vapor 2000/3000 Family (Sev / Iso / Hal / Des)", "Блоки газоаналізу Scio / Vamos Family"] },
-        { id: 3, front: imgSrc3, title: "Обладнання для неонатології", subtitle: ["інкубатори", "транспортні інкубатори", "відкриті реанімаційні системи та ін."], back: ["Реанімаційні столики Babytherm 8000 / 8004 / 8010", "Реанімаційні столики Resuscitaire RW-82/Babyroo TN300 Інкубатор Caleo Інкубатор Isolette 8000 / 8000 plus/ C2000", "Транспортний інкубатор TI 500", "Гібридний інкубатор Babyleo TN500", "Білірубінометр JM-105", "Лампа для фототерапії Bililux"] },
-        { id: 4, front: imgSrc4, title: "Моніторинг пацієнта", subtitle: ["монітори пацієнта", "центральні станції моніторингу"], back: ["Центральні станції моніторингу Infinity Central Station / Vista Central Station ", "Монітори пацієнта IACS (Infinity Acute Care System) та M540", "Монітори Infinity Family (Delta / Delta XL / Gamma / Gamma XL / Vista)", "Монітори пацієнта Vista Family (Vista 120/120 S/300/300 S)", "Амагнітні монітори пацієнта TESLA M3 / TESLA DUO"] },
-        { id: 5, front: imgSrc5, title: "Стерилізаційне та дезінфекційне обладнання", subtitle: ["мийно-дезінфекційні машини", "парові стерилізатори", "низькотемпературні (плазмові) стерилізатори"], back: ["Мийно-дезінфекційні машини серії AWD655", "Машини для дезінфекції суден серії AF2", "Парові стерилізатори серії PROHS FJ", "Низькотемпературні плазмові стерилізатори серії RENO"] },
-        { id: 6, front: imgSrc6, title: "Системи медичного газопостачання, медичні архітектурні системи та операційні світильники", subtitle: ["системи постачання кисню, повітря, вакууму та закису азоту", "газорозподільні панелі", "газові розетки та розетки вакууму", "стельові консолі ", "настінні панелі ", "операційні світильники (мобільні, стельові)"], back: ["Системи постачання кисню, повітря, вакууму та закису азоту", "Газові розетки та розетки вакууму", "Стельові консолі Agila / Movita / Ambia / Ponta", "Настінні панелі Gemina / Linea", "Операційні світильники Polaris 100/200/600"] }
-    ];
-    const items = [
-        "Планове технічне обслуговування",
-        "Аварійні ремонти",
-        "Діагностика та відновлення після збоїв",
-        "Калібрування функціональних вузлів",
-        "Встановлення та введення в експлуатацію",
-        "Оновлення та налаштування ПЗ",
-        "Аудит технічного стану",
-        "Підбір і заміна оригінальних запчастин",
-        "Разове ТО та комплексні сервісні пакети",
-    ];
-    const items1 = [
-        "Діагностика та візуальний огляд",
-        "Перевірка безпеки й функціональних тестів",
-        "Заміна сервісних наборів і витратних матеріалів",
-        "Калібрування систем та модулів",
-        "Тестування та звіт з рекомендаціями",
-    ];
-    const items2 = [
-        "Офіційна робота за регламентами виробників",
-        "Досвід у сервісуванні широкого спектра обладнання",
-        "Спеціалізоване навчання інженерів",
-        "Використання оригінальних комплектуючих",
-        "Оперативне реагування",
-        "Власний сервісний центр",
-        "Прозора звітність",
-        "Сервісні пакети під потреби медзакладу",
-        "Склад запчастин у Києві постійно поповнюється",
-    ];
-
-    const items3 = [
-        "Апарати ШВЛ",
-        "Анестезіологічні станції та Наркозно-дихальні апарати",
-        "Монітори пацієнта",
-        "Неонатальне обладнання",
-        "Хірургічне освітлення",
-        "Обладнання для медичного газопостачання",
-    ];
-    const items4 = [
-        "Запуск і підготовка до роботи",
-        "Налаштування параметрів",
-        "Моніторинг роботи",
-        "Реагування на нестандартні ситуації",
-        "Профілактика помилок користувача",
-        "Підвищення ефективності експлуатації",
-    ];
-    const items5 = [
-        "Гарантія на виконані роботи",
-        "Гарантія на встановлені оригінальні запчастини",
-        "Документальне підтвердження всіх етапів",
-        "Сервіс відповідно до міжнародних вимог",
-    ];
-    const items6 = [
-        "типу обладнання",
-        "стану та обсягу сервісних робіт",
-        "необхідних запчастин",
-        "вибраного сервісного пакета",
-    ];
-
-
-    const tableData = [
-        {
-            label: "Основна мета",
-            plan: "Профілактика збоїв",
-            emergency: "Усунення наявних несправностей",
-        },
-        {
-            label: "Строки виконання",
-            plan: "Прогнозовані строки",
-            emergency: "Строки залежать від ситуації",
-        },
-        {
-            label: "Результат",
-            plan: "Продовження ресурсу обладнання",
-            emergency: "Відновлення функціональності",
-        },
-        {
-            label: "Витрати",
-            plan: "Менше витрат у довгостроковій перспективі",
-            emergency: "Може вимагати більший обсяг робіт",
-        },
-    ];
-
     const [flipped, setFlipped] = useState<Record<number, boolean>>({});
     const [showForm, setShowForm] = useState(false);
-
     const [open, setOpen] = useState(false);
 
     const [name, setName] = useState('');
@@ -213,25 +109,22 @@ export const ClientPage = () => {
     };
 
     return (
-        <MainLayout>
-            <Snowfall color="white" speed={[1.0, 3.0]} style={{
-                position: "fixed",
-                width: "100vw",
-                height: "100vh",
-                zIndex: 50,
-                pointerEvents: "none",
-            }} />
-
-            <div className={classNames("flex flex-1 flex-col self-center", styles.main)}>
-                <div className={classNames("flex flex-col flex-1 justify-normal items-start w-full max-w-[1400px] text-lg")}>
+        <><Snowfall color="white" speed={[1.0, 3.0]} style={{
+            position: "fixed",
+            width: "100vw",
+            height: "100vh",
+            zIndex: 50,
+            pointerEvents: "none",
+        }} /><div className={classNames("flex flex-1 flex-col self-center", styles.main)}>
+                <div className={classNames("flex flex-col flex-1 justify-normal items-center w-full max-w-[1400px] text-lg")}>
                     {/* Left Section */}
-                    <div className={classNames("flex flex-col justify-normal items-start w-full", styles.servContainer)}>
+                    <div className={classNames("flex flex-col justify-normal w-full", styles.servContainer)}>
                         <span className="text-[24px] py-3 self-center text-[#002766]">Технічне обслуговування медичного обладнання</span>
                         <p className="flex self-center leading-relaxed">ДМ-ПРОЕКТ забезпечує повний цикл сервісного супроводу медичної техніки: встановлення, діагностику, планові та аварійні ремонти, калібрування, оновлення програмного забезпечення та відновлення працездатності. Роботи виконуються у медзакладах або у сертифікованому сервісному центрі.</p>
                         <span className="flex flex-row w-full h-auto justify-center gap-5 my-3">
                             <button
                                 className={styles.servSubmit1}
-                                type="button"  // змінено з submit на button
+                                type="button" // змінено з submit на button
                                 onClick={handleShowForm}
                             >
                                 {'Подати заявку на сервіс'}
@@ -242,9 +135,7 @@ export const ClientPage = () => {
                             </button>
                         </span>
                     </div>
-                    <div className={classNames("flex flex-col justify-normal items-start w-full", styles.servContainer1)}>
-                        <span className="text-[24px] py-3 self-center text-[#002766]">Яке обладнання ми обслуговуємо</span>
-                    </div>
+                    <span className="text-[24px] py-5 text-center text-[#002766] justify-center">Яке обладнання ми обслуговуємо</span>
                     <div className="flex justify-center self-center py-3 w-full max-w-[1400px]">
                         <div className="w-full flex flex-wrap justify-center gap-4">
                             {cards.map((card) => (
@@ -274,8 +165,7 @@ export const ClientPage = () => {
                                                     width={isMobile ? 160 : 200}
                                                     height={isMobile ? 190 : 230}
                                                     className="object-contain pt-4" // зберігає пропорції
-                                                    priority={false}
-                                                />
+                                                    priority={false} />
 
                                                 <h3 className="absolute bottom-0 left-0 right-0 bg-[#0061AA] text-white p-2 h-32 text-base text-center">
                                                     {card.title}
@@ -349,11 +239,10 @@ export const ClientPage = () => {
                         </div>
                         <div className="flex-1 relative">
                             <Image
-                                src={imgSrc}
+                                src={pics[0].front}
                                 alt="ТО"
                                 fill
-                                className="object-cover rounded-2xl"
-                            />
+                                className="object-cover rounded-2xl" />
                         </div>
                     </div>
                     <div className="text-[#0061AA]">
@@ -367,9 +256,9 @@ export const ClientPage = () => {
                         <table className="w-full border-collapse">
                             <thead>
                                 <tr className="bg-[#0067C5] text-white text-left">
-                                    <th className="p-4 w-[25%]"></th>
-                                    <th className="p-4 w-[37%] text-center font-semibold">Планове ТО</th>
-                                    <th className="p-4 w-[38%] text-center font-semibold">Аварійний ремонт</th>
+                                    <th className="p-4 w-[34%]"></th>
+                                    <th className="p-4 w-[33%] text-left font-semibold">Планове ТО</th>
+                                    <th className="p-4 w-[33%] text-left font-semibold">Аварійний ремонт</th>
                                 </tr>
                             </thead>
                             <tbody className="text-[#0054A6]">
@@ -418,12 +307,11 @@ export const ClientPage = () => {
                                     onClick={() => setOpen(true)}
                                 >
                                     <Image
-                                        src={imgCert}
+                                        src={pics[3].front}
                                         alt="Ukraine"
                                         width={300}
                                         height={383}
-                                        className="rounded-2xl object-contain"
-                                    />
+                                        className="rounded-2xl object-contain" />
                                 </motion.div>
                                 <AnimatePresence>
                                     {open && (
@@ -432,7 +320,7 @@ export const ClientPage = () => {
                                             initial={{ opacity: 0 }}
                                             animate={{ opacity: 1 }}
                                             exit={{ opacity: 0 }}
-                                            onClick={() => setOpen(false)}   // клік по фону
+                                            onClick={() => setOpen(false)} // клік по фону
                                         >
                                             <motion.div
                                                 initial={{ scale: 0.85, opacity: 0 }}
@@ -446,13 +334,11 @@ export const ClientPage = () => {
                                                 }}
                                             >
                                                 <Image
-                                                    src={imgCert}
+                                                    src={pics[3].front}
                                                     alt="Ukraine certificate full"
                                                     fill
                                                     className="rounded-2xl object-contain"
-                                                    priority
-
-                                                />
+                                                    priority />
 
                                                 <button
                                                     onClick={() => setOpen(false)}
@@ -478,12 +364,11 @@ export const ClientPage = () => {
                             </div>
                             <div className="flex justify-center items-start w-full h-auto">
                                 <Image
-                                    src={imgSrcUkr}
+                                    src={pics[1].front}
                                     alt="Ukraine"
-                                    width={500}       // 662 реальна ширина зображення
-                                    height={383}      // 442 реальна висота зображення
-                                    className="rounded-2xl object-contain"
-                                />
+                                    width={500} // 662 реальна ширина зображення
+                                    height={383} // 442 реальна висота зображення
+                                    className="rounded-2xl object-contain" />
                             </div>
                         </div>
                     </div>
@@ -539,11 +424,10 @@ export const ClientPage = () => {
                         </div>
                         <div className="flex-1 relative">
                             <Image
-                                src={imgSrcLearn}
+                                src={pics[2].front}
                                 alt="ТО"
                                 fill
-                                className="object-cover rounded-2xl"
-                            />
+                                className="object-cover rounded-2xl" />
                         </div>
                     </div>
 
@@ -585,7 +469,7 @@ export const ClientPage = () => {
                     <div className={classNames("flex justify-center items-center", styles.servButton)}>
                         <button
                             className={styles.servSubmit1}
-                            type="button"  // змінено з submit на button
+                            type="button" // змінено з submit на button
                             onClick={handleShowForm}
                         >
                             {'Подати заявку на сервіс'}
@@ -647,8 +531,7 @@ export const ClientPage = () => {
                                     onClick={() => {
                                         setShowForm(false);
                                         setStatus('');
-                                    }
-                                    }
+                                    }}
                                     className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
                                 >
                                     ×
@@ -661,54 +544,47 @@ export const ClientPage = () => {
                                     id="name"
                                     type="text"
                                     value={name}
-                                    onChange={e => setName(e.target.value)}
-                                />
+                                    onChange={e => setName(e.target.value)} />
                                 <input
                                     className={classNames("h-10 w-full mb-2", styles.form)}
                                     placeholder={t('contact-form-mobile')}
                                     id="mobile"
                                     type="text"
                                     value={mobile}
-                                    onChange={e => setMobile(e.target.value)}
-                                />
+                                    onChange={e => setMobile(e.target.value)} />
                                 <input
                                     className={classNames("h-10 w-full mb-2", styles.form)}
                                     placeholder={t('contact-form-medicalFacility')}
                                     id="medicalFacility"
                                     type="text"
                                     value={medicalFacility}
-                                    onChange={e => setMedicalFacility(e.target.value)}
-                                />
+                                    onChange={e => setMedicalFacility(e.target.value)} />
                                 <input
                                     className={classNames("h-10 w-full mb-2", styles.form)}
                                     placeholder={t('contact-form-city')}
                                     id="city"
                                     type="text"
                                     value={city}
-                                    onChange={e => setCity(e.target.value)}
-                                />
+                                    onChange={e => setCity(e.target.value)} />
                                 <input
                                     className={classNames("h-10 w-full mb-2", styles.form)}
                                     placeholder={t('contact-form-email')}
                                     id="email"
                                     type="email"
                                     value={email}
-                                    onChange={e => setEmail(e.target.value)}
-                                />
+                                    onChange={e => setEmail(e.target.value)} />
                                 <textarea
                                     className={classNames("h-24 w-full mb-2 pt-2", styles.form)}
                                     placeholder={t('contact-form-message')}
                                     id="message"
                                     value={message}
-                                    onChange={e => setMessage(e.target.value)}
-                                />
+                                    onChange={e => setMessage(e.target.value)} />
                                 <button className={styles.yerSubmit} type="submit">{t('contact-form-submit')}</button>
                                 {status && <p className="mt-1 text-sm text-green-600">{status}</p>}
                             </motion.form>
                         </motion.div>
                     )}
                 </div>
-            </div >
-        </MainLayout >
+            </div></>
     );
 };
