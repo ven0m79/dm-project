@@ -110,9 +110,9 @@ export default function ServiceMobile() {
 
     return (
         <>
-            <div className={classNames("flex flex-col self-center", styles.main)}>
-                <div className={classNames("flex flex-col flex-1 justify-normal items-start text-lg")}>
-                    <div className={classNames("flex flex-col justify-normal items-start px-2 mx-auto", styles.servContainer)}>
+            <div className={"flex flex-col self-center"}>
+                <div className={classNames("flex flex-col justify-center items-center text-lg px-3 bg-green-400")}>
+                    {/* <div className={classNames("flex flex-col justify-normal items-start px-5 bg-black", styles.servContainer)}>
                         <span className="text-[24px] py-3 self-center text-[#002766]">Технічне обслуговування медичного обладнання</span>
                         <p className="flex self-center leading-relaxed">ДМ-ПРОЕКТ забезпечує повний цикл сервісного супроводу медичної техніки: встановлення, діагностику, планові та аварійні ремонти, калібрування, оновлення програмного забезпечення та відновлення працездатності. Роботи виконуються у медзакладах або у сертифікованому сервісному центрі.</p>
                         <span className="flex flex-row w-full h-auto justify-center gap-2 p-2">
@@ -128,7 +128,7 @@ export default function ServiceMobile() {
                                 {'Дізнатись більше'}
                             </button>
                         </span>
-                    </div>
+                    </div> */}
                     {/* <div className={classNames("flex flex-col justify-center items-start w-full")}>
                         <span className="text-[24px] p-2 self-center text-[#002766]">Яке обладнання ми обслуговуємо</span>
                     </div> */}
