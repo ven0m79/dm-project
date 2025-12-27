@@ -132,8 +132,8 @@ export default function ServiceMobile() {
                     {/* <div className={classNames("flex flex-col justify-center items-start w-full")}>
                         <span className="text-[24px] p-2 self-center text-[#002766]">Яке обладнання ми обслуговуємо</span>
                     </div> */}
-                    <div className="flex justify-center self-center py-3 w-full max-w-[1400px]">
-                        <div className="w-full flex flex-wrap justify-center gap-4">
+                    <div className="flex justify-center self-center py-3 ">
+                        <div className="flex flex-wrap justify-center gap-4">
                             {cards.map((card) => (
                                 <div
                                     key={card.id}
@@ -249,7 +249,7 @@ export default function ServiceMobile() {
                         <p className="flex self-center text-justify leading-relaxed">Оперативні виїзди інженерів забезпечують виконання робіт у короткі строки.</p>
                     </div> */}
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Планове ТО vs Аварійний ремонт'}</span>
-                    <div className="w-full overflow-x-auto">
+                    {/* <div className="w-full overflow-x-auto">
                         <table className="w-full border-collapse">
                             <thead>
                                 <tr className="bg-[#0067C5] text-white text-left">
@@ -271,7 +271,7 @@ export default function ServiceMobile() {
                                 ))}
                             </tbody>
                         </table>
-                    </div>
+                    </div> */}
                     <span className="text-[24px] py-3 self-center text-[#002766]">Переваги нашого сервісу</span>
                     {/* <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
                         {rows2.map((row2, rowIndex) => (
@@ -401,7 +401,7 @@ export default function ServiceMobile() {
 
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Навчання медичного персоналу'}</span>
                     <p className="flex self-center text-left leading-relaxed text-[#0061AA]">Навчання є частиною сервісного супроводу. Проводиться під час встановлення, після оновлення ПЗ або при розширенні функціоналу.</p>
-                    <div className={classNames("flex flex-col max-w-[1400px] w-full justify-center self-center", styles.servContainer1)}>
+                    {/* <div className={classNames("flex flex-col max-w-[1400px] w-full justify-center self-center", styles.servContainer1)}>
                         <div className="flex-1 pr-8">
                             <h3 className="text-2xl font-semibold mt-4 text-left">Навчальні сценарії:</h3>
                             <div className="mx-auto space-y-4 pb-6 w-full">
@@ -424,7 +424,7 @@ export default function ServiceMobile() {
                                 height={400}
                                 className="rounded-2xl" />
                         </div>
-                    </div>
+                    </div> */}
 
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Гарантії сервісу'}</span>
                     <p className="flex self-center text-left leading-relaxed text-[#0061AA]">ДМ-ПРОЕКТ надає сервіс із чітко прописаними гарантіями на роботи, запчастини та документацію, дотримуючись вимог виробників і міжнародних стандартів.</p>
