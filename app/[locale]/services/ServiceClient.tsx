@@ -10,7 +10,7 @@ const ServiceDesktop = dynamic(() => import("./ServiceDesktop"), {
 const ServiceMobile = dynamic(() => import("./ServiceMobile"), {
   ssr: false,
 });
-export const ServiceClient = () => {
+export default function ServiceClient() {
 const isMobile = useIsMobile();
   return isMobile ? <ServiceMobile /> : <ServiceDesktop />;
 };

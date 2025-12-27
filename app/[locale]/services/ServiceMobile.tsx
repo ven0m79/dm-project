@@ -110,9 +110,9 @@ export default function ServiceMobile() {
 
     return (
         <>
-            <div className={classNames("flex flex-1 flex-col self-center p-2", styles.main)}>
+            <div className={classNames("flex flex-1 flex-col self-center", styles.main)}>
                 <div className={classNames("flex flex-col flex-1 justify-normal items-start w-full text-lg")}>
-                    <div className={classNames("flex flex-col justify-normal items-start w-full", styles.servContainer)}>
+                    {/* <div className={classNames("flex flex-col justify-normal items-start w-full", styles.servContainer)}>
                         <span className="text-[24px] py-3 self-center text-[#002766]">Технічне обслуговування медичного обладнання</span>
                         <p className="flex self-center leading-relaxed">ДМ-ПРОЕКТ забезпечує повний цикл сервісного супроводу медичної техніки: встановлення, діагностику, планові та аварійні ремонти, калібрування, оновлення програмного забезпечення та відновлення працездатності. Роботи виконуються у медзакладах або у сертифікованому сервісному центрі.</p>
                         <span className="flex flex-row w-full h-auto justify-center gap-2 p-2">
@@ -128,10 +128,10 @@ export default function ServiceMobile() {
                                 {'Дізнатись більше'}
                             </button>
                         </span>
-                    </div>
-                    <div className={classNames("flex flex-col justify-center items-start w-full")}>
+                    </div> */}
+                    {/* <div className={classNames("flex flex-col justify-center items-start w-full")}>
                         <span className="text-[24px] p-2 self-center text-[#002766]">Яке обладнання ми обслуговуємо</span>
-                    </div>
+                    </div> */}
                     <div className="flex justify-center self-center py-3 w-full max-w-[1400px]">
                         <div className="w-full flex flex-wrap justify-center gap-4">
                             {cards.map((card) => (
@@ -140,7 +140,6 @@ export default function ServiceMobile() {
                                     className="relative perspective cursor-pointer"
                                     onClick={() => toggleFlip(card.id)}
                                 >
-                                    {/* Motion wrapper для flip */}
                                     <motion.div
                                         className="relative w-full h-full preserve-3d rounded-2xl backface-hidden shadow-[0_6px_15px_rgba(0,51,120,0.45)]"
                                         style={{
@@ -170,7 +169,7 @@ export default function ServiceMobile() {
                                         </div>
 
                                         {/* BACK */}
-                                        <div
+                                        {/* <div
                                             className="absolute inset-0 backface-hidden rounded-2xl bg-[#0061AA] text-white p-2 overflow-auto"
                                             style={{ transform: "rotateY(180deg)" }}
                                         >
@@ -179,7 +178,7 @@ export default function ServiceMobile() {
                                                     <li className="text-white" key={i}>{item}</li>
                                                 ))}
                                             </ul>
-                                        </div>
+                                        </div> */}
                                     </motion.div>
                                 </div>
                             ))}
@@ -191,13 +190,13 @@ export default function ServiceMobile() {
 
                     <span className="text-[24px] py-5 self-center text-[#002766]">Які сервіси ми виконуємо</span>
 
-                    <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
+                    {/* <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
                         {rows.map((row, rowIndex) => (
                             <div className="flex gap-4 w-full" key={rowIndex}>
                                 {row.map((item, i) => (
                                     <div
                                         key={i}
-                                        className="flex items-start gap-4 p-3 pl-2 bg-gray-50 rounded-2xl w-full shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
+                                        className="flex items-start gap-4 p-3 bg-gray-50 rounded-2xl w-full shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
                                     >
                                         <span className="flex-shrink-0 text-green-500 font-bold text-xl -mt-1 pl-4">✓</span>
                                         <span className="flex-1 text-[#0061AA]">{item}</span>
@@ -205,9 +204,9 @@ export default function ServiceMobile() {
                                 ))}
                             </div>
                         ))}
-                    </div>
+                    </div> */}
                     <span ref={planRef} className="text-[24px] py-3 text-[#002766] self-center">{'Планове технічне обслуговування'}</span>
-                    <div className={classNames(
+                    {/* <div className={classNames(
                         "flex flex-col self-center max-w-[1400px] w-full gap-10",
                         styles.servContainer1
                     )}>
@@ -241,17 +240,17 @@ export default function ServiceMobile() {
                                 className="rounded-2xl"
                             />
                         </div>
-                    </div>
+                    </div> */}
 
-                    <div className="text-[#0061AA] indent-4">
+                    {/* <div className="text-[#0061AA] indent-4">
                         <h3 className="text-2xl font-semibold mt-4 text-left text-[#0061AA]">Аварійний ремонт і строки реагування</h3>
                         <p className="flex self-center text-justify leading-relaxed">Сервісна служба оперативно реагує на аварійні запити та швидко відновлює працездатність критичного обладнання.</p>
                         <p className="flex self-center text-justify leading-relaxed">Стандартний час відповіді — максимально швидкий у межах робочого графіка. Оперативні виїзди інженерів забезпечують виконання робіт у короткі строки.</p>
                         <p className="flex self-center text-justify leading-relaxed">Оперативні виїзди інженерів забезпечують виконання робіт у короткі строки.</p>
-                    </div>
+                    </div> */}
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Планове ТО vs Аварійний ремонт'}</span>
-                    <div className="w-full overflow-x-auto">
-                        {/* <table className="w-full border-collapse">
+                    {/* <div className="w-full overflow-x-auto">
+                        <table className="w-full border-collapse">
                             <thead>
                                 <tr className="bg-[#0067C5] text-white text-left">
                                     <th className="py-1 w-[34%]"></th>
@@ -271,16 +270,16 @@ export default function ServiceMobile() {
                                     </tr>
                                 ))}
                             </tbody>
-                        </table> */}
-                    </div>
+                        </table>
+                    </div> */}
                     <span className="text-[24px] py-3 self-center text-[#002766]">Переваги нашого сервісу</span>
-                    <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
+                    {/* <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
                         {rows2.map((row2, rowIndex) => (
                             <div className="flex gap-4" key={rowIndex}>
                                 {row2.map((item, i) => (
                                     <div
                                         key={i}
-                                        className="flex items-start gap-4 p-6 pl-8 bg-gray-50 rounded-2xl w-full shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
+                                        className="flex items-start gap-4 p-6 bg-gray-50 rounded-2xl w-full shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
                                     >
                                         <span className="flex-shrink-0 text-green-500 font-bold text-xl -mt-0.5">✓</span>
                                         <span className="flex-1 text-[#0061AA]">{item}</span>
@@ -288,9 +287,9 @@ export default function ServiceMobile() {
                                 ))}
                             </div>
                         ))}
-                    </div>
+                    </div> */}
 
-                    <div className={classNames("flex flex-col self-center justify-around w-full", styles.servContainer1)}>
+                    {/* <div className={classNames("flex flex-col self-center justify-around w-full", styles.servContainer1)}>
                         <div className="flex flex-col">
                             <div className="flex-1 flex flex-col justify-start">
                                 <h3 className="text-2xl font-semibold mt-4 text-left text-[#0061AA]">Сертифікація інженерів</h3>
@@ -368,13 +367,13 @@ export default function ServiceMobile() {
                                     className="rounded-2xl object-contain" />
                             </div>
                         </div>
-                    </div>
-                    <div className={classNames("flex flex-col justify-normal items-start w-full", styles.servContainer)}>
+                    </div> */}
+                    {/* <div className={classNames("flex flex-col justify-normal items-start w-full", styles.servContainer)}>
                         <span className="text-[24px] py-3 self-center text-[#002766]">Офіційний сервіс Dräger в Україні</span>
                         <p className="flex self-center leading-relaxed">На сервісному супроводі — понад 5000 одиниць обладнання Dräger. Інженери проходять навчання у Dräger Academy та мають право офіційно надавати послуги з сервісу.</p>
 
-                    </div>
-                    <div className="flex flex-1 flex-col w-full">
+                    </div> */}
+                    {/* <div className="flex flex-1 flex-col w-full">
                         <h3 className="text-2xl font-semibold my-4 text-left text-[#0061AA]">Обладнання Dräger:</h3>
                         <div className="flex flex-wrap gap-1 pb-6 w-full">
                             {items3.map((item, i) => (
@@ -387,9 +386,9 @@ export default function ServiceMobile() {
                                 </div>
                             ))}
                         </div>
-                    </div>
+                    </div> */}
 
-                    <div className="flex flex-col justify-normal items-start w-full text-[#0061AA]">
+                    {/* <div className="flex flex-col justify-normal items-start w-full text-[#0061AA]">
                         <h3 className="text-2xl font-semibold mt-4 text-left">Переваги сервісу Dräger від ДМ-ПРОЕКТ:</h3>
                         <ul className="list-disc space-y-1 leading-relaxed ">
                             <li className="ml-16 before:mr-2">єдиний в Україні уповноважений офіційний сервіс</li>
@@ -398,11 +397,11 @@ export default function ServiceMobile() {
                             <li className="ml-16 before:mr-2">використання оригінальних сервісних комплектів</li>
                             <li className="ml-16 before:mr-2">підтримка повного циклу експлуатації</li>
                         </ul>
-                    </div>
+                    </div> */}
 
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Навчання медичного персоналу'}</span>
                     <p className="flex self-center text-left leading-relaxed text-[#0061AA]">Навчання є частиною сервісного супроводу. Проводиться під час встановлення, після оновлення ПЗ або при розширенні функціоналу.</p>
-                    <div className={classNames("flex flex-col max-w-[1400px] w-full justify-center self-center", styles.servContainer1)}>
+                    {/* <div className={classNames("flex flex-col max-w-[1400px] w-full justify-center self-center", styles.servContainer1)}>
                         <div className="flex-1 pr-8">
                             <h3 className="text-2xl font-semibold mt-4 text-left">Навчальні сценарії:</h3>
                             <div className="mx-auto space-y-4 pb-6 w-full">
@@ -425,11 +424,11 @@ export default function ServiceMobile() {
                                 height={400}
                                 className="rounded-2xl" />
                         </div>
-                    </div>
+                    </div> */}
 
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Гарантії сервісу'}</span>
                     <p className="flex self-center text-left leading-relaxed text-[#0061AA]">ДМ-ПРОЕКТ надає сервіс із чітко прописаними гарантіями на роботи, запчастини та документацію, дотримуючись вимог виробників і міжнародних стандартів.</p>
-                    <div className={classNames("flex max-w-[1400px] w-full justify-center self-center pt-2", styles.servContainer1)}>
+                    {/* <div className={classNames("flex max-w-[1400px] w-full justify-center self-center pt-2", styles.servContainer1)}>
                         <div className="flex-1 pr-8">
                             <div className="flex flex-wrap gap-1 pb-6 w-full">
                                 {items5.map((item, i) => (
@@ -443,11 +442,11 @@ export default function ServiceMobile() {
                                 ))}
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Вартість та принцип формування'}</span>
                     <p className="flex self-center text-left leading-relaxed text-[#0061AA]">Вартість формується індивідуально, залежно від:</p>
-                    <div className={classNames("flex max-w-[1400px] w-full justify-center self-center pt-2", styles.servContainer1)}>
+                    {/* <div className={classNames("flex max-w-[1400px] w-full justify-center self-center pt-2", styles.servContainer1)}>
                         <div className="flex-1 pr-8">
                             <div className="flex flex-wrap gap-1 pb-6 w-full">
                                 {items6.map((item, i) => (
@@ -470,11 +469,11 @@ export default function ServiceMobile() {
                         >
                             {'Подати заявку на сервіс'}
                         </button>
-                    </div>
+                    </div> */}
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Повний життєвий цикл обладнання'}</span>
                     <p className="flex self-center text-left leading-relaxed text-[#0061AA]">ДМ-ПРОЕКТ забезпечує повний сервісний цикл підтримки — від встановлення та інсталяції обладнання до стабільної та надійної експлуатації протягом багатьох років</p>
 
-                    <div className={classNames("w-full max-w-5xl mx-auto rounded-xl bg-blue-50/60 px-6 py-8", styles.servContainer)}>
+                    {/* <div className={classNames("w-full max-w-5xl mx-auto rounded-xl bg-blue-50/60 px-6 py-8", styles.servContainer)}>
                         <h2 className="mb-7 text-center text-2xl  font-normal text-[#002766]">
                             Контакти сервісної служби
                         </h2>
@@ -503,7 +502,7 @@ export default function ServiceMobile() {
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
 
                     {showForm && (
