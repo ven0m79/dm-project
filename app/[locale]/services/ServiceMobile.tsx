@@ -129,9 +129,9 @@ export default function ServiceMobile() {
                             </button>
                         </span>
                     </div>
-                    {/* <div className={classNames("flex flex-col justify-center items-start w-full")}>
+                    <div className={classNames("flex flex-col justify-center items-start w-full")}>
                         <span className="text-[24px] p-2 self-center text-[#002766]">Яке обладнання ми обслуговуємо</span>
-                    </div> */}
+                    </div>
                     <div className="flex justify-center self-center py-3 ">
                         <div className="flex flex-wrap justify-center gap-4">
                             {cards.map((card) => (
@@ -253,9 +253,9 @@ export default function ServiceMobile() {
                         <table className="text-[14px]">
                             <thead>
                                 <tr className="bg-[#0067C5] text-white text-left">
-                                    <th className="py-2"></th>
-                                    <th className="py-2 text-left">Планове ТО</th>
-                                    <th className="py-2 text-left">Аварійний ремонт</th>
+                                    <th className="py-2 px-1"></th>
+                                    <th className="py-2 px-1 text-left">Планове ТО</th>
+                                    <th className="py-2 px-1 text-left">Аварійний ремонт</th>
                                 </tr>
                             </thead>
                             <tbody className="text-[#0054A6]">
