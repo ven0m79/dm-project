@@ -381,7 +381,7 @@ export default function ServiceMobile() {
 
                     <div className={classNames("flex flex-col justify-normal px-2 items-start my-3 w-full", styles.servContainer)}>
                         <h3 className="text-2xl font-semibold mt-3 text-left">Переваги сервісу Dräger від <span className="flex flex-nowrap">ДМ-ПРОЕКТ:</span></h3>
-                        <ul className="list-disc space-y-1 leading-relaxed text-left">
+                        <ul className="list-disc space-y-1 leading-relaxed text-left pb-2">
                             <li className="ml-10 before:mr-1">єдиний в Україні уповноважений офіційний сервіс</li>
                             <li className="ml-10 before:mr-1">індивідуальні плани ТО</li>
                             <li className="ml-10 before:mr-1">дотримання усіх регламентів</li>
@@ -395,11 +395,11 @@ export default function ServiceMobile() {
                     <div className={classNames("flex flex-col", styles.servContainer1)}>
                         <div className="mx-auto space-y-4 pb-6 w-[95%]">
                             <h3 className="text-2xl font-semibold mt-4 text-left">Навчальні сценарії:</h3>
-                            <div className="mx-auto space-y-4 pb-6 w-[95%]">
+                            <div className="mx-auto space-y-4 pb-3 w-[95%]">
                                 {items4.map((item, i) => (
                                     <div
                                         key={i}
-                                    className="flex items-start gap-4 p-3 bg-gray-50 rounded-2xl w-full shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
+                                        className="flex items-start gap-4 p-3 bg-gray-50 rounded-2xl w-full shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
                                     >
                                         <span className="text-green-500 font-bold text-xl">✓</span>
                                         <span className="text-[#0061AA]">{item}</span>
@@ -411,45 +411,41 @@ export default function ServiceMobile() {
                             <Image
                                 src={pics[2].front}
                                 alt="ТО"
-                                width={350}
-                                height={400}
+                                width={370}
+                                height={500}
                                 className="rounded-2xl" />
                         </div>
                     </div>
 
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Гарантії сервісу'}</span>
                     <p className="flex self-center text-justify indent-5 px-2 leading-relaxed text-[#0061AA]">ДМ-ПРОЕКТ надає сервіс із чітко прописаними гарантіями на роботи, запчастини та документацію, дотримуючись вимог виробників і міжнародних стандартів.</p>
-                    {/* <div className={classNames("flex w-full justify-center self-center pt-2", styles.servContainer1)}>
-                        <div className="flex-1 pr-8">
-                            <div className="flex flex-wrap gap-1 pb-6 w-full">
-                                {items5.map((item, i) => (
-                                    <div
-                                        key={i}
-                                        className="flex items-start gap-4 p-6 bg-gray-50 rounded-2xl shadow-[inset_4px_0_0_0_rgba(0,102,204,1)] w-full"
-                                    >
-                                        <span className="text-green-500 font-bold text-xl">✓</span>
-                                        <span className="text-[#0061AA]">{item}</span>
-                                    </div>
-                                ))}
-                            </div>
+                    <div className={classNames("flex w-[95%] justify-center self-center pt-2", styles.servContainer1)}>
+                        <div className="flex flex-col gap-3 pb-6 w-[95%]">
+                            {items5.map((item, i) => (
+                                <div
+                                    key={i}
+                                    className="flex items-start gap-4 p-3 bg-gray-50 rounded-2xl w-full shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
+                                >
+                                    <span className="text-green-500 font-bold text-xl">✓</span>
+                                    <span className="text-[#0061AA]">{item}</span>
+                                </div>
+                            ))}
                         </div>
-                    </div> */}
+                    </div>
 
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Вартість та принцип формування'}</span>
                     <p className="flex self-center text-justify indent-5 px-2 leading-relaxed text-[#0061AA]">Вартість формується індивідуально, залежно від:</p>
-                    {/* <div className={classNames("flex max-w-[1400px] w-full justify-center self-center pt-2", styles.servContainer1)}>
-                        <div className="flex-1 pr-8">
-                            <div className="flex flex-wrap gap-1 pb-6 w-full">
-                                {items6.map((item, i) => (
-                                    <div
-                                        key={i}
-                                        className="flex items-start gap-4 p-6 bg-gray-50 rounded-2xl shadow-[inset_4px_0_0_0_rgba(0,102,204,1)] w-full"
-                                    >
-                                        <span className="text-green-500 font-bold text-xl">✓</span>
-                                        <span className="text-[#0061AA]">{item}</span>
-                                    </div>
-                                ))}
-                            </div>
+                    <div className={classNames("flex w-[95%] justify-center self-center pt-2", styles.servContainer1)}>
+                        <div className="flex flex-wrap gap-3 pb-6 w-[95%]">
+                            {items6.map((item, i) => (
+                                <div
+                                    key={i}
+                                    className="flex items-start gap-4 p-3 bg-gray-50 rounded-2xl w-full shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
+                                >
+                                    <span className="text-green-500 font-bold text-xl">✓</span>
+                                    <span className="text-[#0061AA]">{item}</span>
+                                </div>
+                            ))}
                         </div>
                     </div>
                     <div className={classNames("flex justify-center items-center", styles.servButton)}>
@@ -460,11 +456,11 @@ export default function ServiceMobile() {
                         >
                             {'Подати заявку на сервіс'}
                         </button>
-                    </div> */}
+                    </div>
                     <span className="text-[24px] py-3 text-[#002766] self-center px-2">{'Повний життєвий цикл обладнання'}</span>
                     <p className="flex self-center text-justify indent-5 px-2 leading-relaxed text-[#0061AA]">ДМ-ПРОЕКТ забезпечує повний сервісний цикл підтримки — від встановлення та інсталяції обладнання до стабільної та надійної експлуатації протягом багатьох років</p>
 
-                    {/* <div className={classNames("w-full max-w-5xl mx-auto rounded-xl bg-blue-50/60 px-6 py-8", styles.servContainer)}>
+                    <div className={classNames("w-full max-w-5xl mx-auto rounded-xl bg-blue-50/60 px-6 py-8", styles.servContainer)}>
                         <h2 className="mb-7 text-center text-2xl  font-normal text-[#002766]">
                             Контакти сервісної служби
                         </h2>
@@ -493,7 +489,7 @@ export default function ServiceMobile() {
                                 </p>
                             </div>
                         </div>
-                    </div> */}
+                    </div>
 
 
                     {showForm && (
