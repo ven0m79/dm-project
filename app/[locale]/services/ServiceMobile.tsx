@@ -445,7 +445,7 @@ export default function ServiceMobile() {
                     </div> */}
 
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Вартість та принцип формування'}</span>
-                    <p className="flex self-center text-left leading-relaxed text-[#0061AA]">Вартість формується індивідуально, залежно від:</p>
+                    <p className="flex self-center text-justify indent-5 px-2 leading-relaxed text-[#0061AA]">Вартість формується індивідуально, залежно від:</p>
                     {/* <div className={classNames("flex max-w-[1400px] w-full justify-center self-center pt-2", styles.servContainer1)}>
                         <div className="flex-1 pr-8">
                             <div className="flex flex-wrap gap-1 pb-6 w-full">
