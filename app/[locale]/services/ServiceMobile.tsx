@@ -264,7 +264,7 @@ export default function ServiceMobile() {
                                         key={index}
                                         className={index % 2 === 0 ? "bg-[#F4F5F7]" : "bg-white"}
                                     >
-                                        <td className="p-1">{row.label}</td>
+                                        <td className="p-1 font-semibold">{row.label}</td>
                                         <td className="p-1">{row.plan}</td>
                                         <td className="p-1">{row.emergency}</td>
                                     </tr>
