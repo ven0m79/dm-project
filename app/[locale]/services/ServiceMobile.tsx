@@ -111,7 +111,7 @@ export default function ServiceMobile() {
     return (
         <>
             <div className={"flex flex-col self-center"}>
-                <div className={classNames("flex flex-col justify-center items-center text-lg bg-green-500")}>
+                <div className={classNames("flex flex-col justify-center items-center text-lg pt-2 bg-green-500")}>
                     <div className={classNames("flex flex-col justify-normal items-start", styles.servContainer)}>
                         <span className="text-[24px] py-3 self-center text-[#002766]">Технічне обслуговування медичного обладнання</span>
                         <p className="flex self-center leading-relaxed">ДМ-ПРОЕКТ забезпечує повний цикл сервісного супроводу медичної техніки: встановлення, діагностику, планові та аварійні ремонти, калібрування, оновлення програмного забезпечення та відновлення працездатності. Роботи виконуються у медзакладах або у сертифікованому сервісному центрі.</p>
@@ -249,7 +249,7 @@ export default function ServiceMobile() {
                         <p className="flex self-center text-justify leading-relaxed">Оперативні виїзди інженерів забезпечують виконання робіт у короткі строки.</p>
                     </div> */}
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Планове ТО vs Аварійний ремонт'}</span>
-                    {/* <div className="w-full overflow-x-auto">
+                    <div className="w-full overflow-x-auto p-2">
                         <table className="w-full border-collapse">
                             <thead>
                                 <tr className="bg-[#0067C5] text-white text-left">
@@ -271,7 +271,7 @@ export default function ServiceMobile() {
                                 ))}
                             </tbody>
                         </table>
-                    </div> */}
+                    </div>
                     <span className="text-[24px] py-3 self-center text-[#002766]">Переваги нашого сервісу</span>
                     {/* <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
                         {rows2.map((row2, rowIndex) => (
