@@ -114,7 +114,7 @@ export default function ServiceMobile() {
                 <div className={classNames("flex flex-col justify-center items-center text-lg pt-2 bg-green-200")}>
                     <div className={classNames("flex flex-col justify-normal items-start", styles.servContainer)}>
                         <span className="text-[24px] py-3 self-center text-[#002766]">Технічне обслуговування медичного обладнання</span>
-                        <p className="flex self-center leading-relaxed">ДМ-ПРОЕКТ забезпечує повний цикл сервісного супроводу медичної техніки: встановлення, діагностику, планові та аварійні ремонти, калібрування, оновлення програмного забезпечення та відновлення працездатності. Роботи виконуються у медзакладах або у сертифікованому сервісному центрі.</p>
+                        <p className="flex self-center px-2 leading-relaxed">ДМ-ПРОЕКТ забезпечує повний цикл сервісного супроводу медичної техніки: встановлення, діагностику, планові та аварійні ремонти, калібрування, оновлення програмного забезпечення та відновлення працездатності. Роботи виконуються у медзакладах або у сертифікованому сервісному центрі.</p>
                         <span className="flex flex-row w-full h-auto justify-center gap-2 p-2">
                             <button
                                 className={styles.servSubmit1}
@@ -129,8 +129,8 @@ export default function ServiceMobile() {
                             </button>
                         </span>
                     </div>
-                    <div className={classNames("flex flex-col justify-center items-center w-full")}>
-                        <span className="text-[24px] p-2 self-center text-[#002766]">Яке обладнання ми обслуговуємо</span>
+                    <div className={classNames("flex flex-1 flex-col justify-center items-center")}>
+                        <span className="text-[24px] p-2 self-center text-center text-[#002766]">Яке обладнання ми обслуговуємо</span>
                     </div>
                     <div className="flex justify-center self-center py-3 ">
                         <div className="flex flex-wrap justify-center gap-4">
@@ -169,10 +169,10 @@ export default function ServiceMobile() {
 
                                         {/* BACK */}
                                         <div
-                                            className="absolute inset-0 backface-hidden rounded-2xl bg-[#0061AA] text-white p-2 overflow-auto"
+                                            className="absolute inset-0 backface-hidden rounded-2xl bg-[#0061AA] text-white p-2 overflow-auto flex items-center justify-center"
                                             style={{ transform: "rotateY(180deg)" }}
                                         >
-                                            <ul className={classNames("list-disc pl-4 space-y-1 text-[10px] leading-tight", styles.whiteText)}>
+                                            <ul className={classNames("list-disc pl-4 space-y-1 text-[13px] leading-tight", styles.whiteText)}>
                                                 {card.back.map((item, i) => (
                                                     <li className="text-white" key={i}>{item}</li>
                                                 ))}
@@ -291,8 +291,6 @@ export default function ServiceMobile() {
                             </div>
                             <div className="flex justify-center items-start">
                                 <motion.div
-                                    whileHover={{ scale: 1.03 }}
-                                    whileTap={{ scale: 0.97 }}
                                     className="cursor-pointer"
                                     onClick={() => setOpen(true)}
                                 >
@@ -362,25 +360,24 @@ export default function ServiceMobile() {
                             </div>
                         </div>
                     </div>
-                    {/* <div className={classNames("flex flex-col justify-normal items-start w-full", styles.servContainer)}>
+                    <div className={classNames("flex flex-col justify-normal items-start my-3 w-full", styles.servContainer)}>
                         <span className="text-[24px] py-3 self-center text-[#002766]">Офіційний сервіс Dräger в Україні</span>
                         <p className="flex self-center leading-relaxed">На сервісному супроводі — понад 5000 одиниць обладнання Dräger. Інженери проходять навчання у Dräger Academy та мають право офіційно надавати послуги з сервісу.</p>
-
-                    </div> */}
-                    {/* <div className="flex flex-1 flex-col w-full">
-                        <h3 className="text-2xl font-semibold my-4 text-left text-[#0061AA]">Обладнання Dräger:</h3>
-                        <div className="flex flex-wrap gap-1 pb-6 w-full">
+                    </div>
+                    <div className="flex flex-1 flex-col w-[95%]">
+                        <h3 className="text-2xl font-semibold my-4 indent-5 text-left text-[#0061AA]">Обладнання Dräger:</h3>
+                        <div className="mx-auto space-y-4 pb-6 w-[95%]">
                             {items3.map((item, i) => (
                                 <div
                                     key={i}
-                                    className="flex items-start gap-4 p-6 pl-8 bg-gray-50 rounded-2xl shadow-[inset_4px_0_0_0_rgba(0,102,204,1)] w-full"
+                                    className="flex items-start gap-4 p-3 bg-gray-50 rounded-2xl w-full shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
                                 >
                                     <span className="text-green-500 font-bold text-xl">✓</span>
                                     <span className="text-[#0061AA]">{item}</span>
                                 </div>
                             ))}
                         </div>
-                    </div> */}
+                    </div>
 
                     {/* <div className="flex flex-col justify-normal items-start w-full text-[#0061AA]">
                         <h3 className="text-2xl font-semibold mt-4 text-left">Переваги сервісу Dräger від ДМ-ПРОЕКТ:</h3>
