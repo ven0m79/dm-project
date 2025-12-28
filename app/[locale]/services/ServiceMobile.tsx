@@ -129,7 +129,7 @@ export default function ServiceMobile() {
                             </button>
                         </span>
                     </div>
-                    <div className={classNames("flex flex-col justify-center items-start w-full")}>
+                    <div className={classNames("flex flex-col justify-center items-center w-full")}>
                         <span className="text-[24px] p-2 self-center text-[#002766]">Яке обладнання ми обслуговуємо</span>
                     </div>
                     <div className="flex justify-center self-center py-3 ">
@@ -188,13 +188,13 @@ export default function ServiceMobile() {
                     <span className="text-[24px] py-5 self-center text-[#002766]">Які сервіси ми виконуємо</span>
                     <div className="space-y-4 pb-4 w-[95%]">
                         {rows.map((row, rowIndex) => (
-                            <div className="flex gap-4 w-full" key={rowIndex}>
+                            <div className="flex w-[95%]" key={rowIndex}>
                                 {row.map((item, i) => (
                                     <div
                                         key={i}
                                         className="flex items-start gap-4 p-3 bg-gray-50 rounded-2xl w-full shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
                                     >
-                                        <span className="flex-shrink-0 text-green-500 font-bold text-xl -mt-1 pl-4">✓</span>
+                                        <span className="flex-shrink-0 text-green-500 font-bold text-xl pl-4">✓</span>
                                         <span className="flex-1 text-[#0061AA]">{item}</span>
                                     </div>
                                 ))}
@@ -202,24 +202,22 @@ export default function ServiceMobile() {
                         ))}
                     </div>
                     <span ref={planRef} className="text-[24px] py-3 text-[#002766] self-center">{'Планове технічне обслуговування'}</span>
-                    {/* <div className={classNames(
-                        "flex flex-col self-center max-w-[1400px] w-full gap-10",
+                    <div className={classNames(
+                        "flex flex-col self-center w-full gap-10 px-2",
                         styles.servContainer1
                     )}>
                         <div className="">
                             <p className="text-justify indent-5 leading-relaxed">
                                 Планове ТО проводиться відповідно до регламентів виробників і враховує інтенсивність використання обладнання. Такий метод мінімізує ризики збоїв, продовжує ресурс техніки й забезпечує безперервність клінічних процесів.
                             </p>
-
-                            <h3 className="text-2xl font-semibold mt-4 text-left">
+                            <h3 className="text-2xl font-semibold mt-4 text-left indent-5">
                                 Етапи планового ТО:
                             </h3>
-
-                            <div className="mx-auto space-y-4 pb-6 w-full">
+                            <div className="space-y-4 pb-4 w-[95%]">
                                 {items1.map((item, i) => (
                                     <div
                                         key={i}
-                                        className="flex items-start gap-4 p-6 pl-8 bg-gray-50 rounded-2xl shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
+                                        className="flex items-start gap-4 p-3 bg-gray-50 rounded-2xl w-full shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
                                     >
                                         <span className="text-green-500 font-bold text-xl">✓</span>
                                         <span className="text-[#0061AA]">{item}</span>
@@ -236,7 +234,7 @@ export default function ServiceMobile() {
                                 className="rounded-2xl"
                             />
                         </div>
-                    </div> */}
+                    </div>
 
                     <div className="text-[#0061AA] indent-4 px-2">
                         <h3 className="text-2xl font-semibold mt-4 text-left text-[#0061AA]">Аварійний ремонт і строки реагування</h3>
