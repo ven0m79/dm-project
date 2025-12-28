@@ -400,7 +400,7 @@ export default function ServiceMobile() {
                     </div> */}
 
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Навчання медичного персоналу'}</span>
-                    <p className="flex self-center text-left leading-relaxed text-[#0061AA]">Навчання є частиною сервісного супроводу. Проводиться під час встановлення, після оновлення ПЗ або при розширенні функціоналу.</p>
+                    <p className="flex self-center text-justify indent-5 px-2 leading-relaxed text-[#0061AA]">Навчання є частиною сервісного супроводу. Проводиться під час встановлення, після оновлення ПЗ або при розширенні функціоналу.</p>
                     {/* <div className={classNames("flex flex-col max-w-[1400px] w-full justify-center self-center", styles.servContainer1)}>
                         <div className="flex-1 pr-8">
                             <h3 className="text-2xl font-semibold mt-4 text-left">Навчальні сценарії:</h3>
@@ -427,7 +427,7 @@ export default function ServiceMobile() {
                     </div> */}
 
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Гарантії сервісу'}</span>
-                    <p className="flex self-center text-left leading-relaxed text-[#0061AA]">ДМ-ПРОЕКТ надає сервіс із чітко прописаними гарантіями на роботи, запчастини та документацію, дотримуючись вимог виробників і міжнародних стандартів.</p>
+                    <p className="flex self-center text-justify indent-5 px-2 leading-relaxed text-[#0061AA]">ДМ-ПРОЕКТ надає сервіс із чітко прописаними гарантіями на роботи, запчастини та документацію, дотримуючись вимог виробників і міжнародних стандартів.</p>
                     {/* <div className={classNames("flex max-w-[1400px] w-full justify-center self-center pt-2", styles.servContainer1)}>
                         <div className="flex-1 pr-8">
                             <div className="flex flex-wrap gap-1 pb-6 w-full">
@@ -470,8 +470,8 @@ export default function ServiceMobile() {
                             {'Подати заявку на сервіс'}
                         </button>
                     </div> */}
-                    <span className="text-[24px] py-3 text-[#002766] self-center">{'Повний життєвий цикл обладнання'}</span>
-                    <p className="flex self-center text-left leading-relaxed text-[#0061AA]">ДМ-ПРОЕКТ забезпечує повний сервісний цикл підтримки — від встановлення та інсталяції обладнання до стабільної та надійної експлуатації протягом багатьох років</p>
+                    <span className="text-[24px] py-3 text-[#002766] self-center px-2">{'Повний життєвий цикл обладнання'}</span>
+                    <p className="flex self-center text-justify indent-5 px-2 leading-relaxed text-[#0061AA]">ДМ-ПРОЕКТ забезпечує повний сервісний цикл підтримки — від встановлення та інсталяції обладнання до стабільної та надійної експлуатації протягом багатьох років</p>
 
                     {/* <div className={classNames("w-full max-w-5xl mx-auto rounded-xl bg-blue-50/60 px-6 py-8", styles.servContainer)}>
                         <h2 className="mb-7 text-center text-2xl  font-normal text-[#002766]">
