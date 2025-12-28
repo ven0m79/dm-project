@@ -249,11 +249,11 @@ export default function ServiceMobile() {
                         <p className="flex self-center text-justify leading-relaxed">Оперативні виїзди інженерів забезпечують виконання робіт у короткі строки.</p>
                     </div> */}
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Планове ТО vs Аварійний ремонт'}</span>
-                    {/* <div className="flex w-[90%] overflow-x-auto">
-                        <table className="border-collapse">
+                    <div className="flex w-full overflow-x-auto px-2">
+                        <table className="">
                             <thead>
                                 <tr className="bg-[#0067C5] text-white text-left">
-                                    <th className="py-2 w-[33%]"></th>
+                                    <th className="py-2 w-[30%]"></th>
                                     <th className="py-2 w-[33%] text-left">Планове ТО</th>
                                     <th className="py-2 w-[33%] text-left">Аварійний ремонт</th>
                                 </tr>
@@ -264,14 +264,14 @@ export default function ServiceMobile() {
                                         key={index}
                                         className={index % 2 === 0 ? "bg-[#F4F5F7]" : "bg-white"}
                                     >
-                                        <td className="p-1">{row.label}</td>
-                                        <td className="p-1">{row.plan}</td>
-                                        <td className="p-1">{row.emergency}</td>
+                                        <td className="p-0">{row.label}</td>
+                                        <td className="p-0">{row.plan}</td>
+                                        <td className="p-0">{row.emergency}</td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
-                    </div> */}
+                    </div>
                     <span className="text-[24px] py-3 self-center text-[#002766]">Переваги нашого сервісу</span>
                     {/* <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
                         {rows2.map((row2, rowIndex) => (
