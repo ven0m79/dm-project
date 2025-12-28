@@ -250,12 +250,12 @@ export default function ServiceMobile() {
                     </div> */}
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Планове ТО vs Аварійний ремонт'}</span>
                     <div className="flex w-full overflow-x-auto px-2">
-                        <table className="">
+                        <table className="text-[14px]">
                             <thead>
                                 <tr className="bg-[#0067C5] text-white text-left">
-                                    <th className="py-2 w-[30%]"></th>
-                                    <th className="py-2 w-[33%] text-left">Планове ТО</th>
-                                    <th className="py-2 w-[33%] text-left">Аварійний ремонт</th>
+                                    <th className="py-2"></th>
+                                    <th className="py-2 text-left">Планове ТО</th>
+                                    <th className="py-2 text-left">Аварійний ремонт</th>
                                 </tr>
                             </thead>
                             <tbody className="text-[#0054A6]">
@@ -264,9 +264,9 @@ export default function ServiceMobile() {
                                         key={index}
                                         className={index % 2 === 0 ? "bg-[#F4F5F7]" : "bg-white"}
                                     >
-                                        <td className="p-0">{row.label}</td>
-                                        <td className="p-0">{row.plan}</td>
-                                        <td className="p-0">{row.emergency}</td>
+                                        <td className="p-1">{row.label}</td>
+                                        <td className="p-1">{row.plan}</td>
+                                        <td className="p-1">{row.emergency}</td>
                                     </tr>
                                 ))}
                             </tbody>
