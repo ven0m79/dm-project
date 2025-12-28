@@ -379,27 +379,27 @@ export default function ServiceMobile() {
                         </div>
                     </div>
 
-                    {/* <div className="flex flex-col justify-normal items-start w-full text-[#0061AA]">
-                        <h3 className="text-2xl font-semibold mt-4 text-left">Переваги сервісу Dräger від ДМ-ПРОЕКТ:</h3>
-                        <ul className="list-disc space-y-1 leading-relaxed ">
-                            <li className="ml-16 before:mr-2">єдиний в Україні уповноважений офіційний сервіс</li>
-                            <li className="ml-16 before:mr-2">індивідуальні плани ТО</li>
-                            <li className="ml-16 before:mr-2">дотримання усіх регламентів</li>
-                            <li className="ml-16 before:mr-2">використання оригінальних сервісних комплектів</li>
-                            <li className="ml-16 before:mr-2">підтримка повного циклу експлуатації</li>
+                    <div className={classNames("flex flex-col justify-normal px-2 items-start my-3 w-full", styles.servContainer)}>
+                        <h3 className="text-2xl font-semibold mt-3 text-left">Переваги сервісу Dräger від <span className="flex flex-nowrap">ДМ-ПРОЕКТ:</span></h3>
+                        <ul className="list-disc space-y-1 leading-relaxed text-left">
+                            <li className="ml-10 before:mr-1">єдиний в Україні уповноважений офіційний сервіс</li>
+                            <li className="ml-10 before:mr-1">індивідуальні плани ТО</li>
+                            <li className="ml-10 before:mr-1">дотримання усіх регламентів</li>
+                            <li className="ml-10 before:mr-1">використання оригінальних сервісних комплектів</li>
+                            <li className="ml-10 before:mr-1">підтримка повного циклу експлуатації</li>
                         </ul>
-                    </div> */}
+                    </div>
 
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Навчання медичного персоналу'}</span>
                     <p className="flex self-center text-justify indent-5 px-2 leading-relaxed text-[#0061AA]">Навчання є частиною сервісного супроводу. Проводиться під час встановлення, після оновлення ПЗ або при розширенні функціоналу.</p>
-                    {/* <div className={classNames("flex flex-col max-w-[1400px] w-full justify-center self-center", styles.servContainer1)}>
-                        <div className="flex-1 pr-8">
+                    <div className={classNames("flex flex-col", styles.servContainer1)}>
+                        <div className="mx-auto space-y-4 pb-6 w-[95%]">
                             <h3 className="text-2xl font-semibold mt-4 text-left">Навчальні сценарії:</h3>
-                            <div className="mx-auto space-y-4 pb-6 w-full">
+                            <div className="mx-auto space-y-4 pb-6 w-[95%]">
                                 {items4.map((item, i) => (
                                     <div
                                         key={i}
-                                        className="flex items-start gap-4 p-6 bg-gray-50 rounded-2xl shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
+                                    className="flex items-start gap-4 p-3 bg-gray-50 rounded-2xl w-full shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
                                     >
                                         <span className="text-green-500 font-bold text-xl">✓</span>
                                         <span className="text-[#0061AA]">{item}</span>
@@ -415,11 +415,11 @@ export default function ServiceMobile() {
                                 height={400}
                                 className="rounded-2xl" />
                         </div>
-                    </div> */}
+                    </div>
 
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Гарантії сервісу'}</span>
                     <p className="flex self-center text-justify indent-5 px-2 leading-relaxed text-[#0061AA]">ДМ-ПРОЕКТ надає сервіс із чітко прописаними гарантіями на роботи, запчастини та документацію, дотримуючись вимог виробників і міжнародних стандартів.</p>
-                    {/* <div className={classNames("flex max-w-[1400px] w-full justify-center self-center pt-2", styles.servContainer1)}>
+                    {/* <div className={classNames("flex w-full justify-center self-center pt-2", styles.servContainer1)}>
                         <div className="flex-1 pr-8">
                             <div className="flex flex-wrap gap-1 pb-6 w-full">
                                 {items5.map((item, i) => (
