@@ -111,7 +111,7 @@ export default function ServiceMobile() {
     return (
         <>
             <div className={"flex flex-col self-center"}>
-                <div className={classNames("flex flex-col justify-center items-center text-lg pt-2 bg-green-500")}>
+                <div className={classNames("flex flex-col justify-center items-center text-lg pt-2 bg-green-200")}>
                     <div className={classNames("flex flex-col justify-normal items-start", styles.servContainer)}>
                         <span className="text-[24px] py-3 self-center text-[#002766]">Технічне обслуговування медичного обладнання</span>
                         <p className="flex self-center leading-relaxed">ДМ-ПРОЕКТ забезпечує повний цикл сервісного супроводу медичної техніки: встановлення, діагностику, планові та аварійні ремонти, калібрування, оновлення програмного забезпечення та відновлення працездатності. Роботи виконуються у медзакладах або у сертифікованому сервісному центрі.</p>
@@ -267,13 +267,13 @@ export default function ServiceMobile() {
                         </table>
                     </div>
                     <span className="text-[24px] py-3 self-center text-[#002766]">Переваги нашого сервісу</span>
-                    {/* <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
+                    <div className="mx-auto space-y-4 pb-6 w-[95%]">
                         {rows2.map((row2, rowIndex) => (
-                            <div className="flex gap-4" key={rowIndex}>
+                            <div className="flex gap-4 w-[95%]" key={rowIndex}>
                                 {row2.map((item, i) => (
                                     <div
                                         key={i}
-                                        className="flex items-start gap-4 p-6 bg-gray-50 rounded-2xl w-full shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
+                                        className="flex items-start gap-4 p-3 bg-gray-50 rounded-2xl w-full shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
                                     >
                                         <span className="flex-shrink-0 text-green-500 font-bold text-xl -mt-0.5">✓</span>
                                         <span className="flex-1 text-[#0061AA]">{item}</span>
@@ -281,13 +281,13 @@ export default function ServiceMobile() {
                                 ))}
                             </div>
                         ))}
-                    </div> */}
+                    </div>
 
-                    {/* <div className={classNames("flex flex-col self-center justify-around w-full", styles.servContainer1)}>
+                    <div className={classNames("flex flex-col self-center w-full", styles.servContainer1)}>
                         <div className="flex flex-col">
                             <div className="flex-1 flex flex-col justify-start">
-                                <h3 className="text-2xl font-semibold mt-4 text-left text-[#0061AA]">Сертифікація інженерів</h3>
-                                <p className="text-justify indent-5 leading-relaxed">Інженери ДМ-ПРОЕКТ мають підтверджені виробниками обладнання сертифікати і проходять регулярне навчання, включно зі спеціалізованими курсами Dräger у Німеччині. Це гарантує коректність, безпечність і точність усіх сервісних операцій.</p>
+                                <h3 className="text-2xl font-semibold mt-4 indent-5 text-left text-[#0061AA]">Сертифікація інженерів</h3>
+                                <p className="text-justify px-2 indent-5 leading-relaxed">Інженери ДМ-ПРОЕКТ мають підтверджені виробниками обладнання сертифікати і проходять регулярне навчання, включно зі спеціалізованими курсами Dräger у Німеччині. Це гарантує коректність, безпечність і точність усіх сервісних операцій.</p>
                             </div>
                             <div className="flex justify-center items-start">
                                 <motion.div
@@ -344,8 +344,8 @@ export default function ServiceMobile() {
                         </div>
                         <div className="flex flex-col">
                             <div className="flex flex-col justify-start">
-                                <h3 className="text-2xl font-semibold mt-4 text-left">Географія сервісу</h3>
-                                <p className="text-justify indent-5 leading-relaxed">
+                                <h3 className="text-2xl font-semibold mt-4 indent-5 text-left">Географія сервісу</h3>
+                                <p className="text-justify px-2 indent-5 leading-relaxed">
                                     Сервіс компанії покриває <strong>всю територію України</strong> (окрім тимчасово окупованих територій та зони бойових дій).
                                     Працюють виїзні бригади, які забезпечують оперативне реагування
                                     у різних регіонах. Можливе індивідуальне планування візитів
@@ -361,7 +361,7 @@ export default function ServiceMobile() {
                                     className="rounded-2xl object-contain" />
                             </div>
                         </div>
-                    </div> */}
+                    </div>
                     {/* <div className={classNames("flex flex-col justify-normal items-start w-full", styles.servContainer)}>
                         <span className="text-[24px] py-3 self-center text-[#002766]">Офіційний сервіс Dräger в Україні</span>
                         <p className="flex self-center leading-relaxed">На сервісному супроводі — понад 5000 одиниць обладнання Dräger. Інженери проходять навчання у Dräger Academy та мають право офіційно надавати послуги з сервісу.</p>
