@@ -160,8 +160,7 @@ export default function ServiceMobile() {
                                                     width={isMobile ? 160 : 200}
                                                     height={isMobile ? 190 : 230}
                                                     className="object-contain pt-4" // зберігає пропорції
-                                                    priority={false} />
-
+                                                />
                                                 <h3 className="absolute bottom-0 left-0 right-0 bg-[#0061AA] text-white p-2 h-32 text-sm leading-tight text-center">
                                                     {card.title}
                                                 </h3>
@@ -186,11 +185,8 @@ export default function ServiceMobile() {
 
                         <style>{`.perspective { perspective: 1200px; } .preserve-3d { transform-style: preserve-3d; } .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }`}</style>
                     </div>
-
-
                     <span className="text-[24px] py-5 self-center text-[#002766]">Які сервіси ми виконуємо</span>
-
-                    {/* <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
+                    <div className="space-y-4 pb-4 w-[95%]">
                         {rows.map((row, rowIndex) => (
                             <div className="flex gap-4 w-full" key={rowIndex}>
                                 {row.map((item, i) => (
@@ -204,7 +200,7 @@ export default function ServiceMobile() {
                                 ))}
                             </div>
                         ))}
-                    </div> */}
+                    </div>
                     <span ref={planRef} className="text-[24px] py-3 text-[#002766] self-center">{'Планове технічне обслуговування'}</span>
                     {/* <div className={classNames(
                         "flex flex-col self-center max-w-[1400px] w-full gap-10",
