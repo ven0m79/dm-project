@@ -392,16 +392,14 @@ export default function ServiceDesktop() {
                         </div>
                     </div>
 
-
-
-                    <div className="flex flex-col justify-normal items-start w-full text-[#0061AA]">
-                        <h3 className="text3xl font-semibold my-4 text-left text-[#0061AA]">Переваги сервісу Dräger від ДМ-ПРОЕКТ:</h3>
-                        <ul className="list-disc space-y-1 leading-relaxed ">
-                            <li className="ml-16 before:mr-2">єдиний в Україні уповноважений офіційний сервіс</li>
-                            <li className="ml-16 before:mr-2">індивідуальні плани ТО</li>
-                            <li className="ml-16 before:mr-2">дотримання усіх регламентів</li>
-                            <li className="ml-16 before:mr-2">використання оригінальних сервісних комплектів</li>
-                            <li className="ml-16 before:mr-2">підтримка повного циклу експлуатації</li>
+                    <div className={classNames("flex flex-col justify-center px-2 items-center my-3", styles.servContainer)}>
+                        <h3 className="text-2xl font-semibold mt-3 text-left">Переваги сервісу Dräger від ДМ-ПРОЕКТ:</h3>
+                        <ul className="list-disc space-y-1 leading-relaxed text-left pb-2">
+                            <li className="ml-10 before:mr-1">єдиний в Україні уповноважений офіційний сервіс</li>
+                            <li className="ml-10 before:mr-1">індивідуальні плани ТО</li>
+                            <li className="ml-10 before:mr-1">дотримання усіх регламентів</li>
+                            <li className="ml-10 before:mr-1">використання оригінальних сервісних комплектів</li>
+                            <li className="ml-10 before:mr-1">підтримка повного циклу експлуатації</li>
                         </ul>
                     </div>
 
@@ -438,7 +436,7 @@ export default function ServiceDesktop() {
                             {items5.map((item, i) => (
                                 <div
                                     key={i}
-                                    className="flex items-center gap-4 p-6 pl-8 bg-gray-50 rounded-2xl shadow-[inset_4px_0_0_0_rgba(0,102,204,1)] w-[50%]"
+                                    className="flex items-center gap-4 p-6 pl-8 bg-gray-50 rounded-2xl shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
                                 >
                                     <span className="text-green-500 font-bold text-xl">✓</span>
                                     <span className="text-[#0061AA]">{item}</span>
