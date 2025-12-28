@@ -242,12 +242,12 @@ export default function ServiceMobile() {
                         </div>
                     </div> */}
 
-                    {/* <div className="text-[#0061AA] indent-4">
+                    <div className="text-[#0061AA] indent-4 px-2">
                         <h3 className="text-2xl font-semibold mt-4 text-left text-[#0061AA]">Аварійний ремонт і строки реагування</h3>
                         <p className="flex self-center text-justify leading-relaxed">Сервісна служба оперативно реагує на аварійні запити та швидко відновлює працездатність критичного обладнання.</p>
                         <p className="flex self-center text-justify leading-relaxed">Стандартний час відповіді — максимально швидкий у межах робочого графіка. Оперативні виїзди інженерів забезпечують виконання робіт у короткі строки.</p>
                         <p className="flex self-center text-justify leading-relaxed">Оперативні виїзди інженерів забезпечують виконання робіт у короткі строки.</p>
-                    </div> */}
+                    </div>
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Планове ТО vs Аварійний ремонт'}</span>
                     <div className="flex w-full overflow-x-auto px-2">
                         <table className="text-[14px]">
