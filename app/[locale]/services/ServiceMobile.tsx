@@ -249,7 +249,7 @@ export default function ServiceMobile() {
                         <p className="flex self-center text-justify leading-relaxed">Оперативні виїзди інженерів забезпечують виконання робіт у короткі строки.</p>
                     </div> */}
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Планове ТО vs Аварійний ремонт'}</span>
-                    <div className="flex w-[90%] overflow-x-auto">
+                    {/* <div className="flex w-[90%] overflow-x-auto">
                         <table className="border-collapse">
                             <thead>
                                 <tr className="bg-[#0067C5] text-white text-left">
@@ -271,7 +271,7 @@ export default function ServiceMobile() {
                                 ))}
                             </tbody>
                         </table>
-                    </div>
+                    </div> */}
                     <span className="text-[24px] py-3 self-center text-[#002766]">Переваги нашого сервісу</span>
                     {/* <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
                         {rows2.map((row2, rowIndex) => (
