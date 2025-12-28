@@ -16,7 +16,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
 
   return (
     <MainLayout>
-      {typeof window !== "undefined" && isMobile ?
+      {isMobile ?
         <>
           <div className={classNames("flex flex-1 flex-col w-full sm:px-5", styles.aboutText)}>
             <div className={classNames("mx-2 my-0 mt-2 indent-5 text-justify")}>

@@ -434,36 +434,32 @@ export default function ServiceDesktop() {
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Гарантії сервісу'}</span>
                     <p className="flex self-center text-left leading-relaxed text-[#0061AA]">ДМ-ПРОЕКТ надає сервіс із чітко прописаними гарантіями на роботи, запчастини та документацію, дотримуючись вимог виробників і міжнародних стандартів.</p>
                     <div className={classNames("flex max-w-[1400px] w-full justify-center self-center pt-2", styles.servContainer1)}>
-                        <div className="flex-1 pr-8">
-                            <div className="flex flex-wrap gap-1 pb-6 w-full">
-                                {items5.map((item, i) => (
-                                    <div
-                                        key={i}
-                                        className="flex items-start gap-4 p-6 pl-8 bg-gray-50 rounded-2xl shadow-[inset_4px_0_0_0_rgba(0,102,204,1)] w-[33%]"
-                                    >
-                                        <span className="text-green-500 font-bold text-xl">✓</span>
-                                        <span className="text-[#0061AA]">{item}</span>
-                                    </div>
-                                ))}
-                            </div>
+                        <div className="grid grid-cols-2 gap-4 pb-6 w-full">
+                            {items5.map((item, i) => (
+                                <div
+                                    key={i}
+                                    className="flex items-center gap-4 p-6 pl-8 bg-gray-50 rounded-2xl shadow-[inset_4px_0_0_0_rgba(0,102,204,1)] w-[50%]"
+                                >
+                                    <span className="text-green-500 font-bold text-xl">✓</span>
+                                    <span className="text-[#0061AA]">{item}</span>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Вартість та принцип формування'}</span>
                     <p className="flex self-center text-left leading-relaxed text-[#0061AA]">Вартість формується індивідуально, залежно від:</p>
                     <div className={classNames("flex max-w-[1400px] w-full justify-center self-center pt-2", styles.servContainer1)}>
-                        <div className="flex-1 pr-8">
-                            <div className="flex flex-wrap gap-1 pb-6 w-full">
-                                {items6.map((item, i) => (
-                                    <div
-                                        key={i}
-                                        className="flex items-start gap-4 p-6 pl-8 bg-gray-50 rounded-2xl shadow-[inset_4px_0_0_0_rgba(0,102,204,1)] w-[33%]"
-                                    >
-                                        <span className="text-green-500 font-bold text-xl">✓</span>
-                                        <span className="text-[#0061AA]">{item}</span>
-                                    </div>
-                                ))}
-                            </div>
+                        <div className="grid grid-cols-2 gap-4 pb-6 w-full">
+                            {items6.map((item, i) => (
+                                <div
+                                    key={i}
+                                    className="flex items-start gap-4 p-6 pl-8 bg-gray-50 rounded-2xl shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
+                                >
+                                    <span className="text-green-500 font-bold text-xl">✓</span>
+                                    <span className="text-[#0061AA]">{item}</span>
+                                </div>
+                            ))}
                         </div>
                     </div>
                     <div className={classNames("flex justify-center items-center", styles.servButton)}>
