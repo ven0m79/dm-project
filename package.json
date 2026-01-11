@@ -61,6 +61,8 @@
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.9",
     "@types/woocommerce__woocommerce-rest-api": "^1.0.5",
-    "@woocommerce/woocommerce-rest-api": "^1.0.1"
+    "@woocommerce/woocommerce-rest-api": "^1.0.1",
+    "tailwind-custom-utilities": "^1.0.5",
+    "tailwindcss-animate": "^1.0.7"
   }
 }
