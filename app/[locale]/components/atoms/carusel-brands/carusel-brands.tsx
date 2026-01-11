@@ -173,8 +173,8 @@ export default function CarouselBrands() {
                       "w-full h-full border rounded overflow-hidden",
                       "transition-all duration-200 ease-out",
                       isActive
-                        ? "opacity-20 border-blue-600 shadow hover:scale-110"
-                        : "opacity-20 hover:opacity-50 hover:scale-110"
+                        ? "opacity-60 border-blue-600 shadow hover:opacity-100 hover:scale-110"
+                        : "opacity-60 hover:opacity-100 hover:scale-110"
                     )}
                   >
                     <Image
