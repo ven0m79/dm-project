@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import styles from "./Home.module.css";
 import { useIsMobile } from "../components/hooks/useIsMobile";
 import dynamic from "next/dynamic";
+import CaruselBrands from "@app/[locale]/components/atoms/carusel-brands/carusel-brands";
 
 // Динамічні імпорти без SSR
 const Slider = dynamic(() => import("@app/[locale]/components/molecules/slider/slider"), {
@@ -190,29 +191,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
 
           {/* Логотипи партнерів */}
           <div className="flex my-5 flex-wrap justify-center items-center bg-white w-[90%] max-w-[1000px] gap-3 sm:gap-10">
-            {[
-              ["https://www.draeger.com", "/logo-partners/dreger-log-partner.jpg", "Draeger"],
-              ["https://www.prohs.pt/en/home/", "/logo-partners/prohs-log-partner.png", "Prohs"],
-              ["https://www.at-os.com", "/logo-partners/atos-log-partner.jpg", "AT-OS"],
-              ["https://www.lojer.com", "/logo-partners/lojer-log-partner.jpg", "Lojer"],
-              ["http://renosem.com", "/logo-partners/renosem-log-partner.jpg", "Renosem"],
-              ["https://www.mipm.com/en", "/logo-partners/mimp.webp", "Mimp"],
-            ].map(([url, src, alt]) => (
-              <div
-                key={alt}
-                className={classNames("flex-1 min-w-[60px] max-w-[120px] sm:max-w-[200px]", styles["block-partners"])}
-              >
-                <Link href={url} target="_blank">
-                  <Image
-                    className={classNames("w-full h-auto", styles.img)}
-                    src={src}
-                    width={200}
-                    height={isMobile ? 80 : 200}
-                    alt={`Logo ${alt}`}
-                  />
-                </Link>
-              </div>
-            ))}
+            <CaruselBrands />
           </div>
         </div>
       </div>
