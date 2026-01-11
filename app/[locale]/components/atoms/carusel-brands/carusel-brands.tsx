@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useMemo } from "react";
 import Image from "next/image";
 import classNames from "classnames";
 import { motion, useMotionValue, animate } from "framer-motion";
+import { useIsMobile } from "../../../components/hooks/useIsMobile";
 
 type BrandImage = {
   src: string;
@@ -12,69 +13,42 @@ type BrandImage = {
 };
 
 const images: BrandImage[] = [
-  {
-    src: "/logo-partners/dreger-log-partner.webp",
-    href: "/partners/dreger",
-    alt: "Draeger",
-  },
-  {
-    src: "/logo-partners/atos-log-partner.webp",
-    href: "/partner/atos",
-    alt: "Atos",
-  },
-  {
-    src: "/logo-partners/lojer-log-partner.webp",
-    href: "/partner/lojer",
-    alt: "Lojer",
-  },
-  {
-    src: "/logo-partners/prohs-log-partner.webp",
-    href: "/partner/prohs",
-    alt: "Prohs",
-  },
-  {
-    src: "/logo-partners/renosem-log-partner.webp",
-    href: "/partner/renosem",
-    alt: "Renosem",
-  },
-  {
-    src: "/logo-partners/inspital.webp",
-    href: "/partner/inspital",
-    alt: "Inspital",
-  },
-  {
-    src: "/logo-partners/fsn.webp",
-    href: "/partner/fsn",
-    alt: "FSN",
-  },
-  {
-    src: "/logo-partners/mimp.webp",
-    href: "/partner/mimp",
-    alt: "MIMP",
-  },
+  { src: "/logo-partners/dreger-log-partner.webp", href: "/partners/dreger", alt: "Draeger" },
+  { src: "/logo-partners/atos-log-partner.webp", href: "/partner/atos", alt: "Atos" },
+  { src: "/logo-partners/lojer-log-partner.webp", href: "/partner/lojer", alt: "Lojer" },
+  { src: "/logo-partners/prohs-log-partner.webp", href: "/partner/prohs", alt: "Prohs" },
+  { src: "/logo-partners/renosem-log-partner.webp", href: "/partner/renosem", alt: "Renosem" },
+  { src: "/logo-partners/inspital.webp", href: "/partner/inspital", alt: "Inspital" },
+  { src: "/logo-partners/fsn.webp", href: "/partner/fsn", alt: "FSN" },
+  { src: "/logo-partners/mimp.webp", href: "/partner/mimp", alt: "MIMP" },
 ];
 
 const THUMB_WIDTH = 120;
 const GAP = 20;
-const VISIBLE_COUNT = 6;
 const CONTAINER_PADDING = 16;
-
-const CONTAINER_WIDTH =
-  VISIBLE_COUNT * THUMB_WIDTH +
-  (VISIBLE_COUNT - 1) * GAP +
-  CONTAINER_PADDING * 2;
-
-const STEP = THUMB_WIDTH + GAP;
 const DRAG_THRESHOLD = 6;
 
 export default function CarouselBrands() {
+  const isMobile = useIsMobile();
+  const VISIBLE_COUNT = isMobile ? 2 : 6;
+
+  const STEP = THUMB_WIDTH + GAP;
+
+  const CONTAINER_WIDTH = useMemo(
+    () =>
+      VISIBLE_COUNT * THUMB_WIDTH +
+      (VISIBLE_COUNT - 1) * GAP +
+      CONTAINER_PADDING * 2,
+    [VISIBLE_COUNT]
+  );
+
+  const maxStartIndex = images.length - VISIBLE_COUNT;
+
   const [selectedImage, setSelectedImage] = useState(0);
   const x = useMotionValue(0);
 
   const pointerDownX = useRef<number | null>(null);
   const isDragging = useRef(false);
-
-  const maxStartIndex = images.length - VISIBLE_COUNT;
 
   const snapToIndex = (index: number) => {
     const clamped = Math.min(Math.max(0, index), maxStartIndex);
@@ -139,8 +113,7 @@ export default function CarouselBrands() {
               pointerDownX.current = null;
             }}
             onDragEnd={() => {
-              const currentX = x.get();
-              const index = Math.round(-currentX / STEP);
+              const index = Math.round(-x.get() / STEP);
               snapToIndex(index);
             }}
           >
@@ -158,10 +131,7 @@ export default function CarouselBrands() {
                       e.stopPropagation();
                     }
                   }}
-                  className={classNames(
-                    "flex-shrink-0",
-                    isActive && "z-10"
-                  )}
+                  className={classNames("flex-shrink-0", isActive && "z-10")}
                   style={{
                     width: THUMB_WIDTH,
                     height: THUMB_WIDTH,
