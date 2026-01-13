@@ -6,7 +6,7 @@ import styles from "../Partners.module.css";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-import dreger from "../../../../public/logo-partners/dreger-log-partner.webp";
+import dreger from "../../../../public/logo-partners/dreger-log-partner-big.webp";
 import Link from "next/link";
 
 export const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
@@ -15,23 +15,23 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
     return (
         <MainLayout>
             <div className="flex flex-col justify-center items-center w-full max-w-[1000px]">
-                <div className="flex  sm:flex-row flex-col">
-                    <div className="w-[400px]">
+                <div className="flex flex-shrink-0 sm:flex-row flex-col w-full">
+                    <div className="flex w-full h-auto">
                         <Image
                             className=""
                             src={dreger}
                             alt="Dräger"
-                            width={300}
-                            height={300}
+                            width={400}
+                            height={400}
                         />
                     </div>
                     <div className="text-[#0061AA] w-full indent-5 leading-relaxed text-justify self-center">
-                        <h1 className="text-[24px]">Drägerwerk AG & Co. KGaA</h1>
-                        <div><strong>Рік заснування:</strong> 1889</div>
-                        <div><strong>Країна:</strong> Німеччина</div>
-                        <div><strong>Офіційний сайт:</strong>
+                        <h1 className="text-[30px] font-semibold text-[#002766]">Drägerwerk AG & Co. KGaA</h1>
+                        <div className="text-[20px]"><strong className="text-[20px] text-[#002766]">Рік заснування:</strong> 1889</div>
+                        <div className="text-[20px]"><strong className="text-[20px] text-[#002766]">Країна:</strong> Німеччина</div>
+                        <div className="text-[20px]"><strong className="text-[20px] text-[#002766]">Офіційний сайт:</strong>
                             <Link href="https://www.draeger.com/" target="_blank"> https://www.draeger.com/</Link></div>
-                        <div><strong>Cоціальні мережі:</strong>
+                        <div className="text-[20px]"><strong className="text-[20px] text-[#002766]">Cоціальні мережі:</strong>
                             <div className="flex flex-row pl-10 pt-2">
                                 <div
                                     className={"flex items-center justify-center gap-4"}
@@ -57,7 +57,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                     </div>
                 </div>
                 <div className="flex flex-col self-center justify-center gap-4 pb-3">
-                    <div className="text-[#0061AA] w-full indent-5 leading-relaxed text-justify">Dräger — бренд із Німеччини з історією понад століття. Компанія працює з 1889 року та пройшла шлях від інженерних
+                    <div className="text-[#0061AA] w-full indent-5 leading-relaxed text-justify pt-4">Dräger — бренд із Німеччини з історією понад століття. Компанія працює з 1889 року та пройшла шлях від інженерних
                         розробок до масштабного виробництва медичних систем, які використовують у лікарнях у багатьох країнах світу.
                         У медичному напрямку Dräger асоціюється з надійністю обладнання, продуманістю інтерфейсів та увагою до сценаріїв,
                         у яких важлива кожна секунда — від операційної до відділення інтенсивної терапії.
