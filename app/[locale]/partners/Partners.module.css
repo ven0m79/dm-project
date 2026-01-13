@@ -4,7 +4,7 @@
     font-size: 18px;
     color: #fff;
     padding: 10px;
-    background-color: #0061AA;
+    background-color: #002766;
     border: 1px solid black;
     border-radius: 10px;
     cursor: pointer;
@@ -13,7 +13,7 @@
 
 .loadProducts:hover {
     transition: all 0.5s;
-    background: #002766;
+    background: #0061AA;
     color: #ffffff;
     font-size: 18px;
 }
