@@ -37,18 +37,18 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                                     className={"flex items-center justify-center gap-4"}
                                 >
                                     <Link href="https://www.linkedin.com/company/draeger" target="_blank">
-                                        <Image src="/linkedin.webp" width={30} height={30} alt="Logo Linkedin" />
+                                        <Image className="transition-transform hover:scale-110" src="/linkedin.webp" width={30} height={30} alt="Logo Linkedin" />
                                     </Link>
 
-                                    <Link href="https://youtube.com/@draeger?si=cNuSHUm57sHZvnkI" target="_blank">
-                                        <Image src="/youtube-ico.jpg" width={30} height={30} alt="Logo Youtube" />
+                                    <Link href="https://www.youtube.com/Draeger" target="_blank">
+                                        <Image className="transition-transform hover:scale-110" src="/youtube-ico.jpg" width={30} height={30} alt="Logo Youtube" />
                                     </Link>
 
-                                    <Link href="https://m.facebook.com/dmprojectdrager/" target="_blank">
+                                    <Link className="transition-transform hover:scale-110" href="https://www.facebook.com/DraegerGlobal/" target="_blank">
                                         <Image src="/facebook-ico.jpg" width={30} height={30} alt="Logo Facebook" />
                                     </Link>
 
-                                    <Link href="https://www.instagram.com/dmproject_drager?igsh=MWJuaWRidnJ5dTM2Zg==" target="_blank">
+                                    <Link className="transition-transform hover:scale-110" href="https://www.instagram.com/draeger.global/" target="_blank">
                                         <Image src="/instagram.webp" width={30} height={30} alt="Logo Instagram" />
                                     </Link>
                                 </div>
