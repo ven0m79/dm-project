@@ -25,13 +25,13 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                             height={400}
                         />
                     </div>
-                    <div className="text-[#0061AA] w-full indent-5 leading-relaxed text-justify self-center">
-                        <h1 className="text-[30px] font-semibold text-[#002766]">Drägerwerk AG & Co. KGaA</h1>
-                        <div className="text-[20px]"><strong className="text-[20px] text-[#002766]">Рік заснування:</strong> 1889</div>
-                        <div className="text-[20px]"><strong className="text-[20px] text-[#002766]">Країна:</strong> Німеччина</div>
-                        <div className="text-[20px]"><strong className="text-[20px] text-[#002766]">Офіційний сайт:</strong>
+                    <div className="text-[#0061AA] w-full indent-0 sm:indent-5 leading-relaxed text-justify self-center sm:px-0 px-2">
+                        <h1 className="text-[24px] sm:text-[30px] font-semibold text-[#002766]">Drägerwerk AG & Co. KGaA</h1>
+                        <div className="text-[16px] sm:text-[20px]"><strong className="text-[#002766]">Рік заснування:</strong> 1889</div>
+                        <div className="text-[16px] sm:text-[20px]"><strong className="text-[#002766]">Країна:</strong> Німеччина</div>
+                        <div className="text-[16px] sm:text-[20px]"><strong className="text-[#002766]">Офіційний сайт:</strong>
                             <Link href="https://www.draeger.com/" target="_blank"> https://www.draeger.com/</Link></div>
-                        <div className="text-[20px]"><strong className="text-[20px] text-[#002766]">Cоціальні мережі:</strong>
+                        <div className="text-[18px] sm:text-[20px]"><strong className="text-[#002766]">Cоціальні мережі:</strong>
                             <div className="flex flex-row pl-10 pt-2">
                                 <div
                                     className={"flex items-center justify-center gap-4"}
@@ -56,7 +56,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col self-center justify-center gap-4 pb-3">
+                <div className="flex flex-col self-center justify-center gap-4 pb-3 sm:px-0 px-2">
                     <div className="text-[#0061AA] w-full indent-5 leading-relaxed text-justify pt-4">Dräger — бренд із Німеччини з історією понад століття. Компанія працює з 1889 року та пройшла шлях від інженерних
                         розробок до масштабного виробництва медичних систем, які використовують у лікарнях у багатьох країнах світу.
                         У медичному напрямку Dräger асоціюється з надійністю обладнання, продуманістю інтерфейсів та увагою до сценаріїв,
@@ -75,7 +75,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                         <p>Обирайте Dräger у каталозі DM Project — щоб отримати перевірені медичні рішення з логічною комплектацією та
                             прозорим шляхом від вибору до покупки.</p>
                     </div>
-                    <div className="flex sm:flex-row justify-around flex-col">
+                    <div className="flex sm:flex-row justify-around flex-col gap-3">
                         <button
                             className={styles.loadProducts}
                             type="button" // змінено з submit на button
