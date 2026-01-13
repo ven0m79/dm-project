@@ -1,0 +1,19 @@
+.loadProducts {
+    text-align: center;
+    max-width: 400px;
+    font-size: 18px;
+    color: #fff;
+    padding: 10px;
+    background-color: #0061AA;
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.loadProducts:hover {
+    transition: all 0.5s;
+    background: #002766;
+    color: #ffffff;
+    font-size: 18px;
+}

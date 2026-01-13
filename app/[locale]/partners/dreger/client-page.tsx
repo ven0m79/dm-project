@@ -29,8 +29,9 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                         <h1 className="text-[24px]">Drägerwerk AG & Co. KGaA</h1>
                         <div><strong>Рік заснування:</strong> 1889</div>
                         <div><strong>Країна:</strong> Німеччина</div>
-                        <div><strong>Офіційний сайт:</strong> https://www.draeger.com/</div>
-                        <div>
+                        <div><strong>Офіційний сайт:</strong>
+                            <Link href="https://www.draeger.com/" target="_blank"> https://www.draeger.com/</Link></div>
+                        <div><strong>Cоціальні мережі:</strong>
                             <div className="flex flex-row pl-10 pt-2">
                                 <div
                                     className={"flex items-center justify-center gap-4"}
@@ -51,12 +52,11 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                                         <Image src="/instagram.webp" width={30} height={30} alt="Logo Instagram" />
                                     </Link>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col self-center justify-center gap-4">
+                <div className="flex flex-col self-center justify-center gap-4 pb-3">
                     <div className="text-[#0061AA] w-full indent-5 leading-relaxed text-justify">Dräger — бренд із Німеччини з історією понад століття. Компанія працює з 1889 року та пройшла шлях від інженерних
                         розробок до масштабного виробництва медичних систем, які використовують у лікарнях у багатьох країнах світу.
                         У медичному напрямку Dräger асоціюється з надійністю обладнання, продуманістю інтерфейсів та увагою до сценаріїв,
@@ -75,8 +75,22 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                         <p>Обирайте Dräger у каталозі DM Project — щоб отримати перевірені медичні рішення з логічною комплектацією та
                             прозорим шляхом від вибору до покупки.</p>
                     </div>
+                    <div className="flex sm:flex-row justify-around flex-col">
+                        <button
+                            className={styles.loadProducts}
+                            type="button" // змінено з submit на button
 
+                        >
+                            {'Завантажити обладнання Dräger'}
+                        </button>
+                        <button
+                            className={styles.loadProducts}
+                            type="button" // змінено з submit на button
 
+                        >
+                            {'Завантажити аксесуари Dräger'}
+                        </button>
+                    </div>
                 </div>
             </div>
 
