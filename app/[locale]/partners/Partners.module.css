@@ -17,3 +17,38 @@
     color: #ffffff;
     font-size: 18px;
 }
+.headSubCatalogBlock {
+    color: #002766;
+    display: flex;
+    text-align: center;
+    padding: 5px;
+    width: 210px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    border-radius: 10px;
+}
+
+@media (max-width: 640px) {
+    .headSubCatalogBlock {
+        width: 160px;
+    }
+}
+
+.headSubCatalogBlockMini {
+    font-size: 12px;
+    color: #002766;
+    display: flex;
+    text-align: center;
+    padding: 5px;
+    width: 140px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    border-radius: 10px;
+}
+
+@media (max-width: 640px) {
+    .headSubCatalogBlockMini {
+        width: 108px;
+        font-size: 10px;
+
+
+    }
+}
