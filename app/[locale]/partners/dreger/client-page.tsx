@@ -9,8 +9,22 @@ import Image from "next/image";
 import dreger from "../../../../public/logo-partners/dreger-log-partner-big.webp";
 import Link from "next/link";
 
-export const ClientPage = ({ params: { locale } }: { params: { locale: string } }) => {
-    const t = useTranslations("AboutPage");
+
+type ClientPageProps = {
+    locale: string;
+    brands: {
+        id: number;
+        name: string;
+        slug: string;
+    };
+    products: any[];
+};
+
+export const ClientPage = ({
+    locale,
+    brands,
+    products,
+}: ClientPageProps) => {
 
     return (
         <MainLayout>
@@ -90,6 +104,48 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                         >
                             {'Завантажити аксесуари Dräger'}
                         </button>
+                    </div>
+                    <div>
+                        <div className="flex flex-col justify-center items-center w-full max-w-[1000px]">
+                            {/* PRODUCTS */}
+                            <div className="w-full pt-10">
+                                <h2 className="text-[22px] font-semibold text-[#002766] mb-4">
+                                    Обладнання бренду {brands?.name}
+                                </h2>
+                                {products.length === 0 && (
+                                    <div>Товари для цього бренду відсутні</div>
+                                )}
+                                <div className="grid sm:grid-cols-2 gap-6">
+                                    {products.map((product) => (
+                                        <div
+                                            key={product.id}
+                                            className="border rounded-lg p-4 flex flex-col gap-3"
+                                        >
+                                            {product.images?.[0] && (
+                                                <Image
+                                                    src={product.images[0].src}
+                                                    alt={product.images[0].alt || product.name}
+                                                    width={300}
+                                                    height={300}
+                                                    className="object-contain"
+                                                />
+                                            )}
+
+                                            <h3 className="font-semibold text-[#002766]">
+                                                {product.name}
+                                            </h3>
+
+                                            <Link
+                                                href={`/${locale}/product/${product.id}`}
+                                                className="text-[#0061AA] underline"
+                                            >
+                                                Переглянути товар
+                                            </Link>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

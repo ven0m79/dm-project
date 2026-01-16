@@ -1,57 +1,108 @@
-// app/[locale]/about/page.tsx
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
+import WooCommerceRestApi from "@woocommerce/woocommerce-rest-api";
 import { ClientPage } from "./client-page";
-import { setRequestLocale } from 'next-intl/server'; // 💡 ДОДАНО: Імпорт для ініціалізації локалі
 
-export async function generateMetadata({
-  params,
-}: {
+export const revalidate = 300;
+
+type PageProps = {
   params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  
-  const { locale } = await params;
+};
 
-  // 💡 ОПЦІЙНО: Можна додати setRequestLocale, але зазвичай це роблять у компоненті Page або Layout
-  setRequestLocale(locale); 
+const api = new WooCommerceRestApi({
+  url: process.env.NEXT_PUBLIC_WORDPRESS_RITE_URL!,
+  consumerKey: process.env.WC_CONSUMER_KEY!,
+  consumerSecret: process.env.WC_CONSUMER_SECRET!,
+  version: "wc/v3",
+});
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  setRequestLocale(locale);
 
   return locale === "ua"
     ? {
-        title: "Партнер DREGER | ДМ-Проект",
-        description: `Dräger — бренд із Німеччини з історією понад століття. Компанія працює з 1889 року та пройшла шлях від інженерних
-розробок до масштабного виробництва медичних систем, які використовують у лікарнях у багатьох країнах світу.
-У медичному напрямку Dräger асоціюється з надійністю обладнання, продуманістю інтерфейсів та увагою до сценаріїв,
-у яких важлива кожна секунда — від операційної до відділення інтенсивної терапії.
-
-Асортимент медичної продукції Dräger охоплює базові потреби стаціонару та критичної допомоги. Це рішення для
-анестезіології та операційних (анестезіологічні робочі місця й системи), апарати штучної вентиляції легень для
-різних клінічних ситуацій, системи моніторингу пацієнта та суміжні рішення для організації безперервного контролю
-показників. Окремий напрям — неонатальні рішення, зокрема обладнання для підтримки стабільного середовища й догляду
-за новонародженими, що критично для відділень, де значення мають точні налаштування та прогнозована робота техніки.
-
-Придбати продукцію Dräger в DM Project зручно, коли потрібен швидкий і зрозумілий підбір під задачу відділення та
-комплектація в одному місці. Тут легше узгодити потрібні позиції між собою, уникнути помилок сумісності та
-отримати рішення, яке коректно закриває реальний клінічний сценарій, а не просто “окремий пристрій у вакуумі”.
-
-Обирайте Dräger у каталозі DM Project — щоб отримати перевірені медичні рішення з логічною комплектацією та
-прозорим шляхом від вибору до покупки.`,
-      }
+      title: "Партнер Dräger | ДМ-Проект",
+      description: "Dräger — офіційний партнер DM Project. Медичне обладнання та аксесуари.",
+    }
     : {
-        title: "Partner DREGER | DM-Project",
-        description: "Dreger - DM-Project is a leader in the design and equipping of medical facilities with modern Dräger equipment. Quality assurance, medical equipment servicing and staff training. A reliable partner for Ukrainian doctors dm-project.com.ua",
-      };
+      title: "Partner Dräger | DM-Project",
+      description: "Dräger official partner. Medical equipment and accessories.",
+    };
 }
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  
-  const { locale } = await params;
-  
-  // 💡 ОБОВ'ЯЗКОВО: Встановлюємо локаль для коректної роботи next-intl у Server Components.
-  setRequestLocale(locale); 
+// ----------------- Функція, що тягне товари Dräger -----------------
+async function getDragerProducts(locale: string) {
+  let page = 1;
+  let totalPages = 1;
+  const allProducts: any[] = [];
 
-  // Це дозволить передати синхронний об'єкт локалі у ClientPage
-  return <ClientPage params={{ locale }} />; 
+  // Визначаємо мову для фільтру
+  const lang = locale === "ua" ? "ua" : "en";
+
+  do {
+    const response = await api.get(`products?per_page=100&page=${page}`);
+
+    if (response.status === 200) {
+      totalPages = parseInt(response.headers["x-wp-totalpages"] || "1", 10);
+
+      // Фільтруємо товари: Dräger + правильна мова
+      const dragerProducts = response.data.filter(
+        (product: { brands: any[]; lang?: string }) =>
+          product.brands?.some(brand => brand.id === 102) &&
+          product.lang === lang
+      );
+
+      allProducts.push(...dragerProducts);
+      page++;
+    } else {
+      break;
+    }
+  } while (page <= totalPages);
+
+  // Сортуємо товари за абеткою, при цьому accessories йдуть вкінці
+  allProducts.sort((a, b) => {
+    const aIsAccessory = a.tags?.some(
+      (tag: any) => tag.slug?.toLowerCase() === "accessories"
+    );
+    const bIsAccessory = b.tags?.some(
+      (tag: any) => tag.slug?.toLowerCase() === "accessories"
+    );
+
+    // Якщо обидва аксесуари або обидва не аксесуари — сортуємо за назвою
+    if (aIsAccessory === bIsAccessory) {
+      return a.name.localeCompare(b.name, lang === "ua" ? "uk" : "en");
+    }
+
+    // Якщо a аксесуар, а b ні — a вкінці
+    return aIsAccessory ? 1 : -1;
+  });
+
+
+  return allProducts;
+}
+
+
+// ----------------- Page -----------------
+export default async function Page({ params }: PageProps) {
+  const { locale } = await params;
+
+  let products: any[] = [];
+  try {
+    products = await getDragerProducts(locale);
+  } catch (err) {
+    console.error("Failed to fetch Dräger products:", err);
+  }
+
+  return (
+    <ClientPage
+      locale={locale}
+      brands={{
+        id: 102,
+        name: "Dräger",
+        slug: "drager-brand",
+      }}
+      products={products}
+    />
+  );
 }
