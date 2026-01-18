@@ -27,17 +27,17 @@ type ClientPageProps = {
 
 /** Тимчасово — потім замінюється даними з API */
 const EQUIPMENT_CATEGORIES: Category[] = [
-    { id: 1, name: "Наркозно-дихальні апарати", slug: "anesthesia-and-respiratory-devices" },
-    { id: 2, name: "Апарати штучної вентиляції легень", slug: "ventilators-icu" },
-    { id: 3, name: "Електро-імпедансний томограф", slug: "electrical-impedance-tomography" },
-    { id: 4, name: "Монітори пацієнта", slug: "patient-monitors" },
-    { id: 5, name: "Неонатальне обладнання", slug: "neonatal-equipment" },
-    { id: 6, name: "Світильники операційні та екзаменаційні", slug: "operating-and-examination-lamps" },
-    { id: 7, name: "Консолі стельові та настінні", slug: "wall-supply-and-ceiling-supply-units" },
-    { id: 8, name: "Випарвувачі", slug: "vaporisers" },
-    { id: 9, name: "Газоаналізатори", slug: "gas-analyzers" },
-    { id: 10, name: "Аспіратори", slug: "aspiration" },
-    { id: 11, name: "Медичне газопостачання", slug: "gas-management-systems" },
+    { id: 18, name: "Наркозно-дихальні апарати", slug: "anesthesia-and-respiratory-devices" },
+    { id: 644, name: "Апарати штучної вентиляції легень", slug: "ventilators-icu" },
+    { id: 1126, name: "Електро-імпедансний томограф", slug: "electrical-impedance-tomography" },
+    { id: 20, name: "Монітори пацієнта", slug: "patient-monitors" },
+    { id: 79, name: "Неонатальне обладнання", slug: "neonatal-equipment" },
+    { id: 670, name: "Світильники операційні та екзаменаційні", slug: "operating-and-examination-lamps" },
+    { id: 243, name: "Консолі стельові та настінні", slug: "wall-supply-and-ceiling-supply-units" },
+    { id: 1145, name: "Випаровувачі", slug: "vaporisers" },
+    { id: 1131, name: "Газоаналізатори", slug: "gas-analyzers" },
+    { id: 1157, name: "Аспіратори", slug: "aspiration" },
+    { id: 87, name: "Медичне газопостачання", slug: "gas-management-systems" },
 ];
 
 export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
@@ -53,7 +53,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
 
         return products.filter(product =>
             product.categories?.some(
-                (cat: any) => cat.slug === selectedCategory.slug
+                (cat: any) => cat.id === selectedCategory.id
             )
         );
     }, [products, selectedCategory]);
@@ -66,7 +66,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
         setSelectedCategory(category);
         setVisibleCount(ITEMS_PER_PAGE);
         setIsDropdownOpen(false);
-        
+
     }; return (
         <MainLayout>
             <div className="flex flex-col justify-center items-center w-full max-w-[1000px]">
@@ -123,7 +123,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
 
 
                 {/* ===== BUTTON + DROPDOWN ===== */}
-                <div className="flex sm:flex-row justify-between flex-col gap-3 pt-2">
+                <div className="relative flex gap-3">
                     <button
                         type="button"
                         onClick={() => setIsDropdownOpen(prev => !prev)}
@@ -135,14 +135,14 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                     </button>
 
                     {isDropdownOpen && (
-                        <div className="absolute left-10 mt-10 bg-white border rounded-lg shadow-lg z-20 w-max">
+                        <div className="absolute left-0 mt-10 bg-white border rounded-lg shadow-lg z-20">
                             {EQUIPMENT_CATEGORIES.map(category => (
                                 <button
                                     key={category.id}
                                     type="button"
                                     onClick={() => handleCategoryClick(category)}
                                     className={classNames(
-                                        "block whitespace-nowrap text-left px-4 py-2 hover:bg-blue-50 transition",
+                                        "block w-full whitespace-nowrap text-left px-4 py-2 hover:bg-blue-50 transition",
                                         selectedCategory?.id === category.id &&
                                         "bg-blue-100 font-semibold"
                                     )}
@@ -151,10 +151,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                                 </button>
                             ))}
                         </div>
-
-
                     )}
-
                     <button
                         className={styles.loadProducts}
                         type="button" // змінено з submit на button
@@ -163,6 +160,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                         {'Завантажити аксесуари Dräger'}
                     </button>
                 </div>
+
 
                 {/* PAGINATION + PRODUCTS */}
                 <div className="w-full pt-10">
