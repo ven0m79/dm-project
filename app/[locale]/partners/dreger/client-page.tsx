@@ -3,7 +3,6 @@ import React, { useMemo, useState } from "react";
 import classNames from "classnames";
 import { MainLayout } from "@app/[locale]/components/templates";
 import styles from "../Partners.module.css";
-import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import router from "next/router";
@@ -47,14 +46,13 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
 
-    /** Фільтрація товарів по категорії */
+    /** Фільтрація товарів по категорії або тегу */
     const filteredProducts = useMemo(() => {
         if (!selectedCategory) return products;
 
         return products.filter(product =>
-            product.categories?.some(
-                (cat: any) => cat.id === selectedCategory.id
-            )
+            product.categories?.some((cat: { slug: string; }) => cat.slug === selectedCategory.slug) ||
+            product.tags?.some((tag: { slug: string; }) => tag.slug === selectedCategory.slug)
         );
     }, [products, selectedCategory]);
 
@@ -66,8 +64,9 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
         setSelectedCategory(category);
         setVisibleCount(ITEMS_PER_PAGE);
         setIsDropdownOpen(false);
+    };
 
-    }; return (
+    return (
         <MainLayout>
             <div className="flex flex-col justify-center items-center w-full max-w-[1000px]">
                 {/* BRAND INFO */}
@@ -102,65 +101,54 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                 </div>
 
                 {/* DESCRIPTION */}
-                <div className="text-[#0061AA] w-full indent-5 leading-relaxed text-justify pt-4">Dräger — бренд із Німеччини з історією понад століття. Компанія працює з 1889 року та пройшла шлях від інженерних
-                    розробок до масштабного виробництва медичних систем, які використовують у лікарнях у багатьох країнах світу.
-                    У медичному напрямку Dräger асоціюється з надійністю обладнання, продуманістю інтерфейсів та увагою до сценаріїв,
-                    у яких важлива кожна секунда — від операційної до відділення інтенсивної терапії.
-
-                    <p>Асортимент медичної продукції Dräger охоплює базові потреби стаціонару та критичної допомоги. Це рішення для
-                        анестезіології та операційних (анестезіологічні робочі місця й системи), апарати штучної вентиляції легень для
-                        різних клінічних ситуацій, системи моніторингу пацієнта та суміжні рішення для організації безперервного контролю
-                        показників. Окремий напрям — неонатальні рішення, зокрема обладнання для підтримки стабільного середовища й догляду
-                        за новонародженими, що критично для відділень, де значення мають точні налаштування та прогнозована робота техніки.</p>
-
-                    <p>Придбати продукцію Dräger в DM Project зручно, коли потрібен швидкий і зрозумілий підбір під задачу відділення та
-                        комплектація в одному місці. Тут легше узгодити потрібні позиції між собою, уникнути помилок сумісності та
-                        отримати рішення, яке коректно закриває реальний клінічний сценарій, а не просто “окремий пристрій у вакуумі”.</p>
-
-                    <p>Обирайте Dräger у каталозі DM Project — щоб отримати перевірені медичні рішення з логічною комплектацією та
-                        прозорим шляхом від вибору до покупки.</p>
+                <div className="text-[#0061AA] w-full indent-5 leading-relaxed text-justify pt-4">Dräger — німецький виробник медичної та безпекової техніки, відомий рішеннями для лікарень і критичної медицини.
+                    Бренд фокусується на практичних технологіях, які допомагають медичним командам працювати стабільно, точно та безпечно
+                    в щоденних і високоризикових сценаріях.
                 </div>
-
 
                 {/* ===== BUTTON + DROPDOWN ===== */}
                 <div className="relative flex gap-3">
-                    <button
-                        type="button"
-                        onClick={() => setIsDropdownOpen(prev => !prev)}
-                        className={styles.loadProducts}
-                    >
-                        {selectedCategory
-                            ? `Категорія: ${selectedCategory.name}`
-                            : "Завантажити обладнання Dräger"}
-                    </button>
+                    <div className="relative">
+                        <button
+                            type="button"
+                            onClick={() => setIsDropdownOpen(prev => !prev)}
+                            className={styles.loadProducts}
+                        >
+                            {selectedCategory
+                                ? `Категорія: ${selectedCategory.name}`
+                                : "Завантажити обладнання Dräger"}
+                        </button>
 
-                    {isDropdownOpen && (
-                        <div className="absolute left-0 mt-10 bg-white border rounded-lg shadow-lg z-20">
-                            {EQUIPMENT_CATEGORIES.map(category => (
-                                <button
-                                    key={category.id}
-                                    type="button"
-                                    onClick={() => handleCategoryClick(category)}
-                                    className={classNames(
-                                        "block w-full whitespace-nowrap text-left px-4 py-2 hover:bg-blue-50 transition",
-                                        selectedCategory?.id === category.id &&
-                                        "bg-blue-100 font-semibold"
-                                    )}
-                                >
-                                    {category.name}
-                                </button>
-                            ))}
-                        </div>
-                    )}
-                    <button
-                        className={styles.loadProducts}
-                        type="button" // змінено з submit на button
+                        {isDropdownOpen && (
+                            <div className="absolute left-0 mt-2 bg-white border rounded-lg shadow-lg z-20">
+                                {EQUIPMENT_CATEGORIES.map(category => (
+                                    <button
+                                        key={category.id}
+                                        type="button"
+                                        onClick={() => handleCategoryClick(category)}
+                                        className={classNames(
+                                            "block w-full whitespace-nowrap text-left px-4 py-2 hover:bg-blue-50 transition",
+                                            selectedCategory?.id === category.id &&
+                                            "bg-blue-100 font-semibold"
+                                        )}
+                                    >
+                                        {category.name}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </div>
 
-                    >
-                        {'Завантажити аксесуари Dräger'}
-                    </button>
+<button
+        className={styles.loadProducts}
+        type="button"
+        onClick={() =>
+            setSelectedCategory({ id: 0, name: "Аксесуари", slug: "accessories" })
+        }
+    >
+        Завантажити аксесуари Dräger
+    </button>
                 </div>
-
 
                 {/* PAGINATION + PRODUCTS */}
                 <div className="w-full pt-10">
@@ -207,6 +195,28 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                             </button>
                         </div>
                     )}
+                </div>
+                <div className="text-[#0061AA] w-full indent-5 leading-relaxed text-justify pt-4">
+                    <p>Dräger — бренд із Німеччини з історією понад століття. Компанія працює з 1889 року та пройшла шлях від інженерних
+                        розробок до масштабного виробництва медичних систем, які використовують у лікарнях у багатьох країнах світу.
+                        У медичному напрямку Dräger асоціюється з надійністю обладнання, продуманістю інтерфейсів та увагою до сценаріїв,
+                        у яких важлива кожна секунда — від операційної до відділення інтенсивної терапії.</p>
+
+                    <p>Асортимент медичної продукції Dräger охоплює базові потреби стаціонару та критичної допомоги. Це рішення для
+                        анестезіології та операційних (анестезіологічні робочі місця й системи), апарати штучної вентиляції легень для
+                        різних клінічних ситуацій, системи моніторингу пацієнта та суміжні рішення для організації безперервного контролю
+                        показників. Окремий напрям — неонатальні рішення, зокрема обладнання для підтримки стабільного середовища й догляду
+                        за новонародженими, що критично для відділень, де значення мають точні налаштування та прогнозована робота техніки.
+                    </p>
+
+                    <p>Придбати продукцію Dräger в DM Project зручно, коли потрібен швидкий і зрозумілий підбір під задачу відділення та
+                        комплектація в одному місці. Тут легше узгодити потрібні позиції між собою, уникнути помилок сумісності та
+                        отримати рішення, яке коректно закриває реальний клінічний сценарій, а не просто “окремий пристрій у вакуумі”.
+                    </p>
+
+                    <p>
+                        Обирайте Dräger у каталозі DM Project — щоб отримати перевірені медичні рішення з логічною комплектацією та
+                        прозорим шляхом від вибору до покупки.</p>
                 </div>
             </div>
         </MainLayout>
