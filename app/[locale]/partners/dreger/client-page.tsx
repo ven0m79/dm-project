@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import classNames from "classnames";
 import { MainLayout } from "@app/[locale]/components/templates";
 import styles from "../Partners.module.css";
@@ -8,6 +8,12 @@ import Image from "next/image";
 import Link from "next/link";
 import router from "next/router";
 import { isIOS } from "utils/constants";
+
+type Category = {
+    id: number;
+    name: string;
+    slug: string;
+};
 
 type ClientPageProps = {
     locale: string;
@@ -19,14 +25,49 @@ type ClientPageProps = {
     products: any[];
 };
 
+/** Тимчасово — потім замінюється даними з API */
+const EQUIPMENT_CATEGORIES: Category[] = [
+    { id: 1, name: "Наркозно-дихальні апарати", slug: "anesthesia-and-respiratory-devices" },
+    { id: 2, name: "Апарати штучної вентиляції легень", slug: "ventilators-icu" },
+    { id: 3, name: "Електро-імпедансний томограф", slug: "electrical-impedance-tomography" },
+    { id: 4, name: "Монітори пацієнта", slug: "patient-monitors" },
+    { id: 5, name: "Неонатальне обладнання", slug: "neonatal-equipment" },
+    { id: 6, name: "Світильники операційні та екзаменаційні", slug: "operating-and-examination-lamps" },
+    { id: 7, name: "Консолі стельові та настінні", slug: "wall-supply-and-ceiling-supply-units" },
+    { id: 8, name: "Випарвувачі", slug: "vaporisers" },
+    { id: 9, name: "Газоаналізатори", slug: "gas-analyzers" },
+    { id: 10, name: "Аспіратори", slug: "aspiration" },
+    { id: 11, name: "Медичне газопостачання", slug: "gas-management-systems" },
+];
+
 export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
     const ITEMS_PER_PAGE = 15;
+
     const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+
+    /** Фільтрація товарів по категорії */
+    const filteredProducts = useMemo(() => {
+        if (!selectedCategory) return products;
+
+        return products.filter(product =>
+            product.categories?.some(
+                (cat: any) => cat.slug === selectedCategory.slug
+            )
+        );
+    }, [products, selectedCategory]);
+
+    const visibleProducts = filteredProducts.slice(0, visibleCount);
 
     const loadMore = () => setVisibleCount(prev => prev + ITEMS_PER_PAGE);
-    const visibleProducts = products.slice(0, visibleCount);
 
-    return (
+    const handleCategoryClick = (category: Category) => {
+        setSelectedCategory(category);
+        setVisibleCount(ITEMS_PER_PAGE);
+        setIsDropdownOpen(false);
+        
+    }; return (
         <MainLayout>
             <div className="flex flex-col justify-center items-center w-full max-w-[1000px]">
                 {/* BRAND INFO */}
@@ -80,14 +121,55 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                         прозорим шляхом від вибору до покупки.</p>
                 </div>
 
+
+                {/* ===== BUTTON + DROPDOWN ===== */}
+                <div className="flex sm:flex-row justify-between flex-col gap-3 pt-2">
+                    <button
+                        type="button"
+                        onClick={() => setIsDropdownOpen(prev => !prev)}
+                        className={styles.loadProducts}
+                    >
+                        {selectedCategory
+                            ? `Категорія: ${selectedCategory.name}`
+                            : "Завантажити обладнання Dräger"}
+                    </button>
+
+                    {isDropdownOpen && (
+                        <div className="absolute left-10 mt-10 bg-white border rounded-lg shadow-lg z-20 w-max">
+                            {EQUIPMENT_CATEGORIES.map(category => (
+                                <button
+                                    key={category.id}
+                                    type="button"
+                                    onClick={() => handleCategoryClick(category)}
+                                    className={classNames(
+                                        "block whitespace-nowrap text-left px-4 py-2 hover:bg-blue-50 transition",
+                                        selectedCategory?.id === category.id &&
+                                        "bg-blue-100 font-semibold"
+                                    )}
+                                >
+                                    {category.name}
+                                </button>
+                            ))}
+                        </div>
+
+
+                    )}
+
+                    <button
+                        className={styles.loadProducts}
+                        type="button" // змінено з submit на button
+
+                    >
+                        {'Завантажити аксесуари Dräger'}
+                    </button>
+                </div>
+
                 {/* PAGINATION + PRODUCTS */}
                 <div className="w-full pt-10">
                     <h2 className="text-[22px] font-semibold text-[#002766] mb-4">
                         Обладнання бренду {brands?.name}
                     </h2>
-
                     {products.length === 0 && <div>Товари для цього бренду відсутні</div>}
-
                     <div className="flex flex-wrap justify-start gap-4 w-full">
                         {visibleProducts.map(product => {
                             const url = `/catalog/sub-catalog/product/${product.translations?.[locale as any]}?category=${encodeURIComponent(product.categories?.[0]?.slug || "")}`;
@@ -117,8 +199,6 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                             );
                         })}
                     </div>
-
-
                     {visibleCount < products.length && (
                         <div className="flex justify-center mt-6">
                             <button
