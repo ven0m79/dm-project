@@ -7,7 +7,6 @@ import { notFound } from 'next/navigation';
 import { routing } from '../../i18n/routing';
 import { cn } from '@app/[locale]/components/molecules/lib/utils';
 import ClientScriptLoader from '@app/[locale]/components/atoms/scriptsBinotel/scriptsBinotel';
-import './globals.css';
 
 type Props = {
   children: ReactNode;
