@@ -16,7 +16,7 @@ export default async function handler(req: any, res: any) {
 //
     do {
       const response = await api.get(
-        `products?per_page=100&page=${page}&brand=102`
+        `products?per_page=100&page=${page}&tag_ID=102`
       );
 
       if (response.status === 200) {

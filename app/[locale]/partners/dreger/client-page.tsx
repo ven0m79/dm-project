@@ -26,6 +26,7 @@ type ClientPageProps = {
 
 /** Тимчасово — потім замінюється даними з API */
 const EQUIPMENT_CATEGORIES: Category[] = [
+    { id: 0, name: "Всі товари Dräger", slug: "all" },
     { id: 18, name: "Наркозно-дихальні апарати", slug: "anesthesia-and-respiratory-devices" },
     { id: 644, name: "Апарати штучної вентиляції легень", slug: "ventilators-icu" },
     { id: 1126, name: "Електро-імпедансний томограф", slug: "electrical-impedance-tomography" },
@@ -40,7 +41,7 @@ const EQUIPMENT_CATEGORIES: Category[] = [
 ];
 
 export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
-    const ITEMS_PER_PAGE = 15;
+    const ITEMS_PER_PAGE = 20;
 
     const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -77,12 +78,16 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
 
     const loadMore = () => setVisibleCount(prev => prev + ITEMS_PER_PAGE);
 
-    const handleCategoryClick = (category: Category) => {
+const handleCategoryClick = (category: Category) => {
+    if (category.slug === "all") {
+        setSelectedCategory(null);
+    } else {
         setSelectedCategory(category);
-        setVisibleCount(ITEMS_PER_PAGE);
-        setIsDropdownOpen(false);
-    };
+    }
 
+    setVisibleCount(ITEMS_PER_PAGE);
+    setIsDropdownOpen(false);
+};
     return (
         <MainLayout>
             <div className="flex flex-col justify-center items-center w-full max-w-250">
@@ -131,9 +136,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                             onClick={() => setIsDropdownOpen(prev => !prev)}
                             className={styles.loadProducts}
                         >
-                            {selectedCategory
-                                ? `Категорія: ${selectedCategory.name}`
-                                : "Завантажити обладнання Dräger"}
+                            {"Завантажити обладнання Dräger"}
                         </button>
 
                         {isDropdownOpen && (
@@ -144,9 +147,9 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                                         type="button"
                                         onClick={() => handleCategoryClick(category)}
                                         className={classNames(
-                                            "block w-full whitespace-nowrap text-left px-4 py-2 hover:bg-blue-50 transition",
+                                            "block w-full whitespace-nowrap rounded-lg text-left px-4 py-2 hover:bg-blue-50 transition",
                                             selectedCategory?.id === category.id &&
-                                            "bg-blue-100 font-semibold"
+                                            "bg-blue-100 font-semibold rounded-lg"
                                         )}
                                     >
                                         {category.name}
@@ -168,19 +171,19 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                 </div>
 
                 {/* PAGINATION + PRODUCTS */}
-                <div className="w-full pt-10">
+                <div className="w-full pt-6">
                     <h2 className="text-[22px] font-semibold text-[#002766] mb-4">
                         Обладнання бренду {brands?.name}
                     </h2>
                     {productsState.length === 0 && <div>Товари грузяться, зачекайте будь ласка.....</div>}
-                    <div className="flex flex-wrap justify-start gap-4 w-full">
+                    <div className="flex flex-wrap justify-center mt-4 mb-4 ml-2 gap-3">
                         {visibleProducts.map(product => {
                             const url = `/catalog/sub-catalog/product/${product.translations?.[locale as any]}?category=${encodeURIComponent(product.categories?.[0]?.slug || "")}`;
 
                             return (
                                 <div
                                     key={product.id}
-                                    className="flex flex-col items-center border rounded-lg p-4 min-w-45 cursor-pointer max-w-75"
+                                    className={classNames("flex flex-col items-center rounded-lg p-4 min-w-45 cursor-pointer max-w-75", styles.headSubCatalogBlock)}
                                     onClick={() => {
                                         if (isIOS) router.push(url);
                                         else window.location.href = url;
@@ -190,8 +193,8 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                                         <Image
                                             src={product.images[0].src}
                                             alt={product.images[0].alt || product.name}
-                                            width={150}
-                                            height={180}
+                                            width={170}
+                                            height={200}
                                             className="object-contain"
                                         />
                                     )}

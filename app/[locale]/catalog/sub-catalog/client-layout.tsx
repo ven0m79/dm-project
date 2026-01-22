@@ -85,7 +85,7 @@ export default function ClientLayout({ children, locale }: Props) {
           </motion.div>
         </>
       ) : (
-        <div className="w-[300px] mt-5">
+        <div className="w-75 mt-5">
           <LSidebar locale={locale} changeURLParams />
         </div>
       )}
@@ -94,7 +94,7 @@ export default function ClientLayout({ children, locale }: Props) {
 
       {/* RIGHT SIDEBAR */}
       {!isMobile && (
-        <div className="w-[300px] mt-5">
+        <div className="w-75 mt-5">
           <RSidebar locale={locale} changeURLParams />
         </div>
       )}
