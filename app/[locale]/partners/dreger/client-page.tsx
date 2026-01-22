@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { isIOS } from "utils/constants";
 import CaruselBrands from "@app/[locale]/components/atoms/carusel-brands/carusel-brands";
+import { useIsMobile } from "../../components/hooks/useIsMobile";
 
 type Category = {
     id: number;
@@ -50,6 +51,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
     const [productsState, setProductsState] = useState<any[]>(products || []);
     const router = useRouter();
     const [showBackButton, setShowBackButton] = useState(false);
+      const isMobile = useIsMobile();
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -188,7 +190,12 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                         Обладнання бренду {brands?.name}
                     </h2>
                     {productsState.length === 0 && <div>Товари грузяться, зачекайте будь ласка.....</div>}
-                    <div className= "grid gap-3 mt-4 mb-4 ml-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 justify-items-start">
+                    <div className={classNames(
+                        "grid gap-3 mt-4 mb-4 mx-1 justify-items-start",
+                        isMobile
+                            ? "grid-cols-2"
+                            : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
+                    )}>
                         {visibleProducts.map(product => {
                             const url = `/catalog/sub-catalog/product/${product.translations?.[locale as any]}?category=${encodeURIComponent(product.categories?.[0]?.slug || "")}`;
 
