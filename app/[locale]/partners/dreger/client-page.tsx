@@ -48,6 +48,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
     const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
     const [productsState, setProductsState] = useState<any[]>(products || []);
     const router = useRouter();
+    const [showBackButton, setShowBackButton] = useState(false);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -64,6 +65,15 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
         fetchProducts();
     }, [locale]);
 
+    useEffect(() => {
+        const onScroll = () => {
+            setShowBackButton(window.scrollY > 120);
+        };
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
+
     /** Фільтрація товарів по категорії або тегу */
     const filteredProducts = useMemo(() => {
         if (!selectedCategory) return productsState;
@@ -75,6 +85,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
     }, [productsState, selectedCategory]);
 
     const visibleProducts = filteredProducts.slice(0, visibleCount);
+
 
     const loadMore = () => setVisibleCount(prev => prev + ITEMS_PER_PAGE);
 
@@ -239,6 +250,32 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                         прозорим шляхом від вибору до покупки.</p>
                 </div>
             </div>
+            {showBackButton && (
+    <button
+        type="button"
+        onClick={() => router.back()}
+        className="
+            fixed
+            top-142
+            right-10
+            z-50
+            flex
+            items-center
+            justify-center
+            w-15
+            h-15
+            rounded-2xl
+            bg-[#0061AA]
+            text-white
+            shadow-lg
+            hover:bg-[#004f8a]
+            transition
+        "
+        aria-label="Back"
+    >
+        ←
+    </button>
+)}
         </MainLayout>
     );
 };
