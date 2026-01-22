@@ -1,11 +1,11 @@
 "use client";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import classNames from "classnames";
 import { MainLayout } from "@app/[locale]/components/templates";
 import styles from "../Partners.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 import { isIOS } from "utils/constants";
 
 type Category = {
@@ -45,16 +45,33 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
     const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+    const [productsState, setProductsState] = useState<any[]>(products || []);
+    const router = useRouter();
+
+    useEffect(() => {
+  const fetchProducts = async () => {
+    try {
+      const res = await fetch(`/api/brands/dreger?locale=${locale}`);
+      if (!res.ok) throw new Error("Failed to load products");
+      const data = await res.json();
+      setProductsState(data);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  fetchProducts();
+}, [locale]);
 
     /** Фільтрація товарів по категорії або тегу */
     const filteredProducts = useMemo(() => {
-        if (!selectedCategory) return products;
+        if (!selectedCategory) return productsState;
 
-        return products.filter(product =>
+        return productsState.filter(product =>
             product.categories?.some((cat: { slug: string; }) => cat.slug === selectedCategory.slug) ||
             product.tags?.some((tag: { slug: string; }) => tag.slug === selectedCategory.slug)
         );
-    }, [products, selectedCategory]);
+    }, [productsState, selectedCategory]);
 
     const visibleProducts = filteredProducts.slice(0, visibleCount);
 
@@ -68,9 +85,9 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
 
     return (
         <MainLayout>
-            <div className="flex flex-col justify-center items-center w-full max-w-[1000px]">
+            <div className="flex flex-col justify-center items-center w-full max-w-250">
                 {/* BRAND INFO */}
-                <div className="flex flex-shrink-0 sm:flex-row flex-col w-full">
+                <div className="flex shrink-0 sm:flex-row flex-col w-full">
                     <div className="flex w-full h-auto">
                         <Image src="/logo-partners/dreger-log-partner-big.webp" alt="Dräger" width={400} height={400} />
                     </div>
@@ -139,15 +156,15 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                         )}
                     </div>
 
-<button
-        className={styles.loadProducts}
-        type="button"
-        onClick={() =>
-            setSelectedCategory({ id: 0, name: "Аксесуари", slug: "accessories" })
-        }
-    >
-        Завантажити аксесуари Dräger
-    </button>
+                    <button
+                        className={styles.loadProducts}
+                        type="button"
+                        onClick={() =>
+                            setSelectedCategory({ id: 0, name: "Аксесуари", slug: "accessories" })
+                        }
+                    >
+                        Завантажити аксесуари Dräger
+                    </button>
                 </div>
 
                 {/* PAGINATION + PRODUCTS */}
@@ -155,7 +172,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                     <h2 className="text-[22px] font-semibold text-[#002766] mb-4">
                         Обладнання бренду {brands?.name}
                     </h2>
-                    {products.length === 0 && <div>Товари для цього бренду відсутні</div>}
+                    {productsState.length === 0}
                     <div className="flex flex-wrap justify-start gap-4 w-full">
                         {visibleProducts.map(product => {
                             const url = `/catalog/sub-catalog/product/${product.translations?.[locale as any]}?category=${encodeURIComponent(product.categories?.[0]?.slug || "")}`;
@@ -163,7 +180,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                             return (
                                 <div
                                     key={product.id}
-                                    className="flex flex-col items-center border rounded-lg p-4 min-w-[180px] cursor-pointer max-w-[300px]"
+                                    className="flex flex-col items-center border rounded-lg p-4 min-w-45 cursor-pointer max-w-75"
                                     onClick={() => {
                                         if (isIOS) router.push(url);
                                         else window.location.href = url;
