@@ -131,7 +131,7 @@ export default function CarouselBrands() {
                       e.stopPropagation();
                     }
                   }}
-                  className={classNames("flex-shrink-0", isActive && "z-10")}
+                  className={classNames("shrink-0", isActive && "z-10")}
                   style={{
                     width: THUMB_WIDTH,
                     height: THUMB_WIDTH,
@@ -140,10 +140,10 @@ export default function CarouselBrands() {
                 >
                   <div
                     className={classNames(
-                      "w-full h-full border rounded overflow-hidden",
+                      "w-full h-full rounded overflow-hidden",
                       "transition-all duration-200 ease-out",
                       isActive
-                        ? "opacity-60 border-blue-600 hover:opacity-100 hover:scale-110"
+                        ? "opacity-60 hover:opacity-100 hover:scale-110"
                         : "opacity-60 hover:opacity-100 hover:scale-110"
                     )}
                   >

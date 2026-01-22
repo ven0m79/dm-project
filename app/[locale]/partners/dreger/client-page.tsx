@@ -49,19 +49,19 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
     const router = useRouter();
 
     useEffect(() => {
-  const fetchProducts = async () => {
-    try {
-      const res = await fetch(`/api/brands/dreger?locale=${locale}`);
-      if (!res.ok) throw new Error("Failed to load products");
-      const data = await res.json();
-      setProductsState(data);
-    } catch (e) {
-      console.error(e);
-    }
-  };
+        const fetchProducts = async () => {
+            try {
+                const res = await fetch(`/api/brands/dreger?locale=${locale}`);
+                if (!res.ok) throw new Error("Failed to load products");
+                const data = await res.json();
+                setProductsState(data);
+            } catch (e) {
+                console.error(e);
+            }
+        };
 
-  fetchProducts();
-}, [locale]);
+        fetchProducts();
+    }, [locale]);
 
     /** Фільтрація товарів по категорії або тегу */
     const filteredProducts = useMemo(() => {
@@ -202,7 +202,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                             );
                         })}
                     </div>
-                    {visibleCount < products.length && (
+                    {visibleCount < filteredProducts.length && (
                         <div className="flex justify-center mt-6">
                             <button
                                 onClick={loadMore}
