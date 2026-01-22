@@ -78,16 +78,16 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
 
     const loadMore = () => setVisibleCount(prev => prev + ITEMS_PER_PAGE);
 
-const handleCategoryClick = (category: Category) => {
-    if (category.slug === "all") {
-        setSelectedCategory(null);
-    } else {
-        setSelectedCategory(category);
-    }
+    const handleCategoryClick = (category: Category) => {
+        if (category.slug === "all") {
+            setSelectedCategory(null);
+        } else {
+            setSelectedCategory(category);
+        }
 
-    setVisibleCount(ITEMS_PER_PAGE);
-    setIsDropdownOpen(false);
-};
+        setVisibleCount(ITEMS_PER_PAGE);
+        setIsDropdownOpen(false);
+    };
     return (
         <MainLayout>
             <div className="flex flex-col justify-center items-center w-full max-w-250">
@@ -198,7 +198,7 @@ const handleCategoryClick = (category: Category) => {
                                             className="object-contain"
                                         />
                                     )}
-                                    <h3 className="flex justify-center h-20 w-full px-2">
+                                    <h3 className="justify-center h-18 w-full px-2 line-clamp-3">
                                         {product.name}
                                     </h3>
                                 </div>
@@ -209,7 +209,7 @@ const handleCategoryClick = (category: Category) => {
                         <div className="flex justify-center mt-6">
                             <button
                                 onClick={loadMore}
-                                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                                className={styles.loadProducts}
                             >
                                 Завантажити ще
                             </button>
