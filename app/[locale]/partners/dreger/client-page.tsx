@@ -172,7 +172,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                     <h2 className="text-[22px] font-semibold text-[#002766] mb-4">
                         Обладнання бренду {brands?.name}
                     </h2>
-                    {productsState.length === 0}
+                    {productsState.length === 0 && <div>Товари грузяться, зачекайте будь ласка.....</div>}
                     <div className="flex flex-wrap justify-start gap-4 w-full">
                         {visibleProducts.map(product => {
                             const url = `/catalog/sub-catalog/product/${product.translations?.[locale as any]}?category=${encodeURIComponent(product.categories?.[0]?.slug || "")}`;
