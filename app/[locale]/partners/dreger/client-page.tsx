@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { isIOS } from "utils/constants";
+import CaruselBrands from "@app/[locale]/components/atoms/carusel-brands/carusel-brands";
 
 type Category = {
     id: number;
@@ -101,7 +102,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
     };
     return (
         <MainLayout>
-            <div className="flex flex-col justify-center items-center w-full max-w-250">
+            <div className="flex flex-col justify-center items-center w-full max-w-250 pb-3">
                 {/* BRAND INFO */}
                 <div className="flex shrink-0 sm:flex-row flex-col w-full">
                     <div className="flex w-full h-auto">
@@ -249,33 +250,18 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                         Обирайте Dräger у каталозі DM Project — щоб отримати перевірені медичні рішення з логічною комплектацією та
                         прозорим шляхом від вибору до покупки.</p>
                 </div>
+                <CaruselBrands />
             </div>
             {showBackButton && (
-    <button
-        type="button"
-        onClick={() => router.back()}
-        className="
-            fixed
-            top-142
-            right-10
-            z-50
-            flex
-            items-center
-            justify-center
-            w-15
-            h-15
-            rounded-2xl
-            bg-[#0061AA]
-            text-white
-            shadow-lg
-            hover:bg-[#004f8a]
-            transition
-        "
-        aria-label="Back"
-    >
-        ←
-    </button>
-)}
+                <button
+                    type="button"
+                    onClick={() => router.back()}
+                    className="fixed top-142 right-10 z-50 flex items-center justify-center w-15 h-15 rounded-2xl bg-[#0061AA] text-white shadow-lg hover:bg-[#004f8a] transition"
+                    aria-label="Back"
+                >
+                    ←
+                </button>
+            )}
         </MainLayout>
     );
 };
