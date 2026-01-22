@@ -27,7 +27,7 @@ const MainLayout: FC<MainLayoutProps> = ({
     <Suspense fallback="Loading">
       <main className={styles.main}>
         {noHeader ? null : <HeaderWrapper />}
-        <div className="sm:h-[50px] h-[0px]">
+        <div className="sm:h-12.5 h-0">
           {noNav ? null : <Nav />}
         </div>
         <div className="flex flex-1 w-full items-center justify-center">

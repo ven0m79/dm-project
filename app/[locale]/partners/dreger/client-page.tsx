@@ -188,7 +188,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                         Обладнання бренду {brands?.name}
                     </h2>
                     {productsState.length === 0 && <div>Товари грузяться, зачекайте будь ласка.....</div>}
-                    <div className="flex flex-wrap justify-center mt-4 mb-4 ml-2 gap-3">
+                    <div className= "grid gap-3 mt-4 mb-4 ml-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 justify-items-start">
                         {visibleProducts.map(product => {
                             const url = `/catalog/sub-catalog/product/${product.translations?.[locale as any]}?category=${encodeURIComponent(product.categories?.[0]?.slug || "")}`;
 
