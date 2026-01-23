@@ -112,9 +112,9 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
       ? source.filter(
           (product) =>
             product.categories?.some(
-              (cat) => cat.slug === selectedCategory.slug,
+              (cat:{ slug: string }) => cat.slug === selectedCategory.slug,
             ) ||
-            product.tags?.some((tag) => tag.slug === selectedCategory.slug),
+            product.tags?.some((tag:{ slug: string }) => tag.slug === selectedCategory.slug),
         )
       : source;
 
