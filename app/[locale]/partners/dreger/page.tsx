@@ -58,7 +58,6 @@ export default async function Page({ params }: PageProps) {
         name: "Dräger",
         slug: "drager-brand",
       }}
-      products={filtered}
-    />
+      products={filtered}   />
   );
 }

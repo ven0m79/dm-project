@@ -75,7 +75,7 @@ export const ClientPage = ({
 
         {/* --- MAP + TEXT --- */}
         <div
-          className="flex flex-1 flex-col justify-end items-center self-center sm:flex-row min-w-[300px]"
+          className="flex flex-1 flex-col justify-end items-center self-center sm:flex-row min-w-75"
           style={{ width: "85%", maxWidth: "1400px" }}
         >
           {/* Ліва колонка з текстом */}
@@ -213,16 +213,16 @@ export const ClientPage = ({
                       styles["serviceText"],
                     )}
                   >
-                    <span className="text-[#0061AA] mr-[10px]">•</span>
+                    <span className="text-[#0061AA] mr-2.5">•</span>
                     {t("projectings1")}
                     <br />
-                    <span className="text-[#0061AA] mr-[10px]">•</span>
+                    <span className="text-[#0061AA] mr-2.5">•</span>
                     {t("projectings2")}
                     <br />
-                    <span className="text-[#0061AA] mr-[10px]">•</span>
+                    <span className="text-[#0061AA] mr-2.5">•</span>
                     {t("projectings3")}
                     <br />
-                    <span className="text-[#0061AA] mr-[10px]">•</span>
+                    <span className="text-[#0061AA] mr-2.5">•</span>
                     {t("projectings4")}
                   </div>
                 </Link>
@@ -243,7 +243,7 @@ export const ClientPage = ({
           </div>
 
           {/* Логотипи партнерів */}
-          <div className="flex my-5 flex-wrap justify-center items-center bg-white w-[90%] max-w-[1000px] gap-3 sm:gap-10">
+          <div className="flex my-5 flex-wrap justify-center items-center bg-white w-[90%] max-w-250 gap-3 sm:gap-10">
             <CaruselBrands />
           </div>
         </div>
