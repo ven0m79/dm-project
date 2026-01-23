@@ -10,7 +10,7 @@ import { isIOS } from "utils/constants";
 import CaruselBrands from "@app/[locale]/components/atoms/carusel-brands/carusel-brands";
 import { useIsMobile } from "../../components/hooks/useIsMobile";
 import { WoocomerceCategoryType } from "../../../../utils/woocomerce.types";
-import {api} from "../../../../utils/woocommerce.setup";
+import { api } from "../../../../utils/woocommerce.setup";
 
 type Category = {
   id: number;
@@ -26,7 +26,6 @@ type ClientPageProps = {
     slug: string;
   };
   products: any[];
-  totalProducts: number;
 };
 
 /** Тимчасово — потім замінюється даними з API */
@@ -85,7 +84,7 @@ function getItemPriority(item: WoocomerceCategoryType): number {
   return priority;
 }
 
-export const ClientPage = ({ locale, brands, products, totalProducts }: ClientPageProps) => {
+export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
   const ITEMS_PER_PAGE = 20;
 
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
@@ -148,13 +147,16 @@ export const ClientPage = ({ locale, brands, products, totalProducts }: ClientPa
 
       totalPages = Number(res.headers["x-wp-totalpages"] || 1);
 
+      const filtered = res.data.filter((p: any) =>
+        p.brands?.some((b: any) => b.id === 102),
+      );
 
-      collected.push(...res.data);
+      collected.push(...filtered);
       page++;
     } while (page <= totalPages);
 
     setProductsData(collected);
-    setVisibleCount((prev) => prev + ITEMS_PER_PAGE)
+    setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
   };
 
   const handleCategoryClick = (category: Category) => {
@@ -312,41 +314,41 @@ export const ClientPage = ({ locale, brands, products, totalProducts }: ClientPa
           {/*  <div>Товари грузяться, зачекайте будь ласка.....</div>*/}
           {/*)}*/}
           <div
-              className={classNames(
-                  "grid gap-3 mt-4 mb-4 mx-1 justify-items-start",
-                  isMobile
-                      ? "grid-cols-2"
-                      : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4",
-              )}
+            className={classNames(
+              "grid gap-3 mt-4 mb-4 mx-1 justify-items-start",
+              isMobile
+                ? "grid-cols-2"
+                : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4",
+            )}
           >
             {filteredProducts.map((product) => {
               const url = `/catalog/sub-catalog/product/${product.translations?.[locale as any]}?category=${encodeURIComponent(product.categories?.[0]?.slug || "")}`;
 
               return (
-                  <div
-                      key={product.id}
-                      className={classNames(
-                          "flex flex-col items-center rounded-lg p-4 min-w-45 cursor-pointer max-w-75",
-                          styles.headSubCatalogBlock,
-                      )}
-                      onClick={() => {
-                        if (isIOS) router.push(url);
-                        else window.location.href = url;
-                      }}
-                  >
-                    {product.images?.[0] && (
-                        <Image
-                            src={product.images[0].src}
-                            alt={product.images[0].alt || product.name}
-                            width={170}
-                            height={200}
-                            className="object-contain"
-                        />
-                    )}
-                    <h3 className="justify-center h-18 w-full px-2 line-clamp-3">
-                      {product.name}
-                    </h3>
-                  </div>
+                <div
+                  key={product.id}
+                  className={classNames(
+                    "flex flex-col items-center rounded-lg p-4 min-w-45 cursor-pointer max-w-75",
+                    styles.headSubCatalogBlock,
+                  )}
+                  onClick={() => {
+                    if (isIOS) router.push(url);
+                    else window.location.href = url;
+                  }}
+                >
+                  {product.images?.[0] && (
+                    <Image
+                      src={product.images[0].src}
+                      alt={product.images[0].alt || product.name}
+                      width={170}
+                      height={200}
+                      className="object-contain"
+                    />
+                  )}
+                  <h3 className="justify-center h-18 w-full px-2 line-clamp-3">
+                    {product.name}
+                  </h3>
+                </div>
               );
             })}
           </div>
