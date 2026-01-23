@@ -148,8 +148,11 @@ export const ClientPage = ({ locale, brands, products, totalProducts }: ClientPa
 
       totalPages = Number(res.headers["x-wp-totalpages"] || 1);
 
+      const filtered = res.data.filter((p: any) =>
+          p.brands?.some((b: any) => b.id === 102)
+      );
 
-      collected.push(...res.data);
+      collected.push(...filtered);
       page++;
     } while (page <= totalPages);
 
