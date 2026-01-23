@@ -121,9 +121,11 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
     }, []);
 
     /** Фільтрація товарів по категорії або тегу */
+    /** Фільтрація та сортування товарів */
     const filteredProducts = useMemo(() => {
         const source = [...productsData];
 
+        // 1. Фільтрація
         const filtered = selectedCategory
             ? source.filter(
                 (product) =>
@@ -136,16 +138,24 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
             )
             : source;
 
+        // 2. Сортування
         return filtered.sort((a, b) => {
+            // Якщо обрано "Аксесуари", сортуємо суто за алфавітом (A-Z)
+            if (selectedCategory?.slug === "accessories") {
+                return a.name.localeCompare(b.name, locale);
+            }
+
+            // Для всіх інших випадків використовуємо пріоритет за ID категорій
             const priorityDiff = getItemPriority(a) - getItemPriority(b);
 
             if (priorityDiff !== 0) {
                 return priorityDiff;
             }
 
+            // Якщо пріоритет однаковий, сортуємо за menu_order
             return (a.menu_order ?? 0) - (b.menu_order ?? 0);
         });
-    }, [productsData, selectedCategory]);
+    }, [productsData, selectedCategory, locale]);
 
     const loadMore = async () => {
         let page = 1;
