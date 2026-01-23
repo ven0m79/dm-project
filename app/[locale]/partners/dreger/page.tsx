@@ -40,26 +40,15 @@ export default async function Page({ params }: PageProps) {
   const lang = locale === "ua" ? "ua" : "en";
   const BRAND_ID = 102;
 
-  let page = 1;
-  let totalPages = 1;
-  const collected: any[] = [];
+  const res = await api.get(`products?category=18,644,1126,20`, {
+    per_page: 20,
+    page: 1,
+    lang,
+  });
 
-  do {
-    const res = await api.get(`products`, {
-      per_page: 100,
-      page,
-      lang,
-    });
-
-    totalPages = Number(res.headers["x-wp-totalpages"] || 1);
-
-    const filtered = res.data.filter((p: any) =>
-      p.brands?.some((b: any) => b.id === BRAND_ID)
-    );
-
-    collected.push(...filtered);
-    page++;
-  } while (page <= totalPages);
+  const filtered = res.data.filter((p: any) =>
+    p.brands?.some((b: any) => b.id === BRAND_ID),
+  );
 
   return (
     <ClientPage
@@ -69,7 +58,7 @@ export default async function Page({ params }: PageProps) {
         name: "Dräger",
         slug: "drager-brand",
       }}
-      products={collected}
+      products={filtered}
     />
   );
 }
