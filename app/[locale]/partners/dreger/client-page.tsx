@@ -122,10 +122,11 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
 
     /** Фільтрація товарів по категорії або тегу */
     /** Фільтрація та сортування товарів */
+    /** Фільтрація та сортування товарів */
     const filteredProducts = useMemo(() => {
         const source = [...productsData];
 
-        // 1. Фільтрація
+        // 1. Фільтрація (залишається без змін)
         const filtered = selectedCategory
             ? source.filter(
                 (product) =>
@@ -140,20 +141,25 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
 
         // 2. Сортування
         return filtered.sort((a, b) => {
-            // Якщо обрано "Аксесуари", сортуємо суто за алфавітом (A-Z)
-            if (selectedCategory?.slug === "accessories") {
-                return a.name.localeCompare(b.name, locale);
+            const priorityA = getItemPriority(a);
+            const priorityB = getItemPriority(b);
+            const priorityDiff = priorityA - priorityB;
+
+            // ЯКЩО обидва товари мають однаковий пріоритет
+            if (priorityDiff === 0) {
+                // ЯКЩО це товари без пріоритету (аксесуари, розхідники тощо)
+                // або якщо ми явно обрали категорію "accessories"
+                if (priorityA === Number.MAX_SAFE_INTEGER || selectedCategory?.slug === "accessories") {
+                    return a.name.localeCompare(b.name, locale);
+                }
+
+                // Для основних товарів з однаковим пріоритетом (наприклад, підкатегорії неонаталки)
+                // використовуємо menu_order
+                return (a.menu_order ?? 0) - (b.menu_order ?? 0);
             }
 
-            // Для всіх інших випадків використовуємо пріоритет за ID категорій
-            const priorityDiff = getItemPriority(a) - getItemPriority(b);
-
-            if (priorityDiff !== 0) {
-                return priorityDiff;
-            }
-
-            // Якщо пріоритет однаковий, сортуємо за menu_order
-            return (a.menu_order ?? 0) - (b.menu_order ?? 0);
+            // В іншому випадку сортуємо за пріоритетом категорій (НДА -> ШВЛ -> Монітори...)
+            return priorityDiff;
         });
     }, [productsData, selectedCategory, locale]);
 
