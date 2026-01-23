@@ -53,20 +53,20 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
     const [showBackButton, setShowBackButton] = useState(false);
       const isMobile = useIsMobile();
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const res = await fetch(`/api/brands/dreger?locale=${locale}`);
-                if (!res.ok) throw new Error("Failed to load products");
-                const data = await res.json();
-                setProductsState(data);
-            } catch (e) {
-                console.error(e);
-            }
-        };
+    // useEffect(() => {
+    //     const fetchProducts = async () => {
+    //         try {
+    //             const res = await fetch(`/api/brands/dreger?locale=${locale}`);
+    //             if (!res.ok) throw new Error("Failed to load products");
+    //             const data = await res.json();
+    //             setProductsState(data);
+    //         } catch (e) {
+    //             console.error(e);
+    //         }
+    //     };
 
-        fetchProducts();
-    }, [locale]);
+    //     fetchProducts();
+    // }, [locale]);
 
     useEffect(() => {
         const onScroll = () => {
