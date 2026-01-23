@@ -10,6 +10,7 @@ import { isIOS } from "utils/constants";
 import CaruselBrands from "@app/[locale]/components/atoms/carusel-brands/carusel-brands";
 import { useIsMobile } from "../../components/hooks/useIsMobile";
 import { WoocomerceCategoryType } from "../../../../utils/woocomerce.types";
+import {api} from "../../../../utils/woocommerce.setup";
 
 type Category = {
   id: number;
@@ -25,6 +26,7 @@ type ClientPageProps = {
     slug: string;
   };
   products: any[];
+  totalProducts: number;
 };
 
 /** Тимчасово — потім замінюється даними з API */
@@ -83,7 +85,7 @@ function getItemPriority(item: WoocomerceCategoryType): number {
   return priority;
 }
 
-export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
+export const ClientPage = ({ locale, brands, products, totalProducts }: ClientPageProps) => {
   const ITEMS_PER_PAGE = 20;
 
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
@@ -91,6 +93,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
     null,
   );
+  const [productsData, setProductsData] = useState(products);
   const router = useRouter();
   const [showBackButton, setShowBackButton] = useState(false);
   const isMobile = useIsMobile();
@@ -106,15 +109,17 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
 
   /** Фільтрація товарів по категорії або тегу */
   const filteredProducts = useMemo(() => {
-    const source = [...products];
+    const source = [...productsData];
 
     const filtered = selectedCategory
       ? source.filter(
           (product) =>
             product.categories?.some(
-              (cat:{ slug: string }) => cat.slug === selectedCategory.slug,
+              (cat: { slug: string }) => cat.slug === selectedCategory.slug,
             ) ||
-            product.tags?.some((tag:{ slug: string }) => tag.slug === selectedCategory.slug),
+            product.tags?.some(
+              (tag: { slug: string }) => tag.slug === selectedCategory.slug,
+            ),
         )
       : source;
 
@@ -127,9 +132,30 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
 
       return (a.menu_order ?? 0) - (b.menu_order ?? 0);
     });
-  }, [products, selectedCategory]);
+  }, [productsData, selectedCategory]);
 
-  const loadMore = () => setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
+  const loadMore = async () => {
+    let page = 1;
+    let totalPages = 1;
+    const collected: any[] = [];
+
+    do {
+      const res = await api.get(`products`, {
+        per_page: 100,
+        page,
+        lang: locale,
+      });
+
+      totalPages = Number(res.headers["x-wp-totalpages"] || 1);
+
+
+      collected.push(...res.data);
+      page++;
+    } while (page <= totalPages);
+
+    setProductsData(collected);
+    setVisibleCount((prev) => prev + ITEMS_PER_PAGE)
+  };
 
   const handleCategoryClick = (category: Category) => {
     if (category.slug === "all") {
@@ -286,51 +312,50 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
           {/*  <div>Товари грузяться, зачекайте будь ласка.....</div>*/}
           {/*)}*/}
           <div
-            className={classNames(
-              "grid gap-3 mt-4 mb-4 mx-1 justify-items-start",
-              isMobile
-                ? "grid-cols-2"
-                : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4",
-            )}
+              className={classNames(
+                  "grid gap-3 mt-4 mb-4 mx-1 justify-items-start",
+                  isMobile
+                      ? "grid-cols-2"
+                      : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4",
+              )}
           >
             {filteredProducts.map((product) => {
               const url = `/catalog/sub-catalog/product/${product.translations?.[locale as any]}?category=${encodeURIComponent(product.categories?.[0]?.slug || "")}`;
 
               return (
-                <div
-                  key={product.id}
-                  className={classNames(
-                    "flex flex-col items-center rounded-lg p-4 min-w-45 cursor-pointer max-w-75",
-                    styles.headSubCatalogBlock,
-                  )}
-                  onClick={() => {
-                    if (isIOS) router.push(url);
-                    else window.location.href = url;
-                  }}
-                >
-                  {product.images?.[0] && (
-                    <Image
-                      src={product.images[0].src}
-                      alt={product.images[0].alt || product.name}
-                      width={170}
-                      height={200}
-                      className="object-contain"
-                    />
-                  )}
-                  <h3 className="justify-center h-18 w-full px-2 line-clamp-3">
-                    {product.name}
-                  </h3>
-                </div>
+                  <div
+                      key={product.id}
+                      className={classNames(
+                          "flex flex-col items-center rounded-lg p-4 min-w-45 cursor-pointer max-w-75",
+                          styles.headSubCatalogBlock,
+                      )}
+                      onClick={() => {
+                        if (isIOS) router.push(url);
+                        else window.location.href = url;
+                      }}
+                  >
+                    {product.images?.[0] && (
+                        <Image
+                            src={product.images[0].src}
+                            alt={product.images[0].alt || product.name}
+                            width={170}
+                            height={200}
+                            className="object-contain"
+                        />
+                    )}
+                    <h3 className="justify-center h-18 w-full px-2 line-clamp-3">
+                      {product.name}
+                    </h3>
+                  </div>
               );
             })}
           </div>
-          {visibleCount < filteredProducts.length && (
-            <div className="flex justify-center mt-6">
-              <button onClick={loadMore} className={styles.loadProducts}>
-                Завантажити ще
-              </button>
-            </div>
-          )}
+
+          <div className="flex justify-center mt-6">
+            <button onClick={loadMore} className={styles.loadProducts}>
+              Завантажити ще
+            </button>
+          </div>
         </div>
         <div className="text-[#0061AA] w-full indent-5 leading-relaxed text-justify pt-4">
           <p>
