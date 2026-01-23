@@ -24,15 +24,15 @@ export async function generateMetadata({
 
   return locale === "ua"
     ? {
-        title: "Партнер Dräger | ДМ-Проект",
-        description:
-          "Dräger — офіційний партнер DM Project. Медичне обладнання та аксесуари.",
-      }
+      title: "Партнер Dräger | ДМ-Проект",
+      description:
+        "Dräger — офіційний партнер DM Project. Медичне обладнання та аксесуари.",
+    }
     : {
-        title: "Partner Dräger | DM-Project",
-        description:
-          "Dräger official partner. Medical equipment and accessories.",
-      };
+      title: "Partner Dräger | DM-Project",
+      description:
+        "Dräger official partner. Medical equipment and accessories.",
+    };
 }
 
 export default async function Page({ params }: PageProps) {
