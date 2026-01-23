@@ -20,6 +20,7 @@ export type WoocomerceCategoryType = {
   yoast_head_json: YoastHeadJson;
   schema_json: string;
   custom_seo_description: string;
+  categories: { id: number; name: string; slug: string }[];
 };
 
 export type YoastHeadJson = {

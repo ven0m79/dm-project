@@ -16,18 +16,22 @@ type PageProps = {
   params: Promise<{ locale: string }>;
 };
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { locale } = await params;
   setRequestLocale(locale);
 
   return locale === "ua"
     ? {
         title: "Партнер Dräger | ДМ-Проект",
-        description: "Dräger — офіційний партнер DM Project. Медичне обладнання та аксесуари.",
+        description:
+          "Dräger — офіційний партнер DM Project. Медичне обладнання та аксесуари.",
       }
     : {
         title: "Partner Dräger | DM-Project",
-        description: "Dräger official partner. Medical equipment and accessories.",
+        description:
+          "Dräger official partner. Medical equipment and accessories.",
       };
 }
 
@@ -55,21 +59,7 @@ export default async function Page({ params }: PageProps) {
 
     collected.push(...filtered);
     page++;
-  } while (page <= totalPages && collected.length < 15);
-
-  // серверне сортування (аксесуари в кінець + алфавіт)
-  collected.sort((a, b) => {
-    const aIsAccessory = a.tags?.some((t: any) => t.slug === "accessories");
-    const bIsAccessory = b.tags?.some((t: any) => t.slug === "accessories");
-
-    if (aIsAccessory === bIsAccessory) {
-      return a.name.localeCompare(b.name, lang === "ua" ? "uk" : "en");
-    }
-
-    return aIsAccessory ? 1 : -1;
-  });
-
-  const products = collected.slice(0, 15);
+  } while (page <= totalPages);
 
   return (
     <ClientPage
@@ -79,7 +69,7 @@ export default async function Page({ params }: PageProps) {
         name: "Dräger",
         slug: "drager-brand",
       }}
-      products={products}
+      products={collected}
     />
   );
 }
