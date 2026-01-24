@@ -22,7 +22,7 @@ body {
 
 ul {
   overflow-y: hidden;
-  list-style-type: disc;
+  list-style-type: none;
 }
 
 button {
