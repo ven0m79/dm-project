@@ -395,11 +395,11 @@ export default function ServiceDesktop() {
                     <div className={classNames("flex flex-col justify-center px-2 items-center my-3", styles.servContainer)}>
                         <h3 className="text-2xl font-semibold mt-3 text-left">Переваги сервісу Dräger від ДМ-ПРОЕКТ:</h3>
                         <ul className="list-disc space-y-1 leading-relaxed text-left pb-2">
-                            <li className="ml-10 before:mr-1">єдиний в Україні уповноважений офіційний сервіс</li>
-                            <li className="ml-10 before:mr-1">індивідуальні плани ТО</li>
-                            <li className="ml-10 before:mr-1">дотримання усіх регламентів</li>
-                            <li className="ml-10 before:mr-1">використання оригінальних сервісних комплектів</li>
-                            <li className="ml-10 before:mr-1">підтримка повного циклу експлуатації</li>
+                            <li className="ml-10 before:mr-1"><span className="mr-2">•</span>єдиний в Україні уповноважений офіційний сервіс</li>
+                            <li className="ml-10 before:mr-1"><span className="mr-2">•</span>індивідуальні плани ТО</li>
+                            <li className="ml-10 before:mr-1"><span className="mr-2">•</span>дотримання усіх регламентів</li>
+                            <li className="ml-10 before:mr-1"><span className="mr-2">•</span>використання оригінальних сервісних комплектів</li>
+                            <li className="ml-10 before:mr-1"><span className="mr-2">•</span>підтримка повного циклу експлуатації</li>
                         </ul>
                     </div>
 
