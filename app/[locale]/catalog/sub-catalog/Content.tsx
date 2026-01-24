@@ -54,7 +54,7 @@ const Content: FC<{ children: ReactNode; locale: string }> = ({ children, locale
           {isLeftSidebarOpen && <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-30" onClick={() => setIsLeftSidebarOpen(false)} />}
         </>
       ) : (
-        <div className="w-[300px]">
+        <div className="w-75">
           <LSidebar locale={locale} changeURLParams />
         </div>
       )}
@@ -91,7 +91,7 @@ const Content: FC<{ children: ReactNode; locale: string }> = ({ children, locale
           {isRightSidebarOpen && <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-30" onClick={() => setIsRightSidebarOpen(false)} />}
         </>
       ) : (
-        <div className="w-[300px]">
+        <div className="w-75">
           <RSidebar locale={locale} changeURLParams />
         </div>
       )}

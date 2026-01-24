@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import classNames from "classnames";
 import { MainLayout } from "@app/[locale]/components/templates";
 import styles from "../Partners.module.css";
@@ -11,6 +11,7 @@ import CaruselBrands from "@app/[locale]/components/atoms/carusel-brands/carusel
 import { useIsMobile } from "../../components/hooks/useIsMobile";
 import { WoocomerceCategoryType } from "../../../../utils/woocomerce.types";
 import { api } from "../../../../utils/woocommerce.setup";
+
 
 type Category = {
     id: number;
@@ -68,8 +69,6 @@ const CATEGORY_NAONATHAL: Record<number, number[]> = {
     79: [384, 364, 286, 374, 354], // всі підкатегорії неонатального обладнання
 };
 
-
-
 const CATEGORY_PRIORITY = new Map<number, number>();
 
 EQUIPMENT_CATEGORIES.filter((el) => el.id !== 0).forEach((cat, index) => {
@@ -98,11 +97,14 @@ function getItemPriority(item: WoocomerceCategoryType): number {
 }
 
 
+
 export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
+
     const ITEMS_PER_PAGE = 20;
 
     const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement | null>(null);
     const [selectedCategory, setSelectedCategory] = useState<Category | null>(
         null,
     );
@@ -110,6 +112,26 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
     const router = useRouter();
     const [showBackButton, setShowBackButton] = useState(false);
     const isMobile = useIsMobile();
+    
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target as Node)
+            ) {
+                setIsDropdownOpen(false);
+            }
+        };
+
+        if (isDropdownOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isDropdownOpen]);
+
 
     useEffect(() => {
         const onScroll = () => {
@@ -288,7 +310,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                 </div>
 
                 {/* ===== BUTTON + DROPDOWN ===== */}
-                <div className="relative flex gap-3">
+                <div className="relative flex gap-3" ref={dropdownRef}>
                     <div className="relative">
                         <button
                             type="button"
