@@ -120,8 +120,6 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
-    /** Фільтрація товарів по категорії або тегу */
-    /** Фільтрація та сортування товарів */
     /** Фільтрація та сортування товарів */
     const filteredProducts = useMemo(() => {
         const source = [...productsData];
