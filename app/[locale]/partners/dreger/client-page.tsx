@@ -453,7 +453,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                 <button
                     type="button"
                     onClick={() => router.push("/")}
-                    className="fixed top-142 right-10 z-50 flex items-center justify-center w-40 h-10 rounded-2xl bg-[#0061AA] text-white shadow-lg hover:bg-[#004f8a] transition"
+                    className="fixed top-142 right-10 z-50 flex items-center justify-center cursor-pointer w-40 h-10 rounded-2xl bg-[#0061AA] text-white shadow-lg hover:bg-[#004f8a] transition"
                     aria-label="Back"
                 >
                     ← На головну
