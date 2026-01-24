@@ -185,9 +185,9 @@ export default function ServiceDesktop() {
                                             className="absolute inset-0 backface-hidden rounded-2xl bg-[#0061AA] text-white p-2 overflow-auto"
                                             style={{ transform: "rotateY(180deg)" }}
                                         >
-                                            <ul className={classNames("list-disc pl-4 space-y-1 text-[16px] leading-tight", styles.whiteText)}>
+                                            <ul className={classNames("list-disc pl-2 space-y-1 text-[16px] leading-tight ul4")}>
                                                 {card.back.map((item, i) => (
-                                                    <li className="text-white" key={i}>{item}</li>
+                                                    <li className="text-white" key={i}><span className="text-[#ffffff] mr-2">•</span>{item}</li>
                                                 ))}
                                             </ul>
                                         </div>
