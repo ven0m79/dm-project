@@ -172,8 +172,7 @@ const items = useMemo(() => (locale === "ua" ? [categories?.[0] || []] : [catego
     }
 
     return (
-      <FBSidebar.Collapse
-        key={key}
+       <FBSidebar.Collapse
         open={
           category.id === RIGHT_BAR_PARENT_ID ||
           category.id === RIGHT_BAR_PARENT_ID_EN ||
@@ -181,23 +180,32 @@ const items = useMemo(() => (locale === "ua" ? [categories?.[0] || []] : [catego
           selectedItemsNestedData?.includes(Number(category.id))
         }
         label={category.name}
+        key={category.id}
         className={classNames({
-          "opacity-0 pointer-events-none mt-[-40px]": category.id === RIGHT_BAR_PARENT_ID || category.id === RIGHT_BAR_PARENT_ID_EN,
+          "opacity-0 pointer-events-none -mt-10":
+            category.id === RIGHT_BAR_PARENT_ID ||
+            category.id === RIGHT_BAR_PARENT_ID_EN,
           "bg-sky-200": selectedCategoryId === category.id,
         })}
         style={{ paddingLeft: `${paddingLeft}px` }}
-        onClick={() => handleCollapseToggle(category)}
-      >
-        {category.childrens
-          ?.sort((a, b) => {
-            if (level === 0 && customFirstLevelOrder.length > 0) {
-              const aIndex = customFirstLevelOrder.indexOf(a.slug);
-              const bIndex = customFirstLevelOrder.indexOf(b.slug);
-              return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
-            }
-            return a.name.localeCompare(b.name);
-          })
-          .map((child, index) => renderNestedCategories(child, level + 1, `${key}-${index}`))}
+        onClick={() => {
+          handleCollapseToggle(category);
+
+          // 🔹 Додаємо зміну URL для категорій з підкатегоріями
+          if (changeURLParams) {
+            router.push(`${pathname.replace(/\/product\/\d+/, "")}?category=${category.slug}`);
+          }
+
+          if (fromProductPage) {
+            router.push(`/catalog/sub-catalog?category=${category.slug}`);
+          }
+        }}
+      >{/* Recursively render children */}
+        {category?.childrens?.length
+          ? category.childrens.map(
+            (child) => renderNestedCategories(child, level + 1), // Increase level for deeper nesting
+          )
+          : null}
       </FBSidebar.Collapse>
     );
   };

@@ -209,7 +209,7 @@ const Content: FC<SidebarProps> = ({
         label={category.name}
         key={key}
         className={classNames({
-          "opacity-0 pointer-events-none mt-[-40px]":
+          "opacity-0 pointer-events-none -mt-10":
             category.id === LEFT_BAR_PARENT_ID ||
             category.id === LEFT_BAR_PARENT_ID_EN,
           "bg-sky-200": selectedCategoryId === category.id,
