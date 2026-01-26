@@ -116,7 +116,7 @@ export default function ServiceDesktop() {
             zIndex: 50,
             pointerEvents: "none",
         }} /><div className={classNames("flex flex-1 flex-col self-center", styles.main)}>
-                <div className={classNames("flex flex-col flex-1 justify-normal items-center w-full max-w-[1400px] text-lg")}>
+                <div className={classNames("flex flex-col flex-1 justify-normal items-center w-full max-w-350 text-lg")}>
                     {/* Left Section */}
                     <div className={classNames("flex flex-col justify-normal w-full", styles.servContainer)}>
                         <span className="text-[24px] py-3 self-center text-[#002766]">Технічне обслуговування медичного обладнання</span>
@@ -136,7 +136,7 @@ export default function ServiceDesktop() {
                         </span>
                     </div>
                     <span className="text-[24px] py-5 text-center text-[#002766] justify-center">Яке обладнання ми обслуговуємо</span>
-                    <div className="flex justify-center self-center py-3 w-full max-w-[1400px]">
+                    <div className="flex justify-center self-center py-3 w-full max-w-350">
                         <div className="w-full flex flex-wrap justify-center gap-4">
                             {cards.map((card) => (
                                 <div
@@ -202,7 +202,7 @@ export default function ServiceDesktop() {
 
                     <span className="text-[24px] py-5 self-center text-[#002766]">Які сервіси ми виконуємо</span>
 
-                    <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
+                    <div className="max-w-350 mx-auto space-y-4 pb-6 w-full">
                         {rows.map((row, rowIndex) => (
                             <div className="flex gap-4" key={rowIndex}>
                                 {row.map((item, i) => (
@@ -210,7 +210,7 @@ export default function ServiceDesktop() {
                                         key={i}
                                         className="flex items-start gap-4 p-6 pl-8 bg-gray-50 rounded-2xl w-[33%] shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
                                     >
-                                        <span className="flex-shrink-0 text-green-500 font-bold text-xl -mt-0.5">✓</span>
+                                        <span className="shrink-0 text-green-500 font-bold text-xl -mt-0.5">✓</span>
                                         <span className="flex-1 text-[#0061AA]">{item}</span>
                                     </div>
                                 ))}
@@ -218,7 +218,7 @@ export default function ServiceDesktop() {
                         ))}
                     </div>
                     <span ref={planRef} className="text-[24px] py-3 text-[#002766] self-center">{'Планове технічне обслуговування'}</span>
-                    <div className={classNames("flex self-center max-w-[1400px] w-full", styles.servContainer1)}>
+                    <div className={classNames("flex self-center max-w-350 w-full", styles.servContainer1)}>
                         <div className="flex-1 pr-8">
                             <p className="text-justify indent-5 leading-relaxed">Планове ТО проводиться відповідно до регламентів виробників і враховує інтенсивність використання обладнання. Такий метод мінімізує ризики збоїв, продовжує ресурс техніки й забезпечує безперервність клінічних процесів.</p>
 
@@ -276,7 +276,7 @@ export default function ServiceDesktop() {
                         </table>
                     </div>
                     <span className="text-[24px] py-3 self-center text-[#002766]">Переваги нашого сервісу</span>
-                    <div className="max-w-[1400px] mx-auto space-y-4 pb-6 w-full">
+                    <div className="max-w-350 mx-auto space-y-4 pb-6 w-full">
                         {rows2.map((row2, rowIndex) => (
                             <div className="flex gap-4" key={rowIndex}>
                                 {row2.map((item, i) => (
@@ -284,7 +284,7 @@ export default function ServiceDesktop() {
                                         key={i}
                                         className="flex items-start gap-4 p-6 pl-8 bg-gray-50 rounded-2xl w-[33%] shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
                                     >
-                                        <span className="flex-shrink-0 text-green-500 font-bold text-xl -mt-0.5">✓</span>
+                                        <span className="shrink-0 text-green-500 font-bold text-xl -mt-0.5">✓</span>
                                         <span className="flex-1 text-[#0061AA]">{item}</span>
                                     </div>
                                 ))}
@@ -394,12 +394,12 @@ export default function ServiceDesktop() {
 
                     <div className={classNames("flex flex-col justify-center px-2 items-center my-3", styles.servContainer)}>
                         <h3 className="text-2xl font-semibold mt-3 text-left">Переваги сервісу Dräger від ДМ-ПРОЕКТ:</h3>
-                        <ul className="list-disc space-y-1 leading-relaxed text-left pb-2">
-                            <li className="ml-10 before:mr-1"><span className="mr-3">•</span>єдиний в Україні уповноважений офіційний сервіс</li>
-                            <li className="ml-10 before:mr-1"><span className="mr-4">•</span>індивідуальні плани ТО</li>
-                            <li className="ml-10 before:mr-1"><span className="mr-5">•</span>дотримання усіх регламентів</li>
-                            <li className="ml-10 before:mr-1"><span className="mr-6">•</span>використання оригінальних сервісних комплектів</li>
-                            <li className="ml-10 before:mr-1"><span className="mr-2">•</span>підтримка повного циклу експлуатації</li>
+                        <ul className="space-y-1 leading-relaxed text-left pb-2 ul3">
+                            <li className="ml-10"><span className="mr-3">•</span>єдиний в Україні уповноважений офіційний сервіс</li>
+                            <li className="ml-10"><span className="mr-4">•</span>індивідуальні плани ТО</li>
+                            <li className="ml-10"><span className="mr-5">•</span>дотримання усіх регламентів</li>
+                            <li className="ml-10"><span className="mr-6">•</span>використання оригінальних сервісних комплектів</li>
+                            <li className="ml-10"><span className="mr-2">•</span>підтримка повного циклу експлуатації</li>
                         </ul>
                     </div>
 

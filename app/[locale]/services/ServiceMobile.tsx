@@ -381,12 +381,12 @@ export default function ServiceMobile() {
 
                     <div className={classNames("flex flex-col justify-normal px-2 items-start my-3 w-full", styles.servContainer)}>
                         <h3 className="text-2xl font-semibold mt-3 text-left">Переваги сервісу Dräger від <span className="flex flex-nowrap">ДМ-ПРОЕКТ:</span></h3>
-                        <ul className="list-disc space-y-1 leading-relaxed text-left pb-2">
-                            <li className="ml-10 before:mr-1">єдиний в Україні уповноважений офіційний сервіс</li>
-                            <li className="ml-10 before:mr-1">індивідуальні плани ТО</li>
-                            <li className="ml-10 before:mr-1">дотримання усіх регламентів</li>
-                            <li className="ml-10 before:mr-1">використання оригінальних сервісних комплектів</li>
-                            <li className="ml-10 before:mr-1">підтримка повного циклу експлуатації</li>
+                        <ul className="space-y-1 leading-relaxed text-left pb-2 ul3">
+                            <li className="ml-10"><span className="mr-3">•</span>єдиний в Україні уповноважений офіційний сервіс</li>
+                            <li className="ml-10"><span className="mr-4">•</span>індивідуальні плани ТО</li>
+                            <li className="ml-10"><span className="mr-5">•</span>дотримання усіх регламентів</li>
+                            <li className="ml-10"><span className="mr-6">•</span>використання оригінальних сервісних комплектів</li>
+                            <li className="ml-10"><span className="mr-2">•</span>підтримка повного циклу експлуатації</li>
                         </ul>
                     </div>
 
