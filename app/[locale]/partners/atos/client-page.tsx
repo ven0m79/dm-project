@@ -10,8 +10,6 @@ import { isIOS } from "utils/constants";
 import CaruselBrands from "@app/[locale]/components/atoms/carusel-brands/carusel-brands";
 import { useIsMobile } from "../../components/hooks/useIsMobile";
 import { WoocomerceCategoryType } from "../../../../utils/woocomerce.types";
-import { api } from "../../../../utils/woocommerce.setup";
-
 
 type Category = {
     id: number;
@@ -29,66 +27,8 @@ type ClientPageProps = {
     products: any[];
 };
 
-/** Тимчасово — потім замінюється даними з API */
-const EQUIPMENT_CATEGORIES: Category[] = [
-    { id: 0, name: "Всі товари Dräger", slug: "all" },
-    {
-        id: 18,
-        name: "Наркозно-дихальні апарати",
-        slug: "anesthesia-and-respiratory-devices",
-    },
-    {
-        id: 644,
-        name: "Апарати штучної вентиляції легень",
-        slug: "ventilators-icu",
-    },
-    {
-        id: 1126,
-        name: "Електро-імпедансний томограф",
-        slug: "electrical-impedance-tomography",
-    },
-    { id: 20, name: "Монітори пацієнта", slug: "patient-monitors" },
-    { id: 79, name: "Неонатальне обладнання", slug: "neonatal-equipment" },
-    {
-        id: 670,
-        name: "Світильники операційні та екзаменаційні",
-        slug: "operating-and-examination-lamps",
-    },
-    {
-        id: 243,
-        name: "Консолі стельові та настінні",
-        slug: "wall-supply-and-ceiling-supply-units",
-    },
-    { id: 1145, name: "Випаровувачі", slug: "vaporisers" },
-    { id: 1131, name: "Газоаналізатори", slug: "gas-analyzers" },
-    { id: 1157, name: "Аспіратори", slug: "aspiration" },
-    { id: 87, name: "Медичне газопостачання", slug: "gas-management-systems" },
-];
-
-const ACCESSORIES_CATEGORY: Category = {
-    id: 95,
-    name: "Аксесуари",
-    slug: "accessories",
-};
-
-const CATEGORY_NAONATHAL: Record<number, number[]> = {
-    79: [384, 364, 286, 374, 354], // всі підкатегорії неонатального обладнання
-};
-
 const CATEGORY_PRIORITY = new Map<number, number>();
 
-EQUIPMENT_CATEGORIES.filter((el) => el.id !== 0).forEach((cat, index) => {
-    // Встановлюємо пріоритет для основної категорії
-    CATEGORY_PRIORITY.set(cat.id, index);
-
-    // Якщо у цієї категорії є підкатегорії в CATEGORY_NAONATHAL, 
-    // даємо їм такий самий пріоритет
-    if (CATEGORY_NAONATHAL[cat.id]) {
-        CATEGORY_NAONATHAL[cat.id].forEach((subId) => {
-            CATEGORY_PRIORITY.set(subId, index);
-        });
-    }
-});
 function getItemPriority(item: WoocomerceCategoryType): number {
     let priority = Number.MAX_SAFE_INTEGER;
 
@@ -102,12 +42,6 @@ function getItemPriority(item: WoocomerceCategoryType): number {
 }
 
 export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
-
-    const ITEMS_PER_PAGE = 20;
-
-    const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const dropdownRef = useRef<HTMLDivElement | null>(null);
     const [selectedCategory, setSelectedCategory] = useState<Category | null>(
         null,
     );
@@ -115,28 +49,6 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
     const router = useRouter();
     const [showBackButton, setShowBackButton] = useState(false);
     const isMobile = useIsMobile();
-    const loadMoreClickedRef = useRef(false);
-    const initialProductsRef = useRef(products);
-
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (
-                dropdownRef.current &&
-                !dropdownRef.current.contains(event.target as Node)
-            ) {
-                setIsDropdownOpen(false);
-            }
-        };
-
-        if (isDropdownOpen) {
-            document.addEventListener("mousedown", handleClickOutside);
-        }
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [isDropdownOpen]);
-
 
     useEffect(() => {
         const onScroll = () => {

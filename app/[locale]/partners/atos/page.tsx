@@ -40,7 +40,7 @@ export default async function Page({ params }: PageProps) {
   const lang = locale === "ua" ? "ua" : "en";
   const BRAND_ID = 105;
 
-  const res = await api.get(`products?category=600,112,592`, {
+  const res = await api.get(`products?category=592,600,112`, {
     per_page: 20,
     page: 1,
     lang,
