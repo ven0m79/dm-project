@@ -172,14 +172,6 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
 
             // ЯКЩО обидва товари мають однаковий пріоритет
             if (priorityDiff === 0) {
-                // ЯКЩО це товари без пріоритету (аксесуари, розхідники тощо)
-                // або якщо ми явно обрали категорію "accessories"
-                if (priorityA === Number.MAX_SAFE_INTEGER || selectedCategory?.slug === "accessories") {
-                    return a.name.localeCompare(b.name, locale);
-                }
-
-                // Для основних товарів з однаковим пріоритетом (наприклад, підкатегорії неонаталки)
-                // використовуємо menu_order
                 return (a.menu_order ?? 0) - (b.menu_order ?? 0);
             }
 
@@ -188,66 +180,6 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
         });
     }, [productsData, selectedCategory, locale]);
 
-    const loadMore = async () => {
-        loadMoreClickedRef.current = true;
-        let page = 1;
-        let totalPages = 1;
-        const collected: any[] = [];
-
-        do {
-            const res = await api.get(`products`, {
-                per_page: 100,
-                page,
-                lang: locale,
-            });
-
-            totalPages = Number(res.headers["x-wp-totalpages"] || 1);
-
-            const filtered = res.data.filter((p: any) =>
-                p.brands?.some((b: any) => b.id === 102),
-            );
-
-            collected.push(...filtered);
-            page++;
-        } while (page <= totalPages);
-
-        setProductsData(collected);
-        setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
-    };
-
-    const handleCategoryClick = async (category: Category) => {
-        setIsDropdownOpen(false);
-        setVisibleCount(ITEMS_PER_PAGE);
-        if (category.slug === "all") {
-            setSelectedCategory(null);
-            setProductsData(initialProductsRef.current);
-            return;
-        }
-
-        setSelectedCategory(category);
-
-
-        // ✅ КНОПКА НАТИСНУТА — ПРАЦЮЄМО ЯК ЗАРАЗ
-        if (loadMoreClickedRef.current) {
-            return;
-        }
-
-        // ❌ КНОПКА НЕ НАТИСНУТА — ПІДВАНТАЖУЄМО КАТЕГОРІЮ
-        if (category.slug !== "all") {
-            const res = await api.get("products", {
-                per_page: 100,
-                category: category.id,
-                lang: locale,
-            });
-
-            const filtered = res.data.filter((p: any) =>
-                p.brands?.some((b: any) => b.id === 102),
-            );
-
-            setProductsData(filtered);
-        }
-    };
-
     return (
         <MainLayout>
             <div className="flex flex-col justify-center items-center w-full max-w-250 pb-3 px-2">
@@ -255,33 +187,33 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                 <div className="flex shrink-0 sm:flex-row flex-col w-full">
                     <div className="flex w-full h-auto">
                         <Image
-                            src="/logo-partners/dreger-log-partner-big.webp"
-                            alt="Dräger"
+                            src="/logo-partners/atos-log-partner.webp"
+                            alt="AT-OS"
                             width={400}
                             height={400}
                         />
                     </div>
                     <div className="text-[#0061AA] w-full indent-0 sm:indent-5 leading-relaxed text-justify self-center">
                         <h1 className="text-[24px] sm:text-[30px] font-semibold text-[#002766]">
-                            Drägerwerk AG & Co. KGaA
+                            AT-OS S.r.l.
                         </h1>
                         <div className="text-[16px] sm:text-[20px]">
-                            <strong className="text-[#002766]">Рік заснування:</strong> 1889
+                            <strong className="text-[#002766]">Рік заснування:</strong> 1996
                         </div>
                         <div className="text-[16px] sm:text-[20px]">
-                            <strong className="text-[#002766]">Країна:</strong> Німеччина
+                            <strong className="text-[#002766]">Країна:</strong> Італія
                         </div>
                         <div className="text-[16px] sm:text-[20px]">
                             <strong className="text-[#002766]">Офіційний сайт:</strong>
-                            <Link href="https://www.draeger.com/" target="_blank">
-                                https://www.draeger.com/
+                            <Link href="https://www.at-os.com/" target="_blank">
+                                https://www.at-os.com/
                             </Link>
                         </div>
                         <div className="text-[18px] sm:text-[20px]">
                             <strong className="text-[#002766]">Cоціальні мережі:</strong>
                             <div className="flex flex-row pl-10 pt-2 gap-4">
                                 <Link
-                                    href="https://www.linkedin.com/company/draeger"
+                                    href="https://it.linkedin.com/company/at-os"
                                     target="_blank"
                                 >
                                     <Image
@@ -292,7 +224,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                                         className="transition-transform hover:scale-110"
                                     />
                                 </Link>
-                                <Link href="https://www.youtube.com/Draeger" target="_blank">
+                                <Link href="https://www.youtube.com/@at-ossrl" target="_blank">
                                     <Image
                                         src="/youtube-ico.jpg"
                                         width={30}
@@ -301,82 +233,10 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                                         className="transition-transform hover:scale-110"
                                     />
                                 </Link>
-                                <Link
-                                    href="https://www.facebook.com/DraegerGlobal/"
-                                    target="_blank"
-                                >
-                                    <Image
-                                        src="/facebook-ico.jpg"
-                                        width={30}
-                                        height={30}
-                                        alt="Logo Facebook"
-                                        className="transition-transform hover:scale-110"
-                                    />
-                                </Link>
-                                <Link
-                                    href="https://www.instagram.com/draeger.global/"
-                                    target="_blank"
-                                >
-                                    <Image
-                                        src="/instagram.webp"
-                                        width={30}
-                                        height={30}
-                                        alt="Logo Instagram"
-                                        className="transition-transform hover:scale-110"
-                                    />
-                                </Link>
+
                             </div>
                         </div>
                     </div>
-                </div>
-
-                {/* DESCRIPTION */}
-                <div className="text-[#0061AA] w-full indent-5 leading-relaxed text-justify pt-4">
-                    Dräger — німецький виробник медичної та безпекової техніки, відомий
-                    рішеннями для лікарень і критичної медицини. Бренд фокусується на
-                    практичних технологіях, які допомагають медичним командам працювати
-                    стабільно, точно та безпечно в щоденних і високоризикових сценаріях.
-                </div>
-
-                {/* ===== BUTTON + DROPDOWN ===== */}
-                <div className="relative flex gap-3 mx-1" ref={dropdownRef}>
-                    <div className="relative">
-                        <button
-                            type="button"
-                            onClick={() => setIsDropdownOpen((prev) => !prev)}
-                            className={styles.loadProducts}
-                        >
-                            {"Завантажити обладнання Dräger"}
-                        </button>
-
-                        {isDropdownOpen && (
-                            <div className="absolute left-0 mt-2 bg-white border rounded-lg shadow-lg z-20">
-                                {EQUIPMENT_CATEGORIES.map((category) => (
-                                    <button
-                                        key={category.id}
-                                        type="button"
-                                        onClick={() => handleCategoryClick(category)}
-                                        className={classNames(
-                                            "block w-full whitespace-nowrap rounded-lg text-left px-4 py-2 hover:bg-blue-50 transition",
-                                            selectedCategory?.id === category.id &&
-                                            "bg-blue-100 font-semibold rounded-lg",
-                                        )}
-                                    >
-                                        {category.name}
-                                    </button>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-
-                    <button
-                        className={styles.loadProducts}
-                        type="button"
-                        onClick={() => handleCategoryClick(ACCESSORIES_CATEGORY)}
-                    >
-                        Завантажити аксесуари Dräger
-                    </button>
-
                 </div>
 
                 {/* PAGINATION + PRODUCTS */}
@@ -423,49 +283,24 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                             );
                         })}
                     </div>
-
-                    <div className="flex justify-center mt-6">
-                        <button onClick={loadMore} className={styles.loadProducts}>
-                            Завантажити ще
-                        </button>
-                    </div>
                 </div>
                 <div className="text-[#0061AA] w-full indent-5 leading-relaxed text-justify pt-4">
-                    <p>
-                        Dräger — бренд із Німеччини з історією понад століття. Компанія
-                        працює з 1889 року та пройшла шлях від інженерних розробок до
-                        масштабного виробництва медичних систем, які використовують у
-                        лікарнях у багатьох країнах світу. У медичному напрямку Dräger
-                        асоціюється з надійністю обладнання, продуманістю інтерфейсів та
-                        увагою до сценаріїв, у яких важлива кожна секунда — від операційної
-                        до відділення інтенсивної терапії.
-                    </p>
+                    <p> AT-OS — бренд з Італії, що розвиває напрямок обладнання для безпечної обробки медичних виробів і хірургічних інструментів.
+                        Компанія позиціонує себе як виробника, який поєднує інженерну практичність із фокусом на профілактиці передачі інфекцій:
+                        у медичних процесах важливий не лише результат “чисто”, а стабільно відтворюваний стандарт обробки, який можна контролювати
+                        та підтверджувати. Саме тому AT-OS робить акцент на рішеннях для мийки й дезінфекції, а також на оснащенні зон, де інструменти
+                        проходять підготовку, сушіння та зберігання.</p>
 
-                    <p>
-                        Асортимент медичної продукції Dräger охоплює базові потреби
-                        стаціонару та критичної допомоги. Це рішення для анестезіології та
-                        операційних (анестезіологічні робочі місця й системи), апарати
-                        штучної вентиляції легень для різних клінічних ситуацій, системи
-                        моніторингу пацієнта та суміжні рішення для організації
-                        безперервного контролю показників. Окремий напрям — неонатальні
-                        рішення, зокрема обладнання для підтримки стабільного середовища й
-                        догляду за новонародженими, що критично для відділень, де значення
-                        мають точні налаштування та прогнозована робота техніки.
-                    </p>
+                    <p>У портфелі AT-OS — машини для миття та дезінфекції інструментів для медичного і стоматологічного напрямів, рішення для обробки
+                        виробів у лікарняному середовищі (включно з окремими категоріями для різних типів застосування), сушильні шафи, а також
+                        допоміжне оснащення: візки, аксесуари та системи завантаження/вивантаження. Для стерилізаційних підрозділів і операційних
+                        зон передбачені технічні елементи з нержавіючої сталі, а для лабораторій — лінійки для миття лабораторного скла та матеріалів.
+                        Виробник також зазначає відповідність обладнання міжнародним вимогам EN ISO 15883, що є важливим орієнтиром для закупівель,
+                        де критичні стандартизація та простежуваність процесу.</p>
 
-                    <p>
-                        Придбати продукцію Dräger в DM Project зручно, коли потрібен швидкий
-                        і зрозумілий підбір під задачу відділення та комплектація в одному
-                        місці. Тут легше узгодити потрібні позиції між собою, уникнути
-                        помилок сумісності та отримати рішення, яке коректно закриває
-                        реальний клінічний сценарій, а не просто “окремий пристрій у
-                        вакуумі”.
-                    </p>
-
-                    <p>
-                        Обирайте Dräger у каталозі DM Project — щоб отримати перевірені
-                        медичні рішення з логічною комплектацією та прозорим шляхом від
-                        вибору до покупки.
+                    <p>Замовляйте AT-OS у DM Project, якщо потрібен підбір під конкретну задачу підрозділу та коректна комплектація під ваші сценарії
+                        роботи. Це знижує ризик помилок сумісності, спрощує впровадження в щоденні процеси та дає прогнозований результат на практиці,
+                        а не лише “на папері”.
                     </p>
                 </div>
                 <CaruselBrands />

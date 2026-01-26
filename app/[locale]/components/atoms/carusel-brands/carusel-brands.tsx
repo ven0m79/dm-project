@@ -14,13 +14,13 @@ type BrandImage = {
 
 const images: BrandImage[] = [
   { src: "/logo-partners/dreger-log-partner.webp", href: "/partners/dreger", alt: "Draeger" },
-  { src: "/logo-partners/atos-log-partner.webp", href: "/partner/atos", alt: "Atos" },
-  { src: "/logo-partners/lojer-log-partner.webp", href: "/partner/lojer", alt: "Lojer" },
-  { src: "/logo-partners/prohs-log-partner.webp", href: "/partner/prohs", alt: "Prohs" },
-  { src: "/logo-partners/renosem-log-partner.webp", href: "/partner/renosem", alt: "Renosem" },
-  { src: "/logo-partners/inspital.webp", href: "/partner/inspital", alt: "Inspital" },
-  { src: "/logo-partners/fsn.webp", href: "/partner/fsn", alt: "FSN" },
-  { src: "/logo-partners/mimp.webp", href: "/partner/mimp", alt: "MIMP" },
+  { src: "/logo-partners/atos-log-partner.webp", href: "/partners/atos", alt: "Atos" },
+  { src: "/logo-partners/lojer-log-partner.webp", href: "/partners/lojer", alt: "Lojer" },
+  { src: "/logo-partners/prohs-log-partner.webp", href: "/partners/prohs", alt: "Prohs" },
+  { src: "/logo-partners/renosem-log-partner.webp", href: "/partners/renosem", alt: "Renosem" },
+  { src: "/logo-partners/inspital.webp", href: "/partners/inspital", alt: "Inspital" },
+  { src: "/logo-partners/fsn.webp", href: "/partners/fsn", alt: "FSN" },
+  { src: "/logo-partners/mimp.webp", href: "/partners/mimp", alt: "MIMP" },
 ];
 
 const THUMB_WIDTH = 120;
