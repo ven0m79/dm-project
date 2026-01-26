@@ -11,6 +11,13 @@
     font-size: 18px;
 }
 
+@media (max-width: 640px) {
+    .loadProducts {
+        font-size: 16px;
+    }
+}
+
+
 .loadProducts:hover {
     transition: all 0.5s;
     background: #0061AA;

@@ -250,7 +250,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
 
     return (
         <MainLayout>
-            <div className="flex flex-col justify-center items-center w-full max-w-250 pb-3">
+            <div className="flex flex-col justify-center items-center w-full max-w-250 pb-3 px-2">
                 {/* BRAND INFO */}
                 <div className="flex shrink-0 sm:flex-row flex-col w-full">
                     <div className="flex w-full h-auto">
@@ -261,7 +261,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                             height={400}
                         />
                     </div>
-                    <div className="text-[#0061AA] w-full indent-0 sm:indent-5 leading-relaxed text-justify self-center sm:px-0 px-2">
+                    <div className="text-[#0061AA] w-full indent-0 sm:indent-5 leading-relaxed text-justify self-center">
                         <h1 className="text-[24px] sm:text-[30px] font-semibold text-[#002766]">
                             Drägerwerk AG & Co. KGaA
                         </h1>
@@ -380,7 +380,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                 </div>
 
                 {/* PAGINATION + PRODUCTS */}
-                <div className="w-full pt-6 px-2">
+                <div className="w-full pt-6">
                     <h2 className="text-[22px] font-semibold text-[#002766] mb-4">
                         Обладнання бренду {brands?.name}
                     </h2>
@@ -389,7 +389,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                     {/*)}*/}
                     <div
                         className={classNames(
-                            "grid gap-2 mt-4 mb-4 mx-1 justify-items-start",
+                            "grid gap-2 mt-4 mb-4 mx-1 justify-items-center",
                             isMobile
                                 ? "grid-cols-2"
                                 : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4",
@@ -419,7 +419,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                                             className="object-contain"
                                         />
                                     )}
-                                    <h3 className="justify-center h-18 w-full px-2 line-clamp-3">
+                                    <h3 className="justify-center h-18 w-full line-clamp-3">
                                         {product.name}
                                     </h3>
                                 </div>
@@ -433,7 +433,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                         </button>
                     </div>
                 </div>
-                <div className="text-[#0061AA] w-full indent-5 leading-relaxed text-justify pt-4 px-2">
+                <div className="text-[#0061AA] w-full indent-5 leading-relaxed text-justify pt-4">
                     <p>
                         Dräger — бренд із Німеччини з історією понад століття. Компанія
                         працює з 1889 року та пройшла шлях від інженерних розробок до
