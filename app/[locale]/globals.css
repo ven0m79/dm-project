@@ -147,17 +147,30 @@ button {
   font-size: 16px;
   color: #ffffff !important;
   text-align: left;
-
   list-style-type: none;
+}
+@media (max-width: 640px) {
+    .ul4 {
+        font-size: 14px;
+    }
 }
 
 .ul4>li {
   display: block;
   color: #ffffff !important;
 }
+@media (max-width: 640px) {
+    .ul4 {
+        font-size: 14px;
+    }
+}
 .ul4>li>span {
-
   color: #ffffff !important;
+}
+@media (max-width: 640px) {
+    .ul4 {
+        font-size: 14px;
+    }
 }
 
 .productText {
