@@ -65,6 +65,12 @@ const EQUIPMENT_CATEGORIES: Category[] = [
     { id: 87, name: "Медичне газопостачання", slug: "gas-management-systems" },
 ];
 
+const ACCESSORIES_CATEGORY: Category = {
+    id: 95,
+    name: "Аксесуари",
+    slug: "accessories",
+};
+
 const CATEGORY_NAONATHAL: Record<number, number[]> = {
     79: [384, 364, 286, 374, 354], // всі підкатегорії неонатального обладнання
 };
@@ -92,11 +98,8 @@ function getItemPriority(item: WoocomerceCategoryType): number {
             priority = p;
         }
     }
-
     return priority;
 }
-
-
 
 export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
 
@@ -112,7 +115,9 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
     const router = useRouter();
     const [showBackButton, setShowBackButton] = useState(false);
     const isMobile = useIsMobile();
-    
+    const loadMoreClickedRef = useRef(false);
+    const initialProductsRef = useRef(products);
+
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (
@@ -184,6 +189,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
     }, [productsData, selectedCategory, locale]);
 
     const loadMore = async () => {
+        loadMoreClickedRef.current = true;
         let page = 1;
         let totalPages = 1;
         const collected: any[] = [];
@@ -209,16 +215,39 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
         setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
     };
 
-    const handleCategoryClick = (category: Category) => {
+    const handleCategoryClick = async (category: Category) => {
+        setIsDropdownOpen(false);
+        setVisibleCount(ITEMS_PER_PAGE);
         if (category.slug === "all") {
             setSelectedCategory(null);
-        } else {
-            setSelectedCategory(category);
+            setProductsData(initialProductsRef.current);
+            return;
         }
 
-        setVisibleCount(ITEMS_PER_PAGE);
-        setIsDropdownOpen(false);
+        setSelectedCategory(category);
+
+
+        // ✅ КНОПКА НАТИСНУТА — ПРАЦЮЄМО ЯК ЗАРАЗ
+        if (loadMoreClickedRef.current) {
+            return;
+        }
+
+        // ❌ КНОПКА НЕ НАТИСНУТА — ПІДВАНТАЖУЄМО КАТЕГОРІЮ
+        if (category.slug !== "all") {
+            const res = await api.get("products", {
+                per_page: 100,
+                category: category.id,
+                lang: locale,
+            });
+
+            const filtered = res.data.filter((p: any) =>
+                p.brands?.some((b: any) => b.id === 102),
+            );
+
+            setProductsData(filtered);
+        }
     };
+
     return (
         <MainLayout>
             <div className="flex flex-col justify-center items-center w-full max-w-250 pb-3">
@@ -343,16 +372,11 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                     <button
                         className={styles.loadProducts}
                         type="button"
-                        onClick={() =>
-                            setSelectedCategory({
-                                id: 0,
-                                name: "Аксесуари",
-                                slug: "accessories",
-                            })
-                        }
+                        onClick={() => handleCategoryClick(ACCESSORIES_CATEGORY)}
                     >
                         Завантажити аксесуари Dräger
                     </button>
+
                 </div>
 
                 {/* PAGINATION + PRODUCTS */}
