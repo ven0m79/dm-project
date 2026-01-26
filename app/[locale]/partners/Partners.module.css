@@ -29,7 +29,8 @@
 
 @media (max-width: 640px) {
     .headSubCatalogBlock {
-        width: 160px;
+        width: 140px;
+        background-color: #0061AA;
     }
 }
 

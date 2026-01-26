@@ -339,7 +339,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                 </div>
 
                 {/* ===== BUTTON + DROPDOWN ===== */}
-                <div className="relative flex gap-3" ref={dropdownRef}>
+                <div className="relative flex gap-3 mx-1" ref={dropdownRef}>
                     <div className="relative">
                         <button
                             type="button"
@@ -380,7 +380,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                 </div>
 
                 {/* PAGINATION + PRODUCTS */}
-                <div className="w-full pt-6">
+                <div className="w-full pt-6 px-2">
                     <h2 className="text-[22px] font-semibold text-[#002766] mb-4">
                         Обладнання бренду {brands?.name}
                     </h2>
@@ -389,7 +389,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                     {/*)}*/}
                     <div
                         className={classNames(
-                            "grid gap-3 mt-4 mb-4 mx-1 justify-items-start",
+                            "grid gap-2 mt-4 mb-4 mx-1 justify-items-start",
                             isMobile
                                 ? "grid-cols-2"
                                 : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4",
@@ -402,7 +402,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                                 <div
                                     key={product.id}
                                     className={classNames(
-                                        "flex flex-col items-center rounded-lg p-4 min-w-45 cursor-pointer max-w-75",
+                                        "flex flex-col items-center rounded-lg p-4 min-w-35 cursor-pointer max-w-75",
                                         styles.headSubCatalogBlock,
                                     )}
                                     onClick={() => {
@@ -414,8 +414,8 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                                         <Image
                                             src={product.images[0].src}
                                             alt={product.images[0].alt || product.name}
-                                            width={170}
-                                            height={200}
+                                            width={isMobile ? 150 : 170}
+                                            height={isMobile ? 160 : 200}
                                             className="object-contain"
                                         />
                                     )}
