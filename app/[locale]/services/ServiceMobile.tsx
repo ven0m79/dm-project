@@ -194,7 +194,7 @@ export default function ServiceMobile() {
                                         key={i}
                                         className="flex items-start gap-4 p-3 bg-gray-50 rounded-2xl w-full shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
                                     >
-                                        <span className="flex-shrink-0 text-green-500 font-bold text-xl pl-4">✓</span>
+                                        <span className="shrink-0 text-green-500 font-bold text-xl pl-4">✓</span>
                                         <span className="flex-1 text-[#0061AA]">{item}</span>
                                     </div>
                                 ))}
@@ -275,7 +275,7 @@ export default function ServiceMobile() {
                                         key={i}
                                         className="flex items-start gap-4 p-3 bg-gray-50 rounded-2xl w-full shadow-[inset_4px_0_0_0_rgba(0,102,204,1)]"
                                     >
-                                        <span className="flex-shrink-0 text-green-500 font-bold text-xl -mt-0.5">✓</span>
+                                        <span className="shrink-0 text-green-500 font-bold text-xl -mt-0.5">✓</span>
                                         <span className="flex-1 text-[#0061AA]">{item}</span>
                                     </div>
                                 ))}
