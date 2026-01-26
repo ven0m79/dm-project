@@ -433,7 +433,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                         </button>
                     </div>
                 </div>
-                <div className="text-[#0061AA] w-full indent-5 leading-relaxed text-justify pt-4">
+                <div className="text-[#0061AA] w-full indent-5 leading-relaxed text-justify pt-4 px-2">
                     <p>
                         Dräger — бренд із Німеччини з історією понад століття. Компанія
                         працює з 1889 року та пройшла шлях від інженерних розробок до
