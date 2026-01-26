@@ -395,17 +395,17 @@ export default function ServiceDesktop() {
                     <div className={classNames("flex flex-col justify-center px-2 items-center my-3", styles.servContainer)}>
                         <h3 className="text-2xl font-semibold mt-3 text-left">Переваги сервісу Dräger від ДМ-ПРОЕКТ:</h3>
                         <ul className="list-disc space-y-1 leading-relaxed text-left pb-2">
-                            <li className="ml-10 before:mr-1"><span className="mr-2">•</span>єдиний в Україні уповноважений офіційний сервіс</li>
-                            <li className="ml-10 before:mr-1"><span className="mr-2">•</span>індивідуальні плани ТО</li>
-                            <li className="ml-10 before:mr-1"><span className="mr-2">•</span>дотримання усіх регламентів</li>
-                            <li className="ml-10 before:mr-1"><span className="mr-2">•</span>використання оригінальних сервісних комплектів</li>
+                            <li className="ml-10 before:mr-1"><span className="mr-3">•</span>єдиний в Україні уповноважений офіційний сервіс</li>
+                            <li className="ml-10 before:mr-1"><span className="mr-4">•</span>індивідуальні плани ТО</li>
+                            <li className="ml-10 before:mr-1"><span className="mr-5">•</span>дотримання усіх регламентів</li>
+                            <li className="ml-10 before:mr-1"><span className="mr-6">•</span>використання оригінальних сервісних комплектів</li>
                             <li className="ml-10 before:mr-1"><span className="mr-2">•</span>підтримка повного циклу експлуатації</li>
                         </ul>
                     </div>
 
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Навчання медичного персоналу'}</span>
                     <p className="flex self-center text-left leading-relaxed text-[#0061AA]">Навчання є частиною сервісного супроводу. Проводиться під час встановлення, після оновлення ПЗ або при розширенні функціоналу.</p>
-                    <div className={classNames("flex max-w-[1400px] w-full justify-center self-center", styles.servContainer1)}>
+                    <div className={classNames("flex max-w-350 w-full justify-center self-center", styles.servContainer1)}>
                         <div className="flex-1 pr-8">
                             <h3 className="text-2xl font-semibold mt-4 text-left">Навчальні сценарії:</h3>
                             <div className="mx-auto space-y-4 pb-6 w-full">
@@ -431,7 +431,7 @@ export default function ServiceDesktop() {
 
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Гарантії сервісу'}</span>
                     <p className="flex self-center text-left leading-relaxed text-[#0061AA]">ДМ-ПРОЕКТ надає сервіс із чітко прописаними гарантіями на роботи, запчастини та документацію, дотримуючись вимог виробників і міжнародних стандартів.</p>
-                    <div className={classNames("flex max-w-[1400px] w-full justify-center self-center pt-2", styles.servContainer1)}>
+                    <div className={classNames("flex max-w-350 w-full justify-center self-center pt-2", styles.servContainer1)}>
                         <div className="grid grid-cols-2 gap-4 pb-6 w-full">
                             {items5.map((item, i) => (
                                 <div
@@ -447,7 +447,7 @@ export default function ServiceDesktop() {
 
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Вартість та принцип формування'}</span>
                     <p className="flex self-center text-left leading-relaxed text-[#0061AA]">Вартість формується індивідуально, залежно від:</p>
-                    <div className={classNames("flex max-w-[1400px] w-full justify-center self-center pt-2", styles.servContainer1)}>
+                    <div className={classNames("flex max-w-350 w-full justify-center self-center pt-2", styles.servContainer1)}>
                         <div className="grid grid-cols-2 gap-4 pb-6 w-full">
                             {items6.map((item, i) => (
                                 <div
