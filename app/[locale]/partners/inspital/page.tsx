@@ -24,49 +24,45 @@ export async function generateMetadata({
 
   return locale === "ua"
     ? {
-      title: "Партнер Dräger | ДМ-Проект",
+      title: "Партнер INSPITAL | ДМ-Проект",
       description:
-        "Dräger — офіційний партнер DM Project. Медичне обладнання та аксесуари.",
+        "INSPITAL — офіційний партнер DM Project. Медичне обладнання та аксесуари.",
     }
     : {
-      title: "Partner Dräger | DM-Project",
+      title: "Partner INSPITAL | DM-Project",
       description:
-        "Dräger official partner. Medical equipment and accessories.",
+        "INSPITAL official partner. Medical equipment and accessories.",
     };
 }
 
 export default async function Page({ params }: PageProps) {
   const { locale } = await params;
   const lang = locale === "ua" ? "ua" : "en";
-  const BRAND_ID = 105;
-  const CATEGORY_IDS = [592, 600, 112];
 
-  const responses = await Promise.all(
-    CATEGORY_IDS.map((category) =>
-      api.get("products", {
-        per_page: 20,
-        page: 1,
-        category,
-        lang,
-      }),
-    ),
+  const BRAND_ID = 1109;
+  const CATEGORY_ID = 277;
+
+  const res = await api.get("products", {
+    per_page: 20,
+    page: 1,
+    category: CATEGORY_ID,
+    lang,
+  });
+
+  const filtered = res.data.filter((p: any) =>
+    p.brands?.some((b: any) => b.id === BRAND_ID),
   );
-
-  const filtered = responses
-    .flatMap((r) => r.data)
-    .filter(
-      (p: any) => p.brands?.some((b: any) => b.id === BRAND_ID),
-    );
-
 
   return (
     <ClientPage
       locale={locale}
       brands={{
-        id: 105,
-        name: "AT-OS",
-        slug: "atos-brand",
+        id: 1109,
+        name: "Inspital",
+        slug: "inspital",
       }}
-      products={filtered} />
+      products={filtered}
+    />
   );
 }
+

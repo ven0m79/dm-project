@@ -79,7 +79,7 @@ const MobileHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Di
   };
 
 
-  return <div className="flex flex-1 flex-col self-start  h-svh border-2 border-cyan-500">
+  return <div className="flex flex-1 flex-col self-start h-svh">
     <div className={classNames("flex flex-1 flex-row justify-center w-screen", [styles.logo])}>
       <div className="ml-4 w-1/4">
         <div
@@ -135,16 +135,16 @@ const MobileHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Di
       </div>
     </div>
 
-    <div className={classNames("flex justify-center items-center h-[30px] text-white text-nowrap bg-[#0061AA]", styles["backText"])}>
+    <div className={classNames("flex justify-center items-center h-7.5 text-white text-nowrap bg-[#0061AA]", styles["backText"])}>
       {t2("authorized-representativeDreger1")}<span className="font-bold mx-1">{t2("authorized-representativeDreger2")}</span> {t2("authorized-representativeDreger3")}
     </div>
-    <div className={classNames("flex justify-center items-center pb-2 h-[50px] bg-[#0061AA]", styles["searchMob"])}>
+    <div className={classNames("flex justify-center items-center pb-2 h-12.5 bg-[#0061AA]", styles["searchMob"])}>
       <Combobox value={searchTerm}>
         <div className="relative flex z-49 w-[90%]">
           <ComboboxInput
             className={clsx(
               "w-full rounded-lg border-[#0061AA] border bg-white py-1 pr-8 pl-3 text-sm/6 text-black",
-              "focus: outline-none data-[focus]:outline-none data-[focus]:-outline-offset-2 data-[focus]:bg-sky-50",
+              "focus: outline-none data-focus:outline-none data-focus:-outline-offset-2 data-focus:bg-sky-50",
             )}
             ref={searchInputRef}
             placeholder={t("placeholder")}
@@ -162,15 +162,15 @@ const MobileHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Di
               anchor="bottom"
               transition
               className={clsx(
-                "w-[var(--input-width)] rounded-xl border-2 border-[#0061AA] bg-white p-1 [--anchor-gap:var(--spacing-1)] empty:invisible z-50",
-                "transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0",
+                "w-(--input-width) rounded-xl border-2 border-[#0061AA] bg-white p-1 [--anchor-gap:var(--spacing-1)] empty:invisible z-50",
+                "transition duration-100 ease-in data-leave:data-closed:opacity-0",
               )}
             >
               {products.map((product) => (
                 <ComboboxOption
                   key={product.id}
                   value={product.name}
-                  className="group flex cursor-default items-center gap-2 rounded-lg py-1.5 px-3 select-none data-[focus]:bg-sky-100"
+                  className="group flex cursor-default items-center gap-2 rounded-lg py-1.5 px-3 select-none data-focus:bg-sky-100"
                 >
                   <a
                     className={clsx("block, text-black")}
