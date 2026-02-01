@@ -31,10 +31,10 @@ const NavLinks: {
         title: "menu-service",
         link: "/services",
     },
-    // decisions: {
-    //   title: "menu-decisions",
-    //   link: "/decisions",
-    // },
+     blog: {
+       title: "menu-blog",
+       link: "/info",
+     },
     projects: {
         title: "menu-projects",
         link: "/projects",
@@ -72,7 +72,7 @@ const MobileNav: FC<{}> = ({ }) => {
 
         <div className="">
             <motion.button
-                className="absolute top-10 right-5 h-10 w-10 rounded-xl bg-[#0061AA]/100 transition-colors"
+                className="absolute top-10 right-5 h-10 w-10 rounded-xl bg-[#0061AA] transition-colors"
                 onClick={() => setIsOpen(!isOpen)}
                 title="Гамбургер основного меню">
                 <motion.span
