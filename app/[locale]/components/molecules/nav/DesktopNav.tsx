@@ -27,10 +27,10 @@ const NavLinks: {
         title: "menu-service",
         link: "/services",
     },
-    // decisions: {
-    //   title: "menu-decisions",
-    //   link: "/decisions",
-    // },
+     blog: {
+       title: "menu-blog",
+       link: "/info",
+     },
     projects: {
         title: "menu-projects",
         link: "/projects",

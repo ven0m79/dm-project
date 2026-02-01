@@ -186,9 +186,9 @@ export default function ServiceMobile() {
                         <style>{`.perspective { perspective: 1200px; } .preserve-3d { transform-style: preserve-3d; } .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }`}</style>
                     </div>
                     <span className="text-[24px] py-5 self-center text-[#002766]">Які сервіси ми виконуємо</span>
-                    <div className="space-y-4 pb-4 w-[95%]">
+                    <div className="space-y-4 pb-4 w-full max-w-full">
                         {rows.map((row, rowIndex) => (
-                            <div className="flex w-[95%]" key={rowIndex}>
+                            <div className="flex w-full max-w-full" key={rowIndex}>
                                 {row.map((item, i) => (
                                     <div
                                         key={i}
@@ -213,7 +213,7 @@ export default function ServiceMobile() {
                             <h3 className="text-2xl font-semibold mt-4 text-left indent-5">
                                 Етапи планового ТО:
                             </h3>
-                            <div className="space-y-4 pb-4 w-[95%]">
+                            <div className="space-y-4 pb-4 w-full max-w-full">
                                 {items1.map((item, i) => (
                                     <div
                                         key={i}
@@ -267,9 +267,9 @@ export default function ServiceMobile() {
                         </table>
                     </div>
                     <span className="text-[24px] py-3 self-center text-[#002766]">Переваги нашого сервісу</span>
-                    <div className="mx-auto space-y-4 pb-6 w-[95%]">
+                    <div className="mx-auto space-y-4 pb-6 w-full max-w-full">
                         {rows2.map((row2, rowIndex) => (
-                            <div className="flex gap-4 w-[95%]" key={rowIndex}>
+                            <div className="flex gap-4 w-full max-w-full" key={rowIndex}>
                                 {row2.map((item, i) => (
                                     <div
                                         key={i}
@@ -364,9 +364,9 @@ export default function ServiceMobile() {
                         <span className="text-[24px] py-3 self-center text-[#002766]">Офіційний сервіс Dräger в Україні</span>
                         <p className="flex self-center leading-relaxed">На сервісному супроводі — понад 5000 одиниць обладнання Dräger. Інженери проходять навчання у Dräger Academy та мають право офіційно надавати послуги з сервісу.</p>
                     </div>
-                    <div className="flex flex-1 flex-col w-[95%]">
+                    <div className="flex flex-1 flex-col w-full max-w-full">
                         <h3 className="text-2xl font-semibold my-4 indent-5 text-left text-[#0061AA]">Обладнання Dräger:</h3>
-                        <div className="mx-auto space-y-4 pb-6 w-[95%]">
+                        <div className="mx-auto space-y-4 pb-6 w-full max-w-full">
                             {items3.map((item, i) => (
                                 <div
                                     key={i}
@@ -393,9 +393,9 @@ export default function ServiceMobile() {
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Навчання медичного персоналу'}</span>
                     <p className="flex self-center text-justify indent-5 px-2 leading-relaxed text-[#0061AA]">Навчання є частиною сервісного супроводу. Проводиться під час встановлення, після оновлення ПЗ або при розширенні функціоналу.</p>
                     <div className={classNames("flex flex-col", styles.servContainer1)}>
-                        <div className="mx-auto space-y-4 pb-6 w-[95%]">
+                        <div className="mx-auto space-y-4 pb-6 w-full max-w-full">
                             <h3 className="text-2xl font-semibold mt-4 text-left">Навчальні сценарії:</h3>
-                            <div className="mx-auto space-y-4 pb-3 w-[95%]">
+                            <div className="mx-auto space-y-4 pb-3 w-full max-w-full">
                                 {items4.map((item, i) => (
                                     <div
                                         key={i}
@@ -419,8 +419,8 @@ export default function ServiceMobile() {
 
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Гарантії сервісу'}</span>
                     <p className="flex self-center text-justify indent-5 px-2 leading-relaxed text-[#0061AA]">ДМ-ПРОЕКТ надає сервіс із чітко прописаними гарантіями на роботи, запчастини та документацію, дотримуючись вимог виробників і міжнародних стандартів.</p>
-                    <div className={classNames("flex w-[95%] justify-center self-center pt-2", styles.servContainer1)}>
-                        <div className="flex flex-col gap-3 pb-6 w-[95%]">
+                    <div className={classNames("flex w-full max-w-full justify-center self-center pt-2", styles.servContainer1)}>
+                        <div className="flex flex-col gap-3 pb-6 w-full max-w-full">
                             {items5.map((item, i) => (
                                 <div
                                     key={i}
@@ -435,8 +435,8 @@ export default function ServiceMobile() {
 
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Вартість та принцип формування'}</span>
                     <p className="flex self-center text-justify indent-5 px-2 leading-relaxed text-[#0061AA]">Вартість формується індивідуально, залежно від:</p>
-                    <div className={classNames("flex w-[95%] justify-center self-center pt-2", styles.servContainer1)}>
-                        <div className="flex flex-wrap gap-3 pb-6 w-[95%]">
+                    <div className={classNames("flex w-full max-w-full justify-center self-center pt-2", styles.servContainer1)}>
+                        <div className="flex flex-wrap gap-3 pb-6 w-full max-w-full">
                             {items6.map((item, i) => (
                                 <div
                                     key={i}

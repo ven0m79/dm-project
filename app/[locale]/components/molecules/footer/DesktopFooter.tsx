@@ -91,7 +91,15 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                         {t("service")}
                     </div>
                 </Link>
-                {/* <Link href="/decisions"><div className={classNames('font-normal mt-1 ml-16 hover:text-green-600')}>{t('decisions')}</div></Link> */}
+                <Link href="/info">
+                    <div
+                        className={classNames(
+                            "font-normal mt-1 ml-10 hover:text-green-600"
+                        )}
+                    >
+                        {t("menu-blog")}
+                    </div>
+                </Link>
                 <Link href="/projects">
                     <div
                         className={classNames(

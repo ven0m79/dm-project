@@ -20,6 +20,15 @@ const nextConfig = {
     ],
   },
 
+  async rewrites() {
+    return [
+      {
+        source: '/info/:path*',
+        destination: 'https://blog.dm-project.com.ua/:path*',
+      },
+    ]
+  },
+
   async headers() {
     return [
       {
@@ -45,6 +54,7 @@ const nextConfig = {
     ];
   },
 };
+
 
 // 🌟 Комбінуємо плагіни ES Module
 export default withNextIntl(withTM(nextConfig));
