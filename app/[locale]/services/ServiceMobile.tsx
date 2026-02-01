@@ -109,7 +109,7 @@ export default function ServiceMobile() {
     };
 
     return (
-        <>
+        <div className="w-full max-w-full overflow-x-hidden">
             <div className={"flex flex-col self-center"}>
                 <div className={classNames("flex flex-col justify-center items-center text-lg pt-2")}>
                     <div className={classNames("flex flex-col justify-normal items-start", styles.servContainer)}>
@@ -244,7 +244,7 @@ export default function ServiceMobile() {
                     </div>
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Планове ТО vs Аварійний ремонт'}</span>
                     <div className="flex w-full overflow-x-auto px-2">
-                        <table className="text-[14px]">
+                        <table className="min-w-full text-[14px]">
                             <thead>
                                 <tr className="bg-[#0067C5] text-white text-left">
                                     <th className="py-2 px-1"></th>
@@ -261,7 +261,7 @@ export default function ServiceMobile() {
                                         <td className="p-1 font-semibold">{row.label}</td>
                                         <td className="p-1">{row.plan}</td>
                                         <td className="p-1">{row.emergency}</td>
-                                    </tr>
+                                    </tr>rows
                                 ))}
                             </tbody>
                         </table>
@@ -269,7 +269,7 @@ export default function ServiceMobile() {
                     <span className="text-[24px] py-3 self-center text-[#002766]">Переваги нашого сервісу</span>
                     <div className="mx-auto space-y-4 pb-6 w-full max-w-full">
                         {rows2.map((row2, rowIndex) => (
-                            <div className="flex gap-4 w-full max-w-full" key={rowIndex}>
+                            <div className="flex gap-4 w-full max-w-full min-w-0" key={rowIndex}>
                                 {row2.map((item, i) => (
                                     <div
                                         key={i}
@@ -354,9 +354,7 @@ export default function ServiceMobile() {
                                 <Image
                                     src={pics[1].front}
                                     alt="Ukraine"
-                                    width={500} // 662 реальна ширина зображення
-                                    height={383} // 442 реальна висота зображення
-                                    className="rounded-2xl object-contain" />
+                                    className="rounded-2xl object-contain max-w-full h-auto" />
                             </div>
                         </div>
                     </div>
@@ -568,6 +566,6 @@ export default function ServiceMobile() {
                     )}
                 </div>
             </div>
-        </>
+        </div>
     );
 };

@@ -69,7 +69,7 @@ export default function SliderAbout({ locale }: { locale: string }) {
   }, [page]);
 
   return (
-    <div className="w-screen flex justify-center px-1">
+    <div className="w-full flex justify-center px-1 overflow-x-hidden">
       <div className="container z-10" style={{ height: isMobile ? 250 : containerHeight }}>
         <AnimatePresence initial={true} custom={direction}>
           <motion.div
