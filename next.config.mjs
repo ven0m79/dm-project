@@ -23,6 +23,10 @@ const nextConfig = {
   async rewrites() {
     return [
       {
+        source: "/info",
+        destination: "https://blog.dm-project.com.ua",
+      },
+      {
         source: '/info/:path*',
         destination: 'https://blog.dm-project.com.ua/:path*',
       },
