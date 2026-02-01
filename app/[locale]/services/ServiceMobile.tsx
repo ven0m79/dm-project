@@ -261,7 +261,7 @@ export default function ServiceMobile() {
                                         <td className="p-1 font-semibold">{row.label}</td>
                                         <td className="p-1">{row.plan}</td>
                                         <td className="p-1">{row.emergency}</td>
-                                    </tr>rows
+                                    </tr>
                                 ))}
                             </tbody>
                         </table>
