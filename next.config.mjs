@@ -24,11 +24,11 @@ const nextConfig = {
     return [
       {
         source: "/info",
-        destination: "https://blog.dm-project.com.ua",
+        destination: "https://info.dm-project.com.ua",
       },
       {
         source: "/info/:path*",
-        destination: "https://blog.dm-project.com.ua/:path*",
+        destination: "https://info.dm-project.com.ua/:path*",
       },
     ];
   },
