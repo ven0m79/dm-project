@@ -109,7 +109,7 @@ export default function ServiceMobile() {
     };
 
     return (
-        <div className="w-full max-w-full overflow-x-hidden">
+        <div className="w-full max-w-full overflow-x-hidden px-1">
             <div className={"flex flex-col self-center"}>
                 <div className={classNames("flex flex-col justify-center items-center text-lg pt-2")}>
                     <div className={classNames("flex flex-col justify-normal items-start", styles.servContainer)}>
@@ -201,9 +201,9 @@ export default function ServiceMobile() {
                             </div>
                         ))}
                     </div>
-                    <span ref={planRef} className="text-[24px] py-3 text-[#002766] self-center">{'Планове технічне обслуговування'}</span>
+                    <span className="text-[24px] py-2 self-center text-[#002766] text-center" ref={planRef}>Планове технічне обслуговування</span>
                     <div className={classNames(
-                        "flex flex-col self-center w-full gap-10 px-2",
+                        "flex flex-col self-center w-full gap-10",
                         styles.servContainer1
                     )}>
                         <div className="">
@@ -213,7 +213,7 @@ export default function ServiceMobile() {
                             <h3 className="text-2xl font-semibold mt-4 text-left indent-5">
                                 Етапи планового ТО:
                             </h3>
-                            <div className="space-y-4 pb-4 w-full max-w-full">
+                            <div className="space-y-4 pb-0 w-full max-w-full">
                                 {items1.map((item, i) => (
                                     <div
                                         key={i}
@@ -236,14 +236,14 @@ export default function ServiceMobile() {
                         </div>
                     </div>
 
-                    <div className="text-[#0061AA] indent-4 px-2">
+                    <div className="text-[#0061AA] indent-4">
                         <h3 className="text-2xl font-semibold mt-4 text-left text-[#0061AA]">Аварійний ремонт і строки реагування</h3>
                         <p className="flex self-center text-justify leading-relaxed">Сервісна служба оперативно реагує на аварійні запити та швидко відновлює працездатність критичного обладнання.</p>
                         <p className="flex self-center text-justify leading-relaxed">Стандартний час відповіді — максимально швидкий у межах робочого графіка. Оперативні виїзди інженерів забезпечують виконання робіт у короткі строки.</p>
                         <p className="flex self-center text-justify leading-relaxed">Оперативні виїзди інженерів забезпечують виконання робіт у короткі строки.</p>
                     </div>
-                    <span className="text-[24px] py-3 text-[#002766] self-center">{'Планове ТО vs Аварійний ремонт'}</span>
-                    <div className="flex w-full overflow-x-auto px-2">
+                    <span className="text-[24px] py-3 text-[#002766] text-center">{'Планове ТО vs Аварійний ремонт'}</span>
+                    <div className="flex w-full overflow-x-auto">
                         <table className="min-w-full text-[14px]">
                             <thead>
                                 <tr className="bg-[#0067C5] text-white text-left">
@@ -287,7 +287,7 @@ export default function ServiceMobile() {
                         <div className="flex flex-col">
                             <div className="flex-1 flex flex-col justify-start">
                                 <h3 className="text-2xl font-semibold mt-4 indent-5 text-left text-[#0061AA]">Сертифікація інженерів</h3>
-                                <p className="text-justify px-2 indent-5 leading-relaxed">Інженери ДМ-ПРОЕКТ мають підтверджені виробниками обладнання сертифікати і проходять регулярне навчання, включно зі спеціалізованими курсами Dräger у Німеччині. Це гарантує коректність, безпечність і точність усіх сервісних операцій.</p>
+                                <p className="text-justify indent-5 leading-relaxed">Інженери ДМ-ПРОЕКТ мають підтверджені виробниками обладнання сертифікати і проходять регулярне навчання, включно зі спеціалізованими курсами Dräger у Німеччині. Це гарантує коректність, безпечність і точність усіх сервісних операцій.</p>
                             </div>
                             <div className="flex justify-center items-start">
                                 <motion.div
@@ -343,7 +343,7 @@ export default function ServiceMobile() {
                         <div className="flex flex-col">
                             <div className="flex flex-col justify-start">
                                 <h3 className="text-2xl font-semibold mt-4 indent-5 text-left">Географія сервісу</h3>
-                                <p className="text-justify px-2 indent-5 leading-relaxed">
+                                <p className="text-justify indent-5 leading-relaxed">
                                     Сервіс компанії покриває <strong>всю територію України</strong> (окрім тимчасово окупованих територій та зони бойових дій).
                                     Працюють виїзні бригади, які забезпечують оперативне реагування
                                     у різних регіонах. Можливе індивідуальне планування візитів
@@ -354,7 +354,9 @@ export default function ServiceMobile() {
                                 <Image
                                     src={pics[1].front}
                                     alt="Ukraine"
-                                    className="rounded-2xl object-contain max-w-full h-auto" />
+                                    width={300}
+                                    height={150}
+                                    className="rounded-2xl object-contain" />
                             </div>
                         </div>
                     </div>
@@ -377,8 +379,8 @@ export default function ServiceMobile() {
                         </div>
                     </div>
 
-                    <div className={classNames("flex flex-col justify-normal px-2 items-start my-3 w-full", styles.servContainer)}>
-                        <h3 className="text-2xl font-semibold mt-3 text-left">Переваги сервісу Dräger від <span className="flex flex-nowrap">ДМ-ПРОЕКТ:</span></h3>
+                    <div className={classNames("flex flex-col justify-normal items-start my-3 w-full", styles.servContainer)}>
+                        <h3 className="text-2xl font-semibold mt-3 text-left indent-5">Переваги сервісу Dräger від <span className="flex flex-nowrap">ДМ-ПРОЕКТ:</span></h3>
                         <ul className="space-y-1 leading-relaxed text-left pb-2 ul3">
                             <li className="ml-10"><span className="mr-1">•</span>єдиний в Україні уповноважений офіційний сервіс</li>
                             <li className="ml-10"><span className="mr-1">•</span>індивідуальні плани ТО</li>
@@ -388,11 +390,11 @@ export default function ServiceMobile() {
                         </ul>
                     </div>
 
-                    <span className="text-[24px] py-3 text-[#002766] self-center">{'Навчання медичного персоналу'}</span>
-                    <p className="flex self-center text-justify indent-5 px-2 leading-relaxed text-[#0061AA]">Навчання є частиною сервісного супроводу. Проводиться під час встановлення, після оновлення ПЗ або при розширенні функціоналу.</p>
+                    <span className="text-[24px] py-3 text-[#002766] text-center">{'Навчання медичного персоналу'}</span>
+                    <p className="flex self-center text-justify indent-5 leading-relaxed text-[#0061AA]">Навчання є частиною сервісного супроводу. Проводиться під час встановлення, після оновлення ПЗ або при розширенні функціоналу.</p>
                     <div className={classNames("flex flex-col", styles.servContainer1)}>
                         <div className="mx-auto space-y-4 pb-6 w-full max-w-full">
-                            <h3 className="text-2xl font-semibold mt-4 text-left">Навчальні сценарії:</h3>
+                            <h3 className="text-2xl font-semibold mt-4 text-left indent-5">Навчальні сценарії:</h3>
                             <div className="mx-auto space-y-4 pb-3 w-full max-w-full">
                                 {items4.map((item, i) => (
                                     <div
@@ -416,7 +418,7 @@ export default function ServiceMobile() {
                     </div>
 
                     <span className="text-[24px] py-3 text-[#002766] self-center">{'Гарантії сервісу'}</span>
-                    <p className="flex self-center text-justify indent-5 px-2 leading-relaxed text-[#0061AA]">ДМ-ПРОЕКТ надає сервіс із чітко прописаними гарантіями на роботи, запчастини та документацію, дотримуючись вимог виробників і міжнародних стандартів.</p>
+                    <p className="flex self-center text-justify indent-5 leading-relaxed text-[#0061AA]">ДМ-ПРОЕКТ надає сервіс із чітко прописаними гарантіями на роботи, запчастини та документацію, дотримуючись вимог виробників і міжнародних стандартів.</p>
                     <div className={classNames("flex w-full max-w-full justify-center self-center pt-2", styles.servContainer1)}>
                         <div className="flex flex-col gap-3 pb-6 w-full max-w-full">
                             {items5.map((item, i) => (
@@ -431,8 +433,8 @@ export default function ServiceMobile() {
                         </div>
                     </div>
 
-                    <span className="text-[24px] py-3 text-[#002766] self-center">{'Вартість та принцип формування'}</span>
-                    <p className="flex self-center text-justify indent-5 px-2 leading-relaxed text-[#0061AA]">Вартість формується індивідуально, залежно від:</p>
+                    <span className="text-[24px] py-3 text-[#002766] text-center">{'Вартість та принцип формування'}</span>
+                    <p className="flex self-center text-justify indent-5 leading-relaxed text-[#0061AA]">Вартість формується індивідуально, залежно від:</p>
                     <div className={classNames("flex w-full max-w-full justify-center self-center pt-2", styles.servContainer1)}>
                         <div className="flex flex-wrap gap-3 pb-6 w-full max-w-full">
                             {items6.map((item, i) => (
@@ -455,8 +457,8 @@ export default function ServiceMobile() {
                             {'Подати заявку на сервіс'}
                         </button>
                     </div>
-                    <span className="text-[24px] py-3 text-[#002766] self-center px-2">{'Повний життєвий цикл обладнання'}</span>
-                    <p className="flex self-center text-justify indent-5 px-2 leading-relaxed text-[#0061AA]">ДМ-ПРОЕКТ забезпечує повний сервісний цикл підтримки — від встановлення та інсталяції обладнання до стабільної та надійної експлуатації протягом багатьох років</p>
+                    <span className="text-[24px] py-3 text-[#002766] text-center">{'Повний життєвий цикл обладнання'}</span>
+                    <p className="flex self-center text-justify indent-5 leading-relaxed text-[#0061AA]">ДМ-ПРОЕКТ забезпечує повний сервісний цикл підтримки — від встановлення та інсталяції обладнання до стабільної та надійної експлуатації протягом багатьох років</p>
 
                     <div className={classNames("w-full max-w-5xl mx-auto rounded-xl bg-blue-50/60 px-6 py-3", styles.servContainer)}>
                         <h2 className="mb-7 text-center text-2xl  font-normal text-[#002766]">
