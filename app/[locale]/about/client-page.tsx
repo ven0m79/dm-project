@@ -16,9 +16,9 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
 
   return (
     <MainLayout>
-      {typeof window !== "undefined" && isMobile ?
+      {isMobile ?
         <>
-          <div className={classNames("flex flex-1 flex-col w-full sm:px-5", styles.aboutText)}>
+          <div className={classNames("flex flex-1 px-1 flex-col", styles.aboutText)}>
             <div className={classNames("mx-2 my-0 mt-2 indent-5 text-justify")}>
               {t("information1")}
             </div>
@@ -53,54 +53,59 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 {t("implemented")}
               </div>
             </div>
-            <div className="">
+            <div className="w-full">
               <SliderAbout locale={locale} />
             </div>
           </div>
         </>
         :
-        <><div className={classNames("flex flex-1 flex-col w-full", styles.aboutContainer)}>
-          <div className={"flex flex-1 flex-row w-full px-5"}>
-            <div>
-              <Image
-                src={vystavka}
-                className="float-left w-full mr-2 mt-2 max-w-[240px]"
-                width={384}
-                height={518}
-                alt={""} />
+        <>
+          <div className="flex flex-col">
+            <div className={"flex flex-1 flex-col w-full items-center"}>
+              <div className={"flex flex-1 flex-row max-w-350 px-5"}>
+                <div>
+                  <Image
+                    src={vystavka}
+                    className="float-left w-full mr-2 mt-2 max-w-60"
+                    width={384}
+                    height={518}
+                    alt={""} />
+                </div>
+                <div className={classNames("flex flex-1 flex-col max-w-full min-w-125 text-[10px] lg:text-[14px] xl:text-[18px]", styles.aboutText)}>
+                  <div className={classNames("mx-2 my-0 lg:my-2 md:my-1 indent-5 text-justify")}>
+                    {t("information1")}
+                  </div>
+                  <div className={classNames("mx-2 my-0 lg:my-2 md:my-1 indent-5 text-justify")}>
+                    {t("information2")}
+                  </div>
+                  <div className={classNames("mx-2 my-0 lg:my-2 md:my-1 indent-5 text-justify")}>
+                    {t("information3")}
+                  </div>
+                  <div className={classNames("mx-2 my-0 lg:my-2 md:my-1 indent-5 text-justifyy")}>
+                    {t("information4")}
+                  </div>
+                </div>
+                <div>
+                  <Image
+                    className="float-right w-full ml-2 mt-2 max-w-60"
+                    src={roman}
+                    width={384}
+                    height={518}
+                    alt={""} />
+                </div>
+              </div>
+              <div>
+                <div className={styles.stroke}></div>
+                <div className="text-2xl text-blue-900 flex justify-center self-center mb-5">
+                  {t("implemented")}
+                </div>
+              </div>
             </div>
-            <div className={classNames("flex flex-1 flex-col max-w-full min-w-[500px] text-[10px] lg:text-[14px] xl:text-[18px]", styles.aboutText)}>
-              <div className={classNames("mx-2 my-0 lg:my-2 md:my-1 indent-5 text-justify")}>
-                {t("information1")}
-              </div>
-              <div className={classNames("mx-2 my-0 lg:my-2 md:my-1 indent-5 text-justify")}>
-                {t("information2")}
-              </div>
-              <div className={classNames("mx-2 my-0 lg:my-2 md:my-1 indent-5 text-justify")}>
-                {t("information3")}
-              </div>
-              <div className={classNames("mx-2 my-0 lg:my-2 md:my-1 indent-5 text-justifyy")}>
-                {t("information4")}
-              </div>
-            </div>
-            <div>
-              <Image
-                className="float-right w-full ml-2 mt-2 max-w-[240px]"
-                src={roman}
-                width={384}
-                height={518}
-                alt={""} />
+            <div className="">
+              <SliderAbout locale={locale} />
             </div>
           </div>
-          <div>
-            <div className={styles.stroke}></div>
-            <div className="text-2xl text-blue-900 flex justify-center self-center mb-5">
-              {t("implemented")}
-            </div>
-          </div>
-        </div><div className="">
-            <SliderAbout locale={locale} />
-          </div></>
+        </>
       }
     </MainLayout >
   );

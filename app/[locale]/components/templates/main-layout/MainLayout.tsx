@@ -2,8 +2,7 @@ import React, { FC, ReactNode, Suspense } from "react";
 
 import { Nav, Footer } from "@app/[locale]/components/molecules";
 import HeaderWrapper from "@app/[locale]/components/molecules/header/HeaderWrapper";
-import "@app/[locale]/globals.css";
-import "@app/[locale]/reset.css";
+import "../../../globals.css";
 
 import styles from "./MainLayout.module.css";
 
@@ -28,9 +27,15 @@ const MainLayout: FC<MainLayoutProps> = ({
     <Suspense fallback="Loading">
       <main className={styles.main}>
         {noHeader ? null : <HeaderWrapper />}
-        {noNav ? null : <Nav /> }
-        {children}
-        {noFooter ? null : <Footer />}
+        <div className="sm:h-12.5 h-0">
+          {noNav ? null : <Nav />}
+        </div>
+        <div className="flex flex-1 w-full items-center justify-center">
+          {children}
+        </div>
+        <div className="">
+          {noFooter ? null : <Footer />}
+        </div>
       </main>
     </Suspense>
   );

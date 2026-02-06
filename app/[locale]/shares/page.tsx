@@ -2,11 +2,15 @@ import type { Metadata } from "next";
 
 import { ClientPage } from "./client-page";
 
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: { locale: string };
-}): Promise<Metadata> {
+
+type PageProps = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata(
+  { params }: PageProps
+): Promise<Metadata> {
+  const { locale } = await params;
   return locale === "ua"
     ? {
         title: "Акції та спеціальні пропозиції на медичне обладнання | ДМ-Проект",

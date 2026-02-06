@@ -51,6 +51,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
     () => sortedProducts.slice(0, visibleCount),
     [sortedProducts, visibleCount],
   );
+  
   const categoriesDescriptionMap = useMemo(() => {
     const map = new Map<number, string>();
     const traverse = (cats: TransformedCategoriesType[]) => {
@@ -89,7 +90,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                   "mb-5 flex flex-col justify-center items-center",
                   cardClass,
                 )}
-              >
+               >
                 <div className="w-full text-center">
                   <div
                     className="cursor-pointer"
@@ -142,7 +143,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
       )}
       {/* Category description */}
       <p
-        className="content text-[#0077d2] text-[15px] leading-[1.5] p-2 text-justify"
+        className="content text-[#0077d2] text-[15px] leading-relaxed p-2 text-justify"
         suppressHydrationWarning
         style={{ textIndent: "15px" }}
         dangerouslySetInnerHTML={{ __html: categoryDescription || "" }}

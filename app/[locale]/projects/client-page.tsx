@@ -7,8 +7,6 @@ import classNames from "classnames";
 import imgProj from '../../../public/projectings.webp';
 import imgProj1 from '../../../public/projectings1.webp';
 import { MainLayout } from "@app/[locale]/components/templates";
-import { unstable_setRequestLocale } from "next-intl/server";
-
 import { useTranslations } from 'next-intl';
 import { useIsMobile } from "../components/hooks/useIsMobile";
 import Image from "next/image";

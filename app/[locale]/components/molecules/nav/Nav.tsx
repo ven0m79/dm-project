@@ -8,7 +8,7 @@ import styles from "./Nav.module.css";
 
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 
-import { Link, usePathname } from "../../../../../config";
+//import { Link, usePathname } from "../../../../../i18n/navigation";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 
@@ -67,7 +67,7 @@ const Nav = () => {
           <MobileNav />
         </nav>
         :
-        <nav className={classNames("flex flex-1 w-screen justify-center max-h-[50px]", styles["navigation"])}>
+        <nav className={classNames("flex flex-1 w-screen justify-center h-[50px]", styles["navigation"])}>
           <DesktopNav />
         </nav >
       }

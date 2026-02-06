@@ -1,0 +1,61 @@
+.loadProducts {
+    text-align: center;
+    max-width: 400px;
+    font-size: 18px;
+    color: #fff;
+    padding: 10px;
+    background-color: #002766;
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+@media (max-width: 640px) {
+    .loadProducts {
+        font-size: 16px;
+    }
+}
+
+
+.loadProducts:hover {
+    transition: all 0.5s;
+    background: #0061AA;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.headSubCatalogBlock {
+    color: #002766;
+    text-align: center;
+    padding: 5px;
+    width: 230px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    border-radius: 10px;
+}
+
+@media (max-width: 640px) {
+    .headSubCatalogBlock {
+        width: 140px;
+    }
+}
+
+.headSubCatalogBlockMini {
+    font-size: 12px;
+    color: #002766;
+    display: flex;
+    text-align: center;
+    padding: 5px;
+    width: 140px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    border-radius: 10px;
+}
+
+@media (max-width: 640px) {
+    .headSubCatalogBlockMini {
+        width: 108px;
+        font-size: 10px;
+
+
+    }
+}

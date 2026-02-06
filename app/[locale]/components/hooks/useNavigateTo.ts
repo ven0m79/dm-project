@@ -1,4 +1,4 @@
-import { useRouter } from "../../../../config";
+import { useRouter } from "../../../../i18n/navigation";
 import { useCallback } from "react";
 
 const PATHNAME_TO_NAVIGATE = "/catalog/sub-catalog";

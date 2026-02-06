@@ -1,25 +1,4 @@
-@import "../../node_modules/tailwindcss/base.css";
-@import "../../node_modules/tailwindcss/components.css";
-@import "../../node_modules/tailwindcss/utilities.css";
-
-/* @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"); */
-
-/* @font-face {
-  font-family: "Roboto";
-  src: url("https://db.onlinewebfonts.com/t/0033a2fbc0329740fb86c1cfd134cb94.eot");
-  src:
-    url("https://db.onlinewebfonts.com/t/0033a2fbc0329740fb86c1cfd134cb94.eot?#iefix")
-      format("embedded-opentype"),
-    url("https://db.onlinewebfonts.com/t/0033a2fbc0329740fb86c1cfd134cb94.woff2")
-      format("woff2"),
-    url("https://db.onlinewebfonts.com/t/0033a2fbc0329740fb86c1cfd134cb94.woff")
-      format("woff"),
-    url("https://db.onlinewebfonts.com/t/0033a2fbc0329740fb86c1cfd134cb94.ttf")
-      format("truetype"),
-    url("https://db.onlinewebfonts.com/t/0033a2fbc0329740fb86c1cfd134cb94.svg#Roboto")
-      format("svg");
-} */
-/* підключення змінної шрифту від next/font */
+@import "tailwindcss";
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -43,6 +22,7 @@ body {
 
 ul {
   overflow-y: hidden;
+  list-style-type: none;
 }
 
 button {
@@ -141,7 +121,7 @@ button {
 }
 
 .ul3 {
-  font-size: 16px;
+  font-size: 18px;
   color: #0061aa !important;
   text-align: justify;
 
@@ -160,6 +140,37 @@ button {
 
 .ul3>li>span {
   margin-right: 20px;
+}
+
+
+.ul4 {
+  font-size: 16px;
+  color: #ffffff !important;
+  text-align: left;
+  list-style-type: none;
+}
+@media (max-width: 640px) {
+    .ul4 {
+        font-size: 14px;
+    }
+}
+
+.ul4>li {
+  display: block;
+  color: #ffffff !important;
+}
+@media (max-width: 640px) {
+    .ul4 {
+        font-size: 14px;
+    }
+}
+.ul4>li>span {
+  color: #ffffff !important;
+}
+@media (max-width: 640px) {
+    .ul4 {
+        font-size: 14px;
+    }
 }
 
 .productText {
