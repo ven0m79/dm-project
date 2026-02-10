@@ -53,15 +53,15 @@ export default function proxy(request: NextRequest) {
   //   return NextResponse.redirect(url, 301);
   // }
 
-  if (isInfoPath(pathname)) {
-    // Let next.config.js rewrites proxy this to WP without locale routing changes.
+if (pathname.startsWith("/info")) {
     const res = NextResponse.next();
 
     // Keep your "noindex for test domains" logic for /info too
     if (hostname.startsWith("test")) {
       res.headers.set("X-Robots-Tag", "noindex, nofollow");
     }
-
+    res.headers.set("X-Forwarded-Host", "dm-project.com.ua");
+    res.headers.set("X-Forwarded-Proto", "https");
     return res;
   }
 

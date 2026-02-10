@@ -20,8 +20,23 @@ const nextConfig = {
     ],
   },
 
+  trailingSlash: true,
+
   async rewrites() {
     return [
+
+      {
+        source: "/info/wp-admin/:path*",
+        destination: "https://info.dm-project.com.ua/wp-admin/:path*"
+      },
+      {
+        source: "/info/wp-login.php",
+        destination: "https://info.dm-project.com.ua/wp-login.php"
+      },
+      {
+        source: "/info/:path*",
+        destination: "https://info.dm-project.com.ua/:path*"
+      },
       {
         source: "/info",
         destination: "https://info.dm-project.com.ua",
@@ -32,6 +47,8 @@ const nextConfig = {
       },
     ];
   },
+
+
 
   async headers() {
     return [
