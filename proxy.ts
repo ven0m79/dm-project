@@ -41,17 +41,17 @@ export default function proxy(request: NextRequest) {
   //    - /info and /info/* bypass next-intl completely
   //    - /{locale}/info -> redirect to /info (optional but recommended)
   // ---------------------------------------------------------------------------
-  if (isLocaleInfoPath(pathname)) {
-    const url = nextUrl.clone();
+  // if (isLocaleInfoPath(pathname)) {
+  //   const url = nextUrl.clone();
 
-    // strip first segment (locale) from /{locale}/info...
-    const segments = pathname.split("/").filter(Boolean);
-    // segments = [locale, "info", ...rest]
-    const rest = segments.slice(1); // ["info", ...]
-    url.pathname = "/" + rest.join("/");
+  //   // strip first segment (locale) from /{locale}/info...
+  //   const segments = pathname.split("/").filter(Boolean);
+  //   // segments = [locale, "info", ...rest]
+  //   const rest = segments.slice(1); // ["info", ...]
+  //   url.pathname = "/" + rest.join("/");
 
-    return NextResponse.redirect(url, 301);
-  }
+  //   return NextResponse.redirect(url, 301);
+  // }
 
   if (isInfoPath(pathname)) {
     // Let next.config.js rewrites proxy this to WP without locale routing changes.
