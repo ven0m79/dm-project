@@ -48,6 +48,7 @@ export type MetaDataType = {
 };
 
 export type SingleProductDetails = {
+  menu_order: number;
   id: number;
   name: string;
   slug: string;
