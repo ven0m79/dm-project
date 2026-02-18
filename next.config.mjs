@@ -92,11 +92,6 @@ const nextConfig = {
         source: "/((?!_next/static|images|fonts).*)",
         headers: [{ key: "Cache-Control", value: "no-store, must-revalidate" }],
       },
-
-      {
-        source: "/info/:path*",
-        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
-      },
     ];
   },
 };
