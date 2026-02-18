@@ -41,10 +41,26 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   }, [categoryId, locale, setOpenedCategoryIds, setSelectedCategoryId]);
 
   // ✅ Memoize sorting
-  const sortedProducts = useMemo(
-    () => [...selectedProducts].sort((a, b) => a.name.localeCompare(b.name)),
-    [selectedProducts],
-  );
+  const normalizeOrder = (order?: number) =>
+    !order || order === 0 ? Number.MAX_SAFE_INTEGER : order;
+
+  const sortedProducts = useMemo(() => {
+    return [...selectedProducts].sort((a, b) => {
+      const aIsAccessories = a.tags?.some((t) => t.name === "accessories");
+      const bIsAccessories = b.tags?.some((t) => t.name === "accessories");
+
+      if (aIsAccessories && bIsAccessories) {
+        return normalizeOrder(a.menu_order) - normalizeOrder(b.menu_order);
+      }
+
+      if (aIsAccessories || bIsAccessories) {
+        return 0;
+      }
+
+      return a.name.localeCompare(b.name);
+    });
+  }, [selectedProducts]);
+
 
   const [visibleCount, setVisibleCount] = useState(15);
   const productsToRender = useMemo(
@@ -117,7 +133,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                     </div>
                     <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center" />
                     <div className="p-1 grow flex items-center justify-center">
-                      <p className="text-center text-sm font-normal text-[#0061AA] line-clamp-2 hover:text-[#004a80] transition-colors">
+                      <p className="text-center text-sm font-normal text-[#0061AA] line-clamp-2 hover:text-[#004a80] transition-colors h-10">
                         {el.name}
                       </p>
                     </div>
