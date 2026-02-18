@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 import styles from "./Footer.module.css";
 
 const DesktopFooter: FC<{ t: any }> = ({ t }) => {
+    
     //const { navigateWithDelay } = useNavigateTo();
 
     return (
