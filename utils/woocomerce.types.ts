@@ -48,7 +48,6 @@ export type MetaDataType = {
 };
 
 export type SingleProductDetails = {
-  menu_order: number;
   id: number;
   name: string;
   slug: string;
@@ -80,6 +79,7 @@ export type SingleProductDetails = {
   parentCategory: string;
   meta_data: MetaDataType[];
   variations?: any[];
+  menu_order: number;
 };
 
 export type BrandsType = {
