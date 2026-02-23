@@ -6,7 +6,7 @@ import styles from './Service.module.css';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import Snowfall from "react-snowfall"
+//import Snowfall from "react-snowfall"
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 import { cards, items, items1, items2, items3, items4, items5, items6, tableData, pics } from "./data";
 
@@ -109,13 +109,15 @@ export default function ServiceDesktop() {
     };
 
     return (
-        <><Snowfall color="white" speed={[1.0, 3.0]} style={{
-            position: "fixed",
-            width: "100vw",
-            height: "100vh",
-            zIndex: 50,
-            pointerEvents: "none",
-        }} /><div className={classNames("flex flex-1 flex-col self-center", styles.main)}>
+        <>
+            {/* <Snowfall color="white" speed={[1.0, 3.0]} style={{
+                position: "fixed",
+                width: "100vw",
+                height: "100vh",
+                zIndex: 50,
+                pointerEvents: "none",
+            }} /> */}
+            <div className={classNames("flex flex-1 flex-col self-center", styles.main)}>
                 <div className={classNames("flex flex-col flex-1 justify-normal items-center w-full max-w-350 text-lg")}>
                     {/* Left Section */}
                     <div className={classNames("flex flex-col justify-normal w-full", styles.servContainer)}>
