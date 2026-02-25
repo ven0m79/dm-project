@@ -3,10 +3,7 @@ import { routing } from "./i18n/routing";
 import { NextRequest, NextResponse } from "next/server";
 
 // Create intl middleware once
-const intlMiddleware = createMiddleware({
-  ...routing,
-  localeDetection: false
-});
+const intlMiddleware = createMiddleware(routing);
 
 export default function proxy(request: NextRequest) {
   const { nextUrl } = request;
