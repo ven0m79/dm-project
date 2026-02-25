@@ -10,7 +10,6 @@ import Image from "next/image";
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 import { cards, items, items1, items2, items3, items4, items5, items6, tableData, pics } from "./data";
 
-
 declare global {
     interface Window {
         dataLayer: Record<string, any>[];
