@@ -2,7 +2,6 @@
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import classNames from "classnames";
-import { MainLayout } from "@app/[locale]/components/templates";
 import styles from "../Partners.module.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,30 +27,62 @@ type ClientPageProps = {
   products: any[];
 };
 
-/** Тимчасово — потім замінюється даними з API */
+/** Ð¢Ð¸Ð¼Ñ‡Ð°ÑÐ¾Ð²Ð¾ â€” Ð¿Ð¾Ñ‚Ñ–Ð¼ Ð·Ð°Ð¼Ñ–Ð½ÑŽÑ”Ñ‚ÑŒÑÑ Ð´Ð°Ð½Ð¸Ð¼Ð¸ Ð· API */
 const EQUIPMENT_CATEGORIES: Category[] = [
-  { id: 0, name: "Всі товари Dräger", slug: "all" },
-  { id: 18, name: "Наркозно-дихальні апарати", slug: "anesthesia-and-respiratory-devices" },
-  { id: 644, name: "Апарати штучної вентиляції легень", slug: "ventilators-icu" },
-  { id: 1126, name: "Електро-імпедансний томограф", slug: "electrical-impedance-tomography" },
-  { id: 20, name: "Монітори пацієнта", slug: "patient-monitors" },
-  { id: 79, name: "Неонатальне обладнання", slug: "neonatal-equipment" },
-  { id: 670, name: "Світильники операційні та екзаменаційні", slug: "operating-and-examination-lamps" },
-  { id: 243, name: "Консолі стельові та настінні", slug: "wall-supply-and-ceiling-supply-units" },
-  { id: 1145, name: "Випаровувачі", slug: "vaporisers" },
-  { id: 1131, name: "Газоаналізатори", slug: "gas-analyzers" },
-  { id: 1157, name: "Аспіратори", slug: "aspiration" },
-  { id: 87, name: "Медичне газопостачання", slug: "gas-management-systems" },
+  { id: 0, name: "Ð’ÑÑ– Ñ‚Ð¾Ð²Ð°Ñ€Ð¸ DrÃ¤ger", slug: "all" },
+  {
+    id: 18,
+    name: "ÐÐ°Ñ€ÐºÐ¾Ð·Ð½Ð¾-Ð´Ð¸Ñ…Ð°Ð»ÑŒÐ½Ñ– Ð°Ð¿Ð°Ñ€Ð°Ñ‚Ð¸",
+    slug: "anesthesia-and-respiratory-devices",
+  },
+  {
+    id: 644,
+    name: "ÐÐ¿Ð°Ñ€Ð°Ñ‚Ð¸ ÑˆÑ‚ÑƒÑ‡Ð½Ð¾Ñ— Ð²ÐµÐ½Ñ‚Ð¸Ð»ÑÑ†Ñ–Ñ— Ð»ÐµÐ³ÐµÐ½ÑŒ",
+    slug: "ventilators-icu",
+  },
+  {
+    id: 1126,
+    name: "Ð•Ð»ÐµÐºÑ‚Ñ€Ð¾-Ñ–Ð¼Ð¿ÐµÐ´Ð°Ð½ÑÐ½Ð¸Ð¹ Ñ‚Ð¾Ð¼Ð¾Ð³Ñ€Ð°Ñ„",
+    slug: "electrical-impedance-tomography",
+  },
+  {
+    id: 20,
+    name: "ÐœÐ¾Ð½Ñ–Ñ‚Ð¾Ñ€Ð¸ Ð¿Ð°Ñ†Ñ–Ñ”Ð½Ñ‚Ð°",
+    slug: "patient-monitors",
+  },
+  {
+    id: 79,
+    name: "ÐÐµÐ¾Ð½Ð°Ñ‚Ð°Ð»ÑŒÐ½Ðµ Ð¾Ð±Ð»Ð°Ð´Ð½Ð°Ð½Ð½Ñ",
+    slug: "neonatal-equipment",
+  },
+  {
+    id: 670,
+    name: "Ð¡Ð²Ñ–Ñ‚Ð¸Ð»ÑŒÐ½Ð¸ÐºÐ¸ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ñ–Ð¹Ð½Ñ– Ñ‚Ð° ÐµÐºÐ·Ð°Ð¼ÐµÐ½Ð°Ñ†Ñ–Ð¹Ð½Ñ–",
+    slug: "operating-and-examination-lamps",
+  },
+  {
+    id: 243,
+    name: "ÐšÐ¾Ð½ÑÐ¾Ð»Ñ– ÑÑ‚ÐµÐ»ÑŒÐ¾Ð²Ñ– Ñ‚Ð° Ð½Ð°ÑÑ‚Ñ–Ð½Ð½Ñ–",
+    slug: "wall-supply-and-ceiling-supply-units",
+  },
+  { id: 1145, name: "Ð’Ð¸Ð¿Ð°Ñ€Ð¾Ð²ÑƒÐ²Ð°Ñ‡Ñ–", slug: "vaporisers" },
+  { id: 1131, name: "Ð“Ð°Ð·Ð¾Ð°Ð½Ð°Ð»Ñ–Ð·Ð°Ñ‚Ð¾Ñ€Ð¸", slug: "gas-analyzers" },
+  { id: 1157, name: "ÐÑÐ¿Ñ–Ñ€Ð°Ñ‚Ð¾Ñ€Ð¸", slug: "aspiration" },
+  {
+    id: 87,
+    name: "ÐœÐµÐ´Ð¸Ñ‡Ð½Ðµ Ð³Ð°Ð·Ð¾Ð¿Ð¾ÑÑ‚Ð°Ñ‡Ð°Ð½Ð½Ñ",
+    slug: "gas-management-systems",
+  },
 ];
 
 const ACCESSORIES_CATEGORY: Category = {
   id: 95,
-  name: "Аксесуари",
+  name: "ÐÐºÑÐµÑÑƒÐ°Ñ€Ð¸",
   slug: "accessories",
 };
 
 const CATEGORY_NAONATHAL: Record<number, number[]> = {
-  79: [384, 364, 286, 374, 354], // всі підкатегорії неонатального обладнання
+  79: [384, 364, 286, 374, 354], // Ð²ÑÑ– Ð¿Ñ–Ð´ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ñ–Ñ— Ð½ÐµÐ¾Ð½Ð°Ñ‚Ð°Ð»ÑŒÐ½Ð¾Ð³Ð¾ Ð¾Ð±Ð»Ð°Ð´Ð½Ð°Ð½Ð½Ñ
 };
 
 const CATEGORY_PRIORITY = new Map<number, number>();
@@ -110,8 +141,12 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
+    null,
+  );
   const [productsData, setProductsData] = useState(products);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   const router = useRouter();
   const [showBackButton, setShowBackButton] = useState(false);
@@ -120,8 +155,60 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
   const initialProductsRef = useRef(products);
 
   useEffect(() => {
+    setProductsData(products);
+    initialProductsRef.current = products;
+  }, [products]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadInitialBatchIfNeeded() {
+      if (products.length > 0) return;
+
+      try {
+        let page = 1;
+        let totalPages = 1;
+        const collected: any[] = [];
+
+        do {
+          const data = await fetchWooProducts({
+            lang: locale,
+            page,
+            per_page: 100,
+            brandId: brands.id,
+          });
+
+          totalPages = data.totalPages || 1;
+          collected.push(...data.items);
+          page++;
+        } while (page <= totalPages && collected.length < ITEMS_PER_PAGE);
+
+        if (!cancelled) {
+          setProductsData(collected);
+          initialProductsRef.current = collected;
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setLoadError(
+            error instanceof Error ? error.message : "Failed to load products",
+          );
+        }
+      }
+    }
+
+    loadInitialBatchIfNeeded();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [brands.id, locale, products.length]);
+
+  useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsDropdownOpen(false);
       }
     };
@@ -144,15 +231,19 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /** Фільтрація та сортування товарів */
+  /** Ð¤Ñ–Ð»ÑŒÑ‚Ñ€Ð°Ñ†Ñ–Ñ Ñ‚Ð° ÑÐ¾Ñ€Ñ‚ÑƒÐ²Ð°Ð½Ð½Ñ Ñ‚Ð¾Ð²Ð°Ñ€Ñ–Ð² */
   const filteredProducts = useMemo(() => {
     const source = [...productsData];
 
     const filtered = selectedCategory
       ? source.filter(
           (product) =>
-            product.categories?.some((cat: { slug: string }) => cat.slug === selectedCategory.slug) ||
-            product.tags?.some((tag: { slug: string }) => tag.slug === selectedCategory.slug),
+            product.categories?.some(
+              (cat: { slug: string }) => cat.slug === selectedCategory.slug,
+            ) ||
+            product.tags?.some(
+              (tag: { slug: string }) => tag.slug === selectedCategory.slug,
+            ),
         )
       : source;
 
@@ -162,7 +253,10 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
       const priorityDiff = priorityA - priorityB;
 
       if (priorityDiff === 0) {
-        if (priorityA === Number.MAX_SAFE_INTEGER || selectedCategory?.slug === "accessories") {
+        if (
+          priorityA === Number.MAX_SAFE_INTEGER ||
+          selectedCategory?.slug === "accessories"
+        ) {
           return a.name.localeCompare(b.name, locale);
         }
         return (a.menu_order ?? 0) - (b.menu_order ?? 0);
@@ -173,28 +267,39 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
   }, [productsData, selectedCategory, locale]);
 
   const loadMore = async () => {
+    setLoadError(null);
+    setIsLoadingMore(true);
     loadMoreClickedRef.current = true;
 
     let page = 1;
     let totalPages = 1;
     const collected: any[] = [];
 
-    do {
-      const data = await fetchWooProducts({
-        lang: locale,
-        page,
-        per_page: 100,
-        brandId: brands.id,
-      });
+    try {
+      do {
+        const data = await fetchWooProducts({
+          lang: locale,
+          page,
+          per_page: 100,
+          brandId: brands.id,
+        });
 
-      totalPages = data.totalPages || 1;
-      collected.push(...data.items);
+        totalPages = data.totalPages || 1;
+        collected.push(...data.items);
 
-      page++;
-    } while (page <= totalPages);
+        page++;
+      } while (page <= totalPages);
 
-    setProductsData(collected);
-    setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
+      setProductsData(collected);
+      setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
+    } catch (error) {
+      loadMoreClickedRef.current = false;
+      setLoadError(
+        error instanceof Error ? error.message : "Failed to load products",
+      );
+    } finally {
+      setIsLoadingMore(false);
+    }
   };
 
   const handleCategoryClick = async (category: Category) => {
@@ -209,53 +314,76 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
 
     setSelectedCategory(category);
 
-    // ✅ якщо вже натиснули "Завантажити ще" — працюємо з уже підвантаженим списком
+    // âœ… ÑÐºÑ‰Ð¾ Ð²Ð¶Ðµ Ð½Ð°Ñ‚Ð¸ÑÐ½ÑƒÐ»Ð¸ "Ð—Ð°Ð²Ð°Ð½Ñ‚Ð°Ð¶Ð¸Ñ‚Ð¸ Ñ‰Ðµ" â€” Ð¿Ñ€Ð°Ñ†ÑŽÑ”Ð¼Ð¾ Ð· ÑƒÐ¶Ðµ Ð¿Ñ–Ð´Ð²Ð°Ð½Ñ‚Ð°Ð¶ÐµÐ½Ð¸Ð¼ ÑÐ¿Ð¸ÑÐºÐ¾Ð¼
     if (loadMoreClickedRef.current) {
       return;
     }
 
-    // ❌ якщо "Завантажити ще" НЕ натиснули — підвантажуємо тільки конкретну категорію з API
-    const data = await fetchWooProducts({
-      lang: locale,
-      page: 1,
-      per_page: 100,
-      category: category.id,
-      brandId: brands.id,
-    });
+    // âŒ ÑÐºÑ‰Ð¾ "Ð—Ð°Ð²Ð°Ð½Ñ‚Ð°Ð¶Ð¸Ñ‚Ð¸ Ñ‰Ðµ" ÐÐ• Ð½Ð°Ñ‚Ð¸ÑÐ½ÑƒÐ»Ð¸ â€” Ð¿Ñ–Ð´Ð²Ð°Ð½Ñ‚Ð°Ð¶ÑƒÑ”Ð¼Ð¾ Ñ‚Ñ–Ð»ÑŒÐºÐ¸ ÐºÐ¾Ð½ÐºÑ€ÐµÑ‚Ð½Ñƒ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ñ–ÑŽ Ð· API
+    try {
+      setLoadError(null);
+      const data = await fetchWooProducts({
+        lang: locale,
+        page: 1,
+        per_page: 100,
+        category: category.id,
+        brandId: brands.id,
+      });
 
-    setProductsData(data.items);
+      setProductsData(data.items);
+    } catch (error) {
+      setLoadError(
+        error instanceof Error ? error.message : "Failed to load products",
+      );
+    }
   };
 
   return (
-    <MainLayout>
+    <>
       <div className="flex flex-col justify-center items-center w-full max-w-250 pb-3 px-2">
         {/* BRAND INFO */}
         <div className="flex shrink-0 sm:flex-row flex-col w-full">
           <div className="flex w-full h-auto">
-            <Image src="/logo-partners/dreger-log-partner-big.webp" alt="Dräger" width={400} height={400} />
+            <Image
+              src="/logo-partners/dreger-log-partner-big.webp"
+              alt="Dräger"
+              width={400}
+              height={400}
+            />
           </div>
 
           <div className="text-[#0061AA] w-full indent-0 sm:indent-5 leading-relaxed text-justify self-center">
             <h1 className="text-[24px] sm:text-[30px] font-semibold text-[#002766]">
-              Drägerwerk AG &amp; Co. KGaA
+             Drägerwerk AG & Co. KGaA
             </h1>
             <div className="text-[16px] sm:text-[20px]">
-              <strong className="text-[#002766]">Рік заснування:</strong> 1889
+              <strong className="text-[#002766]">
+                Рік заснування:
+              </strong>{" "}
+              1889
             </div>
             <div className="text-[16px] sm:text-[20px]">
-              <strong className="text-[#002766]">Країна:</strong> Німеччина
+              <strong className="text-[#002766]">Країна:</strong>{" "}
+             Німеччина
             </div>
             <div className="text-[16px] sm:text-[20px]">
-              <strong className="text-[#002766]">Офіційний сайт:</strong>{" "}
+              <strong className="text-[#002766]">
+               Офіційний сайт:
+              </strong>{" "}
               <Link href="https://www.draeger.com/" target="_blank">
                 https://www.draeger.com/
               </Link>
             </div>
 
             <div className="text-[18px] sm:text-[20px]">
-              <strong className="text-[#002766]">Cоціальні мережі:</strong>
+              <strong className="text-[#002766]">
+                Cоціальні мережі:
+              </strong>
               <div className="flex flex-row pl-10 pt-2 gap-4">
-                <Link href="https://www.linkedin.com/company/draeger" target="_blank">
+                <Link
+                  href="https://www.linkedin.com/company/draeger"
+                  target="_blank"
+                >
                   <Image
                     src="/linkedin.webp"
                     width={30}
@@ -273,7 +401,10 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                     className="transition-transform hover:scale-110"
                   />
                 </Link>
-                <Link href="https://www.facebook.com/DraegerGlobal/" target="_blank">
+                <Link
+                  href="https://www.facebook.com/DraegerGlobal/"
+                  target="_blank"
+                >
                   <Image
                     src="/facebook-ico.jpg"
                     width={30}
@@ -282,7 +413,10 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                     className="transition-transform hover:scale-110"
                   />
                 </Link>
-                <Link href="https://www.instagram.com/draeger.global/" target="_blank">
+                <Link
+                  href="https://www.instagram.com/draeger.global/"
+                  target="_blank"
+                >
                   <Image
                     src="/instagram.webp"
                     width={30}
@@ -298,9 +432,10 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
 
         {/* DESCRIPTION */}
         <div className="text-[#0061AA] w-full indent-5 leading-relaxed text-justify pt-4">
-          Dräger — німецький виробник медичної та безпекової техніки, відомий рішеннями для лікарень і критичної
-          медицини. Бренд фокусується на практичних технологіях, які допомагають медичним командам працювати стабільно,
-          точно та безпечно в щоденних і високоризикових сценаріях.
+            Dräger — німецький виробник медичної та безпекової техніки, відомий
+                    рішеннями для лікарень і критичної медицини. Бренд фокусується на
+                    практичних технологіях, які допомагають медичним командам працювати
+                    стабільно, точно та безпечно в щоденних і високоризикових сценаріях.
         </div>
 
         {/* ===== BUTTON + DROPDOWN ===== */}
@@ -311,7 +446,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
               onClick={() => setIsDropdownOpen((prev) => !prev)}
               className={styles.loadProducts}
             >
-              {"Завантажити обладнання Dräger"}
+               {"Завантажити обладнання Dräger"}
             </button>
 
             {isDropdownOpen && (
@@ -323,7 +458,8 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                     onClick={() => handleCategoryClick(category)}
                     className={classNames(
                       "block w-full whitespace-nowrap rounded-lg text-left px-4 py-2 hover:bg-blue-50 transition",
-                      selectedCategory?.id === category.id && "bg-blue-100 font-semibold rounded-lg",
+                      selectedCategory?.id === category.id &&
+                        "bg-blue-100 font-semibold rounded-lg",
                     )}
                   >
                     {category.name}
@@ -333,19 +469,27 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
             )}
           </div>
 
-          <button className={styles.loadProducts} type="button" onClick={() => handleCategoryClick(ACCESSORIES_CATEGORY)}>
+          <button
+            className={styles.loadProducts}
+            type="button"
+            onClick={() => handleCategoryClick(ACCESSORIES_CATEGORY)}
+          >
             Завантажити аксесуари Dräger
           </button>
         </div>
 
         {/* PRODUCTS GRID */}
         <div className="w-full pt-6">
-          <h2 className="text-[22px] font-semibold text-[#002766] mb-4">Обладнання бренду {brands?.name}</h2>
+          <h2 className="text-[22px] font-semibold text-[#002766] mb-4">
+            Обладнання бренду {brands?.name}
+          </h2>
 
           <div
             className={classNames(
               "grid gap-2 mt-4 mb-4 mx-1 justify-items-center",
-              isMobile ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4",
+              isMobile
+                ? "grid-cols-2"
+                : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4",
             )}
           >
             {filteredProducts.slice(0, visibleCount).map((product) => {
@@ -374,46 +518,64 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                       className="object-contain"
                     />
                   )}
-                  <h3 className="justify-center h-18 w-full line-clamp-3">{product.name}</h3>
+                  <h3 className="justify-center h-18 w-full line-clamp-3">
+                    {product.name}
+                  </h3>
                 </div>
               );
             })}
           </div>
 
           <div className="flex justify-center mt-6">
-            <button onClick={loadMore} className={styles.loadProducts}>
-              Завантажити ще
+            <button
+              onClick={loadMore}
+              className={styles.loadProducts}
+              disabled={isLoadingMore}
+            >
+              {isLoadingMore ? "Завантаження..." : "Завантажити ще"}
             </button>
           </div>
+          {loadError ? (
+            <p className="mt-3 text-center text-red-600">{loadError}</p>
+          ) : null}
         </div>
 
-        {/* LONG TEXT */}
         <div className="text-[#0061AA] w-full indent-5 leading-relaxed text-justify pt-4">
           <p>
-            Dräger — бренд із Німеччини з історією понад століття. Компанія працює з 1889 року та пройшла шлях від
-            інженерних розробок до масштабного виробництва медичних систем, які використовують у лікарнях у багатьох
-            країнах світу. У медичному напрямку Dräger асоціюється з надійністю обладнання, продуманістю інтерфейсів та
-            увагою до сценаріїв, у яких важлива кожна секунда — від операційної до відділення інтенсивної терапії.
+            Dräger — бренд із Німеччини з історією понад століття. Компанія
+            працює з 1889 року та пройшла шлях від інженерних розробок до
+            масштабного виробництва медичних систем, які використовують у
+            лікарнях у багатьох країнах світу. У медичному напрямку Dräger
+            асоціюється з надійністю обладнання, продуманістю інтерфейсів та
+            увагою до сценаріїв, у яких важлива кожна секунда — від операційної
+            до відділення інтенсивної терапії.
           </p>
 
           <p>
-            Асортимент медичної продукції Dräger охоплює базові потреби стаціонару та критичної допомоги. Це рішення для
-            анестезіології та операційних (анестезіологічні робочі місця й системи), апарати штучної вентиляції легень
-            для різних клінічних ситуацій, системи моніторингу пацієнта та суміжні рішення для організації безперервного
-            контролю показників. Окремий напрям — неонатальні рішення, зокрема обладнання для підтримки стабільного
-            середовища й догляду за новонародженими, що критично для відділень, де значення мають точні налаштування та
-            прогнозована робота техніки.
+            Асортимент медичної продукції Dräger охоплює базові потреби
+            стаціонару та критичної допомоги. Це рішення для анестезіології та
+            операційних (анестезіологічні робочі місця й системи), апарати
+            штучної вентиляції легень для різних клінічних ситуацій, системи
+            моніторингу пацієнта та суміжні рішення для організації
+            безперервного контролю показників. Окремий напрям — неонатальні
+            рішення, зокрема обладнання для підтримки стабільного середовища й
+            догляду за новонародженими, що критично для відділень, де значення
+            мають точні налаштування та прогнозована робота техніки.
           </p>
 
           <p>
-            Придбати продукцію Dräger в DM Project зручно, коли потрібен швидкий і зрозумілий підбір під задачу відділення
-            та комплектація в одному місці. Тут легше узгодити потрібні позиції між собою, уникнути помилок сумісності та
-            отримати рішення, яке коректно закриває реальний клінічний сценарій, а не просто “окремий пристрій у вакуумі”.
+            Придбати продукцію Dräger в DM Project зручно, коли потрібен швидкий
+            і зрозумілий підбір під задачу відділення та комплектація в одному
+            місці. Тут легше узгодити потрібні позиції між собою, уникнути
+            помилок сумісності та отримати рішення, яке коректно закриває
+            реальний клінічний сценарій, а не просто “окремий пристрій у
+            вакуумі”.
           </p>
 
           <p>
-            Обирайте Dräger у каталозі DM Project — щоб отримати перевірені медичні рішення з логічною комплектацією та
-            прозорим шляхом від вибору до покупки.
+            Обирайте Dräger у каталозі DM Project — щоб отримати перевірені
+            медичні рішення з логічною комплектацією та прозорим шляхом від
+            вибору до покупки.
           </p>
         </div>
 
@@ -427,9 +589,9 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
           className="fixed top-142 right-10 z-50 flex items-center justify-center cursor-pointer w-40 h-10 rounded-2xl bg-[#0061AA] text-white shadow-lg hover:bg-[#004f8a] transition"
           aria-label="Back"
         >
-          ← На головну
+          â† ÐÐ° Ð³Ð¾Ð»Ð¾Ð²Ð½Ñƒ
         </button>
       )}
-    </MainLayout>
+    </>
   );
 };

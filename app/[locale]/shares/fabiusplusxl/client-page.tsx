@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./../Shares.module.css";
-import { MainLayout } from "@app/[locale]/components/templates";
 import Image from "next/image";
 import classNames from "classnames";
 import fabius1 from "./fabius1.webp";
@@ -12,8 +11,7 @@ const SharesFabiusXL = async () => {
     const t = await getTranslations('Shares');
     const t1 = await getTranslations("Product");
     return (
-        <MainLayout>
-            <div
+                    <div
                 className={classNames(
                     "w-full flex flex-wrap justify-center mb-3 mt-3",
 
@@ -112,8 +110,7 @@ const SharesFabiusXL = async () => {
 
                 </div>
             </div>
-        </MainLayout >
-    );
+            );
 };
 
 export default SharesFabiusXL;

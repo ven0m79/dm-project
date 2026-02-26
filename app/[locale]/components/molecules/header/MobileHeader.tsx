@@ -4,7 +4,7 @@ import React, { Dispatch, FC, SetStateAction, useEffect, useMemo, useRef, useSta
 import styles from "./Header.module.css";
 import Image from "next/image";
 //import { Link, usePathname } from "../../../../../i18n/navigation";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import clsx from "clsx";
 import Loader from "@app/[locale]/components/atoms/loader/loaderSearch";
 import {
@@ -33,7 +33,6 @@ const MobileHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Di
   const t = useTranslations("Header");
   const t2 = useTranslations("Index");
 
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
   const router = useRouter();
 
   // Создаём ref для поля поиска
@@ -86,7 +85,7 @@ const MobileHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Di
           className="flex items-center cursor-pointer"
           onClick={() => {
             const target = "/catalog";
-            isIOS ? (window.location.href = target) : router.push(target);
+            router.push(target);
           }}
         >
           <Image
@@ -104,7 +103,7 @@ const MobileHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Di
           className="cursor-pointer"
           onClick={() => {
             const target = "/";
-            isIOS ? (window.location.href = target) : router.push(target);
+            router.push(target);
           }}
         >
           <Image
@@ -121,7 +120,7 @@ const MobileHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Di
           className="cursor-pointer"
           onClick={() => {
             const target = "/catalog";
-            isIOS ? (window.location.href = target) : router.push(target);
+            router.push(target);
           }}
         >
           <Image
@@ -172,14 +171,19 @@ const MobileHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Di
                   value={product.name}
                   className="group flex cursor-default items-center gap-2 rounded-lg py-1.5 px-3 select-none data-focus:bg-sky-100"
                 >
-                  <a
-                    className={clsx("block, text-black")}
-                    href={`/catalog/sub-catalog/product/${product.id}?category=${product.tags[0].name}`}
+                  <button
+                    type="button"
+                    className={clsx("block text-left text-black w-full")}
+                    onClick={() =>
+                      router.push(
+                        `/catalog/sub-catalog/product/${product.id}?category=${product.tags[0].name}`,
+                      )
+                    }
                   >
                     <div className="text-sm/6 text-black">
                       {highlightText(product.name, searchTerm)}
                     </div>
-                  </a>
+                  </button>
                 </ComboboxOption>
               ))}
             </ComboboxOptions>

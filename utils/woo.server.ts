@@ -1,14 +1,11 @@
 import "server-only";
 
 import { cache } from "react";
+import { getWooEnv } from "./woo-env";
 
-const WC_BASE_URL = process.env.WC_BASE_URL;
-const CK = process.env.WC_CONSUMER_KEY;
-const CS = process.env.WC_CONSUMER_SECRET;
-
-if (!WC_BASE_URL) throw new Error("WC_BASE_URL is required");
-if (!CK) throw new Error("WC_CONSUMER_KEY is required");
-if (!CS) throw new Error("WC_CONSUMER_SECRET is required");
+function getWooConfig() {
+  return getWooEnv();
+}
 
 export type WCCategory = {
   id: number;
@@ -33,15 +30,17 @@ export type WCProduct = {
 };
 
 function withAuth(url: string) {
+  const { consumerKey, consumerSecret } = getWooConfig();
   const u = new URL(url);
-  u.searchParams.set("consumer_key", CK!);
-  u.searchParams.set("consumer_secret", CS!);
+  u.searchParams.set("consumer_key", consumerKey);
+  u.searchParams.set("consumer_secret", consumerSecret);
   return u.toString();
 }
 
 export const getCategoriesCached = cache(
   async (locale: string): Promise<WCCategory[]> => {
-    const base = `${WC_BASE_URL}/wp-json/wc/v3/products/categories?per_page=100&lang=${locale}`;
+    const { baseUrl } = getWooConfig();
+    const base = `${baseUrl}/wp-json/wc/v3/products/categories?per_page=100&lang=${locale}`;
     const url = withAuth(base);
 
     const res = await fetch(url, { next: { revalidate: 300 } });
@@ -52,7 +51,8 @@ export const getCategoriesCached = cache(
 
 export const getProductsByCategoryCached = cache(
   async (locale: string, categoryId: number): Promise<WCProduct[]> => {
-    const base = `${WC_BASE_URL}/wp-json/wc/v3/products?per_page=100&lang=${locale}&category=${categoryId}`;
+    const { baseUrl } = getWooConfig();
+    const base = `${baseUrl}/wp-json/wc/v3/products?per_page=100&lang=${locale}&category=${categoryId}`;
     const url = withAuth(base);
 
     const res = await fetch(url, { next: { revalidate: 300 } });
@@ -67,9 +67,10 @@ export const getProductsByBrandCached = cache(
     categoryIds: number[],
     brandId: number,
   ): Promise<WCProduct[]> => {
+    const { baseUrl } = getWooConfig();
     const responses = await Promise.all(
       categoryIds.map(async (categoryId) => {
-        const base = `${WC_BASE_URL}/wp-json/wc/v3/products?per_page=20&lang=${locale}&category=${categoryId}`;
+        const base = `${baseUrl}/wp-json/wc/v3/products?per_page=20&lang=${locale}&category=${categoryId}`;
         const url = withAuth(base);
 
         const res = await fetch(url, { next: { revalidate: 300 } });
@@ -86,7 +87,8 @@ export const getProductsByBrandCached = cache(
 
 export const getCategoryBySlugCached = cache(
   async (locale: string, slug: string): Promise<WCCategory | null> => {
-    const base = `${WC_BASE_URL}/wp-json/wc/v3/products/categories?lang=${locale}&slug=${encodeURIComponent(slug)}`;
+    const { baseUrl } = getWooConfig();
+    const base = `${baseUrl}/wp-json/wc/v3/products/categories?lang=${locale}&slug=${encodeURIComponent(slug)}`;
     const url = withAuth(base);
 
     const res = await fetch(url, { next: { revalidate: 300 } });

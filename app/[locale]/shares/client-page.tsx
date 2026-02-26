@@ -1,8 +1,6 @@
 import React from "react";
 import styles from "./Shares.module.css";
 
-import { MainLayout } from "@app/[locale]/components/templates";
-
 import { Link } from "../../../i18n/navigation";
 import Image from "next/image";
 import classNames from "classnames";
@@ -24,13 +22,12 @@ export const ClientPage = async () => {
   //const isMobile = useIsMobile();
 
   return (
-    <MainLayout>
-      <div
-        className={classNames(
-          "flex flex-wrap mb-5 gap-5 mt-5",
-          [styles.catalogContainerMain],
-        )}
-      >
+    <div
+      className={classNames(
+        "flex flex-wrap mb-5 gap-5 mt-5",
+        [styles.catalogContainerMain],
+      )}
+    >
         <Link
           href={{
             pathname: "/shares/linea",
@@ -246,7 +243,6 @@ export const ClientPage = async () => {
           </div>
         </Link>
 
-      </div>
-    </MainLayout>
+    </div>
   );
 };

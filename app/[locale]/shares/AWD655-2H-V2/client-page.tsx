@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./../Shares.module.css";
-import { MainLayout } from "@app/[locale]/components/templates";
 import Image from "next/image";
 import classNames from "classnames";
 import awd655_2h_v2 from "../../../../public/shares/awd655-2h-v2.webp"
@@ -11,8 +10,7 @@ const AWD655_2h_v2 = async () => {
     const t = await getTranslations('Shares');
         const t1 = await getTranslations("Product");
     return (
-        <MainLayout>
-            <div
+                    <div
                 className={classNames(
                     "w-full flex flex-wrap justify-center mb-3 mt-3",
                 )}
@@ -82,8 +80,7 @@ const AWD655_2h_v2 = async () => {
                 </div>
             </div>
 
-        </MainLayout >
-    );
+            );
 };
 
 export default AWD655_2h_v2;

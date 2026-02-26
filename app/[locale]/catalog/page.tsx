@@ -3,15 +3,10 @@ import type { Metadata } from "next";
 import { ClientPage } from "./client-page";
 
 export async function generateMetadata(props: {
-  // Залишаємо тип як об'єкт, але обробляємо його як Promise всередині функції
-  params: { locale: string }; 
+  params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
-  
-  // 🟢 КРИТИЧНЕ ВИПРАВЛЕННЯ: Явно очікуємо розгортання params, як вимагає Next.js
-  // Next.js розглядає "params" як Promise або об'єкт, який потрібно "розгорнути"
-  // в контексті Server Components.
-  const { locale } = await props.params; // <--- ДОДАНО `await`
-    
+  const { locale } = await props.params;
+
   return locale === "ua"
     ? {
         title: "Основні категорії продуктів | ДМ-Проект",
@@ -25,6 +20,12 @@ export async function generateMetadata(props: {
       };
 }
 
-export default function Page() {
-  return <ClientPage />;
+type PageProps = {
+  params: Promise<{ locale: string }>;
+};
+
+export default async function Page({ params }: PageProps) {
+  const { locale } = await params;
+
+  return <ClientPage locale={locale} />;
 }

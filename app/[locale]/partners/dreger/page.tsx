@@ -6,11 +6,11 @@ import { getProductsByBrandCached } from "../../../../utils/woo.server";
 export const revalidate = 300;
 
 type PageProps = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { locale } = params;
+  const { locale } = await params;
   setRequestLocale(locale);
 
   return locale === "ua"
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function Page({ params }: PageProps) {
-  const { locale } = params;
+  const { locale } = await params;
   const lang = locale === "ua" ? "ua" : "en";
   const BRAND_ID = 102;
   const CATEGORY_IDS = [18, 644, 1126, 20];

@@ -1,39 +1,16 @@
 "use client";
 
 import classNames from "classnames";
-import React from "react";
 import { MainLayout } from "@app/[locale]/components/templates";
-import Link from "next/link";
+import { Link } from "../../../i18n/navigation";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import styles from "./Home.module.css";
 import { useIsMobile } from "../components/hooks/useIsMobile";
-import dynamic from "next/dynamic";
 import CaruselBrands from "@app/[locale]/components/atoms/carusel-brands/carusel-brands";
-
-// Динамічні імпорти без SSR
-const Slider = dynamic(
-  () => import("@app/[locale]/components/molecules/slider/slider"),
-  {
-    ssr: false,
-    loading: () => <div style={{ width: "100%", height: "400px" }} />, // резервуємо місце
-  },
-);
-const SliderMobile = dynamic(
-  () => import("@app/[locale]/components/molecules/slider/sliderMobile"),
-  {
-    ssr: false,
-    loading: () => <div style={{ width: "100%", height: "200px" }} />,
-  },
-);
-const MapOfUkraine = dynamic(
-  () => import("@app/[locale]/components/molecules/map/Map"),
-  { ssr: false },
-);
-const MapOfUkraineMobile = dynamic(
-  () => import("@app/[locale]/components/molecules/map/Map"),
-  { ssr: false },
-);
+import Slider from "@app/[locale]/components/molecules/slider/slider";
+import SliderMobile from "@app/[locale]/components/molecules/slider/sliderMobile";
+import MapOfUkraine from "@app/[locale]/components/molecules/map/Map";
 
 export const ClientPage = ({
   params: { locale },
@@ -43,35 +20,25 @@ export const ClientPage = ({
   const t = useTranslations("Index");
   const isMobile = useIsMobile();
 
-  // Використовуємо hydration лише для умовного рендеру (уникнення помилок на сервері)
-  const [hydrated, setHydrated] = React.useState(false);
-  React.useEffect(() => setHydrated(true), []);
-
   return (
     <MainLayout>
       <div className="flex flex-col justify-center items-center">
         {/* --- SLIDER --- */}
-        {hydrated ? (
-          isMobile ? (
-            <SliderMobile locale={locale} />
-          ) : (
-            <Slider locale={locale} />
-          )
+        {isMobile ? (
+          <SliderMobile locale={locale} />
         ) : (
-          <div
-            style={{ width: "100%", height: isMobile ? "200px" : "400px" }}
-          />
+          <Slider locale={locale} />
         )}
 
         {/* --- HEADER --- */}
-        <h2
+        <h1
           className={classNames(
             "w-full text-center mb-5 sm:mb-10",
             styles["serviceTextHeader"],
           )}
         >
           {t("in-Ukraine-2009").toUpperCase()}
-        </h2>
+        </h1>
 
         {/* --- MAP + TEXT --- */}
         <div
@@ -86,7 +53,7 @@ export const ClientPage = ({
 
             <div className="flex flex-row items-center self-center">
               <Image
-                alt=""
+                alt={t("more-then")}
                 src="/galka.png"
                 width={25}
                 height={25}
@@ -97,7 +64,7 @@ export const ClientPage = ({
 
             <div className="flex flex-row">
               <Image
-                alt=""
+                alt={t("more-then2")}
                 src="/galka.png"
                 width={25}
                 height={25}
@@ -124,7 +91,7 @@ export const ClientPage = ({
               style={{ height: isMobile ? "250px" : "400px" }}
             >
               {isMobile ? (
-                <MapOfUkraineMobile locale={locale} />
+                <MapOfUkraine locale={locale} />
               ) : (
                 <MapOfUkraine locale={locale} />
               )}

@@ -2,6 +2,7 @@ import "server-only";
 
 import { cache } from "react";
 import WooCommerceRestApi from "@woocommerce/woocommerce-rest-api";
+import { getWooEnv } from "./woo-env";
 import type {
   SingleProductTitles,
   SingleProductDetails,
@@ -13,16 +14,10 @@ let api: WooCommerceRestApi | null = null;
 export function getWooApi(): WooCommerceRestApi {
   if (api) return api;
 
-  const url = process.env.WC_BASE_URL;
-  const consumerKey = process.env.WC_CONSUMER_KEY;
-  const consumerSecret = process.env.WC_CONSUMER_SECRET;
-
-  if (!url) throw new Error("WC_BASE_URL is required");
-  if (!consumerKey) throw new Error("WC_CONSUMER_KEY is required");
-  if (!consumerSecret) throw new Error("WC_CONSUMER_SECRET is required");
+  const { baseUrl, consumerKey, consumerSecret } = getWooEnv();
 
   api = new WooCommerceRestApi({
-    url,
+    url: baseUrl,
     consumerKey,
     consumerSecret,
     version: "wc/v3",
