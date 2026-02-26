@@ -17,6 +17,7 @@ const Breadcrumbs: FC<{
   const isMobile = useIsMobile();
   const { breadcrumbs, buildCategoryTrail } = useBreadcrumbs();
 
+
   useEffect(() => {
     buildCategoryTrail([{ id: categoryId } as any], locale);
   }, [buildCategoryTrail, categoryId, locale]);
@@ -42,8 +43,6 @@ const Breadcrumbs: FC<{
           </h1>
           <DesktopBreadcrumbs
             breadcrumbs={breadcrumbs}
-            isIOS={isIOS}
-            router={router}
           />
         </>
       )}

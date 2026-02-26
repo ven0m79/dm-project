@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import styles from "./../Shares.module.css";
 import { MainLayout } from "@app/[locale]/components/templates";
@@ -6,12 +5,12 @@ import Image from "next/image";
 import classNames from "classnames";
 import atlan3001 from "./atlan300_1.webp";
 import atlan3002 from "./atlan300_2.webp";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
-const SharesAtlan = () => {
-  const t = useTranslations("Shares");
-  const t1 = useTranslations("Product");
+const SharesAtlan = async () => {
+  const t = await getTranslations("Shares");
+  const t1 = await getTranslations("Product");
   return (
     <MainLayout>
       <div
@@ -54,7 +53,6 @@ const SharesAtlan = () => {
                 width={390}
                 height={533}
                 alt="Atlan300"
-                unoptimized
               />
             </div>
             <div className="lg:w-1/2 w-full pl-0 lg:pl-10">
@@ -113,7 +111,6 @@ const SharesAtlan = () => {
             width={500}
             height={100}
             alt="Atlan300"
-            unoptimized
           />
           <p className="my-2">{t("shares-atlan300-text3")}</p>
           <p className="my-2">{t("shares-atlan300-text4")}</p>

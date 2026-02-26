@@ -64,13 +64,11 @@ export const ClientPage = () => {
           setEmail('');
           setMessage('');
         } else {
-          const errorBody = await response.json();
-          console.error("❌ Помилка API:", errorBody); // ⬅️ Деталі помилки
+          await response.json();
           setStatus('Помилка при надсиланні. Спробуйте пізніше.');
         }
       })
-      .catch(error => {
-        console.error("❌ Network error:", error); // ⬅️ Наприклад, 404 або проблема з сервером
+      .catch(() => {
         setStatus('Сталася помилка.');
       });
   };

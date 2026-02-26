@@ -1,4 +1,3 @@
-"use client"
 import React from "react";
 import styles from "./../Shares.module.css";
 import { MainLayout } from "@app/[locale]/components/templates";
@@ -7,12 +6,12 @@ import classNames from "classnames";
 import linea1 from "./linea1.webp";
 import linea2 from "./linea2.webp";
 import linea3 from "./linea3.webp";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
-const SharesLinea = () => {
-    const t = useTranslations('Shares');
-    const t1 = useTranslations("Product");
+const SharesLinea = async () => {
+    const t = await getTranslations('Shares');
+    const t1 = await getTranslations("Product");
     return (
         <MainLayout>
             <div
@@ -54,7 +53,6 @@ const SharesLinea = () => {
                                 width={400}
                                 height={100}
                                 alt="linea"
-                                unoptimized
                             />
                             <Image
                                 className={classNames("w-1/2", styles.img)}
@@ -62,7 +60,6 @@ const SharesLinea = () => {
                                 width={400}
                                 height={100}
                                 alt="linea"
-                                unoptimized
                             />
                         </div>
                         <div className="w-screen">
@@ -84,7 +81,6 @@ const SharesLinea = () => {
                                 width={500}
                                 height={100}
                                 alt="linea"
-                                unoptimized
                             />
                             <p className="my-2">{t('shares-linea-text1')}</p>
                             <p className="my-2">{t('shares-linea-text2')}</p>
