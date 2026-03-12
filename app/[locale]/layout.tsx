@@ -1,12 +1,11 @@
 // app/[locale]/layout.tsx
 import { ReactNode } from 'react';
 import { Roboto } from 'next/font/google';
-import { getMessages } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '../../i18n/routing';
 import { cn } from '@app/[locale]/components/molecules/lib/utils';
-import ClientScriptLoader from '@app/[locale]/components/atoms/scriptsBinotel/scriptsBinotel';
 import Script from "next/script";
 
 type Props = {
@@ -23,10 +22,10 @@ const roboto = Roboto({
 });
 
 export default async function LocaleLayout({ children, params }: Props) {
-  const resolvedParams = await params; // обов’язково unwrap
-  const { locale } = await resolvedParams; // чекаємо Promise
+  const resolvedParams = await params;
+  const { locale } = resolvedParams;
   if (!hasLocale(routing.locales, locale)) notFound();
-
+  setRequestLocale(locale);
   const messages = await getMessages({ locale });
 
   return (
@@ -78,7 +77,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           }}
         />
       </head>
-      <body suppressHydrationWarning className={cn('flex min-h-screen overflow-x-hidden', roboto.variable)}>
+      <body className={cn('flex min-h-screen overflow-x-hidden', roboto.variable)}>
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-52H85B3W"
@@ -92,7 +91,6 @@ export default async function LocaleLayout({ children, params }: Props) {
             {children}
           </NextIntlClientProvider>
         </main>
-        <ClientScriptLoader />
       </body>
     </html>
   );
