@@ -1,24 +1,30 @@
- 'use client' ; 
-
-import { Libraries , useJsApiLoader } from  '@react-google-maps/api' ; 
-import { ReactNode } from  'react' ; 
+"use client";
+import { Libraries, useJsApiLoader } from "@react-google-maps/api";
+import { ReactNode } from "react";
 
 // Определяем список библиотек для загрузки из API Google Карт 
-const libraries = [ 'places' , 'drawing' , 'geometry' ]; 
+const libraries: Libraries = ["places", "drawing", "geometry"];
 
 // Определить компонент функции MapProvider, который принимает свойство children 
-export  function  MapProvider ( { children }: { children: ReactNode } ) { 
+export function MapProvider({ children }: { children: ReactNode }) {
+  const googleMapsApiKey =
+    process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ||
+    process.env.NEXT_PUBLIC_GOOGLE_MAP_API;
 
-  // Асинхронная загрузка JavaScript API Google Карт 
-  const { isLoaded : scriptLoaded, loadError } = useJsApiLoader ( { 
-    googleMapsApiKey :  "AIzaSyCHJrBrnIEF5ccIaQU3jqP6tgju8uG3ytQ"  , libraries 
-    : libraries as  Libraries , 
-  }); 
+  const { isLoaded, loadError } = useJsApiLoader({
+    googleMapsApiKey: googleMapsApiKey ?? "",
+    libraries,
+  });
+  if (!googleMapsApiKey) {
+    return null;
+  }
+  if (loadError) {
+    return <p>Failed to load Google Maps.</p>;
+  }
 
-  if (loadError) return  < p > Произошла ошибка при загрузке карт Google </ p >
+  if (!isLoaded) {
+    return <p>Loading map script...</p>;
+  }
 
-   if (!scriptLoaded) return  < p > Загружается скрипт карты ... </ p >
-
-   // Возвращает свойство children, обернутое этим компонентом MapProvider 
-  return children; 
+  return children;
 }

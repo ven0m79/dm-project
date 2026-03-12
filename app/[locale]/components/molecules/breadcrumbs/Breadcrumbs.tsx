@@ -3,7 +3,7 @@
 import React, { FC, useEffect } from "react";
 import classNames from "classnames";
 import MobileBreadcrumbs from "@app/[locale]/catalog/sub-catalog/product/[productId]/MobileBreadcrumbs";
-import { isIOS } from "../../../../../utils/constants";
+import { isIOS } from "utils/constants";
 import DesktopBreadcrumbs from "@app/[locale]/catalog/sub-catalog/product/[productId]/DesktopBreadcrumbs";
 import { useRouter } from "next/navigation";
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";

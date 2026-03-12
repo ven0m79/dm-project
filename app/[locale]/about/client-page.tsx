@@ -28,7 +28,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 className="w-full mt-2 px-1"
                 width={384}
                 height={518}
-                alt={""} />
+                alt={"DM Project team at exhibition"} />
             </div>
             <div className={classNames("mx-2 my-0 indent-5 text-justify")}>
               {t("information2")}
@@ -39,7 +39,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                 src={roman}
                 width={384}
                 height={518}
-                alt={""} />
+                alt={"DM Project specialist portrait"} />
             </div>
             <div className={classNames("mx-2 my-0 indent-5 text-justify")}>
               {t("information3")}
@@ -69,7 +69,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                     className="float-left w-full mr-2 mt-2 max-w-60"
                     width={384}
                     height={518}
-                    alt={""} />
+                    alt={"DM Project team at exhibition"} />
                 </div>
                 <div className={classNames("flex flex-1 flex-col max-w-full min-w-125 text-[10px] lg:text-[14px] xl:text-[18px]", styles.aboutText)}>
                   <div className={classNames("mx-2 my-0 lg:my-2 md:my-1 indent-5 text-justify")}>
@@ -91,7 +91,7 @@ export const ClientPage = ({ params: { locale } }: { params: { locale: string } 
                     src={roman}
                     width={384}
                     height={518}
-                    alt={""} />
+                    alt={"DM Project specialist portrait"} />
                 </div>
               </div>
               <div>

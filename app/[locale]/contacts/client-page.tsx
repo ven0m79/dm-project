@@ -167,6 +167,7 @@ useEffect(() => {
                   placeholder={t('contact-form-name')}
                   id="name"
                   type="text"
+                  aria-label={t('contact-form-name')}
                   value={name}
                   onChange={e => setName(e.target.value)}
                 /><br />
@@ -175,6 +176,7 @@ useEffect(() => {
                   placeholder={t('contact-form-city')}
                   id="city"
                   type="text"
+                  aria-label={t('contact-form-city')}
                   value={city}
                   onChange={e => setCity(e.target.value)}
                 /><br />
@@ -183,6 +185,7 @@ useEffect(() => {
                   placeholder={t('contact-form-medicalFacility')}
                   id="medicalFacility"
                   type="text"
+                  aria-label={t('contact-form-medicalFacility')}
                   value={medicalFacility}
                   onChange={e => setMedicalFacility(e.target.value)}
                 /><br />
@@ -190,15 +193,17 @@ useEffect(() => {
                   className={classNames("h-10", styles.form)}
                   placeholder={t('contact-form-mobile')}
                   id="mobile"
-                  type="text"
+                  type="tel"
                   value={mobile}
+                  aria-label={t('contact-form-mobile')}
                   onChange={e => setMobile(e.target.value)}
                 /><br />
                 <input
                   className={classNames("h-10", styles.form)}
                   placeholder={t('contact-form-email')}
                   id="email"
-                  type="text"
+                  type="email"
+                  aria-label={t('contact-form-email')}
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                 /><br />
@@ -208,6 +213,7 @@ useEffect(() => {
                 placeholder={t('contact-form-productName')}
                 id="productName"
                 type="text"
+                aria-label={t('contact-form-productName')}
                 value={productName}
                 onChange={e => setProductName(e.target.value)}
                 readOnly={isProductFromUrl} // ✅ заблоковано, якщо з URL
@@ -216,6 +222,7 @@ useEffect(() => {
                   className={classNames("h-24 pt-2", styles.form)}
                   placeholder={t('contact-form-message')}
                   id="message"
+                  aria-label={t('contact-form-message')}
                   value={message}
                   onChange={e => setMessage(e.target.value)}
                 /><br />
