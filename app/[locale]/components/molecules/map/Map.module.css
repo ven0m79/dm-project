@@ -19,7 +19,7 @@
   font-size: large;
   color: #f6dd97;
   width: 350px;
-  height: 80px;
+  height: 85px;
   background-color: #0061AA;
   border-radius: 10px;
 }
@@ -38,7 +38,8 @@
 .info-section-description {
   font-size: medium;
   color: #002766;
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   width: 340px;
   height: 50px;
   background-color: #ffffff;
