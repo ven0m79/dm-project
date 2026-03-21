@@ -12,12 +12,10 @@ export default async function Layout({ children, params }: Props) {
   const { locale } = await params;
 
   return (
-    <MainLayout>
-      <SidebarProvider locale={locale}>
-        <ClientLayout locale={locale}>
-          {children}
-        </ClientLayout>
-      </SidebarProvider>
-    </MainLayout>
+    <SidebarProvider locale={locale}>
+      <ClientLayout locale={locale}>
+        {children}
+      </ClientLayout>
+    </SidebarProvider>
   );
 }
