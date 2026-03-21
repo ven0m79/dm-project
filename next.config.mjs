@@ -88,10 +88,6 @@ const nextConfig = {
           },
         ],
       },
-      {
-        source: "/((?!_next/static|images|fonts).*)",
-        headers: [{ key: "Cache-Control", value: "no-store, must-revalidate" }],
-      },
     ];
   },
 };
