@@ -136,7 +136,6 @@ const MapOfUkraine = ({ locale }: { locale: string }) => {
               </motion.div>
             )}
           </AnimatePresence>
-
         </>
       </div>
     }
