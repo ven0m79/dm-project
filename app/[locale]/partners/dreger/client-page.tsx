@@ -29,60 +29,48 @@ type ClientPageProps = {
 
 /** Ð¢Ð¸Ð¼Ñ‡Ð°ÑÐ¾Ð²Ð¾ â€” Ð¿Ð¾Ñ‚Ñ–Ð¼ Ð·Ð°Ð¼Ñ–Ð½ÑŽÑ”Ñ‚ÑŒÑÑ Ð´Ð°Ð½Ð¸Ð¼Ð¸ Ð· API */
 const EQUIPMENT_CATEGORIES: Category[] = [
-  { id: 0, name: "Ð’ÑÑ– Ñ‚Ð¾Ð²Ð°Ñ€Ð¸ DrÃ¤ger", slug: "all" },
-  {
-    id: 18,
-    name: "ÐÐ°Ñ€ÐºÐ¾Ð·Ð½Ð¾-Ð´Ð¸Ñ…Ð°Ð»ÑŒÐ½Ñ– Ð°Ð¿Ð°Ñ€Ð°Ñ‚Ð¸",
-    slug: "anesthesia-and-respiratory-devices",
-  },
-  {
-    id: 644,
-    name: "ÐÐ¿Ð°Ñ€Ð°Ñ‚Ð¸ ÑˆÑ‚ÑƒÑ‡Ð½Ð¾Ñ— Ð²ÐµÐ½Ñ‚Ð¸Ð»ÑÑ†Ñ–Ñ— Ð»ÐµÐ³ÐµÐ½ÑŒ",
-    slug: "ventilators-icu",
-  },
-  {
-    id: 1126,
-    name: "Ð•Ð»ÐµÐºÑ‚Ñ€Ð¾-Ñ–Ð¼Ð¿ÐµÐ´Ð°Ð½ÑÐ½Ð¸Ð¹ Ñ‚Ð¾Ð¼Ð¾Ð³Ñ€Ð°Ñ„",
-    slug: "electrical-impedance-tomography",
-  },
-  {
-    id: 20,
-    name: "ÐœÐ¾Ð½Ñ–Ñ‚Ð¾Ñ€Ð¸ Ð¿Ð°Ñ†Ñ–Ñ”Ð½Ñ‚Ð°",
-    slug: "patient-monitors",
-  },
-  {
-    id: 79,
-    name: "ÐÐµÐ¾Ð½Ð°Ñ‚Ð°Ð»ÑŒÐ½Ðµ Ð¾Ð±Ð»Ð°Ð´Ð½Ð°Ð½Ð½Ñ",
-    slug: "neonatal-equipment",
-  },
-  {
-    id: 670,
-    name: "Ð¡Ð²Ñ–Ñ‚Ð¸Ð»ÑŒÐ½Ð¸ÐºÐ¸ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ñ–Ð¹Ð½Ñ– Ñ‚Ð° ÐµÐºÐ·Ð°Ð¼ÐµÐ½Ð°Ñ†Ñ–Ð¹Ð½Ñ–",
-    slug: "operating-and-examination-lamps",
-  },
-  {
-    id: 243,
-    name: "ÐšÐ¾Ð½ÑÐ¾Ð»Ñ– ÑÑ‚ÐµÐ»ÑŒÐ¾Ð²Ñ– Ñ‚Ð° Ð½Ð°ÑÑ‚Ñ–Ð½Ð½Ñ–",
-    slug: "wall-supply-and-ceiling-supply-units",
-  },
-  { id: 1145, name: "Ð’Ð¸Ð¿Ð°Ñ€Ð¾Ð²ÑƒÐ²Ð°Ñ‡Ñ–", slug: "vaporisers" },
-  { id: 1131, name: "Ð“Ð°Ð·Ð¾Ð°Ð½Ð°Ð»Ñ–Ð·Ð°Ñ‚Ð¾Ñ€Ð¸", slug: "gas-analyzers" },
-  { id: 1157, name: "ÐÑÐ¿Ñ–Ñ€Ð°Ñ‚Ð¾Ñ€Ð¸", slug: "aspiration" },
-  {
-    id: 87,
-    name: "ÐœÐµÐ´Ð¸Ñ‡Ð½Ðµ Ð³Ð°Ð·Ð¾Ð¿Ð¾ÑÑ‚Ð°Ñ‡Ð°Ð½Ð½Ñ",
-    slug: "gas-management-systems",
-  },
+  { id: 0, name: "Всі товари Dräger", slug: "all" },
+    {
+        id: 18,
+        name: "Наркозно-дихальні апарати",
+        slug: "anesthesia-and-respiratory-devices",
+    },
+    {
+        id: 644,
+        name: "Апарати штучної вентиляції легень",
+        slug: "ventilators-icu",
+    },
+    {
+        id: 1126,
+        name: "Електро-імпедансний томограф",
+        slug: "electrical-impedance-tomography",
+    },
+    { id: 20, name: "Монітори пацієнта", slug: "patient-monitors" },
+    { id: 79, name: "Неонатальне обладнання", slug: "neonatal-equipment" },
+    {
+        id: 670,
+        name: "Світильники операційні та екзаменаційні",
+        slug: "operating-and-examination-lamps",
+    },
+    {
+        id: 243,
+        name: "Консолі стельові та настінні",
+        slug: "wall-supply-and-ceiling-supply-units",
+    },
+    { id: 1145, name: "Випаровувачі", slug: "vaporisers" },
+    { id: 1131, name: "Газоаналізатори", slug: "gas-analyzers" },
+    { id: 1157, name: "Аспіратори", slug: "aspiration" },
+    { id: 87, name: "Медичне газопостачання", slug: "gas-management-systems" },
 ];
 
 const ACCESSORIES_CATEGORY: Category = {
-  id: 95,
-  name: "ÐÐºÑÐµÑÑƒÐ°Ñ€Ð¸",
-  slug: "accessories",
+    id: 95,
+    name: "Аксесуари",
+    slug: "accessories",
 };
 
 const CATEGORY_NAONATHAL: Record<number, number[]> = {
-  79: [384, 364, 286, 374, 354], // Ð²ÑÑ– Ð¿Ñ–Ð´ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ñ–Ñ— Ð½ÐµÐ¾Ð½Ð°Ñ‚Ð°Ð»ÑŒÐ½Ð¾Ð³Ð¾ Ð¾Ð±Ð»Ð°Ð´Ð½Ð°Ð½Ð½Ñ
+    79: [384, 364, 286, 374, 354], // всі підкатегорії неонатального обладнання
 };
 
 const CATEGORY_PRIORITY = new Map<number, number>();
@@ -536,7 +524,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
             </button>
           </div>
           {loadError ? (
-            <p className="mt-3 text-center text-red-600">{loadError}</p>
+            <p className="mt-3 text-center text-red-900">{loadError}</p>
           ) : null}
         </div>
 
