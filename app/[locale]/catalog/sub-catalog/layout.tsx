@@ -22,12 +22,10 @@ export default async function Layout({ children, params }: Props) {
   }
 
   return (
-    <MainLayout>
       <SidebarProvider locale={locale} initialCategories={initialCategories}>
         <ClientLayout locale={locale}>
           {children}
         </ClientLayout>
       </SidebarProvider>
-    </MainLayout>
   );
 }
