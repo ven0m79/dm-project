@@ -28,8 +28,4 @@ export default async function Page({ params }: PageProps) {
   const { locale } = await params;
 
   return <ClientPage locale={locale} />;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> ai/codex-usage

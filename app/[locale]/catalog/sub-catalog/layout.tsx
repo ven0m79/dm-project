@@ -22,20 +22,10 @@ export default async function Layout({ children, params }: Props) {
   }
 
   return (
-<<<<<<< HEAD
     <SidebarProvider locale={locale}>
       <ClientLayout locale={locale}>
         {children}
       </ClientLayout>
     </SidebarProvider>
-=======
-    <MainLayout>
-      <SidebarProvider locale={locale} initialCategories={initialCategories}>
-        <ClientLayout locale={locale}>
-          {children}
-        </ClientLayout>
-      </SidebarProvider>
-    </MainLayout>
->>>>>>> ai/codex-usage
   );
 }

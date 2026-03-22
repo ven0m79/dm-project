@@ -73,8 +73,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "weekly",
     priority: url.includes("/catalog") ? 0.9 : 0.7,
   }));
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> ai/codex-usage
