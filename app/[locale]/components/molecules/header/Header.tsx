@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import styles from "./Header.module.css";
 import Image from "next/image";
-import { Link, usePathname } from "../../../../../config";
+import { Link, usePathname } from "../../../../../i18n/navigation";
 import { useTranslations, useLocale } from "next-intl";
 
 import debounce from "lodash.debounce";

@@ -1,39 +1,37 @@
-import React, { FC, ReactNode, useMemo } from "react";
+import React, { forwardRef, ReactNode, useMemo, ButtonHTMLAttributes } from "react";
 import styles from "./Button.module.css";
 
 type ButtonProps = {
   variant?: "primary" | "secondary" | "tertiary";
   children: ReactNode;
-} & JSX.IntrinsicElements["button"];
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button: FC<ButtonProps> = ({
-  variant = "primary",
-  className,
-  children,
-  ...props
-}) => {
-  const buttonVariantStyle = useMemo(() => {
-    if (variant === "primary") {
-      return styles["primary"];
-    }
-    if (variant === "secondary") {
-      return styles["secondary"];
-    }
-    if (variant === "tertiary") {
-      return styles["tertiary"];
-    }
-  }, [variant]);
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ variant = "primary", className, children, ...props }, ref) => {
+    const buttonVariantStyle = useMemo(() => {
+      switch (variant) {
+        case "secondary":
+          return styles.secondary;
+        case "tertiary":
+          return styles.tertiary;
+        case "primary":
+        default:
+          return styles.primary;
+      }
+    }, [variant]);
 
-  return (
-    <button
-      className={`${styles["btn"]} ${buttonVariantStyle} px-2 ${
-        className ? className : ""
-      }`}
-      {...props}
-    >
-      {children}
-    </button>
-  );
-};
+    return (
+      <button
+        ref={ref} // ⬅ тепер ref правильно типізований
+        className={`${styles.btn} ${buttonVariantStyle} px-2 ${className || ""}`}
+        {...props}
+      >
+        {children}
+      </button>
+    );
+  }
+);
+
+Button.displayName = "Button";
 
 export default Button;

@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import classNames from "classnames";
 import React, { FC } from "react";
 import styles from "./Nav.module.css";
-import { Link, usePathname } from "../../../../../config";
+import { Link, usePathname } from "../../../../../i18n/navigation";
 
 const NavLinks: {
     [key: string]: {
@@ -27,10 +27,10 @@ const NavLinks: {
         title: "menu-service",
         link: "/services",
     },
-    // decisions: {
-    //   title: "menu-decisions",
-    //   link: "/decisions",
-    // },
+     blog: {
+       title: "menu-blog",
+       link: "/info",
+     },
     projects: {
         title: "menu-projects",
         link: "/projects",
@@ -49,7 +49,7 @@ const DesktopNav: FC<{}> = ({ }) => {
     const pathname = usePathname();
     const t = useTranslations("Menu");
     const t2 = useTranslations("Index");
-    return <div className="items-center right-0 flex flex-1 flex-row justify-center mx-0 shrink-0 max-h-[50px]">
+    return <div className="items-center right-0 flex flex-1 flex-row justify-center mx-0 shrink-0 max-h-12.5">
         <div className="">
             <ul className="flex ms-center">
                 {Object.keys(NavLinks).map((el) => (

@@ -5,12 +5,9 @@ import { CustomFlowbiteTheme, Sidebar as FBSidebar } from "flowbite-react";
 import React, { FC, memo, useCallback, useMemo } from "react";
 import styles from "../../../catalog/sub-catalog/Sub-catalog.module.css";
 import { TransformedCategoriesType } from "@app/[locale]/catalog/sub-catalog/helpers";
-import { usePathname, useRouter } from "../../../../../config";
+import { usePathname, useRouter } from "../../../../../i18n/navigation";
 import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
-import {
-  RIGHT_BAR_PARENT_ID,
-  RIGHT_BAR_PARENT_ID_EN,
-} from "@app/[locale]/components/constants";
+import { RIGHT_BAR_PARENT_ID, RIGHT_BAR_PARENT_ID_EN } from "@app/[locale]/components/constants";
 
 const customTheme: CustomFlowbiteTheme = {
   sidebar: {
@@ -97,14 +94,9 @@ type SidebarProps = {
   fromProductPage?: boolean;
 };
 
-const Content: FC<SidebarProps> = ({
-  locale,
-  changeURLParams,
-  fromProductPage,
-}) => {
+const Content: FC<SidebarProps> = ({ locale, changeURLParams, fromProductPage }) => {
   const router = useRouter();
   const pathname = usePathname();
-
   const {
     categories,
     openedCategoryIds,
@@ -114,134 +106,73 @@ const Content: FC<SidebarProps> = ({
     setOpenedCategoryIds,
   } = useSidebar();
 
-  const items = useMemo(
-    () => (locale === "ua" ? [categories?.[0] || []] : [categories?.[1] || []]),
-    [categories, locale],
-  );
+  // Вибір кореневих елементів
+const items = useMemo(() => (locale === "ua" ? [categories?.[0] || []] : [categories?.[1] || []]), [categories, locale]);
 
-  // ✅ Перевірка на iOS (щоб вирішити як робити навігацію)
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
-
-  // ✅ Створюємо швидкий lookup Map для категорій
-  const categoriesMap = useMemo(() => {
-    const map = new Map<number, TransformedCategoriesType>();
-
-    const traverse = (cats: TransformedCategoriesType[]) => {
-      cats.forEach((cat) => {
-        map.set(cat.id, cat);
-        if (cat.childrens?.length) {
-          traverse(cat.childrens);
-        }
-      });
-    };
-
-    if (items?.length) traverse(items);
-
-    return map;
-  }, [items]);
-
-  // ✅ Оновлений toggle (без findCategoryById, тільки через categoriesMap)
   const handleCollapseToggle = (category: TransformedCategoriesType) => {
-    // Встановлюємо id для виділення
     setSelectedCategoryId(category.id);
-    // Встановлюємо slug або name як поточну категорію
-    setSelectedCategory(category.slug); // або category.name, якщо потрібна назва
-
-    // Тогл відкриття / закриття
-    setOpenedCategoryIds((prevOpenedIds) =>
-      prevOpenedIds.includes(category.id)
-        ? prevOpenedIds.filter((id) => id !== category.id)
-        : [...prevOpenedIds, category.id],
+    setSelectedCategory(category.slug);
+    setOpenedCategoryIds(prev =>
+      prev.includes(category.id) ? prev.filter(id => id !== category.id) : [...prev, category.id],
     );
-    // НЕ викликаємо getCategoryDetails і НЕ змінюємо URL тут
-    // Навігацію робимо тільки в місці, де потрібно (нижче — у клику по leaf)
   };
 
+  // Пошук parent категорій
   const findParentCategories = useCallback(
-    (
-      categories: TransformedCategoriesType[],
-      targetCategoryId: number,
-      parents: TransformedCategoriesType[] = [],
-    ): TransformedCategoriesType[] | null => {
-      for (const category of categories) {
-        if (category.id === targetCategoryId) {
-          return parents; // Знайшли — повертаємо список батьків
-        }
-
-        if (category.childrens && category.childrens.length > 0) {
-          const foundParents = findParentCategories(
-            category.childrens,
-            targetCategoryId,
-            [...parents, category],
-          );
-
-          if (foundParents) {
-            return foundParents.filter(
-              (el) =>
-                el.id !== RIGHT_BAR_PARENT_ID && el.id !== RIGHT_BAR_PARENT_ID_EN,
-            );
-          }
+    (cats: TransformedCategoriesType[], targetId: number, parents: TransformedCategoriesType[] = []): TransformedCategoriesType[] | null => {
+      for (const cat of cats) {
+        if (cat.id === targetId) return parents;
+        if (cat.childrens?.length) {
+          const found = findParentCategories(cat.childrens, targetId, [...parents, cat]);
+          if (found) return found.filter(el => el.id !== RIGHT_BAR_PARENT_ID && el.id !== RIGHT_BAR_PARENT_ID_EN);
         }
       }
-
       return null;
     },
     [],
   );
 
-  // ✅ Список id усіх parent-ів для розкриття потрібних Collapse
-  const selectedItemsNestedData = useMemo(() => {
-    return findParentCategories(items, Number(selectedCategoryId))?.map(
-      (el) => el.id,
-    );
-  }, [findParentCategories, items, selectedCategoryId]);
+  const selectedItemsNestedData = useMemo(
+    () => findParentCategories(items, Number(selectedCategoryId))?.map(el => el.id),
+    [findParentCategories, items, selectedCategoryId],
+  );
 
-  // ✅ Рекурсивний рендер категорій
-  const renderNestedCategories = (
-    category: TransformedCategoriesType,
-    level = 0, // Level starts at 0 for root
-    topLevelKey?: number,
-  ) => {
-    // Apply padding starting from level 2
-    const key = topLevelKey ?? category.id;
-    const paddingLeft = level > 1 ? level * 7 : 0; // No padding for level 0 and level 1
+  const customFirstLevelOrder = useMemo(() => {
+    const uaOrder = ["or-equipment","icu-equipment","neonatal-equipment","cleaning-and-desinfecting-equipment","gas-management-systems","furniture","mri-equipment","accessories"];
+    const enOrder = ["or-equipment-en","icu-equipment-en","neonatal-equipment-en","cleaning-and-desinfecting-equipment-en","gas-management-systems-en","furniture-en","mri-equipment-en","accessories-en"];
+    return locale === "ua" ? uaOrder : locale === "en" ? enOrder : [];
+  }, [locale]);
 
-    // 🔹 Якщо категорія без дітей → Item
+  // Рекурсивний рендер категорій з унікальними ключами
+  const renderNestedCategories = (category: TransformedCategoriesType, level = 0, keyPrefix = "") => {
+    const paddingLeft = level > 1 ? level * 7 : 0;
+    const key = keyPrefix ? `${keyPrefix}-${category.id}` : `${category.id}`;
+
     if (!category.childrens?.length) {
       return (
         <FBSidebar.Item
+          key={key}
           as="div"
-          key={category.id}
-          className={classNames("cursor-pointer", {
-            "bg-sky-200": selectedCategoryId === category.id,
-          })}
+          className={classNames("cursor-pointer", { "bg-sky-200": selectedCategoryId === category.id })}
           style={{ paddingLeft: `${paddingLeft}px` }}
         >
           <div
             onClick={() => {
               handleCollapseToggle(category);
-
-              // 🔹 Використовуємо slug вибраної категорії
-              if (changeURLParams) {
-                router.push(`${pathname.replace(/\/product\/\d+/, "")}?category=${category.slug}`);
-              }
-
-              if (fromProductPage) {
-                router.push(`/catalog/sub-catalog?category=${category.slug}`);
-              }
+              const targetUrl = `/catalog/sub-catalog?category=${category.slug}`;
+              if (changeURLParams) router.push(`${pathname.replace(/\/product\/\d+/, "")}?category=${category.slug}`);
+              else if (fromProductPage) router.push(targetUrl);
+              else router.push(targetUrl);
             }}
           >
             {category.name}
           </div>
-
         </FBSidebar.Item>
       );
     }
 
-    // 🔹 Якщо є діти → Collapse
     return (
-      <FBSidebar.Collapse
+       <FBSidebar.Collapse
         open={
           category.id === RIGHT_BAR_PARENT_ID ||
           category.id === RIGHT_BAR_PARENT_ID_EN ||
@@ -251,7 +182,7 @@ const Content: FC<SidebarProps> = ({
         label={category.name}
         key={category.id}
         className={classNames({
-          "opacity-0 pointer-events-none mt-[-40px]":
+          "opacity-0 pointer-events-none -mt-10":
             category.id === RIGHT_BAR_PARENT_ID ||
             category.id === RIGHT_BAR_PARENT_ID_EN,
           "bg-sky-200": selectedCategoryId === category.id,
@@ -280,21 +211,12 @@ const Content: FC<SidebarProps> = ({
   };
 
   return (
-    <div
-      className={classNames(
-        "flex flex-1 flex-row justify-between",
-        styles.subMenu,
-      )}
-    >
-      <div className="">
-        {/* 🔹 Заголовок (назва кореневого елементу) */}
-        <h3 className="text-blue-950 ml-5 font-bold mt-5">
-          {items?.[0]?.name}
-        </h3>
-
+    <div className={classNames("flex flex-1 flex-row justify-between", styles.subMenu)}>
+      <div>
+        <h3 className="text-blue-950 ml-5 font-bold mt-5">{items?.[0]?.name}</h3>
         <FBSidebar aria-label="Catalog" theme={customTheme.sidebar}>
           <FBSidebar.ItemGroup>
-            {items?.map((el) => renderNestedCategories(el, 0, el.id))}
+            {items?.map(el => renderNestedCategories(el, 0))}
           </FBSidebar.ItemGroup>
         </FBSidebar>
       </div>
@@ -302,6 +224,6 @@ const Content: FC<SidebarProps> = ({
   );
 };
 
-const Sidebar: FC<SidebarProps> = (props) => <Content {...props} />;
+const Sidebar: FC<SidebarProps> = props => <Content {...props} />;
 
 export default memo(Sidebar);

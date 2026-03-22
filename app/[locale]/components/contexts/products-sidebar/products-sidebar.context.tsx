@@ -30,13 +30,10 @@ export type SidebarContextProps = {
   setSelectedProducts: (val: SingleProductDetails[]) => void;
   getData: (locale: string) => Promise<void>;
   getCategoryDetails: (id: number, locale: string) => Promise<void>;
-
   selectedCategoryId: number | null;
   setSelectedCategoryId: (val: number | null) => void;
-
   openedCategoryIds: number[];
   setOpenedCategoryIds: Dispatch<SetStateAction<number[]>>;
-
   activeProduct: SingleProductDetails | null;
   setActiveProduct: (val: SingleProductDetails | null) => void;
 };
@@ -45,69 +42,55 @@ export const SidebarContext = createContext<SidebarContextProps | undefined>(
   undefined,
 );
 
-// 🔹 Simple client-side caches so we don't refetch within one browser session
+// Client-side cache
 const categoriesCache = new Map<string, TransformedCategoriesType[]>();
 const productsCache = new Map<string, SingleProductDetails[]>();
 
 type SidebarProviderProps = {
   children: ReactNode;
-  locale: string;
+  locale?: string;
 };
 
 export const SidebarProvider = ({ children, locale }: SidebarProviderProps) => {
   const searchParams = useSearchParams();
-  const selectedCategoryFromParams = searchParams?.get("category");
+  const selectedCategoryFromParams = searchParams?.get("category") ?? null;
 
-  const [selectedCategoryItem, setSelectedCategoryItem] = useState<
-    string | null | undefined
-  >(selectedCategoryFromParams);
-  const [categories, setCategories] = useState<TransformedCategoriesType[]>([]);
-  const [selectedProducts, setSelectedProducts] = useState<
-    SingleProductDetails[]
-  >([]);
-  const [activeProduct, setActiveProduct] =
-    useState<SingleProductDetails | null>(null);
+  const defaultLocale = locale ?? "ua"; // дефолт
 
-  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
-    null,
+ const [selectedCategoryItem, setSelectedCategoryItem] = useState<string | null | undefined>(null);(
+    selectedCategoryFromParams
   );
+  const [categories, setCategories] = useState<TransformedCategoriesType[]>([]);
+  const [selectedProducts, setSelectedProducts] = useState<SingleProductDetails[]>([]);
+  const [activeProduct, setActiveProduct] = useState<SingleProductDetails | null>(null);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
   const [openedCategoryIds, setOpenedCategoryIds] = useState<number[]>([]);
 
-  // ✅ Load categories with client-side + server-side caching (via API route)
-  const getCategoriesData = useCallback(async (localeParam: string) => {
+  const getCategoriesData = useCallback(async (localeParam: string = defaultLocale) => {
     const cacheKey = localeParam;
 
-    // 1) Client-side cache
     if (categoriesCache.has(cacheKey)) {
       setCategories(categoriesCache.get(cacheKey)!);
       return;
     }
 
     try {
-      const res = await fetch(
-        `/api/woocommerce/categories?locale=${encodeURIComponent(localeParam)}`,
-      );
-
+      const res = await fetch(`/api/woocommerce/categories?locale=${encodeURIComponent(localeParam)}`);
       if (!res.ok) {
         console.warn("Failed to fetch categories", res.status);
         return;
       }
-
       const raw = (await res.json()) as WoocomerceCategoryType[];
-      const transformed = categoriesCreation(
-        raw as unknown as TransformedCategoriesType[],
-      );
-
+      const transformed = categoriesCreation(raw as unknown as TransformedCategoriesType[]);
       categoriesCache.set(cacheKey, transformed);
       setCategories(transformed);
     } catch (e) {
       console.warn("Error while fetching categories:", e);
     }
-  }, []);
+  }, [defaultLocale]);
 
-  // ✅ Load products for a category (using server-cached data via API route)
   const getCategoryDetails = useCallback(
-    async (id: number, localeParam: string) => {
+    async (id: number, localeParam: string = defaultLocale) => {
       const cacheKey = `${localeParam}:${id}`;
 
       if (productsCache.has(cacheKey)) {
@@ -116,49 +99,34 @@ export const SidebarProvider = ({ children, locale }: SidebarProviderProps) => {
       }
 
       try {
-        const res = await fetch(
-          `/api/woocommerce/category-products?locale=${encodeURIComponent(
-            localeParam,
-          )}&categoryId=${encodeURIComponent(String(id))}`,
-        );
-
+        const res = await fetch(`/api/woocommerce/category-products?locale=${encodeURIComponent(localeParam)}&categoryId=${id}`);
         if (!res.ok) {
           console.warn("Failed to fetch category products", res.status);
           return;
         }
-
         const data = (await res.json()) as SingleProductDetails[];
-
         productsCache.set(cacheKey, data);
         setSelectedProducts(data);
       } catch (e) {
         console.warn("Error while fetching category products:", e);
       }
     },
-    [],
+    [defaultLocale]
   );
 
-  // 🔁 Sync selectedCategoryId + products with URL search param
   useEffect(() => {
-    const idsMap = getCategoriesIds(locale) as
-      | Record<string, number>
-      | undefined;
-
-    const categoryId = selectedCategoryFromParams
-      ? idsMap?.[selectedCategoryFromParams]
-      : null;
-
+    const idsMap = getCategoriesIds(defaultLocale) ?? {};
+    const categoryId = selectedCategoryFromParams ? idsMap[selectedCategoryFromParams as keyof typeof idsMap] : null;
     setSelectedCategoryId(categoryId || null);
 
     if (categoryId) {
-      getCategoryDetails(categoryId, locale);
+      getCategoryDetails(categoryId, defaultLocale);
     }
-  }, [selectedCategoryFromParams, getCategoryDetails, locale]);
+  }, [selectedCategoryFromParams, getCategoryDetails, defaultLocale]);
 
-  // 🔁 Fetch categories on mount (once per locale thanks to cache)
   useEffect(() => {
-    getCategoriesData(locale);
-  }, [getCategoriesData, locale]);
+    getCategoriesData(defaultLocale);
+  }, [getCategoriesData, defaultLocale]);
 
   return (
     <SidebarContext.Provider
@@ -186,8 +154,6 @@ export const SidebarProvider = ({ children, locale }: SidebarProviderProps) => {
 
 export const useSidebar = () => {
   const context = useContext(SidebarContext);
-  if (!context) {
-    throw new Error("useSidebar must be used within a SidebarProvider");
-  }
+  if (!context) throw new Error("useSidebar must be used within a SidebarProvider");
   return context;
 };

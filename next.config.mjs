@@ -1,30 +1,57 @@
+// next.config.mjs
 import createNextIntlPlugin from "next-intl/plugin";
+import transpileModules from "next-transpile-modules";
 
-const withNextIntl = createNextIntlPlugin("./i18n.ts");
+const withNextIntl = createNextIntlPlugin("./i18n/request.ts"); // правильний шлях
+const withTM = transpileModules(["framer-motion"]); // import замість require
 
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
-
 
   images: {
-  unoptimized: false,
-  formats: ["image/avif", "image/webp"],
-  remotePatterns: [
-    {
-      protocol: "https",
-      hostname: "api.dm-project.com.ua",
-      pathname: "/**",
-    },
-  ],
-},
+    unoptimized: false,
+    formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "api.dm-project.com.ua",
+        pathname: "/**",
+      },
+    ],
+  },
+
+  trailingSlash: true,
+
+  async rewrites() {
+    return [
+
+      {
+        source: "/info/wp-admin/:path*",
+        destination: "https://info.dm-project.com.ua/wp-admin/:path*"
+      },
+      {
+        source: "/info/wp-login.php",
+        destination: "https://info.dm-project.com.ua/wp-login.php"
+      },
+      {
+        source: "/info/:path*",
+        destination: "https://info.dm-project.com.ua/:path*"
+      },
+      {
+        source: "/info",
+        destination: "https://info.dm-project.com.ua",
+      },
+      {
+        source: "/info/:path*",
+        destination: "https://info.dm-project.com.ua/:path*",
+      },
+    ];
+  },
 
 
-  // Хедери для кешування
+
   async headers() {
     return [
-      // 1. Кешуємо Next.js статичні файли (JS/CSS) на 1 рік
       {
         source: "/_next/static/:path*",
         headers: [
@@ -34,8 +61,6 @@ const nextConfig = {
           },
         ],
       },
-
-      // 2. Кешуємо картинки з public/images на 1 рік
       {
         source: "/images/:path*",
         headers: [
@@ -45,8 +70,6 @@ const nextConfig = {
           },
         ],
       },
-
-      // 3. Кешуємо шрифти
       {
         source: "/fonts/:path*",
         headers: [
@@ -56,29 +79,18 @@ const nextConfig = {
           },
         ],
       },
-
-      // 4. Кешуємо SVG, ICO, WEBP, PNG у корені public/
       {
         source: "/:path*\\.(ico|png|svg|webp|jpg|jpeg)",
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=1, immutable",
-          },
-        ],
-      },
-
-      // 5. Забороняємо кешування HTML сторінок (SSR/ISR/Routes)
-      {
-        source: "/((?!_next/static|images|fonts).*)",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "no-store, must-revalidate",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
     ];
   },
-}
-export default withNextIntl(nextConfig);
+};
+
+// 🌟 Комбінуємо плагіни ES Module
+export default withNextIntl(withTM(nextConfig));

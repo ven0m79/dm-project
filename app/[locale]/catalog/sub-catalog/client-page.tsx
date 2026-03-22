@@ -12,7 +12,7 @@ import MobileBreadcrumbs from "./product/[productId]/MobileBreadcrumbs";
 import DesktopBreadcrumbs from "./product/[productId]/DesktopBreadcrumbs";
 import Image from "next/image";
 import { TransformedCategoriesType } from "./helpers";
-import {isIOS} from "../../../../utils/constants";
+import { isIOS } from "../../../../utils/constants";
 
 export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   const {
@@ -41,16 +41,33 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   }, [categoryId, locale, setOpenedCategoryIds, setSelectedCategoryId]);
 
   // ✅ Memoize sorting
-  const sortedProducts = useMemo(
-    () => [...selectedProducts].sort((a, b) => a.name.localeCompare(b.name)),
-    [selectedProducts],
-  );
+  const normalizeOrder = (order?: number) =>
+    !order || order === 0 ? Number.MAX_SAFE_INTEGER : order;
+
+  const sortedProducts = useMemo(() => {
+    return [...selectedProducts].sort((a, b) => {
+      const aIsAccessories = a.tags?.some((t) => t.name === "accessories");
+      const bIsAccessories = b.tags?.some((t) => t.name === "accessories");
+
+      if (aIsAccessories && bIsAccessories) {
+        return normalizeOrder(a.menu_order) - normalizeOrder(b.menu_order);
+      }
+
+      if (aIsAccessories || bIsAccessories) {
+        return 0;
+      }
+
+      return a.name.localeCompare(b.name);
+    });
+  }, [selectedProducts]);
+
 
   const [visibleCount, setVisibleCount] = useState(15);
   const productsToRender = useMemo(
     () => sortedProducts.slice(0, visibleCount),
     [sortedProducts, visibleCount],
   );
+
   const categoriesDescriptionMap = useMemo(() => {
     const map = new Map<number, string>();
     const traverse = (cats: TransformedCategoriesType[]) => {
@@ -69,6 +86,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   }, [categoryId, categoriesDescriptionMap]);
 
   return (
+
     <>
       <div className="flex flex-wrap justify-start self-start mt-4 mb-4 ml-2 items-start">
         {productsToRender?.length ? (
@@ -114,10 +132,23 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                       />
                     </div>
                     <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center" />
-                    <div className="flex justify-center">
-                      <h3 className="flex justify-center h-20 w-full px-2">
+                    <div className="p-1 grow flex items-center justify-center">
+                      <p className="text-center text-sm font-normal text-[#0061AA] line-clamp-2 hover:text-[#004a80] transition-colors h-10">
                         {el.name}
-                      </h3>
+                      </p>
+                    </div>
+                    <div className="flex justify-center">
+                      {el.price && (
+                        <span className="font-bold text-[#002766] text-sm text-center">
+
+                          {el.sku && /\s|,|;/.test(el.sku)
+                            ? "Від "
+                            : " "}
+                          {" "}
+                          {String(el.price).replace(".", ",")} грн
+                        </span>
+                      )}
+
                     </div>
                   </div>
                 </div>
@@ -142,7 +173,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
       )}
       {/* Category description */}
       <p
-        className="content text-[#0077d2] text-[15px] leading-[1.5] p-2 text-justify"
+        className="content text-[#0077d2] text-[15px] leading-relaxed p-2 text-justify"
         suppressHydrationWarning
         style={{ textIndent: "15px" }}
         dangerouslySetInnerHTML={{ __html: categoryDescription || "" }}

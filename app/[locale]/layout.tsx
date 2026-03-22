@@ -1,63 +1,36 @@
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Roboto } from "next/font/google";
-import { ReactNode } from "react";
-import { NextIntlClientProvider, useMessages } from "next-intl";
-
-import "./globals.css";
-//import "./reset.css";
-
-import { cn } from "@app/[locale]/components/molecules/lib/utils";
-import { unstable_setRequestLocale } from "next-intl/server";
+// app/[locale]/layout.tsx
+import { ReactNode } from 'react';
+import { Roboto } from 'next/font/google';
+import { getMessages, setRequestLocale } from 'next-intl/server';
+import { NextIntlClientProvider, hasLocale } from 'next-intl';
+import { notFound } from 'next/navigation';
+import { routing } from '../../i18n/routing';
+import { cn } from '@app/[locale]/components/molecules/lib/utils';
 import Script from "next/script";
-import ClientScriptLoader from "@app/[locale]/components/atoms/scriptsBinotel/scriptsBinotel"
-// import { Metadata } from "next";
-// import  getHreflangLinks  from "@app/[locale]/components/atoms/hreflang/hreflang";
 
+type Props = {
+  children: ReactNode;
+  params: Promise<{ locale: string }>; // params як Promise
+};
 
 const roboto = Roboto({
   weight: ['400', '500', '700'],
   style: ['normal', 'italic'],
   subsets: ['latin', 'cyrillic'],
   display: 'swap',
-  variable: '--font-roboto',
-})
+  variable: '--font-roboto'
+});
 
-interface LocaleLayoutProps {
-  children: ReactNode;
-  params: { locale: string };
-}
-
-export function generateStaticParams() {
-  return [{ locale: "ua" }, { locale: "en" }];
-}
-
-
-// export function generateMetadata(): Metadata {
-//   const path = ""; // Можна підставляти динамічно
-//   const hreflangs = getHreflangLinks(path);
-
-//   return {
-//     alternates: {
-//       languages: {
-//         uk: hreflangs.ua,
-//         en: hreflangs.en
-//       }
-//     }
-//   };
-// }
-
-export default function RootLayout({
-  children,
-  params: { locale },
-}: LocaleLayoutProps) {
-  unstable_setRequestLocale(locale);
-  const messages = useMessages();
+export default async function LocaleLayout({ children, params }: Props) {
+  const resolvedParams = await params;
+  const { locale } = resolvedParams;
+  if (!hasLocale(routing.locales, locale)) notFound();
+  setRequestLocale(locale);
+  const messages = await getMessages({ locale });
 
   return (
     <html lang={locale}>
       <head>
-
-
         {/* ✅ Обидва скрипти у <head> */}
         <Script
           strategy="afterInteractive"
@@ -104,12 +77,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body
-        className={cn(
-          "flex min-h-screen overflow-x-hidden bg-gray-950 text-gray-50",
-          roboto.variable,
-        )}
-      >
+      <body className={cn('flex min-h-screen overflow-x-hidden', roboto.variable)}>
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-52H85B3W"
@@ -118,13 +86,11 @@ export default function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           ></iframe>
         </noscript>
-        <main className="flex flex-1 flex-col items-center justify-center gap-12 w-full bg-white">
+        <main className="flex flex-1 flex-col items-center justify-center gap-12 w-full">
           <NextIntlClientProvider locale={locale} messages={messages}>
             {children}
-            <SpeedInsights />
           </NextIntlClientProvider>
         </main>
-        <ClientScriptLoader />
       </body>
     </html>
   );

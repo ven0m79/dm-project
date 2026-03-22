@@ -35,7 +35,7 @@ const SingleSlideAbout: FC<
   }, [heightChangeHandler]);
 
   return (
-    <div className="flex items-center self-center justify-center w-full h-full max-w-[1360px] bg-red-500 z-9">
+    <div className="flex items-center self-center justify-center w-full h-full max-w-340 bg-red-500 z-9">
       <motion.img
         alt=""
         ref={ref}

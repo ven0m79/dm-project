@@ -130,9 +130,9 @@ export default function ClientPage({
     details.sku && /\s|,|;/.test(details.sku) ? "Ціна від:" : "Ціна:";
 
   return (
-    <div className="flex self-center flex-col max-w-[900px] mb-8">
+    <div className="flex self-center flex-col max-w-225 mb-8">
       {/* Основний контент */}
-      <div className="flex flex-col py-1 px-2 min-h-[600px] flex-1">
+      <div className="flex flex-col py-1 px-2 min-h-150 flex-1">
         <AnimatePresence>
           <motion.div
             initial={{ opacity: 0 }}
@@ -147,7 +147,7 @@ export default function ClientPage({
                 <div
                   onClick={openModal}
                   className={classNames(
-                    "relative w-full max-w-[350px] h-[200px] sm:h-[375px] rounded-lg overflow-hidden shadow-md flex items-center justify-center cursor-zoom-in",
+                    "relative w-full max-w-87.5 h-50 sm:h-93.75 rounded-lg overflow-hidden shadow-md flex items-center justify-center cursor-zoom-in",
                   )}
                 >
                   <Image
@@ -169,7 +169,7 @@ export default function ClientPage({
                   {/* Контейнер із мініатюрами */}
                   <div
                     ref={carouselRef}
-                    className="flex overflow-hidden space-x-2 sm:px-10 px-20 max-w-[300px] snap-x snap-mandatory scroll-smooth mt-2 mb-4"
+                    className="flex overflow-hidden space-x-2 sm:px-10 px-20 max-w-75 snap-x snap-mandatory scroll-smooth mt-2 mb-4"
                   >
                     {details.images?.length ? (
                       details.images.map((img, index) => {
@@ -193,11 +193,11 @@ export default function ClientPage({
                         return (
                           <button
                             key={index}
-                            ref={(el) => (thumbnailRefs.current[index] = el)}
+                            ref={(el) => void (thumbnailRefs.current[index] = el)}
                             onClick={() => setSelectedImage(index)}
                             disabled={!isVisible}
                             className={classNames(
-                              "flex-shrink-0 snap-center border rounded-md overflow-hidden transition-all duration-300 w-[40px] h-[40px] sm:w-[70px] sm:h-[70px] focus:outline-none",
+                              "shrink-0 snap-center border rounded-md overflow-hidden transition-all duration-300 w-10 h-10 sm:w-17.5 sm:h-17.5 focus:outline-none",
                               isActive
                                 ? "border-[#0061AA] shadow-md opacity-100"
                                 : isVisible
@@ -259,7 +259,7 @@ export default function ClientPage({
 
               {/* Інформація */}
               <div className="px-4 pt-0 sm:pt-10 w-1/2">
-                <h1 className="text-[22px] font-bold text-[#002766] mb-[10px]">
+                <h1 className="text-[22px] font-bold text-[#002766] mb-2.5">
                   {details.name}
                 </h1>
                 <div
@@ -302,7 +302,7 @@ export default function ClientPage({
                   </div>
                 )}
 
-                <div className="sm:h-[20px] h-[5px]" />
+                <div className="sm:h-5 h-1.25" />
                 <div className="flex flex-col justify-between items-center gap-5">
                   <br />
                   {!isAccessories && (
@@ -436,7 +436,7 @@ export default function ClientPage({
               </h3>
 
               {relatedProducts && relatedProducts.length > 0 ? (
-                <div className="relative w-full h-auto max-w-[900px] mx-auto py-1 ">
+                <div className="relative w-full h-auto max-w-225 mx-auto py-1 ">
                   {/* Контейнер для скролу */}
                   <div
                     id="related-scroll"
@@ -452,9 +452,9 @@ export default function ClientPage({
                         <Link
                           key={el.id}
                           href={`/catalog/sub-catalog/product/${el.id}?category=${category}`}
-                          className="w-[140px] flex-shrink-0 shadow-md rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-200 flex flex-col bg-white"
+                          className="w-35 shrink-0 shadow-md rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-200 flex flex-col bg-white"
                         >
-                          <div className="w-full h-[200px] flex items-center justify-center overflow-hidden px-1">
+                          <div className="w-full h-50 flex items-center justify-center overflow-hidden px-1">
                             <Image
                               width={140}
                               height={140}
@@ -463,7 +463,7 @@ export default function ClientPage({
                               className="object-contain w-full h-full p-1"
                             />
                           </div>
-                          <div className="p-3 flex-grow flex items-center justify-center">
+                          <div className="p-3 grow flex items-center justify-center">
                             <p className="text-center text-sm font-normal text-[#0061AA] line-clamp-3 hover:text-[#004a80] transition-colors">
                               {el.name}
                             </p>
@@ -522,7 +522,7 @@ export default function ClientPage({
                 <motion.div
                   className={classNames(
                     "relative bg-white rounded-xl overflow-hidden flex items-center justify-center",
-                    isMobile ? "w-[95vw] h-[90vh]" : "w-[600px] h-[600px]",
+                    isMobile ? "w-[95vw] h-[90vh]" : "w-150 h-150",
                   )}
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}

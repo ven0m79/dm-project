@@ -74,7 +74,7 @@ const MapOfUkraine = ({ locale }: { locale: string }) => {
           {selectedItem && (
             <div
               className={classNames(
-                "mt-4 w-full max-w-[100%] bg-gray-900 rounded-lg shadow-md text-center py-2",
+                "mt-4 w-full max-w-full bg-gray-900 rounded-lg shadow-md text-center py-2",
                 classes["info-section"]
               )}
             >
@@ -90,6 +90,7 @@ const MapOfUkraine = ({ locale }: { locale: string }) => {
 
       <div className="relative w-full flex justify-center">
         <><motion.svg
+          xmlns="http://www.w3.org/2000/svg"
           max-width="700px"
           width="100%"
           height="auto"
@@ -106,38 +107,36 @@ const MapOfUkraine = ({ locale }: { locale: string }) => {
               <SingleRegion key={el.id} {...el} setHoveredItem={setHoveredItem} />
             );
           })}
-        </motion.svg><AnimatePresence>
-            {isHovering && coords && coords?.x && coords?.y ? (
-              <>
-                <motion.foreignObject
-                  className="absolute pointer-events-none opacity-80"
-                  animate={{
-                    x: coords?.x,
-                    y: coords?.y,
-                  }}
-                  initial={false}
-                  transition={{ type: "spring", stiffness: 70 }}
+
+        </motion.svg>
+          <AnimatePresence>
+            {isHovering && coords?.x && coords?.y && (
+              <motion.div
+                className="absolute pointer-events-none z-50"
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: 1,
+                  x: coords.x,
+                  y: coords.y,
+                }}
+                exit={{ opacity: 0 }}
+                transition={{ type: "spring", stiffness: 70 }}
+              >
+                <div
+                  className={classNames(
+                    "flex flex-col items-center justify-center",
+                    classes["info-section"]
+                  )}
                 >
-                  <div
-                    className={classNames(
-                      "flex flex-col items-center justify-center",
-                      classes["info-section"]
-                    )}
-                  >
-                    {hoveredItem?.name}
-                    <div
-                      className={classNames(
-                        "items-center justify-center",
-                        classes["info-section-description"]
-                      )}
-                    >
-                      {hoveredItem?.description}
-                    </div>
+                  {hoveredItem?.name}
+                  <div className={classes["info-section-description"]}>
+                    {hoveredItem?.description}
                   </div>
-                </motion.foreignObject>
-              </>
-            ) : null}
-          </AnimatePresence></>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </>
       </div>
     }
     </>

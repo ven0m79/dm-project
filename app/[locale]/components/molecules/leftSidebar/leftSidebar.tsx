@@ -5,7 +5,7 @@ import { CustomFlowbiteTheme, Sidebar as FBSidebar } from "flowbite-react";
 import React, { FC, memo, useCallback, useMemo } from "react";
 import styles from "../../../catalog/sub-catalog/Sub-catalog.module.css";
 import { TransformedCategoriesType } from "@app/[locale]/catalog/sub-catalog/helpers";
-import { usePathname, useRouter } from "../../../../../config";
+import { usePathname, useRouter } from "../../../../../i18n/navigation";
 import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
 import {
   LEFT_BAR_PARENT_ID,
@@ -171,38 +171,25 @@ const Content: FC<SidebarProps> = ({
   }, [locale]);
 
   // ✅ Рекурсивний рендер категорій
-  const renderNestedCategories = (
-    category: TransformedCategoriesType,
-    level = 0,
-    topLevelKey?: number,
-  ) => {
-    const key = topLevelKey ?? category.id;
+  const renderNestedCategories = (category: TransformedCategoriesType, level = 0, keyPrefix = "") => {
     const paddingLeft = level > 1 ? level * 7 : 0;
+    const key = keyPrefix ? `${keyPrefix}-${category.id}` : `${category.id}`;
 
-    // 🔹 Якщо категорія без дітей → Item
     if (!category.childrens?.length) {
       return (
         <FBSidebar.Item
+          key={key}
           as="div"
-          key={category.id}
-          className={classNames("cursor-pointer", {
-            "bg-sky-200": selectedCategoryId === category.id,
-          })}
+          className={classNames("cursor-pointer", { "bg-sky-200": selectedCategoryId === category.id })}
           style={{ paddingLeft: `${paddingLeft}px` }}
         >
           <div
             onClick={() => {
               handleCollapseToggle(category);
-
-              if (changeURLParams) {
-                router.push(
-                  `${pathname.replace(/\/product\/\d+/, "")}?category=${category.slug}`,
-                );
-              }
-
-              if (fromProductPage) {
-                router.push(`/catalog/sub-catalog?category=${category.slug}`);
-              }
+              const targetUrl = `/catalog/sub-catalog?category=${category.slug}`;
+              if (changeURLParams) router.push(`${pathname.replace(/\/product\/\d+/, "")}?category=${category.slug}`);
+              else if (fromProductPage) router.push(targetUrl);
+              else router.push(targetUrl);
             }}
           >
             {category.name}
@@ -211,7 +198,6 @@ const Content: FC<SidebarProps> = ({
       );
     }
 
-    // 🔹 Якщо є діти → Collapse
     return (
       <FBSidebar.Collapse
         open={
@@ -223,7 +209,7 @@ const Content: FC<SidebarProps> = ({
         label={category.name}
         key={key}
         className={classNames({
-          "opacity-0 pointer-events-none mt-[-40px]":
+          "opacity-0 pointer-events-none -mt-10":
             category.id === LEFT_BAR_PARENT_ID ||
             category.id === LEFT_BAR_PARENT_ID_EN,
           "bg-sky-200": selectedCategoryId === category.id,
@@ -274,7 +260,7 @@ const Content: FC<SidebarProps> = ({
 
         <FBSidebar aria-label="Catalog" theme={customTheme.sidebar}>
           <FBSidebar.ItemGroup>
-            {items?.map((el) => renderNestedCategories(el, 0, el.id))}
+            {items?.map((el) => renderNestedCategories(el, 0))}
           </FBSidebar.ItemGroup>
         </FBSidebar>
       </div>

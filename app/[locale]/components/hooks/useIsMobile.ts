@@ -1,30 +1,28 @@
-'use client';
-
 import { useEffect, useState } from "react";
 
 const MEDIA_QUERY = "(max-width: 650px)";
 
-export const useIsMobile = () => {
-  const [isMobile, setIsMobile] = useState(false);
+export function useIsMobile() {
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
   useEffect(() => {
-    // Безпека: цей код виконується лише на клієнті
+    // Next.js / SSR safety
+    if (typeof window === "undefined") return;
+
     const mediaQuery = window.matchMedia(MEDIA_QUERY);
 
-    const handleChange = (event: MediaQueryListEvent) => {
-      setIsMobile(event.matches);
-    };
+    const update = () => setIsMobile(mediaQuery.matches);
 
-    // Ініціалізація поточного стану
-    setIsMobile(mediaQuery.matches);
+    // initial value
+    update();
 
-    // Підписка на зміни
-    mediaQuery.addEventListener("change", handleChange);
+    // subscribe
+    mediaQuery.addEventListener("change", update);
 
     return () => {
-      mediaQuery.removeEventListener("change", handleChange);
+      mediaQuery.removeEventListener("change", update);
     };
   }, []);
 
   return isMobile;
-};
+}
