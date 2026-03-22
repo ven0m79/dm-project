@@ -6,13 +6,12 @@ import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 
 const Nav = () => {
-
   return (
     <>
-      <nav className={classNames("sm:hidden max-h-[0px]", styles["navigation"])}>
+      <nav className={classNames("sm:hidden max-h-0", styles["navigation"])}>
         <MobileNav />
       </nav>
-      <nav className={classNames("hidden sm:flex flex-1 w-screen justify-center h-[50px]", styles["navigation"])}>
+      <nav className={classNames("hidden sm:flex flex-1 w-screen justify-center h-12.5", styles["navigation"])}>
         <DesktopNav />
       </nav>
     </>

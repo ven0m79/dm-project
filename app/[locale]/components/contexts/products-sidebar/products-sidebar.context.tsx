@@ -49,18 +49,17 @@ const productsCache = new Map<string, SingleProductDetails[]>();
 type SidebarProviderProps = {
   children: ReactNode;
   locale?: string;
+  initialCategories?: TransformedCategoriesType[];
 };
 
-export const SidebarProvider = ({ children, locale }: SidebarProviderProps) => {
+export const SidebarProvider = ({ children, locale, initialCategories }: SidebarProviderProps) => {
   const searchParams = useSearchParams();
   const selectedCategoryFromParams = searchParams?.get("category") ?? null;
 
-  const defaultLocale = locale ?? "ua"; // дефолт
+  const defaultLocale = locale ?? "ua";
 
- const [selectedCategoryItem, setSelectedCategoryItem] = useState<string | null | undefined>(null);(
-    selectedCategoryFromParams
-  );
-  const [categories, setCategories] = useState<TransformedCategoriesType[]>([]);
+  const [selectedCategoryItem, setSelectedCategoryItem] = useState<string | null | undefined>(selectedCategoryFromParams);
+  const [categories, setCategories] = useState<TransformedCategoriesType[]>(initialCategories ?? []);
   const [selectedProducts, setSelectedProducts] = useState<SingleProductDetails[]>([]);
   const [activeProduct, setActiveProduct] = useState<SingleProductDetails | null>(null);
   const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
@@ -74,20 +73,23 @@ export const SidebarProvider = ({ children, locale }: SidebarProviderProps) => {
       return;
     }
 
+    // Skip fetch if initial categories were provided from server
+    if (categories.length > 0) {
+      categoriesCache.set(cacheKey, categories);
+      return;
+    }
+
     try {
       const res = await fetch(`/api/woocommerce/categories?locale=${encodeURIComponent(localeParam)}`);
-      if (!res.ok) {
-        console.warn("Failed to fetch categories", res.status);
-        return;
-      }
+      if (!res.ok) return;
       const raw = (await res.json()) as WoocomerceCategoryType[];
       const transformed = categoriesCreation(raw as unknown as TransformedCategoriesType[]);
       categoriesCache.set(cacheKey, transformed);
       setCategories(transformed);
-    } catch (e) {
-      console.warn("Error while fetching categories:", e);
+    } catch {
+      // categories fetch failed silently
     }
-  }, [defaultLocale]);
+  }, [defaultLocale, categories]);
 
   const getCategoryDetails = useCallback(
     async (id: number, localeParam: string = defaultLocale) => {
@@ -100,15 +102,12 @@ export const SidebarProvider = ({ children, locale }: SidebarProviderProps) => {
 
       try {
         const res = await fetch(`/api/woocommerce/category-products?locale=${encodeURIComponent(localeParam)}&categoryId=${id}`);
-        if (!res.ok) {
-          console.warn("Failed to fetch category products", res.status);
-          return;
-        }
+        if (!res.ok) return;
         const data = (await res.json()) as SingleProductDetails[];
         productsCache.set(cacheKey, data);
         setSelectedProducts(data);
-      } catch (e) {
-        console.warn("Error while fetching category products:", e);
+      } catch {
+        // category products fetch failed silently
       }
     },
     [defaultLocale]

@@ -13,6 +13,7 @@ export async function generateMetadata(
 
   return locale === "ua"
     ? {
+<<<<<<< HEAD
       metadataBase: new URL("https://dm-project.com.ua"),
       alternates: {
         canonical: canonicalPath,
@@ -30,6 +31,25 @@ export async function generateMetadata(
       description:
         "Buy medical equipment in Kyiv and across Ukraine from Dräger at the best prices. Order medical supplies for intensive care, operating rooms, neonatal units, and MRI suites. Reliable solutions at dm-project.com.ua",
     };
+=======
+        metadataBase: new URL("https://dm-project.com.ua"),
+        alternates: {
+          canonical: canonicalPath,
+        },
+        title: "Медичне обладнання, представник Dräger в Україні | ДМ-Проект",
+        description:
+          "Купити медичне обладнання в Києві та Україні від виробника Dräger за кращими цінами. Замовити медичне оснащення для реанімаційних, операційних, неонатальних відділень та кабінетів МРТ. Надійне рішення на dm-project.com.ua",
+      }
+    : {
+        metadataBase: new URL("https://dm-project.com.ua"),
+        alternates: {
+          canonical: canonicalPath,
+        },
+        title: "Medical Equipment, Dräger representative in Ukraine | DM-Project",
+        description:
+          "Buy medical equipment in Kyiv and across Ukraine from Dräger at the best prices. Order medical supplies for intensive care, operating rooms, neonatal units, and MRI suites. Reliable solutions at dm-project.com.ua",
+      };
+>>>>>>> ai/codex-usage
 }
 
 export default async function Page({ params }: PageProps) {

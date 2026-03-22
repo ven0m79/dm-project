@@ -33,7 +33,6 @@ const MobileHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Di
   const t = useTranslations("Header");
   const t2 = useTranslations("Index");
 
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
   const router = useRouter();
 
   // Создаём ref для поля поиска
@@ -86,7 +85,7 @@ const MobileHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Di
           className="flex items-center cursor-pointer"
           onClick={() => {
             const target = "/catalog";
-            isIOS ? (window.location.href = target) : router.push(target);
+            router.push(target);
           }}
         >
           <Image
@@ -104,7 +103,7 @@ const MobileHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Di
           className="cursor-pointer"
           onClick={() => {
             const target = "/";
-            isIOS ? (window.location.href = target) : router.push(target);
+            router.push(target);
           }}
         >
           <Image
@@ -121,7 +120,7 @@ const MobileHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Di
           className="cursor-pointer"
           onClick={() => {
             const target = "/catalog";
-            isIOS ? (window.location.href = target) : router.push(target);
+            router.push(target);
           }}
         >
           <Image

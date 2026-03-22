@@ -1,6 +1,8 @@
-"use client";
+'use client';
+
 import { useTranslations } from "next-intl";
 import classNames from "classnames";
+
 import MobileFooter from "./MobileFooter";
 import DesktopFooter from "./DesktopFooter";
 import styles from "./Footer.module.css";
@@ -22,5 +24,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-
 }

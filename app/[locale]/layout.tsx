@@ -6,7 +6,10 @@ import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '../../i18n/routing';
 import { cn } from '@app/[locale]/components/molecules/lib/utils';
+<<<<<<< HEAD
 import Script from "next/script";
+=======
+>>>>>>> ai/codex-usage
 
 type Props = {
   children: ReactNode;
@@ -26,10 +29,15 @@ export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = resolvedParams;
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
+<<<<<<< HEAD
+=======
+
+>>>>>>> ai/codex-usage
   const messages = await getMessages({ locale });
 
   return (
     <html lang={locale}>
+<<<<<<< HEAD
       <head>
         {/* ✅ Обидва скрипти у <head> */}
         <Script
@@ -86,6 +94,9 @@ export default async function LocaleLayout({ children, params }: Props) {
             style={{ display: "none", visibility: "hidden" }}
           ></iframe>
         </noscript>
+=======
+      <body className={cn('flex min-h-screen overflow-x-hidden', roboto.variable)}>
+>>>>>>> ai/codex-usage
         <main className="flex flex-1 flex-col items-center justify-center gap-12 w-full">
           <NextIntlClientProvider locale={locale} messages={messages}>
             {children}

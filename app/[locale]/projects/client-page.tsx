@@ -64,13 +64,11 @@ export const ClientPage = () => {
           setEmail('');
           setMessage('');
         } else {
-          const errorBody = await response.json();
-          console.error("❌ Помилка API:", errorBody); // ⬅️ Деталі помилки
+          await response.json();
           setStatus('Помилка при надсиланні. Спробуйте пізніше.');
         }
       })
-      .catch(error => {
-        console.error("❌ Network error:", error); // ⬅️ Наприклад, 404 або проблема з сервером
+      .catch(() => {
         setStatus('Сталася помилка.');
       });
   };
@@ -245,7 +243,7 @@ export const ClientPage = () => {
                 className={classNames("h-24 pt-2", styles.form)}
                 placeholder={t('project-form-message')}
                 id="message"
-                 aria-label={t('project-form-message')}
+                aria-label={t('project-form-message')}
                 value={message}
                 onChange={e => setMessage(e.target.value)}
               /><br />

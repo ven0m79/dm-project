@@ -64,8 +64,6 @@ useEffect(() => {
       body: JSON.stringify(data),
     })
       .then(async response => {
-        //console.log("📡 HTTP status:", response.status); // ⬅️ Статус відповіді
-
         if (response.ok) {
           setStatus('Ваше повідомлення надіслано. Дякуємо!');
           // ⬇️ Вставка події у GTM
@@ -89,13 +87,11 @@ useEffect(() => {
           setEmail('');
           setMessage('');
         } else {
-          const errorBody = await response.json();
-          console.error("❌ Помилка API:", errorBody); // ⬅️ Деталі помилки
+          await response.json();
           setStatus('Помилка при надсиланні. Спробуйте пізніше.');
         }
       })
-      .catch(error => {
-        console.error("❌ Network error:", error); // ⬅️ Наприклад, 404 або проблема з сервером
+      .catch(() => {
         setStatus('Сталася помилка.');
       });
   };
@@ -194,8 +190,8 @@ useEffect(() => {
                   placeholder={t('contact-form-mobile')}
                   id="mobile"
                   type="tel"
-                  value={mobile}
                   aria-label={t('contact-form-mobile')}
+                  value={mobile}
                   onChange={e => setMobile(e.target.value)}
                 /><br />
                 <input
@@ -238,4 +234,3 @@ useEffect(() => {
 
   );
 };
-

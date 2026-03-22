@@ -19,6 +19,7 @@ type Props = {
 
 export const ClientPage = async ({ locale }: Props) => {
   const t = await getTranslations({ locale, namespace: "Catalog1" });
+
   const makeHref = (category: string) => {
     const suffix = locale === "en" ? "-en" : "";
     return `/catalog/sub-catalog?category=${category}${suffix}`;

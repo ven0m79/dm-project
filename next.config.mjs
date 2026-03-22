@@ -88,6 +88,13 @@ const nextConfig = {
           },
         ],
       },
+<<<<<<< HEAD
+=======
+      {
+        source: "/info/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+>>>>>>> ai/codex-usage
     ];
   },
 };

@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 import { MainLayout } from "@app/[locale]/components/templates";
 
-type PartnersLayoutProps = {
+type SharesLayoutProps = {
   children: ReactNode;
 };
 
-export default function PartnersLayout({ children }: PartnersLayoutProps) {
+export default function SharesLayout({ children }: SharesLayoutProps) {
   return <MainLayout>{children}</MainLayout>;
 }

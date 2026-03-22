@@ -1,9 +1,7 @@
-"use client";
+import { getTranslations } from "next-intl/server";
 
-import { useTranslations } from "next-intl";
-
-export default function NotFoundPage() {
-  const t = useTranslations("NotFound");
+export default async function NotFoundPage() {
+  const t = await getTranslations("NotFound");
   return (
     <div className="flex flex-col items-center justify-center text-center">
       <h1 className="text-9xl font-bold text-gray-800 dark:text-gray-200">404</h1>

@@ -1,8 +1,5 @@
-"use client";
 import React from "react";
 import styles from "./Shares.module.css";
-
-import { MainLayout } from "@app/[locale]/components/templates";
 
 import { Link } from "../../../i18n/navigation";
 import Image from "next/image";
@@ -15,23 +12,22 @@ import fabiusplusxl from "./fabiusplusxl/Fabius_plus_XL-trans.webp";
 import atlan from "./atlan300/atlan300-trans.webp";
 //import awd655_h2_v1 from "./AWD655-2H-V1/awd655-2h-v1-trans.webp";
 import awd655_h2_v2 from "./AWD655-2H-V2/awd655-2h-v2-trans.webp";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 //import { useIsMobile } from "../components/hooks/useIsMobile";
 
 
 
-export const ClientPage = () => {
-  const t = useTranslations('Shares');
+export const ClientPage = async () => {
+  const t = await getTranslations('Shares');
   //const isMobile = useIsMobile();
 
   return (
-    <MainLayout>
-      <div
-        className={classNames(
-          "flex flex-wrap mb-5 gap-5 mt-5",
-          [styles.catalogContainerMain],
-        )}
-      >
+    <div
+      className={classNames(
+        "flex flex-wrap mb-5 gap-5 mt-5",
+        [styles.catalogContainerMain],
+      )}
+    >
         <Link
           href={{
             pathname: "/shares/linea",
@@ -247,7 +243,6 @@ export const ClientPage = () => {
           </div>
         </Link>
 
-      </div>
-    </MainLayout>
+    </div>
   );
 };

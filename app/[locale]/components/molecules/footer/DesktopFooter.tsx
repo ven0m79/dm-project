@@ -126,10 +126,6 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                 </div>
                 <Link
                     href="/catalog/sub-catalog?category=or-equipment"
-                    // onClick={(e) => {
-                    //     e.preventDefault();
-                    //     window.location.href = `/catalog/sub-catalog?category=or-equipment`;
-                    // }}
                 >
                     <div
                         className={classNames(
@@ -142,10 +138,6 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
 
                 <Link
                     href="/catalog/sub-catalog?category=icu-equipment"
-                    // onClick={(e) => {
-                    //     e.preventDefault();
-                    //     window.location.href = `/catalog/sub-catalog?category=icu-equipment`;
-                    // }}
                 >
                     <div
                         className={classNames(
@@ -157,10 +149,6 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                 </Link>
                 <Link
                     href="/catalog/sub-catalog?category=neonatal-equipment"
-                    // onClick={(e) => {
-                    //     e.preventDefault();
-                    //     window.location.href = `/catalog/sub-catalog?category=neonatal-equipment`;
-                    // }}
                 >
                     <div
                         className={classNames(
@@ -173,10 +161,6 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                 {/* додати функцію */}
                 <Link
                     href="/catalog/sub-catalog?category=cleaning-and-desinfecting-equipment"
-                    // onClick={(e) => {
-                    //     e.preventDefault();
-                    //     window.location.href = `/catalog/sub-catalog?category=cleaning-and-desinfecting-equipment`;
-                    // }}
                 >
                     <div
                         className={classNames(
@@ -188,10 +172,6 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                 </Link>
                 <Link
                     href="/catalog/sub-catalog?category=gas-management-systems"
-                    // onClick={(e) => {
-                    //     e.preventDefault();
-                    //     window.location.href = `/catalog/sub-catalog?category=gas-management-systems`;
-                    // }}
                 >
                     <div
                         className={classNames(
@@ -203,10 +183,6 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                 </Link>
                 <Link
                     href="/catalog/sub-catalog?category=furniture"
-                    // onClick={(e) => {
-                    //     e.preventDefault();
-                    //     window.location.href = `/catalog/sub-catalog?category=furniture`;
-                    // }}
                 >
                     <div
                         className={classNames(
@@ -218,10 +194,6 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                 </Link>
                 <Link
                     href="/catalog/sub-catalog?category=mri-equipment"
-                    // onClick={(e) => {
-                    //     e.preventDefault();
-                    //     window.location.href = `/catalog/sub-catalog?category=mri-equipment`;
-                    // }}
                 >
                     <div
                         className={classNames(
@@ -233,10 +205,6 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                 </Link>
                 <Link
                     href="/catalog/sub-catalog?category=accessories"
-                    // onClick={(e) => {
-                    //     e.preventDefault();
-                    //     window.location.href = `/catalog/sub-catalog?category=accessories`;
-                    // }}
                 >
                     <div
                         className={classNames(

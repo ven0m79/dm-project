@@ -23,6 +23,7 @@ export const ClientPage = ({
   return (
     <MainLayout>
       <div className="flex flex-col justify-center items-center">
+        {/* --- SLIDER --- */}
         {isMobile ? (
           <SliderMobile locale={locale} />
         ) : (
