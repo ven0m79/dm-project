@@ -27,50 +27,49 @@ type ClientPageProps = {
   products: any[];
 };
 
-/** Ð¢Ð¸Ð¼Ñ‡Ð°ÑÐ¾Ð²Ð¾ â€” Ð¿Ð¾Ñ‚Ñ–Ð¼ Ð·Ð°Ð¼Ñ–Ð½ÑŽÑ”Ñ‚ÑŒÑÑ Ð´Ð°Ð½Ð¸Ð¼Ð¸ Ð· API */
 const EQUIPMENT_CATEGORIES: Category[] = [
   { id: 0, name: "Всі товари Dräger", slug: "all" },
-    {
-        id: 18,
-        name: "Наркозно-дихальні апарати",
-        slug: "anesthesia-and-respiratory-devices",
-    },
-    {
-        id: 644,
-        name: "Апарати штучної вентиляції легень",
-        slug: "ventilators-icu",
-    },
-    {
-        id: 1126,
-        name: "Електро-імпедансний томограф",
-        slug: "electrical-impedance-tomography",
-    },
-    { id: 20, name: "Монітори пацієнта", slug: "patient-monitors" },
-    { id: 79, name: "Неонатальне обладнання", slug: "neonatal-equipment" },
-    {
-        id: 670,
-        name: "Світильники операційні та екзаменаційні",
-        slug: "operating-and-examination-lamps",
-    },
-    {
-        id: 243,
-        name: "Консолі стельові та настінні",
-        slug: "wall-supply-and-ceiling-supply-units",
-    },
-    { id: 1145, name: "Випаровувачі", slug: "vaporisers" },
-    { id: 1131, name: "Газоаналізатори", slug: "gas-analyzers" },
-    { id: 1157, name: "Аспіратори", slug: "aspiration" },
-    { id: 87, name: "Медичне газопостачання", slug: "gas-management-systems" },
+  {
+    id: 18,
+    name: "Наркозно-дихальні апарати",
+    slug: "anesthesia-and-respiratory-devices",
+  },
+  {
+    id: 644,
+    name: "Апарати штучної вентиляції легень",
+    slug: "ventilators-icu",
+  },
+  {
+    id: 1126,
+    name: "Електро-імпедансний томограф",
+    slug: "electrical-impedance-tomography",
+  },
+  { id: 20, name: "Монітори пацієнта", slug: "patient-monitors" },
+  { id: 79, name: "Неонатальне обладнання", slug: "neonatal-equipment" },
+  {
+    id: 670,
+    name: "Світильники операційні та екзаменаційні",
+    slug: "operating-and-examination-lamps",
+  },
+  {
+    id: 243,
+    name: "Консолі стельові та настінні",
+    slug: "wall-supply-and-ceiling-supply-units",
+  },
+  { id: 1145, name: "Випаровувачі", slug: "vaporisers" },
+  { id: 1131, name: "Газоаналізатори", slug: "gas-analyzers" },
+  { id: 1157, name: "Аспіратори", slug: "aspiration" },
+  { id: 87, name: "Медичне газопостачання", slug: "gas-management-systems" },
 ];
 
 const ACCESSORIES_CATEGORY: Category = {
-    id: 95,
-    name: "Аксесуари",
-    slug: "accessories",
+  id: 95,
+  name: "Аксесуари",
+  slug: "accessories",
 };
 
 const CATEGORY_NAONATHAL: Record<number, number[]> = {
-    79: [384, 364, 286, 374, 354], // всі підкатегорії неонатального обладнання
+  79: [384, 364, 286, 374, 354], // всі підкатегорії неонатального обладнання
 };
 
 const CATEGORY_PRIORITY = new Map<number, number>();
@@ -219,20 +218,19 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /** Ð¤Ñ–Ð»ÑŒÑ‚Ñ€Ð°Ñ†Ñ–Ñ Ñ‚Ð° ÑÐ¾Ñ€Ñ‚ÑƒÐ²Ð°Ð½Ð½Ñ Ñ‚Ð¾Ð²Ð°Ñ€Ñ–Ð² */
   const filteredProducts = useMemo(() => {
     const source = [...productsData];
 
     const filtered = selectedCategory
       ? source.filter(
-          (product) =>
-            product.categories?.some(
-              (cat: { slug: string }) => cat.slug === selectedCategory.slug,
-            ) ||
-            product.tags?.some(
-              (tag: { slug: string }) => tag.slug === selectedCategory.slug,
-            ),
-        )
+        (product) =>
+          product.categories?.some(
+            (cat: { slug: string }) => cat.slug === selectedCategory.slug,
+          ) ||
+          product.tags?.some(
+            (tag: { slug: string }) => tag.slug === selectedCategory.slug,
+          ),
+      )
       : source;
 
     return filtered.sort((a, b) => {
@@ -302,12 +300,10 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
 
     setSelectedCategory(category);
 
-    // âœ… ÑÐºÑ‰Ð¾ Ð²Ð¶Ðµ Ð½Ð°Ñ‚Ð¸ÑÐ½ÑƒÐ»Ð¸ "Ð—Ð°Ð²Ð°Ð½Ñ‚Ð°Ð¶Ð¸Ñ‚Ð¸ Ñ‰Ðµ" â€” Ð¿Ñ€Ð°Ñ†ÑŽÑ”Ð¼Ð¾ Ð· ÑƒÐ¶Ðµ Ð¿Ñ–Ð´Ð²Ð°Ð½Ñ‚Ð°Ð¶ÐµÐ½Ð¸Ð¼ ÑÐ¿Ð¸ÑÐºÐ¾Ð¼
     if (loadMoreClickedRef.current) {
       return;
     }
 
-    // âŒ ÑÐºÑ‰Ð¾ "Ð—Ð°Ð²Ð°Ð½Ñ‚Ð°Ð¶Ð¸Ñ‚Ð¸ Ñ‰Ðµ" ÐÐ• Ð½Ð°Ñ‚Ð¸ÑÐ½ÑƒÐ»Ð¸ â€” Ð¿Ñ–Ð´Ð²Ð°Ð½Ñ‚Ð°Ð¶ÑƒÑ”Ð¼Ð¾ Ñ‚Ñ–Ð»ÑŒÐºÐ¸ ÐºÐ¾Ð½ÐºÑ€ÐµÑ‚Ð½Ñƒ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ñ–ÑŽ Ð· API
     try {
       setLoadError(null);
       const data = await fetchWooProducts({
@@ -342,7 +338,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
 
           <div className="text-[#0061AA] w-full indent-0 sm:indent-5 leading-relaxed text-justify self-center">
             <h1 className="text-[24px] sm:text-[30px] font-semibold text-[#002766]">
-             Drägerwerk AG & Co. KGaA
+              Drägerwerk AG & Co. KGaA
             </h1>
             <div className="text-[16px] sm:text-[20px]">
               <strong className="text-[#002766]">
@@ -352,11 +348,11 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
             </div>
             <div className="text-[16px] sm:text-[20px]">
               <strong className="text-[#002766]">Країна:</strong>{" "}
-             Німеччина
+              Німеччина
             </div>
             <div className="text-[16px] sm:text-[20px]">
               <strong className="text-[#002766]">
-               Офіційний сайт:
+                Офіційний сайт:
               </strong>{" "}
               <Link href="https://www.draeger.com/" target="_blank">
                 https://www.draeger.com/
@@ -420,10 +416,10 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
 
         {/* DESCRIPTION */}
         <div className="text-[#0061AA] w-full indent-5 leading-relaxed text-justify pt-4">
-            Dräger — німецький виробник медичної та безпекової техніки, відомий
-                    рішеннями для лікарень і критичної медицини. Бренд фокусується на
-                    практичних технологіях, які допомагають медичним командам працювати
-                    стабільно, точно та безпечно в щоденних і високоризикових сценаріях.
+          Dräger — німецький виробник медичної та безпекової техніки, відомий
+          рішеннями для лікарень і критичної медицини. Бренд фокусується на
+          практичних технологіях, які допомагають медичним командам працювати
+          стабільно, точно та безпечно в щоденних і високоризикових сценаріях.
         </div>
 
         {/* ===== BUTTON + DROPDOWN ===== */}
@@ -434,7 +430,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
               onClick={() => setIsDropdownOpen((prev) => !prev)}
               className={styles.loadProducts}
             >
-               {"Завантажити обладнання Dräger"}
+              {"Завантажити обладнання Dräger"}
             </button>
 
             {isDropdownOpen && (
@@ -447,7 +443,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                     className={classNames(
                       "block w-full whitespace-nowrap rounded-lg text-left px-4 py-2 hover:bg-blue-50 transition",
                       selectedCategory?.id === category.id &&
-                        "bg-blue-100 font-semibold rounded-lg",
+                      "bg-blue-100 font-semibold rounded-lg",
                     )}
                   >
                     {category.name}
@@ -577,7 +573,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
           className="fixed top-142 right-10 z-50 flex items-center justify-center cursor-pointer w-40 h-10 rounded-2xl bg-[#0061AA] text-white shadow-lg hover:bg-[#004f8a] transition"
           aria-label="Back"
         >
-          â† ÐÐ° Ð³Ð¾Ð»Ð¾Ð²Ð½Ñƒ
+          На головну
         </button>
       )}
     </>
