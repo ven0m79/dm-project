@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { FC } from "react";
-import { Link } from "../../../../../config";
+import { Link } from "../../../../../i18n/navigation";
 import Image from "next/image";
 //import { useTranslations } from "next-intl";
 
@@ -13,7 +13,7 @@ const MobileFooter: FC<{ t: (key: string) => string }> = ({ t }) => {
     
     return (
         <>
-            <div className="items-center bottom-0 flex flex-1 flex-row justify-around max-h-[100px] mx-2 w-screen">
+            <div className="items-center bottom-0 flex flex-row justify-around max-h-[100px] mx-2 w-screen text-white">
                 <Link
                     href={"/catalog"}
                     className="flex flex-col items-center">

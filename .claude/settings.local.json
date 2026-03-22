@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc -l /f/work/own/dm-project/app/[locale]/components/contexts/products-sidebar/products-sidebar.context.tsx)"
+    ]
+  }
+}

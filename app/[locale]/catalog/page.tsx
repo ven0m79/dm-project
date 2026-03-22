@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 
 import { ClientPage } from "./client-page";
 
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: { locale: string };
+export async function generateMetadata(props: {
+  params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
+  const { locale } = await props.params;
+
   return locale === "ua"
     ? {
         title: "Основні категорії продуктів | ДМ-Проект",
@@ -20,6 +20,12 @@ export async function generateMetadata({
       };
 }
 
-export default function Page() {
-  return <ClientPage />;
+type PageProps = {
+  params: Promise<{ locale: string }>;
+};
+
+export default async function Page({ params }: PageProps) {
+  const { locale } = await params;
+
+  return <ClientPage locale={locale} />;
 }

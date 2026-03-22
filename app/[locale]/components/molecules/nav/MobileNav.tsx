@@ -1,10 +1,9 @@
 "use client";
-import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import classNames from "classnames";
-import React, { FC, useEffect, useMemo, useRef, useState } from "react";
+import React, { FC, useMemo, useState } from "react";
 import styles from "./Nav.module.css";
-import { Link, usePathname } from "../../../../../config";
+import { Link, usePathname } from "../../../../../i18n/navigation";
 
 import { motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
@@ -31,10 +30,10 @@ const NavLinks: {
         title: "menu-service",
         link: "/services",
     },
-    // decisions: {
-    //   title: "menu-decisions",
-    //   link: "/decisions",
-    // },
+     blog: {
+       title: "menu-blog",
+       link: "/info",
+     },
     projects: {
         title: "menu-projects",
         link: "/projects",
@@ -72,7 +71,7 @@ const MobileNav: FC<{}> = ({ }) => {
 
         <div className="">
             <motion.button
-                className="absolute top-10 right-5 h-10 w-10 rounded-xl bg-[#0061AA]/100 transition-colors"
+                className="absolute top-10 right-5 h-10 w-10 rounded-xl bg-[#0061AA] transition-colors"
                 onClick={() => setIsOpen(!isOpen)}
                 title="Гамбургер основного меню">
                 <motion.span
@@ -124,17 +123,6 @@ const MobileNav: FC<{}> = ({ }) => {
                     </div>
                     <ul className="mt-4 text-white">
                         {Object.keys(NavLinks).map((el) => {
-                            const href = NavLinks[el].link;
-
-                            // Обработка для iOS-тач
-                            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
-                            const handleTouchStart = () => {
-                                if (isIOS) {
-                                    window.location.href = href;
-                                }
-                            };
-
                             return (
                                 <li
                                     key={el}
@@ -154,12 +142,14 @@ const MobileNav: FC<{}> = ({ }) => {
                             );
                         })}
 
-                        <Link
-                            className="absolute top-5 right-4"
-                            href={""}
-                            onClick={() => setIsOpen(false)}>
-                            <li className="text-white cursor-pointer text-2xl">✖</li>
-                        </Link>
+                        <button
+                            type="button"
+                            className="absolute top-5 right-4 text-white cursor-pointer text-2xl"
+                            onClick={() => setIsOpen(false)}
+                            aria-label="Close menu"
+                        >
+                            ✖
+                        </button>
                     </ul>
                 </div>
             </motion.div>

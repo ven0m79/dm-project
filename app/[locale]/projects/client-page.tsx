@@ -7,8 +7,6 @@ import classNames from "classnames";
 import imgProj from '../../../public/projectings.webp';
 import imgProj1 from '../../../public/projectings1.webp';
 import { MainLayout } from "@app/[locale]/components/templates";
-import { unstable_setRequestLocale } from "next-intl/server";
-
 import { useTranslations } from 'next-intl';
 import { useIsMobile } from "../components/hooks/useIsMobile";
 import Image from "next/image";
@@ -66,13 +64,11 @@ export const ClientPage = () => {
           setEmail('');
           setMessage('');
         } else {
-          const errorBody = await response.json();
-          console.error("❌ Помилка API:", errorBody); // ⬅️ Деталі помилки
+          await response.json();
           setStatus('Помилка при надсиланні. Спробуйте пізніше.');
         }
       })
-      .catch(error => {
-        console.error("❌ Network error:", error); // ⬅️ Наприклад, 404 або проблема з сервером
+      .catch(() => {
         setStatus('Сталася помилка.');
       });
   };
@@ -203,6 +199,7 @@ export const ClientPage = () => {
                 placeholder={t('project-form-name')}
                 id="name"
                 type="text"
+                aria-label={t('project-form-name')}
                 value={name}
                 onChange={e => setName(e.target.value)}
               /><br />
@@ -210,7 +207,8 @@ export const ClientPage = () => {
                 className={classNames("h-10", styles.form)}
                 placeholder={t('project-form-mobile')}
                 id="mobile"
-                type="mobile"
+                type="tel"
+                aria-label={t('project-form-mobile')}
                 value={mobile}
                 onChange={e => setMobile(e.target.value)}
               /><br />
@@ -218,7 +216,8 @@ export const ClientPage = () => {
                 className={classNames("h-10", styles.form)}
                 placeholder={t('project-form-medicalFacility')}
                 id="medicalFacility"
-                type="medicalFacility"
+                type="text"
+                aria-label={t('project-form-medicalFacility')}
                 value={medicalFacility}
                 onChange={e => setMedicalFacility(e.target.value)}
               /><br />
@@ -226,7 +225,8 @@ export const ClientPage = () => {
                 className={classNames("h-10", styles.form)}
                 placeholder={t('project-form-city')}
                 id="city"
-                type="city"
+                type="text"
+                aria-label={t('project-form-city')}
                 value={city}
                 onChange={e => setCity(e.target.value)}
               /><br />
@@ -235,6 +235,7 @@ export const ClientPage = () => {
                 placeholder={t('project-form-email')}
                 id="email"
                 type="email"
+                aria-label={t('project-form-email')}
                 value={email}
                 onChange={e => setEmail(e.target.value)}
               /><br />
@@ -242,6 +243,7 @@ export const ClientPage = () => {
                 className={classNames("h-24 pt-2", styles.form)}
                 placeholder={t('project-form-message')}
                 id="message"
+                aria-label={t('project-form-message')}
                 value={message}
                 onChange={e => setMessage(e.target.value)}
               /><br />
@@ -254,4 +256,3 @@ export const ClientPage = () => {
     </MainLayout>
   );
 };
-

@@ -4,12 +4,8 @@ import React, { FC, useMemo, useState, useEffect } from "react";
 import classNames from "classnames";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
-import { useBreadcrumbs } from "@app/[locale]/components/atoms/breadcrumbs/breadcrumbs";
-import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 import styles from "./Sub-catalog.module.css";
 import { getCategoriesIds } from "@app/[locale]/components/constants";
-import MobileBreadcrumbs from "./product/[productId]/MobileBreadcrumbs";
-import DesktopBreadcrumbs from "./product/[productId]/DesktopBreadcrumbs";
 import Image from "next/image";
 import { TransformedCategoriesType } from "./helpers";
 import {isIOS} from "../../../../utils/constants";
@@ -51,6 +47,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
     () => sortedProducts.slice(0, visibleCount),
     [sortedProducts, visibleCount],
   );
+  
   const categoriesDescriptionMap = useMemo(() => {
     const map = new Map<number, string>();
     const traverse = (cats: TransformedCategoriesType[]) => {
@@ -89,7 +86,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                   "mb-5 flex flex-col justify-center items-center",
                   cardClass,
                 )}
-              >
+               >
                 <div className="w-full text-center">
                   <div
                     className="cursor-pointer"
@@ -142,7 +139,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
       )}
       {/* Category description */}
       <p
-        className="content text-[#0077d2] text-[15px] leading-[1.5] p-2 text-justify"
+        className="content text-[#0077d2] text-[15px] leading-relaxed p-2 text-justify"
         suppressHydrationWarning
         style={{ textIndent: "15px" }}
         dangerouslySetInnerHTML={{ __html: categoryDescription || "" }}

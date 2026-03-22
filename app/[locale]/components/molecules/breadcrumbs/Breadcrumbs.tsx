@@ -3,11 +3,11 @@
 import React, { FC, useEffect } from "react";
 import classNames from "classnames";
 import MobileBreadcrumbs from "@app/[locale]/catalog/sub-catalog/product/[productId]/MobileBreadcrumbs";
-import { isIOS } from "../../../../../utils/constants";
 import DesktopBreadcrumbs from "@app/[locale]/catalog/sub-catalog/product/[productId]/DesktopBreadcrumbs";
 import { useRouter } from "next/navigation";
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 import { useBreadcrumbs } from "@app/[locale]/components/atoms/breadcrumbs/breadcrumbs";
+import { isIOS } from "utils/constants";
 
 const Breadcrumbs: FC<{
   categoryId: number;
@@ -16,6 +16,7 @@ const Breadcrumbs: FC<{
   const router = useRouter();
   const isMobile = useIsMobile();
   const { breadcrumbs, buildCategoryTrail } = useBreadcrumbs();
+
 
   useEffect(() => {
     buildCategoryTrail([{ id: categoryId } as any], locale);
@@ -42,8 +43,6 @@ const Breadcrumbs: FC<{
           </h1>
           <DesktopBreadcrumbs
             breadcrumbs={breadcrumbs}
-            isIOS={isIOS}
-            router={router}
           />
         </>
       )}

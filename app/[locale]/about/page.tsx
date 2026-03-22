@@ -1,8 +1,19 @@
+// app/[locale]/about/page.tsx
 import type { Metadata } from "next";
-
 import { ClientPage } from "./client-page";
+import { setRequestLocale } from 'next-intl/server'; // 💡 ДОДАНО: Імпорт для ініціалізації локалі
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  
+  const { locale } = await params;
+
+  // 💡 ОПЦІЙНО: Можна додати setRequestLocale, але зазвичай це роблять у компоненті Page або Layout
+  setRequestLocale(locale); 
+
   return locale === "ua"
     ? {
         title: "Медичне обладнання, проектування та сервіс | ДМ-Проект",
@@ -14,10 +25,17 @@ export async function generateMetadata({ params: { locale } }: { params: { local
       };
 }
 
-export default function Page({
-  params: { locale },
+export default async function Page({
+  params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
-  return <ClientPage params={{ locale }}  />;
+  
+  const { locale } = await params;
+  
+  // 💡 ОБОВ'ЯЗКОВО: Встановлюємо локаль для коректної роботи next-intl у Server Components.
+  setRequestLocale(locale); 
+
+  // Це дозволить передати синхронний об'єкт локалі у ClientPage
+  return <ClientPage params={{ locale }} />; 
 }
