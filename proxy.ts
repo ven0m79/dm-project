@@ -3,7 +3,10 @@ import { routing } from "./i18n/routing";
 import { NextRequest, NextResponse } from "next/server";
 
 // Create intl middleware once
-const intlMiddleware = createMiddleware(routing);
+const intlMiddleware = createMiddleware({
+  ...routing,
+  localeDetection: false
+});
 
 function isInfoPath(pathname: string) {
   return pathname === "/info" || pathname.startsWith("/info/");
