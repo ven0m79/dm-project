@@ -271,8 +271,31 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
         </div>
             <div className="flex flex-col items-center">
                 <div className={styles.stroke}></div>
-                <div className={"mt-3 mb-3 text-white"}>
-                    © {new Date().getFullYear()} {t("all-right")}
+                <div className="flex flex-row w-full justify-center">
+                    <div className={"mt-3 mb-3 text-white"}>
+                        © {new Date().getFullYear()} {t("all-right")}
+                    </div>
+                    <div className={"mt-2 mb-3 text-white"}>
+                        <Link href="info/povernennia-tovaru/">
+                            <div className={classNames("font-normal mt-1 ml-10 hover:text-green-600")}>
+                                {"Повернення товару"}
+                            </div>
+                        </Link>
+                    </div>
+                    <div className={"mt-2 mb-3 text-white"}>
+                        <Link href="info/dostavka-ta-garantiya/">
+                            <div className={classNames("font-normal mt-1 ml-10 hover:text-green-600")}>
+                                {"Доставка та гарантія"}
+                            </div>
+                        </Link>
+                    </div>
+                    <div className={"mt-2 mb-3 text-white"}>
+                        <Link href="info/politika-konfidentsiynosti/">
+                            <div className={classNames("font-normal mt-1 ml-10 hover:text-green-600")}>
+                                {"Політика конфіденційності"}
+                            </div>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </>
