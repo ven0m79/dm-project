@@ -9,6 +9,7 @@ import { getCategoriesIds } from "@app/[locale]/components/constants";
 import Image from "next/image";
 import { TransformedCategoriesType } from "./helpers";
 import { isIOS } from "../../../../utils/constants";
+import Breadcrumbs from "@app/[locale]/components/molecules/breadcrumbs/Breadcrumbs";
 
 export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   const {
