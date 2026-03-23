@@ -37,7 +37,6 @@ const MainLayout: FC<MainLayoutProps> = ({
     binotelWidget === "none" ? null : BINOTEL_WIDGET_HASHES[binotelWidget];
 
   return (
-    <Suspense fallback="Loading">
       <main className={styles.main}>
         {noHeader ? null : <HeaderWrapper />}
         <div className="sm:h-12.5 h-0">
@@ -57,7 +56,6 @@ const MainLayout: FC<MainLayoutProps> = ({
           />
         ) : null}
       </main>
-    </Suspense>
   );
 };
 

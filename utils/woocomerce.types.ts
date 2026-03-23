@@ -79,6 +79,7 @@ export type SingleProductDetails = {
   parentCategory: string;
   meta_data: MetaDataType[];
   variations?: any[];
+  menu_order: number;
 };
 
 export type BrandsType = {

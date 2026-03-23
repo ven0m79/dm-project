@@ -37,10 +37,25 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   }, [categoryId, locale, setOpenedCategoryIds, setSelectedCategoryId]);
 
   // ✅ Memoize sorting
-  const sortedProducts = useMemo(
-    () => [...selectedProducts].sort((a, b) => a.name.localeCompare(b.name)),
-    [selectedProducts],
-  );
+  const normalizeOrder = (order?: number) =>
+    !order || order === 0 ? Number.MAX_SAFE_INTEGER : order;
+
+  const sortedProducts = useMemo(() => {
+    return [...selectedProducts].sort((a, b) => {
+      const aIsAccessories = a.tags?.some((t) => t.name === "accessories");
+      const bIsAccessories = b.tags?.some((t) => t.name === "accessories");
+
+      if (aIsAccessories && bIsAccessories) {
+        return normalizeOrder(a.menu_order) - normalizeOrder(b.menu_order);
+      }
+
+      if (aIsAccessories || bIsAccessories) {
+        return 0;
+      }
+
+      return a.name.localeCompare(b.name);
+    });
+  }, [selectedProducts]);
 
   const [visibleCount, setVisibleCount] = useState(15);
   const productsToRender = useMemo(
