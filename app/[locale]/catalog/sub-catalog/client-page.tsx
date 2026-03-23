@@ -8,7 +8,7 @@ import styles from "./Sub-catalog.module.css";
 import { getCategoriesIds } from "@app/[locale]/components/constants";
 import Image from "next/image";
 import { TransformedCategoriesType } from "./helpers";
-import {isIOS} from "../../../../utils/constants";
+import { isIOS } from "../../../../utils/constants";
 
 export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   const {
@@ -47,7 +47,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
     () => sortedProducts.slice(0, visibleCount),
     [sortedProducts, visibleCount],
   );
-  
+
   const categoriesDescriptionMap = useMemo(() => {
     const map = new Map<number, string>();
     const traverse = (cats: TransformedCategoriesType[]) => {
@@ -86,7 +86,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                   "mb-5 flex flex-col justify-center items-center",
                   cardClass,
                 )}
-               >
+              >
                 <div className="w-full text-center">
                   <div
                     className="cursor-pointer"
@@ -94,7 +94,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                       if (isIOS) router.push(url);
                       else window.location.href = url;
                     }}
-                  >
+                   >
                     <div className="w-full px-2">
                       {el.sku.length > 7 ? `${el.sku.slice(0, 7)}..` : el.sku}
                     </div>
@@ -111,10 +111,23 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                       />
                     </div>
                     <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center" />
-                    <div className="flex justify-center">
-                      <h3 className="flex justify-center h-20 w-full px-2">
+                    <div className="p-1 grow flex items-center justify-center">
+                      <p className="text-center text-sm font-normal text-[#0061AA] line-clamp-2 hover:text-[#004a80] transition-colors h-10">
                         {el.name}
-                      </h3>
+                      </p>
+                    </div>
+                    <div className="flex justify-center">
+                      {el.price && (
+                        <span className="font-bold text-[#002766] text-sm text-center">
+
+                          {el.sku && /\s|,|;/.test(el.sku)
+                            ? "Від "
+                            : " "}
+                          {" "}
+                          {String(el.price).replace(".", ",")} грн
+                        </span>
+                      )}
+
                     </div>
                   </div>
                 </div>
