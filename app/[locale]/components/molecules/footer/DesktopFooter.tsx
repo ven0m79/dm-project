@@ -10,7 +10,7 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
     //const { navigateWithDelay } = useNavigateTo();
 
     return (
-        <><div className={styles.footerContainer}>
+        <><div className={"flex flex-row justify-center"}>
             <div
                 className={classNames(
                     "flex flex-column justify-top items-center",
@@ -236,14 +236,14 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                                 height={26}
                                 alt="Logo DM Project" />
                         </p>
-                        <p className={classNames("font-normal mt-5")}>
+                        <p className={classNames("font-normal mt-6")}>
                             <Image
                                 src="/telephoneFooter.png"
                                 width={26}
                                 height={26}
                                 alt="Logo DM Project" />
                         </p>
-                        <p className={classNames("font-normal mt-6")}>
+                        <p className={classNames("font-normal mt-8")}>
                             <Image
                                 src="/emailFooter.png"
                                 width={26}
@@ -255,12 +255,12 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                         <div className={classNames("font-normal mt-1 ml-1")}>
                             <Link href="https://share.google/OF6z6AYY01nQkUYRX">{t("adress")}</Link>
                         </div>
-                        <br />
-                        <div className={classNames("font-normal mt-1 ml-1")}>
+
+                        <div className={classNames("font-normal mt-2 ml-1")}>
                             <a href="tel:+380445201224" className="block hover:none">{t("fax")}</a>
                         </div>
-                        <br />
-                        <div className={classNames("font-normal mt-1 ml-1")}>
+
+                        <div className={classNames("font-normal mt-2 ml-1")}>
                             <a href="mailto:allinfo@dm-project.com.ua" className="block hover:none">allinfo@dm-project.com.ua</a>
                             <a href="mailto:sales@dm-project.com.ua" className="block hover:none">sales@dm-project.com.ua</a>
                             <a href="mailto:service@dm-project.com.ua" className="block hover:none">service@dm-project.com.ua</a>
@@ -269,15 +269,13 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                 </div>
             </div>
         </div>
-            <div className={styles.stroke}></div>
-            <div
-                className={classNames(
-                    "mt-3 mb-3 text-white justify-center items-center",
-                    styles["footerContainer"]
-                )}
-            >
-                © {new Date().getFullYear()} {t("all-right")}
-            </div></>
+            <div className="flex flex-col items-center">
+                <div className={styles.stroke}></div>
+                <div className={"mt-3 mb-3 text-white"}>
+                    © {new Date().getFullYear()} {t("all-right")}
+                </div>
+            </div>
+        </>
     )
 }
 export default DesktopFooter;
