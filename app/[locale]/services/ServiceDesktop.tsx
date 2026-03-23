@@ -6,7 +6,6 @@ import styles from './Service.module.css';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import Snowfall from "react-snowfall"
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 import { cards, items, items1, items2, items3, items4, items5, items6, tableData, pics } from "./data";
 
@@ -105,13 +104,7 @@ export default function ServiceDesktop() {
     };
 
     return (
-        <><Snowfall color="white" speed={[1.0, 3.0]} style={{
-            position: "fixed",
-            width: "100vw",
-            height: "100vh",
-            zIndex: 50,
-            pointerEvents: "none",
-        }} /><div className={classNames("flex flex-1 flex-col self-center", styles.main)}>
+        <><div className={classNames("flex flex-1 flex-col self-center", styles.main)}>
                 <div className={classNames("flex flex-col flex-1 justify-normal items-center w-full max-w-350 text-lg")}>
                     {/* Left Section */}
                     <div className={classNames("flex flex-col justify-normal w-full", styles.servContainer)}>
@@ -477,7 +470,7 @@ export default function ServiceDesktop() {
                             <div className="flex-1 space-y-1">
                                 <p className="text-lg font-medium text-[#0061AA]">Телефон</p>
                                 <p className="text-lg font-semibold text-blue-900">
-                                    +38 066 368 98 10
+                                    +38 066 358 98 10
                                 </p>
                             </div>
 
