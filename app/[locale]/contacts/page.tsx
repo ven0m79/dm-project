@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-
 import { ClientPage } from "./client-page";
-
 
 type PageProps = {
   params: Promise<{ locale: string }>;
