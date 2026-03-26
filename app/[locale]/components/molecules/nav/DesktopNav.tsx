@@ -37,7 +37,7 @@ const NavLinks: {
     },
     shares: {
         title: "menu-shares",
-        link: "/shares",
+        link: "/info/aktsii",
     },
     about_us: {
         title: "menu-contacts",

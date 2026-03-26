@@ -72,8 +72,6 @@ export default function ServiceDesktop() {
             body: JSON.stringify(data),
         })
             .then(async response => {
-                //console.log("📡 HTTP status:", response.status); // ⬅️ Статус відповіді
-
                 if (response.ok) {
                     setStatus('Ваше повідомлення надіслано. Дякуємо!');
                     // ⬇️ Вставка події у GTM
@@ -96,27 +94,17 @@ export default function ServiceDesktop() {
                     setEmail('');
                     setMessage('');
                 } else {
-                    const errorBody = await response.json();
-                    console.error("❌ Помилка API:", errorBody); // ⬅️ Деталі помилки
+                    await response.json();
                     setStatus('Помилка при надсиланні. Спробуйте пізніше.');
                 }
             })
-            .catch(error => {
-                console.error("❌ Network error:", error); // ⬅️ Наприклад, 404 або проблема з сервером
+            .catch(() => {
                 setStatus('Сталася помилка.');
             });
     };
 
     return (
-        <>
-            {/* <Snowfall color="white" speed={[1.0, 3.0]} style={{
-                position: "fixed",
-                width: "100vw",
-                height: "100vh",
-                zIndex: 50,
-                pointerEvents: "none",
-            }} /> */}
-            <div className={classNames("flex flex-1 flex-col self-center", styles.main)}>
+        <><div className={classNames("flex flex-1 flex-col self-center", styles.main)}>
                 <div className={classNames("flex flex-col flex-1 justify-normal items-center w-full max-w-350 text-lg")}>
                     {/* Left Section */}
                     <div className={classNames("flex flex-col justify-normal w-full", styles.servContainer)}>
@@ -482,7 +470,7 @@ export default function ServiceDesktop() {
                             <div className="flex-1 space-y-1">
                                 <p className="text-lg font-medium text-[#0061AA]">Телефон</p>
                                 <p className="text-lg font-semibold text-blue-900">
-                                    +38 066 368 98 10
+                                    +38 066 358 98 10
                                 </p>
                             </div>
 

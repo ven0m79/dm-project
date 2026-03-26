@@ -2,7 +2,6 @@ import classNames from "classnames";
 import React, { FC } from "react";
 import { Link } from "../../../../../i18n/navigation";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
 
 //import { useNavigateTo } from "@app/[locale]/components/hooks/useNavigateTo";
 import styles from "./Footer.module.css";
@@ -12,7 +11,7 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
     //const { navigateWithDelay } = useNavigateTo();
 
     return (
-        <><div className={styles.footerContainer}>
+        <><div className={"flex flex-row justify-center"}>
             <div
                 className={classNames(
                     "flex flex-column justify-top items-center",
@@ -127,10 +126,6 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                 </div>
                 <Link
                     href="/catalog/sub-catalog?category=or-equipment"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        window.location.href = `/catalog/sub-catalog?category=or-equipment`;
-                    }}
                 >
                     <div
                         className={classNames(
@@ -143,10 +138,6 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
 
                 <Link
                     href="/catalog/sub-catalog?category=icu-equipment"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        window.location.href = `/catalog/sub-catalog?category=icu-equipment`;
-                    }}
                 >
                     <div
                         className={classNames(
@@ -158,10 +149,6 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                 </Link>
                 <Link
                     href="/catalog/sub-catalog?category=neonatal-equipment"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        window.location.href = `/catalog/sub-catalog?category=neonatal-equipment`;
-                    }}
                 >
                     <div
                         className={classNames(
@@ -174,10 +161,6 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                 {/* додати функцію */}
                 <Link
                     href="/catalog/sub-catalog?category=cleaning-and-desinfecting-equipment"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        window.location.href = `/catalog/sub-catalog?category=cleaning-and-desinfecting-equipment`;
-                    }}
                 >
                     <div
                         className={classNames(
@@ -188,11 +171,7 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                     </div>
                 </Link>
                 <Link
-                    href="/catalog/sub-catalog?category=category=gas-management-systems"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        window.location.href = `/catalog/sub-catalog?category=gas-management-systems`;
-                    }}
+                    href="/catalog/sub-catalog?category=gas-management-systems"
                 >
                     <div
                         className={classNames(
@@ -204,10 +183,6 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                 </Link>
                 <Link
                     href="/catalog/sub-catalog?category=furniture"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        window.location.href = `/catalog/sub-catalog?category=furniture`;
-                    }}
                 >
                     <div
                         className={classNames(
@@ -219,10 +194,6 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                 </Link>
                 <Link
                     href="/catalog/sub-catalog?category=mri-equipment"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        window.location.href = `/catalog/sub-catalog?category=mri-equipment`;
-                    }}
                 >
                     <div
                         className={classNames(
@@ -234,10 +205,6 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                 </Link>
                 <Link
                     href="/catalog/sub-catalog?category=accessories"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        window.location.href = `/catalog/sub-catalog?category=accessories`;
-                    }}
                 >
                     <div
                         className={classNames(
@@ -270,14 +237,14 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                                 height={26}
                                 alt="Logo DM Project" />
                         </p>
-                        <p className={classNames("font-normal mt-5")}>
+                        <p className={classNames("font-normal mt-6")}>
                             <Image
                                 src="/telephoneFooter.png"
                                 width={26}
                                 height={26}
                                 alt="Logo DM Project" />
                         </p>
-                        <p className={classNames("font-normal mt-6")}>
+                        <p className={classNames("font-normal mt-8")}>
                             <Image
                                 src="/emailFooter.png"
                                 width={26}
@@ -286,15 +253,15 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                         </p>
                     </div>
                     <div>
-                        <div className={classNames("font-normal mt-1 ml-1")}>
+                        <div className={classNames("font-normal mt-1 ml-1 hover:text-green-600")}>
                             <Link href="https://share.google/OF6z6AYY01nQkUYRX">{t("adress")}</Link>
                         </div>
-                        <br />
-                        <div className={classNames("font-normal mt-1 ml-1")}>
+
+                        <div className={classNames("font-normal mt-2 ml-1 hover:text-green-600")}>
                             <a href="tel:+380445201224" className="block hover:none">{t("fax")}</a>
                         </div>
-                        <br />
-                        <div className={classNames("font-normal mt-1 ml-1")}>
+
+                        <div className={classNames("font-normal mt-2 ml-1 hover:text-green-600")}>
                             <a href="mailto:allinfo@dm-project.com.ua" className="block hover:none">allinfo@dm-project.com.ua</a>
                             <a href="mailto:sales@dm-project.com.ua" className="block hover:none">sales@dm-project.com.ua</a>
                             <a href="mailto:service@dm-project.com.ua" className="block hover:none">service@dm-project.com.ua</a>
@@ -303,15 +270,36 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                 </div>
             </div>
         </div>
-            <div className={styles.stroke}></div>
-            <div
-                className={classNames(
-                    "mt-3 mb-3 text-white justify-center items-center",
-                    styles["footerContainer"]
-                )}
-            >
-                © {new Date().getFullYear()} {t("all-right")}
-            </div></>
+            <div className="flex flex-col items-center">
+                <div className={styles.stroke}></div>
+                <div className="flex flex-row w-full justify-center">
+                    <div className={"mt-3 mb-3 text-white"}>
+                        © {new Date().getFullYear()} {t("all-right")}
+                    </div>
+                    <div className={"mt-2 mb-3 text-white"}>
+                        <Link href="info/povernennia-tovaru/">
+                            <div className={classNames("font-normal mt-1 ml-10 hover:text-green-600")}>
+                                {"Повернення товару"}
+                            </div>
+                        </Link>
+                    </div>
+                    <div className={"mt-2 mb-3 text-white"}>
+                        <Link href="info/dostavka-ta-garantiya/">
+                            <div className={classNames("font-normal mt-1 ml-10 hover:text-green-600")}>
+                                {"Доставка та гарантія"}
+                            </div>
+                        </Link>
+                    </div>
+                    <div className={"mt-2 mb-3 text-white"}>
+                        <Link href="info/politika-konfidentsiynosti/">
+                            <div className={classNames("font-normal mt-1 ml-10 hover:text-green-600")}>
+                                {"Політика конфіденційності"}
+                            </div>
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </>
     )
 }
 export default DesktopFooter;

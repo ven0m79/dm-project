@@ -4,12 +4,8 @@ import React, { FC, useMemo, useState, useEffect } from "react";
 import classNames from "classnames";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
-import { useBreadcrumbs } from "@app/[locale]/components/atoms/breadcrumbs/breadcrumbs";
-import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 import styles from "./Sub-catalog.module.css";
 import { getCategoriesIds } from "@app/[locale]/components/constants";
-import MobileBreadcrumbs from "./product/[productId]/MobileBreadcrumbs";
-import DesktopBreadcrumbs from "./product/[productId]/DesktopBreadcrumbs";
 import Image from "next/image";
 import { TransformedCategoriesType } from "./helpers";
 import { isIOS } from "../../../../utils/constants";
@@ -60,7 +56,6 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
       return a.name.localeCompare(b.name);
     });
   }, [selectedProducts]);
-
 
   const [visibleCount, setVisibleCount] = useState(15);
   const productsToRender = useMemo(
@@ -115,7 +110,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
                       if (isIOS) router.push(url);
                       else window.location.href = url;
                     }}
-                  >
+                   >
                     <div className="w-full px-2">
                       {el.sku.length > 7 ? `${el.sku.slice(0, 7)}..` : el.sku}
                     </div>

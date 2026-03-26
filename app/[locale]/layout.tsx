@@ -1,7 +1,7 @@
 // app/[locale]/layout.tsx
 import { ReactNode } from 'react';
 import { Roboto } from 'next/font/google';
-import { getMessages } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '../../i18n/routing';
@@ -26,6 +26,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const resolvedParams = await params; // обов’язково unwrap
   const { locale } = await resolvedParams; // чекаємо Promise
   if (!hasLocale(routing.locales, locale)) notFound();
+  setRequestLocale(locale);
 
   const messages = await getMessages({ locale });
 
@@ -92,7 +93,6 @@ export default async function LocaleLayout({ children, params }: Props) {
             {children}
           </NextIntlClientProvider>
         </main>
-        <ClientScriptLoader />
       </body>
     </html>
   );

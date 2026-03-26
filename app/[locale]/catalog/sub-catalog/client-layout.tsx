@@ -11,6 +11,7 @@ import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 import { getCategoriesIds } from "@app/[locale]/components/constants";
 
 import styles from "./Sub-catalog.module.css";
+import Breadcrumbs from "@app/[locale]/components/molecules/breadcrumbs/Breadcrumbs";
 
 const flipTransition: Transition = {
   type: "spring",
@@ -90,7 +91,9 @@ export default function ClientLayout({ children, locale }: Props) {
         </div>
       )}
 
-      <div className="w-full mt-5">{children}</div>
+      <div className="w-full mt-5">
+        {children}
+      </div>
 
       {/* RIGHT SIDEBAR */}
       {!isMobile && (

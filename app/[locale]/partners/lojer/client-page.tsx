@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import classNames from "classnames";
-import { MainLayout } from "@app/[locale]/components/templates";
 import styles from "../Partners.module.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,7 +9,6 @@ import { isIOS } from "utils/constants";
 import CaruselBrands from "@app/[locale]/components/atoms/carusel-brands/carusel-brands";
 import { useIsMobile } from "../../components/hooks/useIsMobile";
 import { WoocomerceCategoryType } from "../../../../utils/woocomerce.types";
-import { api } from "../../../../utils/woocommerce.setup";
 
 
 type Category = {
@@ -159,7 +157,7 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
 
 
     return (
-        <MainLayout>
+        <>
             <div className="flex flex-col justify-center items-center w-full max-w-250 pb-3 px-2">
                 {/* BRAND INFO */}
                 <div className="flex shrink-0 sm:flex-row flex-col w-full">
@@ -340,6 +338,6 @@ export const ClientPage = ({ locale, brands, products }: ClientPageProps) => {
                     ← На головну
                 </button>
             )}
-        </MainLayout>
+        </>
     );
 };

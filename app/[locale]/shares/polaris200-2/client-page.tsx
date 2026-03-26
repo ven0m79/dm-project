@@ -1,21 +1,18 @@
-"use client"
 import React from "react";
 import styles from "./../Shares.module.css";
-import { MainLayout } from "@app/[locale]/components/templates";
 import Image from "next/image";
 import classNames from "classnames";
 import polaris2_1 from "./polaris200-2-1.webp";
 import polaris2_2 from "./polaris200-2-2.webp";
 import polaris2_3 from "./polaris200-2-3.webp";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
-const SharesPolaris2002 = () => {
-    const t = useTranslations('Shares');
-    const t1 = useTranslations('Product');
+const SharesPolaris2002 = async () => {
+    const t = await getTranslations('Shares');
+    const t1 = await getTranslations('Product');
     return (
-        <MainLayout>
-            <div
+                    <div
                 className={classNames(
                     "w-full flex flex-wrap justify-center mb-3 mt-3",
                 )}
@@ -57,7 +54,6 @@ const SharesPolaris2002 = () => {
                                 width={400}
                                 height={100}
                                 alt="polaris200-2"
-                                unoptimized
                             />
                             <Image
                                 className={classNames("w-1/2", styles.img)}
@@ -65,7 +61,6 @@ const SharesPolaris2002 = () => {
                                 width={400}
                                 height={100}
                                 alt="polaris200-2"
-                                unoptimized
                             />
                         </div>
                         <div className="w-screen">
@@ -84,7 +79,6 @@ const SharesPolaris2002 = () => {
                                 width={500}
                                 height={100}
                                 alt="polaris200-2"
-                                unoptimized
                             />
                             <p className="my-2">{t('shares-polaris200-2-text3')}</p>
                             <p className="my-2">{t('shares-polaris200-2-text4')}</p>
@@ -94,8 +88,7 @@ const SharesPolaris2002 = () => {
 
             </div>
 
-        </MainLayout>
-    );
+            );
 };
 
 export default SharesPolaris2002;

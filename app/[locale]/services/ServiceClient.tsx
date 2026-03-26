@@ -1,16 +1,8 @@
 "use client";
-import dynamic from "next/dynamic";
 import { useIsMobile } from "../components/hooks/useIsMobile";
-
-
-const ServiceDesktop = dynamic(() => import("./ServiceDesktop"), {
-  ssr: false,
-});
-
-const ServiceMobile = dynamic(() => import("./ServiceMobile"), {
-  ssr: false,
-});
+import ServiceDesktop from "./ServiceDesktop";
+import ServiceMobile from "./ServiceMobile";
 export default function ServiceClient() {
-const isMobile = useIsMobile();
+  const isMobile = useIsMobile();
   return isMobile ? <ServiceMobile /> : <ServiceDesktop />;
 };

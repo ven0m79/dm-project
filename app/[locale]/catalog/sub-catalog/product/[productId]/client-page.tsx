@@ -126,9 +126,6 @@ export default function ClientPage({
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  const priceLabel =
-    details.sku && /\s|,|;/.test(details.sku) ? "Ціна від:" : "Ціна:";
-
   return (
     <div className="flex self-center flex-col max-w-225 mb-8">
       {/* Основний контент */}
@@ -281,15 +278,7 @@ export default function ClientPage({
                         "text-normal sm:mt-12 mt-6 justify-center",
                       )}
                     >
-                      {details.price && (
-                        <span className="text-[#0061AA] text-[18px]">
-                          <span className="font-bold text-[#002766]">
-                            {priceLabel}
-                          </span>{" "}
-                          {String(details.price).replace(".", ",")} {t("grn")}
                           <ProductDetails details={details} />
-                        </span>
-                      )}
                     </div>
                   </>
                 ) : (

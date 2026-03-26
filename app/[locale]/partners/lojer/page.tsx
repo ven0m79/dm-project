@@ -1,16 +1,9 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { ClientPage } from "./client-page";
-import WooCommerceRestApi from "@woocommerce/woocommerce-rest-api";
+import { getProductsByBrandCached } from "../../../../utils/woo.server";
 
 export const revalidate = 300;
-
-const api = new WooCommerceRestApi({
-  url: process.env.NEXT_PUBLIC_WORDPRESS_RITE_URL!,
-  consumerKey: process.env.WC_CONSUMER_KEY!,
-  consumerSecret: process.env.WC_CONSUMER_SECRET!,
-  version: "wc/v3",
-});
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -39,16 +32,9 @@ export default async function Page({ params }: PageProps) {
   const { locale } = await params;
   const lang = locale === "ua" ? "ua" : "en";
   const BRAND_ID = 285;
+  const CATEGORY_IDS = [277, 937, 996, 958, 980];
 
-  const res = await api.get(`products?category=277, 937, 996, 958, 980`, {
-    per_page: 25,
-    page: 1,
-    lang,
-  });
-
-  const filtered = res.data.filter((p: any) =>
-    p.brands?.some((b: any) => b.id === BRAND_ID),
-  );
+  const filtered = await getProductsByBrandCached(lang, CATEGORY_IDS, BRAND_ID);
 
   return (
     <ClientPage

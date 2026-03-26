@@ -158,7 +158,7 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
                         <ComboboxInput
                             className={clsx(
                                 "w-full rounded-lg border-[#0061AA] border bg-white/5 py-1.5 pr-8 pl-3 text-sm/6 text-black",
-                                "focus: outline-none data-[focus]:outline-none data-[focus]:-outline-offset-2 data-[focus]:bg-sky-50"
+                                "focus: outline-none data-focus:outline-none data-focus:-outline-offset-2 data-focus:bg-sky-50"
                             )}
                             placeholder={t("placeholder")}
                             onChange={handleChange} />
@@ -176,14 +176,14 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
                                 style={{ width: "calc(var(--input-width) * 2)" }}
                                 className={clsx(
                                     "rounded-xl border-2 border-[#0061AA] bg-white p-1 [--anchor-gap:var(--spacing-1)] empty:invisible z-50",
-                                    "transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0"
+                                    "transition duration-100 ease-in data-leave:data-closed:opacity-0"
                                 )}
                             >
                                 {products.map((product) => (
                                     <ComboboxOption
                                         key={product.id}
                                         value={product.name}
-                                        className="group flex cursor-default items-center gap-2 rounded-lg py-1.5 px-3 select-none data-[focus]:bg-sky-100"
+                                        className="group flex cursor-default items-center gap-2 rounded-lg py-1.5 px-3 select-none data-focus:bg-sky-100"
                                     >
                                         <a
                                             className={clsx("block, text-black")}

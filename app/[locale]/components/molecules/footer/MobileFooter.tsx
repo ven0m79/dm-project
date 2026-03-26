@@ -2,12 +2,7 @@ import classNames from "classnames";
 import React, { FC } from "react";
 import { Link } from "../../../../../i18n/navigation";
 import Image from "next/image";
-//import { useTranslations } from "next-intl";
-
-//import { useNavigateTo } from "@app/[locale]/components/hooks/useNavigateTo";
 import styles from "./Footer.module.css";
-
-//import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 
 const MobileFooter: FC<{ t: (key: string) => string }> = ({ t }) => {
     
@@ -51,10 +46,7 @@ const MobileFooter: FC<{ t: (key: string) => string }> = ({ t }) => {
             </div>
             <div className={styles.stroke}></div>
             <div
-                className={classNames(
-                    "mt-3 mb-3 text-white justify-center items-center",
-                    styles["footerContainer"]
-                )}
+                className={"flex mt-3 mb-3 text-white justify-center items-center self-center"}
             >
                 © {new Date().getFullYear()} {t("all-right")}
             </div>

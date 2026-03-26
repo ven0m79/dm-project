@@ -1,17 +1,14 @@
-"use client"
 import React from "react";
 import styles from "./../Shares.module.css";
-import { MainLayout } from "@app/[locale]/components/templates";
 import Image from "next/image";
 import classNames from "classnames";
 import awd655_2h_v1 from "./awd655-2h-v1.webp"
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
-const AWD655_2h_v1 = () => {
-    const t = useTranslations('Shares');
+const AWD655_2h_v1 = async () => {
+    const t = await getTranslations('Shares');
     return (
-        <MainLayout>
-            <div
+                    <div
                 className={classNames(
                     "w-full flex flex-wrap justify-center mb-3 mt-3",
                 )}
@@ -55,8 +52,7 @@ const AWD655_2h_v1 = () => {
                 </div>
             </div>
 
-        </MainLayout >
-    );
+            );
 };
 
 export default AWD655_2h_v1;

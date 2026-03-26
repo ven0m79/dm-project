@@ -49,7 +49,6 @@ export default async function Page({ params }: Props) {
   const product = await getProduct(id, locale);
 
   if (!product) {
-    console.warn(`Product with id ${id} not found`);
     notFound(); // Next.js 16 404
   }
 

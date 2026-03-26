@@ -1,24 +1,13 @@
 "use client";
 import classNames from "classnames";
 import React, { useEffect, useMemo, useState } from "react";
-import axios from "axios";
 import styles from "./Header.module.css";
-import Image from "next/image";
-import { Link, usePathname } from "../../../../../i18n/navigation";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
 
 import debounce from "lodash.debounce";
 import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 import MobileHeader from "./MobileHeader";
 import DesktopHeader from "./DesktopHeader";
-
-
-const api = axios.create({
-  baseURL: "https://api.dm-project.com.ua/wp-json/wc/v3/",
-  headers: {
-    Authorization: `Basic ${Buffer.from("ck_8dee30956004b4c7f467a46247004a2f4cd650e5:cs_1cf0a573275e5cafe5af6bddbb01f29b9592be20").toString("base64")}`,
-  },
-});
 
 type TagType = {
   id: number;
@@ -51,24 +40,19 @@ const Header = () => {
     setLoading(true);
 
     try {
-      const response = await api.get("products?per_page=100", {
-        params: {
-          search: term,
-          lang: locale,
-        },
-      });
+      const res = await fetch(
+        `/api/woocommerce/search?search=${encodeURIComponent(term)}&locale=${encodeURIComponent(locale)}`,
+      );
 
-      //console.log("API Response:", response.data);
-      //console.log("Total products fetched:", response.data.length);
-
-      if (response.status === 200) {
-        const filteredProducts = response.data.filter((product: Product) =>
+      if (res.ok) {
+        const data = await res.json();
+        const filteredProducts = data.filter((product: Product) =>
           product.name.toLowerCase().includes(term.toLowerCase()),
         );
         setProducts(filteredProducts);
       }
-    } catch (error) {
-      console.error("Failed to fetch products:");
+    } catch {
+      // search failed silently
     } finally {
       setLoading(false);
     }

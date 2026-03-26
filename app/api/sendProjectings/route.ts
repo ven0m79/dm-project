@@ -1,14 +1,23 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY_FOR_CONTACTS);
-
 export async function POST(req: Request) {
   const { name, mobile, medicalFacility, city, email, message } = await req.json();
+  const resendApiKey = process.env.RESEND_API_KEY_FOR_CONTACTS;
+  const fromAddress = process.env.RESEND_FROM;
+
+  if (!resendApiKey || !fromAddress) {
+    return NextResponse.json(
+      { success: false, error: "Missing RESEND_API_KEY_FOR_CONTACTS or RESEND_FROM" },
+      { status: 500 },
+    );
+  }
+
+  const resend = new Resend(resendApiKey);
 
   try {
     const data = await resend.emails.send({
-      from: process.env.RESEND_FROM!,
+      from: fromAddress,
       to: ["sales@dm-project.com.ua"], // можеш додати більше отримувачів
       subject: "Нове повідомлення з форми сайту Проектування",
       replyTo: email,

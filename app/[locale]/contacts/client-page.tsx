@@ -64,8 +64,6 @@ useEffect(() => {
       body: JSON.stringify(data),
     })
       .then(async response => {
-        //console.log("📡 HTTP status:", response.status); // ⬅️ Статус відповіді
-
         if (response.ok) {
           setStatus('Ваше повідомлення надіслано. Дякуємо!');
           // ⬇️ Вставка події у GTM
@@ -89,13 +87,11 @@ useEffect(() => {
           setEmail('');
           setMessage('');
         } else {
-          const errorBody = await response.json();
-          console.error("❌ Помилка API:", errorBody); // ⬅️ Деталі помилки
+          await response.json();
           setStatus('Помилка при надсиланні. Спробуйте пізніше.');
         }
       })
-      .catch(error => {
-        console.error("❌ Network error:", error); // ⬅️ Наприклад, 404 або проблема з сервером
+      .catch(() => {
         setStatus('Сталася помилка.');
       });
   };
@@ -167,6 +163,7 @@ useEffect(() => {
                   placeholder={t('contact-form-name')}
                   id="name"
                   type="text"
+                  aria-label={t('contact-form-name')}
                   value={name}
                   onChange={e => setName(e.target.value)}
                 /><br />
@@ -175,6 +172,7 @@ useEffect(() => {
                   placeholder={t('contact-form-city')}
                   id="city"
                   type="text"
+                  aria-label={t('contact-form-city')}
                   value={city}
                   onChange={e => setCity(e.target.value)}
                 /><br />
@@ -183,6 +181,7 @@ useEffect(() => {
                   placeholder={t('contact-form-medicalFacility')}
                   id="medicalFacility"
                   type="text"
+                  aria-label={t('contact-form-medicalFacility')}
                   value={medicalFacility}
                   onChange={e => setMedicalFacility(e.target.value)}
                 /><br />
@@ -190,7 +189,8 @@ useEffect(() => {
                   className={classNames("h-10", styles.form)}
                   placeholder={t('contact-form-mobile')}
                   id="mobile"
-                  type="text"
+                  type="tel"
+                  aria-label={t('contact-form-mobile')}
                   value={mobile}
                   onChange={e => setMobile(e.target.value)}
                 /><br />
@@ -198,7 +198,8 @@ useEffect(() => {
                   className={classNames("h-10", styles.form)}
                   placeholder={t('contact-form-email')}
                   id="email"
-                  type="text"
+                  type="email"
+                  aria-label={t('contact-form-email')}
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                 /><br />
@@ -208,6 +209,7 @@ useEffect(() => {
                 placeholder={t('contact-form-productName')}
                 id="productName"
                 type="text"
+                aria-label={t('contact-form-productName')}
                 value={productName}
                 onChange={e => setProductName(e.target.value)}
                 readOnly={isProductFromUrl} // ✅ заблоковано, якщо з URL
@@ -216,6 +218,7 @@ useEffect(() => {
                   className={classNames("h-24 pt-2", styles.form)}
                   placeholder={t('contact-form-message')}
                   id="message"
+                  aria-label={t('contact-form-message')}
                   value={message}
                   onChange={e => setMessage(e.target.value)}
                 /><br />
@@ -231,4 +234,3 @@ useEffect(() => {
 
   );
 };
-

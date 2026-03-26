@@ -28,6 +28,8 @@ export default function ProductDetails({ details }: { details: any }) {
     }
   };
 
+  const priceLabel =
+    details.sku && /\s|,|;/.test(details.sku) ? "Ціна від:" : "Ціна:";
   return (
     <>
       {/* 🔹 Комбо-бокс для вибору розміру */}
@@ -53,9 +55,12 @@ export default function ProductDetails({ details }: { details: any }) {
       )}
 
       {/* 🔹 Поточна ціна */}
-      <div className="mt-3 text-lg font-bold text-green-700">
-        Ціна: {price} ₴
-      </div>
+      <span className="text-[#0061AA] text-[18px]">
+        <span className="font-bold text-[#002766]">
+          {priceLabel} { }
+        </span>
+         {price} ₴
+      </span>
 
       {/* 🔹 Посилання з передачею імені та розміру */}
       <div className="flex flex-col justify-between items-center mt-4">
@@ -64,11 +69,10 @@ export default function ProductDetails({ details }: { details: any }) {
             href={{
               pathname: "../../../../contacts",
               query: {
-                productName: `${details.name}${
-                  selectedVariation?.attributes?.[0]?.option
+                productName: `${details.name}${selectedVariation?.attributes?.[0]?.option
                     ? `, ${selectedVariation.attributes[0].option}`
                     : ""
-                }`,
+                  }`,
               },
             }}
           >
