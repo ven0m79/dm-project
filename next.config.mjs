@@ -20,18 +20,35 @@ const nextConfig = {
     ],
   },
 
+  trailingSlash: true,
+
   async rewrites() {
     return [
+
       {
-        source: "/info",
-        destination: "https://blog.dm-project.com.ua",
+        source: "/info/wp-admin/:path*",
+        destination: "https://info.dm-project.com.ua/wp-admin/:path*"
+      },
+      {
+        source: "/info/wp-login.php",
+        destination: "https://info.dm-project.com.ua/wp-login.php"
       },
       {
         source: "/info/:path*",
-        destination: "https://blog.dm-project.com.ua/:path*",
+        destination: "https://info.dm-project.com.ua/:path*"
+      },
+      {
+        source: "/info",
+        destination: "https://info.dm-project.com.ua",
+      },
+      {
+        source: "/info/:path*",
+        destination: "https://info.dm-project.com.ua/:path*",
       },
     ];
   },
+
+
 
   async headers() {
     return [
@@ -72,8 +89,8 @@ const nextConfig = {
         ],
       },
       {
-        source: "/info/:path*",
-        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+        source: "/((?!_next/static|images|fonts).*)",
+        headers: [{ key: "Cache-Control", value: "no-store, must-revalidate" }],
       },
     ];
   },

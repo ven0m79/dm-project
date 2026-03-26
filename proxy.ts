@@ -8,24 +8,6 @@ const intlMiddleware = createMiddleware({
   localeDetection: false
 });
 
-function isInfoPath(pathname: string) {
-  return pathname === "/info" || pathname.startsWith("/info/");
-}
-
-function isLocaleInfoPath(pathname: string) {
-  // Handles /uk/info and /uk/info/...
-  const segments = pathname.split("/").filter(Boolean); // ["uk","info",...]
-  if (segments.length < 2) return false;
-
-  const [maybeLocale, second] = segments;
-
-  // routing.locales can be string[] in next-intl routing config
-  // @ts-expect-error: depends on your routing typing, but works at runtime
-  const locales: string[] = routing.locales ?? [];
-
-  return locales.includes(maybeLocale) && second === "info";
-}
-
 export default function proxy(request: NextRequest) {
   const { nextUrl } = request;
   const { pathname, hostname } = nextUrl;
@@ -39,35 +21,12 @@ export default function proxy(request: NextRequest) {
     return NextResponse.redirect(url, 301);
   }
 
-  // ---------------------------------------------------------------------------
-  // 2) Keep WP route stable:
-  //    - /info and /info/* bypass next-intl completely
-  //    - /{locale}/info -> redirect to /info (optional but recommended)
-  // ---------------------------------------------------------------------------
-  if (isLocaleInfoPath(pathname)) {
-    const url = nextUrl.clone();
-
-    // strip first segment (locale) from /{locale}/info...
-    const segments = pathname.split("/").filter(Boolean);
-    // segments = [locale, "info", ...rest]
-    const rest = segments.slice(1); // ["info", ...]
-    url.pathname = "/" + rest.join("/");
-
-    return NextResponse.redirect(url, 301);
-  }
-
-  if (isInfoPath(pathname)) {
-    // Let next.config.js rewrites proxy this to WP without locale routing changes.
+  if (pathname.startsWith("/info")) {
     const res = NextResponse.next();
-
-    // Keep your "noindex for test domains" logic for /info too
-    if (hostname.startsWith("test")) {
-      res.headers.set("X-Robots-Tag", "noindex, nofollow");
-    }
-
+    res.headers.set("X-Forwarded-Host", "dm-project.com.ua");
+    res.headers.set("X-Forwarded-Proto", "https");
     return res;
   }
-
   // ---------------------------------------------------------------------------
   // 3) next-intl routing (everything else)
   // ---------------------------------------------------------------------------
@@ -90,7 +49,7 @@ export default function proxy(request: NextRequest) {
   // ---------------------------------------------------------------------------
   // 5) Disallow indexing for test domains
   // ---------------------------------------------------------------------------
-  if (hostname.startsWith("test")) {
+  if (hostname === "test.dm-project.com.ua") {
     response.headers.set("X-Robots-Tag", "noindex, nofollow");
   }
 

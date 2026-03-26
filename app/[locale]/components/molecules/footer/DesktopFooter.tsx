@@ -7,6 +7,7 @@ import Image from "next/image";
 import styles from "./Footer.module.css";
 
 const DesktopFooter: FC<{ t: any }> = ({ t }) => {
+    
     //const { navigateWithDelay } = useNavigateTo();
 
     return (
@@ -90,7 +91,7 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                         {t("service")}
                     </div>
                 </Link>
-                <Link href="/info">
+                {/* <Link href="/info">
                     <div
                         className={classNames(
                             "font-normal mt-1 ml-10 hover:text-green-600"
@@ -98,7 +99,7 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                     >
                         {t("menu-blog")}
                     </div>
-                </Link>
+                </Link> */}
                 <Link href="/projects">
                     <div
                         className={classNames(
