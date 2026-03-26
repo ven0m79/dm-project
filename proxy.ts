@@ -28,35 +28,36 @@ export default function proxy(request: NextRequest) {
     return res;
   }
 
-    // ---------------------------------------------------------------------------
-  // 2) Custom legacy redirects (shares -> new URLs)
   // ---------------------------------------------------------------------------
-  const redirects: Record<string, string> = {
-    // UA
-    "/shares/AWD655-2H-V1/": "/catalog/sub-catalog/product/476/?category=cleaning-and-desinfecting-equipment",
-    "/shares/linea/": "/info/aktsii/linea/",
-    "/shares/polaris200-2/": "/catalog/sub-catalog/product/738/?category=operating-and-examination-lamps",
-    "/shares/": "/info/aktsii/",
-    "/shares/fabiusplusxl/": "/catalog/sub-catalog/product/1506/?category=anesthesia-and-respiratory-devices",
-    "/shares/polaris200/": "/catalog/sub-catalog/product/738/?category=operating-and-examination-lamps",
+  /// ---------------------------------------------------------------------------
+// 2) Custom legacy redirects (shares -> new URLs)
+// ---------------------------------------------------------------------------
+const redirects: Record<string, string> = {
+  "/shares/AWD655-2H-V1/": "/catalog/sub-catalog/product/476/?category=cleaning-and-desinfecting-equipment",
+  "/shares/linea/": "/info/aktsii/linea/",
+  "/shares/polaris200-2/": "/catalog/sub-catalog/product/738/?category=operating-and-examination-lamps",
+  "/shares/": "/info/aktsii/",
+  "/shares/fabiusplusxl/": "/catalog/sub-catalog/product/1506/?category=anesthesia-and-respiratory-devices",
+  "/shares/polaris200/": "/catalog/sub-catalog/product/738/?category=operating-and-examination-lamps",
 
-    // EN
-    "/en/shares/AWD655-2H-V1/": "/en/catalog/sub-catalog/product/476/?category=cleaning-and-desinfecting-equipment",
-    "/en/shares/linea/": "/info/aktsii/linea/",
-    "/en/shares/polaris200-2/": "/en/catalog/sub-catalog/product/738/?category=operating-and-examination-lamps",
-    "/en/shares/": "/info/aktsii/",
-    "/en/shares/fabiusplusxl/": "/en/catalog/sub-catalog/product/1506/?category=anesthesia-and-respiratory-devices",
-    "/en/shares/polaris200/": "/en/catalog/sub-catalog/product/738/?category=operating-and-examination-lamps",
-  };
+  "/en/shares/AWD655-2H-V1/": "/en/catalog/sub-catalog/product/476/?category=cleaning-and-desinfecting-equipment",
+  "/en/shares/linea/": "/en/info/aktsii/linea/",
+  "/en/shares/polaris200-2/": "/en/catalog/sub-catalog/product/738/?category=operating-and-examination-lamps",
+  "/en/shares/": "/en/info/aktsii/",
+  "/en/shares/fabiusplusxl/": "/en/catalog/sub-catalog/product/1506/?category=anesthesia-and-respiratory-devices",
+  "/en/shares/polaris200/": "/en/catalog/sub-catalog/product/738/?category=operating-and-examination-lamps",
+};
 
-  const normalizedPath = pathname.endsWith("/") ? pathname : pathname + "/";
+const normalizedPath = pathname.endsWith("/") ? pathname : pathname + "/";
 
-  if (redirects[normalizedPath]) {
-    const url = nextUrl.clone();
-    url.pathname = redirects[normalizedPath];
-    url.search = ""; // очищаємо query, бо він уже вшитий у target
-    return NextResponse.redirect(url, 301);
-  }
+const target = redirects[normalizedPath];
+
+if (target) {
+  // ❗ КЛЮЧ: формуємо повний URL вручну
+  const absoluteUrl = `${nextUrl.origin}${target}`;
+
+  return NextResponse.redirect(absoluteUrl, 301);
+}
   // ---------------------------------------------------------------------------
   // 3) next-intl routing (everything else)
   // ---------------------------------------------------------------------------
