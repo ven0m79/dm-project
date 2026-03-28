@@ -2,23 +2,23 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { useState } from "react";
-
-interface Breadcrumb {
-  id: string | number;
-  name: string;
-  url: string;
-}
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import type { BreadcrumbItem } from "utils/woo.server";
 
 interface Props {
-  breadcrumbs: Breadcrumb[];
-  isIOS: boolean;
-  router: any;
+  breadcrumbs: BreadcrumbItem[];
   detailsName?: string;
 }
 
-export default function MobileBreadcrumbs({ breadcrumbs, isIOS, router, detailsName }: Props) {
+export default function MobileBreadcrumbs({ breadcrumbs, detailsName }: Props) {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [isIOS, setIsIOS] = useState(false);
+
+  useEffect(() => {
+    setIsIOS(/iPhone|iPad|iPod/i.test(navigator.userAgent));
+  }, []);
 
   return (
     <div className="relative flex flex-row">
