@@ -1,12 +1,12 @@
 "use client";
 import { useLocale, useTranslations } from "next-intl";
 import classNames from "classnames";
-import React, { FC, useMemo, useState } from "react";
+import React, { FC, useState } from "react";
 import styles from "./Nav.module.css";
 import { Link, usePathname } from "../../../../../i18n/navigation";
 
 import { motion } from "framer-motion";
-import { useSearchParams } from "next/navigation";
+import { useLocaleSwitcherHrefs } from "@app/[locale]/components/hooks/useLocaleSwitcherHrefs";
 
 const NavLinks: {
     [key: string]: {
@@ -51,17 +51,9 @@ const NavLinks: {
 const MobileNav: FC<{}> = ({ }) => {
     const [isOpen, setIsOpen] = useState(false);
     const t = useTranslations("Menu");
-    const searchParams = useSearchParams();
     const pathname = usePathname();
-
-
-    const selectedCategory = useMemo(() => {
-        return searchParams?.get("category")
-            ? `?category=${searchParams?.get("category")}`
-            : "";
-    }, [searchParams]);
-
     const currentLocale = useLocale();
+    const { hrefs, isResolvingHref } = useLocaleSwitcherHrefs();
     const otherLocales = [
         { code: "ua", label: "UA" },
         { code: "en", label: "EN" },
@@ -73,7 +65,8 @@ const MobileNav: FC<{}> = ({ }) => {
             <motion.button
                 className="absolute top-10 right-5 h-10 w-10 rounded-xl bg-[#0061AA] transition-colors"
                 onClick={() => setIsOpen(!isOpen)}
-                title="Гамбургер основного меню">
+                title="Main menu"
+            >
                 <motion.span
                     style={{
                         left: "50%",
@@ -108,17 +101,21 @@ const MobileNav: FC<{}> = ({ }) => {
 
 
             <motion.div
-                initial={{ x: "100%", opacity: 0 }} // Начальное состояние (спрятано)
-                animate={isOpen ? { x: "0%", opacity: 1 } : { x: "100%", opacity: 0 }} // Анимация появления и скрытия
-                transition={{ type: "tween", duration: 0.5 }} // Плавная анимация
+                initial={{ x: "100%", opacity: 0 }}
+                animate={isOpen ? { x: "0%", opacity: 1 } : { x: "100%", opacity: 0 }}
+                transition={{ type: "tween", duration: 0.5 }}
                 className="fixed top-0 right-0 h-full w-1/2 bg-[#4E5A63E5]/90 shadow-lg backdrop-blur-lg p-5 z-50"
             >
                 <div className="flex flex-col ml-3 mb-7">
                     <div className="p-2 hover:text-white cursor-pointer text-[#D3DDE4]">
                         {otherLocales.map(({ code, label }) => (
-                            <Link key={code} href={`${pathname}${selectedCategory}`} locale={code}>
-                                {label}
-                            </Link>
+                            isResolvingHref ? (
+                                <span key={code}>{label}</span>
+                            ) : (
+                                <Link key={code} href={hrefs[code as "ua" | "en"]} locale={code}>
+                                    {label}
+                                </Link>
+                            )
                         ))}
                     </div>
                     <ul className="mt-4 text-white">
@@ -148,7 +145,7 @@ const MobileNav: FC<{}> = ({ }) => {
                             onClick={() => setIsOpen(false)}
                             aria-label="Close menu"
                         >
-                            ✖
+                            x
                         </button>
                     </ul>
                 </div>
@@ -158,3 +155,4 @@ const MobileNav: FC<{}> = ({ }) => {
 }
 
 export default MobileNav;
+

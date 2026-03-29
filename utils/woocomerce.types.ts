@@ -73,7 +73,7 @@ export type SingleProductDetails = {
   lang: string;
   stock_status: string;
   brands: BrandsType[];
-  translations: Record<string, number>[];
+  translations: Record<string, number>;
   cross_sell_ids: number[];
   related_ids: number[];
   parentCategory: string;
