@@ -261,10 +261,10 @@ const DesktopFooter: FC<{ t: any }> = ({ t }) => {
                             <a href="tel:+380445201224" className="block hover:none">{t("fax")}</a>
                         </div>
 
-                        <div className={classNames("font-normal mt-2 ml-1 hover:text-green-600")}>
-                            <a href="mailto:allinfo@dm-project.com.ua" className="block hover:none">allinfo@dm-project.com.ua</a>
-                            <a href="mailto:sales@dm-project.com.ua" className="block hover:none">sales@dm-project.com.ua</a>
-                            <a href="mailto:service@dm-project.com.ua" className="block hover:none">service@dm-project.com.ua</a>
+                        <div className={classNames("font-normal mt-2 ml-1")}>
+                            <a href="mailto:allinfo@dm-project.com.ua" className="block hover:none hover:text-green-600">allinfo@dm-project.com.ua</a>
+                            <a href="mailto:sales@dm-project.com.ua" className="block hover:none hover:text-green-600">sales@dm-project.com.ua</a>
+                            <a href="mailto:service@dm-project.com.ua" className="block hover:none hover:text-green-600">service@dm-project.com.ua</a>
                         </div>
                     </div>
                 </div>
