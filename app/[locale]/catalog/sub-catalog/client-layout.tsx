@@ -11,7 +11,6 @@ import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
 import { getCategoriesIds } from "@app/[locale]/components/constants";
 
 import styles from "./Sub-catalog.module.css";
-import Breadcrumbs from "@app/[locale]/components/molecules/breadcrumbs/Breadcrumbs";
 
 const flipTransition: Transition = {
   type: "spring",
