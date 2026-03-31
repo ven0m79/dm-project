@@ -3,7 +3,7 @@ import classNames from "classnames";
 import React, { Dispatch, FC, SetStateAction, useEffect, useMemo, useState } from "react";
 import styles from "./Header.module.css";
 import Image from "next/image";
-import { Link, usePathname } from "../../../../../i18n/navigation";
+import { Link } from "../../../../../i18n/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import clsx from "clsx";
 import Loader from "@app/[locale]/components/atoms/loader/loaderSearch";
@@ -14,8 +14,7 @@ import {
     ComboboxOptions,
 } from "@headlessui/react";
 import debounce from "lodash.debounce";
-import { useSearchParams } from "next/navigation";
-import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
+import { useLocaleSwitcherHrefs } from "@app/[locale]/components/hooks/useLocaleSwitcherHrefs";
 
 type TagType = {
     id: number;
@@ -34,17 +33,13 @@ type Product = {
 const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: Dispatch<SetStateAction<string>>, products: Product[] }> = ({ searchTerm, setSearchTerm, loading, products }) => {
     const t = useTranslations("Header");
 
-
-    // **Создаём локальное состояние для ввода и debounce**
     const [inputValue, setInputValue] = useState(searchTerm);
 
-    // **Debounce функция, обновляет setSearchTerm с задержкой**
     const debouncedSearch = useMemo(
         () => debounce((query) => setSearchTerm(query), 300),
         [setSearchTerm]
     );
 
-    // **Обновляем значение при вводе текста**
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
         debouncedSearch(event.target.value);
@@ -52,7 +47,7 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
 
     useEffect(() => {
         return () => {
-            debouncedSearch.cancel(); // Очищаем debounce при размонтировании
+            debouncedSearch.cancel();
         };
     }, [debouncedSearch]);
 
@@ -75,17 +70,8 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
         );
     };
 
-
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
-
-    const selectedCategory = useMemo(() => {
-        return searchParams?.get("category")
-            ? `?category=${searchParams?.get("category")}`
-            : "";
-    }, [searchParams]);
-
     const currentLocale = useLocale();
+    const { hrefs, isResolvingHref } = useLocaleSwitcherHrefs();
     const otherLocales = [
         { code: "ua", label: "UA" },
         { code: "en", label: "EN" },
@@ -95,9 +81,13 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
         <div className={classNames("w-screen", styles["lang"])}>
             <div className={styles.langText}>
                 {otherLocales.map(({ code, label }) => (
-                    <Link key={code} href={`${pathname}${selectedCategory}`}  locale={code}>
-                        {label}
-                    </Link>
+                    isResolvingHref ? (
+                        <span key={code}>{label}</span>
+                    ) : (
+                        <Link key={code} href={hrefs[code as "ua" | "en"]} locale={code}>
+                            {label}
+                        </Link>
+                    )
                 ))}
             </div>
         </div>
@@ -249,3 +239,4 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
 }
 
 export default DesktopHeader;
+

@@ -1,15 +1,10 @@
 import Link from "next/link";
 import classNames from "classnames";
 import styles from "./Product.module.css";
-
-interface Breadcrumb {
-  id: string | number;
-  name: string;
-  url: string;
-}
+import type { BreadcrumbItem } from "utils/woo.server";
 
 interface Props {
-  breadcrumbs: Breadcrumb[];
+  breadcrumbs: BreadcrumbItem[];
 }
 
 export default function DesktopBreadcrumbs({ breadcrumbs }: Props) {
