@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '../../i18n/routing';
 import { cn } from '@app/[locale]/components/molecules/lib/utils';
 import Script from 'next/script';
+import ClientScriptLoader from '@app/[locale]/components/atoms/scriptsBinotel/scriptsBinotel';
 //import { Link } from 'i18n/navigation';
 
 type Props = {
@@ -85,6 +86,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             {children}
           </NextIntlClientProvider>
         </main>
+        <ClientScriptLoader />
       </body>
     </html>
   );
