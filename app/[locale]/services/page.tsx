@@ -27,7 +27,7 @@ export async function generateMetadata(
 
 export default function Page() {
   return (
-    <MainLayout binotelWidget="services">
+    <MainLayout>
       <ServiceClient />
     </MainLayout>
   );
