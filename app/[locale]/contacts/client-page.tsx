@@ -311,7 +311,7 @@ useEffect(() => {
           <div
             role="status"
             aria-live="polite"
-            className="min-w-[220px] max-w-sm bg-white rounded-lg shadow-lg p-4 flex items-start gap-3 border border-gray-200"
+            className="min-w-55 max-w-sm bg-white rounded-lg shadow-lg p-4 flex items-start gap-3 border border-gray-200"
           >
             <div className="text-2xl">✅</div>
             <div className="flex-1">
