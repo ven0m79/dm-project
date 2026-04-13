@@ -212,7 +212,6 @@ export default function ClientPage({
                                   "object-contain transition-transform duration-300",
                                   isActive ? "scale-110" : "scale-100",
                                 )}
-                                unoptimized
                               />
                             </div>
                           </button>

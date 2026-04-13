@@ -1,6 +1,5 @@
 'use client'
-import React, { Suspense, useEffect } from "react";
-import { useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import styles from './Contacts.module.css';
 import classNames from "classnames";
 import { MainLayout } from "@app/[locale]/components/templates";
@@ -33,9 +32,23 @@ export const ClientPage = () => {
   const [isProductFromUrl, setIsProductFromUrl] = useState(false); // ✅ новий стейт
 
   const [isClient, setIsClient] = useState(false);
+  const [nameError, setNameError] = useState('');
+  const [mobileError, setMobileError] = useState('');
+  const [showThanks, setShowThanks] = useState(false);
+  const thanksTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     setIsClient(true);
+  }, []);
+
+  // cleanup timer on unmount
+  useEffect(() => {
+    return () => {
+      if (thanksTimeoutRef.current) {
+        clearTimeout(thanksTimeoutRef.current as unknown as number);
+        thanksTimeoutRef.current = null;
+      }
+    };
   }, []);
 
 useEffect(() => {
@@ -54,6 +67,28 @@ useEffect(() => {
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
+
+    // client-side validation for required fields
+    let hasError = false;
+    if (!name.trim()) {
+      setNameError("Будь ласка, вкажіть ім'я");
+      hasError = true;
+    } else {
+      setNameError('');
+    }
+
+    if (!mobile.trim()) {
+      setMobileError("Будь ласка, вкажіть телефон");
+      hasError = true;
+    } else {
+      setMobileError('');
+    }
+
+    if (hasError) {
+      setStatus("Будь ласка, заповніть обов'язкові поля");
+      return;
+    }
+
     const data = { name, city, medicalFacility, mobile, email, productName, message };
 
     fetch('/api/send', {
@@ -66,7 +101,7 @@ useEffect(() => {
       .then(async response => {
         if (response.ok) {
           setStatus('Ваше повідомлення надіслано. Дякуємо!');
-          // ⬇️ Вставка події у GTM
+          // push GTM event if available
           if (typeof window !== 'undefined' && window.dataLayer) {
             window.dataLayer.push({
               event: "form_submit",
@@ -74,11 +109,11 @@ useEffect(() => {
                 form_id: "contact_form",
                 form_name: "Контактна форма",
                 form_destination: window.location.hostname,
-                form_length: 7, // у мене: name, city, medicalFacility, mobile, email, productName, message
+                form_length: 7,
               },
             });
           }
-          // ⬇️ Очистити форму після успішної відправки
+          // Clear form and errors after successful submit
           setName('');
           setMobile('');
           setMedicalFacility('');
@@ -86,6 +121,17 @@ useEffect(() => {
           setCity('');
           setEmail('');
           setMessage('');
+          setNameError('');
+          setMobileError('');
+          // show floating thanks toast and auto-hide
+          setShowThanks(true);
+          if (thanksTimeoutRef.current) {
+            clearTimeout(thanksTimeoutRef.current as unknown as number);
+          }
+          thanksTimeoutRef.current = setTimeout(() => {
+            setShowThanks(false);
+            thanksTimeoutRef.current = null;
+          }, 4000);
         } else {
           await response.json();
           setStatus('Помилка при надсиланні. Спробуйте пізніше.');
@@ -165,8 +211,18 @@ useEffect(() => {
                   type="text"
                   aria-label={t('contact-form-name')}
                   value={name}
-                  onChange={e => setName(e.target.value)}
+                  onChange={e => {
+                    setName(e.target.value);
+                    if (nameError && e.target.value.trim()) setNameError('');
+                  }}
+                  onBlur={() => {
+                    if (!name.trim()) setNameError("Будь ласка, вкажіть ім'я");
+                    else setNameError('');
+                  }}
+                  required
+                  aria-required="true"
                 /><br />
+                {nameError && <p className="text-red-600 text-sm mt-1">{nameError}</p>}
                 <input
                   className={classNames("h-10", styles.form)}
                   placeholder={t('contact-form-city')}
@@ -192,8 +248,18 @@ useEffect(() => {
                   type="tel"
                   aria-label={t('contact-form-mobile')}
                   value={mobile}
-                  onChange={e => setMobile(e.target.value)}
+                  onChange={e => {
+                    setMobile(e.target.value);
+                    if (mobileError && e.target.value.trim()) setMobileError('');
+                  }}
+                  onBlur={() => {
+                    if (!mobile.trim()) setMobileError("Будь ласка, вкажіть телефон");
+                    else setMobileError('');
+                  }}
+                  required
+                  aria-required="true"
                 /><br />
+                {mobileError && <p className="text-red-600 text-sm mt-1">{mobileError}</p>}
                 <input
                   className={classNames("h-10", styles.form)}
                   placeholder={t('contact-form-email')}
@@ -222,7 +288,16 @@ useEffect(() => {
                   value={message}
                   onChange={e => setMessage(e.target.value)}
                 /><br />
-                <button className={styles.yerSubmit} type="submit">{t('contact-form-submit')}</button>
+                <span className="flex pl-8 text-left">{`* - Обов'язкові поля`}</span>
+                <button
+                  className={classNames(styles.yerSubmit, { 'opacity-60 cursor-not-allowed': !name.trim() || !mobile.trim() })}
+                  type="submit"
+                  disabled={!name.trim() || !mobile.trim()}
+                >
+                  {t('contact-form-submit')}
+                  
+              
+                </button>
                 {status && <p className="mt-2 text-sm text-green-600">{status}</p>}
               </form>
             )}
@@ -230,6 +305,35 @@ useEffect(() => {
         </div>
 
       </div>
+
+      {showThanks && (
+        <div className="fixed bottom-6 right-6 z-50">
+          <div
+            role="status"
+            aria-live="polite"
+            className="min-w-55 max-w-sm bg-white rounded-lg shadow-lg p-4 flex items-start gap-3 border border-gray-200"
+          >
+            <div className="text-2xl">✅</div>
+            <div className="flex-1">
+              <div className="font-medium text-gray-900">Дякуємо!</div>
+              <div className="text-sm text-gray-600">{status}</div>
+            </div>
+            <button
+              onClick={() => {
+                setShowThanks(false);
+                if (thanksTimeoutRef.current) {
+                  clearTimeout(thanksTimeoutRef.current as unknown as number);
+                  thanksTimeoutRef.current = null;
+                }
+              }}
+              aria-label="Close"
+              className="ml-2 text-gray-500 hover:text-gray-700"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
     </MainLayout >
 
   );
