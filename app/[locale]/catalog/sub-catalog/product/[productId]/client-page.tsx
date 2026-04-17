@@ -277,7 +277,7 @@ export default function ClientPage({
                         "text-normal sm:mt-12 mt-6 justify-center",
                       )}
                     >
-                          <ProductDetails details={details} />
+                      <ProductDetails details={details} />
                     </div>
                   </>
                 ) : (
@@ -395,9 +395,19 @@ export default function ClientPage({
                   <Tabs.Item title="Завантаження" icon={HiAdjustments}>
                     <div className={classNames("", styles.downloadabled)}>
                       {details.downloads.map((el) => (
-                        <li key={el.id} className="mx-1">
-                          <Link href={el.file}>{el.name}</Link>
-                        </li>
+                        <span key={el.id} className="ml-10">
+                          <Link href={el.file} target="_blank" rel="noopener noreferrer">
+                          <div className="flex flex-row gap-2 items-center">
+                            <Image
+                              src={"/pdf-download.png"}
+                              alt={"Завантажити"}
+                              width={30}
+                              height={30}
+                            />
+                            {el.name}
+                            </div>
+                          </Link>
+                        </span>
                       ))}
                     </div>
                   </Tabs.Item>
