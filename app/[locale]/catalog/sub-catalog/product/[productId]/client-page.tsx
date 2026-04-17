@@ -395,7 +395,7 @@ export default function ClientPage({
                   <Tabs.Item title="Завантаження" icon={HiAdjustments}>
                     <div className={classNames("", styles.downloadabled)}>
                       {details.downloads.map((el) => (
-                        <span key={el.id} className="ml-10">
+                        <span key={el.id} className="ml-16">
                           <Link href={el.file} target="_blank" rel="noopener noreferrer">
                           <div className="flex flex-row gap-2 items-center">
                             <Image
