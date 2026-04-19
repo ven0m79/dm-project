@@ -4,10 +4,10 @@ import classNames from "classnames";
 import { CustomFlowbiteTheme, Sidebar as FBSidebar } from "flowbite-react";
 import React, { FC, memo, useCallback, useMemo } from "react";
 import styles from "../../../catalog/sub-catalog/Sub-catalog.module.css";
-import { TransformedCategoriesType } from "@app/[locale]/catalog/sub-catalog/helpers";
+import { TransformedCategoriesType } from "../../../catalog/sub-catalog/helpers";
 import { usePathname, useRouter } from "../../../../../i18n/navigation";
-import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
-import { RIGHT_BAR_PARENT_ID, RIGHT_BAR_PARENT_ID_EN } from "@app/[locale]/components/constants";
+import { useSidebar } from "../../contexts/products-sidebar/products-sidebar.context";
+import { RIGHT_BAR_PARENT_ID, RIGHT_BAR_PARENT_ID_EN } from "../../constants";
 
 const customTheme: CustomFlowbiteTheme = {
   sidebar: {

@@ -1,16 +1,16 @@
 "use client";
 
 import classNames from "classnames";
-import { MainLayout } from "@app/[locale]/components/templates";
+import { MainLayout } from "../components/templates";
 import { Link } from "../../../i18n/navigation";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import styles from "./Home.module.css";
 import { useIsMobile } from "../components/hooks/useIsMobile";
-import CaruselBrands from "@app/[locale]/components/atoms/carusel-brands/carusel-brands";
-import Slider from "@app/[locale]/components/molecules/slider/slider";
-import SliderMobile from "@app/[locale]/components/molecules/slider/sliderMobile";
-import MapOfUkraine from "@app/[locale]/components/molecules/map/Map";
+import CaruselBrands from "../components/atoms/carusel-brands/carusel-brands";
+import Slider from "../components/molecules/slider/slider";
+import SliderMobile from "../components/molecules/slider/sliderMobile";
+import MapOfUkraine from "../components/molecules/map/Map";
 
 export const ClientPage = ({
   params: { locale },

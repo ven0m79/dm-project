@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Link } from "../../../../../i18n/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import clsx from "clsx";
-import Loader from "@app/[locale]/components/atoms/loader/loaderSearch";
+import Loader from "../../atoms/loader/loaderSearch";
 import {
     Combobox,
     ComboboxInput,
@@ -14,7 +14,7 @@ import {
     ComboboxOptions,
 } from "@headlessui/react";
 import debounce from "lodash.debounce";
-import { useLocaleSwitcherHrefs } from "@app/[locale]/components/hooks/useLocaleSwitcherHrefs";
+import { useLocaleSwitcherHrefs } from "../../hooks/useLocaleSwitcherHrefs";
 
 type TagType = {
     id: number;

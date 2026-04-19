@@ -6,7 +6,7 @@ import styles from './Project.module.css';
 import classNames from "classnames";
 import imgProj from '../../../public/projectings.webp';
 import imgProj1 from '../../../public/projectings1.webp';
-import { MainLayout } from "@app/[locale]/components/templates";
+import { MainLayout } from "../components/templates";
 import { useTranslations } from 'next-intl';
 import { useIsMobile } from "../components/hooks/useIsMobile";
 import Image from "next/image";
@@ -80,7 +80,7 @@ export const ClientPage = () => {
           {t('title')}
         </div>
         <div className={styles.stroke}></div>
-        <div className="w-full max-w-[1400px] flex md:flex-row flex-col">
+        <div className="w-full max-w-350 flex md:flex-row flex-col">
           <div className={classNames("flex flex-1 flex-row justify-normal items-start")}>
             <div className={classNames("flex flex-col justify-center items-start", styles.leftContainer)}>
 

@@ -5,8 +5,8 @@ import styles from "../Partners.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { isIOS } from "utils/constants";
-import CaruselBrands from "@app/[locale]/components/atoms/carusel-brands/carusel-brands";
+import { isIOS } from "../../../../utils/constants";
+import CaruselBrands from "../../components/atoms/carusel-brands/carusel-brands";
 import { useIsMobile } from "../../components/hooks/useIsMobile";
 import { WoocomerceCategoryType } from "../../../../utils/woocomerce.types";
 

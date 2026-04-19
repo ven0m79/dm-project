@@ -5,9 +5,9 @@ import { getMessages, setRequestLocale } from 'next-intl/server';
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '../../i18n/routing';
-import { cn } from '@app/[locale]/components/molecules/lib/utils';
+import { cn } from './components/molecules/lib/utils';
 import Script from 'next/script';
-import ClientScriptLoader from '@app/[locale]/components/atoms/scriptsBinotel/scriptsBinotel';
+import ClientScriptLoader from './components/atoms/scriptsBinotel/scriptsBinotel';
 //import { Link } from 'i18n/navigation';
 
 type Props = {

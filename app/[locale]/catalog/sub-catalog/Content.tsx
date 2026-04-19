@@ -4,9 +4,9 @@
 import React, { FC, ReactNode, useEffect, useState } from "react";
 import classNames from "classnames";
 import { motion } from "framer-motion";
-import LSidebar from "@app/[locale]/components/molecules/leftSidebar/leftSidebar";
-import RSidebar from "@app/[locale]/components/molecules/rightSidebar/rightSidebar";
-import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
+import LSidebar from "../../components/molecules/leftSidebar/leftSidebar";
+import RSidebar from "../../components/molecules/rightSidebar/rightSidebar";
+import { useIsMobile } from "../../components/hooks/useIsMobile";
 import styles from "./Sub-catalog.module.css";
 
 const Content: FC<{ children: ReactNode; locale: string }> = ({ children, locale }) => {

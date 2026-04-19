@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import { MainLayout } from "@app/[locale]/components/templates";
-import { SidebarProvider } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
+import { MainLayout } from "../../components/templates";
+import { SidebarProvider } from "../../components/contexts/products-sidebar/products-sidebar.context";
 import ClientLayout from "./client-layout";
 import { fetchWooCommerceCategories } from "../../../../utils/woocommerce.setup";
 import { categoriesCreation, TransformedCategoriesType } from "./helpers";
