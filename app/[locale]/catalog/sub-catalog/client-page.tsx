@@ -93,7 +93,10 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
               ? `mx-1 sm:mx-2 ${styles.headSubCatalogBlockMini}`
               : `mx-1 sm:mx-6 ${styles.headSubCatalogBlock}`;
 
-            const url = `/catalog/sub-catalog/product/${el.translations[locale as any]}?category=${encodeURIComponent(selectedCategory || "")}`;
+            const prefix = locale === "en" ? "/en" : "";
+            const url = `${prefix}/catalog/sub-catalog/product/${el.translations[locale as any]}?category=${encodeURIComponent(
+              selectedCategory || "",
+            )}`;
 
             return (
               <div
