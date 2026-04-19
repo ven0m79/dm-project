@@ -75,15 +75,34 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
     return map;
   }, [categories]);
 
+  const categoriesNameMap = useMemo(() => {
+    const map = new Map<number, string>();
+    const traverse = (cats: TransformedCategoriesType[]) => {
+      cats.forEach((cat) => {
+        map.set(cat.id, cat.name || "");
+        if (cat.childrens?.length) traverse(cat.childrens);
+      });
+    };
+    if (categories?.length) traverse(categories);
+    return map;
+  }, [categories]);
+
   const categoryDescription = useMemo(() => {
     if (!categoryId) return "";
     return categoriesDescriptionMap.get(categoryId) || "";
   }, [categoryId, categoriesDescriptionMap]);
 
+  const selectedCategoryName = useMemo(() => {
+    if (!categoryId) return selectedCategory ?? "";
+    return categoriesNameMap.get(categoryId) || selectedCategory 
+  }, [categoryId, categoriesNameMap, selectedCategory]);
+
   return (
 
     <>
+    <h1 className="flex flex-wrap justify-center self-start mt-4 mb-4 ml-2 text-[#002766]">{selectedCategoryName}</h1>
       <div className="flex flex-wrap justify-start self-start mt-4 mb-4 ml-2 items-start">
+        
         {productsToRender?.length ? (
           productsToRender.map((el) => {
             const isAccessories = el.tags?.some(
