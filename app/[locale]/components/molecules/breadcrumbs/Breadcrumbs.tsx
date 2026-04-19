@@ -1,6 +1,6 @@
-import { buildBreadcrumbTrail } from "utils/woo.server";
-import DesktopBreadcrumbs from "@app/[locale]/catalog/sub-catalog/product/[productId]/DesktopBreadcrumbs";
-import MobileBreadcrumbs from "@app/[locale]/catalog/sub-catalog/product/[productId]/MobileBreadcrumbs";
+import { buildBreadcrumbTrail } from "../../../../../utils/woo.server";
+import DesktopBreadcrumbs from "../../../catalog/sub-catalog/product/[productId]/DesktopBreadcrumbs";
+import MobileBreadcrumbs from "../../../catalog/sub-catalog/product/[productId]/MobileBreadcrumbs";
 
 interface Props {
   categorySlug: string;

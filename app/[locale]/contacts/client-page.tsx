@@ -2,7 +2,7 @@
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import styles from './Contacts.module.css';
 import classNames from "classnames";
-import { MainLayout } from "@app/[locale]/components/templates";
+import { MainLayout } from "../components/templates";
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import mail from "./contacts-photo/emailContacts.png";

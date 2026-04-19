@@ -5,10 +5,10 @@ import classNames from "classnames";
 import { motion, Transition } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 
-import LSidebar from "@app/[locale]/components/molecules/leftSidebar/leftSidebar";
-import RSidebar from "@app/[locale]/components/molecules/rightSidebar/rightSidebar";
-import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
-import { getCategoriesIds } from "@app/[locale]/components/constants";
+import LSidebar from "../../components/molecules/leftSidebar/leftSidebar";
+import RSidebar from "../../components/molecules/rightSidebar/rightSidebar";
+import { useIsMobile } from "../../components/hooks/useIsMobile";
+import { getCategoriesIds } from "../../components/constants";
 
 import styles from "./Sub-catalog.module.css";
 

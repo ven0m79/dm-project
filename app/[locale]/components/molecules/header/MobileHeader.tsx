@@ -6,7 +6,7 @@ import Image from "next/image";
 //import { Link, usePathname } from "../../../../../i18n/navigation";
 import { useTranslations } from "next-intl";
 import clsx from "clsx";
-import Loader from "@app/[locale]/components/atoms/loader/loaderSearch";
+import Loader from "../../atoms/loader/loaderSearch";
 import {
   Combobox,
   ComboboxInput,

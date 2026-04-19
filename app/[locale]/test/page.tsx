@@ -1,5 +1,5 @@
 import { SimpleCard_V1 } from "../services/TestText";
-import { MainLayout } from "@app/[locale]/components/templates";
+import { MainLayout } from "../components/templates";
 
 export default function Page() {
   return (

@@ -10,8 +10,8 @@ import { Tabs, CustomFlowbiteTheme } from "flowbite-react";
 import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import { useTranslations } from "next-intl";
-import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
-import Loader from "@app/[locale]/components/atoms/loader/Loader";
+import { useIsMobile } from "../../../../components/hooks/useIsMobile";
+import Loader from "../../../../components/atoms/loader/Loader";
 import styles from "./Product.module.css";
 import ProductDetails from "./selectedPrice";
 

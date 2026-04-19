@@ -5,7 +5,7 @@ import styles from "./Header.module.css";
 import { useLocale } from "next-intl";
 
 import debounce from "lodash.debounce";
-import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
+import { useIsMobile } from "../../hooks/useIsMobile";
 import MobileHeader from "./MobileHeader";
 import DesktopHeader from "./DesktopHeader";
 

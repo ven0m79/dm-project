@@ -1,7 +1,7 @@
 import Link from "next/link";
 import classNames from "classnames";
 import styles from "./Product.module.css";
-import type { BreadcrumbItem } from "utils/woo.server";
+import type { BreadcrumbItem } from "../../../../../../utils/woo.server";
 
 interface Props {
   breadcrumbs: BreadcrumbItem[];

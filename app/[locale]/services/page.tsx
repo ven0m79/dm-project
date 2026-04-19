@@ -1,6 +1,6 @@
 // app/[locale]/services/page.tsx
 import type { Metadata } from "next";
-import { MainLayout } from "@app/[locale]/components/templates";
+import { MainLayout } from "../components/templates";
 import ServiceClient from "./ServiceClient";
 
 type PageProps = {

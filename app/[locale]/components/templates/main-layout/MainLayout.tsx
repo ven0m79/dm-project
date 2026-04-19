@@ -1,6 +1,6 @@
 import React, { FC, ReactNode, Suspense } from "react";
-import { Nav, Footer } from "@app/[locale]/components/molecules";
-import HeaderWrapper from "@app/[locale]/components/molecules/header/HeaderWrapper";
+import { Nav, Footer } from "../../molecules";
+import HeaderWrapper from "../../molecules/header/HeaderWrapper";
 import "../../../globals.css";
 import styles from "./MainLayout.module.css";
 

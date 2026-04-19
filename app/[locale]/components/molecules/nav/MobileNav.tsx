@@ -6,7 +6,7 @@ import styles from "./Nav.module.css";
 import { Link, usePathname } from "../../../../../i18n/navigation";
 
 import { motion } from "framer-motion";
-import { useLocaleSwitcherHrefs } from "@app/[locale]/components/hooks/useLocaleSwitcherHrefs";
+import { useLocaleSwitcherHrefs } from "../../hooks/useLocaleSwitcherHrefs";
 
 const NavLinks: {
     [key: string]: {

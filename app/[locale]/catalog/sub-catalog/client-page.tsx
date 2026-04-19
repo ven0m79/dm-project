@@ -3,9 +3,9 @@
 import React, { FC, useMemo, useState, useEffect } from "react";
 import classNames from "classnames";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useSidebar } from "@app/[locale]/components/contexts/products-sidebar/products-sidebar.context";
+import { useSidebar } from "../../components/contexts/products-sidebar/products-sidebar.context";
 import styles from "./Sub-catalog.module.css";
-import { getCategoriesIds } from "@app/[locale]/components/constants";
+import { getCategoriesIds } from "../../components/constants";
 import Image from "next/image";
 import { TransformedCategoriesType } from "./helpers";
 import { isIOS } from "../../../../utils/constants";

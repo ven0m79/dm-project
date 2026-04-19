@@ -6,7 +6,7 @@ import styles from './Project.module.css';
 import classNames from "classnames";
 import imgProj from '../../../public/projectings.webp';
 import imgProj1 from '../../../public/projectings1.webp';
-import { MainLayout } from "@app/[locale]/components/templates";
+import { MainLayout } from "../components/templates";
 import { useTranslations } from 'next-intl';
 import { useIsMobile } from "../components/hooks/useIsMobile";
 import Image from "next/image";
