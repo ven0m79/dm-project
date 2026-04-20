@@ -1,6 +1,23 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
+// Helper to determine how many cards fit in the container
+function useVisibleRelatedCount(containerRef, minCardWidth = 140, gap = 16) {
+  const [visibleCount, setVisibleCount] = useState(Infinity);
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const handleResize = () => {
+      const width = containerRef.current.offsetWidth;
+      if (!width) return setVisibleCount(Infinity);
+      const count = Math.floor((width + gap) / (minCardWidth + gap));
+      setVisibleCount(count > 0 ? count : 1);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [containerRef, minCardWidth, gap]);
+  return visibleCount;
+}
 import { SingleProductDetails } from "../../../../../../utils/woocomerce.types";
 import Link from "next/link";
 import Image from "next/image";
@@ -78,6 +95,7 @@ export default function ClientPage({
   const carouselRef = useRef<HTMLDivElement | null>(null);
   const thumbnailRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const scrollContainer = useRef<HTMLDivElement | null>(null);
+  const visibleRelatedCount = useVisibleRelatedCount(scrollContainer, 140, 16);
 
   // Scroll active thumbnail into view
   useEffect(() => {
@@ -442,20 +460,20 @@ export default function ClientPage({
             </div>
 
             {/* Схожі товари після Tabs */}
-            <div className="mt-6 w-full">
+            <div className="mt-6">
               <h3 className="text-lg font-semibold text-[#0061AA] mb-4">
                 Схожі товари
               </h3>
 
               {relatedProducts && relatedProducts.length > 0 ? (
-                <div className="relative w-full h-auto max-w-225 mx-auto py-1 ">
+                <div className="relative w-full py-1">
                   {/* Контейнер для скролу */}
                   <div
                     id="related-scroll"
                     className="flex gap-4 overflow-x-auto scroll-smooth no-scrollbar px-5 py-1"
                     ref={scrollContainer}
                   >
-                    {relatedProducts.map((el) => {
+                    {relatedProducts.slice(0, visibleRelatedCount).map((el) => {
                       const category = el.tags?.[0]?.name || "default-category";
                       const imageSrc =
                         el.images?.[0]?.src || "/placeholder.png";
@@ -464,7 +482,8 @@ export default function ClientPage({
                         <Link
                           key={el.id}
                           href={`/catalog/sub-catalog/product/${el.id}?category=${category}`}
-                          className="w-35 shrink-0 shadow-md rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-200 flex flex-col bg-white"
+                          className="shrink-0 shadow-md rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-200 flex flex-col bg-white"
+                          style={{ minWidth: 140, maxWidth: 180, flex: '1 1 160px' }}
                         >
                           <div className="w-full h-50 flex items-center justify-center overflow-hidden px-1">
                             <Image
