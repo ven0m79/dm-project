@@ -36,15 +36,31 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
     setOpenedCategoryIds([categoryId]);
   }, [categoryId, locale, setOpenedCategoryIds, setSelectedCategoryId]);
 
-  // No sorting, just paginate selectedProducts as-is
+  // ✅ Memoize sorting
+  const normalizeOrder = (order?: number) =>
+    !order || order === 0 ? Number.MAX_SAFE_INTEGER : order;
+
+  const sortedProducts = useMemo(() => {
+    return [...selectedProducts].sort((a, b) => {
+      const aIsAccessories = a.tags?.some((t) => t.name === "accessories");
+      const bIsAccessories = b.tags?.some((t) => t.name === "accessories");
+
+      if (aIsAccessories && bIsAccessories) {
+        return normalizeOrder(a.menu_order) - normalizeOrder(b.menu_order);
+      }
+
+      if (aIsAccessories || bIsAccessories) {
+        return 0;
+      }
+
+      return a.name.localeCompare(b.name);
+    });
+  }, [selectedProducts]);
+
   const [visibleCount, setVisibleCount] = useState(15);
   const productsToRender = useMemo(
-    () =>
-      selectedProducts
-        .slice()
-        .sort((a, b) => (a.menu_order ?? 0) - (b.menu_order ?? 0))
-        .slice(0, visibleCount),
-    [selectedProducts, visibleCount],
+    () => sortedProducts.slice(0, visibleCount),
+    [sortedProducts, visibleCount],
   );
 
   const categoriesDescriptionMap = useMemo(() => {
@@ -162,7 +178,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
       </div>
 
       {/* Load more */}
-      {selectedProducts.length > visibleCount && (
+      {sortedProducts.length > visibleCount && (
         <div className="flex flex-1 w-full self-center items-center justify-center">
           <button
             className={classNames("justify-center", styles.downloadable)}
