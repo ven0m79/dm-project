@@ -39,7 +39,11 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   // No sorting, just paginate selectedProducts as-is
   const [visibleCount, setVisibleCount] = useState(15);
   const productsToRender = useMemo(
-    () => selectedProducts.slice(0, visibleCount),
+    () =>
+      selectedProducts
+        .slice()
+        .sort((a, b) => (a.menu_order ?? 0) - (b.menu_order ?? 0))
+        .slice(0, visibleCount),
     [selectedProducts, visibleCount],
   );
 
