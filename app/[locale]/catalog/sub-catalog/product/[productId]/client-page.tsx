@@ -11,7 +11,7 @@ import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import { useTranslations } from "next-intl";
 import { useIsMobile } from "../../../../components/hooks/useIsMobile";
-import Loader from "../../../../components/atoms/loader/Loader";
+import Skeleton from "../../../../components/atoms/loader/Skeleton";
 import styles from "./Product.module.css";
 import ProductDetails from "./selectedPrice";
 
@@ -94,7 +94,13 @@ export default function ClientPage({
   if (!details) {
     return (
       <div className="flex w-full h-4/5 justify-center items-center">
-        <Loader />
+        <div className="w-full max-w-225 p-8">
+          <Skeleton height={350} className="mb-6 w-full" />
+          <Skeleton height={32} width={200} className="mb-4" />
+          <Skeleton height={24} width={120} className="mb-2" />
+          <Skeleton height={24} width={180} className="mb-2" />
+          <Skeleton height={48} width={"100%"} className="mb-4" />
+        </div>
       </div>
     );
   }

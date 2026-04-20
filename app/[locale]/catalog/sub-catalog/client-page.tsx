@@ -1,5 +1,6 @@
-// app/[locale]/catalog/sub-catalog/client-page.tsx
+
 "use client";
+import Skeleton from "../../components/atoms/loader/Skeleton";
 import React, { FC, useMemo, useState, useEffect } from "react";
 import classNames from "classnames";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -97,84 +98,93 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
     return categoriesNameMap.get(categoryId) || selectedCategory 
   }, [categoryId, categoriesNameMap, selectedCategory]);
 
+  // Show skeletons while loading products
+  if (!selectedProducts || selectedProducts.length === 0) {
+    return (
+      <div className="flex flex-wrap justify-start self-start mt-4 mb-4 ml-2 items-start w-full">
+        {Array.from({ length: 8 }).map((_, idx) => (
+          <div
+            key={idx}
+            className={classNames(
+              "mb-5 flex flex-col justify-center items-center",
+              styles.headSubCatalogBlock
+            )}
+            style={{ minWidth: 220, maxWidth: 260 }}
+          >
+            <Skeleton height={32} width={120} className="mb-2 mt-4" />
+            <Skeleton height={200} width={200} className="mb-2" />
+            <Skeleton height={24} width={180} className="mb-2" />
+            <Skeleton height={24} width={120} className="mb-2" />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
-
     <>
-    <h1 className="flex flex-wrap justify-center self-start mt-4 mb-4 ml-2 text-[#002766]">{selectedCategoryName}</h1>
+      <h1 className="flex flex-wrap justify-center self-start mt-4 mb-4 ml-2 text-[#002766]">{selectedCategoryName}</h1>
       <div className="flex flex-wrap justify-start self-start mt-4 mb-4 ml-2 items-start">
-        
-        {productsToRender?.length ? (
-          productsToRender.map((el) => {
-            const isAccessories = el.tags?.some(
-              (t) => t.name === "accessories",
-            );
-            const cardClass = isAccessories
-              ? `mx-1 sm:mx-2 ${styles.headSubCatalogBlockMini}`
-              : `mx-1 sm:mx-6 ${styles.headSubCatalogBlock}`;
+        {productsToRender.map((el) => {
+          const isAccessories = el.tags?.some((t) => t.name === "accessories");
+          const cardClass = isAccessories
+            ? `mx-1 sm:mx-2 ${styles.headSubCatalogBlockMini}`
+            : `mx-1 sm:mx-6 ${styles.headSubCatalogBlock}`;
 
-            const prefix = locale === "en" ? "/en" : "";
-            const url = `${prefix}/catalog/sub-catalog/product/${el.translations[locale as any]}?category=${encodeURIComponent(
-              selectedCategory || "",
-            )}`;
+          const prefix = locale === "en" ? "/en" : "";
+          const url = `${prefix}/catalog/sub-catalog/product/${el.translations[locale as any]}?category=${encodeURIComponent(
+            selectedCategory || "",
+          )}`;
 
-            return (
-              <div
-                key={el.id}
-                className={classNames(
-                  "mb-5 flex flex-col justify-center items-center",
-                  cardClass,
-                )}
-              >
-                <div className="w-full text-center">
-                  <div
-                    className="cursor-pointer"
-                    onClick={() => {
-                      if (isIOS) router.push(url);
-                      else window.location.href = url;
-                    }}
-                   >
-                    <div className="w-full px-2">
-                      {el.sku.length > 7 ? `${el.sku.slice(0, 7)}..` : el.sku}
-                    </div>
-                    <div className="cursor-pointer flex justify-center">
-                      <Image
-                        src={el.images[0].src}
-                        alt={el.images[0].alt}
-                        width={200}
-                        height={250}
-                        fetchPriority="high"
-                        className="w-full h-auto object-contain"
-                        sizes="(max-width: 768px) 200px, (max-width: 1200px) 400px, 800px" // ✅ адаптивність
-                        priority // тільки перше зображення для LCP
-                      />
-                    </div>
-                    <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center" />
-                    <div className="p-1 grow flex items-center justify-center">
-                      <p className="text-center text-sm font-normal text-[#0061AA] line-clamp-2 hover:text-[#004a80] transition-colors h-10">
-                        {el.name}
-                      </p>
-                    </div>
-                    <div className="flex justify-center">
-                      {el.price && (
-                        <span className="font-bold text-[#002766] text-sm text-center">
-
-                          {el.sku && /\s|,|;/.test(el.sku)
-                            ? "Від "
-                            : " "}
-                          {" "}
-                          {String(el.price).replace(".", ",")} грн
-                        </span>
-                      )}
-
-                    </div>
+          return (
+            <div
+              key={el.id}
+              className={classNames(
+                "mb-5 flex flex-col justify-center items-center",
+                cardClass,
+              )}
+            >
+              <div className="w-full text-center">
+                <div
+                  className="cursor-pointer"
+                  onClick={() => {
+                    if (isIOS) router.push(url);
+                    else window.location.href = url;
+                  }}
+                >
+                  <div className="w-full px-2">
+                    {el.sku.length > 7 ? `${el.sku.slice(0, 7)}..` : el.sku}
+                  </div>
+                  <div className="cursor-pointer flex justify-center">
+                    <Image
+                      src={el.images[0].src}
+                      alt={el.images[0].alt}
+                      width={200}
+                      height={250}
+                      fetchPriority="high"
+                      className="w-full h-auto object-contain"
+                      sizes="(max-width: 768px) 200px, (max-width: 1200px) 400px, 800px"
+                      priority
+                    />
+                  </div>
+                  <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center" />
+                  <div className="p-1 grow flex items-center justify-center">
+                    <p className="text-center text-sm font-normal text-[#0061AA] line-clamp-2 hover:text-[#004a80] transition-colors h-10">
+                      {el.name}
+                    </p>
+                  </div>
+                  <div className="flex justify-center">
+                    {el.price && (
+                      <span className="font-bold text-[#002766] text-sm text-center">
+                        {el.sku && /\s|,|;/.test(el.sku) ? "Від " : " "} {String(el.price).replace(".", ",")} грн
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
-            );
-          })
-        ) : (
-          <h2 className="text-amber-700" />
-        )}
+            </div>
+          );
+        })}
       </div>
 
       {/* Load more */}
