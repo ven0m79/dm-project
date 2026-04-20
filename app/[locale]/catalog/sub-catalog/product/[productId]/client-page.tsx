@@ -10,8 +10,8 @@ import { Tabs, CustomFlowbiteTheme } from "flowbite-react";
 import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import { useTranslations } from "next-intl";
-import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
-import Loader from "@app/[locale]/components/atoms/loader/Loader";
+import { useIsMobile } from "../../../../components/hooks/useIsMobile";
+import Loader from "../../../../components/atoms/loader/Loader";
 import styles from "./Product.module.css";
 import ProductDetails from "./selectedPrice";
 
@@ -380,7 +380,7 @@ export default function ClientPage({
                       {crossSellProducts.map((el) => (
                         <li key={el.id} className="mx-1">
                           <a
-                            className="text text-blue-900"
+                            className="text text-[#0061AA]"
                             href={`/catalog/sub-catalog/product/${el.id}?category=${el.tags[0].name}`}
                           >
                             {el.name}
@@ -397,14 +397,14 @@ export default function ClientPage({
                       {details.downloads.map((el) => (
                         <span key={el.id} className="ml-16">
                           <Link href={el.file} target="_blank" rel="noopener noreferrer">
-                          <div className="flex flex-row gap-2 items-center">
-                            <Image
-                              src={"/pdf-download.png"}
-                              alt={"Завантажити"}
-                              width={30}
-                              height={30}
-                            />
-                            {el.name}
+                            <div className="flex flex-row gap-2 items-center">
+                              <Image
+                                src={"/pdf-download.png"}
+                                alt={"Завантажити"}
+                                width={30}
+                                height={30}
+                              />
+                              {el.name}
                             </div>
                           </Link>
                         </span>
@@ -415,13 +415,21 @@ export default function ClientPage({
 
                 {youtubeUrl && (
                   <Tabs.Item title="Відео" icon={HiClipboardList}>
-                    <button
-                      onClick={() => window.open(youtubeUrl, "_blank")}
-                      className="text-blue-600 underline"
-                      rel="noopener noreferrer"
-                    >
-                      Переглянути відео на YouTube
-                    </button>
+                    <div className="flex flex-row gap-2 items-center">
+                      <Image
+                        src={"/youtube-play.png"}
+                        alt={"Завантажити"}
+                        width={30}
+                        height={30}
+                      />
+                      <button
+                        onClick={() => window.open(youtubeUrl, "_blank")}
+                        className="text-blue-600 underline cursor-pointer"
+                        rel="noopener noreferrer"
+                      >
+                        Переглянути відео на YouTube
+                      </button>
+                    </div>
                   </Tabs.Item>
                 )}
               </Tabs>

@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 //import Snowfall from "react-snowfall"
-import { useIsMobile } from "@app/[locale]/components/hooks/useIsMobile";
+import { useIsMobile } from "../components/hooks/useIsMobile";
 import { cards, items, items1, items2, items3, items4, items5, items6, tableData, pics } from "./data";
 
 declare global {

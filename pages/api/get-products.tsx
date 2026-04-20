@@ -1,4 +1,4 @@
-import { WoocomerceCategoryType } from "utils/woocomerce.types";
+import { WoocomerceCategoryType } from "../../utils/woocomerce.types";
 import WooCommerceRestApi from "@woocommerce/woocommerce-rest-api";
 
 const api = new WooCommerceRestApi({

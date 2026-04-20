@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import { Link } from "../../../../../i18n/navigation";
 import Image from "next/image";
 
-//import { useNavigateTo } from "@app/[locale]/components/hooks/useNavigateTo";
+//import { useNavigateTo } from "../../hooks/useNavigateTo";
 import styles from "./Footer.module.css";
 
 const DesktopFooter: FC<{ t: any }> = ({ t }) => {

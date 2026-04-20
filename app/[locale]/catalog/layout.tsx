@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { MainLayout } from "@app/[locale]/components/templates";
+import { MainLayout } from "../components/templates";
 
 type Props = {
   children: ReactNode;

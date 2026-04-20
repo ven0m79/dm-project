@@ -13,13 +13,13 @@ import React, {
 import {
   categoriesCreation,
   TransformedCategoriesType,
-} from "@app/[locale]/catalog/sub-catalog/helpers";
+} from "../../../catalog/sub-catalog/helpers";
 import {
   SingleProductDetails,
   WoocomerceCategoryType,
 } from "../../../../../utils/woocomerce.types";
 import { useSearchParams } from "next/navigation";
-import { getCategoriesIds } from "@app/[locale]/components/constants";
+import { getCategoriesIds } from "../../constants";
 
 export type SidebarContextProps = {
   selectedCategory?: string | null;
