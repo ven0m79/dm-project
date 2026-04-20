@@ -1,23 +1,6 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
-// Helper to determine how many cards fit in the container
-function useVisibleRelatedCount(containerRef, minCardWidth = 140, gap = 16) {
-  const [visibleCount, setVisibleCount] = useState(Infinity);
-  useEffect(() => {
-    if (!containerRef.current) return;
-    const handleResize = () => {
-      const width = containerRef.current.offsetWidth;
-      if (!width) return setVisibleCount(Infinity);
-      const count = Math.floor((width + gap) / (minCardWidth + gap));
-      setVisibleCount(count > 0 ? count : 1);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [containerRef, minCardWidth, gap]);
-  return visibleCount;
-}
 import { SingleProductDetails } from "../../../../../../utils/woocomerce.types";
 import Link from "next/link";
 import Image from "next/image";
@@ -95,7 +78,6 @@ export default function ClientPage({
   const carouselRef = useRef<HTMLDivElement | null>(null);
   const thumbnailRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const scrollContainer = useRef<HTMLDivElement | null>(null);
-  const visibleRelatedCount = useVisibleRelatedCount(scrollContainer, 140, 16);
 
   // Scroll active thumbnail into view
   useEffect(() => {
@@ -473,7 +455,7 @@ export default function ClientPage({
                     className="flex gap-4 overflow-x-auto scroll-smooth no-scrollbar px-5 py-1"
                     ref={scrollContainer}
                   >
-                    {relatedProducts.slice(0, visibleRelatedCount).map((el) => {
+                    {relatedProducts.map((el) => {
                       const category = el.tags?.[0]?.name || "default-category";
                       const imageSrc =
                         el.images?.[0]?.src || "/placeholder.png";
@@ -482,8 +464,7 @@ export default function ClientPage({
                         <Link
                           key={el.id}
                           href={`/catalog/sub-catalog/product/${el.id}?category=${category}`}
-                          className="shrink-0 shadow-md rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-200 flex flex-col bg-white"
-                          style={{ minWidth: 140, maxWidth: 180, flex: '1 1 160px' }}
+                          className="w-35 shrink-0 shadow-md rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-200 flex flex-col bg-white"
                         >
                           <div className="w-full h-50 flex items-center justify-center overflow-hidden px-1">
                             <Image
