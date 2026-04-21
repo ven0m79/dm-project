@@ -11,7 +11,7 @@ import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import { useTranslations } from "next-intl";
 import { useIsMobile } from "../../../../components/hooks/useIsMobile";
-import Skeleton from "../../../../components/atoms/loader/Skeleton";
+import Loader from "../../../../components/atoms/loader/Loader";
 import styles from "./Product.module.css";
 import ProductDetails from "./selectedPrice";
 
@@ -94,13 +94,7 @@ export default function ClientPage({
   if (!details) {
     return (
       <div className="flex w-full h-4/5 justify-center items-center">
-        <div className="w-full max-w-225 p-8">
-          <Skeleton height={350} className="mb-6 w-full" />
-          <Skeleton height={32} width={200} className="mb-4" />
-          <Skeleton height={24} width={120} className="mb-2" />
-          <Skeleton height={24} width={180} className="mb-2" />
-          <Skeleton height={48} width={"100%"} className="mb-4" />
-        </div>
+        <Loader />
       </div>
     );
   }
@@ -143,7 +137,7 @@ export default function ClientPage({
             exit={{ opacity: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <div className="flex flex-row w-full">
+            <div className="flex flex-wrap w-full">
               {/* 🖼️ Галерея з мініатюрами */}
               <div className="flex flex-col w-1/2 items-center">
                 {/* Основне зображення */}
@@ -442,17 +436,17 @@ export default function ClientPage({
             </div>
 
             {/* Схожі товари після Tabs */}
-            <div className="mt-6">
+            <div className="mt-6 w-full">
               <h3 className="text-lg font-semibold text-[#0061AA] mb-4">
                 Схожі товари
               </h3>
 
               {relatedProducts && relatedProducts.length > 0 ? (
-                <div className="relative w-full py-1">
+                <div className="relative w-full h-auto max-w-225 mx-auto py-1 ">
                   {/* Контейнер для скролу */}
                   <div
                     id="related-scroll"
-                    className="flex gap-4 overflow-x-auto scroll-smooth no-scrollbar px-5 py-1"
+                    className="flex gap-4 overflow-x-auto sm:overflow-hidden scroll-smooth no-scrollbar px-5 py-1"
                     ref={scrollContainer}
                   >
                     {relatedProducts.map((el) => {
@@ -496,7 +490,7 @@ export default function ClientPage({
                           behavior: "smooth",
                         });
                     }}
-                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 hover:bg-gray-100"
+                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 hover:bg-gray-100 sm:hidden"
                   >
                     ←
                   </button>
@@ -512,7 +506,7 @@ export default function ClientPage({
                           behavior: "smooth",
                         });
                     }}
-                    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 hover:bg-gray-100"
+                    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 hover:bg-gray-100 sm:hidden"
                   >
                     →
                   </button>

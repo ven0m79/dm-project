@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-
+import { getAlternates } from "../components/atoms/hreflang/hreflang";
 import { ClientPage } from "./client-page";
 
 
@@ -13,11 +13,15 @@ export async function generateMetadata(
   const { locale } = await params;
   return locale === "ua"
     ? {
+        metadataBase: new URL("https://dm-project.com.ua"),
+        alternates: getAlternates("/shares", locale),
         title: "Акції та спеціальні пропозиції на медичне обладнання | ДМ-Проект",
         description:
           "Акційні пропозиції на медичне обладнання Dräger та оснащення для лікарень в Києві. Вигідні знижки, професійна консультація та сервіс. Купуйте обладнання для лікарень вигідно на dm-project.com.ua",
       }
     : {
+        metadataBase: new URL("https://dm-project.com.ua"),
+        alternates: getAlternates("/shares", locale),
         title: "Promotions and special offers on medical equipment | DM-Project",
         description:
           "Special offers on Dräger medical equipment and hospital supplies in Kyiv. Great discounts, professional advice and service. Buy hospital equipment at great prices on dm-project.com.ua",
