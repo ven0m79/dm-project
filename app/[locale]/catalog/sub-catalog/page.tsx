@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getAlternates } from "../../components/atoms/hreflang/hreflang";
 import { ClientPage } from "./client-page";
 import parse from "html-react-parser";
 import { getCategoryBySlugCached, buildBreadcrumbTrail } from "../../../../utils/woo.server";
@@ -32,9 +33,11 @@ export async function generateMetadata(
   const title = yoast?.title || category.name || slug;
   const description =
     yoast?.description || (category.description || "").trim();
+  const categoryPath = `/catalog/sub-catalog${slug ? `?category=${slug}` : ""}`;
 
   return {
     metadataBase: new URL("https://dm-project.com.ua"),
+    alternates: getAlternates(categoryPath, locale),
     title,
     description,
     openGraph: {

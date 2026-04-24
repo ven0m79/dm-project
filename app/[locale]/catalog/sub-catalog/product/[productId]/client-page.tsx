@@ -137,7 +137,7 @@ export default function ClientPage({
             exit={{ opacity: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <div className="flex flex-row w-full">
+            <div className="flex flex-wrap w-full">
               {/* 🖼️ Галерея з мініатюрами */}
               <div className="flex flex-col w-1/2 items-center">
                 {/* Основне зображення */}
@@ -446,7 +446,7 @@ export default function ClientPage({
                   {/* Контейнер для скролу */}
                   <div
                     id="related-scroll"
-                    className="flex gap-4 overflow-x-auto scroll-smooth no-scrollbar px-5 py-1"
+                    className="flex gap-4 overflow-x-auto sm:overflow-hidden scroll-smooth no-scrollbar px-5 py-1"
                     ref={scrollContainer}
                   >
                     {relatedProducts.map((el) => {
@@ -490,7 +490,7 @@ export default function ClientPage({
                           behavior: "smooth",
                         });
                     }}
-                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 hover:bg-gray-100"
+                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 hover:bg-gray-100 sm:hidden"
                   >
                     ←
                   </button>
@@ -506,7 +506,7 @@ export default function ClientPage({
                           behavior: "smooth",
                         });
                     }}
-                    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 hover:bg-gray-100"
+                    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 hover:bg-gray-100 sm:hidden"
                   >
                     →
                   </button>
