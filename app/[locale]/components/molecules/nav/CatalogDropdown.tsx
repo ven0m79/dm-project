@@ -67,7 +67,7 @@ export const CatalogDropdown = ({ label }: { label: string }) => {
             onMouseEnter={handleWrapperEnter}
             onMouseLeave={scheduleClose}
         >
-            <span>{label}</span>
+            <Link href="/catalog" onClick={() => setOpen(false)}>{label}</Link>
 
             {mounted && createPortal(
                 <AnimatePresence>
