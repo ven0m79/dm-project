@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { cache } from "react";
 import { notFound } from "next/navigation";
+import { getAlternates } from "../../../../components/atoms/hreflang/hreflang";
 
 import ClientPage from "./client-page";
 import DesktopBreadcrumbs from "./DesktopBreadcrumbs";
@@ -25,9 +26,9 @@ const getProduct = cache(async (id: number, locale: string) => {
 });
 
 // SEO metadata
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const resolvedParams = await params; // розпаковуємо Promise
-  const { productId, locale } = resolvedParams;
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
+  const { productId, locale } = await params;
+  const { category } = await searchParams;
   const id = Number(productId);
 
   const product = await getProduct(id, locale);
@@ -37,8 +38,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const strip = product.short_description?.replace(/<[^>]*>/g, "").trim() ?? "";
+  const uaId = product.translations?.ua ?? id;
+  const enId = product.translations?.en ?? id;
+  const categoryQuery = category ? `?category=${category}` : "";
 
   return {
+    metadataBase: new URL("https://dm-project.com.ua"),
+    alternates: getAlternates(
+      `/catalog/sub-catalog/product/${uaId}${categoryQuery}`,
+      locale,
+      `/catalog/sub-catalog/product/${enId}${categoryQuery}`,
+    ),
     title: product.name || "Product",
     description: strip,
   };

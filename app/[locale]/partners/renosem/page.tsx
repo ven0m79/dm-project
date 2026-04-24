@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
+import { getAlternates } from "../../components/atoms/hreflang/hreflang";
 import { ClientPage } from "./client-page";
 import { getProductsByBrandCached } from "../../../../utils/woo.server";
 
@@ -17,11 +18,15 @@ export async function generateMetadata({
 
   return locale === "ua"
     ? {
+      metadataBase: new URL("https://dm-project.com.ua"),
+      alternates: getAlternates("/partners/renosem", locale),
       title: "Партнер RENOSEM | ДМ-Проект",
       description:
         "RENOSEM  — офіційний партнер DM Project. Медичне обладнання та аксесуари.",
     }
     : {
+      metadataBase: new URL("https://dm-project.com.ua"),
+      alternates: getAlternates("/partners/renosem", locale),
       title: "Partner RENOSEM  | DM-Project",
       description:
         "RENOSEM  official partner. Medical equipment and accessories.",

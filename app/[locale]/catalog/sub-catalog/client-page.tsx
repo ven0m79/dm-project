@@ -1,5 +1,5 @@
-
 "use client";
+
 import Skeleton from "../../components/atoms/loader/Skeleton";
 import React, { FC, useMemo, useState, useEffect } from "react";
 import classNames from "classnames";
