@@ -1,5 +1,5 @@
 'use client'
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import styles from './Contacts.module.css';
 import classNames from "classnames";
 import { MainLayout } from "../components/templates";
@@ -10,6 +10,7 @@ import phone from "./contacts-photo/telephoneContacts.png";
 import adress from "./contacts-photo/locationContacts.png";
 //import { useIsMobile } from "../components/hooks/useIsMobile";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 declare global {
   interface Window {
@@ -19,6 +20,7 @@ declare global {
 
 export const ClientPage = () => {
   const t = useTranslations('ContactsPage');
+  const router = useRouter();
   const [name, setName] = useState('');
   const [mobile, setMobile] = useState('');
   const [medicalFacility, setMedicalFacility] = useState('');
@@ -34,34 +36,22 @@ export const ClientPage = () => {
   const [isClient, setIsClient] = useState(false);
   const [nameError, setNameError] = useState('');
   const [mobileError, setMobileError] = useState('');
-  const [showThanks, setShowThanks] = useState(false);
-  const thanksTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  // cleanup timer on unmount
   useEffect(() => {
-    return () => {
-      if (thanksTimeoutRef.current) {
-        clearTimeout(thanksTimeoutRef.current as unknown as number);
-        thanksTimeoutRef.current = null;
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const productFromUrl = params.get("productName");
+
+      if (productFromUrl) {
+        setProductName(productFromUrl.replace(/\+/g, " "));
+        setIsProductFromUrl(true); // ✅ тільки якщо параметр є
       }
-    };
-  }, []);
-
-useEffect(() => {
-  if (typeof window !== "undefined") {
-    const params = new URLSearchParams(window.location.search);
-    const productFromUrl = params.get("productName");
-
-    if (productFromUrl) {
-      setProductName(productFromUrl.replace(/\+/g, " "));
-      setIsProductFromUrl(true); // ✅ тільки якщо параметр є
     }
-  }
-}, []);
+  }, []);
 
 
 
@@ -123,15 +113,7 @@ useEffect(() => {
           setMessage('');
           setNameError('');
           setMobileError('');
-          // show floating thanks toast and auto-hide
-          setShowThanks(true);
-          if (thanksTimeoutRef.current) {
-            clearTimeout(thanksTimeoutRef.current as unknown as number);
-          }
-          thanksTimeoutRef.current = setTimeout(() => {
-            setShowThanks(false);
-            thanksTimeoutRef.current = null;
-          }, 4000);
+          router.push('/info/diakuiemo-za-vashe-zvernennia/');
         } else {
           await response.json();
           setStatus('Помилка при надсиланні. Спробуйте пізніше.');
@@ -269,17 +251,17 @@ useEffect(() => {
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                 /><br />
-              <input
-                className={classNames("h-10", styles.form, { "bg-[#ECF3FE] cursor-default": isProductFromUrl } // ✅ синій текст, якщо з URL
-                )}
-                placeholder={t('contact-form-productName')}
-                id="productName"
-                type="text"
-                aria-label={t('contact-form-productName')}
-                value={productName}
-                onChange={e => setProductName(e.target.value)}
-                readOnly={isProductFromUrl} // ✅ заблоковано, якщо з URL
-              /><br />
+                <input
+                  className={classNames("h-10", styles.form, { "bg-[#ECF3FE] cursor-default": isProductFromUrl } // ✅ синій текст, якщо з URL
+                  )}
+                  placeholder={t('contact-form-productName')}
+                  id="productName"
+                  type="text"
+                  aria-label={t('contact-form-productName')}
+                  value={productName}
+                  onChange={e => setProductName(e.target.value)}
+                  readOnly={isProductFromUrl} // ✅ заблоковано, якщо з URL
+                /><br />
                 <textarea
                   className={classNames("h-24 pt-2", styles.form)}
                   placeholder={t('contact-form-message')}
@@ -295,46 +277,13 @@ useEffect(() => {
                   disabled={!name.trim() || !mobile.trim()}
                 >
                   {t('contact-form-submit')}
-                  
-              
                 </button>
                 {status && <p className="mt-2 text-sm text-green-600">{status}</p>}
               </form>
             )}
           </div>
         </div>
-
       </div>
-
-      {showThanks && (
-        <div className="fixed bottom-6 right-6 z-50">
-          <div
-            role="status"
-            aria-live="polite"
-            className="min-w-55 max-w-sm bg-white rounded-lg shadow-lg p-4 flex items-start gap-3 border border-gray-200"
-          >
-            <div className="text-2xl">✅</div>
-            <div className="flex-1">
-              <div className="font-medium text-gray-900">Дякуємо!</div>
-              <div className="text-sm text-gray-600">{status}</div>
-            </div>
-            <button
-              onClick={() => {
-                setShowThanks(false);
-                if (thanksTimeoutRef.current) {
-                  clearTimeout(thanksTimeoutRef.current as unknown as number);
-                  thanksTimeoutRef.current = null;
-                }
-              }}
-              aria-label="Close"
-              className="ml-2 text-gray-500 hover:text-gray-700"
-            >
-              ✕
-            </button>
-          </div>
-        </div>
-      )}
     </MainLayout >
-
   );
 };
