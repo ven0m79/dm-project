@@ -8,7 +8,7 @@ const MobileFooter: FC<{ t: (key: string) => string }> = ({ t }) => {
     
     return (
         <>
-            <div className="items-center bottom-0 flex flex-row justify-around max-h-25 mx-2 w-screen text-white">
+            <div className="items-center bottom-0 flex flex-row justify-around max-h-25 w-full text-white">
                 <Link
                     href={"/catalog"}
                     className="flex flex-col items-center">
