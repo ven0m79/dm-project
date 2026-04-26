@@ -4,6 +4,9 @@ import classNames from "classnames";
 import React, { FC } from "react";
 import styles from "./Nav.module.css";
 import { Link, usePathname } from "../../../../../i18n/navigation";
+import { CatalogDropdown } from "./CatalogDropdown";
+
+
 
 const NavLinks: {
     [key: string]: {
@@ -53,21 +56,27 @@ const DesktopNav: FC<{}> = ({ }) => {
         <div className="">
             <ul className="flex ms-center">
                 {Object.keys(NavLinks).map((el) => (
-                    <li
-                        key={el}
-                        className={classNames(
-                            "text-[10px] sm:text-[12px] xl:text-[16px]",
-                            styles["link"],
-                            {
-                                [styles["active"]]:
-                                    NavLinks[el].link === "/"
-                                        ? pathname === "/"
-                                        : pathname.startsWith(NavLinks[el].link),
-                            }
-                        )}
-                    >
-                        <Link href={NavLinks[el].link}>{t(NavLinks[el].title)}</Link>
-                    </li>
+                    el === "catalog" ? (
+                        <li key={el} className="text-[10px] sm:text-[12px] xl:text-[16px]">
+                            <CatalogDropdown label={t(NavLinks[el].title)} />
+                        </li>
+                    ) : (
+                        <li
+                            key={el}
+                            className={classNames(
+                                "text-[10px] sm:text-[12px] xl:text-[16px]",
+                                styles["link"],
+                                {
+                                    [styles["active"]]:
+                                        NavLinks[el].link === "/"
+                                            ? pathname === "/"
+                                            : pathname.startsWith(NavLinks[el].link),
+                                }
+                            )}
+                        >
+                            <Link href={NavLinks[el].link}>{t(NavLinks[el].title)}</Link>
+                        </li>
+                    )
                 ))}
             </ul>
         </div>

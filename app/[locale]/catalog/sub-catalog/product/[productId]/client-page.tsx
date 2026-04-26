@@ -11,7 +11,7 @@ import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import { useTranslations } from "next-intl";
 import { useIsMobile } from "../../../../components/hooks/useIsMobile";
-import Loader from "../../../../components/atoms/loader/Loader";
+import ProductSkeleton from "./ProductSkeleton";
 import styles from "./Product.module.css";
 import ProductDetails from "./selectedPrice";
 
@@ -92,11 +92,7 @@ export default function ClientPage({
   }, [selectedImage]);
 
   if (!details) {
-    return (
-      <div className="flex w-full h-4/5 justify-center items-center">
-        <Loader />
-      </div>
-    );
+    return <ProductSkeleton />;
   }
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -466,7 +462,7 @@ export default function ClientPage({
                               height={140}
                               src={imageSrc}
                               alt={el.name}
-                              className="object-contain w-full h-full p-1"
+                              className="object-contain w-full h-full p-1 hover:scale-105 transition-transform duration-200"
                             />
                           </div>
                           <div className="p-3 grow flex items-center justify-center">
