@@ -79,7 +79,7 @@ const DesktopHeader: FC<{ searchTerm: string, loading: boolean, setSearchTerm: D
 
    return <>
         <div className={classNames("w-screen", styles["lang"])}>
-            <div className={styles.langText}>
+            <div className={classNames("flex flex-1 self-end justify-end px-20", styles["langText"])}>
                 {otherLocales.map(({ code, label }) => (
                     isResolvingHref ? (
                         <span key={code}>{label}</span>
