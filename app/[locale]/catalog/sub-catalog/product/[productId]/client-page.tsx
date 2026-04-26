@@ -466,7 +466,7 @@ export default function ClientPage({
                               height={140}
                               src={imageSrc}
                               alt={el.name}
-                              className="object-contain w-full h-full p-1"
+                              className="object-contain w-full h-full p-1 hover:scale-105 transition-transform duration-200"
                             />
                           </div>
                           <div className="p-3 grow flex items-center justify-center">

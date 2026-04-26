@@ -101,7 +101,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   // Show skeletons while loading products
   if (!selectedProducts || selectedProducts.length === 0) {
     return (
-      <div className="flex flex-wrap justify-start self-start mt-4 mb-4 ml-2 items-start w-full">
+      <div className="flex flex-wrap justify-around self-center mt-4 mb-4 items-center w-full">
         {Array.from({ length: 8 }).map((_, idx) => (
           <div
             key={idx}
