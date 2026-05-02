@@ -80,6 +80,21 @@ async function fetchAllProducts(locale: string): Promise<any[]> {
   return allProducts;
 }
 
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
+function parseSchemaJson(value: unknown): object | null {
+  if (!value) return null;
+  if (typeof value !== "string") return value as object;
+  const s = value.trim();
+  // WooCommerce sometimes returns the schema wrapped in <script> tags
+  if (s.startsWith("<")) {
+    const match = s.match(/<script[^>]*>([\s\S]*?)<\/script>/i);
+    if (!match) return null;
+    try { return JSON.parse(match[1]); } catch { return null; }
+  }
+  try { return JSON.parse(s); } catch { return null; }
+}
+
 // ─── Upsert helpers ───────────────────────────────────────────────────────────
 
 async function upsertCategories(categories: any[], locale: string) {
@@ -97,11 +112,7 @@ async function upsertCategories(categories: any[], locale: string) {
     count: c.count ?? 0,
     menu_order: c.menu_order ?? 0,
     yoast_head_json: c.yoast_head_json ?? null,
-    schema_json: c.schema_json
-      ? typeof c.schema_json === "string"
-        ? JSON.parse(c.schema_json)
-        : c.schema_json
-      : null,
+    schema_json: parseSchemaJson(c.schema_json),
     synced_at: new Date(),
   }));
 
