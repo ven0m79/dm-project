@@ -18,8 +18,6 @@ import {
   SingleProductDetails,
   WoocomerceCategoryType,
 } from "../../../../../utils/woocomerce.types";
-import { useSearchParams } from "next/navigation";
-import { getCategoriesIds } from "../../constants";
 
 export type SidebarContextProps = {
   selectedCategory?: string | null;
@@ -53,12 +51,9 @@ type SidebarProviderProps = {
 };
 
 export const SidebarProvider = ({ children, locale, initialCategories }: SidebarProviderProps) => {
-  const searchParams = useSearchParams();
-  const selectedCategoryFromParams = searchParams?.get("category") ?? null;
-
   const defaultLocale = locale ?? "ua";
 
-  const [selectedCategoryItem, setSelectedCategoryItem] = useState<string | null | undefined>(selectedCategoryFromParams);
+  const [selectedCategoryItem, setSelectedCategoryItem] = useState<string | null | undefined>(null);
   const [categories, setCategories] = useState<TransformedCategoriesType[]>(initialCategories ?? []);
   const [selectedProducts, setSelectedProducts] = useState<SingleProductDetails[]>([]);
   const [activeProduct, setActiveProduct] = useState<SingleProductDetails | null>(null);
@@ -112,16 +107,6 @@ export const SidebarProvider = ({ children, locale, initialCategories }: Sidebar
     },
     [defaultLocale]
   );
-
-  useEffect(() => {
-    const idsMap = getCategoriesIds(defaultLocale) ?? {};
-    const categoryId = selectedCategoryFromParams ? idsMap[selectedCategoryFromParams as keyof typeof idsMap] : null;
-    setSelectedCategoryId(categoryId || null);
-
-    if (categoryId) {
-      getCategoryDetails(categoryId, defaultLocale);
-    }
-  }, [selectedCategoryFromParams, getCategoryDetails, defaultLocale]);
 
   useEffect(() => {
     getCategoriesData(defaultLocale);

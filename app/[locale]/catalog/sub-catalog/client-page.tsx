@@ -23,6 +23,7 @@ export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategory
     selectedProducts,
     setSelectedCategoryId,
     setOpenedCategoryIds,
+    getCategoryDetails,
     categories,
     selectedCategory,
   } = useSidebar();
@@ -41,7 +42,8 @@ export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategory
     if (!categoryId) return;
     setSelectedCategoryId(categoryId);
     setOpenedCategoryIds([categoryId]);
-  }, [categoryId, locale, setOpenedCategoryIds, setSelectedCategoryId]);
+    getCategoryDetails(categoryId, locale);
+  }, [categoryId, locale, getCategoryDetails, setOpenedCategoryIds, setSelectedCategoryId]);
 
   // Use sidebar products once loaded; fall back to SSR-provided initialProducts
   const effectiveProducts = selectedProducts.length > 0 ? selectedProducts : (initialProducts ?? []);
@@ -114,7 +116,7 @@ export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategory
     <>
       <h1 className="flex flex-wrap justify-center self-start mt-4 mb-4 ml-2 text-[#002766]">{selectedCategoryName}</h1>
       <div className="flex flex-wrap justify-start self-start mt-4 mb-4 ml-2 items-start">
-        {productsToRender.map((el) => {
+        {productsToRender.map((el, index) => {
           const isAccessories = el.tags?.some((t) => t.name === "accessories");
           const cardClass = isAccessories
             ? `mx-1 sm:mx-2 ${styles.headSubCatalogBlockMini}`
@@ -150,10 +152,10 @@ export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategory
                       alt={el.images[0].alt}
                       width={200}
                       height={250}
-                      fetchPriority="high"
+                      fetchPriority={index < 6 ? "high" : "auto"}
                       className="w-full h-auto object-contain"
-                      sizes="(max-width: 768px) 200px, (max-width: 1200px) 400px, 800px"
-                      priority
+                      sizes="(max-width: 640px) calc(50vw - 20px), 200px"
+                      priority={index < 6}
                     />
                   </div>
                   <div className="h-px bg-emerald-900 mb-1 mx-1 flex self-center" />

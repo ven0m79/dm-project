@@ -69,8 +69,14 @@ export default async function Page(
       : JSON.stringify(category.schema_json)
     : null;
 
+  const lcpImageSrc = initialProducts[0]?.images?.[0]?.src;
+
   return (
     <>
+      {lcpImageSrc && (
+        // eslint-disable-next-line @next/next/no-head-element
+        <link rel="preload" as="image" href={lcpImageSrc} fetchPriority="high" />
+      )}
       {schemaJson && (
         <script
           type="application/ld+json"

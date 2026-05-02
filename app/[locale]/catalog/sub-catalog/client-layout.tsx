@@ -1,22 +1,18 @@
 "use client";
 
-import React, { ReactNode, useEffect, useMemo, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import classNames from "classnames";
-import { motion, Transition } from "framer-motion";
-import { useSearchParams } from "next/navigation";
 
 import LSidebar from "../../components/molecules/leftSidebar/leftSidebar";
 import RSidebar from "../../components/molecules/rightSidebar/rightSidebar";
 import { useIsMobile } from "../../components/hooks/useIsMobile";
-import { getCategoriesIds } from "../../components/constants";
 
 import styles from "./Sub-catalog.module.css";
 
-const flipTransition: Transition = {
-  type: "spring",
-  stiffness: 250,
-  damping: 28,
-};
+const slideStyle = (open: boolean): React.CSSProperties => ({
+  transform: open ? "translateX(0)" : "translateX(-100%)",
+  transition: "transform 0.28s cubic-bezier(0.25, 0.1, 0.25, 1)",
+});
 
 type Props = {
   children: ReactNode;
@@ -24,26 +20,15 @@ type Props = {
 };
 
 export default function ClientLayout({ children, locale }: Props) {
-  const searchParams = useSearchParams();
   const isMobile = useIsMobile();
 
   const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false);
   const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false);
 
-  const currentIdsData = useMemo(
-    () => getCategoriesIds(locale),
-    [locale]
-  );
-
-  const categoryFromUrl = searchParams?.get("category") ?? "";
-
   useEffect(() => {
     document.body.style.overflowY =
       isLeftSidebarOpen || isRightSidebarOpen ? "hidden" : "auto";
-
-    return () => {
-      document.body.style.overflowY = "auto";
-    };
+    return () => { document.body.style.overflowY = "auto"; };
   }, [isLeftSidebarOpen, isRightSidebarOpen]);
 
   return (
@@ -66,10 +51,8 @@ export default function ClientLayout({ children, locale }: Props) {
             ☰ По призначенню
           </button>
 
-          <motion.div
-            initial={{ x: "-100%" }}
-            animate={{ x: isLeftSidebarOpen ? "0%" : "-100%" }}
-            transition={flipTransition}
+          <div
+            style={slideStyle(isLeftSidebarOpen)}
             className="fixed top-0 left-0 w-full h-full bg-white/50 backdrop-blur-sm z-50 overflow-y-auto"
           >
             <button
@@ -78,11 +61,10 @@ export default function ClientLayout({ children, locale }: Props) {
             >
               ✕
             </button>
-
             <div className="p-4">
               <LSidebar locale={locale} changeURLParams />
             </div>
-          </motion.div>
+          </div>
         </>
       ) : (
         <div className="w-75 mt-5">
