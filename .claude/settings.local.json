@@ -18,7 +18,10 @@
       "Bash(python3 -c ' *)",
       "Bash(curl -s \"https://api.dm-project.com.ua/wp-json/wc/v3/products/categories?per_page=3&lang=ua&consumer_key=ck_8dee30956004b4c7f467a46247004a2f4cd650e5&consumer_secret=cs_1cf0a573275e5cafe5af6bddbb01f29b9592be20\")",
       "Bash(node -e ' *)",
-      "Bash(curl -s \"https://api.dm-project.com.ua/wp-json/wc/v3/products/categories?per_page=100&page=1&lang=ua&consumer_key=ck_8dee30956004b4c7f467a46247004a2f4cd650e5&consumer_secret=cs_1cf0a573275e5cafe5af6bddbb01f29b9592be20\")"
+      "Bash(curl -s \"https://api.dm-project.com.ua/wp-json/wc/v3/products/categories?per_page=100&page=1&lang=ua&consumer_key=ck_8dee30956004b4c7f467a46247004a2f4cd650e5&consumer_secret=cs_1cf0a573275e5cafe5af6bddbb01f29b9592be20\")",
+      "Bash(curl -s \"http://localhost:3000/api/woocommerce/category-products/?locale=ua&categoryId=91\")",
+      "Bash(curl -s \"https://api.dm-project.com.ua/wp-json/wc/v3/products?category=91&per_page=5&lang=ua&consumer_key=ck_8dee30956004b4c7f467a46247004a2f4cd650e5&consumer_secret=cs_1cf0a573275e5cafe5af6bddbb01f29b9592be20\")",
+      "Bash(curl -s \"http://localhost:3000/api/woocommerce/categories/?locale=ua\")"
     ]
   }
 }

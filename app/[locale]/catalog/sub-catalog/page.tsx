@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { getAlternates } from "../../components/atoms/hreflang/hreflang";
 import { ClientPage } from "./client-page";
-import parse from "html-react-parser";
 import { getCategoryBySlugFromDb, getProductsByCategoryIdFromDb, buildBreadcrumbTrailFromDb } from "../../../../lib/db/queries";
 import DesktopBreadcrumbs from "./product/[productId]/DesktopBreadcrumbs";
 import MobileBreadcrumbs from "./product/[productId]/MobileBreadcrumbs";
@@ -72,7 +71,12 @@ export default async function Page(
 
   return (
     <>
-      {schemaJson && <>{parse(schemaJson)}</>}
+      {schemaJson && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: schemaJson }}
+        />
+      )}
 
       <div className="hidden sm:block ml-4 mt-2">
         <DesktopBreadcrumbs breadcrumbs={breadcrumbs} />

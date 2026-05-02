@@ -165,17 +165,40 @@ async function fetchProductsWithImages(
 
 export const getProductsByCategoryIdFromDb = unstable_cache(
   async (locale: string, categoryId: number): Promise<SingleProductDetails[]> => {
+    // Collect categoryId + all its descendants via BFS
+    const allCats = await db()
+      .select({ id: wc_categories.id, parent_id: wc_categories.parent_id })
+      .from(wc_categories)
+      .where(eq(wc_categories.locale, locale));
+
+    const childMap = new Map<number, number[]>();
+    for (const cat of allCats) {
+      const p = cat.parent_id ?? 0;
+      const list = childMap.get(p) ?? [];
+      list.push(cat.id);
+      childMap.set(p, list);
+    }
+
+    const allIds = new Set<number>([categoryId]);
+    const queue = [categoryId];
+    while (queue.length) {
+      const current = queue.shift()!;
+      for (const child of childMap.get(current) ?? []) {
+        if (!allIds.has(child)) { allIds.add(child); queue.push(child); }
+      }
+    }
+
     const productCats = await db()
       .select({ product_id: wc_product_categories.product_id })
       .from(wc_product_categories)
       .where(
         and(
           eq(wc_product_categories.locale, locale),
-          eq(wc_product_categories.category_id, categoryId),
+          inArray(wc_product_categories.category_id, [...allIds]),
         ),
       );
 
-    const ids = productCats.map((pc) => pc.product_id);
+    const ids = [...new Set(productCats.map((pc) => pc.product_id))];
     return fetchProductsWithImages(locale, ids);
   },
   ["products-by-category-from-db"],
