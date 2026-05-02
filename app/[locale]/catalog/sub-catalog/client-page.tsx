@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, useMemo, useState, useEffect } from "react";
+import { FC, useMemo, useState, useEffect } from "react";
 import CatalogSkeleton from "./CatalogSkeleton";
 import classNames from "classnames";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -10,8 +10,15 @@ import { getCategoriesIds } from "../../components/constants";
 import Image from "next/image";
 import { TransformedCategoriesType } from "./helpers";
 import { isIOS } from "../../../../utils/constants";
+import type { SingleProductDetails } from "../../../../utils/woocomerce.types";
 
-export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
+type Props = {
+  locale: string;
+  initialProducts?: SingleProductDetails[];
+  initialCategorySlug?: string;
+};
+
+export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategorySlug }) => {
   const {
     selectedProducts,
     setSelectedCategoryId,
@@ -24,25 +31,26 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const categoryFromUrl = searchParams?.get("category") ?? "";
+  const categoryFromUrl = searchParams?.get("category") ?? initialCategorySlug ?? "";
   const categoryId = useMemo(
     () => (currentIdsData as Record<string, number>)[categoryFromUrl],
     [categoryFromUrl, currentIdsData],
   );
 
-  // ✅ Only UI state here (Provider fetches products by URL)
   useEffect(() => {
     if (!categoryId) return;
     setSelectedCategoryId(categoryId);
     setOpenedCategoryIds([categoryId]);
   }, [categoryId, locale, setOpenedCategoryIds, setSelectedCategoryId]);
 
-  // ✅ Memoize sorting
+  // Use sidebar products once loaded; fall back to SSR-provided initialProducts
+  const effectiveProducts = selectedProducts.length > 0 ? selectedProducts : (initialProducts ?? []);
+
   const normalizeOrder = (order?: number) =>
     !order || order === 0 ? Number.MAX_SAFE_INTEGER : order;
 
   const sortedProducts = useMemo(() => {
-    return [...selectedProducts].sort((a, b) => {
+    return [...effectiveProducts].sort((a, b) => {
       const aIsAccessories = a.tags?.some((t) => t.name === "accessories");
       const bIsAccessories = b.tags?.some((t) => t.name === "accessories");
 
@@ -56,7 +64,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
 
       return a.name.localeCompare(b.name);
     });
-  }, [selectedProducts]);
+  }, [effectiveProducts]);
 
   const [visibleCount, setVisibleCount] = useState(15);
   const productsToRender = useMemo(
@@ -95,11 +103,10 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
 
   const selectedCategoryName = useMemo(() => {
     if (!categoryId) return selectedCategory ?? "";
-    return categoriesNameMap.get(categoryId) || selectedCategory 
+    return categoriesNameMap.get(categoryId) || selectedCategory;
   }, [categoryId, categoriesNameMap, selectedCategory]);
 
-  // Show skeletons while loading products
-  if (!selectedProducts || selectedProducts.length === 0) {
+  if (!effectiveProducts.length) {
     return <CatalogSkeleton />;
   }
 
@@ -115,7 +122,7 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
 
           const prefix = locale === "en" ? "/en" : "";
           const url = `${prefix}/catalog/sub-catalog/product/${el.translations[locale as any]}?category=${encodeURIComponent(
-            selectedCategory || "",
+            selectedCategory || categoryFromUrl || "",
           )}`;
 
           return (
@@ -169,7 +176,6 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
         })}
       </div>
 
-      {/* Load more */}
       {sortedProducts.length > visibleCount && (
         <div className="flex flex-1 w-full self-center items-center justify-center">
           <button
@@ -180,7 +186,6 @@ export const ClientPage: FC<{ locale: string }> = ({ locale }) => {
           </button>
         </div>
       )}
-      {/* Category description */}
       <p
         className="content text-[#0077d2] text-[15px] leading-relaxed p-2 text-justify"
         suppressHydrationWarning

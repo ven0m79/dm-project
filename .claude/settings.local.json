@@ -1,7 +1,24 @@
 {
   "permissions": {
     "allow": [
-      "Bash(wc -l /f/work/own/dm-project/app/[locale]/components/contexts/products-sidebar/products-sidebar.context.tsx)"
+      "Bash(wc -l /f/work/own/dm-project/app/[locale]/components/contexts/products-sidebar/products-sidebar.context.tsx)",
+      "Bash(grep -E \"\\\\.tsx$|^d\")",
+      "Bash(find /c/Users/schur/Desktop/dm-project/app/*/catalog -type f -name \"*.ts\" -o -name \"*.tsx\")",
+      "Bash(npm install *)",
+      "Bash(npx tsc *)",
+      "Bash(node -e \"console.log\\(require\\('crypto'\\).randomBytes\\(32\\).toString\\('hex'\\)\\)\")",
+      "Bash(DATABASE_URL=\"postgresql://neondb_owner:npg_3FurC1ZXYzOv@ep-weathered-scene-anzmquj0-pooler.c-6.us-east-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require\" DATABASE_URL_UNPOOLED=\"postgresql://neondb_owner:npg_3FurC1ZXYzOv@ep-weathered-scene-anzmquj0.c-6.us-east-1.aws.neon.tech/neondb?sslmode=require\" npx drizzle-kit push)",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\schur\\\\Desktop\\\\dm-project\" -Recurse -Directory)",
+      "Bash(Select-Object -First 20)",
+      "Bash(xargs cat *)",
+      "Bash(curl -s -o /tmp/wc_test.txt -w \"%{http_code}\" \"https://api.dm-project.com.ua/wp-json/wc/v3/products/categories?per_page=3&lang=ua\" -u \"ck_8dee30956004b4c7f467a46247004a2f4cd650e5:cs_1cf0a573275e5cafe5af6bddbb01f29b9592be20\")",
+      "Read(//tmp/**)",
+      "Bash(curl -s -o /tmp/wc_qs_test.txt -w \"%{http_code}\" \"https://api.dm-project.com.ua/wp-json/wc/v3/products/categories?per_page=3&lang=ua&consumer_key=ck_8dee30956004b4c7f467a46247004a2f4cd650e5&consumer_secret=cs_1cf0a573275e5cafe5af6bddbb01f29b9592be20\")",
+      "Bash(curl -s \"https://api.dm-project.com.ua/wp-json/wc/v3/products/categories?per_page=5&lang=ua&consumer_key=ck_8dee30956004b4c7f467a46247004a2f4cd650e5&consumer_secret=cs_1cf0a573275e5cafe5af6bddbb01f29b9592be20\")",
+      "Bash(python3 -c ' *)",
+      "Bash(curl -s \"https://api.dm-project.com.ua/wp-json/wc/v3/products/categories?per_page=3&lang=ua&consumer_key=ck_8dee30956004b4c7f467a46247004a2f4cd650e5&consumer_secret=cs_1cf0a573275e5cafe5af6bddbb01f29b9592be20\")",
+      "Bash(node -e ' *)",
+      "Bash(curl -s \"https://api.dm-project.com.ua/wp-json/wc/v3/products/categories?per_page=100&page=1&lang=ua&consumer_key=ck_8dee30956004b4c7f467a46247004a2f4cd650e5&consumer_secret=cs_1cf0a573275e5cafe5af6bddbb01f29b9592be20\")"
     ]
   }
 }

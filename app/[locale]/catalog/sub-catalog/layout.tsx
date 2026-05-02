@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { MainLayout } from "../../components/templates";
 import { SidebarProvider } from "../../components/contexts/products-sidebar/products-sidebar.context";
 import ClientLayout from "./client-layout";
-import { fetchWooCommerceCategories } from "../../../../utils/woocommerce.setup";
+import { getCategoriesFromDb } from "../../../../lib/db/queries";
 import { categoriesCreation, TransformedCategoriesType } from "./helpers";
 
 type Props = {
@@ -15,7 +15,7 @@ export default async function Layout({ children, params }: Props) {
 
   let initialCategories: TransformedCategoriesType[] = [];
   try {
-    const raw = await fetchWooCommerceCategories(locale);
+    const raw = await getCategoriesFromDb(locale);
     initialCategories = categoriesCreation(raw as unknown as TransformedCategoriesType[]);
   } catch {
     // fallback: SidebarProvider will fetch client-side
