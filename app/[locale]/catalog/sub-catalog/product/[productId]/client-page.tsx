@@ -492,7 +492,7 @@ export default function ClientPage({
                         <li key={el.id} className="mx-1">
                           <a
                             className="text text-[#0061AA]"
-                            href={`/catalog/sub-catalog/product/${el.id}?category=${el.tags[0].name}`}
+                            href={`/catalog/sub-catalog/product/${el.id}?category=${el.tags?.[0]?.name ?? ""}`}
                           >
                             {el.name}
                           </a>
