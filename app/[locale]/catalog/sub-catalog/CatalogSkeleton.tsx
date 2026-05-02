@@ -10,7 +10,7 @@ export default function CatalogSkeleton() {
         <div
           key={idx}
           className={classNames(
-            "mb-5 flex flex-col justify-center items-center",
+            "mb-5 flex flex-col justify-center items-center gap-1",
             styles.headSubCatalogBlock,
           )}
           style={{ minWidth: 220, maxWidth: 260 }}
