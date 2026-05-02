@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(wc -l /f/work/own/dm-project/app/[locale]/components/contexts/products-sidebar/products-sidebar.context.tsx)"
+      "Bash(wc -l /f/work/own/dm-project/app/[locale]/components/contexts/products-sidebar/products-sidebar.context.tsx)",
+      "Bash(grep -E \"\\\\.tsx$|^d\")",
+      "Bash(find /c/Users/schur/Desktop/dm-project/app/*/catalog -type f -name \"*.ts\" -o -name \"*.tsx\")",
+      "Bash(npm install *)",
+      "Bash(npx tsc *)",
+      "Bash(node -e \"console.log\\(require\\('crypto'\\).randomBytes\\(32\\).toString\\('hex'\\)\\)\")",
+      "Bash(DATABASE_URL=\"postgresql://neondb_owner:npg_3FurC1ZXYzOv@ep-weathered-scene-anzmquj0-pooler.c-6.us-east-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require\" DATABASE_URL_UNPOOLED=\"postgresql://neondb_owner:npg_3FurC1ZXYzOv@ep-weathered-scene-anzmquj0.c-6.us-east-1.aws.neon.tech/neondb?sslmode=require\" npx drizzle-kit push)"
     ]
   }
 }

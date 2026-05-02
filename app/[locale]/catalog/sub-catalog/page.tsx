@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getAlternates } from "../../components/atoms/hreflang/hreflang";
 import { ClientPage } from "./client-page";
 import parse from "html-react-parser";
-import { getCategoryBySlugCached, buildBreadcrumbTrail } from "../../../../utils/woo.server";
+import { getCategoryBySlugFromDb, getProductsByCategoryIdFromDb, buildBreadcrumbTrailFromDb } from "../../../../lib/db/queries";
 import DesktopBreadcrumbs from "./product/[productId]/DesktopBreadcrumbs";
 import MobileBreadcrumbs from "./product/[productId]/MobileBreadcrumbs";
 
@@ -11,15 +11,13 @@ type PageProps = {
   searchParams: Promise<{ category?: string }>;
 };
 
-export const revalidate = 300;
-
 export async function generateMetadata(
   { params, searchParams }: PageProps
 ): Promise<Metadata> {
   const { locale } = await params;
   const { category: slug } = await searchParams;
 
-  const category = slug ? await getCategoryBySlugCached(locale, slug) : null;
+  const category = slug ? await getCategoryBySlugFromDb(locale, slug) : null;
 
   if (!category) {
     return {
@@ -58,9 +56,13 @@ export default async function Page(
   const { category: slug } = await searchParams;
 
   const [category, breadcrumbs] = await Promise.all([
-    slug ? getCategoryBySlugCached(locale, slug) : Promise.resolve(null),
-    buildBreadcrumbTrail(locale, slug),
+    slug ? getCategoryBySlugFromDb(locale, slug) : Promise.resolve(null),
+    buildBreadcrumbTrailFromDb(locale, slug),
   ]);
+
+  const initialProducts = category
+    ? await getProductsByCategoryIdFromDb(locale, category.id)
+    : [];
 
   const schemaJson = category?.schema_json
     ? typeof category.schema_json === "string"
@@ -82,7 +84,11 @@ export default async function Page(
         />
       </div>
 
-      <ClientPage locale={locale} />
+      <ClientPage
+        locale={locale}
+        initialProducts={initialProducts}
+        initialCategorySlug={slug}
+      />
     </>
   );
 }
