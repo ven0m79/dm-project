@@ -26,67 +26,24 @@ export const ClientPage = async ({ locale }: Props) => {
   };
 
   return (
-    <div
-      className={classNames(
-        "text-2xl flex flex-wrap justify-start mb-5 gap-5 mt-5",
-        [styles.catalogContainer],
-      )}
-    >
-      <Link href={makeHref("or-equipment")}>
-        <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
-          <span className={styles.span}>{t("or-equipment")}</span>
-          <Image className={styles.img} src={imgOper} width={130} height={130} priority alt={t("or-equipment")} />
-        </div>
-      </Link>
-
-      <Link href={makeHref("icu-equipment")}>
-        <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
-          <span className={styles.span}>{t("icu-equipment")}</span>
-          <Image className={styles.img} src={imgIntensive} width={130} height={130} alt={t("icu-equipment")} />
-        </div>
-      </Link>
-
-      <Link href={makeHref("neonatal-equipment")}>
-        <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
-          <span className={styles.span}>{t("neonatal-equipment")}</span>
-          <Image className={styles.img} src={imgNeonat} width={130} height={130} alt={t("neonatal-equipment")} />
-        </div>
-      </Link>
-
-      <Link href={makeHref("cleaning-and-desinfecting-equipment")}>
-        <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
-          <span className={styles.span}>{t("candd-equipment")}</span>
-          <Image className={styles.img} src={imgSteriliz} width={130} height={130} alt={t("candd-equipment")} />
-        </div>
-      </Link>
-
-      <Link href={makeHref("gas-management-systems")}>
-        <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
-          <span className={styles.span}>{t("gas-systems")}</span>
-          <Image className={styles.img} src={imgMedgaz} width={130} height={130} alt={t("gas-systems")} />
-        </div>
-      </Link>
-
-      <Link href={makeHref("furniture")}>
-        <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
-          <span className={styles.span}>{t("other-equipment")}</span>
-          <Image className={styles.img} src={imgFurniture} width={130} height={130} alt={t("other-equipment")} />
-        </div>
-      </Link>
-
-      <Link href={makeHref("mri-equipment")}>
-        <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
-          <span className={styles.span}>{t("mrt")}</span>
-          <Image className={styles.img} src={imgMri} width={130} height={130} alt={t("mrt")} />
-        </div>
-      </Link>
-
-      <Link href={makeHref("accessories")}>
-        <div className={classNames("flex flex-row items-center rounded-xl mx-1", styles["block-decisions"])}>
-          <span className={styles.span}>{t("accessories")}</span>
-          <Image className={styles.img} src={imgCons} width={130} height={130} alt={t("accessories")} />
-        </div>
-      </Link>
+    <div className={classNames("grid grid-cols-1 sm:grid-cols-2 gap-5 m-5", styles.catalogContainer)}>
+      {[
+        { href: makeHref("or-equipment"),                       label: t("or-equipment"),    img: imgOper,      priority: true  },
+        { href: makeHref("icu-equipment"),                      label: t("icu-equipment"),   img: imgIntensive                  },
+        { href: makeHref("neonatal-equipment"),                 label: t("neonatal-equipment"), img: imgNeonat                  },
+        { href: makeHref("cleaning-and-desinfecting-equipment"),label: t("candd-equipment"), img: imgSteriliz                   },
+        { href: makeHref("gas-management-systems"),             label: t("gas-systems"),     img: imgMedgaz                     },
+        { href: makeHref("furniture"),                          label: t("other-equipment"), img: imgFurniture                  },
+        { href: makeHref("mri-equipment"),                      label: t("mrt"),             img: imgMri                        },
+        { href: makeHref("accessories"),                        label: t("accessories"),     img: imgCons                       },
+      ].map(({ href, label, img, priority }) => (
+        <Link key={href} href={href} className="w-full">
+          <div className={classNames("flex flex-row items-center justify-between rounded-xl", styles["block-decisions"])}>
+            <span className={styles.span}>{label}</span>
+            <Image className={styles.img} src={img} width={130} height={130} priority={priority} alt={label} />
+          </div>
+        </Link>
+      ))}
     </div>
   );
 };

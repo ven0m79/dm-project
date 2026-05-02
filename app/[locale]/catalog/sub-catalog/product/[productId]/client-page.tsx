@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { SingleProductDetails } from "../../../../../../utils/woocomerce.types";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,7 +11,7 @@ import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import { useTranslations } from "next-intl";
 import { useIsMobile } from "../../../../components/hooks/useIsMobile";
-import Loader from "../../../../components/atoms/loader/Loader";
+import ProductSkeleton from "./ProductSkeleton";
 import styles from "./Product.module.css";
 import ProductDetails from "./selectedPrice";
 
@@ -77,7 +77,42 @@ export default function ClientPage({
 
   const carouselRef = useRef<HTMLDivElement | null>(null);
   const thumbnailRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const productContentRef = useRef<HTMLDivElement | null>(null);
   const scrollContainer = useRef<HTMLDivElement | null>(null);
+  const [relatedContainerWidth, setRelatedContainerWidth] = useState<
+    number | null
+  >(null);
+  const [relatedScrollState, setRelatedScrollState] = useState({
+    hasOverflow: false,
+    canScrollPrev: false,
+    canScrollNext: false,
+  });
+
+  const updateRelatedScrollState = useCallback(() => {
+    const container = scrollContainer.current;
+
+    if (!container) {
+      setRelatedScrollState({
+        hasOverflow: false,
+        canScrollPrev: false,
+        canScrollNext: false,
+      });
+      return;
+    }
+
+    const maxScrollLeft = Math.max(
+      container.scrollWidth - container.clientWidth,
+      0,
+    );
+    const hasOverflow = maxScrollLeft > 1;
+    const scrollLeft = container.scrollLeft;
+
+    setRelatedScrollState({
+      hasOverflow,
+      canScrollPrev: hasOverflow && scrollLeft > 1,
+      canScrollNext: hasOverflow && scrollLeft < maxScrollLeft - 1,
+    });
+  }, []);
 
   // Scroll active thumbnail into view
   useEffect(() => {
@@ -91,29 +126,82 @@ export default function ClientPage({
     }
   }, [selectedImage]);
 
-  if (!details) {
-    return (
-      <div className="flex w-full h-4/5 justify-center items-center">
-        <Loader />
-      </div>
-    );
-  }
+  useEffect(() => {
+    const container = productContentRef.current;
+    if (!container) return;
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+    const updateRelatedContainerWidth = () => {
+      const nextWidth = Math.ceil(container.getBoundingClientRect().width);
+
+      setRelatedContainerWidth((previousWidth) =>
+        previousWidth === nextWidth ? previousWidth : nextWidth,
+      );
+      window.requestAnimationFrame(updateRelatedScrollState);
+    };
+
+    updateRelatedContainerWidth();
+    window.addEventListener("resize", updateRelatedContainerWidth);
+
+    const resizeObserver =
+      typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(updateRelatedContainerWidth)
+        : null;
+
+    resizeObserver?.observe(container);
+
+    return () => {
+      window.removeEventListener("resize", updateRelatedContainerWidth);
+      resizeObserver?.disconnect();
+    };
+  }, [updateRelatedScrollState]);
+
+  useEffect(() => {
+    const container = scrollContainer.current;
+    if (!container) return;
+
+    const frameId = window.requestAnimationFrame(updateRelatedScrollState);
+
+    container.addEventListener("scroll", updateRelatedScrollState, {
+      passive: true,
+    });
+    window.addEventListener("resize", updateRelatedScrollState);
+
+    const resizeObserver =
+      typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(updateRelatedScrollState)
+        : null;
+
+    resizeObserver?.observe(container);
+    Array.from(container.children).forEach((child) =>
+      resizeObserver?.observe(child),
+    );
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      container.removeEventListener("scroll", updateRelatedScrollState);
+      window.removeEventListener("resize", updateRelatedScrollState);
+      resizeObserver?.disconnect();
+    };
+  }, [relatedProducts.length, updateRelatedScrollState]);
+
   const [youtubeUrl, isAccessories] = useMemo(() => {
-    const youtubeMeta = details.meta_data?.find(
+    const youtubeMeta = details?.meta_data?.find(
       (item: any) => item.key === "_nickx_video_text_url",
     );
     const youtubeUrl = Array.isArray(youtubeMeta?.value)
       ? youtubeMeta?.value[0]
       : youtubeMeta?.value;
 
-    const isAccessories = details.tags
+    const isAccessories = details?.tags
       ?.map((el) => el.name)
       ?.includes("accessories");
 
     return [youtubeUrl, isAccessories];
-  }, [details.meta_data, details.tags]);
+  }, [details?.meta_data, details?.tags]);
+
+  if (!details) {
+    return <ProductSkeleton />;
+  }
 
   const scrollToImage = (index: number) => {
     if (index < 0 || index >= (details.images?.length ?? 0)) return;
@@ -123,11 +211,33 @@ export default function ClientPage({
   const prevImage = () => scrollToImage(selectedImage - 1);
   const nextImage = () => scrollToImage(selectedImage + 1);
 
+  const scrollRelatedProducts = (direction: -1 | 1) => {
+    const container = scrollContainer.current;
+    if (!container) return;
+
+    const firstProductCard = container.querySelector<HTMLElement>("a");
+    const gap = 16;
+    const scrollDistance = firstProductCard
+      ? firstProductCard.offsetWidth + gap
+      : container.clientWidth * 0.8;
+
+    container.scrollBy({
+      left: direction * scrollDistance,
+      behavior: "smooth",
+    });
+  };
+
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  const relatedContainerStyle = relatedContainerWidth
+    ? {
+        width: `${relatedContainerWidth}px`,
+        maxWidth: `${relatedContainerWidth}px`,
+      }
+    : undefined;
 
   return (
-    <div className="flex self-center flex-col max-w-225 mb-8">
+    <div className="flex max-w-225 min-w-0 self-center flex-col mb-8">
       {/* Основний контент */}
       <div className="flex flex-col py-1 px-2 min-h-150 flex-1">
         <AnimatePresence>
@@ -137,29 +247,30 @@ export default function ClientPage({
             exit={{ opacity: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <div className="flex flex-wrap w-full">
-              {/* 🖼️ Галерея з мініатюрами */}
-              <div className="flex flex-col w-1/2 items-center">
-                {/* Основне зображення */}
-                <div
-                  onClick={openModal}
-                  className={classNames(
-                    "relative w-full max-w-87.5 h-50 sm:h-93.75 rounded-lg overflow-hidden shadow-md flex items-center justify-center cursor-zoom-in",
-                  )}
-                >
-                  <Image
-                    src={
-                      details.images?.[selectedImage]?.src || "/placeholder.png"
-                    }
-                    alt={
-                      details.images?.[selectedImage]?.alt || details.name || ""
-                    }
-                    fill
-                    className="object-contain transition-transform duration-300 hover:scale-105 p-3"
-                    sizes="(max-width: 768px) 100vw, 350px"
-                    priority
-                  />
-                </div>
+            <div ref={productContentRef} className="w-fit max-w-full min-w-0">
+              <div className="flex flex-wrap w-full">
+                {/* 🖼️ Галерея з мініатюрами */}
+                <div className="flex flex-col w-1/2 items-center">
+                  {/* Основне зображення */}
+                  <div
+                    onClick={openModal}
+                    className={classNames(
+                      "relative w-full max-w-87.5 h-50 sm:h-93.75 rounded-lg overflow-hidden shadow-md flex items-center justify-center cursor-zoom-in",
+                    )}
+                  >
+                    <Image
+                      src={
+                        details.images?.[selectedImage]?.src || "/placeholder.png"
+                      }
+                      alt={
+                        details.images?.[selectedImage]?.alt || details.name || ""
+                      }
+                      fill
+                      className="object-contain transition-transform duration-300 hover:scale-105 p-3"
+                      sizes="(max-width: 768px) 100vw, 350px"
+                      priority
+                    />
+                  </div>
 
                 {/* Карусель мініатюр */}
                 <div className="relative w-full flex flex-col items-center my-4">
@@ -434,19 +545,29 @@ export default function ClientPage({
                 )}
               </Tabs>
             </div>
+            </div>
 
             {/* Схожі товари після Tabs */}
-            <div className="mt-6 w-full">
+            <div
+              className="mt-6 min-w-0 overflow-hidden"
+              style={relatedContainerStyle}
+            >
               <h3 className="text-lg font-semibold text-[#0061AA] mb-4">
                 Схожі товари
               </h3>
 
               {relatedProducts && relatedProducts.length > 0 ? (
-                <div className="relative w-full h-auto max-w-225 mx-auto py-1 ">
+                <div
+                  id="ccc"
+                  className="relative w-0 min-w-full max-w-full overflow-hidden py-1"
+                  style={relatedContainerStyle}
+                >
                   {/* Контейнер для скролу */}
                   <div
-                    id="related-scroll"
-                    className="flex gap-4 overflow-x-auto sm:overflow-hidden scroll-smooth no-scrollbar px-5 py-1"
+                    className={classNames(
+                      "flex w-full min-w-full max-w-full gap-4 overflow-x-auto scroll-smooth py-1",
+                      styles["no-scrollbar"],
+                    )}
                     ref={scrollContainer}
                   >
                     {relatedProducts.map((el) => {
@@ -458,15 +579,15 @@ export default function ClientPage({
                         <Link
                           key={el.id}
                           href={`/catalog/sub-catalog/product/${el.id}?category=${category}`}
-                          className="w-35 shrink-0 shadow-md rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-200 flex flex-col bg-white"
+                          className="w-35 sm:w-40 md:w-44 shrink-0 shadow-md rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-200 flex flex-col bg-white"
                         >
-                          <div className="w-full h-50 flex items-center justify-center overflow-hidden px-1">
+                          <div className="w-full h-44 sm:h-50 flex items-center justify-center overflow-hidden px-1">
                             <Image
                               width={140}
                               height={140}
                               src={imageSrc}
                               alt={el.name}
-                              className="object-contain w-full h-full p-1"
+                              className="object-contain w-full h-full p-1 hover:scale-105 transition-transform duration-200"
                             />
                           </div>
                           <div className="p-3 grow flex items-center justify-center">
@@ -479,37 +600,40 @@ export default function ClientPage({
                     })}
                   </div>
 
-                  {/* Кнопка "←" */}
-                  <button
-                    onClick={() => {
-                      const container =
-                        document.getElementById("related-scroll");
-                      if (container)
-                        container.scrollBy({
-                          left: -300,
-                          behavior: "smooth",
-                        });
-                    }}
-                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 hover:bg-gray-100 sm:hidden"
-                  >
-                    ←
-                  </button>
+                  {relatedScrollState.hasOverflow && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => scrollRelatedProducts(-1)}
+                        disabled={!relatedScrollState.canScrollPrev}
+                        aria-label="Previous related products"
+                        className={classNames(
+                          "absolute left-0 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#0061AA] shadow-md transition",
+                          relatedScrollState.canScrollPrev
+                            ? "hover:bg-gray-100 hover:scale-105"
+                            : "cursor-not-allowed opacity-40",
+                        )}
+                      >
+                        {"<"}
+                      </button>
 
-                  {/* Кнопка "→" */}
-                  <button
-                    onClick={() => {
-                      const container =
-                        document.getElementById("related-scroll");
-                      if (container)
-                        container.scrollBy({
-                          left: 300,
-                          behavior: "smooth",
-                        });
-                    }}
-                    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 hover:bg-gray-100 sm:hidden"
-                  >
-                    →
-                  </button>
+                      <button
+                        type="button"
+                        onClick={() => scrollRelatedProducts(1)}
+                        disabled={!relatedScrollState.canScrollNext}
+                        aria-label="Next related products"
+                        className={classNames(
+                          "absolute right-0 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#0061AA] shadow-md transition",
+                          relatedScrollState.canScrollNext
+                            ? "hover:bg-gray-100 hover:scale-105"
+                            : "cursor-not-allowed opacity-40",
+                        )}
+                      >
+                        {">"}
+                      </button>
+                    </>
+                  )}
+
                 </div>
               ) : (
                 <p className="text-gray-500 italic">Схожих товарів немає</p>
