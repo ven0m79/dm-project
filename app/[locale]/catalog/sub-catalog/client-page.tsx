@@ -68,10 +68,18 @@ export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategory
     });
   }, [effectiveProducts, sortMode]);
 
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredProducts = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    if (q.length < 3) return sortedProducts;
+    return sortedProducts.filter((p) => p.name.toLowerCase().includes(q));
+  }, [sortedProducts, searchQuery]);
+
   const [visibleCount, setVisibleCount] = useState(15);
   const productsToRender = useMemo(
-    () => sortedProducts.slice(0, visibleCount),
-    [sortedProducts, visibleCount],
+    () => filteredProducts.slice(0, visibleCount),
+    [filteredProducts, visibleCount],
   );
 
   const categoriesDescriptionMap = useMemo(() => {
@@ -122,7 +130,7 @@ export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategory
     <>
       <h1 className="flex flex-wrap justify-center self-start mt-4 mb-4 ml-2 text-[#002766]">{selectedCategoryName}</h1>
 
-      <div className="flex items-center gap-2 ml-2 mb-3">
+      <div className="flex flex-wrap items-center gap-2 ml-2 mb-3">
         <select
           value={sortMode}
           onChange={(e) => { setSortMode(e.target.value as SortMode); setVisibleCount(15); }}
@@ -132,6 +140,13 @@ export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategory
             <option key={value} value={value}>{label}</option>
           ))}
         </select>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => { setSearchQuery(e.target.value); setVisibleCount(15); }}
+          placeholder="Пошук (від 3 символів)..."
+          className="text-sm text-[#0061AA] border border-[#0061AA] rounded px-2 py-1 bg-white outline-none focus:ring-1 focus:ring-[#0061AA] w-52"
+        />
       </div>
 
       <div className="flex flex-wrap justify-start self-start mt-4 mb-4 ml-2 items-start">
@@ -197,7 +212,7 @@ export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategory
         })}
       </div>
 
-      {sortedProducts.length > visibleCount && (
+      {filteredProducts.length > visibleCount && (
         <div className="flex flex-1 w-full self-center items-center justify-center">
           <button
             className={classNames("justify-center", styles.downloadable)}
