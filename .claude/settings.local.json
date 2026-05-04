@@ -34,7 +34,9 @@
       "Bash(git merge *)",
       "Bash(git push *)",
       "Bash(curl -X POST https://test.dm-project.com.ua/api/admin/sync -H \"Authorization: Bearer 8dd8059d9e2b785026dd51a8d0c81cef63f0d6d350cd34cfb405ccf552e3566c\" -H \"Content-Type: application/json\" --max-time 360 -w \"\\\\nHTTP Status: %{http_code}\\\\nTime: %{time_total}s\\\\n\")",
-      "Bash(curl -L -X POST https://test.dm-project.com.ua/api/admin/sync -H \"Authorization: Bearer 8dd8059d9e2b785026dd51a8d0c81cef63f0d6d350cd34cfb405ccf552e3566c\" -H \"Content-Type: application/json\" --max-time 360 -w \"\\\\nHTTP Status: %{http_code}\\\\nTime: %{time_total}s\\\\n\")"
+      "Bash(curl -L -X POST https://test.dm-project.com.ua/api/admin/sync -H \"Authorization: Bearer 8dd8059d9e2b785026dd51a8d0c81cef63f0d6d350cd34cfb405ccf552e3566c\" -H \"Content-Type: application/json\" --max-time 360 -w \"\\\\nHTTP Status: %{http_code}\\\\nTime: %{time_total}s\\\\n\")",
+      "Bash(git pull *)",
+      "Bash(dir \"c:\\\\Users\\\\schur\\\\Desktop\\\\dm-project\\\\app\\\\[locale]\\\\catalog\\\\sub-catalog\" /b)"
     ]
   }
 }
