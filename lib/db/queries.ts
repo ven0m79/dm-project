@@ -1,7 +1,7 @@
 import "server-only";
 
 import { unstable_cache } from "next/cache";
-import { eq, and, inArray } from "drizzle-orm";
+import { eq, and, inArray, asc } from "drizzle-orm";
 import { db } from "./client";
 import {
   wc_categories,
@@ -90,7 +90,8 @@ export const getCategoriesFromDb = unstable_cache(
     const rows = await db()
       .select()
       .from(wc_categories)
-      .where(eq(wc_categories.locale, locale));
+      .where(eq(wc_categories.locale, locale))
+      .orderBy(asc(wc_categories.id));
     return rows.map(mapCategoryRow);
   },
   ["categories-from-db"],
