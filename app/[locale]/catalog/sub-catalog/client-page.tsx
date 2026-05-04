@@ -50,7 +50,7 @@ export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategory
   // Use sidebar products once loaded; fall back to SSR-provided initialProducts
   const effectiveProducts = selectedProducts.length > 0 ? selectedProducts : (initialProducts ?? []);
 
-  const [sortMode, setSortMode] = useState<SortMode>("az");
+  const [sortMode, setSortMode] = useState<SortMode>("order");
 
   const normalizeOrder = (order?: number) =>
     !order || order === 0 ? Number.MAX_SAFE_INTEGER : order;
@@ -122,20 +122,16 @@ export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategory
     <>
       <h1 className="flex flex-wrap justify-center self-start mt-4 mb-4 ml-2 text-[#002766]">{selectedCategoryName}</h1>
 
-      <div className="flex flex-wrap gap-3 ml-2 mb-3">
-        {SORT_OPTIONS.map(({ value, label }) => (
-          <label key={value} className="flex items-center gap-1.5 cursor-pointer select-none text-sm text-[#0061AA]">
-            <input
-              type="radio"
-              name="sort"
-              value={value}
-              checked={sortMode === value}
-              onChange={() => { setSortMode(value); setVisibleCount(15); }}
-              className="accent-[#0061AA] w-4 h-4 cursor-pointer"
-            />
-            {label}
-          </label>
-        ))}
+      <div className="flex items-center gap-2 ml-2 mb-3">
+        <select
+          value={sortMode}
+          onChange={(e) => { setSortMode(e.target.value as SortMode); setVisibleCount(15); }}
+          className="text-sm text-[#0061AA] border border-[#0061AA] rounded px-2 py-1 bg-white cursor-pointer outline-none focus:ring-1 focus:ring-[#0061AA]"
+        >
+          {SORT_OPTIONS.map(({ value, label }) => (
+            <option key={value} value={value}>{label}</option>
+          ))}
+        </select>
       </div>
 
       <div className="flex flex-wrap justify-start self-start mt-4 mb-4 ml-2 items-start">
