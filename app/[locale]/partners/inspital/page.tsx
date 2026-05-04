@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { getAlternates } from "../../components/atoms/hreflang/hreflang";
 import { ClientPage } from "./client-page";
-import { getProductsByBrandCached } from "../../../../utils/woo.server";
-
-export const revalidate = 300;
+import { getProductsByBrandFromDb } from "../../../../lib/db/queries";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -40,7 +38,7 @@ export default async function Page({ params }: PageProps) {
   const BRAND_ID = 1109;
   const CATEGORY_IDS = [277];
 
-  const filtered = await getProductsByBrandCached(lang, CATEGORY_IDS, BRAND_ID);
+  const filtered = await getProductsByBrandFromDb(lang, BRAND_ID, CATEGORY_IDS);
 
   return (
     <ClientPage

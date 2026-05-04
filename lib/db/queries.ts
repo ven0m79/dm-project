@@ -1,7 +1,7 @@
 import "server-only";
 
 import { unstable_cache } from "next/cache";
-import { eq, and, inArray, asc } from "drizzle-orm";
+import { eq, and, inArray, asc, sql } from "drizzle-orm";
 import { db } from "./client";
 import {
   wc_categories,
@@ -242,6 +242,73 @@ export const getRelatedProductsFromDb = unstable_cache(
     return fetchProductsWithImages(locale, relatedIds);
   },
   ["related-products-from-db"],
+  { tags: ["catalog"], revalidate: false },
+);
+
+export const getProductsByBrandFromDb = unstable_cache(
+  async (
+    locale: string,
+    brandId: number,
+    categoryIds: number[],
+  ): Promise<SingleProductDetails[]> => {
+    let scopedProductIds: number[] | null = null;
+
+    if (categoryIds.length > 0) {
+      const allCats = await db()
+        .select({ id: wc_categories.id, parent_id: wc_categories.parent_id })
+        .from(wc_categories)
+        .where(eq(wc_categories.locale, locale));
+
+      const childMap = new Map<number, number[]>();
+      for (const cat of allCats) {
+        const p = cat.parent_id ?? 0;
+        const list = childMap.get(p) ?? [];
+        list.push(cat.id);
+        childMap.set(p, list);
+      }
+
+      const allIds = new Set<number>(categoryIds);
+      const queue = [...categoryIds];
+      while (queue.length) {
+        const current = queue.shift()!;
+        for (const child of childMap.get(current) ?? []) {
+          if (!allIds.has(child)) { allIds.add(child); queue.push(child); }
+        }
+      }
+
+      const productCats = await db()
+        .select({ product_id: wc_product_categories.product_id })
+        .from(wc_product_categories)
+        .where(
+          and(
+            eq(wc_product_categories.locale, locale),
+            inArray(wc_product_categories.category_id, [...allIds]),
+          ),
+        );
+
+      scopedProductIds = [...new Set(productCats.map((r) => r.product_id))];
+      if (!scopedProductIds.length) return [];
+    }
+
+    const branded = await db()
+      .select({ id: wc_products.id })
+      .from(wc_products)
+      .where(
+        scopedProductIds
+          ? and(
+              eq(wc_products.locale, locale),
+              inArray(wc_products.id, scopedProductIds),
+              sql`${wc_products.brands}::jsonb @> ${JSON.stringify([{ id: brandId }])}::jsonb`,
+            )
+          : and(
+              eq(wc_products.locale, locale),
+              sql`${wc_products.brands}::jsonb @> ${JSON.stringify([{ id: brandId }])}::jsonb`,
+            ),
+      );
+
+    return fetchProductsWithImages(locale, branded.map((p) => p.id));
+  },
+  ["products-by-brand-from-db"],
   { tags: ["catalog"], revalidate: false },
 );
 
