@@ -11,7 +11,7 @@ import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import { useTranslations } from "next-intl";
 import { useIsMobile } from "../../../../components/hooks/useIsMobile";
-import ProductSkeleton from "./ProductSkeleton";
+// import ProductSkeleton from "./ProductSkeleton";
 import styles from "./Product.module.css";
 import ProductDetails from "./selectedPrice";
 
@@ -199,9 +199,7 @@ export default function ClientPage({
     return [youtubeUrl, isAccessories];
   }, [details?.meta_data, details?.tags]);
 
-  if (!details) {
-    return <ProductSkeleton />;
-  }
+  if (!details) return null;
 
   const scrollToImage = (index: number) => {
     if (index < 0 || index >= (details.images?.length ?? 0)) return;

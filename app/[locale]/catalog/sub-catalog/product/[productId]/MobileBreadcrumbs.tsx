@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import type { BreadcrumbItem } from "../../../../../../utils/woo.server";
+import type { BreadcrumbItem } from "../../../../../../lib/db/queries";
 
 interface Props {
   breadcrumbs: BreadcrumbItem[];

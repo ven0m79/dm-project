@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useMemo, useState, useEffect } from "react";
-import CatalogSkeleton from "./CatalogSkeleton";
+// import CatalogSkeleton from "./CatalogSkeleton";
 import classNames from "classnames";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useSidebar } from "../../components/contexts/products-sidebar/products-sidebar.context";
@@ -35,10 +35,22 @@ export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategory
   const searchParams = useSearchParams();
 
   const categoryFromUrl = searchParams?.get("category") ?? initialCategorySlug ?? "";
-  const categoryId = useMemo(
-    () => (currentIdsData as Record<string, number>)[categoryFromUrl],
-    [categoryFromUrl, currentIdsData],
-  );
+  const categoryId = useMemo(() => {
+    if (!categoryFromUrl) return undefined;
+    const fromMap = (currentIdsData as Record<string, number>)[categoryFromUrl];
+    if (fromMap) return fromMap;
+    // Slug not in hardcoded map — search the loaded category tree by slug
+    const search = (cats: TransformedCategoriesType[]): number | undefined => {
+      for (const cat of cats) {
+        if (cat.slug === categoryFromUrl) return cat.id;
+        if (cat.childrens?.length) {
+          const found = search(cat.childrens);
+          if (found) return found;
+        }
+      }
+    };
+    return search(categories);
+  }, [categoryFromUrl, currentIdsData, categories]);
 
   useEffect(() => {
     if (!categoryId) return;
@@ -118,9 +130,9 @@ export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategory
     return categoriesNameMap.get(categoryId) || selectedCategory;
   }, [categoryId, categoriesNameMap, selectedCategory]);
 
-  if (!effectiveProducts.length) {
-    return <CatalogSkeleton />;
-  }
+  // if (!effectiveProducts.length) {
+  //   return <CatalogSkeleton />;
+  // }
 
   const SORT_OPTIONS: { value: SortMode; label: string }[] = [
     { value: "order", label: "По порядку" },
