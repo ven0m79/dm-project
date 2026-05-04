@@ -1,4 +1,4 @@
-import { buildBreadcrumbTrail } from "../../../../../utils/woo.server";
+import { buildBreadcrumbTrailFromDb } from "../../../../../lib/db/queries";
 import DesktopBreadcrumbs from "../../../catalog/sub-catalog/product/[productId]/DesktopBreadcrumbs";
 import MobileBreadcrumbs from "../../../catalog/sub-catalog/product/[productId]/MobileBreadcrumbs";
 
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default async function Breadcrumbs({ categorySlug, locale }: Props) {
-  const breadcrumbs = await buildBreadcrumbTrail(locale, categorySlug);
+  const breadcrumbs = await buildBreadcrumbTrailFromDb(locale, categorySlug);
 
   return (
     <div className="mt-6 left-0 w-full">

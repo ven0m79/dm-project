@@ -9,7 +9,9 @@ import {
   wc_product_images,
   wc_product_categories,
 } from "./schema";
-import type { WCCategory, BreadcrumbItem } from "../../utils/woo.server";
+import type { WCCategory } from "../../utils/woo.server";
+
+export type BreadcrumbItem = { id: number | string; name: string; url: string };
 import type { SingleProductDetails } from "../../utils/woocomerce.types";
 
 // ─── Internal mappers ───────────────────────────────────────────────────────

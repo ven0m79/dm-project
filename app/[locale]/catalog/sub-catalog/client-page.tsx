@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useMemo, useState, useEffect } from "react";
-import CatalogSkeleton from "./CatalogSkeleton";
+// import CatalogSkeleton from "./CatalogSkeleton";
 import classNames from "classnames";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useSidebar } from "../../components/contexts/products-sidebar/products-sidebar.context";
@@ -35,10 +35,22 @@ export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategory
   const searchParams = useSearchParams();
 
   const categoryFromUrl = searchParams?.get("category") ?? initialCategorySlug ?? "";
-  const categoryId = useMemo(
-    () => (currentIdsData as Record<string, number>)[categoryFromUrl],
-    [categoryFromUrl, currentIdsData],
-  );
+  const categoryId = useMemo(() => {
+    if (!categoryFromUrl) return undefined;
+    const fromMap = (currentIdsData as Record<string, number>)[categoryFromUrl];
+    if (fromMap) return fromMap;
+    // Slug not in hardcoded map — search the loaded category tree by slug
+    const search = (cats: TransformedCategoriesType[]): number | undefined => {
+      for (const cat of cats) {
+        if (cat.slug === categoryFromUrl) return cat.id;
+        if (cat.childrens?.length) {
+          const found = search(cat.childrens);
+          if (found) return found;
+        }
+      }
+    };
+    return search(categories);
+  }, [categoryFromUrl, currentIdsData, categories]);
 
   useEffect(() => {
     if (!categoryId) return;
@@ -118,37 +130,43 @@ export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategory
     return categoriesNameMap.get(categoryId) || selectedCategory;
   }, [categoryId, categoriesNameMap, selectedCategory]);
 
-  if (!effectiveProducts.length) {
-    return <CatalogSkeleton />;
-  }
+  // if (!effectiveProducts.length) {
+  //   return <CatalogSkeleton />;
+  // }
 
   const SORT_OPTIONS: { value: SortMode; label: string }[] = [
     { value: "order", label: "По порядку" },
-    { value: "az",    label: "А → Я" },
-    { value: "za",    label: "Я → А" },
+    { value: "az", label: "А → Я" },
+    { value: "za", label: "Я → А" },
   ];
 
   return (
     <>
       <h1 className="flex flex-wrap justify-center self-start mt-4 mb-4 ml-2 text-[#002766]">{selectedCategoryName}</h1>
 
-      <div className="flex flex-wrap items-center gap-2 ml-2 mb-3">
-        <select
-          value={sortMode}
-          onChange={(e) => { setSortMode(e.target.value as SortMode); setVisibleCount(15); }}
-          className="text-sm text-[#0061AA] border border-[#0061AA] rounded px-2 py-1 bg-white cursor-pointer outline-none focus:ring-1 focus:ring-[#0061AA]"
-        >
-          {SORT_OPTIONS.map(({ value, label }) => (
-            <option key={value} value={value}>{label}</option>
-          ))}
-        </select>
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => { setSearchQuery(e.target.value); setVisibleCount(15); }}
-          placeholder="Пошук (від 3 символів)..."
-          className="text-sm text-[#0061AA] border border-[#0061AA] rounded px-2 py-1 bg-white outline-none focus:ring-1 focus:ring-[#0061AA] w-52"
-        />
+      <div className="flex flex-wrap items-center justify-around gap-2 ml-4 mb-3">
+        <div className="flex flex-1 justify-center ">
+          <span className="flex pr-2">Сортування</span>
+          <select
+            value={sortMode}
+            onChange={(e) => { setSortMode(e.target.value as SortMode); setVisibleCount(15); }}
+            className="text-sm text-[#0061AA] border border-[#0061AA] rounded px-2 py-1 bg-white cursor-pointer outline-none focus:ring-1 focus:ring-[#0061AA]"
+          >
+            {SORT_OPTIONS.map(({ value, label }) => (
+              <option key={value} value={value}>{label}</option>
+            ))}
+          </select>
+        </div>
+        <div className="flex flex-1 justify-center">
+          <span className="pr-2">Фільтрація</span>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => { setSearchQuery(e.target.value); setVisibleCount(15); }}
+            placeholder="Пошук (від 3 символів)..."
+            className="text-sm text-[#0061AA] border border-[#0061AA] rounded px-2 py-1 bg-white outline-none focus:ring-1 focus:ring-[#0061AA] w-52"
+          />
+        </div>
       </div>
 
       <div className="flex flex-wrap justify-start self-start mt-4 mb-4 ml-2 items-start">

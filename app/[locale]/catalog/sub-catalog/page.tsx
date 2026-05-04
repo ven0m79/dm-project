@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { getAlternates } from "../../components/atoms/hreflang/hreflang";
 import { ClientPage } from "./client-page";
-import CatalogSkeleton from "./CatalogSkeleton";
+// import CatalogSkeleton from "./CatalogSkeleton";
 import { getCategoryBySlugFromDb, getProductsByCategoryIdFromDb, buildBreadcrumbTrailFromDb } from "../../../../lib/db/queries";
 import DesktopBreadcrumbs from "./product/[productId]/DesktopBreadcrumbs";
 import MobileBreadcrumbs from "./product/[productId]/MobileBreadcrumbs";
@@ -96,7 +96,7 @@ export default async function Page(
         />
       </div>
 
-      <Suspense fallback={<CatalogSkeleton />}>
+      <Suspense fallback={null}>
         <ClientPage
           locale={locale}
           initialProducts={initialProducts}
