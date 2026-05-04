@@ -73,7 +73,9 @@ export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategory
   const filteredProducts = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
     if (q.length < 3) return sortedProducts;
-    return sortedProducts.filter((p) => p.name.toLowerCase().includes(q));
+    return sortedProducts.filter(
+      (p) => p.name.toLowerCase().includes(q) || p.sku.toLowerCase().includes(q),
+    );
   }, [sortedProducts, searchQuery]);
 
   const [visibleCount, setVisibleCount] = useState(15);
