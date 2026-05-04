@@ -26,7 +26,7 @@ const Content: FC<{ children: ReactNode; locale: string }> = ({ children, locale
   return (
     <div className={classNames("flex flex-1 flex-row justify-between self-center mb-5 mt-5 mx-2", styles.subCatalog)}>
       {/* Left panel */}
-      {typeof window !== "undefined" && isMobile ? (
+      {isMobile ? (
         <>
           <button
             className={classNames("absolute top-52 left-2 z-30 bg-transparent text-[#0061AA] p-2 rounded-md", styles.buttons)}
@@ -63,7 +63,7 @@ const Content: FC<{ children: ReactNode; locale: string }> = ({ children, locale
       <div className="w-screen">{children}</div>
 
       {/* Right panel */}
-      {typeof window !== "undefined" && isMobile ? (
+      {isMobile ? (
         <>
           <button
             className={classNames("absolute top-52 right-2 z-30 bg-transparent text-[#0061AA] p-2 rounded-md", styles.buttons)}
