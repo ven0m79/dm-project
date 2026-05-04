@@ -12,6 +12,8 @@ import { TransformedCategoriesType } from "./helpers";
 import { isIOS } from "../../../../utils/constants";
 import type { SingleProductDetails } from "../../../../utils/woocomerce.types";
 
+type SortMode = "order" | "az" | "za";
+
 type Props = {
   locale: string;
   initialProducts?: SingleProductDetails[];
@@ -48,6 +50,8 @@ export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategory
   // Use sidebar products once loaded; fall back to SSR-provided initialProducts
   const effectiveProducts = selectedProducts.length > 0 ? selectedProducts : (initialProducts ?? []);
 
+  const [sortMode, setSortMode] = useState<SortMode>("az");
+
   const normalizeOrder = (order?: number) =>
     !order || order === 0 ? Number.MAX_SAFE_INTEGER : order;
 
@@ -56,17 +60,13 @@ export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategory
       const aIsAccessories = a.tags?.some((t) => t.name === "accessories");
       const bIsAccessories = b.tags?.some((t) => t.name === "accessories");
 
-      if (aIsAccessories && bIsAccessories) {
-        return normalizeOrder(a.menu_order) - normalizeOrder(b.menu_order);
-      }
+      if (aIsAccessories !== bIsAccessories) return aIsAccessories ? 1 : -1;
 
-      if (aIsAccessories || bIsAccessories) {
-        return 0;
-      }
-
+      if (sortMode === "order") return normalizeOrder(a.menu_order) - normalizeOrder(b.menu_order);
+      if (sortMode === "za") return b.name.localeCompare(a.name);
       return a.name.localeCompare(b.name);
     });
-  }, [effectiveProducts]);
+  }, [effectiveProducts, sortMode]);
 
   const [visibleCount, setVisibleCount] = useState(15);
   const productsToRender = useMemo(
@@ -112,9 +112,32 @@ export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategory
     return <CatalogSkeleton />;
   }
 
+  const SORT_OPTIONS: { value: SortMode; label: string }[] = [
+    { value: "order", label: "По порядку" },
+    { value: "az",    label: "А → Я" },
+    { value: "za",    label: "Я → А" },
+  ];
+
   return (
     <>
       <h1 className="flex flex-wrap justify-center self-start mt-4 mb-4 ml-2 text-[#002766]">{selectedCategoryName}</h1>
+
+      <div className="flex flex-wrap gap-3 ml-2 mb-3">
+        {SORT_OPTIONS.map(({ value, label }) => (
+          <label key={value} className="flex items-center gap-1.5 cursor-pointer select-none text-sm text-[#0061AA]">
+            <input
+              type="radio"
+              name="sort"
+              value={value}
+              checked={sortMode === value}
+              onChange={() => { setSortMode(value); setVisibleCount(15); }}
+              className="accent-[#0061AA] w-4 h-4 cursor-pointer"
+            />
+            {label}
+          </label>
+        ))}
+      </div>
+
       <div className="flex flex-wrap justify-start self-start mt-4 mb-4 ml-2 items-start">
         {productsToRender.map((el, index) => {
           const isAccessories = el.tags?.some((t) => t.name === "accessories");
