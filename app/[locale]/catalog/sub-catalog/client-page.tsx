@@ -9,7 +9,6 @@ import styles from "./Sub-catalog.module.css";
 import { getCategoriesIds } from "../../components/constants";
 import Image from "next/image";
 import { TransformedCategoriesType } from "./helpers";
-import { isIOS } from "../../../../utils/constants";
 import type { SingleProductDetails } from "../../../../utils/woocomerce.types";
 
 type SortMode = "order" | "az" | "za";
@@ -194,10 +193,7 @@ export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategory
               <div className="w-full text-center">
                 <div
                   className="cursor-pointer"
-                  onClick={() => {
-                    if (isIOS) router.push(url);
-                    else window.location.href = url;
-                  }}
+                  onClick={() => router.push(url)}
                 >
                   <div className="w-full px-2">
                     {el.sku.length > 7 ? `${el.sku.slice(0, 7)}..` : el.sku}
