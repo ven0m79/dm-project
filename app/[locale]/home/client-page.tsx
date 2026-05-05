@@ -86,15 +86,8 @@ export const ClientPage = ({
 
           {/* Карта України */}
           <div className="flex justify-center items-center w-full">
-            <div
-              className="min-w-[320px] w-full flex justify-center"
-              style={{ height: isMobile ? "250px" : "400px" }}
-            >
-              {isMobile ? (
-                <MapOfUkraine locale={locale} />
-              ) : (
-                <MapOfUkraine locale={locale} />
-              )}
+            <div className="min-w-[320px] w-full flex justify-center h-62.5 sm:h-100">
+              <MapOfUkraine locale={locale} />
             </div>
           </div>
         </div>
