@@ -17,6 +17,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const entries: MetadataRoute.Sitemap = [];
 
+  const brandSlugs = ["atos", "dreger", "fsn", "inspital", "lojer", "mimp", "prohs", "renosem"];
+
   // Static pages
   entries.push(
     { url: BASE, changeFrequency: "weekly", priority: 1.0 },
@@ -24,6 +26,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/catalog`, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE}/en/catalog`, changeFrequency: "weekly", priority: 0.9 },
   );
+
+  // Brand/partner pages
+  for (const slug of brandSlugs) {
+    entries.push(
+      { url: `${BASE}/partners/${slug}`, changeFrequency: "monthly", priority: 0.7 },
+      { url: `${BASE}/en/partners/${slug}`, changeFrequency: "monthly", priority: 0.7 },
+    );
+  }
 
   // Category pages (UA — no prefix)
   for (const slug of uaCategorySlugs) {
