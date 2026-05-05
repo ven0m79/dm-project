@@ -1,7 +1,6 @@
 ﻿"use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { useLocale } from "next-intl";
 import { usePathname } from "../../../../i18n/navigation";
 import type {
@@ -150,10 +149,15 @@ async function translateProductPath(
 
 export function useLocaleSwitcherHrefs() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const locale = useLocale();
-  const search = searchParams?.toString() ?? "";
-  const categorySlug = searchParams?.get("category") ?? "";
+  const [search, setSearch] = useState("");
+  const [categorySlug, setCategorySlug] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setSearch(params.toString());
+    setCategorySlug(params.get("category") ?? "");
+  }, []);
 
   const fallbackHrefs = useMemo<LocaleSwitcherHrefs>(
     () => ({

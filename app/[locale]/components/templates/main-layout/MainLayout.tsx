@@ -28,7 +28,7 @@ const MainLayout: FC<MainLayoutProps> = ({
       <main className={styles.main}>
         {noHeader ? null : <HeaderWrapper />}
         <div className="sm:h-12.5 h-0">
-          {noNav ? null : <Nav />}
+          {noNav ? null : <Suspense fallback={null}><Nav /></Suspense>}
         </div>
         <div className="flex flex-1 w-full items-center justify-center">
           {children}

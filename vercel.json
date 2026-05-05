@@ -1,0 +1,5 @@
+{
+  "functions": {
+    "app/api/admin/sync/route.ts": { "maxDuration": 300 }
+  }
+}

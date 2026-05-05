@@ -84,10 +84,11 @@ const Content: FC<SidebarProps> = ({
   } = useSidebar();
 
   // ✅ Вибір "кореневих" елементів залежно від мови
-  const items = useMemo(
-    () => (locale === "ua" ? [categories?.[1] || []] : [categories?.[0] || []]),
-    [categories, locale],
-  );
+  const items = useMemo(() => {
+    const parentId = locale === "ua" ? LEFT_BAR_PARENT_ID : LEFT_BAR_PARENT_ID_EN;
+    const found = categories?.find((cat) => cat.id === parentId);
+    return found ? [found] : [];
+  }, [categories, locale]);
 
   // ✅ Оновлений toggle
   const handleCollapseToggle = (category: TransformedCategoriesType) => {

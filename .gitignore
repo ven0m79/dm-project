@@ -25,6 +25,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env
 .env*.local
 
 # vercel
@@ -35,3 +36,7 @@ yarn-error.log*
 next-env.d.ts
 Claude.md
 .agent.md
+
+
+# Contentlayer
+.contentlayer

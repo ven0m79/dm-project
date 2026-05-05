@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { cache } from "react";
 import { notFound } from "next/navigation";
 import { getAlternates } from "../../../../components/atoms/hreflang/hreflang";
 
@@ -7,31 +6,37 @@ import ClientPage from "./client-page";
 import DesktopBreadcrumbs from "./DesktopBreadcrumbs";
 import MobileBreadcrumbs from "./MobileBreadcrumbs";
 import {
-  fetchWooCommerceProductDetails,
-  fetchWooCommerceCrossProductsDetails,
-} from "../../../../../../utils/woocommerce.setup";
-import { buildBreadcrumbTrail } from "../../../../../../utils/woo.server";
+  getProductByIdFromDb,
+  getRelatedProductsFromDb,
+  buildBreadcrumbTrailFromDb,
+  getAllProductIdsByLocale,
+} from "../../../../../../lib/db/queries";
 
 type Props = {
   params: Promise<{ locale: string; productId: string }>;
   searchParams: Promise<{ category?: string }>;
 };
 
-export const revalidate = 3600; // кеш на 1 годину
+export const revalidate = 3600;
+export const dynamicParams = true;
 
-// Shared, memoized data loader for this route
-const getProduct = cache(async (id: number, locale: string) => {
-  const product = await fetchWooCommerceProductDetails(id, locale);
-  return product ?? null;
-});
+export async function generateStaticParams() {
+  const [ua, en] = await Promise.all([
+    getAllProductIdsByLocale("ua"),
+    getAllProductIdsByLocale("en"),
+  ]);
+  return [
+    ...ua.map((id) => ({ locale: "ua", productId: String(id) })),
+    ...en.map((id) => ({ locale: "en", productId: String(id) })),
+  ];
+}
 
-// SEO metadata
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { productId, locale } = await params;
   const { category } = await searchParams;
   const id = Number(productId);
 
-  const product = await getProduct(id, locale);
+  const product = await getProductByIdFromDb(locale, id);
 
   if (!product) {
     return { title: "Product", description: "" };
@@ -54,36 +59,31 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   };
 }
 
-// Main SSR page
 export default async function Page({ params, searchParams }: Props) {
-  const resolvedParams = await params; // обов'язково unwrap
+  const resolvedParams = await params;
   const { productId, locale } = resolvedParams;
   const { category: categorySlug } = await searchParams;
   const id = Number(productId);
 
-  const product = await getProduct(id, locale);
+  const product = await getProductByIdFromDb(locale, id);
 
   if (!product) {
-    notFound(); // Next.js 16 404
+    notFound();
   }
 
-  // Use the URL category if present; fall back to the product's first assigned category
   const effectiveCategorySlug = categorySlug ?? product.categories?.[0]?.slug;
 
+  const crossSellIds = product.cross_sell_ids?.map((v: any) =>
+    typeof v === "object" ? v.id : v
+  ) ?? [];
+  const relatedIds = product.related_ids?.map((v: any) =>
+    typeof v === "object" ? v.id : v
+  ) ?? [];
+
   const [crossSellProducts, relatedProducts, breadcrumbs] = await Promise.all([
-    product.cross_sell_ids?.length > 0
-      ? fetchWooCommerceCrossProductsDetails(
-          product.cross_sell_ids.map((id: any) => (typeof id === "object" ? id.id : id)),
-          locale
-        )
-      : Promise.resolve([]),
-    product.related_ids?.length > 0
-      ? fetchWooCommerceCrossProductsDetails(
-          product.related_ids.map((id: any) => (typeof id === "object" ? id.id : id)),
-          locale
-        )
-      : Promise.resolve([]),
-    buildBreadcrumbTrail(locale, effectiveCategorySlug, product.name, product.id),
+    crossSellIds.length > 0 ? getRelatedProductsFromDb(locale, crossSellIds) : Promise.resolve([]),
+    relatedIds.length > 0 ? getRelatedProductsFromDb(locale, relatedIds) : Promise.resolve([]),
+    buildBreadcrumbTrailFromDb(locale, effectiveCategorySlug, product.name, product.id),
   ]);
 
   return (
