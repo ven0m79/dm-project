@@ -38,7 +38,11 @@
       "Bash(git pull *)",
       "Bash(dir \"c:\\\\Users\\\\schur\\\\Desktop\\\\dm-project\\\\app\\\\[locale]\\\\catalog\\\\sub-catalog\" /b)",
       "Bash(del \"c:\\\\Users\\\\schur\\\\Desktop\\\\dm-project\\\\app\\\\[locale]\\\\components\\\\atoms\\\\breadcrumbs\\\\breadcrumbs.tsx\")",
-      "Bash(git rm *)"
+      "Bash(git rm *)",
+      "Bash(cat .env-example)",
+      "Bash(cat .env.example)",
+      "Bash(find /c/Users/schur/Desktop/dm-project/app/[locale]/catalog/sub-catalog/product/[productId] -maxdepth 1 -name \"*layout*\")",
+      "Bash(find /c/Users/schur/Desktop/dm-project/app/[locale]/components/templates -name \"*\" -type f)"
     ]
   }
 }
