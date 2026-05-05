@@ -97,10 +97,10 @@ export default function Slider({ locale }: { locale: string }) {
         </motion.div>
       </AnimatePresence>
 
-      <div className="next" onClick={() => paginate(1)}>
+      <div className="next text-white" onClick={() => paginate(1)}>
         {">"}
       </div>
-      <div className="prev" onClick={() => paginate(-1)}>
+      <div className="prev text-white" onClick={() => paginate(-1)}>
         {">"}
       </div>
     </div>
