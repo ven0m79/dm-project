@@ -42,7 +42,9 @@
       "Bash(cat .env-example)",
       "Bash(cat .env.example)",
       "Bash(find /c/Users/schur/Desktop/dm-project/app/[locale]/catalog/sub-catalog/product/[productId] -maxdepth 1 -name \"*layout*\")",
-      "Bash(find /c/Users/schur/Desktop/dm-project/app/[locale]/components/templates -name \"*\" -type f)"
+      "Bash(find /c/Users/schur/Desktop/dm-project/app/[locale]/components/templates -name \"*\" -type f)",
+      "Bash(npx next *)",
+      "Bash(npx eslint *)"
     ]
   }
 }
