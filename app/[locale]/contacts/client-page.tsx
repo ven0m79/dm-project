@@ -1,5 +1,5 @@
 'use client'
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from './Contacts.module.css';
 import classNames from "classnames";
 import { MainLayout } from "../components/templates";
@@ -33,13 +33,8 @@ export const ClientPage = () => {
   //const searchParams = useSearchParams();
   const [isProductFromUrl, setIsProductFromUrl] = useState(false); // ✅ новий стейт
 
-  const [isClient, setIsClient] = useState(false);
   const [nameError, setNameError] = useState('');
   const [mobileError, setMobileError] = useState('');
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -183,8 +178,7 @@ export const ClientPage = () => {
             </div>
           </div>
           <div className="flex flex-1 w-1/2">
-            {isClient && (
-              <form onSubmit={handleSubmit} className={styles.container}>
+            <form onSubmit={handleSubmit} className={styles.container}>
                 <div className={styles.sendUsMessage}>{t('contact-form-title')}</div>
                 <input
                   className={classNames("h-10", styles.form)}
@@ -280,7 +274,6 @@ export const ClientPage = () => {
                 </button>
                 {status && <p className="mt-2 text-sm text-green-600">{status}</p>}
               </form>
-            )}
           </div>
         </div>
       </div>

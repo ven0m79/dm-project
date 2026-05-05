@@ -97,6 +97,7 @@ export default async function Page({ params, searchParams }: Props) {
 
       <ClientPage
         params={resolvedParams}
+        categorySlug={effectiveCategorySlug}
         serverData={{
           details: product,
           crossSellProducts,

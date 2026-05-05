@@ -14,6 +14,9 @@ import { useIsMobile } from "../../../../components/hooks/useIsMobile";
 // import ProductSkeleton from "./ProductSkeleton";
 import styles from "./Product.module.css";
 import ProductDetails from "./selectedPrice";
+import { useSidebar } from "../../../../components/contexts/products-sidebar/products-sidebar.context";
+import { getCategoriesIds } from "../../../../components/constants";
+import type { TransformedCategoriesType } from "../../helpers";
 
 const customTheme: CustomFlowbiteTheme = {
   tabs: {
@@ -53,6 +56,7 @@ const customTheme: CustomFlowbiteTheme = {
 
 type ClientPageProps = {
   params: { locale: string };
+  categorySlug?: string;
   serverData: {
     details: SingleProductDetails | null;
     crossSellProducts: SingleProductDetails[];
@@ -62,10 +66,43 @@ type ClientPageProps = {
 
 export default function ClientPage({
   params: { locale },
+  categorySlug,
   serverData,
 }: ClientPageProps) {
   const t = useTranslations("Product");
   const isMobile = useIsMobile();
+
+  const {
+    setSelectedCategoryId,
+    setOpenedCategoryIds,
+    setSelectedCategory,
+    categories,
+  } = useSidebar();
+
+  const currentIdsData = useMemo(() => getCategoriesIds(locale), [locale]);
+
+  const categoryId = useMemo(() => {
+    if (!categorySlug) return undefined;
+    const fromMap = (currentIdsData as Record<string, number>)[categorySlug];
+    if (fromMap) return fromMap;
+    const search = (cats: TransformedCategoriesType[]): number | undefined => {
+      for (const cat of cats) {
+        if (cat.slug === categorySlug) return cat.id;
+        if (cat.childrens?.length) {
+          const found = search(cat.childrens);
+          if (found) return found;
+        }
+      }
+    };
+    return search(categories);
+  }, [categorySlug, currentIdsData, categories]);
+
+  useEffect(() => {
+    if (!categoryId) return;
+    setSelectedCategoryId(categoryId);
+    setOpenedCategoryIds([categoryId]);
+    setSelectedCategory(categorySlug);
+  }, [categoryId, categorySlug, setSelectedCategoryId, setOpenedCategoryIds, setSelectedCategory]);
 
   // These come fully from the server; no need to duplicate them in local state
   const details = serverData.details;
