@@ -101,6 +101,8 @@ export default async function Page(
           locale={locale}
           initialProducts={initialProducts}
           initialCategorySlug={slug}
+          initialCategoryName={category?.name ?? ""}
+          initialCategoryDescription={category?.description ?? ""}
         />
       </Suspense>
     </>

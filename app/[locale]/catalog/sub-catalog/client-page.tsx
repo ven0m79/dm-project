@@ -18,9 +18,11 @@ type Props = {
   locale: string;
   initialProducts?: SingleProductDetails[];
   initialCategorySlug?: string;
+  initialCategoryName?: string;
+  initialCategoryDescription?: string;
 };
 
-export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategorySlug }) => {
+export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategorySlug, initialCategoryName, initialCategoryDescription }) => {
   const {
     selectedProducts,
     setSelectedCategoryId,
@@ -121,14 +123,14 @@ export const ClientPage: FC<Props> = ({ locale, initialProducts, initialCategory
   }, [categories]);
 
   const categoryDescription = useMemo(() => {
-    if (!categoryId) return "";
-    return categoriesDescriptionMap.get(categoryId) || "";
-  }, [categoryId, categoriesDescriptionMap]);
+    if (!categoryId) return initialCategoryDescription || "";
+    return categoriesDescriptionMap.get(categoryId) || initialCategoryDescription || "";
+  }, [categoryId, categoriesDescriptionMap, initialCategoryDescription]);
 
   const selectedCategoryName = useMemo(() => {
-    if (!categoryId) return selectedCategory ?? "";
-    return categoriesNameMap.get(categoryId) || selectedCategory;
-  }, [categoryId, categoriesNameMap, selectedCategory]);
+    if (!categoryId) return initialCategoryName || selectedCategory || "";
+    return categoriesNameMap.get(categoryId) || initialCategoryName || selectedCategory || "";
+  }, [categoryId, categoriesNameMap, selectedCategory, initialCategoryName]);
 
   // if (!effectiveProducts.length) {
   //   return <CatalogSkeleton />;
